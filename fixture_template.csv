@@ -1,0 +1,91 @@
+gameweek,home_team,away_team
+7,Bournemouth,Fulham
+7,Leeds,Spurs
+7,Arsenal,West Ham
+7,Man Utd,Sunderland
+7,Chelsea,Liverpool
+7,Aston Villa,Burnley
+7,Everton,Crystal Palace
+7,Newcastle,Nott'm Forest
+7,Wolves,Brighton
+7,Brentford,Man City
+8,Nott'm Forest,Chelsea
+8,Brighton,Newcastle
+8,Burnley,Leeds
+8,Crystal Palace,Bournemouth
+8,Man City,Everton
+8,Sunderland,Wolves
+8,Fulham,Arsenal
+8,Spurs,Aston Villa
+8,Liverpool,Man Utd
+9,West Ham,Brentford
+9,Leeds,West Ham
+9,Chelsea,Sunderland
+9,Newcastle,Fulham
+9,Man Utd,Brighton
+9,Brentford,Liverpool
+9,Bournemouth,Nott'm Forest
+9,Arsenal,Crystal Palace
+9,Aston Villa,Man City
+9,Wolves,Burnley
+9,Everton,Spurs
+10,Brighton,Leeds
+10,Burnley,Arsenal
+10,Crystal Palace,Brentford
+10,Fulham,Wolves
+10,Liverpool,Aston Villa
+10,Man City,Bournemouth
+10,Nott'm Forest,Man Utd
+10,Sunderland,Everton
+10,Spurs,Chelsea
+10,West Ham,Newcastle
+11,Aston Villa,Bournemouth
+11,Brentford,Newcastle
+11,Chelsea,Wolves
+11,Crystal Palace,Brighton
+11,Everton,Fulham
+11,Man City,Liverpool
+11,Nott'm Forest,Leeds
+11,Sunderland,Arsenal
+11,Spurs,Man Utd
+11,West Ham,Burnley
+12,Bournemouth,West Ham
+12,Arsenal,Spurs
+12,Brighton,Brentford
+12,Burnley,Chelsea
+12,Fulham,Sunderland
+12,Leeds,Aston Villa
+12,Liverpool,Nott'm Forest
+12,Man Utd,Everton
+12,Newcastle,Man City
+12,Wolves,Crystal Palace
+13,Aston Villa,Wolves
+13,Brentford,Burnley
+13,Chelsea,Arsenal
+13,Crystal Palace,Man Utd
+13,Everton,Newcastle
+13,Man City,Leeds
+13,Nott'm Forest,Brighton
+13,Sunderland,Bournemouth
+13,Spurs,Fulham
+13,West Ham,Liverpool
+14,Bournemouth,Everton
+14,Arsenal,Brentford
+14,Brighton,Aston Villa
+14,Burnley,Crystal Palace
+14,Fulham,Man City
+14,Leeds,Chelsea
+14,Liverpool,Sunderland
+14,Man Utd,West Ham
+14,Newcastle,Spurs
+14,Wolves,Nott'm Forest
+15,Bournemouth,Chelsea
+15,Aston Villa,Arsenal
+15,Brighton,West Ham
+15,Everton,Nott'm Forest
+15,Fulham,Crystal Palace
+15,Leeds,Liverpool
+15,Man City,Sunderland
+15,Newcastle,Burnley
+15,Spurs,Brentford
+15,Wolves,Man Utd
