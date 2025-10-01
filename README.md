@@ -1,8 +1,130 @@
-# 📊 Fantasy Premier League (FPL) - Complete Data Analysis & Strategy Tools
+# 🏈 FPL Analyst - Full Stack Fantasy Premier League Dashboard
 
-## 🎯 **Project Overview**
+A comprehensive Fantasy Premier League analysis tool with Jupyter notebook backend and modern web frontend.
 
-This comprehensive FPL analysis system provides data-driven insights for Fantasy Premier League decision-making. The project transforms raw gameweek data into actionable strategic intelligence through advanced statistical analysis, team strength rankings, and fixture difficulty assessments.
+## 🏗️ Project Structure
+
+```
+fpl/
+├── 📊 fpl.ipynb                    # Main analysis notebook
+├── 📂 backend/                     # Python Flask API
+│   ├── app.py                      # API server
+│   ├── data_processor.py           # Data export utilities
+│   └── requirements.txt            # Python dependencies
+├── � fpl-frontend/                # React frontend (Tempo.ai)
+├── 📁 data/                        # Exported JSON data
+├── 📋 fpl-data-stats.csv          # Raw FPL data
+├── 🎯 fixture_template.csv        # Fixture data
+└── 🚀 start_backend.bat           # Backend startup script
+```
+
+## 🔧 Setup Instructions
+
+### 1. Backend Setup (Python API)
+```bash
+# Install Python dependencies
+cd backend
+pip install -r requirements.txt
+```
+
+### 2. Frontend Setup (React/Tempo.ai)
+```bash
+# Connect to your Tempo.ai project
+cd fpl-frontend
+npx tempo-ai connect 778e5dc0-af69-4122-88de-394ae0fa00a7
+```
+
+### 3. Data Export
+1. Open `fpl.ipynb` in VS Code/Jupyter
+2. Run all cells to perform the analysis
+3. Run the final "Data Export" cell to generate JSON files
+
+## 🚀 Running the Application
+
+### Start Backend API
+```bash
+# Option 1: Use the startup script
+./start_backend.bat
+
+# Option 2: Manual start
+cd backend
+python app.py
+```
+API will be available at: `http://localhost:5000`
+
+### Start Frontend
+```bash
+cd fpl-frontend
+npm run dev
+```
+Frontend will be available at: `http://localhost:3000`
+
+## 📡 API Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/players` | All player data |
+| `GET /api/players/{position}` | Players by position (GK/DEF/MID/FWD) |
+| `GET /api/teams` | Team rankings and statistics |
+| `GET /api/fixtures?gw=X` | Fixture analysis (optional gameweek filter) |
+| `GET /api/top-performers` | Goal leaders, value players, season stars |
+| `GET /api/hidden-gems` | Hidden gems and differential picks |
+| `GET /api/transfers` | Transfer recommendations |
+| `GET /api/health` | Health check and data status |
+
+## 🎯 Features
+
+### 📊 Jupyter Notebook Analysis
+- **Data cleaning and exploration**
+- **Player performance analysis** 
+- **Team strength rankings**
+- **Fixture difficulty calculator**
+- **Hidden gems discovery**
+- **Transfer recommendations**
+
+### 🌐 Web Dashboard
+- **Top Performers** - Goal leaders, value players, season stars
+- **Team Rankings** - Attack/defense strength with rankings
+- **Fixture Analysis** - Gameweek-by-gameweek difficulty analysis
+- **Hidden Gems** - Low ownership, high potential players
+- **Transfer Strategy** - Multi-gameweek planning
+- **Quick Picks** - Position-based recommendations
+
+## 🔄 Workflow
+
+1. **Analyze** - Run notebook analysis on latest FPL data
+2. **Export** - Generate JSON data files from analysis
+3. **Serve** - Start Flask API to serve the data
+4. **Display** - View insights in the React frontend
+
+## 🛠️ Development
+
+### Adding New Features
+1. Add analysis logic to `fpl.ipynb`
+2. Update `data_processor.py` to export new data
+3. Add API endpoint in `backend/app.py`
+4. Update frontend to consume new endpoint
+
+### Data Updates
+- Replace `fpl-data-stats.csv` with new FPL data
+- Update `fixture_template.csv` with new fixtures
+- Re-run notebook analysis
+- Data export happens automatically
+
+## 🎨 Frontend Integration
+
+Your Tempo.ai frontend should:
+- Connect to `http://localhost:5000` for API calls
+- Use the provided endpoints to fetch data
+- Implement the dashboard pages as specified in the Tempo prompt
+- Handle loading states and error cases
+
+## 📝 Notes
+
+- Backend runs on port 5000
+- Frontend typically runs on port 3000
+- Make sure to export data before starting the API
+- Update fixture data regularly for accurate analysis
 
 ### **Key Features**
 - ✅ **Season Performance Analysis** - Cumulative player statistics across all gameweeks
