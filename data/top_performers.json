@@ -1,0 +1,278 @@
+{
+  "goal_leaders": [
+    {
+      "web_name": "Haaland",
+      "team_name": "Man City",
+      "goals": 8,
+      "games_played": 6,
+      "goals_per_game": 1.33,
+      "total_points": 62,
+      "now_cost": 14.4
+    },
+    {
+      "web_name": "Anthony",
+      "team_name": "Burnley",
+      "goals": 4,
+      "games_played": 6,
+      "goals_per_game": 0.67,
+      "total_points": 40,
+      "now_cost": 5.6
+    },
+    {
+      "web_name": "Semenyo",
+      "team_name": "Bournemouth",
+      "goals": 4,
+      "games_played": 6,
+      "goals_per_game": 0.67,
+      "total_points": 48,
+      "now_cost": 7.8
+    },
+    {
+      "web_name": "Thiago",
+      "team_name": "Brentford",
+      "goals": 4,
+      "games_played": 6,
+      "goals_per_game": 0.67,
+      "total_points": 30,
+      "now_cost": 6.0
+    },
+    {
+      "web_name": "Bowen",
+      "team_name": "West Ham",
+      "goals": 3,
+      "games_played": 6,
+      "goals_per_game": 0.5,
+      "total_points": 33,
+      "now_cost": 7.7
+    },
+    {
+      "web_name": "Ekitiké",
+      "team_name": "Liverpool",
+      "goals": 3,
+      "games_played": 6,
+      "goals_per_game": 0.5,
+      "total_points": 32,
+      "now_cost": 8.7
+    },
+    {
+      "web_name": "Enzo",
+      "team_name": "Chelsea",
+      "goals": 3,
+      "games_played": 6,
+      "goals_per_game": 0.5,
+      "total_points": 39,
+      "now_cost": 6.7
+    },
+    {
+      "web_name": "Gyökeres",
+      "team_name": "Arsenal",
+      "goals": 3,
+      "games_played": 6,
+      "goals_per_game": 0.5,
+      "total_points": 24,
+      "now_cost": 9.0
+    },
+    {
+      "web_name": "Isidor",
+      "team_name": "Sunderland",
+      "goals": 3,
+      "games_played": 6,
+      "goals_per_game": 0.5,
+      "total_points": 27,
+      "now_cost": 5.6
+    },
+    {
+      "web_name": "Richarlison",
+      "team_name": "Spurs",
+      "goals": 3,
+      "games_played": 6,
+      "goals_per_game": 0.5,
+      "total_points": 31,
+      "now_cost": 6.8
+    }
+  ],
+  "value_players": [
+    {
+      "web_name": "Alderete",
+      "team_name": "Sunderland",
+      "position_name": "Defender",
+      "points_per_million": 9.75,
+      "total_points": 39,
+      "now_cost": 4.0,
+      "selected_by_percent": 4.2
+    },
+    {
+      "web_name": "Senesi",
+      "team_name": "Bournemouth",
+      "position_name": "Defender",
+      "points_per_million": 8.98,
+      "total_points": 44,
+      "now_cost": 4.9,
+      "selected_by_percent": 20.6
+    },
+    {
+      "web_name": "Guéhi",
+      "team_name": "Crystal Palace",
+      "position_name": "Defender",
+      "points_per_million": 8.96,
+      "total_points": 43,
+      "now_cost": 4.8,
+      "selected_by_percent": 27.9
+    },
+    {
+      "web_name": "Roefs",
+      "team_name": "Sunderland",
+      "position_name": "Goalkeeper",
+      "points_per_million": 8.67,
+      "total_points": 39,
+      "now_cost": 4.5,
+      "selected_by_percent": 3.4
+    },
+    {
+      "web_name": "Livramento",
+      "team_name": "Newcastle",
+      "position_name": "Defender",
+      "points_per_million": 7.25,
+      "total_points": 37,
+      "now_cost": 5.1,
+      "selected_by_percent": 9.3
+    },
+    {
+      "web_name": "Rodon",
+      "team_name": "Leeds",
+      "position_name": "Defender",
+      "points_per_million": 7.25,
+      "total_points": 29,
+      "now_cost": 4.0,
+      "selected_by_percent": 4.9
+    },
+    {
+      "web_name": "Anthony",
+      "team_name": "Burnley",
+      "position_name": "Midfielder",
+      "points_per_million": 7.14,
+      "total_points": 40,
+      "now_cost": 5.6,
+      "selected_by_percent": 4.6
+    },
+    {
+      "web_name": "Keane",
+      "team_name": "Everton",
+      "position_name": "Defender",
+      "points_per_million": 6.89,
+      "total_points": 31,
+      "now_cost": 4.5,
+      "selected_by_percent": 0.8
+    },
+    {
+      "web_name": "Mitchell",
+      "team_name": "Crystal Palace",
+      "position_name": "Defender",
+      "points_per_million": 6.8,
+      "total_points": 34,
+      "now_cost": 5.0,
+      "selected_by_percent": 2.2
+    },
+    {
+      "web_name": "Pope",
+      "team_name": "Newcastle",
+      "position_name": "Goalkeeper",
+      "points_per_million": 6.8,
+      "total_points": 34,
+      "now_cost": 5.0,
+      "selected_by_percent": 7.4
+    }
+  ],
+  "season_stars": [
+    {
+      "web_name": "Haaland",
+      "team_name": "Man City",
+      "position_name": "Forward",
+      "total_points": 62,
+      "points_per_game": 10.33,
+      "games_played": 6,
+      "now_cost": 14.4
+    },
+    {
+      "web_name": "Semenyo",
+      "team_name": "Bournemouth",
+      "position_name": "Midfielder",
+      "total_points": 48,
+      "points_per_game": 8.0,
+      "games_played": 6,
+      "now_cost": 7.8
+    },
+    {
+      "web_name": "Senesi",
+      "team_name": "Bournemouth",
+      "position_name": "Defender",
+      "total_points": 44,
+      "points_per_game": 7.33,
+      "games_played": 6,
+      "now_cost": 4.9
+    },
+    {
+      "web_name": "Guéhi",
+      "team_name": "Crystal Palace",
+      "position_name": "Defender",
+      "total_points": 43,
+      "points_per_game": 7.17,
+      "games_played": 6,
+      "now_cost": 4.8
+    },
+    {
+      "web_name": "Anthony",
+      "team_name": "Burnley",
+      "position_name": "Midfielder",
+      "total_points": 40,
+      "points_per_game": 6.67,
+      "games_played": 6,
+      "now_cost": 5.6
+    },
+    {
+      "web_name": "Alderete",
+      "team_name": "Sunderland",
+      "position_name": "Defender",
+      "total_points": 39,
+      "points_per_game": 6.5,
+      "games_played": 6,
+      "now_cost": 4.0
+    },
+    {
+      "web_name": "Enzo",
+      "team_name": "Chelsea",
+      "position_name": "Midfielder",
+      "total_points": 39,
+      "points_per_game": 6.5,
+      "games_played": 6,
+      "now_cost": 6.7
+    },
+    {
+      "web_name": "Roefs",
+      "team_name": "Sunderland",
+      "position_name": "Goalkeeper",
+      "total_points": 39,
+      "points_per_game": 6.5,
+      "games_played": 6,
+      "now_cost": 4.5
+    },
+    {
+      "web_name": "Gabriel",
+      "team_name": "Arsenal",
+      "position_name": "Defender",
+      "total_points": 38,
+      "points_per_game": 6.33,
+      "games_played": 6,
+      "now_cost": 6.2
+    },
+    {
+      "web_name": "J.Timber",
+      "team_name": "Arsenal",
+      "position_name": "Defender",
+      "total_points": 37,
+      "points_per_game": 6.17,
+      "games_played": 6,
+      "now_cost": 5.8
+    }
+  ]
+}

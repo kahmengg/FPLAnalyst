@@ -63,7 +63,7 @@ Frontend will be available at: `http://localhost:3000`
 
 | Endpoint | Description |
 |----------|-------------|
-| `GET /api/players` | All player data |
+| `GET /api/players` | All player data (includes form score & ownership %) |
 | `GET /api/players/{position}` | Players by position (GK/DEF/MID/FWD) |
 | `GET /api/teams` | Team rankings and statistics |
 | `GET /api/fixtures?gw=X` | Fixture analysis (optional gameweek filter) |
@@ -81,6 +81,12 @@ Frontend will be available at: `http://localhost:3000`
 - **Fixture difficulty calculator**
 - **Hidden gems discovery**
 - **Transfer recommendations**
+
+### 📈 Enhanced Player Data
+- **Form Score** - Calculated from last 5 gameweeks performance
+- **Ownership %** - Current selected_by_percent from FPL data
+- **Value Metrics** - Points per million calculations
+- **Expected Stats** - xG, xA, xCS for sustainability analysis
 
 ### 🌐 Web Dashboard
 - **Top Performers** - Goal leaders, value players, season stars

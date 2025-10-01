@@ -10,6 +10,7 @@ class FPLDataProcessor:
     def __init__(self, data_dir: str = "../data"):
         self.data_dir = data_dir
         os.makedirs(data_dir, exist_ok=True)
+        self.raw_df = None  # Will store the raw dataframe for form calculations
     
     def process_and_export_all(self, 
                               df: pd.DataFrame, 
@@ -19,6 +20,9 @@ class FPLDataProcessor:
         """Process all data and export to JSON files"""
         
         print("🔄 Processing FPL data for export...")
+        
+        # Store raw dataframe for form calculations
+        self.raw_df = df
         
         # Export player data
         self.export_players(season_stats)
@@ -67,7 +71,7 @@ class FPLDataProcessor:
                 "expected_assists": round(float(player.get('season_xA', 0)), 2),
                 "expected_clean_sheets": round(float(player.get('season_xCS', 0)), 2),
                 "value_score": round(float(player.get('points_per_million', 0)), 2),
-                "form_score": round(float(player.get('form', 0)), 1) if 'form' in player else 0
+                "form_score": self._calculate_player_form(player, season_stats)
             }
             players_data.append(player_dict)
         
@@ -269,6 +273,42 @@ class FPLDataProcessor:
         except Exception as e:
             print(f"⚠️ Could not export transfers: {e}")
             self.save_json({"transfers_in": [], "transfers_out": []}, 'transfers.json')
+    
+    def _calculate_player_form(self, player: pd.Series, season_stats: pd.DataFrame) -> float:
+        """Calculate player form from last 5 gameweeks performance"""
+        if self.raw_df is None:
+            return 0.0
+            
+        try:
+            player_name = player.get('web_name', '')
+            if not player_name:
+                return 0.0
+            
+            # Get player's recent gameweek data
+            player_data = self.raw_df[self.raw_df['web_name'] == player_name]
+            
+            if player_data.empty:
+                return 0.0
+            
+            # Get last 5 gameweeks or all available gameweeks if less than 5
+            recent_data = player_data.nlargest(5, 'gameweek')
+            
+            if recent_data.empty:
+                return 0.0
+            
+            # Calculate form as average points per game in recent gameweeks
+            total_points = recent_data['total_points'].sum()
+            games_count = len(recent_data[recent_data['minutes'] > 0])  # Only count games played
+            
+            if games_count == 0:
+                return 0.0
+            
+            form_score = total_points / games_count
+            return round(float(form_score), 1)
+            
+        except Exception as e:
+            print(f"⚠️ Could not calculate form for {player.get('web_name', 'unknown')}: {e}")
+            return 0.0
     
     def save_json(self, data: Any, filename: str):
         """Save data to JSON file"""
