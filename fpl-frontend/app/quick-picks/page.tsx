@@ -1,126 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { TrendingUp, Shield, Target, Star, Users, Award, DollarSign, Clock } from "lucide-react"
+import { TrendingUp, Shield, Target, Star, Users, Award, DollarSign, Clock, Loader2, AlertCircle } from "lucide-react"
 
-// Data from your notebook analysis - Attacking Picks by Team Strength
-const attackingPicks = [
-  {
-    team: "Liverpool",
-    teamCode: "LIV",
-    attackRank: 1,
-    attackStrength: 4.032,
-    difficulty: "easy",
-    players: [
-      { name: "Gravenberch", position: "MID", price: 5.6, goals_pg: 0.33, assists_pg: 0.17, points_pg: 5.83, ownership: 15.2 },
-      { name: "Ekitiké", position: "FWD", price: 8.7, goals_pg: 0.50, assists_pg: 0.17, points_pg: 5.33, ownership: 8.4 },
-      { name: "M.Salah", position: "MID", price: 14.5, goals_pg: 0.33, assists_pg: 0.33, points_pg: 5.33, ownership: 45.2 }
-    ]
-  },
-  {
-    team: "Man Utd",
-    teamCode: "MUN",
-    attackRank: 2,
-    attackStrength: 3.875,
-    difficulty: "moderate",
-    players: [
-      { name: "B.Fernandes", position: "MID", price: 9.0, goals_pg: 0.33, assists_pg: 0.0, points_pg: 4.17, ownership: 32.1 },
-      { name: "Mbeumo", position: "MID", price: 8.1, goals_pg: 0.17, assists_pg: 0.0, points_pg: 3.50, ownership: 12.3 },
-      { name: "Šeško", position: "FWD", price: 7.3, goals_pg: 0.17, assists_pg: 0.0, points_pg: 2.33, ownership: 6.8 }
-    ]
-  },
-  {
-    team: "Arsenal",
-    teamCode: "ARS",
-    attackRank: 3,
-    attackStrength: 3.654,
-    difficulty: "easy",
-    players: [
-      { name: "Martinelli", position: "MID", price: 7.2, goals_pg: 0.50, assists_pg: 0.17, points_pg: 4.83, ownership: 18.9 },
-      { name: "Havertz", position: "FWD", price: 8.1, goals_pg: 0.33, assists_pg: 0.17, points_pg: 4.17, ownership: 22.7 },
-      { name: "Saka", position: "MID", price: 10.3, goals_pg: 0.17, assists_pg: 0.33, points_pg: 3.83, ownership: 38.4 }
-    ]
-  },
-  {
-    team: "Newcastle",
-    teamCode: "NEW",
-    attackRank: 4,
-    attackStrength: 3.521,
-    difficulty: "easy",
-    players: [
-      { name: "Isak", position: "FWD", price: 8.9, goals_pg: 0.67, assists_pg: 0.0, points_pg: 5.17, ownership: 28.3 },
-      { name: "Gordon", position: "MID", price: 7.8, goals_pg: 0.17, assists_pg: 0.33, points_pg: 4.33, ownership: 19.6 },
-      { name: "Barnes", position: "MID", price: 6.4, goals_pg: 0.17, assists_pg: 0.17, points_pg: 3.67, ownership: 11.2 }
-    ]
-  },
-  {
-    team: "Man City",
-    teamCode: "MCI",
-    attackRank: 5,
-    attackStrength: 3.412,
-    difficulty: "moderate",
-    players: [
-      { name: "Haaland", position: "FWD", price: 15.1, goals_pg: 1.0, assists_pg: 0.0, points_pg: 7.17, ownership: 52.8 },
-      { name: "Foden", position: "MID", price: 9.3, goals_pg: 0.17, assists_pg: 0.33, points_pg: 4.0, ownership: 24.1 },
-      { name: "Silva", position: "MID", price: 6.8, goals_pg: 0.0, assists_pg: 0.33, points_pg: 3.17, ownership: 8.7 }
-    ]
-  }
-]
-
-// Defensive Picks by Team Strength
-const defensivePicks = [
-  {
-    team: "Arsenal",
-    teamCode: "ARS",
-    defenseRank: 1,
-    defenseStrength: 2.841,
-    difficulty: "easy",
-    players: [
-      { name: "Raya", position: "GK", price: 5.6, cs_rate: 0.67, points_pg: 4.33, ownership: 28.9 },
-      { name: "Gabriel", position: "DEF", price: 6.2, cs_rate: 0.67, points_pg: 5.17, ownership: 35.2 },
-      { name: "Saliba", position: "DEF", price: 6.0, cs_rate: 0.67, points_pg: 4.83, ownership: 31.7 }
-    ]
-  },
-  {
-    team: "Liverpool",
-    teamCode: "LIV",
-    defenseRank: 2,
-    defenseStrength: 2.654,
-    difficulty: "easy",
-    players: [
-      { name: "Alisson", position: "GK", price: 5.5, cs_rate: 0.50, points_pg: 4.0, ownership: 18.4 },
-      { name: "van Dijk", position: "DEF", price: 6.5, cs_rate: 0.50, points_pg: 4.67, ownership: 24.6 },
-      { name: "Robertson", position: "DEF", price: 6.1, cs_rate: 0.50, points_pg: 4.33, ownership: 19.8 }
-    ]
-  },
-  {
-    team: "Newcastle",
-    teamCode: "NEW",
-    defenseRank: 3,
-    defenseStrength: 2.432,
-    difficulty: "moderate",
-    players: [
-      { name: "Pope", position: "GK", price: 5.0, cs_rate: 0.67, points_pg: 5.67, ownership: 22.1 },
-      { name: "Trippier", position: "DEF", price: 6.2, cs_rate: 0.67, points_pg: 5.0, ownership: 16.9 },
-      { name: "Botman", position: "DEF", price: 4.9, cs_rate: 0.67, points_pg: 4.17, ownership: 12.3 }
-    ]
-  },
-  {
-    team: "Chelsea",
-    teamCode: "CHE",
-    defenseRank: 4,
-    defenseStrength: 2.298,
-    difficulty: "moderate",
-    players: [
-      { name: "Sánchez", position: "GK", price: 4.5, cs_rate: 0.33, points_pg: 3.5, ownership: 14.7 },
-      { name: "James", position: "DEF", price: 5.8, cs_rate: 0.33, points_pg: 4.17, ownership: 18.2 },
-      { name: "Colwill", position: "DEF", price: 4.4, cs_rate: 0.33, points_pg: 3.83, ownership: 9.4 }
-    ]
-  }
-]
+// API configuration
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
 
 const difficultyColors = {
   easy: "bg-green-500/20 text-green-700 border-green-300",
@@ -142,8 +29,108 @@ const getOwnershipCategory = (ownership: number) => {
   return { label: "Template", color: "text-red-600" }
 }
 
+interface Player {
+  name: string
+  position: string
+  price: number
+  goals_pg?: number
+  assists_pg?: number
+  points_pg: number
+  ownership: number
+  form?: number
+  total_points: number
+  cs_rate?: number
+  clean_sheets?: number
+}
+
+interface TeamData {
+  team: string
+  teamCode: string
+  attackRank?: number
+  defenseRank?: number
+  attackStrength?: number
+  defenseStrength?: number
+  difficulty: string
+  players: Player[]
+}
+
+interface QuickPicksData {
+  attacking: TeamData[]
+  defensive: TeamData[]
+}
+
+// Static data removed - now fetched from API
+
 export default function QuickPicksPage() {
   const [activeTab, setActiveTab] = useState("attacking")
+  const [data, setData] = useState<QuickPicksData | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  const fetchQuickPicks = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+      
+      const response = await fetch(`${API_BASE_URL}/api/quick-picks`)
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      
+      const result = await response.json()
+      setData(result)
+      
+    } catch (err) {
+      console.error('Error fetching quick picks:', err)
+      setError(err instanceof Error ? err.message : 'Failed to fetch data')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchQuickPicks()
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center h-64">
+            <div className="text-center">
+              <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
+              <p className="text-muted-foreground">Loading quick picks data...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center h-64">
+            <Card className="border-destructive/50 bg-card/50 backdrop-blur-md">
+              <CardContent className="p-6 text-center">
+                <AlertCircle className="h-12 w-12 text-destructive mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-foreground mb-2">Failed to Load Data</h3>
+                <p className="text-muted-foreground mb-4">{error}</p>
+                <button 
+                  onClick={fetchQuickPicks}
+                  className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                >
+                  Try Again
+                </button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
@@ -191,7 +178,7 @@ export default function QuickPicksPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                {attackingPicks.map((teamData, index) => (
+                {data?.attacking?.map((teamData, index) => (
                   <div key={teamData.teamCode} className="border-l-4 border-l-red-500 pl-6">
                     {/* Team Header */}
                     <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -303,7 +290,7 @@ export default function QuickPicksPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                {defensivePicks.map((teamData, index) => (
+                {data?.defensive?.map((teamData, index) => (
                   <div key={teamData.teamCode} className="border-l-4 border-l-blue-500 pl-6">
                     {/* Team Header */}
                     <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
