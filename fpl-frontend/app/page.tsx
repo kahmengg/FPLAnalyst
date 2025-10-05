@@ -41,16 +41,6 @@ const actionCards = [
     gradientTo: "to-cyan-600/5",
   },
   {
-    title: "Transfer Strategy",
-    description: "Multi-gameweek planning and recommendations",
-    icon: ArrowLeftRight,
-    href: "/transfer-strategy",
-    color: "bg-gradient-to-br from-red-500/20 to-rose-600/20",
-    iconColor: "text-red-500",
-    gradientFrom: "from-red-500/5",
-    gradientTo: "to-rose-600/5",
-  },
-  {
     title: "Quick Picks",
     description: "Position-based instant recommendations",
     icon: Target,
@@ -59,6 +49,16 @@ const actionCards = [
     iconColor: "text-indigo-500",
     gradientFrom: "from-indigo-500/5",
     gradientTo: "to-blue-600/5",
+  },  
+  {
+    title: "Transfer Strategy",
+    description: "Multi-gameweek planning and recommendations",
+    icon: ArrowLeftRight,
+    href: "/transfer-strategy",
+    color: "bg-gradient-to-br from-red-500/20 to-rose-600/20",
+    iconColor: "text-red-500",
+    gradientFrom: "from-red-500/5",
+    gradientTo: "to-rose-600/5",
   },
 ]
 
@@ -81,7 +81,7 @@ export default function HomePage() {
             Your Strategic Advantage
           </p>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Gameweek 15 • 2024/25 Season 
+            Gameweek 15 • 2025/26 Season 
           </p>
         </div>
 

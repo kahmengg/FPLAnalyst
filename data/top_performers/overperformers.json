@@ -1,0 +1,82 @@
+[
+  {
+    "player": "Thiago",
+    "team": "Brentford",
+    "team_short": "BRE",
+    "goals": 4,
+    "xG": 1.9,
+    "overperformance": 2.1,
+    "sustainable": false,
+    "form": 6.7
+  },
+  {
+    "player": "Bowen",
+    "team": "West Ham",
+    "team_short": "WHU",
+    "goals": 3,
+    "xG": 1.0,
+    "overperformance": 2.0,
+    "sustainable": false,
+    "form": 7.5
+  },
+  {
+    "player": "Isidor",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "goals": 3,
+    "xG": 1.1,
+    "overperformance": 1.9,
+    "sustainable": false,
+    "form": 6.1
+  },
+  {
+    "player": "Anthony",
+    "team": "Burnley",
+    "team_short": "BUR",
+    "goals": 4,
+    "xG": 2.2,
+    "overperformance": 1.8,
+    "sustainable": false,
+    "form": 7.3
+  },
+  {
+    "player": "Gravenberch",
+    "team": "Liverpool",
+    "team_short": "LIV",
+    "goals": 2,
+    "xG": 0.3,
+    "overperformance": 1.7,
+    "sustainable": false,
+    "form": 8.7
+  },
+  {
+    "player": "Zubimendi",
+    "team": "Arsenal",
+    "team_short": "ARS",
+    "goals": 2,
+    "xG": 0.3,
+    "overperformance": 1.7,
+    "sustainable": false,
+    "form": 7.5
+  },
+  {
+    "player": "J.Palhinha",
+    "team": "Spurs",
+    "team_short": "TOT",
+    "goals": 2,
+    "xG": 0.4,
+    "overperformance": 1.6,
+    "sustainable": false,
+    "form": 6.7
+  },
+  {
+    "player": "Caicedo",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "goals": 2,
+    "xG": 0.5,
+    "overperformance": 1.5,
+    "sustainable": false,
+    "form": 7.1
+  }
+]

@@ -1,0 +1,167 @@
+[
+  {
+    "player": "Haaland",
+    "team": "Man City",
+    "team_short": "MCI",
+    "position": "Forward",
+    "points": 62,
+    "ppg": 10.3,
+    "price": 14.4,
+    "ownership": 53.6,
+    "form": 10.0
+  },
+  {
+    "player": "Semenyo",
+    "team": "Bournemouth",
+    "team_short": "BOU",
+    "position": "Midfielder",
+    "points": 48,
+    "ppg": 8.0,
+    "price": 7.8,
+    "ownership": 53.4,
+    "form": 8.5
+  },
+  {
+    "player": "Senesi",
+    "team": "Bournemouth",
+    "team_short": "BOU",
+    "position": "Defender",
+    "points": 44,
+    "ppg": 7.3,
+    "price": 4.9,
+    "ownership": 20.6,
+    "form": 8.3
+  },
+  {
+    "player": "Guéhi",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
+    "position": "Defender",
+    "points": 43,
+    "ppg": 7.2,
+    "price": 4.8,
+    "ownership": 27.9,
+    "form": 8.7
+  },
+  {
+    "player": "Anthony",
+    "team": "Burnley",
+    "team_short": "BUR",
+    "position": "Midfielder",
+    "points": 40,
+    "ppg": 6.7,
+    "price": 5.6,
+    "ownership": 4.6,
+    "form": 7.3
+  },
+  {
+    "player": "Alderete",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Defender",
+    "points": 39,
+    "ppg": 6.5,
+    "price": 4.0,
+    "ownership": 4.2,
+    "form": 10.0
+  },
+  {
+    "player": "Enzo",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "position": "Midfielder",
+    "points": 39,
+    "ppg": 6.5,
+    "price": 6.7,
+    "ownership": 13.5,
+    "form": 6.3
+  },
+  {
+    "player": "Roefs",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Goalkeeper",
+    "points": 39,
+    "ppg": 6.5,
+    "price": 4.5,
+    "ownership": 3.4,
+    "form": 9.3
+  },
+  {
+    "player": "Gabriel",
+    "team": "Arsenal",
+    "team_short": "ARS",
+    "position": "Defender",
+    "points": 38,
+    "ppg": 6.3,
+    "price": 6.2,
+    "ownership": 25.4,
+    "form": 10.0
+  },
+  {
+    "player": "J.Timber",
+    "team": "Arsenal",
+    "team_short": "ARS",
+    "position": "Defender",
+    "points": 37,
+    "ppg": 6.2,
+    "price": 5.8,
+    "ownership": 14.5,
+    "form": 5.7
+  },
+  {
+    "player": "João Pedro",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "position": "Forward",
+    "points": 37,
+    "ppg": 6.2,
+    "price": 7.8,
+    "ownership": 65.9,
+    "form": 5.7
+  },
+  {
+    "player": "Livramento",
+    "team": "Newcastle",
+    "team_short": "NEW",
+    "position": "Defender",
+    "points": 37,
+    "ppg": 6.2,
+    "price": 5.1,
+    "ownership": 9.3,
+    "form": 8.0
+  },
+  {
+    "player": "Calafiori",
+    "team": "Arsenal",
+    "team_short": "ARS",
+    "position": "Defender",
+    "points": 36,
+    "ppg": 6.0,
+    "price": 5.7,
+    "ownership": 14.6,
+    "form": 4.7
+  },
+  {
+    "player": "Caicedo",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "position": "Midfielder",
+    "points": 35,
+    "ppg": 5.8,
+    "price": 5.7,
+    "ownership": 11.9,
+    "form": 7.1
+  },
+  {
+    "player": "Chalobah",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "position": "Defender",
+    "points": 35,
+    "ppg": 5.8,
+    "price": 5.2,
+    "ownership": 9.1,
+    "form": 4.7
+  }
+]

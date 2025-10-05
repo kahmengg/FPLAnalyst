@@ -1,22 +1,21 @@
 import type React from "react"
-import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { Sidebar } from "@/components/sidebar"
+import { Inter, JetBrains_Mono } from "next/font/google"
 
-const geistSans = Geist({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
+  variable: "--font-inter",
 })
 
-const geistMono = Geist_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-geist-mono",
+  variable: "--font-jetbrains-mono",
 })
 
 export const metadata = {
   title: "FPL Analyst - Your Strategic Advantage",
-  description: "Comprehensive Fantasy Premier League analytics and insights",
-    generator: 'v0.app'
+  description: "Comprehensive Fantasy Premier League analytics and insights"
 }
 
 export default function RootLayout({
@@ -25,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>
       <body className="font-sans">
         <div className="flex min-h-screen">
           <Sidebar />

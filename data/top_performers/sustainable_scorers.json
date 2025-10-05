@@ -1,0 +1,42 @@
+[
+  {
+    "player": "Semenyo",
+    "team": "Bournemouth",
+    "team_short": "BOU",
+    "goals": 4,
+    "xG": 3.1,
+    "overperformance": 0.9,
+    "sustainable": true,
+    "form": 8.5
+  },
+  {
+    "player": "Enzo",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "goals": 3,
+    "xG": 3.3,
+    "overperformance": -0.3,
+    "sustainable": true,
+    "form": 6.3
+  },
+  {
+    "player": "Gyökeres",
+    "team": "Arsenal",
+    "team_short": "ARS",
+    "goals": 3,
+    "xG": 2.4,
+    "overperformance": 0.6,
+    "sustainable": true,
+    "form": 5.5
+  },
+  {
+    "player": "Sarr",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
+    "goals": 3,
+    "xG": 2.7,
+    "overperformance": 0.3,
+    "sustainable": true,
+    "form": 5.7
+  }
+]

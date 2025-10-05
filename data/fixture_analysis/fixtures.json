@@ -1,0 +1,3332 @@
+[
+    {
+        "gameweek": 7,
+        "fixture": "Bournemouth vs Fulham",
+        "home_team": {
+            "name": "Bournemouth",
+            "short_name": "BOU",
+            "attack": {
+                "score": 3.9,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 3.9,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 6,
+                "defense": 6
+            }
+        },
+        "away_team": {
+            "name": "Fulham",
+            "short_name": "FUL",
+            "attack": {
+                "score": -3.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -3.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 13,
+                "defense": 13
+            }
+        },
+        "favorability": "Bournemouth"
+    },
+    {
+        "gameweek": 7,
+        "fixture": "Leeds vs Spurs",
+        "home_team": {
+            "name": "Leeds",
+            "short_name": "LEE",
+            "attack": {
+                "score": -4.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 0.3,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 14,
+                "defense": 10
+            }
+        },
+        "away_team": {
+            "name": "Spurs",
+            "short_name": "TOT",
+            "attack": {
+                "score": 0.0,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 5.0,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 10,
+                "defense": 4
+            }
+        },
+        "favorability": "Spurs"
+    },
+    {
+        "gameweek": 7,
+        "fixture": "Arsenal vs West Ham",
+        "home_team": {
+            "name": "Arsenal",
+            "short_name": "ARS",
+            "attack": {
+                "score": 6.3,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 5.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 4,
+                "defense": 1
+            }
+        },
+        "away_team": {
+            "name": "West Ham",
+            "short_name": "WHU",
+            "attack": {
+                "score": -5.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -6.0,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 12,
+                "defense": 16
+            }
+        },
+        "favorability": "Arsenal"
+    },
+    {
+        "gameweek": 7,
+        "fixture": "Man Utd vs Sunderland",
+        "home_team": {
+            "name": "Man Utd",
+            "short_name": "MUN",
+            "attack": {
+                "score": 1.9,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": -0.7,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 2,
+                "defense": 18
+            }
+        },
+        "away_team": {
+            "name": "Sunderland",
+            "short_name": "SUN",
+            "attack": {
+                "score": 1.0,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": -1.5,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 16,
+                "defense": 5
+            }
+        },
+        "favorability": "Man Utd"
+    },
+    {
+        "gameweek": 7,
+        "fixture": "Chelsea vs Liverpool",
+        "home_team": {
+            "name": "Chelsea",
+            "short_name": "CHE",
+            "attack": {
+                "score": 1.9,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": -4.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 5,
+                "defense": 11
+            }
+        },
+        "away_team": {
+            "name": "Liverpool",
+            "short_name": "LIV",
+            "attack": {
+                "score": 5.0,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": -1.5,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 1,
+                "defense": 8
+            }
+        },
+        "favorability": "Liverpool"
+    },
+    {
+        "gameweek": 7,
+        "fixture": "Aston Villa vs Burnley",
+        "home_team": {
+            "name": "Aston Villa",
+            "short_name": "AVL",
+            "attack": {
+                "score": 1.8,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 4.3,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 17,
+                "defense": 12
+            }
+        },
+        "away_team": {
+            "name": "Burnley",
+            "short_name": "BUR",
+            "attack": {
+                "score": -4.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -1.5,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 20,
+                "defense": 20
+            }
+        },
+        "favorability": "Aston Villa"
+    },
+    {
+        "gameweek": 7,
+        "fixture": "Everton vs Crystal Palace",
+        "home_team": {
+            "name": "Everton",
+            "short_name": "EVE",
+            "attack": {
+                "score": -2.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -0.7,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 8,
+                "defense": 9
+            }
+        },
+        "away_team": {
+            "name": "Crystal Palace",
+            "short_name": "CRY",
+            "attack": {
+                "score": 1.0,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 3.0,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 7,
+                "defense": 2
+            }
+        },
+        "favorability": "Crystal Palace"
+    },
+    {
+        "gameweek": 7,
+        "fixture": "Newcastle vs Nott'm Forest",
+        "home_team": {
+            "name": "Newcastle",
+            "short_name": "NEW",
+            "attack": {
+                "score": 2.3,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 3.4,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 15,
+                "defense": 3
+            }
+        },
+        "away_team": {
+            "name": "Nott'm Forest",
+            "short_name": "NFO",
+            "attack": {
+                "score": -3.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -2.0,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 9,
+                "defense": 19
+            }
+        },
+        "favorability": "Newcastle"
+    },
+    {
+        "gameweek": 7,
+        "fixture": "Wolves vs Brighton",
+        "home_team": {
+            "name": "Wolves",
+            "short_name": "WOL",
+            "attack": {
+                "score": -0.7,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": -1.2,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 19,
+                "defense": 14
+            }
+        },
+        "away_team": {
+            "name": "Brighton",
+            "short_name": "BHA",
+            "attack": {
+                "score": 1.5,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 1.0,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 11,
+                "defense": 17
+            }
+        },
+        "favorability": "Brighton"
+    },
+    {
+        "gameweek": 7,
+        "fixture": "Brentford vs Man City",
+        "home_team": {
+            "name": "Brentford",
+            "short_name": "BRE",
+            "attack": {
+                "score": -5.2,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -5.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 18,
+                "defense": 15
+            }
+        },
+        "away_team": {
+            "name": "Man City",
+            "short_name": "MCI",
+            "attack": {
+                "score": 6.0,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 5.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 3,
+                "defense": 7
+            }
+        },
+        "favorability": "Man City"
+    },
+    {
+        "gameweek": 8,
+        "fixture": "Nott'm Forest vs Chelsea",
+        "home_team": {
+            "name": "Nott'm Forest",
+            "short_name": "NFO",
+            "attack": {
+                "score": 1.3,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": -6.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 9,
+                "defense": 19
+            }
+        },
+        "away_team": {
+            "name": "Chelsea",
+            "short_name": "CHE",
+            "attack": {
+                "score": 7.0,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": -1.0,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 5,
+                "defense": 11
+            }
+        },
+        "favorability": "Chelsea"
+    },
+    {
+        "gameweek": 8,
+        "fixture": "Brighton vs Newcastle",
+        "home_team": {
+            "name": "Brighton",
+            "short_name": "BHA",
+            "attack": {
+                "score": -3.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -0.7,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 11,
+                "defense": 17
+            }
+        },
+        "away_team": {
+            "name": "Newcastle",
+            "short_name": "NEW",
+            "attack": {
+                "score": 1.0,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 4.0,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 15,
+                "defense": 3
+            }
+        },
+        "favorability": "Newcastle"
+    },
+    {
+        "gameweek": 8,
+        "fixture": "Burnley vs Leeds",
+        "home_team": {
+            "name": "Burnley",
+            "short_name": "BUR",
+            "attack": {
+                "score": -4.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -2.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 20,
+                "defense": 20
+            }
+        },
+        "away_team": {
+            "name": "Leeds",
+            "short_name": "LEE",
+            "attack": {
+                "score": 3.0,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 5.0,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 14,
+                "defense": 10
+            }
+        },
+        "favorability": "Leeds"
+    },
+    {
+        "gameweek": 8,
+        "fixture": "Crystal Palace vs Bournemouth",
+        "home_team": {
+            "name": "Crystal Palace",
+            "short_name": "CRY",
+            "attack": {
+                "score": -0.1,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 2.4,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 7,
+                "defense": 2
+            }
+        },
+        "away_team": {
+            "name": "Bournemouth",
+            "short_name": "BOU",
+            "attack": {
+                "score": -2.0,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": 0.5,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 6,
+                "defense": 6
+            }
+        },
+        "favorability": "Crystal Palace"
+    },
+    {
+        "gameweek": 8,
+        "fixture": "Man City vs Everton",
+        "home_team": {
+            "name": "Man City",
+            "short_name": "MCI",
+            "attack": {
+                "score": 3.4,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 0.9,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 3,
+                "defense": 7
+            }
+        },
+        "away_team": {
+            "name": "Everton",
+            "short_name": "EVE",
+            "attack": {
+                "score": -0.5,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -3.0,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 8,
+                "defense": 9
+            }
+        },
+        "favorability": "Man City"
+    },
+    {
+        "gameweek": 8,
+        "fixture": "Sunderland vs Wolves",
+        "home_team": {
+            "name": "Sunderland",
+            "short_name": "SUN",
+            "attack": {
+                "score": -0.7,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": 7.3,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 16,
+                "defense": 5
+            }
+        },
+        "away_team": {
+            "name": "Wolves",
+            "short_name": "WOL",
+            "attack": {
+                "score": -7.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 1.0,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 19,
+                "defense": 14
+            }
+        },
+        "favorability": "Sunderland"
+    },
+    {
+        "gameweek": 8,
+        "fixture": "Fulham vs Arsenal",
+        "home_team": {
+            "name": "Fulham",
+            "short_name": "FUL",
+            "attack": {
+                "score": -5.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -4.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 13,
+                "defense": 13
+            }
+        },
+        "away_team": {
+            "name": "Arsenal",
+            "short_name": "ARS",
+            "attack": {
+                "score": 4.5,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 6.0,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 4,
+                "defense": 1
+            }
+        },
+        "favorability": "Arsenal"
+    },
+    {
+        "gameweek": 8,
+        "fixture": "Spurs vs Aston Villa",
+        "home_team": {
+            "name": "Spurs",
+            "short_name": "TOT",
+            "attack": {
+                "score": 1.3,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 6.8,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 10,
+                "defense": 4
+            }
+        },
+        "away_team": {
+            "name": "Aston Villa",
+            "short_name": "AVL",
+            "attack": {
+                "score": -6.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -1.0,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 17,
+                "defense": 12
+            }
+        },
+        "favorability": "Spurs"
+    },
+    {
+        "gameweek": 8,
+        "fixture": "Liverpool vs Man Utd",
+        "home_team": {
+            "name": "Liverpool",
+            "short_name": "LIV",
+            "attack": {
+                "score": 8.5,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": -2.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 1,
+                "defense": 8
+            }
+        },
+        "away_team": {
+            "name": "Man Utd",
+            "short_name": "MUN",
+            "attack": {
+                "score": 3.0,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": -8.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 2,
+                "defense": 18
+            }
+        },
+        "favorability": "Liverpool"
+    },
+    {
+        "gameweek": 9,
+        "fixture": "West Ham vs Brentford",
+        "home_team": {
+            "name": "West Ham",
+            "short_name": "WHU",
+            "attack": {
+                "score": 1.8,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 1.3,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 12,
+                "defense": 16
+            }
+        },
+        "away_team": {
+            "name": "Brentford",
+            "short_name": "BRE",
+            "attack": {
+                "score": -1.0,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": -1.5,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 18,
+                "defense": 15
+            }
+        },
+        "favorability": "West Ham"
+    },
+    {
+        "gameweek": 9,
+        "fixture": "Leeds vs West Ham",
+        "home_team": {
+            "name": "Leeds",
+            "short_name": "LEE",
+            "attack": {
+                "score": 1.3,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 1.3,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 14,
+                "defense": 10
+            }
+        },
+        "away_team": {
+            "name": "West Ham",
+            "short_name": "WHU",
+            "attack": {
+                "score": -1.0,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": -1.0,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 12,
+                "defense": 16
+            }
+        },
+        "favorability": "Leeds"
+    },
+    {
+        "gameweek": 9,
+        "fixture": "Chelsea vs Sunderland",
+        "home_team": {
+            "name": "Chelsea",
+            "short_name": "CHE",
+            "attack": {
+                "score": 0.4,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 2.8,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 5,
+                "defense": 11
+            }
+        },
+        "away_team": {
+            "name": "Sunderland",
+            "short_name": "SUN",
+            "attack": {
+                "score": -2.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 0.0,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 16,
+                "defense": 5
+            }
+        },
+        "favorability": "Chelsea"
+    },
+    {
+        "gameweek": 9,
+        "fixture": "Newcastle vs Fulham",
+        "home_team": {
+            "name": "Newcastle",
+            "short_name": "NEW",
+            "attack": {
+                "score": -0.7,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": 5.3,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 15,
+                "defense": 3
+            }
+        },
+        "away_team": {
+            "name": "Fulham",
+            "short_name": "FUL",
+            "attack": {
+                "score": -5.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 1.0,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 13,
+                "defense": 13
+            }
+        },
+        "favorability": "Newcastle"
+    },
+    {
+        "gameweek": 9,
+        "fixture": "Man Utd vs Brighton",
+        "home_team": {
+            "name": "Man Utd",
+            "short_name": "MUN",
+            "attack": {
+                "score": 7.8,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": -3.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 2,
+                "defense": 18
+            }
+        },
+        "away_team": {
+            "name": "Brighton",
+            "short_name": "BHA",
+            "attack": {
+                "score": 3.5,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": -7.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 11,
+                "defense": 17
+            }
+        },
+        "favorability": "Man Utd"
+    },
+    {
+        "gameweek": 9,
+        "fixture": "Brentford vs Liverpool",
+        "home_team": {
+            "name": "Brentford",
+            "short_name": "BRE",
+            "attack": {
+                "score": -4.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -6.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 18,
+                "defense": 15
+            }
+        },
+        "away_team": {
+            "name": "Liverpool",
+            "short_name": "LIV",
+            "attack": {
+                "score": 7.0,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 5.0,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 1,
+                "defense": 8
+            }
+        },
+        "favorability": "Liverpool"
+    },
+    {
+        "gameweek": 9,
+        "fixture": "Bournemouth vs Nott'm Forest",
+        "home_team": {
+            "name": "Bournemouth",
+            "short_name": "BOU",
+            "attack": {
+                "score": 6.8,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 1.9,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 6,
+                "defense": 6
+            }
+        },
+        "away_team": {
+            "name": "Nott'm Forest",
+            "short_name": "NFO",
+            "attack": {
+                "score": -1.5,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": -6.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 9,
+                "defense": 19
+            }
+        },
+        "favorability": "Bournemouth"
+    },
+    {
+        "gameweek": 9,
+        "fixture": "Arsenal vs Crystal Palace",
+        "home_team": {
+            "name": "Arsenal",
+            "short_name": "ARS",
+            "attack": {
+                "score": -0.6,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": 3.0,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 4,
+                "defense": 1
+            }
+        },
+        "away_team": {
+            "name": "Crystal Palace",
+            "short_name": "CRY",
+            "attack": {
+                "score": -3.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 1.0,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 7,
+                "defense": 2
+            }
+        },
+        "favorability": "Arsenal"
+    },
+    {
+        "gameweek": 9,
+        "fixture": "Aston Villa vs Man City",
+        "home_team": {
+            "name": "Aston Villa",
+            "short_name": "AVL",
+            "attack": {
+                "score": -4.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -4.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 17,
+                "defense": 12
+            }
+        },
+        "away_team": {
+            "name": "Man City",
+            "short_name": "MCI",
+            "attack": {
+                "score": 4.5,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 5.0,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 3,
+                "defense": 7
+            }
+        },
+        "favorability": "Man City"
+    },
+    {
+        "gameweek": 9,
+        "fixture": "Wolves vs Burnley",
+        "home_team": {
+            "name": "Wolves",
+            "short_name": "WOL",
+            "attack": {
+                "score": 0.8,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 3.3,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 19,
+                "defense": 14
+            }
+        },
+        "away_team": {
+            "name": "Burnley",
+            "short_name": "BUR",
+            "attack": {
+                "score": -3.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -0.5,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 20,
+                "defense": 20
+            }
+        },
+        "favorability": "Wolves"
+    },
+    {
+        "gameweek": 9,
+        "fixture": "Everton vs Spurs",
+        "home_team": {
+            "name": "Everton",
+            "short_name": "EVE",
+            "attack": {
+                "score": -1.6,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": 0.8,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 8,
+                "defense": 9
+            }
+        },
+        "away_team": {
+            "name": "Spurs",
+            "short_name": "TOT",
+            "attack": {
+                "score": -0.5,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 2.0,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 10,
+                "defense": 4
+            }
+        },
+        "favorability": "Spurs"
+    },
+    {
+        "gameweek": 10,
+        "fixture": "Brighton vs Leeds",
+        "home_team": {
+            "name": "Brighton",
+            "short_name": "BHA",
+            "attack": {
+                "score": -0.2,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -1.2,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 11,
+                "defense": 17
+            }
+        },
+        "away_team": {
+            "name": "Leeds",
+            "short_name": "LEE",
+            "attack": {
+                "score": 1.5,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 0.5,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 14,
+                "defense": 10
+            }
+        },
+        "favorability": "Leeds"
+    },
+    {
+        "gameweek": 10,
+        "fixture": "Burnley vs Arsenal",
+        "home_team": {
+            "name": "Burnley",
+            "short_name": "BUR",
+            "attack": {
+                "score": -9.2,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -7.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 20,
+                "defense": 20
+            }
+        },
+        "away_team": {
+            "name": "Arsenal",
+            "short_name": "ARS",
+            "attack": {
+                "score": 8.0,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 9.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 4,
+                "defense": 1
+            }
+        },
+        "favorability": "Arsenal"
+    },
+    {
+        "gameweek": 10,
+        "fixture": "Crystal Palace vs Brentford",
+        "home_team": {
+            "name": "Crystal Palace",
+            "short_name": "CRY",
+            "attack": {
+                "score": 4.3,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 8.3,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 7,
+                "defense": 2
+            }
+        },
+        "away_team": {
+            "name": "Brentford",
+            "short_name": "BRE",
+            "attack": {
+                "score": -8.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -4.0,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 18,
+                "defense": 15
+            }
+        },
+        "favorability": "Crystal Palace"
+    },
+    {
+        "gameweek": 10,
+        "fixture": "Fulham vs Wolves",
+        "home_team": {
+            "name": "Fulham",
+            "short_name": "FUL",
+            "attack": {
+                "score": 0.8,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 3.3,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 13,
+                "defense": 13
+            }
+        },
+        "away_team": {
+            "name": "Wolves",
+            "short_name": "WOL",
+            "attack": {
+                "score": -3.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -0.5,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 19,
+                "defense": 14
+            }
+        },
+        "favorability": "Fulham"
+    },
+    {
+        "gameweek": 10,
+        "fixture": "Liverpool vs Aston Villa",
+        "home_team": {
+            "name": "Liverpool",
+            "short_name": "LIV",
+            "attack": {
+                "score": 5.5,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 4.8,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 1,
+                "defense": 8
+            }
+        },
+        "away_team": {
+            "name": "Aston Villa",
+            "short_name": "AVL",
+            "attack": {
+                "score": -4.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -5.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 17,
+                "defense": 12
+            }
+        },
+        "favorability": "Liverpool"
+    },
+    {
+        "gameweek": 10,
+        "fixture": "Man City vs Bournemouth",
+        "home_team": {
+            "name": "Man City",
+            "short_name": "MCI",
+            "attack": {
+                "score": 1.9,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": -0.1,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 3,
+                "defense": 7
+            }
+        },
+        "away_team": {
+            "name": "Bournemouth",
+            "short_name": "BOU",
+            "attack": {
+                "score": 0.5,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -1.5,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 6,
+                "defense": 6
+            }
+        },
+        "favorability": "Man City"
+    },
+    {
+        "gameweek": 10,
+        "fixture": "Nott'm Forest vs Man Utd",
+        "home_team": {
+            "name": "Nott'm Forest",
+            "short_name": "NFO",
+            "attack": {
+                "score": 4.8,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": -8.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 9,
+                "defense": 19
+            }
+        },
+        "away_team": {
+            "name": "Man Utd",
+            "short_name": "MUN",
+            "attack": {
+                "score": 8.5,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": -4.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 2,
+                "defense": 18
+            }
+        },
+        "favorability": "Man Utd"
+    },
+    {
+        "gameweek": 10,
+        "fixture": "Sunderland vs Everton",
+        "home_team": {
+            "name": "Sunderland",
+            "short_name": "SUN",
+            "attack": {
+                "score": -3.2,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 1.9,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 16,
+                "defense": 5
+            }
+        },
+        "away_team": {
+            "name": "Everton",
+            "short_name": "EVE",
+            "attack": {
+                "score": -1.5,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": 3.5,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 8,
+                "defense": 9
+            }
+        },
+        "favorability": "Everton"
+    },
+    {
+        "gameweek": 10,
+        "fixture": "Spurs vs Chelsea",
+        "home_team": {
+            "name": "Spurs",
+            "short_name": "TOT",
+            "attack": {
+                "score": 0.8,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 0.9,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 10,
+                "defense": 4
+            }
+        },
+        "away_team": {
+            "name": "Chelsea",
+            "short_name": "CHE",
+            "attack": {
+                "score": -0.5,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -0.5,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 5,
+                "defense": 11
+            }
+        },
+        "favorability": "Spurs"
+    },
+    {
+        "gameweek": 10,
+        "fixture": "West Ham vs Newcastle",
+        "home_team": {
+            "name": "West Ham",
+            "short_name": "WHU",
+            "attack": {
+                "score": -4.2,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -0.2,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 12,
+                "defense": 16
+            }
+        },
+        "away_team": {
+            "name": "Newcastle",
+            "short_name": "NEW",
+            "attack": {
+                "score": 0.5,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 4.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 15,
+                "defense": 3
+            }
+        },
+        "favorability": "Newcastle"
+    },
+    {
+        "gameweek": 11,
+        "fixture": "Aston Villa vs Bournemouth",
+        "home_team": {
+            "name": "Aston Villa",
+            "short_name": "AVL",
+            "attack": {
+                "score": -5.2,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -2.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 17,
+                "defense": 12
+            }
+        },
+        "away_team": {
+            "name": "Bournemouth",
+            "short_name": "BOU",
+            "attack": {
+                "score": 3.0,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 5.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 6,
+                "defense": 6
+            }
+        },
+        "favorability": "Bournemouth"
+    },
+    {
+        "gameweek": 11,
+        "fixture": "Brentford vs Newcastle",
+        "home_team": {
+            "name": "Brentford",
+            "short_name": "BRE",
+            "attack": {
+                "score": -7.2,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 0.3,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 18,
+                "defense": 15
+            }
+        },
+        "away_team": {
+            "name": "Newcastle",
+            "short_name": "NEW",
+            "attack": {
+                "score": 0.0,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 7.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 15,
+                "defense": 3
+            }
+        },
+        "favorability": "Newcastle"
+    },
+    {
+        "gameweek": 11,
+        "fixture": "Chelsea vs Wolves",
+        "home_team": {
+            "name": "Chelsea",
+            "short_name": "CHE",
+            "attack": {
+                "score": 4.8,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 4.3,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 5,
+                "defense": 11
+            }
+        },
+        "away_team": {
+            "name": "Wolves",
+            "short_name": "WOL",
+            "attack": {
+                "score": -4.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -4.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 19,
+                "defense": 14
+            }
+        },
+        "favorability": "Chelsea"
+    },
+    {
+        "gameweek": 11,
+        "fixture": "Crystal Palace vs Brighton",
+        "home_team": {
+            "name": "Crystal Palace",
+            "short_name": "CRY",
+            "attack": {
+                "score": 5.3,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 4.8,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 7,
+                "defense": 2
+            }
+        },
+        "away_team": {
+            "name": "Brighton",
+            "short_name": "BHA",
+            "attack": {
+                "score": -4.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -5.0,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 11,
+                "defense": 17
+            }
+        },
+        "favorability": "Crystal Palace"
+    },
+    {
+        "gameweek": 11,
+        "fixture": "Everton vs Fulham",
+        "home_team": {
+            "name": "Everton",
+            "short_name": "EVE",
+            "attack": {
+                "score": 2.9,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 2.3,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 8,
+                "defense": 9
+            }
+        },
+        "away_team": {
+            "name": "Fulham",
+            "short_name": "FUL",
+            "attack": {
+                "score": -2.0,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": -2.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 13,
+                "defense": 13
+            }
+        },
+        "favorability": "Everton"
+    },
+    {
+        "gameweek": 11,
+        "fixture": "Man City vs Liverpool",
+        "home_team": {
+            "name": "Man City",
+            "short_name": "MCI",
+            "attack": {
+                "score": 2.9,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": -2.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 3,
+                "defense": 7
+            }
+        },
+        "away_team": {
+            "name": "Liverpool",
+            "short_name": "LIV",
+            "attack": {
+                "score": 3.0,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": -2.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 1,
+                "defense": 8
+            }
+        },
+        "favorability": "Liverpool"
+    },
+    {
+        "gameweek": 11,
+        "fixture": "Nott'm Forest vs Leeds",
+        "home_team": {
+            "name": "Nott'm Forest",
+            "short_name": "NFO",
+            "attack": {
+                "score": 0.8,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -2.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 9,
+                "defense": 19
+            }
+        },
+        "away_team": {
+            "name": "Leeds",
+            "short_name": "LEE",
+            "attack": {
+                "score": 2.5,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": -0.5,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 14,
+                "defense": 10
+            }
+        },
+        "favorability": "Leeds"
+    },
+    {
+        "gameweek": 11,
+        "fixture": "Sunderland vs Arsenal",
+        "home_team": {
+            "name": "Sunderland",
+            "short_name": "SUN",
+            "attack": {
+                "score": -7.2,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -0.1,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 16,
+                "defense": 5
+            }
+        },
+        "away_team": {
+            "name": "Arsenal",
+            "short_name": "ARS",
+            "attack": {
+                "score": 0.5,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 7.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 4,
+                "defense": 1
+            }
+        },
+        "favorability": "Arsenal"
+    },
+    {
+        "gameweek": 11,
+        "fixture": "Spurs vs Man Utd",
+        "home_team": {
+            "name": "Spurs",
+            "short_name": "TOT",
+            "attack": {
+                "score": 4.3,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": -0.6,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 10,
+                "defense": 4
+            }
+        },
+        "away_team": {
+            "name": "Man Utd",
+            "short_name": "MUN",
+            "attack": {
+                "score": 1.0,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": -4.0,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 2,
+                "defense": 18
+            }
+        },
+        "favorability": "Spurs"
+    },
+    {
+        "gameweek": 11,
+        "fixture": "West Ham vs Burnley",
+        "home_team": {
+            "name": "West Ham",
+            "short_name": "WHU",
+            "attack": {
+                "score": 4.3,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 2.3,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 12,
+                "defense": 16
+            }
+        },
+        "away_team": {
+            "name": "Burnley",
+            "short_name": "BUR",
+            "attack": {
+                "score": -2.0,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": -4.0,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 20,
+                "defense": 20
+            }
+        },
+        "favorability": "West Ham"
+    },
+    {
+        "gameweek": 12,
+        "fixture": "Bournemouth vs West Ham",
+        "home_team": {
+            "name": "Bournemouth",
+            "short_name": "BOU",
+            "attack": {
+                "score": 5.3,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 3.4,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 6,
+                "defense": 6
+            }
+        },
+        "away_team": {
+            "name": "West Ham",
+            "short_name": "WHU",
+            "attack": {
+                "score": -3.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -5.0,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 12,
+                "defense": 16
+            }
+        },
+        "favorability": "Bournemouth"
+    },
+    {
+        "gameweek": 12,
+        "fixture": "Arsenal vs Spurs",
+        "home_team": {
+            "name": "Arsenal",
+            "short_name": "ARS",
+            "attack": {
+                "score": 0.4,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 4.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 4,
+                "defense": 1
+            }
+        },
+        "away_team": {
+            "name": "Spurs",
+            "short_name": "TOT",
+            "attack": {
+                "score": -4.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 0.0,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 10,
+                "defense": 4
+            }
+        },
+        "favorability": "Arsenal"
+    },
+    {
+        "gameweek": 12,
+        "fixture": "Brighton vs Brentford",
+        "home_team": {
+            "name": "Brighton",
+            "short_name": "BHA",
+            "attack": {
+                "score": 2.3,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 0.8,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 11,
+                "defense": 17
+            }
+        },
+        "away_team": {
+            "name": "Brentford",
+            "short_name": "BRE",
+            "attack": {
+                "score": -0.5,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -2.0,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 18,
+                "defense": 15
+            }
+        },
+        "favorability": "Brighton"
+    },
+    {
+        "gameweek": 12,
+        "fixture": "Burnley vs Chelsea",
+        "home_team": {
+            "name": "Burnley",
+            "short_name": "BUR",
+            "attack": {
+                "score": -4.2,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -7.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 20,
+                "defense": 20
+            }
+        },
+        "away_team": {
+            "name": "Chelsea",
+            "short_name": "CHE",
+            "attack": {
+                "score": 7.5,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 4.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 5,
+                "defense": 11
+            }
+        },
+        "favorability": "Chelsea"
+    },
+    {
+        "gameweek": 12,
+        "fixture": "Fulham vs Sunderland",
+        "home_team": {
+            "name": "Fulham",
+            "short_name": "FUL",
+            "attack": {
+                "score": -3.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 1.8,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 13,
+                "defense": 13
+            }
+        },
+        "away_team": {
+            "name": "Sunderland",
+            "short_name": "SUN",
+            "attack": {
+                "score": -1.5,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": 4.0,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 16,
+                "defense": 5
+            }
+        },
+        "favorability": "Sunderland"
+    },
+    {
+        "gameweek": 12,
+        "fixture": "Leeds vs Aston Villa",
+        "home_team": {
+            "name": "Leeds",
+            "short_name": "LEE",
+            "attack": {
+                "score": -0.7,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": 3.8,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 14,
+                "defense": 10
+            }
+        },
+        "away_team": {
+            "name": "Aston Villa",
+            "short_name": "AVL",
+            "attack": {
+                "score": -3.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 1.0,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 17,
+                "defense": 12
+            }
+        },
+        "favorability": "Leeds"
+    },
+    {
+        "gameweek": 12,
+        "fixture": "Liverpool vs Nott'm Forest",
+        "home_team": {
+            "name": "Liverpool",
+            "short_name": "LIV",
+            "attack": {
+                "score": 9.0,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 0.9,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 1,
+                "defense": 8
+            }
+        },
+        "away_team": {
+            "name": "Nott'm Forest",
+            "short_name": "NFO",
+            "attack": {
+                "score": -0.5,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -9.0,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 9,
+                "defense": 19
+            }
+        },
+        "favorability": "Liverpool"
+    },
+    {
+        "gameweek": 12,
+        "fixture": "Man Utd vs Everton",
+        "home_team": {
+            "name": "Man Utd",
+            "short_name": "MUN",
+            "attack": {
+                "score": 3.9,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": -4.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 2,
+                "defense": 18
+            }
+        },
+        "away_team": {
+            "name": "Everton",
+            "short_name": "EVE",
+            "attack": {
+                "score": 5.0,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": -3.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 8,
+                "defense": 9
+            }
+        },
+        "favorability": "Everton"
+    },
+    {
+        "gameweek": 12,
+        "fixture": "Newcastle vs Man City",
+        "home_team": {
+            "name": "Newcastle",
+            "short_name": "NEW",
+            "attack": {
+                "score": -3.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 0.4,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 15,
+                "defense": 3
+            }
+        },
+        "away_team": {
+            "name": "Man City",
+            "short_name": "MCI",
+            "attack": {
+                "score": 0.0,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 4.0,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 3,
+                "defense": 7
+            }
+        },
+        "favorability": "Man City"
+    },
+    {
+        "gameweek": 12,
+        "fixture": "Wolves vs Crystal Palace",
+        "home_team": {
+            "name": "Wolves",
+            "short_name": "WOL",
+            "attack": {
+                "score": -8.2,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -3.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 19,
+                "defense": 14
+            }
+        },
+        "away_team": {
+            "name": "Crystal Palace",
+            "short_name": "CRY",
+            "attack": {
+                "score": 3.5,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 8.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 7,
+                "defense": 2
+            }
+        },
+        "favorability": "Crystal Palace"
+    },
+    {
+        "gameweek": 13,
+        "fixture": "Aston Villa vs Wolves",
+        "home_team": {
+            "name": "Aston Villa",
+            "short_name": "AVL",
+            "attack": {
+                "score": -1.2,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": 3.8,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 17,
+                "defense": 12
+            }
+        },
+        "away_team": {
+            "name": "Wolves",
+            "short_name": "WOL",
+            "attack": {
+                "score": -3.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 1.5,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 19,
+                "defense": 14
+            }
+        },
+        "favorability": "Aston Villa"
+    },
+    {
+        "gameweek": 13,
+        "fixture": "Brentford vs Burnley",
+        "home_team": {
+            "name": "Brentford",
+            "short_name": "BRE",
+            "attack": {
+                "score": 1.3,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 2.8,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 18,
+                "defense": 15
+            }
+        },
+        "away_team": {
+            "name": "Burnley",
+            "short_name": "BUR",
+            "attack": {
+                "score": -2.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -1.0,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 20,
+                "defense": 20
+            }
+        },
+        "favorability": "Brentford"
+    },
+    {
+        "gameweek": 13,
+        "fixture": "Chelsea vs Arsenal",
+        "home_team": {
+            "name": "Chelsea",
+            "short_name": "CHE",
+            "attack": {
+                "score": -1.6,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": -3.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 5,
+                "defense": 11
+            }
+        },
+        "away_team": {
+            "name": "Arsenal",
+            "short_name": "ARS",
+            "attack": {
+                "score": 3.5,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 2.0,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 4,
+                "defense": 1
+            }
+        },
+        "favorability": "Arsenal"
+    },
+    {
+        "gameweek": 13,
+        "fixture": "Crystal Palace vs Man Utd",
+        "home_team": {
+            "name": "Crystal Palace",
+            "short_name": "CRY",
+            "attack": {
+                "score": 5.8,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 0.3,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 7,
+                "defense": 2
+            }
+        },
+        "away_team": {
+            "name": "Man Utd",
+            "short_name": "MUN",
+            "attack": {
+                "score": 0.0,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -5.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 2,
+                "defense": 18
+            }
+        },
+        "favorability": "Crystal Palace"
+    },
+    {
+        "gameweek": 13,
+        "fixture": "Everton vs Newcastle",
+        "home_team": {
+            "name": "Everton",
+            "short_name": "EVE",
+            "attack": {
+                "score": -2.1,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 3.3,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 8,
+                "defense": 9
+            }
+        },
+        "away_team": {
+            "name": "Newcastle",
+            "short_name": "NEW",
+            "attack": {
+                "score": -3.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 2.5,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 15,
+                "defense": 3
+            }
+        },
+        "favorability": "Everton"
+    },
+    {
+        "gameweek": 13,
+        "fixture": "Man City vs Leeds",
+        "home_team": {
+            "name": "Man City",
+            "short_name": "MCI",
+            "attack": {
+                "score": 3.9,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 3.9,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 3,
+                "defense": 7
+            }
+        },
+        "away_team": {
+            "name": "Leeds",
+            "short_name": "LEE",
+            "attack": {
+                "score": -3.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -3.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 14,
+                "defense": 10
+            }
+        },
+        "favorability": "Man City"
+    },
+    {
+        "gameweek": 13,
+        "fixture": "Nott'm Forest vs Brighton",
+        "home_team": {
+            "name": "Nott'm Forest",
+            "short_name": "NFO",
+            "attack": {
+                "score": 4.3,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": -3.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 9,
+                "defense": 19
+            }
+        },
+        "away_team": {
+            "name": "Brighton",
+            "short_name": "BHA",
+            "attack": {
+                "score": 4.0,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": -4.0,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 11,
+                "defense": 17
+            }
+        },
+        "favorability": "Nott'm Forest"
+    },
+    {
+        "gameweek": 13,
+        "fixture": "Sunderland vs Bournemouth",
+        "home_team": {
+            "name": "Sunderland",
+            "short_name": "SUN",
+            "attack": {
+                "score": -4.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 0.9,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 16,
+                "defense": 5
+            }
+        },
+        "away_team": {
+            "name": "Bournemouth",
+            "short_name": "BOU",
+            "attack": {
+                "score": -0.5,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 5.0,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 6,
+                "defense": 6
+            }
+        },
+        "favorability": "Bournemouth"
+    },
+    {
+        "gameweek": 13,
+        "fixture": "Spurs vs Fulham",
+        "home_team": {
+            "name": "Spurs",
+            "short_name": "TOT",
+            "attack": {
+                "score": 1.8,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 4.8,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 10,
+                "defense": 4
+            }
+        },
+        "away_team": {
+            "name": "Fulham",
+            "short_name": "FUL",
+            "attack": {
+                "score": -4.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -1.5,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 13,
+                "defense": 13
+            }
+        },
+        "favorability": "Spurs"
+    },
+    {
+        "gameweek": 13,
+        "fixture": "West Ham vs Liverpool",
+        "home_team": {
+            "name": "West Ham",
+            "short_name": "WHU",
+            "attack": {
+                "score": -1.7,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": -7.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 12,
+                "defense": 16
+            }
+        },
+        "away_team": {
+            "name": "Liverpool",
+            "short_name": "LIV",
+            "attack": {
+                "score": 7.5,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 2.0,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 1,
+                "defense": 8
+            }
+        },
+        "favorability": "Liverpool"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Bournemouth vs Everton",
+        "home_team": {
+            "name": "Bournemouth",
+            "short_name": "BOU",
+            "attack": {
+                "score": 1.9,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 1.4,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 6,
+                "defense": 6
+            }
+        },
+        "away_team": {
+            "name": "Everton",
+            "short_name": "EVE",
+            "attack": {
+                "score": -1.0,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": -1.5,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 8,
+                "defense": 9
+            }
+        },
+        "favorability": "Bournemouth"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Arsenal vs Brentford",
+        "home_team": {
+            "name": "Arsenal",
+            "short_name": "ARS",
+            "attack": {
+                "score": 5.8,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 8.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 4,
+                "defense": 1
+            }
+        },
+        "away_team": {
+            "name": "Brentford",
+            "short_name": "BRE",
+            "attack": {
+                "score": -8.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -5.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 18,
+                "defense": 15
+            }
+        },
+        "favorability": "Arsenal"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Brighton vs Aston Villa",
+        "home_team": {
+            "name": "Brighton",
+            "short_name": "BHA",
+            "attack": {
+                "score": 0.8,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": 0.3,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 11,
+                "defense": 17
+            }
+        },
+        "away_team": {
+            "name": "Aston Villa",
+            "short_name": "AVL",
+            "attack": {
+                "score": 0.0,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -0.5,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 17,
+                "defense": 12
+            }
+        },
+        "favorability": "Brighton"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Burnley vs Crystal Palace",
+        "home_team": {
+            "name": "Burnley",
+            "short_name": "BUR",
+            "attack": {
+                "score": -8.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -6.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 20,
+                "defense": 20
+            }
+        },
+        "away_team": {
+            "name": "Crystal Palace",
+            "short_name": "CRY",
+            "attack": {
+                "score": 6.5,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 9.0,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 7,
+                "defense": 2
+            }
+        },
+        "favorability": "Crystal Palace"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Fulham vs Man City",
+        "home_team": {
+            "name": "Fulham",
+            "short_name": "FUL",
+            "attack": {
+                "score": -2.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -4.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 13,
+                "defense": 13
+            }
+        },
+        "away_team": {
+            "name": "Man City",
+            "short_name": "MCI",
+            "attack": {
+                "score": 5.0,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 3.0,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 3,
+                "defense": 7
+            }
+        },
+        "favorability": "Man City"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Leeds vs Chelsea",
+        "home_team": {
+            "name": "Leeds",
+            "short_name": "LEE",
+            "attack": {
+                "score": -1.2,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": -2.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 14,
+                "defense": 10
+            }
+        },
+        "away_team": {
+            "name": "Chelsea",
+            "short_name": "CHE",
+            "attack": {
+                "score": 2.5,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 1.5,
+                "level": "Medium-Easy"
+            },
+            "rank": {
+                "attack": 5,
+                "defense": 11
+            }
+        },
+        "favorability": "Chelsea"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Liverpool vs Sunderland",
+        "home_team": {
+            "name": "Liverpool",
+            "short_name": "LIV",
+            "attack": {
+                "score": 2.0,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 4.3,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 1,
+                "defense": 8
+            }
+        },
+        "away_team": {
+            "name": "Sunderland",
+            "short_name": "SUN",
+            "attack": {
+                "score": -4.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -2.0,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 16,
+                "defense": 5
+            }
+        },
+        "favorability": "Liverpool"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Man Utd vs West Ham",
+        "home_team": {
+            "name": "Man Utd",
+            "short_name": "MUN",
+            "attack": {
+                "score": 7.3,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": -2.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 2,
+                "defense": 18
+            }
+        },
+        "away_team": {
+            "name": "West Ham",
+            "short_name": "WHU",
+            "attack": {
+                "score": 3.0,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": -7.0,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 12,
+                "defense": 16
+            }
+        },
+        "favorability": "Man Utd"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Newcastle vs Spurs",
+        "home_team": {
+            "name": "Newcastle",
+            "short_name": "NEW",
+            "attack": {
+                "score": -5.2,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 3.9,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 15,
+                "defense": 3
+            }
+        },
+        "away_team": {
+            "name": "Spurs",
+            "short_name": "TOT",
+            "attack": {
+                "score": -3.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 5.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 10,
+                "defense": 4
+            }
+        },
+        "favorability": "Spurs"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Wolves vs Nott'm Forest",
+        "home_team": {
+            "name": "Wolves",
+            "short_name": "WOL",
+            "attack": {
+                "score": 0.3,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -2.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 19,
+                "defense": 14
+            }
+        },
+        "away_team": {
+            "name": "Nott'm Forest",
+            "short_name": "NFO",
+            "attack": {
+                "score": 2.5,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 0.0,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 9,
+                "defense": 19
+            }
+        },
+        "favorability": "Nott'm Forest"
+    },
+    {
+        "gameweek": 15,
+        "fixture": "Bournemouth vs Chelsea",
+        "home_team": {
+            "name": "Bournemouth",
+            "short_name": "BOU",
+            "attack": {
+                "score": 2.9,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": -0.1,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 6,
+                "defense": 6
+            }
+        },
+        "away_team": {
+            "name": "Chelsea",
+            "short_name": "CHE",
+            "attack": {
+                "score": 0.5,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -2.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 5,
+                "defense": 11
+            }
+        },
+        "favorability": "Bournemouth"
+    },
+    {
+        "gameweek": 15,
+        "fixture": "Aston Villa vs Arsenal",
+        "home_team": {
+            "name": "Aston Villa",
+            "short_name": "AVL",
+            "attack": {
+                "score": -7.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -3.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 17,
+                "defense": 12
+            }
+        },
+        "away_team": {
+            "name": "Arsenal",
+            "short_name": "ARS",
+            "attack": {
+                "score": 4.0,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 8.0,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 4,
+                "defense": 1
+            }
+        },
+        "favorability": "Arsenal"
+    },
+    {
+        "gameweek": 15,
+        "fixture": "Brighton vs West Ham",
+        "home_team": {
+            "name": "Brighton",
+            "short_name": "BHA",
+            "attack": {
+                "score": 2.8,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": -2.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 11,
+                "defense": 17
+            }
+        },
+        "away_team": {
+            "name": "West Ham",
+            "short_name": "WHU",
+            "attack": {
+                "score": 2.5,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": -2.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 12,
+                "defense": 16
+            }
+        },
+        "favorability": "Brighton"
+    },
+    {
+        "gameweek": 15,
+        "fixture": "Everton vs Nott'm Forest",
+        "home_team": {
+            "name": "Everton",
+            "short_name": "EVE",
+            "attack": {
+                "score": 5.8,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 0.3,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 8,
+                "defense": 9
+            }
+        },
+        "away_team": {
+            "name": "Nott'm Forest",
+            "short_name": "NFO",
+            "attack": {
+                "score": 0.0,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -5.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 9,
+                "defense": 19
+            }
+        },
+        "favorability": "Everton"
+    },
+    {
+        "gameweek": 15,
+        "fixture": "Fulham vs Crystal Palace",
+        "home_team": {
+            "name": "Fulham",
+            "short_name": "FUL",
+            "attack": {
+                "score": -5.2,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -2.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 13,
+                "defense": 13
+            }
+        },
+        "away_team": {
+            "name": "Crystal Palace",
+            "short_name": "CRY",
+            "attack": {
+                "score": 3.0,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 5.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 7,
+                "defense": 2
+            }
+        },
+        "favorability": "Crystal Palace"
+    },
+    {
+        "gameweek": 15,
+        "fixture": "Leeds vs Liverpool",
+        "home_team": {
+            "name": "Leeds",
+            "short_name": "LEE",
+            "attack": {
+                "score": -2.7,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -4.2,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 14,
+                "defense": 10
+            }
+        },
+        "away_team": {
+            "name": "Liverpool",
+            "short_name": "LIV",
+            "attack": {
+                "score": 4.5,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 3.0,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 1,
+                "defense": 8
+            }
+        },
+        "favorability": "Liverpool"
+    },
+    {
+        "gameweek": 15,
+        "fixture": "Man City vs Sunderland",
+        "home_team": {
+            "name": "Man City",
+            "short_name": "MCI",
+            "attack": {
+                "score": 1.4,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 4.8,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 3,
+                "defense": 7
+            }
+        },
+        "away_team": {
+            "name": "Sunderland",
+            "short_name": "SUN",
+            "attack": {
+                "score": -4.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -1.0,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 16,
+                "defense": 5
+            }
+        },
+        "favorability": "Man City"
+    },
+    {
+        "gameweek": 15,
+        "fixture": "Newcastle vs Burnley",
+        "home_team": {
+            "name": "Newcastle",
+            "short_name": "NEW",
+            "attack": {
+                "score": 2.8,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 8.8,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 15,
+                "defense": 3
+            }
+        },
+        "away_team": {
+            "name": "Burnley",
+            "short_name": "BUR",
+            "attack": {
+                "score": -8.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -2.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 20,
+                "defense": 20
+            }
+        },
+        "favorability": "Newcastle"
+    },
+    {
+        "gameweek": 15,
+        "fixture": "Spurs vs Brentford",
+        "home_team": {
+            "name": "Spurs",
+            "short_name": "TOT",
+            "attack": {
+                "score": 2.8,
+                "level": "Easy"
+            },
+            "defense": {
+                "score": 7.3,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 10,
+                "defense": 4
+            }
+        },
+        "away_team": {
+            "name": "Brentford",
+            "short_name": "BRE",
+            "attack": {
+                "score": -7.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -2.5,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 18,
+                "defense": 15
+            }
+        },
+        "favorability": "Spurs"
+    },
+    {
+        "gameweek": 15,
+        "fixture": "Wolves vs Man Utd",
+        "home_team": {
+            "name": "Wolves",
+            "short_name": "WOL",
+            "attack": {
+                "score": -0.2,
+                "level": "Medium"
+            },
+            "defense": {
+                "score": -5.7,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 19,
+                "defense": 14
+            }
+        },
+        "away_team": {
+            "name": "Man Utd",
+            "short_name": "MUN",
+            "attack": {
+                "score": 6.0,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 0.5,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 2,
+                "defense": 18
+            }
+        },
+        "favorability": "Man Utd"
+    }
+]

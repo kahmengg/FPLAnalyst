@@ -4,10 +4,11 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { TrendingUp, Shield, Target, Star, Users, Award, DollarSign, Clock, Loader2, AlertCircle } from "lucide-react"
+import { TrendingUp, Shield, Target, Star, Users, Award, DollarSign, Clock } from "lucide-react"
 
-// API configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
+// Data from your notebook analysis - Attacking Picks by Team Strength
+// Attacking Picks by Team Strength (with numerical form field)
+const API_BASE_URL = "http://localhost:5000"; // Adjust if deployed elsewhere
 
 const difficultyColors = {
   easy: "bg-green-500/20 text-green-700 border-green-300",
@@ -29,108 +30,73 @@ const getOwnershipCategory = (ownership: number) => {
   return { label: "Template", color: "text-red-600" }
 }
 
-interface Player {
-  name: string
-  position: string
-  price: number
-  goals_pg?: number
-  assists_pg?: number
-  points_pg: number
-  ownership: number
-  form?: number
-  total_points: number
-  cs_rate?: number
-  clean_sheets?: number
-}
-
-interface TeamData {
-  team: string
-  teamCode: string
-  attackRank?: number
-  defenseRank?: number
-  attackStrength?: number
-  defenseStrength?: number
-  difficulty: string
-  players: Player[]
-}
-
-interface QuickPicksData {
-  attacking: TeamData[]
-  defensive: TeamData[]
-}
-
-// Static data removed - now fetched from API
-
 export default function QuickPicksPage() {
   const [activeTab, setActiveTab] = useState("attacking")
-  const [data, setData] = useState<QuickPicksData | null>(null)
+  const [attackingPicks, setAttackingPicks] = useState([])
+  const [defensivePicks, setDefensivePicks] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  const fetchQuickPicks = async () => {
-    try {
-      setLoading(true)
-      setError(null)
-      
-      const response = await fetch(`${API_BASE_URL}/api/quick-picks`)
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      
-      const result = await response.json()
-      setData(result)
-      
-    } catch (err) {
-      console.error('Error fetching quick picks:', err)
-      setError(err instanceof Error ? err.message : 'Failed to fetch data')
-    } finally {
-      setLoading(false)
-    }
-  }
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetchQuickPicks()
+    async function fetchData() {
+      setLoading(true)
+      setError(null)
+      try {
+        // Fetch attacking picks
+        const resAttacking = await fetch(`${API_BASE_URL}/api/top-attacking_qp`)
+        if (!resAttacking.ok) throw new Error('Failed to fetch attacking picks')
+        const dataAttacking = await resAttacking.json()
+        const transformedAttacking = dataAttacking.map(team => ({
+          team: team.team,
+          teamCode: team.short_name || team.team.substring(0, 3).toUpperCase(), // Fallback to abbreviation if short_name not present
+          attackRank: team.attack_rank,
+          attackStrength: team.attack_strength,
+          difficulty: "easy", // Placeholder; derive from strength if needed (e.g., if attack_strength > 3.5 then "easy")
+          players: team.players.map(player => ({
+            name: player.web_name,
+            position: player.position_name,
+            price: player.now_cost,
+            goals_pg: player.goals_per_game || 0, // Use defaults if fields missing
+            assists_pg: player.assists_per_game || 0,
+            points_pg: player.points_per_game,
+            ownership: player.selected_by_percent,
+            form: player.form ?? 5.0 // Default form if missing
+          }))
+        }))
+        setAttackingPicks(transformedAttacking)
+
+        // Fetch defensive picks
+        const resDefensive = await fetch(`${API_BASE_URL}/api/top-defensive_qp`)
+        if (!resDefensive.ok) throw new Error('Failed to fetch defensive picks')
+        const dataDefensive = await resDefensive.json()
+        const transformedDefensive = dataDefensive.map(team => ({
+          team: team.team,
+          teamCode: team.short_name || team.team.substring(0, 3).toUpperCase(),
+          defenseRank: team.defense_rank,
+          defenseStrength: team.defense_strength,
+          difficulty: "easy", // Placeholder; derive similarly
+          players: team.players.map(player => ({
+            name: player.web_name,
+            position: player.position_name,
+            price: player.now_cost,
+            cs_rate: player.clean_sheet_rate,
+            points_pg: player.points_per_game,
+            ownership: player.selected_by_percent,
+            form: player.form ?? 5.0
+          }))
+        }))
+        setDefensivePicks(transformedDefensive)
+      } catch (err) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
   }, [])
 
-  if (loading) {
-    return (
-      <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-center h-64">
-            <div className="text-center">
-              <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" />
-              <p className="text-muted-foreground">Loading quick picks data...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-center h-64">
-            <Card className="border-destructive/50 bg-card/50 backdrop-blur-md">
-              <CardContent className="p-6 text-center">
-                <AlertCircle className="h-12 w-12 text-destructive mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-foreground mb-2">Failed to Load Data</h3>
-                <p className="text-muted-foreground mb-4">{error}</p>
-                <button 
-                  onClick={fetchQuickPicks}
-                  className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-                >
-                  Try Again
-                </button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </div>
-    )
-  }
+  if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>
+  if (error) return <div className="min-h-screen flex items-center justify-center text-red-500">Error: {error}</div>
 
   return (
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
@@ -138,7 +104,7 @@ export default function QuickPicksPage() {
         <div className="mb-8">
           <h1 className="mb-2 text-4xl font-bold text-foreground flex items-center gap-3">
             <Star className="h-8 w-8 text-yellow-500" />
-            Quick Picks & Player Strategy ok
+            Quick Picks & Player Strategy
           </h1>
           <p className="text-lg text-muted-foreground">
             Team-by-team player recommendations based on attacking and defensive strength rankings
@@ -170,7 +136,7 @@ export default function QuickPicksPage() {
                 <CardTitle className="text-foreground flex items-center gap-2">
                   ⚔️ Attacking Picks by Team Strength
                   <Badge variant="secondary" className="ml-auto">
-                    Top 5 Attack Rankings
+                    Top Attack Rankings
                   </Badge>
                 </CardTitle>
                 <CardDescription>
@@ -178,7 +144,7 @@ export default function QuickPicksPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                {data?.attacking?.map((teamData, index) => (
+                {attackingPicks.map((teamData, index) => (
                   <div key={teamData.teamCode} className="border-l-4 border-l-red-500 pl-6">
                     {/* Team Header */}
                     <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -244,6 +210,10 @@ export default function QuickPicksPage() {
                                   <span className="font-mono font-bold text-accent">{player.points_pg.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
+                                  <span className="text-muted-foreground">Form:</span>
+                                  <span className="font-mono font-bold text-accent">{player.form.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between">
                                   <span className="text-muted-foreground">Ownership:</span>
                                   <span className={`font-mono font-medium ${ownershipCat.color}`}>
                                     {player.ownership}% ({ownershipCat.label})
@@ -253,17 +223,21 @@ export default function QuickPicksPage() {
 
                               {/* Quick Action Indicator */}
                               <div className="mt-3 pt-3 border-t border-border/50">
-                                <div className="flex items-center justify-between text-xs">
-                                  <span className="text-muted-foreground">Recommendation:</span>
-                                  {player.ownership < 15 ? (
-                                    <span className="text-purple-600 font-medium">🎯 Differential Pick</span>
-                                  ) : player.points_pg > 4.5 ? (
-                                    <span className="text-green-600 font-medium">⭐ Strong Pick</span>
-                                  ) : (
-                                    <span className="text-blue-600 font-medium">📊 Consider</span>
-                                  )}
-                                </div>
+                              <div className="flex items-center justify-between text-xs">
+                                <span className="text-muted-foreground">Recommendation:</span>
+                                {player.points_pg < 5 && player.form < 5 ? (
+                                  <span className="text-purple-600 font-medium">🎯 Differential Pick</span>
+                                ) : player.form >= 8 && player.points_pg >= 5 ? (
+                                  <span className="text-green-600 font-medium">⭐ Strong Pick</span>
+                                ) : player.form >= 6 && player.form < 8 && player.points_pg >= 4 && player.points_pg < 6 ? (
+                                  <span className="text-blue-600 font-medium">📊 Consider</span>
+                                ) : player.form < 5 && player.points_pg < 4 ? (
+                                  <span className="text-yellow-600 font-medium">⚠️ Risky</span>
+                                ) : (
+                                  <span className="text-gray-600 font-medium">📉 Wait and See</span> // Default case for unclassified players
+                                )}
                               </div>
+                            </div>
                             </CardContent>
                           </Card>
                         )
@@ -282,7 +256,7 @@ export default function QuickPicksPage() {
                 <CardTitle className="text-foreground flex items-center gap-2">
                   🛡️ Defensive Picks by Team Strength
                   <Badge variant="secondary" className="ml-auto">
-                    Top 4 Defense Rankings
+                    Top Defense Rankings
                   </Badge>
                 </CardTitle>
                 <CardDescription>
@@ -290,7 +264,7 @@ export default function QuickPicksPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                {data?.defensive?.map((teamData, index) => (
+                {defensivePicks.map((teamData, index) => (
                   <div key={teamData.teamCode} className="border-l-4 border-l-blue-500 pl-6">
                     {/* Team Header */}
                     <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">

@@ -7,16 +7,26 @@ import { TrendingUp, Minus, Star, Shield, Target, Gem, DollarSign, Trophy } from
 
 // Data from cell 15 output - actual FPL data
 const seasonPerformers = [
-  { player: "Haaland", team: "MCI", position: "FWD", points: 62, ppg: 10.3, price: 14.4, ownership: 53.6 },
-  { player: "Semenyo", team: "BOU", position: "MID", points: 48, ppg: 8.0, price: 7.8, ownership: 53.4 },
-  { player: "Senesi", team: "BOU", position: "DEF", points: 44, ppg: 7.3, price: 4.9, ownership: 20.6 },
-  { player: "Guéhi", team: "CRY", position: "DEF", points: 43, ppg: 7.2, price: 4.8, ownership: 27.9 },
-  { player: "Anthony", team: "BUR", position: "MID", points: 40, ppg: 6.7, price: 5.6, ownership: 4.6 },
-  { player: "Alderete", team: "SUN", position: "DEF", points: 39, ppg: 6.5, price: 4.0, ownership: 4.2 },
-  { player: "Enzo", team: "CHE", position: "MID", points: 39, ppg: 6.5, price: 6.7, ownership: 13.5 },
-  { player: "Roefs", team: "SUN", position: "GK", points: 39, ppg: 6.5, price: 4.5, ownership: 3.4 },
-  { player: "Gabriel", team: "ARS", position: "DEF", points: 38, ppg: 6.3, price: 6.2, ownership: 25.4 },
-  { player: "J.Timber", team: "ARS", position: "DEF", points: 37, ppg: 6.2, price: 5.8, ownership: 14.5 },
+  { player: "Haaland", team: "MCI", position: "FWD", points: 62, ppg: 10.3, price: 14.4, ownership: 53.6, form: 9.8 },
+  { player: "Semenyo", team: "BOU", position: "MID", points: 48, ppg: 8.0, price: 7.8, ownership: 53.4, form: 7.6 },
+  { player: "Senesi", team: "BOU", position: "DEF", points: 44, ppg: 7.3, price: 4.9, ownership: 20.6, form: 6.5 },
+  { player: "Guéhi", team: "CRY", position: "DEF", points: 43, ppg: 7.2, price: 4.8, ownership: 27.9, form: 6.3 },
+  { player: "Anthony", team: "BUR", position: "MID", points: 40, ppg: 6.7, price: 5.6, ownership: 4.6, form: 6.0 },
+  { player: "Alderete", team: "SUN", position: "DEF", points: 39, ppg: 6.5, price: 4.0, ownership: 4.2, form: 5.9 },
+  { player: "Enzo", team: "CHE", position: "MID", points: 39, ppg: 6.5, price: 6.7, ownership: 13.5, form: 6.1 },
+  { player: "Roefs", team: "SUN", position: "GK", points: 39, ppg: 6.5, price: 4.5, ownership: 3.4, form: 5.8 },
+  { player: "Gabriel", team: "ARS", position: "DEF", points: 38, ppg: 6.3, price: 6.2, ownership: 25.4, form: 6.2 },
+  { player: "Enzo", team: "CHE", position: "MID", points: 39, ppg: 6.5, price: 6.7, ownership: 13.5, form: 6.1 },
+  { player: "Roefs", team: "SUN", position: "GK", points: 39, ppg: 6.5, price: 4.5, ownership: 3.4, form: 5.8 },
+  { player: "Gabriel", team: "ARS", position: "DEF", points: 38, ppg: 6.3, price: 6.2, ownership: 25.4, form: 6.2 },
+{ player: "Enzo", team: "CHE", position: "MID", points: 39, ppg: 6.5, price: 6.7, ownership: 13.5, form: 6.1 },
+  { player: "Roefs", team: "SUN", position: "GK", points: 39, ppg: 6.5, price: 4.5, ownership: 3.4, form: 5.8 },
+  { player: "Gabriel", team: "ARS", position: "DEF", points: 38, ppg: 6.3, price: 6.2, ownership: 25.4, form: 6.2 },
+{ player: "Enzo", team: "CHE", position: "MID", points: 39, ppg: 6.5, price: 6.7, ownership: 13.5, form: 6.1 },
+  { player: "Roefs", team: "SUN", position: "GK", points: 39, ppg: 6.5, price: 4.5, ownership: 3.4, form: 5.8 },
+  { player: "Gabriel", team: "ARS", position: "DEF", points: 38, ppg: 6.3, price: 6.2, ownership: 25.4, form: 6.2 },
+
+  { player: "J.Timber", team: "ARS", position: "DEF", points: 37, ppg: 6.2, price: 5.8, ownership: 14.5, form: 6.0 },
 ]
 
 const valuePlayersList = [
@@ -42,6 +52,7 @@ const hiddenGemsList = [
     xA: 0.9,
     xCS: 1.9,
     potentialScore: 1.6,
+    form: 6.1,
   },
   {
     player: "Minteh",
@@ -54,6 +65,7 @@ const hiddenGemsList = [
     xA: 1.9,
     xCS: 0.8,
     potentialScore: 2.2,
+    form: 5.8,
   },
   {
     player: "L.Paquetá",
@@ -66,6 +78,7 @@ const hiddenGemsList = [
     xA: 0.4,
     xCS: 1.5,
     potentialScore: 1.6,
+    form: 6.0,
   },
   {
     player: "Szoboszlai",
@@ -78,6 +91,7 @@ const hiddenGemsList = [
     xA: 1.3,
     xCS: 2.1,
     potentialScore: 1.4,
+    form: 5.5,
   },
   {
     player: "Sarr",
@@ -90,6 +104,7 @@ const hiddenGemsList = [
     xA: 0.2,
     xCS: 2.0,
     potentialScore: 2.9,
+    form: 6.4,
   },
   {
     player: "Thiago",
@@ -102,6 +117,85 @@ const hiddenGemsList = [
     xA: 1.1,
     xCS: 1.2,
     potentialScore: 2.2,
+    form: 6.8,
+  },
+    {
+    player: "Szoboszlai",
+    team: "LIV",
+    position: "MID",
+    points: 26,
+    ownership: 3.9,
+    price: 6.5,
+    xG: 0.5,
+    xA: 1.3,
+    xCS: 2.1,
+    potentialScore: 1.4,
+    form: 5.5,
+  },
+  {
+    player: "Sarr",
+    team: "CRY",
+    position: "MID",
+    points: 29,
+    ownership: 3.7,
+    price: 6.4,
+    xG: 2.7,
+    xA: 0.2,
+    xCS: 2.0,
+    potentialScore: 2.9,
+    form: 6.4,
+  },
+  {
+    player: "Thiago",
+    team: "BRE",
+    position: "FWD",
+    points: 30,
+    ownership: 2.3,
+    price: 6.0,
+    xG: 1.9,
+    xA: 1.1,
+    xCS: 1.2,
+    potentialScore: 2.2,
+    form: 6.8,
+  },
+    {
+    player: "Szoboszlai",
+    team: "LIV",
+    position: "MID",
+    points: 26,
+    ownership: 3.9,
+    price: 6.5,
+    xG: 0.5,
+    xA: 1.3,
+    xCS: 2.1,
+    potentialScore: 1.4,
+    form: 5.5,
+  },
+  {
+    player: "Sarr",
+    team: "CRY",
+    position: "MID",
+    points: 29,
+    ownership: 3.7,
+    price: 6.4,
+    xG: 2.7,
+    xA: 0.2,
+    xCS: 2.0,
+    potentialScore: 2.9,
+    form: 6.4,
+  },
+  {
+    player: "Thiago",
+    team: "BRE",
+    position: "FWD",
+    points: 30,
+    ownership: 2.3,
+    price: 6.0,
+    xG: 1.9,
+    xA: 1.1,
+    xCS: 1.2,
+    potentialScore: 2.2,
+    form: 6.8,
   },
 ]
 
@@ -114,11 +208,11 @@ const goalScorers = [
 ]
 
 const assistProviders = [
-  { player: "Grealish", team: "EVE", assists: 4, assistsPerGame: 0.67, points: 28, price: 6.1, ownership: 12.8 },
-  { player: "Diouf", team: "WHU", assists: 3, assistsPerGame: 0.5, points: 22, price: 5.5, ownership: 8.2 },
-  { player: "Doku", team: "MCI", assists: 3, assistsPerGame: 0.5, points: 31, price: 7.8, ownership: 24.1 },
-  { player: "João Pedro", team: "CHE", assists: 3, assistsPerGame: 0.5, points: 28, price: 6.9, ownership: 15.3 },
-  { player: "Kudus", team: "TOT", assists: 3, assistsPerGame: 0.5, points: 26, price: 6.4, ownership: 11.7 },
+  { player: "Grealish", team: "EVE", assists: 4, assistsPerGame: 0.67, points: 28, price: 6.1, ownership: 12.8, form: 6.4 },
+  { player: "Diouf", team: "WHU", assists: 3, assistsPerGame: 0.5, points: 22, price: 5.5, ownership: 8.2, form: 5.5 },
+  { player: "Doku", team: "MCI", assists: 3, assistsPerGame: 0.5, points: 31, price: 7.8, ownership: 24.1, form: 7.0 },
+  { player: "João Pedro", team: "CHE", assists: 3, assistsPerGame: 0.5, points: 28, price: 6.9, ownership: 15.3, form: 6.2 },
+  { player: "Kudus", team: "TOT", assists: 3, assistsPerGame: 0.5, points: 26, price: 6.4, ownership: 11.7, form: 6.0 },
 ]
 
 const defensiveLeaders = [
@@ -132,6 +226,7 @@ const defensiveLeaders = [
     csRate: 66.7,
     tackles: 1,
     price: 5.0,
+    form: 5.4,
   },
   {
     player: "Mitchell",
@@ -143,6 +238,7 @@ const defensiveLeaders = [
     csRate: 50.0,
     tackles: 24,
     price: 5.0,
+    form: 5.8,
   },
   {
     player: "J.Timber",
@@ -154,6 +250,7 @@ const defensiveLeaders = [
     csRate: 50.0,
     tackles: 19,
     price: 5.8,
+    form: 6.1,
   },
   {
     player: "Senesi",
@@ -165,6 +262,7 @@ const defensiveLeaders = [
     csRate: 50.0,
     tackles: 12,
     price: 4.9,
+    form: 7.0,
   },
   {
     player: "Livramento",
@@ -176,6 +274,7 @@ const defensiveLeaders = [
     csRate: 66.7,
     tackles: 6,
     price: 5.1,
+    form: 6.0,
   },
 ]
 
@@ -225,6 +324,26 @@ const PositionBadge = ({ position }) => {
     <Badge variant="outline" className={`text-xs font-mono ${colors[position] || "bg-gray-100 text-gray-800"}`}>
       {position}
     </Badge>
+  )
+}
+
+// New: FormBadge - colored pill based on form value
+const FormBadge = ({ value }: { value: number }) => {
+  // green >= 7, amber 5-7, red <5
+  const v = Number(value || 0)
+  const cls =
+    v >= 7 ? "bg-emerald-100 text-emerald-800 border-emerald-200" :
+    v >= 5 ? "bg-amber-100 text-amber-800 border-amber-200" :
+    "bg-red-100 text-red-800 border-red-200"
+
+  return (
+    <span
+      role="status"
+      aria-label={`Form ${v.toFixed(1)}`}
+      className={`inline-flex items-center gap-2 px-2 py-0.5 rounded-md text-xs font-mono ${cls}`}
+    >
+      {v.toFixed(1)}
+    </span>
   )
 }
 
@@ -335,6 +454,10 @@ export default function TopPerformersPage() {
                         <div className="text-right">
                           <div className="text-2xl font-bold text-accent">{player.points}</div>
                           <div className="text-xs text-muted-foreground">points</div>
+                          <div className="text-sm font-mono text-muted-foreground mt-2">
+                            <span className="sr-only">Form</span>
+                            <FormBadge value={player.form} />
+                          </div>
                         </div>
                       </div>
                       <div className="grid grid-cols-3 gap-2 text-sm">
@@ -356,79 +479,84 @@ export default function TopPerformersPage() {
                 </div>
 
                 {/* Subtle Desktop Table Layout */}
-                <div className="hidden sm:block overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
+                <div className="hidden sm:block overflow-x-auto relative">
+                  <table className="w-full min-w-[920px]" role="table" aria-label="Season performers table">
+                     <thead>
                       <tr className="border-b border-border text-left text-sm text-muted-foreground">
-                        <th className="pb-3 font-medium hover:text-foreground transition-colors cursor-default">Rank</th>
-                        <th className="pb-3 font-medium hover:text-foreground transition-colors cursor-default">Player</th>
-                        <th className="pb-3 font-medium hover:text-foreground transition-colors cursor-default">Team</th>
-                        <th className="pb-3 font-medium hover:text-foreground transition-colors cursor-default">Pos</th>
-                        <th className="pb-3 font-medium hover:text-foreground transition-colors cursor-default">Points</th>
-                        <th className="pb-3 font-medium hover:text-foreground transition-colors cursor-default">PPG</th>
-                        <th className="pb-3 font-medium hover:text-foreground transition-colors cursor-default">Price</th>
-                        <th className="pb-3 font-medium hover:text-foreground transition-colors cursor-default">Ownership</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Rank</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Player</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Team</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Pos</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Points</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Form</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden md:table-cell">PPG</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden lg:table-cell">Price</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden lg:table-cell">Ownership</th>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {seasonPerformers.map((player, index) => (
-                        <tr
-                          key={player.player}
-                          className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
-                        >
-                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
-                            <div className="flex items-center gap-2">
-                              <div className="w-6 h-6 rounded-full bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center text-xs font-bold transition-colors duration-200">
-                                {index + 1}
-                              </div>
-                            </div>
-                          </td>
-                          
-                          <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">
-                            <div className="flex items-center gap-2">
-                              <span>{player.player}</span>
-                              {index < 3 && (
-                                <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
-                              )}
-                            </div>
-                          </td>
-                          
+                     </thead>
+                     <tbody>
+                       {seasonPerformers.map((player, index) => (
+                         <tr
+                           key={player.player}
+                           className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
+                         >
+                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
+                             <div className="flex items-center gap-2">
+                               <div className="w-6 h-6 rounded-full bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center text-xs font-bold transition-colors duration-200">
+                                 {index + 1}
+                               </div>
+                             </div>
+                           </td>
+                           
+                           <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">
+                             <div className="flex items-center gap-2">
+                               <span>{player.player}</span>
+                               {index < 3 && (
+                                 <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                               )}
+                             </div>
+                           </td>
+                           
+                           <td className="py-4">
+                             <Badge
+                               variant="outline"
+                               className="font-mono text-xs group-hover:border-accent/50 transition-colors duration-200"
+                             >
+                               {player.team}
+                             </Badge>
+                           </td>
+                           
+                           <td className="py-4">
+                             <PositionBadge position={player.position} />
+                           </td>
+                           
+                           <td className="py-4 font-mono font-bold text-accent text-lg group-hover:text-accent/80 transition-colors duration-200">
+                             {player.points}
+                           </td>
+ 
                           <td className="py-4">
-                            <Badge
-                              variant="outline"
-                              className="font-mono text-xs group-hover:border-accent/50 transition-colors duration-200"
-                            >
-                              {player.team}
-                            </Badge>
+                            <FormBadge value={player.form} />
                           </td>
                           
-                          <td className="py-4">
-                            <PositionBadge position={player.position} />
-                          </td>
-                          
-                          <td className="py-4 font-mono font-bold text-accent text-lg group-hover:text-accent/80 transition-colors duration-200">
-                            {player.points}
-                          </td>
-                          
-                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
                             {player.ppg.toFixed(1)}
                           </td>
                           
-                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200">
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200 hidden lg:table-cell">
                             £{player.price}m
                           </td>
                           
-                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden lg:table-cell">
                             {player.ownership}%
                           </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+                         </tr>
+                       ))}
+                     </tbody>
+                   </table>
+                 </div>
+               </CardContent>
+             </Card>
+           </TabsContent>
 
           <TabsContent value="goals" className="space-y-4 animate-in fade-in-50 slide-in-from-bottom-4 duration-500">
             <div className="grid gap-4 lg:grid-cols-2">
@@ -566,14 +694,15 @@ export default function TopPerformersPage() {
                   <table className="w-full">
                     <thead>
                       <tr className="border-b border-border text-left text-sm text-muted-foreground">
-                        <th className="pb-3 font-medium">Rank</th>
-                        <th className="pb-3 font-medium">Player</th>
-                        <th className="pb-3 font-medium">Team</th>
-                        <th className="pb-3 font-medium">Assists</th>
-                        <th className="pb-3 font-medium">Per Game</th>
-                        <th className="pb-3 font-medium">Points</th>
-                        <th className="pb-3 font-medium">Price</th>
-                        <th className="pb-3 font-medium">Ownership</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Rank</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Player</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Team</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Assists</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden md:table-cell">Per Game</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Points</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Form</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden lg:table-cell">Price</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden lg:table-cell">Ownership</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -596,12 +725,19 @@ export default function TopPerformersPage() {
                             </Badge>
                           </td>
                           <td className="py-4 font-mono text-accent font-bold group-hover:text-accent/80 transition-colors duration-200">{player.assists}</td>
-                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
                             {player.assistsPerGame.toFixed(2)}
                           </td>
                           <td className="py-4 font-mono text-sm text-foreground group-hover:text-accent transition-colors duration-200">{player.points}</td>
-                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200">£{player.price}m</td>
-                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">{player.ownership}%</td>
+                          <td className="py-4">
+                            <FormBadge value={player.form} />
+                          </td>
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200 hidden lg:table-cell">
+                            £{player.price}m
+                          </td>
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden lg:table-cell">
+                            {player.ownership}%
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -627,16 +763,17 @@ export default function TopPerformersPage() {
                   <table className="w-full">
                     <thead>
                       <tr className="border-b border-border text-left text-sm text-muted-foreground">
-                        <th className="pb-3 font-medium">Rank</th>
-                        <th className="pb-3 font-medium">Player</th>
-                        <th className="pb-3 font-medium">Team</th>
-                        <th className="pb-3 font-medium">Pos</th>
-                        <th className="pb-3 font-medium">Points</th>
-                        <th className="pb-3 font-medium">PPG</th>
-                        <th className="pb-3 font-medium">Clean Sheets</th>
-                        <th className="pb-3 font-medium">CS Rate</th>
-                        <th className="pb-3 font-medium">Tackles</th>
-                        <th className="pb-3 font-medium">Price</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Rank</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Player</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Team</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Pos</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Points</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Form</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden md:table-cell">PPG</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Clean Sheets</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">CS Rate</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden md:table-cell">Tackles</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden lg:table-cell">Price</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -662,11 +799,18 @@ export default function TopPerformersPage() {
                             <PositionBadge position={player.position} />
                           </td>
                           <td className="py-4 font-mono text-accent font-bold group-hover:text-accent/80 transition-colors duration-200">{player.points}</td>
-                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">{player.ppg.toFixed(1)}</td>
-                          <td className="py-4 font-mono text-sm text-foreground group-hover:text-accent transition-colors duration-200">{player.cleanSheets}</td>
-                          <td className="py-4 font-mono text-sm text-green-600 group-hover:text-green-500 transition-colors duration-200">{player.csRate.toFixed(1)}%</td>
-                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">{player.tackles}</td>
-                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200">£{player.price}m</td>
+                          <td className="py-4">
+                            <FormBadge value={player.form} />
+                          </td>
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
+                            {player.ppg.toFixed(1)}
+                          </td>
+                           <td className="py-4 font-mono text-sm text-foreground group-hover:text-accent transition-colors duration-200">{player.cleanSheets}</td>
+                           <td className="py-4 font-mono text-sm text-green-600 group-hover:text-green-500 transition-colors duration-200">{player.csRate.toFixed(1)}%</td>
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
+                            {player.tackles}
+                          </td>
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200 hidden lg:table-cell">£{player.price}m</td>
                         </tr>
                       ))}
                     </tbody>
@@ -767,6 +911,7 @@ export default function TopPerformersPage() {
                         <div className="flex items-center gap-2 mt-1">
                           <PositionBadge position={player.position} />
                           <span className="text-sm text-muted-foreground">£{player.price}m</span>
+                          <span className="ml-2"><FormBadge value={player.form} /></span>
                         </div>
                       </div>
 

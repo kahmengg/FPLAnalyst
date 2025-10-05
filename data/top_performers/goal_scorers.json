@@ -1,0 +1,134 @@
+[
+  {
+    "player": "Haaland",
+    "team": "Man City",
+    "team_short": "MCI",
+    "goals": 8,
+    "goalsPerGame": 1.33,
+    "points": 62,
+    "price": 14.4,
+    "ownership": 53.6,
+    "form": 10.0
+  },
+  {
+    "player": "Anthony",
+    "team": "Burnley",
+    "team_short": "BUR",
+    "goals": 4,
+    "goalsPerGame": 0.67,
+    "points": 40,
+    "price": 5.6,
+    "ownership": 4.6,
+    "form": 7.3
+  },
+  {
+    "player": "Semenyo",
+    "team": "Bournemouth",
+    "team_short": "BOU",
+    "goals": 4,
+    "goalsPerGame": 0.67,
+    "points": 48,
+    "price": 7.8,
+    "ownership": 53.4,
+    "form": 8.5
+  },
+  {
+    "player": "Thiago",
+    "team": "Brentford",
+    "team_short": "BRE",
+    "goals": 4,
+    "goalsPerGame": 0.67,
+    "points": 30,
+    "price": 6.0,
+    "ownership": 2.3,
+    "form": 6.7
+  },
+  {
+    "player": "Bowen",
+    "team": "West Ham",
+    "team_short": "WHU",
+    "goals": 3,
+    "goalsPerGame": 0.5,
+    "points": 33,
+    "price": 7.7,
+    "ownership": 6.3,
+    "form": 7.5
+  },
+  {
+    "player": "Ekitiké",
+    "team": "Liverpool",
+    "team_short": "LIV",
+    "goals": 3,
+    "goalsPerGame": 0.5,
+    "points": 32,
+    "price": 8.7,
+    "ownership": 19.7,
+    "form": 5.5
+  },
+  {
+    "player": "Enzo",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "goals": 3,
+    "goalsPerGame": 0.5,
+    "points": 39,
+    "price": 6.7,
+    "ownership": 13.5,
+    "form": 6.3
+  },
+  {
+    "player": "Gyökeres",
+    "team": "Arsenal",
+    "team_short": "ARS",
+    "goals": 3,
+    "goalsPerGame": 0.5,
+    "points": 24,
+    "price": 9.0,
+    "ownership": 25.9,
+    "form": 5.5
+  },
+  {
+    "player": "Isidor",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "goals": 3,
+    "goalsPerGame": 0.5,
+    "points": 27,
+    "price": 5.6,
+    "ownership": 2.9,
+    "form": 6.1
+  },
+  {
+    "player": "Richarlison",
+    "team": "Spurs",
+    "team_short": "TOT",
+    "goals": 3,
+    "goalsPerGame": 0.5,
+    "points": 31,
+    "price": 6.8,
+    "ownership": 17.3,
+    "form": 5.9
+  },
+  {
+    "player": "Sarr",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
+    "goals": 3,
+    "goalsPerGame": 0.5,
+    "points": 29,
+    "price": 6.4,
+    "ownership": 3.7,
+    "form": 5.7
+  },
+  {
+    "player": "B.Fernandes",
+    "team": "Man Utd",
+    "team_short": "MUN",
+    "goals": 2,
+    "goalsPerGame": 0.33,
+    "points": 25,
+    "price": 9.0,
+    "ownership": 20.4,
+    "form": 5.7
+  }
+]

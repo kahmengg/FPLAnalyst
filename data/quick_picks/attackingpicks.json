@@ -1,0 +1,882 @@
+[
+    {
+        "team": "Liverpool",
+        "attack_rank": 1,
+        "attack_strength": 4.032,
+        "overall_strength": 2.636,
+        "players": [
+            {
+                "web_name": "Gravenberch",
+                "position_name": "Midfielder",
+                "now_cost": 5.6,
+                "goals_per_game": 0.33,
+                "assists_per_game": 0.17,
+                "points_per_game": 5.83,
+                "xg_per_game": 0.05,
+                "selected_by_percent": 4.7,
+                "team_name_short": "LIV",
+                "form": 8.7
+            },
+            {
+                "web_name": "Ekitiké",
+                "position_name": "Forward",
+                "now_cost": 8.7,
+                "goals_per_game": 0.5,
+                "assists_per_game": 0.17,
+                "points_per_game": 5.33,
+                "xg_per_game": 0.28,
+                "selected_by_percent": 19.7,
+                "team_name_short": "LIV",
+                "form": 5.5
+            },
+            {
+                "web_name": "M.Salah",
+                "position_name": "Midfielder",
+                "now_cost": 14.5,
+                "goals_per_game": 0.33,
+                "assists_per_game": 0.33,
+                "points_per_game": 5.33,
+                "xg_per_game": 0.28,
+                "selected_by_percent": 45.5,
+                "team_name_short": "LIV",
+                "form": 6.7
+            }
+        ]
+    },
+    {
+        "team": "Man Utd",
+        "attack_rank": 2,
+        "attack_strength": 3.875,
+        "overall_strength": 2.465,
+        "players": [
+            {
+                "web_name": "B.Fernandes",
+                "position_name": "Midfielder",
+                "now_cost": 9.0,
+                "goals_per_game": 0.33,
+                "assists_per_game": 0.0,
+                "points_per_game": 4.17,
+                "xg_per_game": 0.55,
+                "selected_by_percent": 20.4,
+                "team_name_short": "MUN",
+                "form": 5.7
+            },
+            {
+                "web_name": "Mbeumo",
+                "position_name": "Midfielder",
+                "now_cost": 8.1,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.0,
+                "points_per_game": 3.5,
+                "xg_per_game": 0.3,
+                "selected_by_percent": 15.0,
+                "team_name_short": "MUN",
+                "form": 4.9
+            },
+            {
+                "web_name": "Šeško",
+                "position_name": "Forward",
+                "now_cost": 7.3,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.0,
+                "points_per_game": 2.33,
+                "xg_per_game": 0.2,
+                "selected_by_percent": 4.6,
+                "team_name_short": "MUN",
+                "form": 5.7
+            }
+        ]
+    },
+    {
+        "team": "Man City",
+        "attack_rank": 3,
+        "attack_strength": 3.861,
+        "overall_strength": 2.55,
+        "players": [
+            {
+                "web_name": "Haaland",
+                "position_name": "Forward",
+                "now_cost": 14.4,
+                "goals_per_game": 1.33,
+                "assists_per_game": 0.17,
+                "points_per_game": 10.33,
+                "xg_per_game": 1.12,
+                "selected_by_percent": 53.6,
+                "team_name_short": "MCI",
+                "form": 10.0
+            },
+            {
+                "web_name": "Reijnders",
+                "position_name": "Midfielder",
+                "now_cost": 5.8,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.33,
+                "points_per_game": 4.67,
+                "xg_per_game": 0.13,
+                "selected_by_percent": 34.1,
+                "team_name_short": "MCI",
+                "form": 6.3
+            },
+            {
+                "web_name": "Doku",
+                "position_name": "Midfielder",
+                "now_cost": 6.5,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.5,
+                "points_per_game": 4.67,
+                "xg_per_game": 0.1,
+                "selected_by_percent": 5.5,
+                "team_name_short": "MCI",
+                "form": 8.1
+            }
+        ]
+    },
+    {
+        "team": "Arsenal",
+        "attack_rank": 4,
+        "attack_strength": 3.824,
+        "overall_strength": 2.671,
+        "players": [
+            {
+                "web_name": "Zubimendi",
+                "position_name": "Midfielder",
+                "now_cost": 5.5,
+                "goals_per_game": 0.33,
+                "assists_per_game": 0.0,
+                "points_per_game": 4.83,
+                "xg_per_game": 0.05,
+                "selected_by_percent": 4.3,
+                "team_name_short": "ARS",
+                "form": 7.5
+            },
+            {
+                "web_name": "Rice",
+                "position_name": "Midfielder",
+                "now_cost": 6.5,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.33,
+                "points_per_game": 4.83,
+                "xg_per_game": 0.03,
+                "selected_by_percent": 8.1,
+                "team_name_short": "ARS",
+                "form": 6.1
+            },
+            {
+                "web_name": "Gyökeres",
+                "position_name": "Forward",
+                "now_cost": 9.0,
+                "goals_per_game": 0.5,
+                "assists_per_game": 0.0,
+                "points_per_game": 4.0,
+                "xg_per_game": 0.4,
+                "selected_by_percent": 25.9,
+                "team_name_short": "ARS",
+                "form": 5.5
+            }
+        ]
+    },
+    {
+        "team": "Chelsea",
+        "attack_rank": 5,
+        "attack_strength": 3.525,
+        "overall_strength": 2.314,
+        "players": [
+            {
+                "web_name": "Enzo",
+                "position_name": "Midfielder",
+                "now_cost": 6.7,
+                "goals_per_game": 0.5,
+                "assists_per_game": 0.17,
+                "points_per_game": 6.5,
+                "xg_per_game": 0.55,
+                "selected_by_percent": 13.5,
+                "team_name_short": "CHE",
+                "form": 6.3
+            },
+            {
+                "web_name": "João Pedro",
+                "position_name": "Forward",
+                "now_cost": 7.8,
+                "goals_per_game": 0.33,
+                "assists_per_game": 0.5,
+                "points_per_game": 6.17,
+                "xg_per_game": 0.25,
+                "selected_by_percent": 65.9,
+                "team_name_short": "CHE",
+                "form": 5.7
+            },
+            {
+                "web_name": "Caicedo",
+                "position_name": "Midfielder",
+                "now_cost": 5.7,
+                "goals_per_game": 0.33,
+                "assists_per_game": 0.0,
+                "points_per_game": 5.83,
+                "xg_per_game": 0.08,
+                "selected_by_percent": 11.9,
+                "team_name_short": "CHE",
+                "form": 7.1
+            }
+        ]
+    },
+    {
+        "team": "Bournemouth",
+        "attack_rank": 6,
+        "attack_strength": 3.347,
+        "overall_strength": 2.268,
+        "players": [
+            {
+                "web_name": "Semenyo",
+                "position_name": "Midfielder",
+                "now_cost": 7.8,
+                "goals_per_game": 0.67,
+                "assists_per_game": 0.33,
+                "points_per_game": 8.0,
+                "xg_per_game": 0.52,
+                "selected_by_percent": 53.4,
+                "team_name_short": "BOU",
+                "form": 8.5
+            },
+            {
+                "web_name": "Tavernier",
+                "position_name": "Midfielder",
+                "now_cost": 5.5,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.0,
+                "points_per_game": 4.0,
+                "xg_per_game": 0.15,
+                "selected_by_percent": 1.5,
+                "team_name_short": "BOU",
+                "form": 4.7
+            },
+            {
+                "web_name": "Scott",
+                "position_name": "Midfielder",
+                "now_cost": 5.0,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.0,
+                "points_per_game": 3.33,
+                "xg_per_game": 0.05,
+                "selected_by_percent": 0.3,
+                "team_name_short": "BOU",
+                "form": 6.1
+            }
+        ]
+    },
+    {
+        "team": "Crystal Palace",
+        "attack_rank": 7,
+        "attack_strength": 3.285,
+        "overall_strength": 2.309,
+        "players": [
+            {
+                "web_name": "Sarr",
+                "position_name": "Midfielder",
+                "now_cost": 6.4,
+                "goals_per_game": 0.5,
+                "assists_per_game": 0.0,
+                "points_per_game": 4.83,
+                "xg_per_game": 0.45,
+                "selected_by_percent": 3.7,
+                "team_name_short": "CRY",
+                "form": 5.7
+            },
+            {
+                "web_name": "Mateta",
+                "position_name": "Forward",
+                "now_cost": 7.5,
+                "goals_per_game": 0.33,
+                "assists_per_game": 0.0,
+                "points_per_game": 3.0,
+                "xg_per_game": 0.5,
+                "selected_by_percent": 9.9,
+                "team_name_short": "CRY",
+                "form": 5.5
+            },
+            {
+                "web_name": "Wharton",
+                "position_name": "Midfielder",
+                "now_cost": 5.0,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.0,
+                "points_per_game": 2.67,
+                "xg_per_game": 0.0,
+                "selected_by_percent": 0.4,
+                "team_name_short": "CRY",
+                "form": 5.5
+            }
+        ]
+    },
+    {
+        "team": "Everton",
+        "attack_rank": 8,
+        "attack_strength": 3.141,
+        "overall_strength": 2.1,
+        "players": [
+            {
+                "web_name": "Garner",
+                "position_name": "Midfielder",
+                "now_cost": 5.0,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.17,
+                "points_per_game": 5.33,
+                "xg_per_game": 0.05,
+                "selected_by_percent": 0.7,
+                "team_name_short": "EVE",
+                "form": 6.7
+            },
+            {
+                "web_name": "Ndiaye",
+                "position_name": "Midfielder",
+                "now_cost": 6.5,
+                "goals_per_game": 0.33,
+                "assists_per_game": 0.17,
+                "points_per_game": 5.0,
+                "xg_per_game": 0.23,
+                "selected_by_percent": 11.3,
+                "team_name_short": "EVE",
+                "form": 6.1
+            },
+            {
+                "web_name": "Grealish",
+                "position_name": "Midfielder",
+                "now_cost": 6.9,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.67,
+                "points_per_game": 4.5,
+                "xg_per_game": 0.07,
+                "selected_by_percent": 23.1,
+                "team_name_short": "EVE",
+                "form": 4.5
+            }
+        ]
+    },
+    {
+        "team": "Nott'm Forest",
+        "attack_rank": 9,
+        "attack_strength": 3.112,
+        "overall_strength": 2.006,
+        "players": [
+            {
+                "web_name": "Ndoye",
+                "position_name": "Midfielder",
+                "now_cost": 6.0,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.17,
+                "points_per_game": 3.67,
+                "xg_per_game": 0.03,
+                "selected_by_percent": 2.6,
+                "team_name_short": "NFO",
+                "form": 4.5
+            },
+            {
+                "web_name": "Wood",
+                "position_name": "Forward",
+                "now_cost": 7.5,
+                "goals_per_game": 0.33,
+                "assists_per_game": 0.0,
+                "points_per_game": 3.67,
+                "xg_per_game": 0.47,
+                "selected_by_percent": 15.9,
+                "team_name_short": "NFO",
+                "form": 4.5
+            },
+            {
+                "web_name": "Anderson",
+                "position_name": "Midfielder",
+                "now_cost": 5.5,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.17,
+                "points_per_game": 3.5,
+                "xg_per_game": 0.1,
+                "selected_by_percent": 4.5,
+                "team_name_short": "NFO",
+                "form": 5.7
+            }
+        ]
+    },
+    {
+        "team": "Spurs",
+        "attack_rank": 10,
+        "attack_strength": 3.076,
+        "overall_strength": 2.13,
+        "players": [
+            {
+                "web_name": "Richarlison",
+                "position_name": "Forward",
+                "now_cost": 6.8,
+                "goals_per_game": 0.5,
+                "assists_per_game": 0.17,
+                "points_per_game": 5.17,
+                "xg_per_game": 0.27,
+                "selected_by_percent": 17.3,
+                "team_name_short": "TOT",
+                "form": 5.9
+            },
+            {
+                "web_name": "J.Palhinha",
+                "position_name": "Midfielder",
+                "now_cost": 5.5,
+                "goals_per_game": 0.33,
+                "assists_per_game": 0.0,
+                "points_per_game": 4.83,
+                "xg_per_game": 0.07,
+                "selected_by_percent": 1.0,
+                "team_name_short": "TOT",
+                "form": 6.7
+            },
+            {
+                "web_name": "P.M.Sarr",
+                "position_name": "Midfielder",
+                "now_cost": 5.0,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.33,
+                "points_per_game": 3.83,
+                "xg_per_game": 0.05,
+                "selected_by_percent": 2.5,
+                "team_name_short": "TOT",
+                "form": 5.9
+            }
+        ]
+    },
+    {
+        "team": "Brighton",
+        "attack_rank": 11,
+        "attack_strength": 3.016,
+        "overall_strength": 1.95,
+        "players": [
+            {
+                "web_name": "Minteh",
+                "position_name": "Midfielder",
+                "now_cost": 5.9,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.33,
+                "points_per_game": 4.83,
+                "xg_per_game": 0.25,
+                "selected_by_percent": 2.1,
+                "team_name_short": "BHA",
+                "form": 7.5
+            },
+            {
+                "web_name": "Mitoma",
+                "position_name": "Midfielder",
+                "now_cost": 6.4,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.17,
+                "points_per_game": 3.33,
+                "xg_per_game": 0.13,
+                "selected_by_percent": 4.4,
+                "team_name_short": "BHA",
+                "form": 5.7
+            },
+            {
+                "web_name": "Welbeck",
+                "position_name": "Forward",
+                "now_cost": 6.3,
+                "goals_per_game": 0.33,
+                "assists_per_game": 0.0,
+                "points_per_game": 2.83,
+                "xg_per_game": 0.43,
+                "selected_by_percent": 2.1,
+                "team_name_short": "BHA",
+                "form": 6.3
+            }
+        ]
+    },
+    {
+        "team": "West Ham",
+        "attack_rank": 12,
+        "attack_strength": 2.785,
+        "overall_strength": 1.82,
+        "players": [
+            {
+                "web_name": "Bowen",
+                "position_name": "Forward",
+                "now_cost": 7.7,
+                "goals_per_game": 0.5,
+                "assists_per_game": 0.0,
+                "points_per_game": 5.5,
+                "xg_per_game": 0.17,
+                "selected_by_percent": 6.3,
+                "team_name_short": "WHU",
+                "form": 7.5
+            },
+            {
+                "web_name": "L.Paquetá",
+                "position_name": "Midfielder",
+                "now_cost": 5.9,
+                "goals_per_game": 0.33,
+                "assists_per_game": 0.0,
+                "points_per_game": 4.67,
+                "xg_per_game": 0.23,
+                "selected_by_percent": 3.1,
+                "team_name_short": "WHU",
+                "form": 4.9
+            },
+            {
+                "web_name": "Summerville",
+                "position_name": "Midfielder",
+                "now_cost": 5.5,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.17,
+                "points_per_game": 2.17,
+                "xg_per_game": 0.07,
+                "selected_by_percent": 0.1,
+                "team_name_short": "WHU",
+                "form": 4.7
+            }
+        ]
+    },
+    {
+        "team": "Fulham",
+        "attack_rank": 13,
+        "attack_strength": 2.593,
+        "overall_strength": 1.749,
+        "players": [
+            {
+                "web_name": "Iwobi",
+                "position_name": "Midfielder",
+                "now_cost": 6.5,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.33,
+                "points_per_game": 4.67,
+                "xg_per_game": 0.05,
+                "selected_by_percent": 1.8,
+                "team_name_short": "FUL",
+                "form": 7.1
+            },
+            {
+                "web_name": "Wilson",
+                "position_name": "Midfielder",
+                "now_cost": 5.3,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.0,
+                "points_per_game": 3.0,
+                "xg_per_game": 0.1,
+                "selected_by_percent": 0.4,
+                "team_name_short": "FUL",
+                "form": 5.7
+            },
+            {
+                "web_name": "Muniz",
+                "position_name": "Forward",
+                "now_cost": 5.5,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.17,
+                "points_per_game": 2.5,
+                "xg_per_game": 0.13,
+                "selected_by_percent": 2.3,
+                "team_name_short": "FUL",
+                "form": 4.9
+            }
+        ]
+    },
+    {
+        "team": "Leeds",
+        "attack_rank": 14,
+        "attack_strength": 2.559,
+        "overall_strength": 1.743,
+        "players": [
+            {
+                "web_name": "Stach",
+                "position_name": "Midfielder",
+                "now_cost": 5.0,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.17,
+                "points_per_game": 5.17,
+                "xg_per_game": 0.12,
+                "selected_by_percent": 3.0,
+                "team_name_short": "LEE",
+                "form": 7.1
+            },
+            {
+                "web_name": "Longstaff",
+                "position_name": "Midfielder",
+                "now_cost": 4.9,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.17,
+                "points_per_game": 4.33,
+                "xg_per_game": 0.03,
+                "selected_by_percent": 0.3,
+                "team_name_short": "LEE",
+                "form": 7.3
+            },
+            {
+                "web_name": "Calvert-Lewin",
+                "position_name": "Forward",
+                "now_cost": 5.5,
+                "goals_per_game": 0.2,
+                "assists_per_game": 0.0,
+                "points_per_game": 3.2,
+                "xg_per_game": 0.2,
+                "selected_by_percent": 0.9,
+                "team_name_short": "LEE",
+                "form": 6.5
+            }
+        ]
+    },
+    {
+        "team": "Newcastle",
+        "attack_rank": 15,
+        "attack_strength": 2.535,
+        "overall_strength": 1.832,
+        "players": [
+            {
+                "web_name": "Woltemade",
+                "position_name": "Forward",
+                "now_cost": 7.1,
+                "goals_per_game": 0.67,
+                "assists_per_game": 0.0,
+                "points_per_game": 6.0,
+                "xg_per_game": 0.17,
+                "selected_by_percent": 4.0,
+                "team_name_short": "NEW",
+                "form": 7.1
+            },
+            {
+                "web_name": "Tonali",
+                "position_name": "Midfielder",
+                "now_cost": 5.4,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.17,
+                "points_per_game": 3.33,
+                "xg_per_game": 0.05,
+                "selected_by_percent": 1.3,
+                "team_name_short": "NEW",
+                "form": 5.9
+            },
+            {
+                "web_name": "Bruno G.",
+                "position_name": "Midfielder",
+                "now_cost": 6.5,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.0,
+                "points_per_game": 2.67,
+                "xg_per_game": 0.05,
+                "selected_by_percent": 2.1,
+                "team_name_short": "NEW",
+                "form": 4.3
+            }
+        ]
+    },
+    {
+        "team": "Sunderland",
+        "attack_rank": 16,
+        "attack_strength": 2.513,
+        "overall_strength": 1.785,
+        "players": [
+            {
+                "web_name": "Isidor",
+                "position_name": "Forward",
+                "now_cost": 5.6,
+                "goals_per_game": 0.5,
+                "assists_per_game": 0.0,
+                "points_per_game": 4.5,
+                "xg_per_game": 0.18,
+                "selected_by_percent": 2.9,
+                "team_name_short": "SUN",
+                "form": 6.1
+            },
+            {
+                "web_name": "Xhaka",
+                "position_name": "Midfielder",
+                "now_cost": 5.0,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.5,
+                "points_per_game": 4.83,
+                "xg_per_game": 0.03,
+                "selected_by_percent": 3.3,
+                "team_name_short": "SUN",
+                "form": 7.1
+            },
+            {
+                "web_name": "E.Le Fée",
+                "position_name": "Midfielder",
+                "now_cost": 4.9,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.0,
+                "points_per_game": 3.0,
+                "xg_per_game": 0.13,
+                "selected_by_percent": 0.4,
+                "team_name_short": "SUN",
+                "form": 4.5
+            }
+        ]
+    },
+    {
+        "team": "Aston Villa",
+        "attack_rank": 17,
+        "attack_strength": 2.474,
+        "overall_strength": 1.678,
+        "players": [
+            {
+                "web_name": "Buendía",
+                "position_name": "Midfielder",
+                "now_cost": 5.3,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.17,
+                "points_per_game": 2.83,
+                "xg_per_game": 0.13,
+                "selected_by_percent": 0.1,
+                "team_name_short": "AVL",
+                "form": 6.5
+            },
+            {
+                "web_name": "McGinn",
+                "position_name": "Midfielder",
+                "now_cost": 5.4,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.0,
+                "points_per_game": 3.0,
+                "xg_per_game": 0.1,
+                "selected_by_percent": 0.6,
+                "team_name_short": "AVL",
+                "form": 5.7
+            },
+            {
+                "web_name": "Watkins",
+                "position_name": "Forward",
+                "now_cost": 8.7,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.0,
+                "points_per_game": 3.0,
+                "xg_per_game": 0.23,
+                "selected_by_percent": 9.8,
+                "team_name_short": "AVL",
+                "form": 5.9
+            }
+        ]
+    },
+    {
+        "team": "Brentford",
+        "attack_rank": 18,
+        "attack_strength": 2.437,
+        "overall_strength": 1.615,
+        "players": [
+            {
+                "web_name": "Thiago",
+                "position_name": "Forward",
+                "now_cost": 6.0,
+                "goals_per_game": 0.67,
+                "assists_per_game": 0.0,
+                "points_per_game": 5.0,
+                "xg_per_game": 0.32,
+                "selected_by_percent": 2.3,
+                "team_name_short": "BRE",
+                "form": 6.7
+            },
+            {
+                "web_name": "Henderson",
+                "position_name": "Midfielder",
+                "now_cost": 5.0,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.33,
+                "points_per_game": 3.5,
+                "xg_per_game": 0.0,
+                "selected_by_percent": 0.4,
+                "team_name_short": "BRE",
+                "form": 6.3
+            },
+            {
+                "web_name": "O.Dango",
+                "position_name": "Midfielder",
+                "now_cost": 6.0,
+                "goals_per_game": 0.2,
+                "assists_per_game": 0.0,
+                "points_per_game": 3.8,
+                "xg_per_game": 0.28,
+                "selected_by_percent": 0.6,
+                "team_name_short": "BRE",
+                "form": 4.3
+            }
+        ]
+    },
+    {
+        "team": "Wolves",
+        "attack_rank": 19,
+        "attack_strength": 2.382,
+        "overall_strength": 1.584,
+        "players": [
+            {
+                "web_name": "Munetsi",
+                "position_name": "Midfielder",
+                "now_cost": 5.4,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.17,
+                "points_per_game": 2.33,
+                "xg_per_game": 0.1,
+                "selected_by_percent": 0.0,
+                "team_name_short": "WOL",
+                "form": 4.5
+            },
+            {
+                "web_name": "Hee Chan",
+                "position_name": "Midfielder",
+                "now_cost": 5.9,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.0,
+                "points_per_game": 2.0,
+                "xg_per_game": 0.1,
+                "selected_by_percent": 0.2,
+                "team_name_short": "WOL",
+                "form": 4.1
+            },
+            {
+                "web_name": "André",
+                "position_name": "Midfielder",
+                "now_cost": 5.4,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.0,
+                "points_per_game": 2.33,
+                "xg_per_game": 0.0,
+                "selected_by_percent": 0.1,
+                "team_name_short": "WOL",
+                "form": 4.9
+            }
+        ]
+    },
+    {
+        "team": "Burnley",
+        "attack_rank": 20,
+        "attack_strength": 2.134,
+        "overall_strength": 1.408,
+        "players": [
+            {
+                "web_name": "Anthony",
+                "position_name": "Midfielder",
+                "now_cost": 5.6,
+                "goals_per_game": 0.67,
+                "assists_per_game": 0.17,
+                "points_per_game": 6.67,
+                "xg_per_game": 0.37,
+                "selected_by_percent": 4.6,
+                "team_name_short": "BUR",
+                "form": 7.3
+            },
+            {
+                "web_name": "Cullen",
+                "position_name": "Midfielder",
+                "now_cost": 5.0,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.17,
+                "points_per_game": 5.17,
+                "xg_per_game": 0.02,
+                "selected_by_percent": 2.0,
+                "team_name_short": "BUR",
+                "form": 5.7
+            },
+            {
+                "web_name": "Foster",
+                "position_name": "Forward",
+                "now_cost": 5.0,
+                "goals_per_game": 0.17,
+                "assists_per_game": 0.17,
+                "points_per_game": 3.33,
+                "xg_per_game": 0.15,
+                "selected_by_percent": 2.1,
+                "team_name_short": "BUR",
+                "form": 5.5
+            }
+        ]
+    }
+]
