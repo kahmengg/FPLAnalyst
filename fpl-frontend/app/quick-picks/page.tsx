@@ -10,25 +10,96 @@ import { TrendingUp, Shield, Target, Star, Users, Award, DollarSign, Clock } fro
 // Attacking Picks by Team Strength (with numerical form field)
 const API_BASE_URL = "http://localhost:5000"; // Adjust if deployed elsewhere
 
-const difficultyColors = {
-  easy: "bg-green-500/20 text-green-700 border-green-300",
-  moderate: "bg-yellow-500/20 text-yellow-700 border-yellow-300",
-  hard: "bg-red-500/20 text-red-700 border-red-300"
-}
+const PositionBadge = ({ position }) => {
+  // Map full position names to abbreviations
+  const positionMap = {
+    Goalkeeper: "GK",
+    Defender: "DEF",
+    Midfielder: "MID",
+    Forward: "FWD",
+  };
 
-const positionColors = {
-  GK: "bg-purple-100 text-purple-800 border-purple-200",
-  DEF: "bg-blue-100 text-blue-800 border-blue-200",
-  MID: "bg-green-100 text-green-800 border-green-200",
-  FWD: "bg-red-100 text-red-800 border-red-200"
-}
+  // Get the abbreviated position, or use the original if not found
+  const normalizedPosition = positionMap[position] || position;
 
-const getOwnershipCategory = (ownership: number) => {
-  if (ownership < 10) return { label: "Differential", color: "text-purple-600" }
-  if (ownership < 25) return { label: "Low Owned", color: "text-blue-600" }
-  if (ownership < 40) return { label: "Popular", color: "text-orange-600" }
-  return { label: "Template", color: "text-red-600" }
-}
+  const colors = {
+    GK: "bg-purple-100 text-purple-800 border-purple-200",
+    DEF: "bg-blue-100 text-blue-800 border-blue-200",
+    MID: "bg-green-100 text-green-800 border-green-200",
+    FWD: "bg-red-100 text-red-800 border-red-200",
+  };
+
+  return (
+    <Badge
+      variant="outline"
+      className={`text-xs font-mono font-bold rounded-full border ${colors[normalizedPosition] || "bg-teal-50 text-teal-700 border-teal-500 hover:border-teal-400 transition-colors duration-150"}`}
+    >
+      {normalizedPosition}
+    </Badge>
+  );
+};
+
+
+// Define recommendation logic
+const getRecommendation = (points_per_game, form) => {
+  const categories = [
+    {
+      condition: points_per_game >= 5 && form >= 6,
+      label: "⭐ Top Pick",
+      className: "bg-green-100 text-green-800 border-green-300 font-medium dark:bg-green-900 dark:text-green-200",
+    },
+    {
+      condition: points_per_game >= 3.5 && points_per_game < 5 && form >= 4.5 && form < 6,
+      label: "📊 Solid Choice",
+      className: "bg-blue-100 text-blue-800 border-blue-300 font-medium dark:bg-blue-900 dark:text-blue-200",
+    },
+    {
+      condition: points_per_game >= 2.5 && points_per_game < 3.5 && form >= 3.5 && form < 4.5,
+      label: "🎯 Differential",
+      className: "bg-purple-100 text-purple-800 border-purple-300 font-medium dark:bg-purple-900 dark:text-purple-200",
+    },
+    {
+      condition: points_per_game < 2.5 && form < 3.5,
+      label: "⚠️ Risky",
+      className: "bg-yellow-100 text-yellow-800 border-yellow-300 font-medium dark:bg-yellow-900 dark:text-yellow-200",
+    },
+    {
+      condition: true, // Default
+      label: "📉 Monitor",
+      className: "bg-gray-100 text-gray-800 border-gray-300 font-medium dark:bg-gray-800 dark:text-gray-200",
+    },
+  ];
+
+  return categories.find(cat => cat.condition) || categories[categories.length - 1];
+};
+
+// Ownership category logic
+const getOwnershipCategory = (ownership) => {
+  const categories = [
+    {
+      condition: ownership < 10,
+      label: "🎯 Differential",
+      className: "bg-purple-100 text-purple-800 border-purple-300 font-medium dark:bg-purple-900 dark:text-purple-200",
+    },
+    {
+      condition: ownership < 20,
+      label: "🔽 Low Owned",
+      className: "bg-blue-100 text-blue-800 border-blue-300 font-medium dark:bg-blue-900 dark:text-blue-200",
+    },
+    {
+      condition: ownership < 30,
+      label: "📈 Popular",
+      className: "bg-orange-100 text-orange-800 border-orange-300 font-medium dark:bg-orange-900 dark:text-orange-200",
+    },
+    {
+      condition: true,
+      label: "🔥 Template",
+      className: "bg-red-100 text-red-800 border-red-300 font-medium dark:bg-red-900 dark:text-red-200",
+    },
+  ];
+
+  return categories.find(cat => cat.condition) || categories[categories.length - 1];
+};
 
 export default function QuickPicksPage() {
   const [activeTab, setActiveTab] = useState("attacking")
@@ -51,7 +122,6 @@ export default function QuickPicksPage() {
           teamCode: team.short_name || team.team.substring(0, 3).toUpperCase(), // Fallback to abbreviation if short_name not present
           attackRank: team.attack_rank,
           attackStrength: team.attack_strength,
-          difficulty: "easy", // Placeholder; derive from strength if needed (e.g., if attack_strength > 3.5 then "easy")
           players: team.players.map(player => ({
             name: player.web_name,
             position: player.position_name,
@@ -74,7 +144,6 @@ export default function QuickPicksPage() {
           teamCode: team.short_name || team.team.substring(0, 3).toUpperCase(),
           defenseRank: team.defense_rank,
           defenseStrength: team.defense_strength,
-          difficulty: "easy", // Placeholder; derive similarly
           players: team.players.map(player => ({
             name: player.web_name,
             position: player.position_name,
@@ -159,11 +228,6 @@ export default function QuickPicksPage() {
                           </p>
                         </div>
                       </div>
-                      <Badge className={`border ${difficultyColors[teamData.difficulty]}`}>
-                        {teamData.difficulty === 'easy' && '🟢 Good Fixtures'}
-                        {teamData.difficulty === 'moderate' && '🟡 Average Fixtures'}
-                        {teamData.difficulty === 'hard' && '🔴 Tough Fixtures'}
-                      </Badge>
                     </div>
 
                     {/* Players Grid */}
@@ -171,8 +235,8 @@ export default function QuickPicksPage() {
                       {teamData.players.map((player, playerIndex) => {
                         const ownershipCat = getOwnershipCategory(player.ownership)
                         return (
-                          <Card 
-                            key={player.name} 
+                          <Card
+                            key={player.name}
                             className="border border-border/50 hover:border-red-300 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer bg-gradient-to-br from-card to-secondary/20"
                           >
                             <CardContent className="p-4">
@@ -187,35 +251,30 @@ export default function QuickPicksPage() {
                                   </div>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  <Badge variant="outline" className={`text-xs ${positionColors[player.position]}`}>
-                                    {player.position}
-                                  </Badge>
-                                  <Badge variant="outline" className="text-xs">
-                                    {teamData.teamCode}
-                                  </Badge>
+                                  <PositionBadge position={player.position} />
                                 </div>
                               </div>
 
                               <div className="space-y-2 text-sm">
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Goals/Game:</span>
-                                  <span className="font-mono font-medium">{player.goals_pg.toFixed(2)}</span>
+                                  <span className="font-mono font-medium text-red-600">{player.goals_pg.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Assists/Game:</span>
-                                  <span className="font-mono font-medium">{player.assists_pg.toFixed(2)}</span>
+                                  <span className="font-mono font-medium text-red-600">{player.assists_pg.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Points/Game:</span>
-                                  <span className="font-mono font-bold text-accent">{player.points_pg.toFixed(2)}</span>
+                                  <span className="font-mono font-bold text-red-600">{player.points_pg.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Form:</span>
-                                  <span className="font-mono font-bold text-accent">{player.form.toFixed(2)}</span>
+                                  <span className="font-mono font-bold text-red-600">{player.form.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Ownership:</span>
-                                  <span className={`font-mono font-medium ${ownershipCat.color}`}>
+                                  <span className={`font-mono font-bold ${ownershipCat.color}`}>
                                     {player.ownership}% ({ownershipCat.label})
                                   </span>
                                 </div>
@@ -223,21 +282,16 @@ export default function QuickPicksPage() {
 
                               {/* Quick Action Indicator */}
                               <div className="mt-3 pt-3 border-t border-border/50">
-                              <div className="flex items-center justify-between text-xs">
-                                <span className="text-muted-foreground">Recommendation:</span>
-                                {player.points_pg < 5 && player.form < 5 ? (
-                                  <span className="text-purple-600 font-medium">🎯 Differential Pick</span>
-                                ) : player.form >= 8 && player.points_pg >= 5 ? (
-                                  <span className="text-green-600 font-medium">⭐ Strong Pick</span>
-                                ) : player.form >= 6 && player.form < 8 && player.points_pg >= 4 && player.points_pg < 6 ? (
-                                  <span className="text-blue-600 font-medium">📊 Consider</span>
-                                ) : player.form < 5 && player.points_pg < 4 ? (
-                                  <span className="text-yellow-600 font-medium">⚠️ Risky</span>
-                                ) : (
-                                  <span className="text-gray-600 font-medium">📉 Wait and See</span> // Default case for unclassified players
-                                )}
+                                <div className="flex items-center justify-between text-xs">
+                                  <span className="text-muted-foreground">Recommendation:</span>
+                                  <Badge
+                                    aria-label={`Recommendation for ${player.web_name}: ${getRecommendation(player.points_per_game, player.form).label}`}
+                                    className={getRecommendation(player.points_per_game, player.form).className}
+                                  >
+                                    {getRecommendation(player.points_per_game, player.form).label}
+                                  </Badge>
+                                </div>
                               </div>
-                            </div>
                             </CardContent>
                           </Card>
                         )
@@ -279,11 +333,6 @@ export default function QuickPicksPage() {
                           </p>
                         </div>
                       </div>
-                      <Badge className={`border ${difficultyColors[teamData.difficulty]}`}>
-                        {teamData.difficulty === 'easy' && '🟢 Good Fixtures'}
-                        {teamData.difficulty === 'moderate' && '🟡 Average Fixtures'}
-                        {teamData.difficulty === 'hard' && '🔴 Tough Fixtures'}
-                      </Badge>
                     </div>
 
                     {/* Players Grid */}
@@ -291,8 +340,8 @@ export default function QuickPicksPage() {
                       {teamData.players.map((player, playerIndex) => {
                         const ownershipCat = getOwnershipCategory(player.ownership)
                         return (
-                          <Card 
-                            key={player.name} 
+                          <Card
+                            key={player.name}
                             className="border border-border/50 hover:border-blue-300 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer bg-gradient-to-br from-card to-secondary/20"
                           >
                             <CardContent className="p-4">
@@ -307,9 +356,7 @@ export default function QuickPicksPage() {
                                   </div>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  <Badge variant="outline" className={`text-xs ${positionColors[player.position]}`}>
-                                    {player.position}
-                                  </Badge>
+                                  <PositionBadge position={player.position} />
                                   <Badge variant="outline" className="text-xs">
                                     {teamData.teamCode}
                                   </Badge>
@@ -319,11 +366,15 @@ export default function QuickPicksPage() {
                               <div className="space-y-2 text-sm">
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Clean Sheet Rate:</span>
-                                  <span className="font-mono font-medium">{(player.cs_rate * 100).toFixed(0)}%</span>
+                                  <span className="font-mono font-medium text-blue-600">{(player.cs_rate * 100).toFixed(2)}%</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Points/Game:</span>
                                   <span className="font-mono font-bold text-blue-600">{player.points_pg.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground">Form:</span>
+                                  <span className="font-mono font-bold text-blue-600">{player.form.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Ownership:</span>

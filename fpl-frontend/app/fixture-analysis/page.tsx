@@ -26,6 +26,39 @@ const getLevelColor = (level) => {
 	}
 };
 
+const TeamBadge = ({ team }) => {
+	const colors = {
+		ARS: "bg-red-100 text-red-800 border-red-200",
+		BOU: "bg-red-600 text-white border-red-700", // Replaced cherry with standard red
+		BRE: "bg-red-200 text-red-900 border-red-300",
+		BHA: "bg-blue-200 text-blue-900 border-blue-300",
+		BUR: "bg-red-500 text-white border-red-600", // Replaced claret with standard red
+		CHE: "bg-blue-100 text-blue-800 border-blue-200",
+		CRY: "bg-blue-300 text-blue-900 border-blue-400",
+		EVE: "bg-blue-400 text-blue-900 border-blue-500",
+		FUL: "bg-white text-gray-800 border-gray-200", // Simplified white-100 to white
+		LEE: "bg-white text-blue-800 border-gray-300", // Simplified white-200 to white
+		LIV: "bg-green-100 text-green-800 border-green-200",
+		MCI: "bg-sky-100 text-sky-800 border-sky-200",
+		MUN: "bg-yellow-100 text-yellow-800 border-yellow-200",
+		NEW: "bg-gray-900 text-white border-gray-950", // Replaced black-100 for better contrast
+		TOT: "bg-white text-blue-900 border-gray-400", // Replaced navy with blue-900
+		SUN: "bg-red-300 text-white border-red-400",
+		WHU: "bg-red-400 text-sky-800 border-red-500", // Adjusted claret to red
+		WOL: "bg-yellow-200 text-gray-900 border-yellow-300",
+		NFO: "bg-red-400 text-white border-red-500",
+		AVL: "bg-red-500 text-blue-900 border-red-600", // Adjusted claret to red
+	};
+	return (
+		<Badge
+			variant="outline"
+			className={`text-xs font-sans uppercase px-2 py-0.5 rounded-lg border-dashed border-2 ${colors[team] || "bg-orange-50 text-orange-700 border-orange-500 hover:bg-orange-100 transition-all duration-200"}`}
+		>
+			{team}
+		</Badge>
+	);
+};
+
 const getDifficultyEmoji = (score) => {
 	if (score >= 3) return "🟢";
 	if (score >= 1) return "🟡";
@@ -49,9 +82,11 @@ const getFavorabilityColor = (favorability, teamName) => {
 };
 
 const getRankColor = (rank) => {
-	if (rank <= 2) return "text-green-600 font-bold";
-	if (rank <= 4) return "text-blue-600 font-semibold";
-	return "text-red-600";
+	if (rank <= 3) return "bg-yellow-100 text-yellow-800 border-yellow-300 font-bold dark:bg-yellow-900 dark:text-yellow-200 dark:border-yellow-700"; // Gold for top 3
+	if (rank <= 6) return "bg-gray-100 text-gray-800 border-gray-300 font-semibold dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"; // Silver for 4-6
+	if (rank <= 10) return "bg-orange-100 text-orange-800 border-orange-300 font-medium dark:bg-orange-900 dark:text-orange-200 dark:border-orange-700"; // Bronze for 7-10
+	if (rank <= 15) return "bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900 dark:text-blue-200 dark:border-blue-600"; // Neutral blue for 11-15
+	return "bg-red-100 text-red-800 border-red-300 dark:bg-red-900 dark:text-red-200 dark:border-red-600"; // Warning red for 16-20
 };
 
 export default function FixtureAnalysisPage() {
@@ -316,60 +351,51 @@ export default function FixtureAnalysisPage() {
 												<h3 className="font-semibold text-sm sm:text-base text-foreground truncate">
 													{fixture.teams.home.team} (H)
 												</h3>
-												<div className="flex items-center gap-1 sm:gap-2">
-													<Badge
-														variant="outline"
-														className={`text-xs sm:text-sm border ${getRankColor(fixture.teams.home.rank.attack)} bg-transparent hover:bg-accent/10 transition-all duration-200`}
-														title="Attack Rank: Higher rank indicates stronger attacking performance"
-													>
-														<Target className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
-														A#{fixture.teams.home.rank.attack}
-													</Badge>
-													<Badge
-														variant="outline"
-														className={`text-xs sm:text-sm border ${getRankColor(fixture.teams.home.rank.defense)} bg-transparent hover:bg-accent/10 transition-all duration-200`}
-														title="Defense Rank: Higher rank indicates stronger defensive performance"
-													>
-														<Shield className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
-														D#{fixture.teams.home.rank.defense}
-													</Badge>
-												</div>
 											</div>
-											<div className="grid grid-cols-2 gap-2 sm:gap-3">
-												<div className="space-y-1">
-													<div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
-														<Target className="h-3 w-3 sm:h-4 sm:w-4" />
-														Attack
+											<div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+												<div className="space-y-2">
+													<div className="flex items-center gap-2 text-sm text-muted-foreground">
+														<div className="group relative">
+															<Target className="h-4 w-4" />
+															<span className="absolute hidden group-hover:block text-xs bg-gray-800 text-white p-1 rounded">
+																Attack Strength
+															</span>
+														</div>
+														<Badge
+															aria-label={`Attack Rank ${fixture.teams.home.rank.attack}`}
+															className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getRankColor(fixture.teams.home.rank.attack)}`}
+														>
+															#{fixture.teams.home.rank.attack} Attack
+														</Badge>
 													</div>
-													<Badge className={`text-xs sm:text-sm w-full justify-center ${getLevelColor(fixture.teams.home.attack.level)}`}>
+													<Badge className={`text-sm w-full justify-center ${getLevelColor(fixture.teams.home.attack.level)}`}>
 														{fixture.teams.home.attack.level}
 													</Badge>
-													<p className={`text-center font-mono font-bold text-xs sm:text-sm ${getScoreColor(fixture.teams.home.attack.score)}`}>
+													<p className={`text-center font-mono font-bold text-sm ${getScoreColor(fixture.teams.home.attack.score)}`}>
 														{fixture.teams.home.attack.score > 0 ? '+' : ''}{fixture.teams.home.attack.score}
 													</p>
 												</div>
-												<div className="space-y-1">
-													<div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
-														<Shield className="h-3 w-3 sm:h-4 sm:w-4" />
-														Defense
+												<div className="space-y-2">
+													<div className="flex items-center gap-2 text-sm text-muted-foreground">
+														<div className="group relative">
+															<Shield className="h-4 w-4" />
+															<span className="absolute hidden group-hover:block text-xs bg-gray-800 text-white p-1 rounded">
+																Defense Strength
+															</span>
+														</div>
+														<Badge
+															aria-label={`Defense Rank ${fixture.teams.home.rank.defense}`}
+															className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getRankColor(fixture.teams.home.rank.defense)}`}
+														>
+															#{fixture.teams.home.rank.defense} Defense
+														</Badge>
 													</div>
-													<Badge className={`text-xs sm:text-sm w-full justify-center ${getLevelColor(fixture.teams.home.defense.level)}`}>
+													<Badge className={`text-sm w-full justify-center ${getLevelColor(fixture.teams.home.defense.level)}`}>
 														{fixture.teams.home.defense.level}
 													</Badge>
-													<p className={`text-center font-mono font-bold text-xs sm:text-sm ${getScoreColor(fixture.teams.home.defense.score)}`}>
+													<p className={`text-center font-mono font-bold text-sm ${getScoreColor(fixture.teams.home.defense.score)}`}>
 														{fixture.teams.home.defense.score > 0 ? '+' : ''}{fixture.teams.home.defense.score}
 													</p>
-												</div>
-											</div>
-											<div className="flex items-center justify-between text-xs mt-2">
-												<div className="flex items-center gap-2">
-													<span>Defense Rank</span>
-													<span className={`text-xs ${getRankColor(fixture.teams.home.rank.defense)}`}>#{fixture.teams.home.rank.defense}</span>
-												</div>
-												<div className="flex items-center gap-1">
-													<Badge className={`text-xs border ${getLevelColor(fixture.teams.home.defense.level)}`}>
-														{fixture.teams.home.defense.score > 0 ? '+' : ''}{fixture.teams.home.defense.score}
-													</Badge>
 												</div>
 											</div>
 										</div>
@@ -380,60 +406,51 @@ export default function FixtureAnalysisPage() {
 												<h3 className="font-semibold text-sm sm:text-base text-foreground truncate">
 													{fixture.teams.away.team} (A)
 												</h3>
-												<div className="flex items-center gap-1 sm:gap-2">
-													<Badge
-														variant="outline"
-														className={`text-xs sm:text-sm border ${getRankColor(fixture.teams.away.rank.attack)} bg-transparent hover:bg-accent/10 transition-all duration-200`}
-														title="Attack Rank: Higher rank indicates stronger attacking performance"
-													>
-														<Target className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
-														A#{fixture.teams.away.rank.attack}
-													</Badge>
-													<Badge
-														variant="outline"
-														className={`text-xs sm:text-sm border ${getRankColor(fixture.teams.away.rank.defense)} bg-transparent hover:bg-accent/10 transition-all duration-200`}
-														title="Defense Rank: Higher rank indicates stronger defensive performance"
-													>
-														<Shield className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
-														D#{fixture.teams.away.rank.defense}
-													</Badge>
-												</div>
 											</div>
-											<div className="grid grid-cols-2 gap-2 sm:gap-3">
-												<div className="space-y-1">
-													<div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
-														<Target className="h-3 w-3 sm:h-4 sm:w-4" />
-														Attack
+											<div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+												<div className="space-y-2">
+													<div className="flex items-center gap-2 text-sm text-muted-foreground">
+														<div className="group relative">
+															<Target className="h-4 w-4" />
+															<span className="absolute hidden group-hover:block text-xs bg-gray-800 text-white p-1 rounded">
+																Attack Strength
+															</span>
+														</div>
+														<Badge
+															aria-label={`Attack Rank ${fixture.teams.away.rank.attack}`}
+															className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getRankColor(fixture.teams.away.rank.attack)}`}
+														>
+															#{fixture.teams.away.rank.attack} Attack
+														</Badge>
 													</div>
-													<Badge className={`text-xs sm:text-sm w-full justify-center ${getLevelColor(fixture.teams.away.attack.level)}`}>
+													<Badge className={`text-sm w-full justify-center font-medium ${getLevelColor(fixture.teams.away.attack.level)}`}>
 														{fixture.teams.away.attack.level}
 													</Badge>
-													<p className={`text-center font-mono font-bold text-xs sm:text-sm ${getScoreColor(fixture.teams.away.attack.score)}`}>
+													<p className={`text-center font-mono font-bold text-sm ${getScoreColor(fixture.teams.away.attack.score)}`}>
 														{fixture.teams.away.attack.score > 0 ? '+' : ''}{fixture.teams.away.attack.score}
 													</p>
 												</div>
-												<div className="space-y-1">
-													<div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
-														<Shield className="h-3 w-3 sm:h-4 sm:w-4" />
-														Defense
+												<div className="space-y-2">
+													<div className="flex items-center gap-2 text-sm text-muted-foreground">
+														<div className="group relative">
+															<Shield className="h-4 w-4" />
+															<span className="absolute hidden group-hover:block text-xs bg-gray-800 text-white p-1 rounded">
+																Defense Strength
+															</span>
+														</div>
+														<Badge
+															aria-label={`Defense Rank ${fixture.teams.away.rank.defense}`}
+															className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getRankColor(fixture.teams.away.rank.defense)}`}
+														>
+															#{fixture.teams.away.rank.defense} Defense
+														</Badge>
 													</div>
-													<Badge className={`text-xs sm:text-sm w-full justify-center ${getLevelColor(fixture.teams.away.defense.level)}`}>
+													<Badge className={`text-sm w-full justify-center font-medium ${getLevelColor(fixture.teams.away.defense.level)}`}>
 														{fixture.teams.away.defense.level}
 													</Badge>
-													<p className={`text-center font-mono font-bold text-xs sm:text-sm ${getScoreColor(fixture.teams.away.defense.score)}`}>
+													<p className={`text-center font-mono font-bold text-sm ${getScoreColor(fixture.teams.away.defense.score)}`}>
 														{fixture.teams.away.defense.score > 0 ? '+' : ''}{fixture.teams.away.defense.score}
 													</p>
-												</div>
-											</div>
-											<div className="flex items-center justify-between text-xs mt-2">
-												<div className="flex items-center gap-2">
-													<span>Defense Rank</span>
-													<span className={`text-xs ${getRankColor(fixture.teams.away.rank.defense)}`}>#{fixture.teams.away.rank.defense}</span>
-												</div>
-												<div className="flex items-center gap-1">
-													<Badge className={`text-xs border ${getLevelColor(fixture.teams.away.defense.level)}`}>
-														{fixture.teams.away.defense.score > 0 ? '+' : ''}{fixture.teams.away.defense.score}
-													</Badge>
 												</div>
 											</div>
 										</div>

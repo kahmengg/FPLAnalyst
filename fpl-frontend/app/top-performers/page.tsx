@@ -3,329 +3,74 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
+import { useState, useEffect } from "react"
 import { TrendingUp, Minus, Star, Shield, Target, Gem, DollarSign, Trophy } from "lucide-react"
 
-// Data from cell 15 output - actual FPL data
-const seasonPerformers = [
-  { player: "Haaland", team: "MCI", position: "FWD", points: 62, ppg: 10.3, price: 14.4, ownership: 53.6, form: 9.8 },
-  { player: "Semenyo", team: "BOU", position: "MID", points: 48, ppg: 8.0, price: 7.8, ownership: 53.4, form: 7.6 },
-  { player: "Senesi", team: "BOU", position: "DEF", points: 44, ppg: 7.3, price: 4.9, ownership: 20.6, form: 6.5 },
-  { player: "Guéhi", team: "CRY", position: "DEF", points: 43, ppg: 7.2, price: 4.8, ownership: 27.9, form: 6.3 },
-  { player: "Anthony", team: "BUR", position: "MID", points: 40, ppg: 6.7, price: 5.6, ownership: 4.6, form: 6.0 },
-  { player: "Alderete", team: "SUN", position: "DEF", points: 39, ppg: 6.5, price: 4.0, ownership: 4.2, form: 5.9 },
-  { player: "Enzo", team: "CHE", position: "MID", points: 39, ppg: 6.5, price: 6.7, ownership: 13.5, form: 6.1 },
-  { player: "Roefs", team: "SUN", position: "GK", points: 39, ppg: 6.5, price: 4.5, ownership: 3.4, form: 5.8 },
-  { player: "Gabriel", team: "ARS", position: "DEF", points: 38, ppg: 6.3, price: 6.2, ownership: 25.4, form: 6.2 },
-  { player: "Enzo", team: "CHE", position: "MID", points: 39, ppg: 6.5, price: 6.7, ownership: 13.5, form: 6.1 },
-  { player: "Roefs", team: "SUN", position: "GK", points: 39, ppg: 6.5, price: 4.5, ownership: 3.4, form: 5.8 },
-  { player: "Gabriel", team: "ARS", position: "DEF", points: 38, ppg: 6.3, price: 6.2, ownership: 25.4, form: 6.2 },
-{ player: "Enzo", team: "CHE", position: "MID", points: 39, ppg: 6.5, price: 6.7, ownership: 13.5, form: 6.1 },
-  { player: "Roefs", team: "SUN", position: "GK", points: 39, ppg: 6.5, price: 4.5, ownership: 3.4, form: 5.8 },
-  { player: "Gabriel", team: "ARS", position: "DEF", points: 38, ppg: 6.3, price: 6.2, ownership: 25.4, form: 6.2 },
-{ player: "Enzo", team: "CHE", position: "MID", points: 39, ppg: 6.5, price: 6.7, ownership: 13.5, form: 6.1 },
-  { player: "Roefs", team: "SUN", position: "GK", points: 39, ppg: 6.5, price: 4.5, ownership: 3.4, form: 5.8 },
-  { player: "Gabriel", team: "ARS", position: "DEF", points: 38, ppg: 6.3, price: 6.2, ownership: 25.4, form: 6.2 },
 
-  { player: "J.Timber", team: "ARS", position: "DEF", points: 37, ppg: 6.2, price: 5.8, ownership: 14.5, form: 6.0 },
-]
-
-const valuePlayersList = [
-  { player: "Livramento", team: "NEW", position: "DEF", pointsPerMillion: 7.25, totalPoints: 37, price: 5.1 },
-  { player: "Rodon", team: "LEE", position: "DEF", pointsPerMillion: 7.25, totalPoints: 29, price: 4.0 },
-  { player: "Keane", team: "EVE", position: "DEF", pointsPerMillion: 6.89, totalPoints: 31, price: 4.5 },
-  { player: "Mitchell", team: "CRY", position: "DEF", pointsPerMillion: 6.8, totalPoints: 34, price: 5.0 },
-  { player: "Pope", team: "NEW", position: "GK", pointsPerMillion: 6.8, totalPoints: 34, price: 5.0 },
-  { player: "Chalobah", team: "CHE", position: "DEF", pointsPerMillion: 6.73, totalPoints: 35, price: 5.2 },
-  { player: "Lacroix", team: "CRY", position: "DEF", pointsPerMillion: 6.67, totalPoints: 34, price: 5.1 },
-  { player: "Richards", team: "CRY", position: "DEF", pointsPerMillion: 6.67, totalPoints: 30, price: 4.5 },
-]
-
-const hiddenGemsList = [
-  {
-    player: "Stach",
-    team: "LEE",
-    position: "MID",
-    points: 31,
-    ownership: 3.0,
-    price: 5.0,
-    xG: 0.7,
-    xA: 0.9,
-    xCS: 1.9,
-    potentialScore: 1.6,
-    form: 6.1,
-  },
-  {
-    player: "Minteh",
-    team: "BHA",
-    position: "MID",
-    points: 29,
-    ownership: 2.1,
-    price: 5.9,
-    xG: 1.5,
-    xA: 1.9,
-    xCS: 0.8,
-    potentialScore: 2.2,
-    form: 5.8,
-  },
-  {
-    player: "L.Paquetá",
-    team: "WHU",
-    position: "MID",
-    points: 28,
-    ownership: 3.1,
-    price: 5.9,
-    xG: 1.4,
-    xA: 0.4,
-    xCS: 1.5,
-    potentialScore: 1.6,
-    form: 6.0,
-  },
-  {
-    player: "Szoboszlai",
-    team: "LIV",
-    position: "MID",
-    points: 26,
-    ownership: 3.9,
-    price: 6.5,
-    xG: 0.5,
-    xA: 1.3,
-    xCS: 2.1,
-    potentialScore: 1.4,
-    form: 5.5,
-  },
-  {
-    player: "Sarr",
-    team: "CRY",
-    position: "MID",
-    points: 29,
-    ownership: 3.7,
-    price: 6.4,
-    xG: 2.7,
-    xA: 0.2,
-    xCS: 2.0,
-    potentialScore: 2.9,
-    form: 6.4,
-  },
-  {
-    player: "Thiago",
-    team: "BRE",
-    position: "FWD",
-    points: 30,
-    ownership: 2.3,
-    price: 6.0,
-    xG: 1.9,
-    xA: 1.1,
-    xCS: 1.2,
-    potentialScore: 2.2,
-    form: 6.8,
-  },
-    {
-    player: "Szoboszlai",
-    team: "LIV",
-    position: "MID",
-    points: 26,
-    ownership: 3.9,
-    price: 6.5,
-    xG: 0.5,
-    xA: 1.3,
-    xCS: 2.1,
-    potentialScore: 1.4,
-    form: 5.5,
-  },
-  {
-    player: "Sarr",
-    team: "CRY",
-    position: "MID",
-    points: 29,
-    ownership: 3.7,
-    price: 6.4,
-    xG: 2.7,
-    xA: 0.2,
-    xCS: 2.0,
-    potentialScore: 2.9,
-    form: 6.4,
-  },
-  {
-    player: "Thiago",
-    team: "BRE",
-    position: "FWD",
-    points: 30,
-    ownership: 2.3,
-    price: 6.0,
-    xG: 1.9,
-    xA: 1.1,
-    xCS: 1.2,
-    potentialScore: 2.2,
-    form: 6.8,
-  },
-    {
-    player: "Szoboszlai",
-    team: "LIV",
-    position: "MID",
-    points: 26,
-    ownership: 3.9,
-    price: 6.5,
-    xG: 0.5,
-    xA: 1.3,
-    xCS: 2.1,
-    potentialScore: 1.4,
-    form: 5.5,
-  },
-  {
-    player: "Sarr",
-    team: "CRY",
-    position: "MID",
-    points: 29,
-    ownership: 3.7,
-    price: 6.4,
-    xG: 2.7,
-    xA: 0.2,
-    xCS: 2.0,
-    potentialScore: 2.9,
-    form: 6.4,
-  },
-  {
-    player: "Thiago",
-    team: "BRE",
-    position: "FWD",
-    points: 30,
-    ownership: 2.3,
-    price: 6.0,
-    xG: 1.9,
-    xA: 1.1,
-    xCS: 1.2,
-    potentialScore: 2.2,
-    form: 6.8,
-  },
-]
-
-const goalScorers = [
-  { player: "Haaland", team: "MCI", goals: 8, goalsPerGame: 1.33, points: 62, price: 14.4, ownership: 53.6 },
-  { player: "Anthony", team: "BUR", goals: 4, goalsPerGame: 0.67, points: 40, price: 5.6, ownership: 4.6 },
-  { player: "Semenyo", team: "BOU", goals: 4, goalsPerGame: 0.67, points: 48, price: 7.8, ownership: 53.4 },
-  { player: "Thiago", team: "BRE", goals: 4, goalsPerGame: 0.67, points: 30, price: 6.0, ownership: 2.3 },
-  { player: "Bowen", team: "WHU", goals: 3, goalsPerGame: 0.5, points: 25, price: 7.2, ownership: 18.4 },
-]
-
-const assistProviders = [
-  { player: "Grealish", team: "EVE", assists: 4, assistsPerGame: 0.67, points: 28, price: 6.1, ownership: 12.8, form: 6.4 },
-  { player: "Diouf", team: "WHU", assists: 3, assistsPerGame: 0.5, points: 22, price: 5.5, ownership: 8.2, form: 5.5 },
-  { player: "Doku", team: "MCI", assists: 3, assistsPerGame: 0.5, points: 31, price: 7.8, ownership: 24.1, form: 7.0 },
-  { player: "João Pedro", team: "CHE", assists: 3, assistsPerGame: 0.5, points: 28, price: 6.9, ownership: 15.3, form: 6.2 },
-  { player: "Kudus", team: "TOT", assists: 3, assistsPerGame: 0.5, points: 26, price: 6.4, ownership: 11.7, form: 6.0 },
-]
-
-const defensiveLeaders = [
-  {
-    player: "Pope",
-    team: "NEW",
-    position: "GK",
-    points: 34,
-    ppg: 5.7,
-    cleanSheets: 4,
-    csRate: 66.7,
-    tackles: 1,
-    price: 5.0,
-    form: 5.4,
-  },
-  {
-    player: "Mitchell",
-    team: "CRY",
-    position: "DEF",
-    points: 34,
-    ppg: 5.7,
-    cleanSheets: 3,
-    csRate: 50.0,
-    tackles: 24,
-    price: 5.0,
-    form: 5.8,
-  },
-  {
-    player: "J.Timber",
-    team: "ARS",
-    position: "DEF",
-    points: 37,
-    ppg: 6.2,
-    cleanSheets: 3,
-    csRate: 50.0,
-    tackles: 19,
-    price: 5.8,
-    form: 6.1,
-  },
-  {
-    player: "Senesi",
-    team: "BOU",
-    position: "DEF",
-    points: 44,
-    ppg: 7.3,
-    cleanSheets: 3,
-    csRate: 50.0,
-    tackles: 12,
-    price: 4.9,
-    form: 7.0,
-  },
-  {
-    player: "Livramento",
-    team: "NEW",
-    position: "DEF",
-    points: 37,
-    ppg: 6.2,
-    cleanSheets: 4,
-    csRate: 66.7,
-    tackles: 6,
-    price: 5.1,
-    form: 6.0,
-  },
-]
-
-const overperformers = [
-  { player: "Thiago", team: "BRE", goals: 4, xG: 1.9, overperformance: 2.1, sustainable: false },
-  { player: "Bowen", team: "WHU", goals: 3, xG: 1.0, overperformance: 2.0, sustainable: false },
-  { player: "Isidor", team: "SUN", goals: 3, xG: 1.1, overperformance: 1.9, sustainable: false },
-  { player: "Anthony", team: "BUR", goals: 4, xG: 2.2, overperformance: 1.8, sustainable: false },
-  { player: "Gravenberch", team: "LIV", goals: 2, xG: 0.3, overperformance: 1.7, sustainable: false },
-]
-
-const sustainableScorers = [
-  { player: "Semenyo", team: "BOU", goals: 4, xG: 3.1, overperformance: 0.9, sustainable: true },
-  { player: "Enzo", team: "CHE", goals: 3, xG: 3.3, overperformance: -0.3, sustainable: true },
-  { player: "Gyökeres", team: "ARS", goals: 3, xG: 2.4, overperformance: 0.6, sustainable: true },
-  { player: "Sarr", team: "CRY", goals: 3, xG: 2.7, overperformance: 0.3, sustainable: true },
-]
-
-// Helper components
-const OverperformanceIndicator = ({ overperformance, sustainable }) => {
-  if (sustainable) {
-    return (
-      <div className="flex items-center gap-1 text-green-600">
-        <Minus className="h-3 w-3" />
-        <span className="text-xs font-mono">Sustainable</span>
-      </div>
-    )
-  }
-
-  return (
-    <div className="flex items-center gap-1 text-red-500">
-      <TrendingUp className="h-3 w-3" />
-      <span className="text-xs font-mono">+{overperformance.toFixed(1)}</span>
-    </div>
-  )
-}
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+const MAX_RETRIES = 3
 
 const PositionBadge = ({ position }) => {
+  // Map full position names to abbreviations
+  const positionMap = {
+    Goalkeeper: "GK",
+    Defender: "DEF",
+    Midfielder: "MID",
+    Forward: "FWD",
+  };
+
+  // Get the abbreviated position, or use the original if not found
+  const normalizedPosition = positionMap[position] || position;
+
   const colors = {
     GK: "bg-purple-100 text-purple-800 border-purple-200",
     DEF: "bg-blue-100 text-blue-800 border-blue-200",
     MID: "bg-green-100 text-green-800 border-green-200",
     FWD: "bg-red-100 text-red-800 border-red-200",
-  }
+  };
 
   return (
-    <Badge variant="outline" className={`text-xs font-mono ${colors[position] || "bg-gray-100 text-gray-800"}`}>
-      {position}
-    </Badge>
-  )
-}
+    <Badge
+  variant="outline"
+  className={`text-xs font-mono font-bold rounded-full border ${colors[normalizedPosition] || "bg-teal-50 text-teal-700 border-teal-500 hover:border-teal-400 transition-colors duration-150"}`}
+>
+  {normalizedPosition}
+</Badge>
+  );
+};
+
+const TeamBadge = ({ team }) => {
+  const colors = {
+    ARS: "bg-red-100 text-red-800 border-red-200",
+    BOU: "bg-red-600 text-white border-red-700", // Replaced cherry with standard red
+    BRE: "bg-red-200 text-red-900 border-red-300",
+    BHA: "bg-blue-200 text-blue-900 border-blue-300",
+    BUR: "bg-red-500 text-white border-red-600", // Replaced claret with standard red
+    CHE: "bg-blue-100 text-blue-800 border-blue-200",
+    CRY: "bg-blue-300 text-blue-900 border-blue-400",
+    EVE: "bg-blue-400 text-blue-900 border-blue-500",
+    FUL: "bg-white text-gray-800 border-gray-200", // Simplified white-100 to white
+    LEE: "bg-white text-blue-800 border-gray-300", // Simplified white-200 to white
+    LIV: "bg-green-100 text-green-800 border-green-200",
+    MCI: "bg-sky-100 text-sky-800 border-sky-200",
+    MUN: "bg-yellow-100 text-yellow-800 border-yellow-200",
+    NEW: "bg-gray-900 text-white border-gray-950", // Replaced black-100 for better contrast
+    TOT: "bg-white text-blue-900 border-gray-400", // Replaced navy with blue-900
+    SUN: "bg-red-300 text-white border-red-400",
+    WHU: "bg-red-400 text-sky-800 border-red-500", // Adjusted claret to red
+    WOL: "bg-yellow-200 text-gray-900 border-yellow-300",
+    NFO: "bg-red-400 text-white border-red-500",
+    AVL: "bg-red-500 text-blue-900 border-red-600", // Adjusted claret to red
+  };
+  return (
+    <Badge
+  variant="outline"
+  className={`text-xs font-sans uppercase px-2 py-0.5 rounded-lg border-dashed border-2 ${colors[team] || "bg-orange-50 text-orange-700 border-orange-500 hover:bg-orange-100 transition-all duration-200"}`}
+>
+  {team}
+</Badge>
+  );
+};
 
 // New: FormBadge - colored pill based on form value
 const FormBadge = ({ value }: { value: number }) => {
@@ -333,8 +78,8 @@ const FormBadge = ({ value }: { value: number }) => {
   const v = Number(value || 0)
   const cls =
     v >= 7 ? "bg-emerald-100 text-emerald-800 border-emerald-200" :
-    v >= 5 ? "bg-amber-100 text-amber-800 border-amber-200" :
-    "bg-red-100 text-red-800 border-red-200"
+      v >= 5 ? "bg-amber-100 text-amber-800 border-amber-200" :
+        "bg-red-100 text-red-800 border-red-200"
 
   return (
     <span
@@ -348,18 +93,139 @@ const FormBadge = ({ value }: { value: number }) => {
 }
 
 export default function TopPerformersPage() {
+
+  const [activeTab, setActiveTab] = useState("goalScorers")
+  const [goalScorers, setGoalScorers] = useState([])
+  const [assistProviders, setAssistProviders] = useState([])
+  const [defensiveLeaders, setDefensiveLeaders] = useState([])
+  const [seasonPerformers, setSeasonPerformers] = useState([])
+  const [hiddenGems, setHiddenGems] = useState([])
+  const [valuePlayers, setValuePlayers] = useState([])
+  const [overperformers, setOverperformers] = useState([])
+  const [sustainableScorers, setSustainableScorers] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [errors, setErrors] = useState({})
+
+  async function fetchWithRetry(url, retries = MAX_RETRIES) {
+    for (let i = 0; i < retries; i++) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return await response.json();
+      } catch (err) {
+        if (i === retries - 1) throw err;
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
+      }
+    }
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true)
+      setErrors({})
+      const newErrors = {};
+
+      try {
+        const endpoints = [
+          {
+            key: 'goalScorers', url: `${API_BASE_URL}/api/goal_scorer-picks`, setter: setGoalScorers, mapper: p => ({
+              player: p.player, team: p.team, team_short: p.team_short, goals: p.goals,
+              goalsPerGame: p.goalsPerGame, points: p.points, price: p.price,
+              ownership: p.ownership, form: p.form
+            })
+          },
+          {
+            key: 'assistProviders', url: `${API_BASE_URL}/api/assist-gems`, setter: setAssistProviders, mapper: p => ({
+              player: p.player, team: p.team, team_short: p.team_short, assists: p.assists,
+              assistsPerGame: p.assistsPerGame, points: p.points, price: p.price,
+              ownership: p.ownership, form: p.form
+            })
+          },
+          {
+            key: 'defensiveLeaders', url: `${API_BASE_URL}/api/def_lead`, setter: setDefensiveLeaders, mapper: p => ({
+              player: p.player, team: p.team, team_short: p.team_short, position: p.position,
+              points: p.points, ppg: p.ppg, cleanSheets: p.cleanSheets, csRate: p.csRate,
+              tackles: p.tackles, price: p.price, form: p.form
+            })
+          },
+          {
+            key: 'seasonPerformers', url: `${API_BASE_URL}/api/season-performers`, setter: setSeasonPerformers, mapper: p => ({
+              player: p.player, team: p.team, team_short: p.team_short, position: p.position,
+              points: p.points, ppg: p.ppg, price: p.price, ownership: p.ownership, form: p.form
+            })
+          },
+          {
+            key: 'hiddenGems', url: `${API_BASE_URL}/api/hidden-gems`, setter: setHiddenGems, mapper: p => ({
+              player: p.player, team: p.team, team_short: p.team_short, position: p.position,
+              points: p.points, ownership: p.ownership, price: p.price, xG: p.xG,
+              xA: p.xA, xCS: p.xCS, potentialScore: p.potentialScore, form: p.form
+            })
+          },
+          {
+            key: 'valuePlayers', url: `${API_BASE_URL}/api/value-players`, setter: setValuePlayers, mapper: p => ({
+              player: p.player, team: p.team, team_short: p.team_short, position: p.position,
+              pointsPerMillion: p.pointsPerMillion, totalPoints: p.totalPoints, price: p.price, form: p.form
+            })
+          },
+          {
+            key: 'overperformers', url: `${API_BASE_URL}/api/overperformers`, setter: setOverperformers, mapper: p => ({
+              player: p.player, team: p.team, team_short: p.team_short, goals: p.goals,
+              xG: p.xG, overperformance: p.overperformance, sustainable: p.sustainable, form: p.form
+            })
+          },
+          {
+            key: 'sustainableScorers', url: `${API_BASE_URL}/api/sustainable-scorers`, setter: setSustainableScorers, mapper: p => ({
+              player: p.player, team: p.team, team_short: p.team_short, goals: p.goals,
+              xG: p.xG, overperformance: p.overperformance, sustainable: p.sustainable, form: p.form
+            })
+          }
+        ];
+
+        await Promise.all(endpoints.map(async ({ key, url, setter, mapper }) => {
+          try {
+            const data = await fetchWithRetry(url);
+            setter(data.map(mapper));
+          } catch (err) {
+            newErrors[key] = `Failed to fetch ${key}: ${err.message}`;
+          }
+        }));
+
+        if (Object.keys(newErrors).length > 0) {
+          setErrors(newErrors);
+        }
+      } catch (err) {
+        setErrors({ general: `Unexpected error: ${err.message}` });
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-2 text-muted-foreground">Loading performers...</p>
+        </div>
+      </div>
+    )
+  }
   return (
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-        <h1 className="mb-2 text-4xl font-bold text-foreground flex items-center gap-3">
-          <Trophy className="h-8 w-8 text-yellow-600" />
-          FPL Key Insights & Recommendations
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          Comprehensive analysis based on actual season data through gameweek 6
-        </p>
-      </div>
+          <h1 className="mb-2 text-4xl font-bold text-foreground flex items-center gap-3">
+            <Trophy className="h-8 w-8 text-yellow-600" />
+            FPL Key Insights & Recommendations
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Comprehensive analysis based on actual season data through gameweek 6
+          </p>
+        </div>
 
         <Tabs defaultValue="season" className="space-y-6 sm:space-y-8">
           <div className="sticky top-4 z-10 backdrop-blur-sm bg-background/80 p-2 rounded-xl border shadow-lg py-0 px-2 text-transparent">
@@ -444,9 +310,7 @@ export default function TopPerformersPage() {
                           <div>
                             <div className="font-semibold text-foreground">{player.player}</div>
                             <div className="flex items-center gap-2 mt-1">
-                              <Badge variant="outline" className="text-xs">
-                                {player.team}
-                              </Badge>
+                              <TeamBadge team={player.team_short} />
                               <PositionBadge position={player.position} />
                             </div>
                           </div>
@@ -481,7 +345,7 @@ export default function TopPerformersPage() {
                 {/* Subtle Desktop Table Layout */}
                 <div className="hidden sm:block overflow-x-auto relative">
                   <table className="w-full min-w-[920px]" role="table" aria-label="Season performers table">
-                     <thead>
+                    <thead>
                       <tr className="border-b border-border text-left text-sm text-muted-foreground">
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Rank</th>
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Player</th>
@@ -493,70 +357,65 @@ export default function TopPerformersPage() {
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden lg:table-cell">Price</th>
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden lg:table-cell">Ownership</th>
                       </tr>
-                     </thead>
-                     <tbody>
-                       {seasonPerformers.map((player, index) => (
-                         <tr
-                           key={player.player}
-                           className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
-                         >
-                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
-                             <div className="flex items-center gap-2">
-                               <div className="w-6 h-6 rounded-full bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center text-xs font-bold transition-colors duration-200">
-                                 {index + 1}
-                               </div>
-                             </div>
-                           </td>
-                           
-                           <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">
-                             <div className="flex items-center gap-2">
-                               <span>{player.player}</span>
-                               {index < 3 && (
-                                 <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
-                               )}
-                             </div>
-                           </td>
-                           
-                           <td className="py-4">
-                             <Badge
-                               variant="outline"
-                               className="font-mono text-xs group-hover:border-accent/50 transition-colors duration-200"
-                             >
-                               {player.team}
-                             </Badge>
-                           </td>
-                           
-                           <td className="py-4">
-                             <PositionBadge position={player.position} />
-                           </td>
-                           
-                           <td className="py-4 font-mono font-bold text-accent text-lg group-hover:text-accent/80 transition-colors duration-200">
-                             {player.points}
-                           </td>
- 
+                    </thead>
+                    <tbody>
+                      {seasonPerformers.map((player, index) => (
+                        <tr
+                          key={player.player}
+                          className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
+                        >
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-6 rounded-full bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center text-xs font-bold transition-colors duration-200">
+                                {index + 1}
+                              </div>
+                            </div>
+                          </td>
+
+                          <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">
+                            <div className="flex items-center gap-2">
+                              <span>{player.player}</span>
+                              {index < 3 && (
+                                <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                              )}
+                            </div>
+                          </td>
+
+                          <td className="py-4">
+                            <TeamBadge team={player.team_short} />
+                          </td>
+
+                          <td className="py-4">
+                            <PositionBadge position={player.position} />
+                          </td>
+
+                          <td className="py-4 font-mono font-bold text-accent text-lg group-hover:text-accent/80 transition-colors duration-200">
+                            {player.points}
+                          </td>
+
                           <td className="py-4">
                             <FormBadge value={player.form} />
                           </td>
-                          
+
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
                             {player.ppg.toFixed(1)}
                           </td>
-                          
+
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200 hidden lg:table-cell">
                             £{player.price}m
                           </td>
-                          
+
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden lg:table-cell">
                             {player.ownership}%
                           </td>
-                         </tr>
-                       ))}
-                     </tbody>
-                   </table>
-                 </div>
-               </CardContent>
-             </Card>
-           </TabsContent>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
 
           <TabsContent value="goals" className="space-y-4 animate-in fade-in-50 slide-in-from-bottom-4 duration-500">
             <div className="grid gap-4 lg:grid-cols-2">
@@ -586,7 +445,7 @@ export default function TopPerformersPage() {
                               <div className="font-semibold text-foreground text-sm sm:text-base">{player.player}</div>
                               <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mt-1">
                                 <Badge variant="outline" className="text-xs w-fit">
-                                  {player.team}
+                                  {player.team_short}
                                 </Badge>
                                 <span className="text-xs text-muted-foreground">{player.ownership}% owned</span>
                               </div>
@@ -601,7 +460,7 @@ export default function TopPerformersPage() {
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-sm mb-3">
                           <div className="flex items-center gap-3 sm:gap-4">
                             <span className="font-medium">£{player.price}m</span>
-                            <span className="text-muted-foreground">{player.goalsPerGame.toFixed(2)}/game</span>
+                            <span className="text-muted-foreground">{player.goalsPerGame.toFixed(2)} goals/game</span>
                             <span className="text-accent font-medium">{player.points} pts</span>
                           </div>
                         </div>
@@ -640,14 +499,14 @@ export default function TopPerformersPage() {
                         ⚠️ Potential Regression Risk
                       </h4>
                       <div className="space-y-2">
-                        {overperformers.slice(0, 3).map((player) => (
+                        {overperformers.map((player) => (
                           <div
                             key={player.player}
                             className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0 p-2 rounded-lg bg-white/50 dark:bg-red-900/20"
                           >
                             <span className="font-medium text-sm sm:text-base">{player.player}</span>
                             <span className="text-red-600 dark:text-red-400 font-semibold text-sm">
-                              +{player.overperformance.toFixed(1)} above xG
+                              {player.goals} goals ≈ {player.xG.toFixed(1)} xG
                             </span>
                           </div>
                         ))}
@@ -666,7 +525,7 @@ export default function TopPerformersPage() {
                           >
                             <span className="font-medium text-sm sm:text-base">{player.player}</span>
                             <span className="text-green-600 dark:text-green-400 font-semibold text-sm">
-                              {player.goals} ≈ {player.xG.toFixed(1)} xG
+                              {player.goals} goals ≈ {player.xG.toFixed(1)} xG
                             </span>
                           </div>
                         ))}
@@ -721,7 +580,7 @@ export default function TopPerformersPage() {
                           <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">{player.player}</td>
                           <td className="py-4">
                             <Badge variant="outline" className="font-mono text-xs group-hover:border-accent/50 transition-colors duration-200">
-                              {player.team}
+                              {player.team_short}
                             </Badge>
                           </td>
                           <td className="py-4 font-mono text-accent font-bold group-hover:text-accent/80 transition-colors duration-200">{player.assists}</td>
@@ -791,9 +650,7 @@ export default function TopPerformersPage() {
                           </td>
                           <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">{player.player}</td>
                           <td className="py-4">
-                            <Badge variant="outline" className="font-mono text-xs group-hover:border-accent/50 transition-colors duration-200">
-                              {player.team}
-                            </Badge>
+                            <TeamBadge team={player.team_short} />
                           </td>
                           <td className="py-4">
                             <PositionBadge position={player.position} />
@@ -805,8 +662,8 @@ export default function TopPerformersPage() {
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
                             {player.ppg.toFixed(1)}
                           </td>
-                           <td className="py-4 font-mono text-sm text-foreground group-hover:text-accent transition-colors duration-200">{player.cleanSheets}</td>
-                           <td className="py-4 font-mono text-sm text-green-600 group-hover:text-green-500 transition-colors duration-200">{player.csRate.toFixed(1)}%</td>
+                          <td className="py-4 font-mono text-sm text-foreground group-hover:text-accent transition-colors duration-200">{player.cleanSheets}</td>
+                          <td className="py-4 font-mono text-sm text-green-600 group-hover:text-green-500 transition-colors duration-200">{player.csRate.toFixed(1)}%</td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
                             {player.tackles}
                           </td>
@@ -846,7 +703,7 @@ export default function TopPerformersPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {valuePlayersList.map((player, index) => (
+                      {valuePlayers.map((player, index) => (
                         <tr
                           key={player.player}
                           className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
@@ -860,9 +717,7 @@ export default function TopPerformersPage() {
                           </td>
                           <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">{player.player}</td>
                           <td className="py-4">
-                            <Badge variant="outline" className="font-mono text-xs group-hover:border-accent/50 transition-colors duration-200">
-                              {player.team}
-                            </Badge>
+                            <TeamBadge team={player.team_short} />
                           </td>
                           <td className="py-4">
                             <PositionBadge position={player.position} />
@@ -894,15 +749,13 @@ export default function TopPerformersPage() {
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                  {hiddenGemsList.map((player, index) => (
+                  {hiddenGems.map((player, index) => (
                     <div
                       key={player.player}
                       className="p-4 rounded-lg bg-gradient-to-br from-secondary/30 to-secondary/10 border transition-all hover:scale-105"
                     >
                       <div className="flex items-center justify-between mb-3">
-                        <Badge variant="outline" className="text-xs">
-                          {player.team}
-                        </Badge>
+                        <TeamBadge team={player.team_short} />
                         <div className="text-xs text-muted-foreground">#{index + 1}</div>
                       </div>
 
