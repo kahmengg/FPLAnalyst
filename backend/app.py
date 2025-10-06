@@ -63,6 +63,16 @@ def home():
             "value_players": "/api/value-players"
         }
     })
+
+# Layout
+@app.route('/api/layout')
+def get_layout():
+    data = load_json_data('layout.json')
+    
+    if isinstance(data, dict) and "error" in data:
+        return jsonify(data), 404
+        
+    return jsonify(data)
     
 # Fixture Analysis
 @app.route('/api/fixtures')
@@ -240,4 +250,4 @@ if __name__ == '__main__':
     print("🌐 API will be available at: http://localhost:5000")
     print("🔧 Test endpoint: http://localhost:5000/api/test")
     print("🔧 Health check: http://localhost:5000/api/health")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='127.0.0.1', port=5000)

@@ -1,8 +1,13 @@
 import Link from "next/link"
 import { TrendingUp, Trophy, Calendar, Gem, ArrowLeftRight, Target, Users, Shield, Activity, Clock } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState, useEffect } from "react"
 
-const quickStats = [
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+const MAX_RETRIES = 3
+
+// Default stats in case API fetch fails
+const defaultQuickStats = [
   { label: "Total Players Analyzed", value: "500+", icon: Users, color: "text-emerald-500", bgColor: "bg-emerald-500/10" },
   { label: "Teams Ranked", value: "20", icon: Shield, color: "text-blue-500", bgColor: "bg-blue-500/10" },
   { label: "Fixtures Analyzed", value: "8 GWs", icon: Activity, color: "text-purple-500", bgColor: "bg-purple-500/10" },
@@ -62,12 +67,90 @@ const actionCards = [
   },
 ]
 
+async function fetchWithRetry(url, retries = MAX_RETRIES) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      }
+      return await response.json()
+    } catch (err) {
+      if (i === retries - 1) throw err
+      await new Promise(resolve => setTimeout(resolve, 1000)) // 1s delay between retries
+    }
+  }
+}
+
 export default function HomePage() {
+  const [quickStats, setQuickStats] = useState(defaultQuickStats)
+  const [gameweek, setGameWeek] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true)
+      setError(null)
+      try {
+        const data = await fetchWithRetry(`${API_BASE_URL}/api/summary-stats`)
+        const summary = data[0] // Assume single object in array
+        const mappedStats = [
+          {
+            label: "Total Players Analyzed",
+            value: summary.number_of_players.toString(),
+            icon: Users,
+            color: "text-emerald-500",
+            bgColor: "bg-emerald-500/10",
+          },
+          {
+            label: "Teams Ranked",
+            value: summary.total_teams.toString(),
+            icon: Shield,
+            color: "text-blue-500",
+            bgColor: "bg-blue-500/10",
+          },
+          {
+            label: "Fixtures Analyzed",
+            value: `${summary.total_gameweeks} GWs`,
+            icon: Activity,
+            color: "text-purple-500",
+            bgColor: "bg-purple-500/10",
+          },
+          {
+            label: "Last Updated",
+            value: "Live",
+            icon: Clock,
+            color: "text-orange-500",
+            bgColor: "bg-orange-500/10",
+          },
+        ]
+        setQuickStats(mappedStats)
+        setGameWeek(summary.total_gameweeks)
+      } catch (err) {
+        setError(`Failed to fetch summary stats: ${err.message}`)
+        setQuickStats(defaultQuickStats) // Fallback to default
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto"></div>
+          <p className="mt-2 text-slate-600 dark:text-slate-400">Loading stats...</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
-      {/* Enhanced Container with better spacing */}
       <div className="container mx-auto px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
-        {/* Enhanced Hero Section with animations */}
         <div className="mb-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500/10 to-blue-500/10 px-4 py-2 mb-6 border border-emerald-500/20">
             <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
@@ -81,7 +164,7 @@ export default function HomePage() {
             Your Strategic Advantage
           </p>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Gameweek 15 • 2025/26 Season 
+            Gameweek {gameweek} • 2025/26 Season 
           </p>
         </div>
 

@@ -6,6 +6,18 @@
         "overall_strength": 2.671,
         "players": [
             {
+                "web_name": "Zinchenko",
+                "position_name": "Defender",
+                "now_cost": 4.9,
+                "clean_sheet_rate": 0.6666666666666666,
+                "points_per_game": 0.0,
+                "points_per_million": 0.0,
+                "xgc_per_game": 0.6666666666666666,
+                "selected_by_percent": 0.4,
+                "team_name_short": "ARS",
+                "form": 2.0
+            },
+            {
                 "web_name": "J.Timber",
                 "position_name": "Defender",
                 "now_cost": 5.8,
@@ -28,18 +40,6 @@
                 "selected_by_percent": 14.6,
                 "team_name_short": "ARS",
                 "form": 4.7
-            },
-            {
-                "web_name": "Gabriel",
-                "position_name": "Defender",
-                "now_cost": 6.2,
-                "clean_sheet_rate": 0.5,
-                "points_per_game": 6.333333333333333,
-                "points_per_million": 6.129032258064516,
-                "xgc_per_game": 0.5833333333333334,
-                "selected_by_percent": 25.4,
-                "team_name_short": "ARS",
-                "form": 10.0
             }
         ]
     },

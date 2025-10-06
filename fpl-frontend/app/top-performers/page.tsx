@@ -92,6 +92,23 @@ const FormBadge = ({ value }: { value: number }) => {
   )
 }
 
+	const sortedTeamData = useMemo(() => {
+		return [...teamFixtureSummary].sort((a, b) => {
+			const aVal = a[sortBy];
+			const bVal = b[sortBy];
+			return sortOrder === "desc" ? bVal - aVal : aVal - bVal;
+		});
+	}, [sortBy, sortOrder, teamFixtureSummary]);
+
+	const handleSort = (column) => {
+		if (sortBy === column) {
+			setSortOrder(sortOrder === "desc" ? "asc" : "desc");
+		} else {
+			setSortBy(column);
+			setSortOrder("desc");
+		}
+	};
+  
 export default function TopPerformersPage() {
 
   const [activeTab, setActiveTab] = useState("goalScorers")
