@@ -40,18 +40,18 @@
         "num_fixtures": 9
     },
     {
-        "team": "Newcastle",
-        "short_name": "NEW",
-        "attack_difficulty": -0.6,
-        "defense_difficulty": 4.5,
-        "overall_difficulty": 2.0,
-        "num_fixtures": 9
-    },
-    {
         "team": "Spurs",
         "short_name": "TOT",
         "attack_difficulty": 0.4,
         "defense_difficulty": 3.6,
+        "overall_difficulty": 2.0,
+        "num_fixtures": 9
+    },
+    {
+        "team": "Newcastle",
+        "short_name": "NEW",
+        "attack_difficulty": -0.6,
+        "defense_difficulty": 4.5,
         "overall_difficulty": 2.0,
         "num_fixtures": 9
     },

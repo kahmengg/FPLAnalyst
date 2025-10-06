@@ -9,7 +9,8 @@
     "goals_per_game": 2.0,
     "expected_goals_per_game": 1.48,
     "goals_conceded_per_game": 1.17,
-    "clean_sheet_rate": 0.33
+    "clean_sheet_rate": 0.33,
+    "defensive_contribution": 0
   },
   {
     "team": "Man Utd",
@@ -21,7 +22,8 @@
     "goals_per_game": 0.83,
     "expected_goals_per_game": 1.95,
     "goals_conceded_per_game": 1.83,
-    "clean_sheet_rate": 0.0
+    "clean_sheet_rate": 0.0,
+    "defensive_contribution": 0
   },
   {
     "team": "Man City",
@@ -33,7 +35,8 @@
     "goals_per_game": 2.0,
     "expected_goals_per_game": 1.75,
     "goals_conceded_per_game": 1.0,
-    "clean_sheet_rate": 0.33
+    "clean_sheet_rate": 0.33,
+    "defensive_contribution": 0
   },
   {
     "team": "Arsenal",
@@ -45,7 +48,8 @@
     "goals_per_game": 2.0,
     "expected_goals_per_game": 1.5,
     "goals_conceded_per_game": 0.5,
-    "clean_sheet_rate": 0.5
+    "clean_sheet_rate": 0.5,
+    "defensive_contribution": 0
   },
   {
     "team": "Chelsea",
@@ -57,7 +61,8 @@
     "goals_per_game": 1.83,
     "expected_goals_per_game": 1.65,
     "goals_conceded_per_game": 1.33,
-    "clean_sheet_rate": 0.33
+    "clean_sheet_rate": 0.33,
+    "defensive_contribution": 0
   },
   {
     "team": "Bournemouth",
@@ -69,7 +74,8 @@
     "goals_per_game": 2.67,
     "expected_goals_per_game": 2.53,
     "goals_conceded_per_game": 1.0,
-    "clean_sheet_rate": 0.33
+    "clean_sheet_rate": 0.33,
+    "defensive_contribution": 0
   },
   {
     "team": "Crystal Palace",
@@ -81,7 +87,8 @@
     "goals_per_game": 1.33,
     "expected_goals_per_game": 1.8,
     "goals_conceded_per_game": 0.5,
-    "clean_sheet_rate": 0.5
+    "clean_sheet_rate": 0.5,
+    "defensive_contribution": 0
   },
   {
     "team": "Everton",
@@ -93,7 +100,8 @@
     "goals_per_game": 1.17,
     "expected_goals_per_game": 1.25,
     "goals_conceded_per_game": 1.0,
-    "clean_sheet_rate": 0.33
+    "clean_sheet_rate": 0.33,
+    "defensive_contribution": 0
   },
   {
     "team": "Nott'm Forest",
@@ -105,7 +113,8 @@
     "goals_per_game": 0.83,
     "expected_goals_per_game": 1.02,
     "goals_conceded_per_game": 1.67,
-    "clean_sheet_rate": 0.0
+    "clean_sheet_rate": 0.0,
+    "defensive_contribution": 0
   },
   {
     "team": "Spurs",
@@ -117,7 +126,8 @@
     "goals_per_game": 1.67,
     "expected_goals_per_game": 1.13,
     "goals_conceded_per_game": 0.67,
-    "clean_sheet_rate": 0.5
+    "clean_sheet_rate": 0.5,
+    "defensive_contribution": 0
   },
   {
     "team": "Brighton",
@@ -129,7 +139,8 @@
     "goals_per_game": 1.5,
     "expected_goals_per_game": 1.75,
     "goals_conceded_per_game": 1.5,
-    "clean_sheet_rate": 0.0
+    "clean_sheet_rate": 0.0,
+    "defensive_contribution": 0
   },
   {
     "team": "West Ham",
@@ -141,7 +152,8 @@
     "goals_per_game": 1.0,
     "expected_goals_per_game": 0.97,
     "goals_conceded_per_game": 2.33,
-    "clean_sheet_rate": 0.17
+    "clean_sheet_rate": 0.17,
+    "defensive_contribution": 0
   },
   {
     "team": "Fulham",
@@ -153,7 +165,8 @@
     "goals_per_game": 0.83,
     "expected_goals_per_game": 1.05,
     "goals_conceded_per_game": 1.33,
-    "clean_sheet_rate": 0.17
+    "clean_sheet_rate": 0.17,
+    "defensive_contribution": 0
   },
   {
     "team": "Leeds",
@@ -165,7 +178,8 @@
     "goals_per_game": 1.0,
     "expected_goals_per_game": 0.97,
     "goals_conceded_per_game": 1.5,
-    "clean_sheet_rate": 0.33
+    "clean_sheet_rate": 0.33,
+    "defensive_contribution": 0
   },
   {
     "team": "Newcastle",
@@ -177,7 +191,8 @@
     "goals_per_game": 0.67,
     "expected_goals_per_game": 0.78,
     "goals_conceded_per_game": 0.83,
-    "clean_sheet_rate": 0.67
+    "clean_sheet_rate": 0.67,
+    "defensive_contribution": 0
   },
   {
     "team": "Sunderland",
@@ -189,7 +204,8 @@
     "goals_per_game": 1.17,
     "expected_goals_per_game": 0.92,
     "goals_conceded_per_game": 0.67,
-    "clean_sheet_rate": 0.5
+    "clean_sheet_rate": 0.5,
+    "defensive_contribution": 0
   },
   {
     "team": "Aston Villa",
@@ -201,7 +217,8 @@
     "goals_per_game": 0.67,
     "expected_goals_per_game": 0.83,
     "goals_conceded_per_game": 1.0,
-    "clean_sheet_rate": 0.33
+    "clean_sheet_rate": 0.33,
+    "defensive_contribution": 0
   },
   {
     "team": "Brentford",
@@ -213,7 +230,8 @@
     "goals_per_game": 1.5,
     "expected_goals_per_game": 1.28,
     "goals_conceded_per_game": 1.83,
-    "clean_sheet_rate": 0.17
+    "clean_sheet_rate": 0.17,
+    "defensive_contribution": 0
   },
   {
     "team": "Wolves",
@@ -225,7 +243,8 @@
     "goals_per_game": 0.67,
     "expected_goals_per_game": 0.85,
     "goals_conceded_per_game": 2.17,
-    "clean_sheet_rate": 0.0
+    "clean_sheet_rate": 0.0,
+    "defensive_contribution": 0
   },
   {
     "team": "Burnley",
@@ -237,6 +256,7 @@
     "goals_per_game": 1.0,
     "expected_goals_per_game": 0.67,
     "goals_conceded_per_game": 2.17,
-    "clean_sheet_rate": 0.17
+    "clean_sheet_rate": 0.17,
+    "defensive_contribution": 0
   }
 ]
