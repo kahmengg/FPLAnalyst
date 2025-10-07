@@ -44,6 +44,51 @@
             "score": 7.0,
             "venue": "A",
             "level": "Very Easy"
+        },
+        {
+            "gameweek": 9,
+            "team": "Liverpool",
+            "short_name": "LIV",
+            "opponent": "Brentford",
+            "score": 7.0,
+            "venue": "A",
+            "level": "Very Easy"
+        },
+        {
+            "gameweek": 9,
+            "team": "Bournemouth",
+            "short_name": "BOU",
+            "opponent": "Nott'm Forest",
+            "score": 7.0,
+            "venue": "H",
+            "level": "Very Easy"
+        },
+        {
+            "gameweek": 7,
+            "team": "Arsenal",
+            "short_name": "ARS",
+            "opponent": "West Ham",
+            "score": 6.5,
+            "venue": "H",
+            "level": "Very Easy"
+        },
+        {
+            "gameweek": 7,
+            "team": "Man City",
+            "short_name": "MCI",
+            "opponent": "Brentford",
+            "score": 6.0,
+            "venue": "A",
+            "level": "Very Easy"
+        },
+        {
+            "gameweek": 10,
+            "team": "Liverpool",
+            "short_name": "LIV",
+            "opponent": "Aston Villa",
+            "score": 5.5,
+            "venue": "H",
+            "level": "Very Easy"
         }
     ],
     "defense": [
@@ -89,6 +134,51 @@
             "short_name": "ARS",
             "opponent": "Fulham",
             "score": 6.0,
+            "venue": "A",
+            "level": "Very Easy"
+        },
+        {
+            "gameweek": 7,
+            "team": "Arsenal",
+            "short_name": "ARS",
+            "opponent": "West Ham",
+            "score": 5.5,
+            "venue": "H",
+            "level": "Very Easy"
+        },
+        {
+            "gameweek": 7,
+            "team": "Man City",
+            "short_name": "MCI",
+            "opponent": "Brentford",
+            "score": 5.5,
+            "venue": "A",
+            "level": "Very Easy"
+        },
+        {
+            "gameweek": 9,
+            "team": "Newcastle",
+            "short_name": "NEW",
+            "opponent": "Fulham",
+            "score": 5.5,
+            "venue": "H",
+            "level": "Very Easy"
+        },
+        {
+            "gameweek": 7,
+            "team": "Spurs",
+            "short_name": "TOT",
+            "opponent": "Leeds",
+            "score": 5.0,
+            "venue": "A",
+            "level": "Very Easy"
+        },
+        {
+            "gameweek": 8,
+            "team": "Leeds",
+            "short_name": "LEE",
+            "opponent": "Burnley",
+            "score": 5.0,
             "venue": "A",
             "level": "Very Easy"
         }
