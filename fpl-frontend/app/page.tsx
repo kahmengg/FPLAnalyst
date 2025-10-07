@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link"
 import { TrendingUp, Trophy, Calendar, Gem, ArrowLeftRight, Target, Users, Shield, Activity, Clock } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"

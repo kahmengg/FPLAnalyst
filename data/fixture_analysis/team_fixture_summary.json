@@ -1,142 +1,142 @@
 [
     {
-        "team": "Bournemouth",
-        "avg_attack_difficulty": 3.2,
-        "avg_defense_difficulty": 2.075,
-        "overall_difficulty": 2.638,
-        "num_favorable_fixtures": 2
-    },
-    {
-        "team": "Aston Villa",
-        "avg_attack_difficulty": 1.087,
-        "avg_defense_difficulty": 3.075,
-        "overall_difficulty": 2.081,
+        "team": "Crystal Palace",
+        "avg_attack_difficulty": 2.825,
+        "avg_defense_difficulty": 4.088,
+        "overall_difficulty": 3.456,
         "num_favorable_fixtures": 3
     },
     {
-        "team": "Crystal Palace",
-        "avg_attack_difficulty": 0.325,
-        "avg_defense_difficulty": 3.338,
-        "overall_difficulty": 1.832,
+        "team": "Wolves",
+        "avg_attack_difficulty": 1.575,
+        "avg_defense_difficulty": 4.2,
+        "overall_difficulty": 2.888,
+        "num_favorable_fixtures": 4
+    },
+    {
+        "team": "Chelsea",
+        "avg_attack_difficulty": 2.2,
+        "avg_defense_difficulty": 0.325,
+        "overall_difficulty": 1.263,
+        "num_favorable_fixtures": 2
+    },
+    {
+        "team": "Spurs",
+        "avg_attack_difficulty": 0.825,
+        "avg_defense_difficulty": 1.7,
+        "overall_difficulty": 1.262,
+        "num_favorable_fixtures": 1
+    },
+    {
+        "team": "Bournemouth",
+        "avg_attack_difficulty": 1.325,
+        "avg_defense_difficulty": 1.075,
+        "overall_difficulty": 1.2,
+        "num_favorable_fixtures": 1
+    },
+    {
+        "team": "Everton",
+        "avg_attack_difficulty": 0.2,
+        "avg_defense_difficulty": 1.825,
+        "overall_difficulty": 1.012,
+        "num_favorable_fixtures": 2
+    },
+    {
+        "team": "Brighton",
+        "avg_attack_difficulty": 2.45,
+        "avg_defense_difficulty": -0.55,
+        "overall_difficulty": 0.95,
+        "num_favorable_fixtures": 2
+    },
+    {
+        "team": "Fulham",
+        "avg_attack_difficulty": -0.425,
+        "avg_defense_difficulty": 2.2,
+        "overall_difficulty": 0.888,
+        "num_favorable_fixtures": 3
+    },
+    {
+        "team": "Man Utd",
+        "avg_attack_difficulty": 4.462,
+        "avg_defense_difficulty": -3.175,
+        "overall_difficulty": 0.644,
+        "num_favorable_fixtures": 2
+    },
+    {
+        "team": "Man City",
+        "avg_attack_difficulty": 1.075,
+        "avg_defense_difficulty": -0.425,
+        "overall_difficulty": 0.325,
         "num_favorable_fixtures": 2
     },
     {
         "team": "West Ham",
-        "avg_attack_difficulty": 1.45,
-        "avg_defense_difficulty": 2.088,
-        "overall_difficulty": 1.769,
-        "num_favorable_fixtures": 1
-    },
-    {
-        "team": "Wolves",
-        "avg_attack_difficulty": 0.2,
-        "avg_defense_difficulty": 3.325,
-        "overall_difficulty": 1.763,
-        "num_favorable_fixtures": 3
-    },
-    {
-        "team": "Sunderland",
         "avg_attack_difficulty": -0.3,
-        "avg_defense_difficulty": 2.95,
-        "overall_difficulty": 1.325,
-        "num_favorable_fixtures": 2
-    },
-    {
-        "team": "Man Utd",
-        "avg_attack_difficulty": 5.837,
-        "avg_defense_difficulty": -3.55,
-        "overall_difficulty": 1.144,
-        "num_favorable_fixtures": 3
-    },
-    {
-        "team": "Fulham",
-        "avg_attack_difficulty": -0.3,
-        "avg_defense_difficulty": 2.2,
-        "overall_difficulty": 0.95,
-        "num_favorable_fixtures": 3
-    },
-    {
-        "team": "Nott'm Forest",
-        "avg_attack_difficulty": 3.95,
-        "avg_defense_difficulty": -2.3,
-        "overall_difficulty": 0.825,
-        "num_favorable_fixtures": 3
-    },
-    {
-        "team": "Spurs",
-        "avg_attack_difficulty": -0.925,
-        "avg_defense_difficulty": 2.325,
-        "overall_difficulty": 0.7,
+        "avg_defense_difficulty": 0.825,
+        "overall_difficulty": 0.262,
         "num_favorable_fixtures": 1
     },
     {
         "team": "Liverpool",
         "avg_attack_difficulty": 2.85,
-        "avg_defense_difficulty": -2.175,
-        "overall_difficulty": 0.338,
+        "avg_defense_difficulty": -2.425,
+        "overall_difficulty": 0.213,
+        "num_favorable_fixtures": 3
+    },
+    {
+        "team": "Aston Villa",
+        "avg_attack_difficulty": -0.162,
+        "avg_defense_difficulty": 0.45,
+        "overall_difficulty": 0.144,
         "num_favorable_fixtures": 2
     },
     {
-        "team": "Newcastle",
-        "avg_attack_difficulty": -1.425,
+        "team": "Sunderland",
+        "avg_attack_difficulty": -2.55,
         "avg_defense_difficulty": 2.075,
-        "overall_difficulty": 0.325,
+        "overall_difficulty": -0.237,
         "num_favorable_fixtures": 2
     },
     {
-        "team": "Everton",
-        "avg_attack_difficulty": -0.925,
-        "avg_defense_difficulty": 0.825,
-        "overall_difficulty": -0.05,
-        "num_favorable_fixtures": 1
-    },
-    {
-        "team": "Brighton",
-        "avg_attack_difficulty": 0.95,
-        "avg_defense_difficulty": -1.425,
-        "overall_difficulty": -0.238,
-        "num_favorable_fixtures": 1
-    },
-    {
-        "team": "Chelsea",
-        "avg_attack_difficulty": 1.2,
-        "avg_defense_difficulty": -1.8,
-        "overall_difficulty": -0.3,
-        "num_favorable_fixtures": 1
-    },
-    {
-        "team": "Brentford",
-        "avg_attack_difficulty": -0.8,
-        "avg_defense_difficulty": -0.55,
+        "team": "Nott'm Forest",
+        "avg_attack_difficulty": 1.825,
+        "avg_defense_difficulty": -3.175,
         "overall_difficulty": -0.675,
         "num_favorable_fixtures": 1
     },
     {
         "team": "Leeds",
-        "avg_attack_difficulty": -1.925,
-        "avg_defense_difficulty": -0.425,
-        "overall_difficulty": -1.175,
-        "num_favorable_fixtures": 0
+        "avg_attack_difficulty": -1.175,
+        "avg_defense_difficulty": -0.3,
+        "overall_difficulty": -0.738,
+        "num_favorable_fixtures": 1
     },
     {
-        "team": "Arsenal",
-        "avg_attack_difficulty": -2.175,
-        "avg_defense_difficulty": -0.775,
-        "overall_difficulty": -1.475,
-        "num_favorable_fixtures": 2
+        "team": "Brentford",
+        "avg_attack_difficulty": -1.425,
+        "avg_defense_difficulty": -0.175,
+        "overall_difficulty": -0.8,
+        "num_favorable_fixtures": 1
     },
     {
-        "team": "Man City",
-        "avg_attack_difficulty": -1.05,
-        "avg_defense_difficulty": -2.175,
-        "overall_difficulty": -1.612,
+        "team": "Newcastle",
+        "avg_attack_difficulty": -3.925,
+        "avg_defense_difficulty": -0.175,
+        "overall_difficulty": -2.05,
         "num_favorable_fixtures": 1
     },
     {
         "team": "Burnley",
-        "avg_attack_difficulty": -2.675,
-        "avg_defense_difficulty": -0.55,
-        "overall_difficulty": -1.612,
-        "num_favorable_fixtures": 2
+        "avg_attack_difficulty": -2.8,
+        "avg_defense_difficulty": -1.675,
+        "overall_difficulty": -2.238,
+        "num_favorable_fixtures": 1
+    },
+    {
+        "team": "Arsenal",
+        "avg_attack_difficulty": -5.55,
+        "avg_defense_difficulty": -3.163,
+        "overall_difficulty": -4.356,
+        "num_favorable_fixtures": 1
     }
 ]

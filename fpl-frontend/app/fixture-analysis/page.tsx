@@ -67,8 +67,8 @@ const getDifficultyEmoji = (score) => {
 };
 
 const getScoreColor = (score) => {
-	if (score >= 5) return "text-green-600 dark:text-green-400";
-	if (score >= 2) return "text-blue-600 dark:text-blue-400";
+	if (score >= 6) return "text-green-600 dark:text-green-400";
+	if (score >= 4) return "text-blue-600 dark:text-blue-400";
 	if (score >= -2) return "text-yellow-600 dark:text-yellow-400";
 	if (score >= -5) return "text-orange-600 dark:text-orange-400";
 	return "text-red-600 dark:text-red-400";
@@ -90,7 +90,7 @@ const getRankColor = (rank) => {
 };
 
 export default function FixtureAnalysisPage() {
-	const [gameweek, setGameweek] = useState(7);
+	const [gameweek, setGameweek] = useState(null);
 	const [activeTab, setActiveTab] = useState("fixtures");
 	const [sortBy, setSortBy] = useState("overall");
 	const [sortOrder, setSortOrder] = useState("desc");
@@ -110,7 +110,9 @@ export default function FixtureAnalysisPage() {
 				const resFixtures = await fetch(`${API_BASE_URL}/api/fixtures`);
 				if (!resFixtures.ok) throw new Error('Failed to fetch fixtures');
 				const dataFixtures = await resFixtures.json();
-
+				const gameweeks = dataFixtures.map(f => f.gameweek).filter(gw => typeof gw === 'number' && !isNaN(gw));
+				const minGameweek = gameweeks.length > 0 ? Math.min(...gameweeks) : 1; // Fallback to 1 if no valid gameweeks
+				setGameweek(minGameweek);
 				const transformedFixtures = dataFixtures.map(f => {
 					// Calculate favorability based on average of attack and defense scores
 					const homeAvgScore = (f.home_team.attack.score + f.home_team.defense.score) / 2;
@@ -154,7 +156,7 @@ export default function FixtureAnalysisPage() {
 					matchup: `${o.team} vs ${o.opponent}`,
 					team: o.team,
 					venue: o.venue,
-					score: o.score,
+					score: o.combined_score,
 					level: o.level.toUpperCase()
 				}));
 				const transformedDefense = dataOpportunities.defense.map(o => ({
@@ -162,7 +164,7 @@ export default function FixtureAnalysisPage() {
 					matchup: `${o.team} vs ${o.opponent}`,
 					team: o.team,
 					venue: o.venue,
-					score: o.score,
+					score: o.combined_score,
 					level: o.level.toUpperCase()
 				}));
 				setFixtureOpportunities({ attack: transformedAttack, defense: transformedDefense });
@@ -173,10 +175,10 @@ export default function FixtureAnalysisPage() {
 				const dataSummary = await resSummary.json();
 				const transformedSummary = dataSummary.map(t => ({
 					team: t.team,
-					att: t.attack_difficulty,
-					def: t.defense_difficulty,
+					att: t.avg_attack_difficulty,
+					def: t.avg_defense_difficulty,
 					overall: t.overall_difficulty,
-					fixtures: t.num_fixtures
+					fixtures: t.num_favorable_fixtures
 				}));
 				setTeamFixtureSummary(transformedSummary);
 
@@ -278,7 +280,7 @@ export default function FixtureAnalysisPage() {
 						<div className="flex flex-col sm:flex-row items-center justify-between gap-4">
 							<div className="flex items-center justify-center gap-3 sm:gap-6">
 								<Button
-									onClick={() => setGameweek(Math.max(7, gameweek - 1))}
+									onClick={() => setGameweek(Math.max(gameweek, gameweek - 1))}
 									variant="ghost"
 									size="icon"
 									className="h-9 w-9 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition"
@@ -469,7 +471,7 @@ export default function FixtureAnalysisPage() {
 									<CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
 										🔥 Best Attacking Opportunities
 										<Badge variant="secondary" className="ml-auto text-xs">
-											GW7-9
+											GW {gameweek - 1} - {gameweek + 1}
 										</Badge>
 									</CardTitle>
 								</CardHeader>
@@ -524,7 +526,7 @@ export default function FixtureAnalysisPage() {
 									<CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
 										🛡️ Best Defensive Opportunities
 										<Badge variant="secondary" className="ml-auto text-xs">
-											GW7-9
+											GW {gameweek - 1} - {gameweek + 1}
 										</Badge>
 									</CardTitle>
 								</CardHeader>

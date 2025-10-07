@@ -1,10 +1,10 @@
-"use client"
+"use client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { useState, useEffect } from "react"
-import { TrendingUp, Minus, Star, Shield, Target, Gem, DollarSign, Trophy } from "lucide-react"
+import { useState, useEffect, useMemo } from "react"
+import { TrendingUp, Minus, Star, Shield, Target, Gem, DollarSign, Trophy, ArrowUp, ArrowUpDown, ArrowDown} from "lucide-react"
 
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
@@ -92,36 +92,49 @@ const FormBadge = ({ value }: { value: number }) => {
   )
 }
 
-	const sortedTeamData = useMemo(() => {
-		return [...teamFixtureSummary].sort((a, b) => {
-			const aVal = a[sortBy];
-			const bVal = b[sortBy];
-			return sortOrder === "desc" ? bVal - aVal : aVal - bVal;
-		});
-	}, [sortBy, sortOrder, teamFixtureSummary]);
 
-	const handleSort = (column) => {
-		if (sortBy === column) {
-			setSortOrder(sortOrder === "desc" ? "asc" : "desc");
-		} else {
-			setSortBy(column);
-			setSortOrder("desc");
-		}
-	};
   
 export default function TopPerformersPage() {
+  const [activeTab, setActiveTab] = useState("season");
+  const [goalScorers, setGoalScorers] = useState([]);
+  const [assistProviders, setAssistProviders] = useState([]);
+  const [defensiveLeaders, setDefensiveLeaders] = useState([]);
+  const [seasonPerformers, setSeasonPerformers] = useState([]);
+  const [hiddenGems, setHiddenGems] = useState([]);
+  const [valuePlayers, setValuePlayers] = useState([]);
+  const [overperformers, setOverperformers] = useState([]);
+  const [sustainableScorers, setSustainableScorers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [errors, setErrors] = useState({});
 
-  const [activeTab, setActiveTab] = useState("goalScorers")
-  const [goalScorers, setGoalScorers] = useState([])
-  const [assistProviders, setAssistProviders] = useState([])
-  const [defensiveLeaders, setDefensiveLeaders] = useState([])
-  const [seasonPerformers, setSeasonPerformers] = useState([])
-  const [hiddenGems, setHiddenGems] = useState([])
-  const [valuePlayers, setValuePlayers] = useState([])
-  const [overperformers, setOverperformers] = useState([])
-  const [sustainableScorers, setSustainableScorers] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [errors, setErrors] = useState({})
+  // Add sorting state
+  const [sortBy, setSortBy] = useState("points"); // Default sort by points
+  const [sortOrder, setSortOrder] = useState("desc"); // Default descending (higher is better)
+
+  // Sorting logic for seasonPerformers
+  const sortedSeasonPerformers = useMemo(() => {
+    return [...seasonPerformers].sort((a, b) => {
+      const aVal = a[sortBy];
+      const bVal = b[sortBy];
+      return sortOrder === "desc" ? bVal - aVal : aVal - bVal;
+    });
+  }, [sortBy, sortOrder, seasonPerformers]);
+
+  // Handle sort click
+  const handleSort = (column) => {
+    if (sortBy === column) {
+      setSortOrder(sortOrder === "desc" ? "asc" : "desc");
+    } else {
+      setSortBy(column);
+      setSortOrder("desc");
+    }
+  };
+
+  // Get sort icon
+  const getSortIcon = (column) => {
+    if (sortBy !== column) return <ArrowUpDown className="h-3 w-3" />;
+    return sortOrder === "desc" ? <ArrowDown className="h-3 w-3" /> : <ArrowUp className="h-3 w-3" />;
+  };
 
   async function fetchWithRetry(url, retries = MAX_RETRIES) {
     for (let i = 0; i < retries; i++) {
@@ -240,7 +253,7 @@ export default function TopPerformersPage() {
             FPL Key Insights & Recommendations
           </h1>
           <p className="text-lg text-muted-foreground">
-            Comprehensive analysis based on actual season data through gameweek 6
+            Comprehensive analysis based on actual season data through gameweeks
           </p>
         </div>
 
@@ -312,9 +325,9 @@ export default function TopPerformersPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-3 sm:p-6">
-                {/* Mobile Card Layout */}
+                {/* Mobile Card Layout (unchanged) */}
                 <div className="block sm:hidden space-y-3">
-                  {seasonPerformers.map((player, index) => (
+                  {sortedSeasonPerformers.map((player, index) => (
                     <div
                       key={player.player}
                       className="p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer"
@@ -359,7 +372,7 @@ export default function TopPerformersPage() {
                   ))}
                 </div>
 
-                {/* Subtle Desktop Table Layout */}
+                {/* Desktop Table Layout with Sorting */}
                 <div className="hidden sm:block overflow-x-auto relative">
                   <table className="w-full min-w-[920px]" role="table" aria-label="Season performers table">
                     <thead>
@@ -368,15 +381,50 @@ export default function TopPerformersPage() {
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Player</th>
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Team</th>
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Pos</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Points</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Form</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden md:table-cell">PPG</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden lg:table-cell">Price</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden lg:table-cell">Ownership</th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort("points")}
+                        >
+                          <div className="flex items-center gap-1">
+                            Points {getSortIcon("points")}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort("form")}
+                        >
+                          <div className="flex items-center gap-1">
+                            Form {getSortIcon("form")}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors hidden md:table-cell"
+                          onClick={() => handleSort("ppg")}
+                        >
+                          <div className="flex items-center gap-1">
+                            PPG {getSortIcon("ppg")}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors hidden lg:table-cell"
+                          onClick={() => handleSort("price")}
+                        >
+                          <div className="flex items-center gap-1">
+                            Price {getSortIcon("price")}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors hidden lg:table-cell"
+                          onClick={() => handleSort("ownership")}
+                        >
+                          <div className="flex items-center gap-1">
+                            Ownership {getSortIcon("ownership")}
+                          </div>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {seasonPerformers.map((player, index) => (
+                      {sortedSeasonPerformers.map((player, index) => (
                         <tr
                           key={player.player}
                           className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
@@ -388,7 +436,6 @@ export default function TopPerformersPage() {
                               </div>
                             </div>
                           </td>
-
                           <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">
                             <div className="flex items-center gap-2">
                               <span>{player.player}</span>
@@ -397,31 +444,24 @@ export default function TopPerformersPage() {
                               )}
                             </div>
                           </td>
-
                           <td className="py-4">
                             <TeamBadge team={player.team_short} />
                           </td>
-
                           <td className="py-4">
                             <PositionBadge position={player.position} />
                           </td>
-
                           <td className="py-4 font-mono font-bold text-accent text-lg group-hover:text-accent/80 transition-colors duration-200">
                             {player.points}
                           </td>
-
                           <td className="py-4">
                             <FormBadge value={player.form} />
                           </td>
-
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
                             {player.ppg.toFixed(1)}
                           </td>
-
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200 hidden lg:table-cell">
                             £{player.price}m
                           </td>
-
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden lg:table-cell">
                             {player.ownership}%
                           </td>
