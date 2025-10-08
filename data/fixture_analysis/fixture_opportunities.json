@@ -8,8 +8,7 @@
             "attack_score": 9.0,
             "defense_score": 9.5,
             "combined_score": 9.2,
-            "venue": "A",
-            "level": "Very Easy"
+            "venue": "A"
         },
         {
             "gameweek": 10,
@@ -19,8 +18,7 @@
             "attack_score": 8.0,
             "defense_score": -1.0,
             "combined_score": 3.5,
-            "venue": "A",
-            "level": "Easy"
+            "venue": "A"
         },
         {
             "gameweek": 9,
@@ -30,8 +28,7 @@
             "attack_score": 7.5,
             "defense_score": -2.0,
             "combined_score": 2.8,
-            "venue": "H",
-            "level": "Easy"
+            "venue": "H"
         },
         {
             "gameweek": 9,
@@ -41,8 +38,7 @@
             "attack_score": 7.5,
             "defense_score": 4.0,
             "combined_score": 5.8,
-            "venue": "A",
-            "level": "Easy"
+            "venue": "A"
         },
         {
             "gameweek": 8,
@@ -52,8 +48,7 @@
             "attack_score": 7.0,
             "defense_score": 0.0,
             "combined_score": 3.5,
-            "venue": "A",
-            "level": "Easy"
+            "venue": "A"
         },
         {
             "gameweek": 9,
@@ -63,8 +58,7 @@
             "attack_score": 7.0,
             "defense_score": 3.5,
             "combined_score": 5.2,
-            "venue": "H",
-            "level": "Easy"
+            "venue": "H"
         },
         {
             "gameweek": 8,
@@ -74,8 +68,7 @@
             "attack_score": 6.5,
             "defense_score": -3.0,
             "combined_score": 1.8,
-            "venue": "H",
-            "level": "Medium-Easy"
+            "venue": "H"
         },
         {
             "gameweek": 8,
@@ -85,30 +78,27 @@
             "attack_score": 5.5,
             "defense_score": 7.0,
             "combined_score": 6.2,
-            "venue": "A",
-            "level": "Medium-Easy"
+            "venue": "A"
         },
         {
-            "gameweek": 11,
-            "team": "Chelsea",
-            "short_name": "CHE",
-            "opponent": "Wolves",
-            "attack_score": 5.5,
-            "defense_score": 4.0,
-            "combined_score": 4.8,
-            "venue": "H",
-            "level": "Medium-Easy"
-        },
-        {
-            "gameweek": 11,
+            "gameweek": 10,
             "team": "Crystal Palace",
             "short_name": "CRY",
-            "opponent": "Brighton",
-            "attack_score": 5.5,
-            "defense_score": 3.5,
-            "combined_score": 4.5,
-            "venue": "H",
-            "level": "Medium-Easy"
+            "opponent": "Brentford",
+            "attack_score": 5.0,
+            "defense_score": 8.0,
+            "combined_score": 6.5,
+            "venue": "H"
+        },
+        {
+            "gameweek": 10,
+            "team": "Liverpool",
+            "short_name": "LIV",
+            "opponent": "Aston Villa",
+            "attack_score": 5.0,
+            "defense_score": 2.0,
+            "combined_score": 3.5,
+            "venue": "H"
         }
     ],
     "defense": [
@@ -120,8 +110,7 @@
             "attack_score": 9.0,
             "defense_score": 9.5,
             "combined_score": 9.2,
-            "venue": "A",
-            "level": "Very Easy"
+            "venue": "A"
         },
         {
             "gameweek": 10,
@@ -131,30 +120,7 @@
             "attack_score": 5.0,
             "defense_score": 8.0,
             "combined_score": 6.5,
-            "venue": "H",
-            "level": "Easy"
-        },
-        {
-            "gameweek": 11,
-            "team": "Newcastle",
-            "short_name": "NEW",
-            "opponent": "Brentford",
-            "attack_score": 2.5,
-            "defense_score": 8.0,
-            "combined_score": 5.2,
-            "venue": "A",
-            "level": "Easy"
-        },
-        {
-            "gameweek": 11,
-            "team": "Arsenal",
-            "short_name": "ARS",
-            "opponent": "Sunderland",
-            "attack_score": 2.5,
-            "defense_score": 8.0,
-            "combined_score": 5.2,
-            "venue": "A",
-            "level": "Easy"
+            "venue": "H"
         },
         {
             "gameweek": 8,
@@ -164,8 +130,7 @@
             "attack_score": 5.5,
             "defense_score": 7.0,
             "combined_score": 6.2,
-            "venue": "A",
-            "level": "Easy"
+            "venue": "A"
         },
         {
             "gameweek": 9,
@@ -175,8 +140,7 @@
             "attack_score": 1.5,
             "defense_score": 7.0,
             "combined_score": 4.2,
-            "venue": "H",
-            "level": "Easy"
+            "venue": "H"
         },
         {
             "gameweek": 10,
@@ -186,8 +150,7 @@
             "attack_score": 3.5,
             "defense_score": 7.0,
             "combined_score": 5.2,
-            "venue": "A",
-            "level": "Easy"
+            "venue": "A"
         },
         {
             "gameweek": 8,
@@ -197,8 +160,7 @@
             "attack_score": -0.6,
             "defense_score": 6.5,
             "combined_score": 3.0,
-            "venue": "H",
-            "level": "Medium-Easy"
+            "venue": "H"
         },
         {
             "gameweek": 8,
@@ -208,8 +170,7 @@
             "attack_score": 3.0,
             "defense_score": 6.0,
             "combined_score": 4.5,
-            "venue": "A",
-            "level": "Medium-Easy"
+            "venue": "A"
         },
         {
             "gameweek": 8,
@@ -219,8 +180,27 @@
             "attack_score": 1.0,
             "defense_score": 5.0,
             "combined_score": 3.0,
-            "venue": "H",
-            "level": "Medium-Easy"
+            "venue": "H"
+        },
+        {
+            "gameweek": 9,
+            "team": "Leeds",
+            "short_name": "LEE",
+            "opponent": "West Ham",
+            "attack_score": 2.5,
+            "defense_score": 4.5,
+            "combined_score": 3.5,
+            "venue": "H"
+        },
+        {
+            "gameweek": 9,
+            "team": "Liverpool",
+            "short_name": "LIV",
+            "opponent": "Brentford",
+            "attack_score": 7.5,
+            "defense_score": 4.0,
+            "combined_score": 5.8,
+            "venue": "A"
         }
     ]
 }

@@ -17,7 +17,7 @@
                 "consistency_score": 0.827,
                 "selected_by_percent": 17.3,
                 "team_name_short": "ARS",
-                "form": 6.2
+                "form": 5.1
             },
             {
                 "web_name": "Gabriel",
@@ -31,7 +31,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 29.2,
                 "team_name_short": "ARS",
-                "form": 9.5
+                "form": 8.8
             },
             {
                 "web_name": "Calafiori",
@@ -45,7 +45,7 @@
                 "consistency_score": 0.832,
                 "selected_by_percent": 14.8,
                 "team_name_short": "ARS",
-                "form": 4.5
+                "form": 3.3
             }
         ]
     },
@@ -67,7 +67,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 8.0,
                 "team_name_short": "NEW",
-                "form": 8.2
+                "form": 7.3
             },
             {
                 "web_name": "Pope",
@@ -81,7 +81,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 9.5,
                 "team_name_short": "NEW",
-                "form": 6.5
+                "form": 6.0
             },
             {
                 "web_name": "Livramento",
@@ -95,7 +95,7 @@
                 "consistency_score": 0.835,
                 "selected_by_percent": 6.1,
                 "team_name_short": "NEW",
-                "form": 5.5
+                "form": 4.4
             }
         ]
     },
@@ -117,7 +117,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 30.7,
                 "team_name_short": "CRY",
-                "form": 7.2
+                "form": 6.2
             },
             {
                 "web_name": "Richards",
@@ -131,7 +131,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 3.1,
                 "team_name_short": "CRY",
-                "form": 5.2
+                "form": 4.0
             },
             {
                 "web_name": "Lacroix",
@@ -145,7 +145,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 4.2,
                 "team_name_short": "CRY",
-                "form": 4.5
+                "form": 3.3
             }
         ]
     },
@@ -167,7 +167,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 12.0,
                 "team_name_short": "TOT",
-                "form": 3.5
+                "form": 2.4
             },
             {
                 "web_name": "Van de Ven",
@@ -181,7 +181,7 @@
                 "consistency_score": 0.983,
                 "selected_by_percent": 34.1,
                 "team_name_short": "TOT",
-                "form": 3.2
+                "form": 1.8
             },
             {
                 "web_name": "Romero",
@@ -195,7 +195,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 7.4,
                 "team_name_short": "TOT",
-                "form": 3.2
+                "form": 1.8
             }
         ]
     },
@@ -217,7 +217,7 @@
                 "consistency_score": 0.865,
                 "selected_by_percent": 4.3,
                 "team_name_short": "MCI",
-                "form": 5.8
+                "form": 4.8
             },
             {
                 "web_name": "Gvardiol",
@@ -231,7 +231,7 @@
                 "consistency_score": 0.538,
                 "selected_by_percent": 5.5,
                 "team_name_short": "MCI",
-                "form": 7.5
+                "form": 6.6
             },
             {
                 "web_name": "O’Reilly",
@@ -245,7 +245,7 @@
                 "consistency_score": 0.619,
                 "selected_by_percent": 0.7,
                 "team_name_short": "MCI",
-                "form": 5.8
+                "form": 4.8
             }
         ]
     },
@@ -267,7 +267,7 @@
                 "consistency_score": 0.979,
                 "selected_by_percent": 24.9,
                 "team_name_short": "BOU",
-                "form": 7.5
+                "form": 6.6
             },
             {
                 "web_name": "Truffert",
@@ -281,7 +281,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 2.1,
                 "team_name_short": "BOU",
-                "form": 7.2
+                "form": 6.2
             },
             {
                 "web_name": "Petrović",
@@ -295,7 +295,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 5.7,
                 "team_name_short": "BOU",
-                "form": 5.5
+                "form": 4.8
             }
         ]
     },
@@ -317,7 +317,7 @@
                 "consistency_score": 0.916,
                 "selected_by_percent": 6.7,
                 "team_name_short": "SUN",
-                "form": 8.5
+                "form": 7.7
             },
             {
                 "web_name": "Roefs",
@@ -331,7 +331,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 4.7,
                 "team_name_short": "SUN",
-                "form": 6.2
+                "form": 5.6
             },
             {
                 "web_name": "Mukiele",
@@ -345,7 +345,7 @@
                 "consistency_score": 0.833,
                 "selected_by_percent": 2.1,
                 "team_name_short": "SUN",
-                "form": 5.8
+                "form": 4.8
             }
         ]
     },
@@ -367,7 +367,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 5.4,
                 "team_name_short": "LEE",
-                "form": 4.8
+                "form": 3.7
             },
             {
                 "web_name": "Gudmundsson",
@@ -381,7 +381,7 @@
                 "consistency_score": 0.963,
                 "selected_by_percent": 5.6,
                 "team_name_short": "LEE",
-                "form": 3.5
+                "form": 2.2
             },
             {
                 "web_name": "Struijk",
@@ -395,7 +395,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 0.4,
                 "team_name_short": "LEE",
-                "form": 4.2
+                "form": 2.9
             }
         ]
     },
@@ -417,7 +417,7 @@
                 "consistency_score": 0.959,
                 "selected_by_percent": 1.0,
                 "team_name_short": "EVE",
-                "form": 6.8
+                "form": 5.9
             },
             {
                 "web_name": "Tarkowski",
@@ -431,7 +431,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 7.8,
                 "team_name_short": "EVE",
-                "form": 4.5
+                "form": 3.3
             },
             {
                 "web_name": "Pickford",
@@ -445,7 +445,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 10.6,
                 "team_name_short": "EVE",
-                "form": 3.5
+                "form": 2.4
             }
         ]
     },
@@ -467,7 +467,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 28.1,
                 "team_name_short": "LIV",
-                "form": 3.8
+                "form": 2.6
             },
             {
                 "web_name": "Konaté",
@@ -481,7 +481,7 @@
                 "consistency_score": 0.892,
                 "selected_by_percent": 3.3,
                 "team_name_short": "LIV",
-                "form": 4.2
+                "form": 2.9
             },
             {
                 "web_name": "A.Becker",
@@ -495,7 +495,7 @@
                 "consistency_score": 0.857,
                 "selected_by_percent": 8.1,
                 "team_name_short": "LIV",
-                "form": 2.8
+                "form": 1.6
             }
         ]
     },
@@ -517,7 +517,7 @@
                 "consistency_score": 0.962,
                 "selected_by_percent": 5.4,
                 "team_name_short": "AVL",
-                "form": 6.2
+                "form": 5.1
             },
             {
                 "web_name": "Mings",
@@ -531,7 +531,7 @@
                 "consistency_score": 0.763,
                 "selected_by_percent": 1.2,
                 "team_name_short": "AVL",
-                "form": 3.2
+                "form": 1.8
             },
             {
                 "web_name": "Digne",
@@ -545,7 +545,7 @@
                 "consistency_score": 0.773,
                 "selected_by_percent": 1.9,
                 "team_name_short": "AVL",
-                "form": 3.8
+                "form": 2.6
             }
         ]
     },
@@ -567,7 +567,7 @@
                 "consistency_score": 0.762,
                 "selected_by_percent": 7.4,
                 "team_name_short": "CHE",
-                "form": 3.2
+                "form": 1.8
             },
             {
                 "web_name": "Cucurella",
@@ -581,7 +581,7 @@
                 "consistency_score": 0.851,
                 "selected_by_percent": 21.9,
                 "team_name_short": "CHE",
-                "form": 3.8
+                "form": 2.6
             },
             {
                 "web_name": "Sánchez",
@@ -595,7 +595,7 @@
                 "consistency_score": 0.863,
                 "selected_by_percent": 14.9,
                 "team_name_short": "CHE",
-                "form": 1.5
+                "form": 0.0
             }
         ]
     },
@@ -617,7 +617,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 4.1,
                 "team_name_short": "FUL",
-                "form": 4.8
+                "form": 3.7
             },
             {
                 "web_name": "Bassey",
@@ -631,7 +631,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 0.5,
                 "team_name_short": "FUL",
-                "form": 3.2
+                "form": 1.8
             },
             {
                 "web_name": "Leno",
@@ -645,7 +645,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 1.5,
                 "team_name_short": "FUL",
-                "form": 2.8
+                "form": 1.6
             }
         ]
     },
@@ -667,7 +667,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 2.8,
                 "team_name_short": "MUN",
-                "form": 5.8
+                "form": 4.8
             },
             {
                 "web_name": "Yoro",
@@ -681,7 +681,7 @@
                 "consistency_score": 0.713,
                 "selected_by_percent": 2.0,
                 "team_name_short": "MUN",
-                "form": 4.2
+                "form": 2.9
             },
             {
                 "web_name": "Dalot",
@@ -695,7 +695,7 @@
                 "consistency_score": 0.532,
                 "selected_by_percent": 0.9,
                 "team_name_short": "MUN",
-                "form": 4.8
+                "form": 3.7
             }
         ]
     },
@@ -717,7 +717,7 @@
                 "consistency_score": 0.695,
                 "selected_by_percent": 0.1,
                 "team_name_short": "WOL",
-                "form": 5.2
+                "form": 4.0
             },
             {
                 "web_name": "S.Bueno",
@@ -731,7 +731,7 @@
                 "consistency_score": 0.483,
                 "selected_by_percent": 0.1,
                 "team_name_short": "WOL",
-                "form": 5.8
+                "form": 4.8
             },
             {
                 "web_name": "Agbadou",
@@ -745,7 +745,7 @@
                 "consistency_score": 0.833,
                 "selected_by_percent": 0.3,
                 "team_name_short": "WOL",
-                "form": 3.2
+                "form": 1.8
             }
         ]
     },
@@ -767,7 +767,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 8.1,
                 "team_name_short": "BRE",
-                "form": 5.5
+                "form": 4.8
             },
             {
                 "web_name": "Van den Berg",
@@ -781,7 +781,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 0.6,
                 "team_name_short": "BRE",
-                "form": 3.2
+                "form": 1.8
             },
             {
                 "web_name": "Kayode",
@@ -795,7 +795,7 @@
                 "consistency_score": 0.978,
                 "selected_by_percent": 0.3,
                 "team_name_short": "BRE",
-                "form": 3.2
+                "form": 1.8
             }
         ]
     },
@@ -817,7 +817,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 0.9,
                 "team_name_short": "BHA",
-                "form": 6.5
+                "form": 5.5
             },
             {
                 "web_name": "Dunk",
@@ -831,7 +831,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 1.2,
                 "team_name_short": "BHA",
-                "form": 3.2
+                "form": 1.8
             },
             {
                 "web_name": "De Cuyper",
@@ -845,7 +845,7 @@
                 "consistency_score": 0.467,
                 "selected_by_percent": 2.4,
                 "team_name_short": "BHA",
-                "form": 4.5
+                "form": 3.3
             }
         ]
     },
@@ -867,7 +867,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 3.7,
                 "team_name_short": "WHU",
-                "form": 5.2
+                "form": 4.0
             },
             {
                 "web_name": "Mavropanos",
@@ -881,7 +881,7 @@
                 "consistency_score": 0.714,
                 "selected_by_percent": 0.1,
                 "team_name_short": "WHU",
-                "form": 3.8
+                "form": 2.6
             },
             {
                 "web_name": "Kilman",
@@ -895,7 +895,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 0.2,
                 "team_name_short": "WHU",
-                "form": 3.5
+                "form": 2.2
             }
         ]
     },
@@ -917,7 +917,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 4.8,
                 "team_name_short": "NFO",
-                "form": 5.2
+                "form": 4.0
             },
             {
                 "web_name": "Sels",
@@ -931,7 +931,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 10.7,
                 "team_name_short": "NFO",
-                "form": 4.2
+                "form": 3.2
             },
             {
                 "web_name": "Milenković",
@@ -945,7 +945,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 5.3,
                 "team_name_short": "NFO",
-                "form": 3.5
+                "form": 2.2
             }
         ]
     },
@@ -967,7 +967,7 @@
                 "consistency_score": 0.995,
                 "selected_by_percent": 0.5,
                 "team_name_short": "BUR",
-                "form": 4.5
+                "form": 3.3
             },
             {
                 "web_name": "Dúbravka",
@@ -981,7 +981,7 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 34.1,
                 "team_name_short": "BUR",
-                "form": 3.8
+                "form": 2.8
             },
             {
                 "web_name": "Ekdal",
@@ -995,7 +995,7 @@
                 "consistency_score": 0.844,
                 "selected_by_percent": 1.4,
                 "team_name_short": "BUR",
-                "form": 2.2
+                "form": 0.7
             }
         ]
     }
