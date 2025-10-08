@@ -8,7 +8,7 @@
     "ppg": 10.0,
     "price": 14.5,
     "ownership": 60.6,
-    "form": 10.0
+    "form": 9.9
   },
   {
     "player": "Semenyo",
@@ -19,7 +19,7 @@
     "ppg": 9.4,
     "price": 7.9,
     "ownership": 58.9,
-    "form": 9.5
+    "form": 9.0
   },
   {
     "player": "J.Timber",
@@ -30,7 +30,7 @@
     "ppg": 6.9,
     "price": 5.9,
     "ownership": 17.3,
-    "form": 6.7
+    "form": 5.1
   },
   {
     "player": "Gabriel",
@@ -41,7 +41,7 @@
     "ppg": 6.7,
     "price": 6.3,
     "ownership": 29.2,
-    "form": 10.0
+    "form": 8.8
   },
   {
     "player": "Guéhi",
@@ -52,7 +52,7 @@
     "ppg": 6.6,
     "price": 4.8,
     "ownership": 30.7,
-    "form": 7.7
+    "form": 6.2
   },
   {
     "player": "Senesi",
@@ -63,7 +63,7 @@
     "ppg": 6.6,
     "price": 4.9,
     "ownership": 24.9,
-    "form": 8.0
+    "form": 6.6
   },
   {
     "player": "Caicedo",
@@ -74,7 +74,7 @@
     "ppg": 6.4,
     "price": 5.7,
     "ownership": 13.6,
-    "form": 6.7
+    "form": 4.8
   },
   {
     "player": "Burn",
@@ -85,7 +85,7 @@
     "ppg": 6.1,
     "price": 5.1,
     "ownership": 8.0,
-    "form": 8.7
+    "form": 7.3
   },
   {
     "player": "Calafiori",
@@ -96,7 +96,7 @@
     "ppg": 6.0,
     "price": 5.7,
     "ownership": 14.8,
-    "form": 5.0
+    "form": 3.3
   },
   {
     "player": "Anthony",
@@ -107,7 +107,7 @@
     "ppg": 5.9,
     "price": 5.7,
     "ownership": 6.9,
-    "form": 6.9
+    "form": 5.1
   },
   {
     "player": "Enzo",
@@ -118,7 +118,7 @@
     "ppg": 5.9,
     "price": 6.7,
     "ownership": 14.7,
-    "form": 5.9
+    "form": 3.6
   },
   {
     "player": "Pope",
@@ -129,7 +129,7 @@
     "ppg": 5.9,
     "price": 5.1,
     "ownership": 9.5,
-    "form": 7.0
+    "form": 6.0
   },
   {
     "player": "Roefs",
@@ -140,7 +140,7 @@
     "ppg": 5.9,
     "price": 4.6,
     "ownership": 4.7,
-    "form": 6.7
+    "form": 5.6
   },
   {
     "player": "Rice",
@@ -151,7 +151,7 @@
     "ppg": 5.7,
     "price": 6.5,
     "ownership": 8.7,
-    "form": 8.1
+    "form": 6.9
   },
   {
     "player": "Alderete",
@@ -162,6 +162,6 @@
     "ppg": 5.6,
     "price": 4.1,
     "ownership": 6.7,
-    "form": 9.0
+    "form": 7.7
   }
 ]

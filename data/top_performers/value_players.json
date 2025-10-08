@@ -7,7 +7,7 @@
     "pointsPerMillion": 7.78,
     "totalPoints": 35,
     "price": 4.5,
-    "form": 7.3
+    "form": 5.9
   },
   {
     "player": "Rodon",
@@ -17,7 +17,7 @@
     "pointsPerMillion": 7.5,
     "totalPoints": 30,
     "price": 4.0,
-    "form": 5.3
+    "form": 3.7
   },
   {
     "player": "Cullen",
@@ -27,7 +27,7 @@
     "pointsPerMillion": 7.4,
     "totalPoints": 37,
     "price": 5.0,
-    "form": 6.3
+    "form": 4.2
   },
   {
     "player": "Richards",
@@ -37,7 +37,7 @@
     "pointsPerMillion": 7.33,
     "totalPoints": 33,
     "price": 4.5,
-    "form": 5.7
+    "form": 4.0
   },
   {
     "player": "Lacroix",
@@ -47,7 +47,7 @@
     "pointsPerMillion": 7.25,
     "totalPoints": 37,
     "price": 5.1,
-    "form": 5.0
+    "form": 3.3
   },
   {
     "player": "Livramento",
@@ -57,7 +57,7 @@
     "pointsPerMillion": 7.25,
     "totalPoints": 37,
     "price": 5.1,
-    "form": 6.0
+    "form": 4.4
   },
   {
     "player": "Truffert",
@@ -67,7 +67,7 @@
     "pointsPerMillion": 7.11,
     "totalPoints": 32,
     "price": 4.5,
-    "form": 7.7
+    "form": 6.2
   },
   {
     "player": "Mitchell",
@@ -77,7 +77,7 @@
     "pointsPerMillion": 7.0,
     "totalPoints": 35,
     "price": 5.0,
-    "form": 6.3
+    "form": 4.8
   },
   {
     "player": "Chalobah",
@@ -87,7 +87,7 @@
     "pointsPerMillion": 6.86,
     "totalPoints": 35,
     "price": 5.1,
-    "form": 3.7
+    "form": 1.8
   },
   {
     "player": "Vicario",
@@ -97,7 +97,7 @@
     "pointsPerMillion": 6.86,
     "totalPoints": 35,
     "price": 5.1,
-    "form": 4.0
+    "form": 2.4
   },
   {
     "player": "Mukiele",
@@ -107,7 +107,7 @@
     "pointsPerMillion": 6.75,
     "totalPoints": 27,
     "price": 4.0,
-    "form": 6.3
+    "form": 4.8
   },
   {
     "player": "Van de Ven",
@@ -117,6 +117,6 @@
     "pointsPerMillion": 6.67,
     "totalPoints": 32,
     "price": 4.8,
-    "form": 3.7
+    "form": 1.8
   }
 ]

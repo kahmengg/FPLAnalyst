@@ -10,7 +10,7 @@
     "csRate": 71.4,
     "tackles": 1,
     "price": 5.1,
-    "form": 7.0
+    "form": 6.0
   },
   {
     "player": "J.Timber",
@@ -23,7 +23,7 @@
     "csRate": 57.1,
     "tackles": 25,
     "price": 5.9,
-    "form": 6.7
+    "form": 5.1
   },
   {
     "player": "Mitchell",
@@ -36,7 +36,7 @@
     "csRate": 42.9,
     "tackles": 27,
     "price": 5.0,
-    "form": 6.3
+    "form": 4.8
   },
   {
     "player": "Burn",
@@ -49,7 +49,7 @@
     "csRate": 71.4,
     "tackles": 9,
     "price": 5.1,
-    "form": 8.7
+    "form": 7.3
   },
   {
     "player": "Livramento",
@@ -62,7 +62,7 @@
     "csRate": 71.4,
     "tackles": 6,
     "price": 5.1,
-    "form": 6.0
+    "form": 4.4
   },
   {
     "player": "Raya",
@@ -75,7 +75,7 @@
     "csRate": 57.1,
     "tackles": 1,
     "price": 5.7,
-    "form": 5.3
+    "form": 4.0
   },
   {
     "player": "Calafiori",
@@ -88,7 +88,7 @@
     "csRate": 57.1,
     "tackles": 11,
     "price": 5.7,
-    "form": 5.0
+    "form": 3.3
   },
   {
     "player": "Truffert",
@@ -101,7 +101,7 @@
     "csRate": 42.9,
     "tackles": 14,
     "price": 4.5,
-    "form": 7.7
+    "form": 6.2
   },
   {
     "player": "Muñoz",
@@ -114,7 +114,7 @@
     "csRate": 42.9,
     "tackles": 18,
     "price": 5.6,
-    "form": 6.0
+    "form": 4.4
   },
   {
     "player": "Senesi",
@@ -127,7 +127,7 @@
     "csRate": 42.9,
     "tackles": 12,
     "price": 4.9,
-    "form": 8.0
+    "form": 6.6
   },
   {
     "player": "Roefs",
@@ -140,7 +140,7 @@
     "csRate": 42.9,
     "tackles": 1,
     "price": 4.6,
-    "form": 6.7
+    "form": 5.6
   },
   {
     "player": "Gabriel",
@@ -153,6 +153,6 @@
     "csRate": 57.1,
     "tackles": 10,
     "price": 6.3,
-    "form": 10.0
+    "form": 8.8
   }
 ]

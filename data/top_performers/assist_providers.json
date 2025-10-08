@@ -8,7 +8,7 @@
     "points": 37,
     "price": 6.9,
     "ownership": 20.8,
-    "form": 6.1
+    "form": 3.9
   },
   {
     "player": "Kudus",
@@ -19,7 +19,7 @@
     "points": 39,
     "price": 6.7,
     "ownership": 32.8,
-    "form": 7.7
+    "form": 6.3
   },
   {
     "player": "Diouf",
@@ -30,7 +30,7 @@
     "points": 26,
     "price": 4.4,
     "ownership": 3.7,
-    "form": 5.7
+    "form": 4.0
   },
   {
     "player": "Doku",
@@ -41,7 +41,7 @@
     "points": 29,
     "price": 6.6,
     "ownership": 7.7,
-    "form": 6.3
+    "form": 4.2
   },
   {
     "player": "João Pedro",
@@ -52,7 +52,7 @@
     "points": 39,
     "price": 7.7,
     "ownership": 61.7,
-    "form": 4.7
+    "form": 1.8
   },
   {
     "player": "Semenyo",
@@ -63,7 +63,7 @@
     "points": 66,
     "price": 7.9,
     "ownership": 58.9,
-    "form": 9.5
+    "form": 9.0
   },
   {
     "player": "Xhaka",
@@ -74,7 +74,7 @@
     "points": 32,
     "price": 5.0,
     "ownership": 3.9,
-    "form": 6.7
+    "form": 4.8
   },
   {
     "player": "Calafiori",
@@ -85,7 +85,7 @@
     "points": 42,
     "price": 5.7,
     "ownership": 14.8,
-    "form": 5.0
+    "form": 3.3
   },
   {
     "player": "Cucurella",
@@ -96,7 +96,7 @@
     "points": 27,
     "price": 6.1,
     "ownership": 21.9,
-    "form": 4.3
+    "form": 2.6
   },
   {
     "player": "Eze",
@@ -107,7 +107,7 @@
     "points": 19,
     "price": 7.6,
     "ownership": 13.4,
-    "form": 5.9
+    "form": 3.6
   },
   {
     "player": "Gakpo",
@@ -118,7 +118,7 @@
     "points": 33,
     "price": 7.5,
     "ownership": 11.9,
-    "form": 5.5
+    "form": 3.0
   },
   {
     "player": "Hartman",
@@ -129,6 +129,6 @@
     "points": 21,
     "price": 4.0,
     "ownership": 0.5,
-    "form": 5.0
+    "form": 3.3
   }
 ]
