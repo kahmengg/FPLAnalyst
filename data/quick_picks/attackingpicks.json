@@ -55,7 +55,7 @@
                 "points_per_game": 3.857,
                 "points_per_million": 4.154,
                 "consistency_score": 1.0,
-                "selected_by_percent": 3.8,
+                "selected_by_percent": 3.7,
                 "team_name_short": "LIV",
                 "form": 2.1
             }
@@ -81,7 +81,7 @@
                 "points_per_game": 5.714,
                 "points_per_million": 6.154,
                 "consistency_score": 0.86,
-                "selected_by_percent": 8.7,
+                "selected_by_percent": 8.6,
                 "team_name_short": "ARS",
                 "form": 6.9
             },
@@ -117,7 +117,7 @@
                 "points_per_game": 3.714,
                 "points_per_million": 2.857,
                 "consistency_score": 0.914,
-                "selected_by_percent": 26.9,
+                "selected_by_percent": 26.7,
                 "team_name_short": "ARS",
                 "form": 1.8
             }
@@ -143,7 +143,7 @@
                 "points_per_game": 3.857,
                 "points_per_million": 3.333,
                 "consistency_score": 0.944,
-                "selected_by_percent": 14.3,
+                "selected_by_percent": 14.2,
                 "team_name_short": "MUN",
                 "form": 3.3
             },
@@ -161,7 +161,7 @@
                 "points_per_game": 4.0,
                 "points_per_million": 3.111,
                 "consistency_score": 0.994,
-                "selected_by_percent": 18.8,
+                "selected_by_percent": 18.7,
                 "team_name_short": "MUN",
                 "form": 3.6
             },
@@ -205,7 +205,7 @@
                 "points_per_game": 10.0,
                 "points_per_million": 4.828,
                 "consistency_score": 0.941,
-                "selected_by_percent": 60.6,
+                "selected_by_percent": 61.0,
                 "team_name_short": "MCI",
                 "form": 9.9
             },
@@ -223,7 +223,7 @@
                 "points_per_game": 4.429,
                 "points_per_million": 5.345,
                 "consistency_score": 0.963,
-                "selected_by_percent": 33.1,
+                "selected_by_percent": 33.0,
                 "team_name_short": "MCI",
                 "form": 4.2
             },
@@ -256,7 +256,7 @@
             {
                 "web_name": "Caicedo",
                 "position_name": "Midfielder",
-                "now_cost": 5.7,
+                "now_cost": 5.8,
                 "goals_per_game": 0.429,
                 "assists_per_game": 0.0,
                 "xg_per_game": 0.086,
@@ -265,9 +265,9 @@
                 "SoT_per_game": 0.571,
                 "SiB_per_game": 0.286,
                 "points_per_game": 6.429,
-                "points_per_million": 7.895,
+                "points_per_million": 7.759,
                 "consistency_score": 1.0,
-                "selected_by_percent": 13.6,
+                "selected_by_percent": 14.0,
                 "team_name_short": "CHE",
                 "form": 4.8
             },
@@ -285,7 +285,7 @@
                 "points_per_game": 5.857,
                 "points_per_million": 6.119,
                 "consistency_score": 0.981,
-                "selected_by_percent": 14.7,
+                "selected_by_percent": 14.9,
                 "team_name_short": "CHE",
                 "form": 3.6
             },
@@ -303,7 +303,7 @@
                 "points_per_game": 5.571,
                 "points_per_million": 5.065,
                 "consistency_score": 0.925,
-                "selected_by_percent": 61.7,
+                "selected_by_percent": 61.5,
                 "team_name_short": "CHE",
                 "form": 1.8
             }
@@ -329,7 +329,7 @@
                 "points_per_game": 9.429,
                 "points_per_million": 8.354,
                 "consistency_score": 1.0,
-                "selected_by_percent": 58.9,
+                "selected_by_percent": 59.3,
                 "team_name_short": "BOU",
                 "form": 9.0
             },
@@ -365,7 +365,7 @@
                 "points_per_game": 3.429,
                 "points_per_million": 4.8,
                 "consistency_score": 0.711,
-                "selected_by_percent": 0.3,
+                "selected_by_percent": 0.4,
                 "team_name_short": "BOU",
                 "form": 2.4
             }
@@ -391,7 +391,7 @@
                 "points_per_game": 5.143,
                 "points_per_million": 5.538,
                 "consistency_score": 0.686,
-                "selected_by_percent": 6.1,
+                "selected_by_percent": 6.2,
                 "team_name_short": "CRY",
                 "form": 5.4
             },
@@ -489,7 +489,7 @@
                 "points_per_game": 5.286,
                 "points_per_million": 5.362,
                 "consistency_score": 0.883,
-                "selected_by_percent": 20.8,
+                "selected_by_percent": 20.7,
                 "team_name_short": "EVE",
                 "form": 3.9
             }
@@ -577,7 +577,7 @@
                 "points_per_game": 5.571,
                 "points_per_million": 5.821,
                 "consistency_score": 0.981,
-                "selected_by_percent": 32.8,
+                "selected_by_percent": 33.0,
                 "team_name_short": "TOT",
                 "form": 6.3
             },
@@ -613,7 +613,7 @@
                 "points_per_game": 4.571,
                 "points_per_million": 4.706,
                 "consistency_score": 0.719,
-                "selected_by_percent": 15.8,
+                "selected_by_percent": 15.6,
                 "team_name_short": "TOT",
                 "form": 3.6
             }
@@ -675,7 +675,7 @@
                 "points_per_game": 6.0,
                 "points_per_million": 3.333,
                 "consistency_score": 0.842,
-                "selected_by_percent": 8.9,
+                "selected_by_percent": 9.3,
                 "team_name_short": "NEW",
                 "form": 4.5
             }
@@ -719,7 +719,7 @@
                 "points_per_game": 3.429,
                 "points_per_million": 4.0,
                 "consistency_score": 0.783,
-                "selected_by_percent": 2.1,
+                "selected_by_percent": 2.0,
                 "team_name_short": "NFO",
                 "form": 1.5
             },
@@ -737,7 +737,7 @@
                 "points_per_game": 3.429,
                 "points_per_million": 3.243,
                 "consistency_score": 0.829,
-                "selected_by_percent": 12.3,
+                "selected_by_percent": 12.1,
                 "team_name_short": "NFO",
                 "form": 1.8
             }
@@ -967,7 +967,7 @@
                 "points_per_game": 5.0,
                 "points_per_million": 4.545,
                 "consistency_score": 1.0,
-                "selected_by_percent": 7.0,
+                "selected_by_percent": 7.1,
                 "team_name_short": "WHU",
                 "form": 6.0
             },
@@ -1011,7 +1011,7 @@
                 "points_per_game": 4.571,
                 "points_per_million": 6.4,
                 "consistency_score": 1.0,
-                "selected_by_percent": 3.9,
+                "selected_by_percent": 4.0,
                 "team_name_short": "SUN",
                 "form": 4.8
             },
@@ -1073,7 +1073,7 @@
                 "points_per_game": 4.571,
                 "points_per_million": 5.246,
                 "consistency_score": 0.89,
-                "selected_by_percent": 3.2,
+                "selected_by_percent": 3.3,
                 "team_name_short": "BRE",
                 "form": 5.1
             },
@@ -1233,7 +1233,7 @@
                 "points_per_game": 3.0,
                 "points_per_million": 4.2,
                 "consistency_score": 0.897,
-                "selected_by_percent": 2.3,
+                "selected_by_percent": 2.4,
                 "team_name_short": "BUR",
                 "form": 2.7
             }

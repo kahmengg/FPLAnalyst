@@ -7,7 +7,7 @@
     "points": 70,
     "ppg": 10.0,
     "price": 14.5,
-    "ownership": 60.6,
+    "ownership": 61.0,
     "form": 9.9
   },
   {
@@ -18,7 +18,7 @@
     "points": 66,
     "ppg": 9.4,
     "price": 7.9,
-    "ownership": 58.9,
+    "ownership": 59.3,
     "form": 9.0
   },
   {
@@ -29,7 +29,7 @@
     "points": 48,
     "ppg": 6.9,
     "price": 5.9,
-    "ownership": 17.3,
+    "ownership": 17.6,
     "form": 5.1
   },
   {
@@ -40,7 +40,7 @@
     "points": 47,
     "ppg": 6.7,
     "price": 6.3,
-    "ownership": 29.2,
+    "ownership": 29.5,
     "form": 8.8
   },
   {
@@ -51,7 +51,7 @@
     "points": 46,
     "ppg": 6.6,
     "price": 4.8,
-    "ownership": 30.7,
+    "ownership": 30.8,
     "form": 6.2
   },
   {
@@ -61,8 +61,8 @@
     "position": "Defender",
     "points": 46,
     "ppg": 6.6,
-    "price": 4.9,
-    "ownership": 24.9,
+    "price": 5.0,
+    "ownership": 25.0,
     "form": 6.6
   },
   {
@@ -72,8 +72,8 @@
     "position": "Midfielder",
     "points": 45,
     "ppg": 6.4,
-    "price": 5.7,
-    "ownership": 13.6,
+    "price": 5.8,
+    "ownership": 14.0,
     "form": 4.8
   },
   {
@@ -84,7 +84,7 @@
     "points": 43,
     "ppg": 6.1,
     "price": 5.1,
-    "ownership": 8.0,
+    "ownership": 8.2,
     "form": 7.3
   },
   {
@@ -117,7 +117,7 @@
     "points": 41,
     "ppg": 5.9,
     "price": 6.7,
-    "ownership": 14.7,
+    "ownership": 14.9,
     "form": 3.6
   },
   {
@@ -128,7 +128,7 @@
     "points": 41,
     "ppg": 5.9,
     "price": 5.1,
-    "ownership": 9.5,
+    "ownership": 9.7,
     "form": 6.0
   },
   {
@@ -139,7 +139,7 @@
     "points": 41,
     "ppg": 5.9,
     "price": 4.6,
-    "ownership": 4.7,
+    "ownership": 4.8,
     "form": 5.6
   },
   {
@@ -150,7 +150,7 @@
     "points": 40,
     "ppg": 5.7,
     "price": 6.5,
-    "ownership": 8.7,
+    "ownership": 8.6,
     "form": 6.9
   },
   {
@@ -161,7 +161,7 @@
     "points": 39,
     "ppg": 5.6,
     "price": 4.1,
-    "ownership": 6.7,
+    "ownership": 6.8,
     "form": 7.7
   }
 ]

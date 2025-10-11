@@ -94,7 +94,7 @@ export default function HomePage() {
       setLoading(true)
       setError(null)
       try {
-        const data = await fetchWithRetry(`${API_BASE_URL}/api/summary-stats`)
+        const data = await fetchWithRetry(`${API_BASE_URL}/api/layout`)
         const summary = data[0] // Assume single object in array
         const mappedStats = [
           {

@@ -7,7 +7,7 @@
     "goalsPerGame": 1.29,
     "points": 70,
     "price": 14.5,
-    "ownership": 60.6,
+    "ownership": 61.0,
     "form": 9.9
   },
   {
@@ -18,7 +18,7 @@
     "goalsPerGame": 0.86,
     "points": 66,
     "price": 7.9,
-    "ownership": 58.9,
+    "ownership": 59.3,
     "form": 9.0
   },
   {
@@ -40,7 +40,7 @@
     "goalsPerGame": 0.57,
     "points": 32,
     "price": 6.1,
-    "ownership": 3.2,
+    "ownership": 3.3,
     "form": 5.1
   },
   {
@@ -51,7 +51,7 @@
     "goalsPerGame": 0.43,
     "points": 35,
     "price": 7.7,
-    "ownership": 7.0,
+    "ownership": 7.1,
     "form": 6.0
   },
   {
@@ -61,8 +61,8 @@
     "goals": 3,
     "goalsPerGame": 0.43,
     "points": 45,
-    "price": 5.7,
-    "ownership": 13.6,
+    "price": 5.8,
+    "ownership": 14.0,
     "form": 4.8
   },
   {
@@ -73,7 +73,7 @@
     "goalsPerGame": 0.43,
     "points": 33,
     "price": 8.7,
-    "ownership": 16.9,
+    "ownership": 16.8,
     "form": 2.7
   },
   {
@@ -84,7 +84,7 @@
     "goalsPerGame": 0.43,
     "points": 41,
     "price": 6.7,
-    "ownership": 14.7,
+    "ownership": 14.9,
     "form": 3.6
   },
   {
@@ -95,7 +95,7 @@
     "goalsPerGame": 0.43,
     "points": 26,
     "price": 9.1,
-    "ownership": 26.9,
+    "ownership": 26.7,
     "form": 1.8
   },
   {
@@ -128,7 +128,7 @@
     "goalsPerGame": 0.43,
     "points": 32,
     "price": 6.8,
-    "ownership": 15.8,
+    "ownership": 15.6,
     "form": 3.6
   }
 ]

@@ -192,7 +192,7 @@ def get_hidden_gems():
 @app.route('/api/overperformers')
 def get_top_overperformers():
     """Get top overperformers data"""
-    data = load_json_data('top_performers/overperformers.json')
+    data = load_json_data('performance_analysis/overperformers.json')
     return jsonify(data)
 
 @app.route('/api/season-performers')
@@ -204,7 +204,13 @@ def get_season_performers():
 @app.route('/api/sustainable-scorers')
 def get_sustainable_scorers():
     """Get sustainable scorers data"""
-    data = load_json_data('top_performers/sustainable_scorers.json')
+    data = load_json_data('performance_analysis/sustainable_scorers.json')
+    return jsonify(data)
+
+@app.route('/api/underperformers')
+def get_underperformers():
+    """Get underperformers data"""
+    data = load_json_data('performance_analysis/underperformers.json')
     return jsonify(data)
 
 @app.route('/api/value-players')

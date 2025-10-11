@@ -4,8 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { useState, useEffect, useMemo } from "react"
-import { TrendingUp, Minus, Star, Shield, Target, Gem, DollarSign, Trophy, ArrowUp, ArrowUpDown, ArrowDown} from "lucide-react"
-
+import { TrendingUp, Minus, Star, Shield, Target, Gem, DollarSign, Trophy, ArrowUp, ArrowUpDown, ArrowDown } from "lucide-react"
+import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
 const MAX_RETRIES = 3
@@ -31,44 +31,44 @@ const PositionBadge = ({ position }) => {
 
   return (
     <Badge
-  variant="outline"
-  className={`text-xs font-mono font-bold rounded-full border ${colors[normalizedPosition] || "bg-teal-50 text-teal-700 border-teal-500 hover:border-teal-400 transition-colors duration-150"}`}
->
-  {normalizedPosition}
-</Badge>
+      variant="outline"
+      className={`text-xs font-mono font-bold rounded-full border ${colors[normalizedPosition] || "bg-teal-50 text-teal-700 border-teal-500 hover:border-teal-400 transition-colors duration-150"}`}
+    >
+      {normalizedPosition}
+    </Badge>
   );
 };
 
 const TeamBadge = ({ team }) => {
   const colors = {
-    ARS: "bg-red-100 text-red-800 border-red-200",
-    BOU: "bg-red-600 text-white border-red-700", // Replaced cherry with standard red
-    BRE: "bg-red-200 text-red-900 border-red-300",
-    BHA: "bg-blue-200 text-blue-900 border-blue-300",
-    BUR: "bg-red-500 text-white border-red-600", // Replaced claret with standard red
-    CHE: "bg-blue-100 text-blue-800 border-blue-200",
-    CRY: "bg-blue-300 text-blue-900 border-blue-400",
-    EVE: "bg-blue-400 text-blue-900 border-blue-500",
-    FUL: "bg-white text-gray-800 border-gray-200", // Simplified white-100 to white
-    LEE: "bg-white text-blue-800 border-gray-300", // Simplified white-200 to white
-    LIV: "bg-green-100 text-green-800 border-green-200",
-    MCI: "bg-sky-100 text-sky-800 border-sky-200",
-    MUN: "bg-yellow-100 text-yellow-800 border-yellow-200",
-    NEW: "bg-gray-900 text-white border-gray-950", // Replaced black-100 for better contrast
-    TOT: "bg-white text-blue-900 border-gray-400", // Replaced navy with blue-900
-    SUN: "bg-red-300 text-white border-red-400",
-    WHU: "bg-red-400 text-sky-800 border-red-500", // Adjusted claret to red
-    WOL: "bg-yellow-200 text-gray-900 border-yellow-300",
-    NFO: "bg-red-400 text-white border-red-500",
-    AVL: "bg-red-500 text-blue-900 border-red-600", // Adjusted claret to red
+    ARS: "bg-red-600 text-white border-red-700",           // Arsenal - red & white
+    AVL: "bg-claret-700 text-sky-100 border-claret-800",   // Aston Villa - claret & sky blue (custom class or closest match)
+    BOU: "bg-red-700 text-white border-red-800",           // Bournemouth - red & black (approx with strong red)
+    BRE: "bg-red-500 text-white border-red-600",           // Brentford - red & white
+    BHA: "bg-blue-400 text-white border-blue-500",         // Brighton - blue & white
+    BUR: "bg-rose-700 text-white border-rose-900",         // Burnley - claret (rose) & blue
+    CHE: "bg-blue-700 text-white border-blue-800",         // Chelsea - royal blue
+    CRY: "bg-blue-800 text-red-300 border-blue-900",       // Crystal Palace - blue with red accents
+    EVE: "bg-blue-600 text-white border-blue-700",         // Everton - strong royal blue
+    FUL: "bg-white text-black border-gray-300",            // Fulham - white & black
+    LEE: "bg-yellow text-blue-800 border-gray-300",         // Leeds - white & blue
+    LIV: "bg-red-800 text-white border-red-900",           // Liverpool - deep red
+    MCI: "bg-sky-400 text-white border-sky-500",           // Man City - sky blue
+    MUN: "bg-red-600 text-white border-red-700",           // Man United - red
+    NEW: "bg-black text-white border-gray-800",            // Newcastle - black & white
+    NFO: "bg-red-600 text-white border-red-700",           // Nottingham Forest - red
+    SUN: "bg-red-500 text-white border-red-600",           // Sunderland - red & white
+    TOT: "bg-white text-blue-900 border-gray-400",         // Spurs - white with navy
+    WHU: "bg-rose-800 text-sky-200 border-rose-900",       // West Ham - claret & blue
+    WOL: "bg-yellow-400 text-black border-yellow-500",     // Wolves - gold/yellow & black
   };
   return (
     <Badge
-  variant="outline"
-  className={`text-xs font-sans uppercase px-2 py-0.5 rounded-lg border-dashed border-2 ${colors[team] || "bg-orange-50 text-orange-700 border-orange-500 hover:bg-orange-100 transition-all duration-200"}`}
->
-  {team}
-</Badge>
+      variant="outline"
+      className={`text-xs font-sans uppercase px-2 py-0.5 rounded-lg border-dashed border-2 ${colors[team] || "bg-orange-50 text-orange-700 border-orange-500 hover:bg-orange-100 transition-all duration-200"}`}
+    >
+      {team}
+    </Badge>
   );
 };
 
@@ -93,10 +93,11 @@ const FormBadge = ({ value }: { value: number }) => {
 }
 
 
-  
+
 export default function TopPerformersPage() {
   const [activeTab, setActiveTab] = useState("season");
   const [goalScorers, setGoalScorers] = useState([]);
+  const [underperformers, setUnderperformers] = useState([]);
   const [assistProviders, setAssistProviders] = useState([]);
   const [defensiveLeaders, setDefensiveLeaders] = useState([]);
   const [seasonPerformers, setSeasonPerformers] = useState([]);
@@ -110,6 +111,19 @@ export default function TopPerformersPage() {
   // Add sorting state
   const [sortBy, setSortBy] = useState("points"); // Default sort by points
   const [sortOrder, setSortOrder] = useState("desc"); // Default descending (higher is better)
+  const [assistSortBy, setAssistSortBy] = useState("assists"); // Default sort by assists
+  const [assistSortDirection, setAssistSortDirection] = useState("desc"); // Default descending
+  const [defenseSortBy, setDefenseSortBy] = useState("points");
+  const [defenseSortDirection, setDefenseSortDirection] = useState("desc");
+  const [valueSortBy, setValueSortBy] = useState('pointsPerMillion');
+  const [valueSortDirection, setValueSortDirection] = useState('desc');
+
+  const [overSortBy, setOverSortBy] = useState("overperformance_per_90");
+  const [overSortDirection, setOverSortDirection] = useState("desc");
+  const [sustainSortBy, setSustainSortBy] = useState("goals");
+  const [sustainSortDirection, setSustainSortDirection] = useState("desc");
+  const [underSortBy, setUnderSortBy] = useState("xG");
+  const [underSortDirection, setUnderSortDirection] = useState("desc");
 
   // Sorting logic for seasonPerformers
   const sortedSeasonPerformers = useMemo(() => {
@@ -120,20 +134,123 @@ export default function TopPerformersPage() {
     });
   }, [sortBy, sortOrder, seasonPerformers]);
 
+  // Memoized sorting for defensive performers
+  const sortedDefensiveLeaders = useMemo(() => {
+    return [...defensiveLeaders].sort((a, b) => {
+      const aVal = a[defenseSortBy];
+      const bVal = b[defenseSortBy];
+      const order = defenseSortDirection === "desc" ? bVal - aVal : aVal - bVal;
+      return order || a.player.localeCompare(b.player);
+    });
+  }, [defenseSortBy, defenseSortDirection, defensiveLeaders]);
+
+  // Sort Best Value
+  const sortedValuePlayers = useMemo(() => {
+    return [...valuePlayers].sort((a, b) => {
+      const aVal = a[valueSortBy];
+      const bVal = b[valueSortBy];
+      const order = valueSortDirection === 'desc' ? bVal - aVal : aVal - bVal;
+      return order || a.player.localeCompare(b.player); // Fallback to player name for ties
+    });
+  }, [valueSortBy, valueSortDirection, valuePlayers]);
+
+  // Sort assistProviders
+  const sortedAssistProviders = useMemo(() => {
+    return [...assistProviders].sort((a, b) => {
+      const aVal = a[assistSortBy];
+      const bVal = b[assistSortBy];
+      const order = assistSortDirection === "desc" ? bVal - aVal : aVal - bVal;
+      return order || a.player.localeCompare(b.player); // Fallback to player name for ties
+    });
+  }, [assistSortBy, assistSortDirection, assistProviders]);
+
+  // Sort overperformers
+  const sortedOverperformers = useMemo(() => {
+    return [...overperformers].sort((a, b) => {
+      const aVal = a[overSortBy];
+      const bVal = b[overSortBy];
+      const order = overSortDirection === "desc" ? bVal - aVal : aVal - bVal;
+      return order || a.player.localeCompare(b.player);
+    });
+  }, [overSortBy, overSortDirection, overperformers]);
+
+  // Sort sustainable scorers
+  const sortedSustainableScorers = useMemo(() => {
+    return [...sustainableScorers].sort((a, b) => {
+      const aVal = a[sustainSortBy];
+      const bVal = b[sustainSortBy];
+      const order = sustainSortDirection === "desc" ? bVal - aVal : aVal - bVal;
+      return order || a.player.localeCompare(b.player);
+    });
+  }, [sustainSortBy, sustainSortDirection, sustainableScorers]);
+
+  // Sort underperformers
+  const sortedUnderperformers = useMemo(() => {
+    return [...underperformers].sort((a, b) => {
+      const aVal = a[underSortBy];
+      const bVal = b[underSortBy];
+      const order = underSortDirection === "desc" ? bVal - aVal : aVal - bVal;
+      return order || a.player.localeCompare(b.player);
+    });
+  }, [underSortBy, underSortDirection, underperformers]);
+
   // Handle sort click
-  const handleSort = (column) => {
-    if (sortBy === column) {
-      setSortOrder(sortOrder === "desc" ? "asc" : "desc");
+  const handleSort = (column, tab = 'season') => {
+    if (tab === 'assists') {
+      if (assistSortBy === column) {
+        setAssistSortDirection(assistSortDirection === 'desc' ? 'asc' : 'desc');
+      } else {
+        setAssistSortBy(column);
+        setAssistSortDirection('desc');
+      }
+    } else if (tab === 'overperformers') {
+      if (overSortBy === column) {
+        setOverSortDirection(overSortDirection === 'desc' ? 'asc' : 'desc');
+      } else {
+        setOverSortBy(column);
+        setOverSortDirection('desc');
+      }
+    } else if (tab === 'sustainable') {
+      if (sustainSortBy === column) {
+        setSustainSortDirection(sustainSortDirection === 'desc' ? 'asc' : 'desc');
+      } else {
+        setSustainSortBy(column);
+        setSustainSortDirection('desc');
+      }
+    } else if (tab === 'underperformers') {
+      if (underSortBy === column) {
+        setUnderSortDirection(underSortDirection === 'desc' ? 'asc' : 'desc');
+      } else {
+        setUnderSortBy(column);
+        setUnderSortDirection('desc');
+      }
+    } else if (tab === 'value') {
+      if (valueSortBy === column) {
+        setValueSortDirection(valueSortDirection === 'desc' ? 'asc' : 'desc');
+      } else {
+        setValueSortBy(column);
+        setValueSortDirection('asc');
+      }
     } else {
-      setSortBy(column);
-      setSortOrder("desc");
+      if (sortBy === column) {
+        setSortOrder(sortOrder === 'desc' ? 'asc' : 'desc');
+      } else {
+        setSortBy(column);
+        setSortOrder('desc');
+      }
     }
   };
 
   // Get sort icon
-  const getSortIcon = (column) => {
-    if (sortBy !== column) return <ArrowUpDown className="h-3 w-3" />;
-    return sortOrder === "desc" ? <ArrowDown className="h-3 w-3" /> : <ArrowUp className="h-3 w-3" />;
+  const getSortIcon = (key, tab = "season") => {
+    const currentSortBy = tab === "assists" ? assistSortBy : tab === "defense" ? defenseSortBy : tab === "value" ? valueSortBy : sortBy;
+    const currentSortDirection = tab === "assists" ? assistSortDirection : tab === "defense" ? defenseSortDirection : tab === "value" ? valueSortDirection : sortOrder;
+    if (currentSortBy !== key) return <ArrowUpDown className="h-4 w-4" />;
+    return currentSortDirection === "desc" ? (
+      <ArrowDown className="h-4 w-4" />
+    ) : (
+      <ArrowUp className="h-4 w-4" />
+    );
   };
 
   async function fetchWithRetry(url, retries = MAX_RETRIES) {
@@ -176,7 +293,7 @@ export default function TopPerformersPage() {
           {
             key: 'defensiveLeaders', url: `${API_BASE_URL}/api/def_lead`, setter: setDefensiveLeaders, mapper: p => ({
               player: p.player, team: p.team, team_short: p.team_short, position: p.position,
-              points: p.points, ppg: p.ppg, cleanSheets: p.cleanSheets, csRate: p.csRate,
+              points: p.points, ppg: p.ppg, cleanSheets: p.cleanSheets, csRate: p.csRate, dfc: p.defensiveContributions,
               tackles: p.tackles, price: p.price, form: p.form
             })
           },
@@ -202,13 +319,19 @@ export default function TopPerformersPage() {
           {
             key: 'overperformers', url: `${API_BASE_URL}/api/overperformers`, setter: setOverperformers, mapper: p => ({
               player: p.player, team: p.team, team_short: p.team_short, goals: p.goals,
-              xG: p.xG, overperformance: p.overperformance, sustainable: p.sustainable, form: p.form
+              xG: p.xG, overperformance: p.overperformance, sustainable: p.sustainable, form: p.form, overperformance_per_90: p.overperformance_per_90
+            })
+          },
+          {
+            key: 'underperformers', url: `${API_BASE_URL}/api/underperformers`, setter: setUnderperformers, mapper: p => ({
+              player: p.player, team: p.team, team_short: p.team_short, goals: p.goals,
+              xG: p.xG, overperformance: p.overperformance, sustainable: p.sustainable, form: p.form, overperformance_per_90: p.overperformance_per_90
             })
           },
           {
             key: 'sustainableScorers', url: `${API_BASE_URL}/api/sustainable-scorers`, setter: setSustainableScorers, mapper: p => ({
               player: p.player, team: p.team, team_short: p.team_short, goals: p.goals,
-              xG: p.xG, overperformance: p.overperformance, sustainable: p.sustainable, form: p.form
+              xG: p.xG, overperformance: p.overperformance, sustainable: p.sustainable, form: p.form, overperformance_per_90: p.overperformance_per_90
             })
           }
         ];
@@ -325,53 +448,6 @@ export default function TopPerformersPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-3 sm:p-6">
-                {/* Mobile Card Layout (unchanged) */}
-                <div className="block sm:hidden space-y-3">
-                  {sortedSeasonPerformers.map((player, index) => (
-                    <div
-                      key={player.player}
-                      className="p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer"
-                    >
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="flex items-center gap-3">
-                          <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/20 text-accent font-bold text-sm hover:bg-accent hover:text-white transition-all duration-300">
-                            #{index + 1}
-                          </div>
-                          <div>
-                            <div className="font-semibold text-foreground">{player.player}</div>
-                            <div className="flex items-center gap-2 mt-1">
-                              <TeamBadge team={player.team_short} />
-                              <PositionBadge position={player.position} />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-2xl font-bold text-accent">{player.points}</div>
-                          <div className="text-xs text-muted-foreground">points</div>
-                          <div className="text-sm font-mono text-muted-foreground mt-2">
-                            <span className="sr-only">Form</span>
-                            <FormBadge value={player.form} />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-3 gap-2 text-sm">
-                        <div className="text-center p-2 bg-secondary/20 rounded-lg">
-                          <div className="text-xs text-muted-foreground">PPG</div>
-                          <div className="font-semibold">{player.ppg.toFixed(1)}</div>
-                        </div>
-                        <div className="text-center p-2 bg-secondary/20 rounded-lg">
-                          <div className="text-xs text-muted-foreground">Price</div>
-                          <div className="font-semibold">£{player.price}m</div>
-                        </div>
-                        <div className="text-center p-2 bg-secondary/20 rounded-lg">
-                          <div className="text-xs text-muted-foreground">Own%</div>
-                          <div className="font-semibold">{player.ownership}%</div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
                 {/* Desktop Table Layout with Sorting */}
                 <div className="hidden sm:block overflow-x-auto relative">
                   <table className="w-full min-w-[920px]" role="table" aria-label="Season performers table">
@@ -501,9 +577,7 @@ export default function TopPerformersPage() {
                             <div>
                               <div className="font-semibold text-foreground text-sm sm:text-base">{player.player}</div>
                               <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mt-1">
-                                <Badge variant="outline" className="text-xs w-fit">
-                                  {player.team_short}
-                                </Badge>
+                                <TeamBadge team={player.team_short} />
                                 <span className="text-xs text-muted-foreground">{player.ownership}% owned</span>
                               </div>
                             </div>
@@ -546,46 +620,275 @@ export default function TopPerformersPage() {
                     📈 Sustainability Analysis
                   </CardTitle>
                   <CardDescription className="text-sm sm:text-base">
-                    Goal overperformance vs expected goals
+                    Goal performance compared to expected goals (xG)
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="p-3 sm:p-6">
-                  <div className="space-y-4">
+                  <div className="space-y-6">
+                    {/* Overperformers Section */}
                     <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-red-50 to-red-100 dark:from-red-950/30 dark:to-red-950/10 border border-red-200 dark:border-red-800/50 hover:shadow-lg transition-all duration-300">
                       <h4 className="font-semibold text-red-800 dark:text-red-200 mb-3 flex items-center gap-2">
                         ⚠️ Potential Regression Risk
                       </h4>
-                      <div className="space-y-2">
-                        {overperformers.map((player) => (
-                          <div
-                            key={player.player}
-                            className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0 p-2 rounded-lg bg-white/50 dark:bg-red-900/20"
-                          >
-                            <span className="font-medium text-sm sm:text-base">{player.player}</span>
-                            <span className="text-red-600 dark:text-red-400 font-semibold text-sm">
-                              {player.goals} goals ≈ {player.xG.toFixed(1)} xG
-                            </span>
-                          </div>
-                        ))}
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead>
+                            <tr className="border-b border-red-200 dark:border-red-800/50 text-left text-muted-foreground">
+                              <th className="py-2 px-2 font-medium">Player</th>
+                              <th className="py-2 px-2 font-medium">Team</th>
+                              <th
+                                className="py-2 px-2 font-medium cursor-pointer hover:text-foreground transition-colors"
+                                onClick={() => handleSort("goals", "overperformers")}
+                              >
+                                <div className="flex items-center gap-1">
+                                  Goals {getSortIcon("goals", "overperformers")}
+                                </div>
+                              </th>
+                              <th
+                                className="py-2 px-2 font-medium cursor-pointer hover:text-foreground transition-colors"
+                                onClick={() => handleSort("xG", "overperformers")}
+                              >
+                                <div className="flex items-center gap-1">
+                                  xG {getSortIcon("xG", "overperformers")}
+                                </div>
+                              </th>
+                              <th
+                                className="py-2 px-2 font-medium cursor-pointer hover:text-foreground transition-colors"
+                                onClick={() => handleSort("overperformance", "overperformers")}
+                              >
+                                <div className="flex items-center gap-1">
+                                  Overperf {getSortIcon("overperformance", "overperformers")}
+                                </div>
+                              </th>
+                              <th
+                                className="py-2 px-2 font-medium cursor-pointer hover:text-foreground transition-colors"
+                              >
+                                <TooltipProvider>
+                                  <Tooltip>
+                                    <TooltipTrigger>
+                                      <div
+                                        className="flex items-center gap-1"
+                                        onClick={() => handleSort("overperformance_per_90", "overperformers")}
+                                      >
+                                        Per 90 {getSortIcon("overperformance_per_90", "overperformers")}
+                                      </div>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                      Overperformance per 90 minutes
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </TooltipProvider>
+                              </th>
+                              <th className="py-2 px-2 font-medium">Form</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {sortedOverperformers.length === 0 ? (
+                              <tr>
+                                <td colSpan="7" className="py-4 text-center text-muted-foreground">
+                                  No overperformers found
+                                </td>
+                              </tr>
+                            ) : (
+                              sortedOverperformers.map((player) => (
+                                <tr
+                                  key={player.player}
+                                  className="border-b border-red-100 dark:border-red-800/30 transition-all duration-200 hover:bg-red-100/50 dark:hover:bg-red-900/20"
+                                >
+                                  <td className="py-2 px-2 font-medium">{player.player}</td>
+                                  <td className="py-2 px-2">
+                                    <TeamBadge team={player.team_short} />
+                                  </td>
+                                  <td className="py-2 px-2 text-red-600 dark:text-red-400 font-semibold">{player.goals}</td>
+                                  <td className="py-2 px-2 text-red-600 dark:text-red-400">{player.xG.toFixed(1)}</td>
+                                  <td className="py-2 px-2 text-red-600 dark:text-red-400">{player.overperformance.toFixed(1)}</td>
+                                  <td className="py-2 px-2 text-red-600 dark:text-red-400">{player.overperformance_per_90.toFixed(3)}</td>
+                                  <td className="py-2 px-2">
+                                    <FormBadge value={player.form} />
+                                  </td>
+                                </tr>
+                              ))
+                            )}
+                          </tbody>
+                        </table>
                       </div>
                     </div>
 
+                    {/* Sustainable Scorers Section */}
                     <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-green-50 to-green-100 dark:from-green-950/30 dark:to-green-950/10 border border-green-200 dark:border-green-800/50 hover:shadow-lg transition-all duration-300">
                       <h4 className="font-semibold text-green-800 dark:text-green-200 mb-3 flex items-center gap-2">
                         ✅ Sustainable Performers
                       </h4>
-                      <div className="space-y-2">
-                        {sustainableScorers.map((player) => (
-                          <div
-                            key={player.player}
-                            className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0 p-2 rounded-lg bg-white/50 dark:bg-green-900/20"
-                          >
-                            <span className="font-medium text-sm sm:text-base">{player.player}</span>
-                            <span className="text-green-600 dark:text-green-400 font-semibold text-sm">
-                              {player.goals} goals ≈ {player.xG.toFixed(1)} xG
-                            </span>
-                          </div>
-                        ))}
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead>
+                            <tr className="border-b border-green-200 dark:border-green-800/50 text-left text-muted-foreground">
+                              <th className="py-2 px-2 font-medium">Player</th>
+                              <th className="py-2 px-2 font-medium">Team</th>
+                              <th
+                                className="py-2 px-2 font-medium cursor-pointer hover:text-foreground transition-colors"
+                                onClick={() => handleSort("goals", "sustainable")}
+                              >
+                                <div className="flex items-center gap-1">
+                                  Goals {getSortIcon("goals", "sustainable")}
+                                </div>
+                              </th>
+                              <th
+                                className="py-2 px-2 font-medium cursor-pointer hover:text-foreground transition-colors"
+                                onClick={() => handleSort("xG", "sustainable")}
+                              >
+                                <div className="flex items-center gap-1">
+                                  xG {getSortIcon("xG", "sustainable")}
+                                </div>
+                              </th>
+                              <th
+                                className="py-2 px-2 font-medium cursor-pointer hover:text-foreground transition-colors"
+                                onClick={() => handleSort("overperformance", "sustainable")}
+                              >
+                                <div className="flex items-center gap-1">
+                                  Overperf {getSortIcon("overperformance", "sustainable")}
+                                </div>
+                              </th>
+                              <th
+                                className="py-2 px-2 font-medium cursor-pointer hover:text-foreground transition-colors"
+                              >
+                                <TooltipProvider>
+                                  <Tooltip>
+                                    <TooltipTrigger>
+                                      <div
+                                        className="flex items-center gap-1"
+                                        onClick={() => handleSort("overperformance_per_90", "sustainable")}
+                                      >
+                                        Per 90 {getSortIcon("overperformance_per_90", "sustainable")}
+                                      </div>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                      Overperformance per 90 minutes
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </TooltipProvider>
+                              </th>
+                              <th className="py-2 px-2 font-medium">Form</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {sortedSustainableScorers.length === 0 ? (
+                              <tr>
+                                <td colSpan="7" className="py-4 text-center text-muted-foreground">
+                                  No sustainable performers found
+                                </td>
+                              </tr>
+                            ) : (
+                              sortedSustainableScorers.map((player) => (
+                                <tr
+                                  key={player.player}
+                                  className="border-b border-green-100 dark:border-green-800/30 transition-all duration-200 hover:bg-green-100/50 dark:hover:bg-green-900/20"
+                                >
+                                  <td className="py-2 px-2 font-medium">{player.player}</td>
+                                  <td className="py-2 px-2">
+                                    <TeamBadge team={player.team_short} />
+                                  </td>
+                                  <td className="py-2 px-2 text-green-600 dark:text-green-400 font-semibold">{player.goals}</td>
+                                  <td className="py-2 px-2 text-green-600 dark:text-green-400">{player.xG.toFixed(1)}</td>
+                                  <td className="py-2 px-2 text-green-600 dark:text-green-400">{player.overperformance.toFixed(1)}</td>
+                                  <td className="py-2 px-2 text-green-600 dark:text-green-400">{player.overperformance_per_90.toFixed(3)}</td>
+                                  <td className="py-2 px-2">
+                                    <FormBadge value={player.form} />
+                                  </td>
+                                </tr>
+                              ))
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    {/* Underperformers Section */}
+                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-950/10 border border-blue-200 dark:border-blue-800/50 hover:shadow-lg transition-all duration-300">
+                      <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-3 flex items-center gap-2">
+                        🔥 Potential Breakout Candidates
+                      </h4>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead>
+                            <tr className="border-b border-blue-200 dark:border-blue-800/50 text-left text-muted-foreground">
+                              <th className="py-2 px-2 font-medium">Player</th>
+                              <th className="py-2 px-2 font-medium">Team</th>
+                              <th
+                                className="py-2 px-2 font-medium cursor-pointer hover:text-foreground transition-colors"
+                                onClick={() => handleSort("goals", "underperformers")}
+                              >
+                                <div className="flex items-center gap-1">
+                                  Goals {getSortIcon("goals", "underperformers")}
+                                </div>
+                              </th>
+                              <th
+                                className="py-2 px-2 font-medium cursor-pointer hover:text-foreground transition-colors"
+                                onClick={() => handleSort("xG", "underperformers")}
+                              >
+                                <div className="flex items-center gap-1">
+                                  xG {getSortIcon("xG", "underperformers")}
+                                </div>
+                              </th>
+                              <th
+                                className="py-2 px-2 font-medium cursor-pointer hover:text-foreground transition-colors"
+                                onClick={() => handleSort("overperformance", "underperformers")}
+                              >
+                                <div className="flex items-center gap-1">
+                                  Overperf {getSortIcon("overperformance", "underperformers")}
+                                </div>
+                              </th>
+                              <th
+                                className="py-2 px-2 font-medium cursor-pointer hover:text-foreground transition-colors"
+                              >
+                                <TooltipProvider>
+                                  <Tooltip>
+                                    <TooltipTrigger>
+                                      <div
+                                        className="flex items-center gap-1"
+                                        onClick={() => handleSort("overperformance_per_90", "underperformers")}
+                                      >
+                                        Per 90 {getSortIcon("overperformance_per_90", "underperformers")}
+                                      </div>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                      Overperformance per 90 minutes
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </TooltipProvider>
+                              </th>
+                              <th className="py-2 px-2 font-medium">Form</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {sortedUnderperformers.length === 0 ? (
+                              <tr>
+                                <td colSpan="7" className="py-4 text-center text-muted-foreground">
+                                  No underperformers found
+                                </td>
+                              </tr>
+                            ) : (
+                              sortedUnderperformers.map((player) => (
+                                <tr
+                                  key={player.player}
+                                  className="border-b border-blue-100 dark:border-blue-800/30 transition-all duration-200 hover:bg-blue-100/50 dark:hover:bg-blue-900/20"
+                                >
+                                  <td className="py-2 px-2 font-medium">{player.player}</td>
+                                  <td className="py-2 px-2">
+                                    <TeamBadge team={player.team_short} />
+                                  </td>
+                                  <td className="py-2 px-2 text-blue-600 dark:text-blue-400 font-semibold">{player.goals}</td>
+                                  <td className="py-2 px-2 text-blue-600 dark:text-blue-400">{player.xG.toFixed(1)}</td>
+                                  <td className="py-2 px-2 text-blue-600 dark:text-blue-400">{player.overperformance.toFixed(1)}</td>
+                                  <td className="py-2 px-2 text-blue-600 dark:text-blue-400">{player.overperformance_per_90.toFixed(3)}</td>
+                                  <td className="py-2 px-2">
+                                    <FormBadge value={player.form} />
+                                  </td>
+                                </tr>
+                              ))
+                            )}
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
@@ -613,16 +916,58 @@ export default function TopPerformersPage() {
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Rank</th>
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Player</th>
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Team</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Assists</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden md:table-cell">Per Game</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Points</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Form</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden lg:table-cell">Price</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden lg:table-cell">Ownership</th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort("assists", true)}
+                        >
+                          <div className="flex items-center gap-1">
+                            Assists {getSortIcon("assists", true)}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors hidden md:table-cell"
+                          onClick={() => handleSort("assistsPerGame", true)}
+                        >
+                          <div className="flex items-center gap-1">
+                            Per Game {getSortIcon("assistsPerGame", true)}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort("points", true)}
+                        >
+                          <div className="flex items-center gap-1">
+                            Points {getSortIcon("points", true)}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort("form", true)}
+                        >
+                          <div className="flex items-center gap-1">
+                            Form {getSortIcon("form", true)}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors hidden lg:table-cell"
+                          onClick={() => handleSort("price", true)}
+                        >
+                          <div className="flex items-center gap-1">
+                            Price {getSortIcon("price", true)}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors hidden lg:table-cell"
+                          onClick={() => handleSort("ownership", true)}
+                        >
+                          <div className="flex items-center gap-1">
+                            Ownership {getSortIcon("ownership", true)}
+                          </div>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {assistProviders.map((player, index) => (
+                      {sortedAssistProviders.map((player, index) => (
                         <tr
                           key={player.player}
                           className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
@@ -634,17 +979,21 @@ export default function TopPerformersPage() {
                               </div>
                             </div>
                           </td>
-                          <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">{player.player}</td>
-                          <td className="py-4">
-                            <Badge variant="outline" className="font-mono text-xs group-hover:border-accent/50 transition-colors duration-200">
-                              {player.team_short}
-                            </Badge>
+                          <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">
+                            {player.player}
                           </td>
-                          <td className="py-4 font-mono text-accent font-bold group-hover:text-accent/80 transition-colors duration-200">{player.assists}</td>
+                          <td className="py-4">
+                            <TeamBadge team={player.team_short} />
+                          </td>
+                          <td className="py-4 font-mono text-accent font-bold group-hover:text-accent/80 transition-colors duration-200">
+                            {player.assists}
+                          </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
                             {player.assistsPerGame.toFixed(2)}
                           </td>
-                          <td className="py-4 font-mono text-sm text-foreground group-hover:text-accent transition-colors duration-200">{player.points}</td>
+                          <td className="py-4 font-mono text-sm text-foreground group-hover:text-accent transition-colors duration-200">
+                            {player.points}
+                          </td>
                           <td className="py-4">
                             <FormBadge value={player.form} />
                           </td>
@@ -683,17 +1032,74 @@ export default function TopPerformersPage() {
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Player</th>
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Team</th>
                         <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Pos</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Points</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Form</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden md:table-cell">PPG</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Clean Sheets</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">CS Rate</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden md:table-cell">Tackles</th>
-                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium hidden lg:table-cell">Price</th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort("points", "defense")}
+                        >
+                          <div className="flex items-center gap-1">
+                            Points {getSortIcon("points", "defense")}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort("form", "defense")}
+                        >
+                          <div className="flex items-center gap-1">
+                            Form {getSortIcon("form", "defense")}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors hidden md:table-cell"
+                          onClick={() => handleSort("ppg", "defense")}
+                        >
+                          <div className="flex items-center gap-1">
+                            PPG {getSortIcon("ppg", "defense")}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort("cleanSheets", "defense")}
+                        >
+                          <div className="flex items-center gap-1">
+                            Clean Sheets {getSortIcon("cleanSheets", "defense")}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort("dfc", "defense")}
+                        >
+                          <div className="flex items-center gap-1">
+                            Defensive Contributions {getSortIcon("dfc", "defense")}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort("csRate", "defense")}
+                        >
+                          <div className="flex items-center gap-1">
+                            CS Rate {getSortIcon("csRate", "defense")}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors hidden md:table-cell"
+                          onClick={() => handleSort("tackles", "defense")}
+                        >
+                          <div className="flex items-center gap-1">
+                            Tackles {getSortIcon("tackles", "defense")}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors hidden lg:table-cell"
+                          onClick={() => handleSort("price", "defense")}
+                        >
+                          <div className="flex items-center gap-1">
+                            Price {getSortIcon("price", "defense")}
+                          </div>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {defensiveLeaders.map((player, index) => (
+                      {sortedDefensiveLeaders.map((player, index) => (
                         <tr
                           key={player.player}
                           className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
@@ -705,26 +1111,39 @@ export default function TopPerformersPage() {
                               </div>
                             </div>
                           </td>
-                          <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">{player.player}</td>
+                          <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">
+                            {player.player}
+                          </td>
                           <td className="py-4">
                             <TeamBadge team={player.team_short} />
                           </td>
                           <td className="py-4">
                             <PositionBadge position={player.position} />
                           </td>
-                          <td className="py-4 font-mono text-accent font-bold group-hover:text-accent/80 transition-colors duration-200">{player.points}</td>
+                          <td className="py-4 font-mono text-accent font-bold group-hover:text-accent/80 transition-colors duration-200">
+                            {player.points}
+                          </td>
                           <td className="py-4">
                             <FormBadge value={player.form} />
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
                             {player.ppg.toFixed(1)}
                           </td>
-                          <td className="py-4 font-mono text-sm text-foreground group-hover:text-accent transition-colors duration-200">{player.cleanSheets}</td>
-                          <td className="py-4 font-mono text-sm text-green-600 group-hover:text-green-500 transition-colors duration-200">{player.csRate.toFixed(1)}%</td>
+                          <td className="py-4 font-mono text-sm text-foreground group-hover:text-accent transition-colors duration-200">
+                            {player.cleanSheets}
+                          </td>
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
+                            {player.dfc}
+                          </td>
+                          <td className="py-4 font-mono text-sm text-green-600 group-hover:text-green-500 transition-colors duration-200">
+                            {player.csRate.toFixed(2)}%
+                          </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
                             {player.tackles}
                           </td>
-                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200 hidden lg:table-cell">£{player.price}m</td>
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200 hidden lg:table-cell">
+                            £{player.price}m
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -740,27 +1159,72 @@ export default function TopPerformersPage() {
                 <CardTitle className="text-foreground flex items-center gap-2">
                   💰 Best Value Players
                   <Badge variant="secondary" className="ml-auto">
-                    Points per £m
+                    High Points per Million
                   </Badge>
                 </CardTitle>
-                <CardDescription>Highest points per million efficiency</CardDescription>
+                <CardDescription>
+                  Players offering the best return for their cost.
+                  Points per million calculated as total points divided by price (£m).
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
                       <tr className="border-b border-border text-left text-sm text-muted-foreground">
-                        <th className="pb-3 font-medium">Rank</th>
-                        <th className="pb-3 font-medium">Player</th>
-                        <th className="pb-3 font-medium">Team</th>
-                        <th className="pb-3 font-medium">Pos</th>
-                        <th className="pb-3 font-medium">Pts/£m</th>
-                        <th className="pb-3 font-medium">Total Pts</th>
-                        <th className="pb-3 font-medium">Price</th>
+                        <th className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium">Rank</th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort('player', 'value')}
+                        >
+                          <div className="flex items-center gap-1">
+                            Player {getSortIcon('player', 'value')}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort('team_short', 'value')}
+                        >
+                          <div className="flex items-center gap-1">
+                            Team {getSortIcon('team_short', 'value')}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort('position', 'value')}
+                        >
+                          <div className="flex items-center gap-1">
+                            Pos {getSortIcon('position', 'value')}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort('totalPoints', 'value')}
+                        >
+                          <div className="flex items-center gap-1">
+                            Points {getSortIcon('totalPoints', 'value')}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort('price', 'value')}
+                        >
+                          <div className="flex items-center gap-1">
+                            Price (£m) {getSortIcon('price', 'value')}
+                          </div>
+                        </th>
+                        <th
+                          className="sticky top-0 bg-card/60 backdrop-blur z-10 pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort('pointsPerMillion', 'value')}
+                        >
+                          <div className="flex items-center gap-1">
+                            Points/Million {getSortIcon('pointsPerMillion', 'value')}
+                          </div>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {valuePlayers.map((player, index) => (
+                      {sortedValuePlayers.map((player, index) => (
                         <tr
                           key={player.player}
                           className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
@@ -772,18 +1236,24 @@ export default function TopPerformersPage() {
                               </div>
                             </div>
                           </td>
-                          <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">{player.player}</td>
+                          <td className="py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">
+                            {player.player}
+                          </td>
                           <td className="py-4">
                             <TeamBadge team={player.team_short} />
                           </td>
                           <td className="py-4">
                             <PositionBadge position={player.position} />
                           </td>
-                          <td className="py-4 font-mono font-bold text-green-600 text-lg group-hover:text-green-500 transition-colors duration-200">
+                          <td className="py-4 font-mono text-accent font-bold group-hover:text-accent/80 transition-colors duration-200">
+                            {player.totalPoints}
+                          </td>
+                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200">
+                            £{player.price.toFixed(1)}m
+                          </td>
+                          <td className="py-4 font-mono text-sm text-green-600 group-hover:text-green-500 transition-colors duration-200">
                             {player.pointsPerMillion.toFixed(2)}
                           </td>
-                          <td className="py-4 font-mono text-sm text-foreground group-hover:text-accent transition-colors duration-200">{player.totalPoints}</td>
-                          <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200">£{player.price}m</td>
                         </tr>
                       ))}
                     </tbody>
@@ -802,14 +1272,17 @@ export default function TopPerformersPage() {
                     Low Ownership + High Potential
                   </Badge>
                 </CardTitle>
-                <CardDescription>Undervalued players with strong underlying stats</CardDescription>
+                <CardDescription>
+                  Undervalued players with above-average stats (Potential Score: 0–10).
+                  Score calculated from weighted stats like xG, xA, form, and points per game, tailored by position.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {hiddenGems.map((player, index) => (
                     <div
                       key={player.player}
-                      className="p-4 rounded-lg bg-gradient-to-br from-secondary/30 to-secondary/10 border transition-all hover:scale-105"
+                      className="p-4 rounded-lg bg-gradient-to-br from-secondary/30 to-secondary/10 border transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-accent/50"
                     >
                       <div className="flex items-center justify-between mb-3">
                         <TeamBadge team={player.team_short} />
@@ -825,6 +1298,14 @@ export default function TopPerformersPage() {
                         </div>
                       </div>
 
+                      <div className="mb-3 text-center">
+                        <div className="flex justify-center items-center gap-2">
+                          <Gem className="h-5 w-5 text-pink-500" />
+                          <span className="text-2xl font-bold text-pink-600">{player.potentialScore.toFixed(1)}</span>
+                        </div>
+                        <div className="text-xs text-muted-foreground">Potential Score</div>
+                      </div>
+
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
                           <span>Points:</span>
@@ -835,14 +1316,14 @@ export default function TopPerformersPage() {
                           <span className="font-mono text-accent font-bold">{player.ownership}%</span>
                         </div>
                         <div className="flex justify-between text-xs text-muted-foreground">
-                          <span>xG: {player.xG.toFixed(1)}</span>
-                          <span>xA: {player.xA.toFixed(1)}</span>
-                          <span>xCS: {player.xCS.toFixed(1)}</span>
+                          <span>xG: {player.xG.toFixed(2)}</span>
+                          <span>xA: {player.xA.toFixed(2)}</span>
+                          <span>xCS: {player.xCS.toFixed(2)}</span>
                         </div>
                       </div>
 
                       <div className="mt-3">
-                        <Progress value={player.ownership * 20} className="h-1" />
+                        <Progress value={player.ownership * 1} className="h-1 bg-accent/20 [&>div]:bg-accent" />
                         <div className="text-xs text-muted-foreground mt-1">Ownership Level</div>
                       </div>
                     </div>

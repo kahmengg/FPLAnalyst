@@ -15,7 +15,7 @@
                 "points_per_game": 6.857,
                 "points_per_million": 8.136,
                 "consistency_score": 0.827,
-                "selected_by_percent": 17.3,
+                "selected_by_percent": 17.6,
                 "team_name_short": "ARS",
                 "form": 5.1
             },
@@ -29,7 +29,7 @@
                 "points_per_game": 6.714,
                 "points_per_million": 7.46,
                 "consistency_score": 1.0,
-                "selected_by_percent": 29.2,
+                "selected_by_percent": 29.5,
                 "team_name_short": "ARS",
                 "form": 8.8
             },
@@ -65,7 +65,7 @@
                 "points_per_game": 6.143,
                 "points_per_million": 8.431,
                 "consistency_score": 1.0,
-                "selected_by_percent": 8.0,
+                "selected_by_percent": 8.2,
                 "team_name_short": "NEW",
                 "form": 7.3
             },
@@ -79,7 +79,7 @@
                 "points_per_game": 5.857,
                 "points_per_million": 8.039,
                 "consistency_score": 1.0,
-                "selected_by_percent": 9.5,
+                "selected_by_percent": 9.7,
                 "team_name_short": "NEW",
                 "form": 6.0
             },
@@ -93,7 +93,7 @@
                 "points_per_game": 5.286,
                 "points_per_million": 7.255,
                 "consistency_score": 0.835,
-                "selected_by_percent": 6.1,
+                "selected_by_percent": 5.9,
                 "team_name_short": "NEW",
                 "form": 4.4
             }
@@ -115,7 +115,7 @@
                 "points_per_game": 6.571,
                 "points_per_million": 9.583,
                 "consistency_score": 1.0,
-                "selected_by_percent": 30.7,
+                "selected_by_percent": 30.8,
                 "team_name_short": "CRY",
                 "form": 6.2
             },
@@ -179,7 +179,7 @@
                 "points_per_game": 4.571,
                 "points_per_million": 6.667,
                 "consistency_score": 0.983,
-                "selected_by_percent": 34.1,
+                "selected_by_percent": 34.0,
                 "team_name_short": "TOT",
                 "form": 1.8
             },
@@ -193,7 +193,7 @@
                 "points_per_game": 4.571,
                 "points_per_million": 6.275,
                 "consistency_score": 1.0,
-                "selected_by_percent": 7.4,
+                "selected_by_percent": 7.3,
                 "team_name_short": "TOT",
                 "form": 1.8
             }
@@ -220,20 +220,6 @@
                 "form": 4.8
             },
             {
-                "web_name": "Gvardiol",
-                "position_name": "Defender",
-                "now_cost": 5.8,
-                "clean_sheet_rate": 0.429,
-                "xcs_per_game": 0.346,
-                "goals_conceded_per_game": 0.857,
-                "points_per_game": 3.429,
-                "points_per_million": 4.138,
-                "consistency_score": 0.538,
-                "selected_by_percent": 5.5,
-                "team_name_short": "MCI",
-                "form": 6.6
-            },
-            {
                 "web_name": "O’Reilly",
                 "position_name": "Defender",
                 "now_cost": 4.9,
@@ -246,6 +232,20 @@
                 "selected_by_percent": 0.7,
                 "team_name_short": "MCI",
                 "form": 4.8
+            },
+            {
+                "web_name": "Gvardiol",
+                "position_name": "Defender",
+                "now_cost": 5.9,
+                "clean_sheet_rate": 0.429,
+                "xcs_per_game": 0.346,
+                "goals_conceded_per_game": 0.857,
+                "points_per_game": 3.429,
+                "points_per_million": 4.068,
+                "consistency_score": 0.538,
+                "selected_by_percent": 5.6,
+                "team_name_short": "MCI",
+                "form": 6.6
             }
         ]
     },
@@ -258,14 +258,14 @@
             {
                 "web_name": "Senesi",
                 "position_name": "Defender",
-                "now_cost": 4.9,
+                "now_cost": 5.0,
                 "clean_sheet_rate": 0.429,
                 "xcs_per_game": 0.489,
                 "goals_conceded_per_game": 1.143,
                 "points_per_game": 6.571,
-                "points_per_million": 9.388,
+                "points_per_million": 9.2,
                 "consistency_score": 0.979,
-                "selected_by_percent": 24.9,
+                "selected_by_percent": 25.0,
                 "team_name_short": "BOU",
                 "form": 6.6
             },
@@ -315,7 +315,7 @@
                 "points_per_game": 5.571,
                 "points_per_million": 9.512,
                 "consistency_score": 0.916,
-                "selected_by_percent": 6.7,
+                "selected_by_percent": 6.8,
                 "team_name_short": "SUN",
                 "form": 7.7
             },
@@ -329,7 +329,7 @@
                 "points_per_game": 5.857,
                 "points_per_million": 8.913,
                 "consistency_score": 1.0,
-                "selected_by_percent": 4.7,
+                "selected_by_percent": 4.8,
                 "team_name_short": "SUN",
                 "form": 5.6
             },
@@ -429,7 +429,7 @@
                 "points_per_game": 4.571,
                 "points_per_million": 5.818,
                 "consistency_score": 1.0,
-                "selected_by_percent": 7.8,
+                "selected_by_percent": 7.7,
                 "team_name_short": "EVE",
                 "form": 3.3
             },
@@ -465,7 +465,7 @@
                 "points_per_game": 4.143,
                 "points_per_million": 4.754,
                 "consistency_score": 1.0,
-                "selected_by_percent": 28.1,
+                "selected_by_percent": 28.0,
                 "team_name_short": "LIV",
                 "form": 2.6
             },
@@ -479,21 +479,21 @@
                 "points_per_game": 3.429,
                 "points_per_million": 4.364,
                 "consistency_score": 0.892,
-                "selected_by_percent": 3.3,
+                "selected_by_percent": 3.2,
                 "team_name_short": "LIV",
                 "form": 2.9
             },
             {
                 "web_name": "A.Becker",
                 "position_name": "Goalkeeper",
-                "now_cost": 5.5,
+                "now_cost": 5.4,
                 "clean_sheet_rate": 0.286,
                 "xcs_per_game": 0.33,
                 "goals_conceded_per_game": 1.286,
                 "points_per_game": 2.857,
-                "points_per_million": 3.636,
+                "points_per_million": 3.704,
                 "consistency_score": 0.857,
-                "selected_by_percent": 8.1,
+                "selected_by_percent": 8.0,
                 "team_name_short": "LIV",
                 "form": 1.6
             }
@@ -593,7 +593,7 @@
                 "points_per_game": 2.714,
                 "points_per_million": 3.878,
                 "consistency_score": 0.863,
-                "selected_by_percent": 14.9,
+                "selected_by_percent": 14.8,
                 "team_name_short": "CHE",
                 "form": 0.0
             }
@@ -736,12 +736,12 @@
             {
                 "web_name": "Agbadou",
                 "position_name": "Defender",
-                "now_cost": 4.5,
+                "now_cost": 4.4,
                 "clean_sheet_rate": 0.0,
                 "xcs_per_game": 0.226,
                 "goals_conceded_per_game": 2.0,
                 "points_per_game": 2.0,
-                "points_per_million": 3.111,
+                "points_per_million": 3.182,
                 "consistency_score": 0.833,
                 "selected_by_percent": 0.3,
                 "team_name_short": "WOL",
@@ -929,7 +929,7 @@
                 "points_per_game": 2.143,
                 "points_per_million": 3.061,
                 "consistency_score": 1.0,
-                "selected_by_percent": 10.7,
+                "selected_by_percent": 10.6,
                 "team_name_short": "NFO",
                 "form": 3.2
             },

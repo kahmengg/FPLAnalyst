@@ -1,0 +1,90 @@
+[
+    {
+        "player": "Enzo",
+        "team": "Chelsea",
+        "team_short": "CHE",
+        "goals": 3,
+        "xG": 3.6,
+        "overperformance": -0.6,
+        "overperformance_per_90": -0.086,
+        "sustainable": false,
+        "form": 3.6
+    },
+    {
+        "player": "Mateta",
+        "team": "Crystal Palace",
+        "team_short": "CRY",
+        "goals": 2,
+        "xG": 3.6,
+        "overperformance": -1.6,
+        "overperformance_per_90": -0.229,
+        "sustainable": false,
+        "form": 3.0
+    },
+    {
+        "player": "B.Fernandes",
+        "team": "Man Utd",
+        "team_short": "MUN",
+        "goals": 2,
+        "xG": 3.5,
+        "overperformance": -1.5,
+        "overperformance_per_90": -0.214,
+        "sustainable": false,
+        "form": 3.6
+    },
+    {
+        "player": "Wood",
+        "team": "Nott'm Forest",
+        "team_short": "NFO",
+        "goals": 2,
+        "xG": 2.8,
+        "overperformance": -0.8,
+        "overperformance_per_90": -0.114,
+        "sustainable": false,
+        "form": 1.8
+    },
+    {
+        "player": "Beto",
+        "team": "Everton",
+        "team_short": "EVE",
+        "goals": 1,
+        "xG": 2.6,
+        "overperformance": -1.6,
+        "overperformance_per_90": -0.229,
+        "sustainable": false,
+        "form": 1.2
+    },
+    {
+        "player": "Welbeck",
+        "team": "Brighton",
+        "team_short": "BHA",
+        "goals": 2,
+        "xG": 2.6,
+        "overperformance": -0.6,
+        "overperformance_per_90": -0.086,
+        "sustainable": false,
+        "form": 3.9
+    },
+    {
+        "player": "Mbeumo",
+        "team": "Man Utd",
+        "team_short": "MUN",
+        "goals": 1,
+        "xG": 1.9,
+        "overperformance": -0.9,
+        "overperformance_per_90": -0.129,
+        "sustainable": false,
+        "form": 3.3
+    },
+    {
+        "player": "Gruda",
+        "team": "Brighton",
+        "team_short": "BHA",
+        "goals": 1,
+        "xG": 1.7,
+        "overperformance": -0.7,
+        "overperformance_per_90": -0.1,
+        "sustainable": false,
+        "form": 2.4
+    }
+]

@@ -8,7 +8,7 @@
       "points": 70,
       "ppg": 10.0,
       "price": 14.5,
-      "ownership": 60.6,
+      "ownership": 61.0,
       "form": 9.9
     },
     {
@@ -19,7 +19,7 @@
       "points": 66,
       "ppg": 9.4,
       "price": 7.9,
-      "ownership": 58.9,
+      "ownership": 59.3,
       "form": 9.0
     },
     {
@@ -30,7 +30,7 @@
       "points": 48,
       "ppg": 6.9,
       "price": 5.9,
-      "ownership": 17.3,
+      "ownership": 17.6,
       "form": 5.1
     },
     {
@@ -41,7 +41,7 @@
       "points": 47,
       "ppg": 6.7,
       "price": 6.3,
-      "ownership": 29.2,
+      "ownership": 29.5,
       "form": 8.8
     },
     {
@@ -52,7 +52,7 @@
       "points": 46,
       "ppg": 6.6,
       "price": 4.8,
-      "ownership": 30.7,
+      "ownership": 30.8,
       "form": 6.2
     },
     {
@@ -62,8 +62,8 @@
       "position": "Defender",
       "points": 46,
       "ppg": 6.6,
-      "price": 4.9,
-      "ownership": 24.9,
+      "price": 5.0,
+      "ownership": 25.0,
       "form": 6.6
     },
     {
@@ -73,8 +73,8 @@
       "position": "Midfielder",
       "points": 45,
       "ppg": 6.4,
-      "price": 5.7,
-      "ownership": 13.6,
+      "price": 5.8,
+      "ownership": 14.0,
       "form": 4.8
     },
     {
@@ -85,7 +85,7 @@
       "points": 43,
       "ppg": 6.1,
       "price": 5.1,
-      "ownership": 8.0,
+      "ownership": 8.2,
       "form": 7.3
     },
     {
@@ -118,7 +118,7 @@
       "points": 41,
       "ppg": 5.9,
       "price": 6.7,
-      "ownership": 14.7,
+      "ownership": 14.9,
       "form": 3.6
     },
     {
@@ -129,7 +129,7 @@
       "points": 41,
       "ppg": 5.9,
       "price": 5.1,
-      "ownership": 9.5,
+      "ownership": 9.7,
       "form": 6.0
     },
     {
@@ -140,7 +140,7 @@
       "points": 41,
       "ppg": 5.9,
       "price": 4.6,
-      "ownership": 4.7,
+      "ownership": 4.8,
       "form": 5.6
     },
     {
@@ -151,7 +151,7 @@
       "points": 40,
       "ppg": 5.7,
       "price": 6.5,
-      "ownership": 8.7,
+      "ownership": 8.6,
       "form": 6.9
     },
     {
@@ -162,7 +162,7 @@
       "points": 39,
       "ppg": 5.6,
       "price": 4.1,
-      "ownership": 6.7,
+      "ownership": 6.8,
       "form": 7.7
     }
   ],
@@ -290,172 +290,172 @@
   ],
   "hidden_gems": [
     {
+      "player": "Thiago",
+      "team": "Brentford",
+      "team_short": "BRE",
+      "position": "FWD",
+      "points": 32,
+      "ownership": 3.3,
+      "price": 6.1,
+      "xG": 2.6,
+      "xA": 1.1,
+      "xCS": 1.5,
+      "form": 5.1,
+      "potentialScore": 10.0
+    },
+    {
       "player": "Minteh",
       "team": "Brighton",
       "team_short": "BHA",
-      "position": "Midfielder",
+      "position": "MID",
       "points": 31,
       "ownership": 3.5,
       "price": 6.0,
       "xG": 1.5,
       "xA": 2.1,
-      "xCS": 1.4,
-      "potentialScore": 2.7,
-      "form": 4.8
-    },
-    {
-      "player": "Longstaff",
-      "team": "Leeds",
-      "team_short": "LEE",
-      "position": "Midfielder",
-      "points": 28,
-      "ownership": 0.6,
-      "price": 4.9,
-      "xG": 0.4,
-      "xA": 1.0,
-      "xCS": 2.3,
-      "potentialScore": 2.2,
-      "form": 5.7
+      "xCS": 1.45,
+      "form": 4.8,
+      "potentialScore": 9.63
     },
     {
       "player": "Stach",
       "team": "Leeds",
       "team_short": "LEE",
-      "position": "Midfielder",
+      "position": "MID",
       "points": 33,
       "ownership": 3.2,
       "price": 5.0,
       "xG": 0.7,
       "xA": 0.9,
-      "xCS": 2.3,
-      "potentialScore": 2.2,
-      "form": 5.7
+      "xCS": 2.33,
+      "form": 5.7,
+      "potentialScore": 7.73
     },
     {
-      "player": "L.Paquetá",
+      "player": "Bowen",
       "team": "West Ham",
       "team_short": "WHU",
-      "position": "Midfielder",
-      "points": 29,
-      "ownership": 2.8,
-      "price": 5.9,
-      "xG": 1.4,
-      "xA": 0.8,
-      "xCS": 1.5,
-      "potentialScore": 2.2,
-      "form": 1.8
+      "position": "FWD",
+      "points": 35,
+      "ownership": 7.1,
+      "price": 7.7,
+      "xG": 1.0,
+      "xA": 0.5,
+      "xCS": 1.52,
+      "form": 6.0,
+      "potentialScore": 7.63
     },
     {
-      "player": "Szoboszlai",
-      "team": "Liverpool",
-      "team_short": "LIV",
-      "position": "Midfielder",
-      "points": 27,
-      "ownership": 3.8,
+      "player": "Sarr",
+      "team": "Crystal Palace",
+      "team_short": "CRY",
+      "position": "MID",
+      "points": 36,
+      "ownership": 6.2,
       "price": 6.5,
-      "xG": 1.1,
-      "xA": 1.3,
-      "xCS": 2.3,
-      "potentialScore": 2.1,
-      "form": 2.1
+      "xG": 2.9,
+      "xA": 0.4,
+      "xCS": 2.02,
+      "form": 5.4,
+      "potentialScore": 7.62
     },
     {
-      "player": "Thiago",
-      "team": "Brentford",
-      "team_short": "BRE",
-      "position": "Forward",
-      "points": 32,
-      "ownership": 3.2,
-      "price": 6.1,
-      "xG": 2.6,
-      "xA": 1.1,
-      "xCS": 1.5,
-      "potentialScore": 2.1,
-      "form": 5.1
+      "player": "Longstaff",
+      "team": "Leeds",
+      "team_short": "LEE",
+      "position": "MID",
+      "points": 28,
+      "ownership": 0.6,
+      "price": 4.9,
+      "xG": 0.4,
+      "xA": 1.0,
+      "xCS": 2.33,
+      "form": 5.7,
+      "potentialScore": 7.45
     },
     {
-      "player": "Trippier",
+      "player": "Thiaw",
       "team": "Newcastle",
       "team_short": "NEW",
-      "position": "Defender",
-      "points": 27,
-      "ownership": 2.6,
-      "price": 5.0,
-      "xG": 0.0,
-      "xA": 0.5,
-      "xCS": 3.7,
-      "potentialScore": 2.0,
-      "form": 2.2
+      "position": "DEF",
+      "points": 19,
+      "ownership": 0.2,
+      "price": 4.9,
+      "xG": 0.4,
+      "xA": 0.3,
+      "xCS": 3.69,
+      "form": 6.6,
+      "potentialScore": 7.28
     },
     {
-      "player": "Tavernier",
-      "team": "Bournemouth",
-      "team_short": "BOU",
-      "position": "Midfielder",
-      "points": 27,
-      "ownership": 1.3,
-      "price": 5.5,
-      "xG": 0.9,
-      "xA": 0.5,
-      "xCS": 3.4,
-      "potentialScore": 1.9,
-      "form": 2.1
+      "player": "Doku",
+      "team": "Man City",
+      "team_short": "MCI",
+      "position": "MID",
+      "points": 29,
+      "ownership": 7.7,
+      "price": 6.6,
+      "xG": 0.6,
+      "xA": 1.3,
+      "xCS": 2.42,
+      "form": 4.2,
+      "potentialScore": 7.12
     },
     {
       "player": "Iwobi",
       "team": "Fulham",
       "team_short": "FUL",
-      "position": "Midfielder",
+      "position": "MID",
       "points": 30,
       "ownership": 1.7,
       "price": 6.5,
       "xG": 0.4,
       "xA": 1.3,
-      "xCS": 1.4,
-      "potentialScore": 1.7,
-      "form": 5.1
+      "xCS": 1.36,
+      "form": 5.1,
+      "potentialScore": 6.88
     },
     {
-      "player": "Xhaka",
-      "team": "Sunderland",
-      "team_short": "SUN",
-      "position": "Midfielder",
-      "points": 32,
-      "ownership": 3.9,
-      "price": 5.0,
-      "xG": 0.2,
-      "xA": 1.0,
-      "xCS": 1.7,
-      "potentialScore": 1.6,
-      "form": 4.8
+      "player": "Šeško",
+      "team": "Man Utd",
+      "team_short": "MUN",
+      "position": "FWD",
+      "points": 23,
+      "ownership": 5.1,
+      "price": 7.3,
+      "xG": 1.5,
+      "xA": 0.2,
+      "xCS": 1.48,
+      "form": 5.4,
+      "potentialScore": 6.62
     },
     {
-      "player": "Garner",
+      "player": "Keane",
       "team": "Everton",
       "team_short": "EVE",
-      "position": "Midfielder",
-      "points": 33,
+      "position": "DEF",
+      "points": 35,
       "ownership": 1.0,
-      "price": 5.0,
-      "xG": 0.4,
-      "xA": 0.8,
-      "xCS": 1.9,
-      "potentialScore": 1.6,
-      "form": 3.6
+      "price": 4.5,
+      "xG": 0.7,
+      "xA": 0.1,
+      "xCS": 1.93,
+      "form": 5.9,
+      "potentialScore": 6.53
     },
     {
-      "player": "Bruno G.",
-      "team": "Newcastle",
-      "team_short": "NEW",
-      "position": "Midfielder",
-      "points": 30,
-      "ownership": 2.1,
+      "player": "Estêvão",
+      "team": "Chelsea",
+      "team_short": "CHE",
+      "position": "MID",
+      "points": 20,
+      "ownership": 1.9,
       "price": 6.5,
-      "xG": 0.4,
-      "xA": 0.2,
-      "xCS": 3.7,
-      "potentialScore": 1.6,
-      "form": 4.8
+      "xG": 1.5,
+      "xA": 1.2,
+      "xCS": 1.53,
+      "form": 3.6,
+      "potentialScore": 6.49
     }
   ],
   "goal_scorers": [
@@ -467,7 +467,7 @@
       "goalsPerGame": 1.29,
       "points": 70,
       "price": 14.5,
-      "ownership": 60.6,
+      "ownership": 61.0,
       "form": 9.9
     },
     {
@@ -478,7 +478,7 @@
       "goalsPerGame": 0.86,
       "points": 66,
       "price": 7.9,
-      "ownership": 58.9,
+      "ownership": 59.3,
       "form": 9.0
     },
     {
@@ -500,7 +500,7 @@
       "goalsPerGame": 0.57,
       "points": 32,
       "price": 6.1,
-      "ownership": 3.2,
+      "ownership": 3.3,
       "form": 5.1
     },
     {
@@ -511,7 +511,7 @@
       "goalsPerGame": 0.43,
       "points": 35,
       "price": 7.7,
-      "ownership": 7.0,
+      "ownership": 7.1,
       "form": 6.0
     },
     {
@@ -521,8 +521,8 @@
       "goals": 3,
       "goalsPerGame": 0.43,
       "points": 45,
-      "price": 5.7,
-      "ownership": 13.6,
+      "price": 5.8,
+      "ownership": 14.0,
       "form": 4.8
     },
     {
@@ -533,7 +533,7 @@
       "goalsPerGame": 0.43,
       "points": 33,
       "price": 8.7,
-      "ownership": 16.9,
+      "ownership": 16.8,
       "form": 2.7
     },
     {
@@ -544,7 +544,7 @@
       "goalsPerGame": 0.43,
       "points": 41,
       "price": 6.7,
-      "ownership": 14.7,
+      "ownership": 14.9,
       "form": 3.6
     },
     {
@@ -555,7 +555,7 @@
       "goalsPerGame": 0.43,
       "points": 26,
       "price": 9.1,
-      "ownership": 26.9,
+      "ownership": 26.7,
       "form": 1.8
     },
     {
@@ -588,7 +588,7 @@
       "goalsPerGame": 0.43,
       "points": 32,
       "price": 6.8,
-      "ownership": 15.8,
+      "ownership": 15.6,
       "form": 3.6
     }
   ],
@@ -601,7 +601,7 @@
       "assistsPerGame": 0.57,
       "points": 37,
       "price": 6.9,
-      "ownership": 20.8,
+      "ownership": 20.7,
       "form": 3.9
     },
     {
@@ -612,7 +612,7 @@
       "assistsPerGame": 0.57,
       "points": 39,
       "price": 6.7,
-      "ownership": 32.8,
+      "ownership": 33.0,
       "form": 6.3
     },
     {
@@ -645,7 +645,7 @@
       "assistsPerGame": 0.43,
       "points": 39,
       "price": 7.7,
-      "ownership": 61.7,
+      "ownership": 61.5,
       "form": 1.8
     },
     {
@@ -656,7 +656,7 @@
       "assistsPerGame": 0.43,
       "points": 66,
       "price": 7.9,
-      "ownership": 58.9,
+      "ownership": 59.3,
       "form": 9.0
     },
     {
@@ -667,7 +667,7 @@
       "assistsPerGame": 0.43,
       "points": 32,
       "price": 5.0,
-      "ownership": 3.9,
+      "ownership": 4.0,
       "form": 4.8
     },
     {
@@ -728,30 +728,74 @@
   ],
   "defensive_leaders": [
     {
-      "player": "Pope",
-      "team": "Newcastle",
-      "team_short": "NEW",
-      "position": "Goalkeeper",
-      "points": 41,
-      "ppg": 5.9,
-      "cleanSheets": 5,
-      "csRate": 71.4,
-      "tackles": 1,
-      "price": 5.1,
-      "form": 6.0
+      "player": "Senesi",
+      "team": "Bournemouth",
+      "team_short": "BOU",
+      "position": "Defender",
+      "points": 46,
+      "ppg": 6.6,
+      "cleanSheets": 3,
+      "csRate": 42.9,
+      "tackles": 12,
+      "defensiveContributions": 88,
+      "price": 5.0,
+      "form": 6.6
     },
     {
-      "player": "J.Timber",
-      "team": "Arsenal",
-      "team_short": "ARS",
+      "player": "Andersen",
+      "team": "Fulham",
+      "team_short": "FUL",
       "position": "Defender",
-      "points": 48,
-      "ppg": 6.9,
-      "cleanSheets": 4,
-      "csRate": 57.1,
-      "tackles": 25,
-      "price": 5.9,
-      "form": 5.1
+      "points": 29,
+      "ppg": 4.1,
+      "cleanSheets": 1,
+      "csRate": 14.3,
+      "tackles": 15,
+      "defensiveContributions": 81,
+      "price": 4.5,
+      "form": 3.7
+    },
+    {
+      "player": "Tarkowski",
+      "team": "Everton",
+      "team_short": "EVE",
+      "position": "Defender",
+      "points": 32,
+      "ppg": 4.6,
+      "cleanSheets": 2,
+      "csRate": 28.6,
+      "tackles": 12,
+      "defensiveContributions": 79,
+      "price": 5.5,
+      "form": 3.3
+    },
+    {
+      "player": "Virgil",
+      "team": "Liverpool",
+      "team_short": "LIV",
+      "position": "Defender",
+      "points": 29,
+      "ppg": 4.1,
+      "cleanSheets": 2,
+      "csRate": 28.6,
+      "tackles": 3,
+      "defensiveContributions": 79,
+      "price": 6.1,
+      "form": 2.6
+    },
+    {
+      "player": "Lacroix",
+      "team": "Crystal Palace",
+      "team_short": "CRY",
+      "position": "Defender",
+      "points": 37,
+      "ppg": 5.3,
+      "cleanSheets": 3,
+      "csRate": 42.9,
+      "tackles": 15,
+      "defensiveContributions": 72,
+      "price": 5.1,
+      "form": 3.3
     },
     {
       "player": "Mitchell",
@@ -763,8 +807,65 @@
       "cleanSheets": 3,
       "csRate": 42.9,
       "tackles": 27,
+      "defensiveContributions": 60,
       "price": 5.0,
       "form": 4.8
+    },
+    {
+      "player": "Keane",
+      "team": "Everton",
+      "team_short": "EVE",
+      "position": "Defender",
+      "points": 35,
+      "ppg": 5.0,
+      "cleanSheets": 2,
+      "csRate": 28.6,
+      "tackles": 7,
+      "defensiveContributions": 71,
+      "price": 4.5,
+      "form": 5.9
+    },
+    {
+      "player": "Alderete",
+      "team": "Sunderland",
+      "team_short": "SUN",
+      "position": "Defender",
+      "points": 39,
+      "ppg": 5.6,
+      "cleanSheets": 3,
+      "csRate": 42.9,
+      "tackles": 11,
+      "defensiveContributions": 64,
+      "price": 4.1,
+      "form": 7.7
+    },
+    {
+      "player": "Bogle",
+      "team": "Leeds",
+      "team_short": "LEE",
+      "position": "Defender",
+      "points": 23,
+      "ppg": 3.3,
+      "cleanSheets": 2,
+      "csRate": 28.6,
+      "tackles": 21,
+      "defensiveContributions": 53,
+      "price": 4.5,
+      "form": 3.7
+    },
+    {
+      "player": "Richards",
+      "team": "Crystal Palace",
+      "team_short": "CRY",
+      "position": "Defender",
+      "points": 33,
+      "ppg": 4.7,
+      "cleanSheets": 3,
+      "csRate": 42.9,
+      "tackles": 16,
+      "defensiveContributions": 73,
+      "price": 4.5,
+      "form": 4.0
     },
     {
       "player": "Burn",
@@ -776,236 +877,23 @@
       "cleanSheets": 5,
       "csRate": 71.4,
       "tackles": 9,
+      "defensiveContributions": 58,
       "price": 5.1,
       "form": 7.3
     },
     {
-      "player": "Livramento",
-      "team": "Newcastle",
-      "team_short": "NEW",
+      "player": "Agbadou",
+      "team": "Wolves",
+      "team_short": "WOL",
       "position": "Defender",
-      "points": 37,
-      "ppg": 5.3,
-      "cleanSheets": 5,
-      "csRate": 71.4,
-      "tackles": 6,
-      "price": 5.1,
-      "form": 4.4
-    },
-    {
-      "player": "Raya",
-      "team": "Arsenal",
-      "team_short": "ARS",
-      "position": "Goalkeeper",
-      "points": 34,
-      "ppg": 4.9,
-      "cleanSheets": 4,
-      "csRate": 57.1,
-      "tackles": 1,
-      "price": 5.7,
-      "form": 4.0
-    },
-    {
-      "player": "Calafiori",
-      "team": "Arsenal",
-      "team_short": "ARS",
-      "position": "Defender",
-      "points": 42,
-      "ppg": 6.0,
-      "cleanSheets": 4,
-      "csRate": 57.1,
-      "tackles": 11,
-      "price": 5.7,
-      "form": 3.3
-    },
-    {
-      "player": "Truffert",
-      "team": "Bournemouth",
-      "team_short": "BOU",
-      "position": "Defender",
-      "points": 32,
-      "ppg": 4.6,
-      "cleanSheets": 3,
-      "csRate": 42.9,
+      "points": 14,
+      "ppg": 2.0,
+      "cleanSheets": 0,
+      "csRate": 0.0,
       "tackles": 14,
-      "price": 4.5,
-      "form": 6.2
-    },
-    {
-      "player": "Muñoz",
-      "team": "Crystal Palace",
-      "team_short": "CRY",
-      "position": "Defender",
-      "points": 36,
-      "ppg": 5.1,
-      "cleanSheets": 3,
-      "csRate": 42.9,
-      "tackles": 18,
-      "price": 5.6,
-      "form": 4.4
-    },
-    {
-      "player": "Senesi",
-      "team": "Bournemouth",
-      "team_short": "BOU",
-      "position": "Defender",
-      "points": 46,
-      "ppg": 6.6,
-      "cleanSheets": 3,
-      "csRate": 42.9,
-      "tackles": 12,
-      "price": 4.9,
-      "form": 6.6
-    },
-    {
-      "player": "Roefs",
-      "team": "Sunderland",
-      "team_short": "SUN",
-      "position": "Goalkeeper",
-      "points": 41,
-      "ppg": 5.9,
-      "cleanSheets": 3,
-      "csRate": 42.9,
-      "tackles": 1,
-      "price": 4.6,
-      "form": 5.6
-    },
-    {
-      "player": "Gabriel",
-      "team": "Arsenal",
-      "team_short": "ARS",
-      "position": "Defender",
-      "points": 47,
-      "ppg": 6.7,
-      "cleanSheets": 4,
-      "csRate": 57.1,
-      "tackles": 10,
-      "price": 6.3,
-      "form": 8.8
-    }
-  ],
-  "overperformers": [
-    {
-      "player": "Caicedo",
-      "team": "Chelsea",
-      "team_short": "CHE",
-      "goals": 3,
-      "xG": 0.6,
-      "overperformance": 2.4,
-      "sustainable": false,
-      "form": 4.8
-    },
-    {
-      "player": "Semenyo",
-      "team": "Bournemouth",
-      "team_short": "BOU",
-      "goals": 6,
-      "xG": 3.8,
-      "overperformance": 2.2,
-      "sustainable": false,
-      "form": 9.0
-    },
-    {
-      "player": "Bowen",
-      "team": "West Ham",
-      "team_short": "WHU",
-      "goals": 3,
-      "xG": 1.0,
-      "overperformance": 2.0,
-      "sustainable": false,
-      "form": 6.0
-    },
-    {
-      "player": "Haaland",
-      "team": "Man City",
-      "team_short": "MCI",
-      "goals": 9,
-      "xG": 7.0,
-      "overperformance": 2.0,
-      "sustainable": false,
-      "form": 9.9
-    },
-    {
-      "player": "Isidor",
-      "team": "Sunderland",
-      "team_short": "SUN",
-      "goals": 3,
-      "xG": 1.1,
-      "overperformance": 1.9,
-      "sustainable": false,
-      "form": 3.6
-    },
-    {
-      "player": "Anthony",
-      "team": "Burnley",
-      "team_short": "BUR",
-      "goals": 4,
-      "xG": 2.2,
-      "overperformance": 1.8,
-      "sustainable": false,
-      "form": 5.1
-    },
-    {
-      "player": "Gravenberch",
-      "team": "Liverpool",
-      "team_short": "LIV",
-      "goals": 2,
-      "xG": 0.3,
-      "overperformance": 1.7,
-      "sustainable": false,
-      "form": 7.5
-    },
-    {
-      "player": "Zubimendi",
-      "team": "Arsenal",
-      "team_short": "ARS",
-      "goals": 2,
-      "xG": 0.3,
-      "overperformance": 1.7,
-      "sustainable": false,
-      "form": 2.1
-    }
-  ],
-  "sustainable_scorers": [
-    {
-      "player": "Enzo",
-      "team": "Chelsea",
-      "team_short": "CHE",
-      "goals": 3,
-      "xG": 3.6,
-      "overperformance": -0.6,
-      "sustainable": true,
-      "form": 3.6
-    },
-    {
-      "player": "Gyökeres",
-      "team": "Arsenal",
-      "team_short": "ARS",
-      "goals": 3,
-      "xG": 3.0,
-      "overperformance": 0.0,
-      "sustainable": true,
+      "defensiveContributions": 62,
+      "price": 4.4,
       "form": 1.8
-    },
-    {
-      "player": "Ndiaye",
-      "team": "Everton",
-      "team_short": "EVE",
-      "goals": 3,
-      "xG": 2.2,
-      "overperformance": 0.8,
-      "sustainable": true,
-      "form": 4.5
-    },
-    {
-      "player": "Sarr",
-      "team": "Crystal Palace",
-      "team_short": "CRY",
-      "goals": 3,
-      "xG": 2.9,
-      "overperformance": 0.1,
-      "sustainable": true,
-      "form": 5.4
     }
   ]
 }
