@@ -11,15 +11,15 @@ const API_BASE_URL = "http://localhost:5000"; // Adjust if deployed elsewhere
 
 const getLevelColor = (level) => {
 	switch (level) {
-		case "VERY EASY":
+		case "Very Easy":
 			return "bg-green-100 text-green-800 border-green-300 dark:bg-green-900 dark:text-green-200";
-		case "EASY":
+		case "Easy":
 			return "bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-900 dark:text-blue-200";
-		case "MEDIUM":
+		case "Medium":
 			return "bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900 dark:text-yellow-200";
-		case "HARD":
+		case "Hard":
 			return "bg-orange-100 text-orange-800 border-orange-300 dark:bg-orange-900 dark:text-orange-200";
-		case "VERY HARD":
+		case "Very Hard":
 			return "bg-red-100 text-red-800 border-red-300 dark:bg-red-900 dark:text-red-200";
 		default:
 			return "bg-gray-100 text-gray-800 border-gray-300 dark:bg-gray-900 dark:text-gray-200";
@@ -131,14 +131,14 @@ export default function FixtureAnalysisPage() {
 						teams: {
 							home: {
 								team: f.home_team.name,
-								attack: { ...f.home_team.attack, level: f.home_team.attack.level.toUpperCase() },
-								defense: { ...f.home_team.defense, level: f.home_team.defense.level.toUpperCase() },
+								attack: { ...f.home_team.attack, level: f.home_team.attack.level },
+								defense: { ...f.home_team.defense, level: f.home_team.defense.level },
 								rank: f.home_team.rank
 							},
 							away: {
 								team: f.away_team.name,
-								attack: { ...f.away_team.attack, level: f.away_team.attack.level.toUpperCase() },
-								defense: { ...f.away_team.defense, level: f.away_team.defense.level.toUpperCase() },
+								attack: { ...f.away_team.attack, level: f.away_team.attack.level },
+								defense: { ...f.away_team.defense, level: f.away_team.defense.level },
 								rank: f.away_team.rank
 							}
 						},
@@ -157,7 +157,7 @@ export default function FixtureAnalysisPage() {
 					team: o.team,
 					venue: o.venue,
 					score: o.combined_score,
-					level: o.level.toUpperCase()
+					level: o.level
 				}));
 				const transformedDefense = dataOpportunities.defense.map(o => ({
 					gw: o.gameweek,
@@ -165,7 +165,7 @@ export default function FixtureAnalysisPage() {
 					team: o.team,
 					venue: o.venue,
 					score: o.combined_score,
-					level: o.level.toUpperCase()
+					level: o.level
 				}));
 				setFixtureOpportunities({ attack: transformedAttack, defense: transformedDefense });
 
