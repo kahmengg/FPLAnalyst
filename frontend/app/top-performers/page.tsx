@@ -527,7 +527,7 @@ export default function TopPerformersPage() {
                             <PositionBadge position={player.position} />
                           </td>
                           <td className="py-4 font-mono font-bold text-accent text-lg group-hover:text-accent/80 transition-colors duration-200">
-                            {player.points}
+                             {player.points}
                           </td>
                           <td className="py-4">
                             <FormBadge value={player.form} />

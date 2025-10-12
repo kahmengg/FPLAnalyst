@@ -214,7 +214,7 @@ export default function QuickPicksPage() {
               </CardHeader>
               <CardContent className="space-y-6">
                 {attackingPicks.map((teamData, index) => (
-                  <div key={teamData.teamCode} className="border-l-4 border-l-red-500 pl-6">
+                  <div key={teamData.team_name_short} className="border-l-4 border-l-red-500 pl-6">
                     {/* Team Header */}
                     <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div className="flex items-center gap-3">
@@ -319,7 +319,7 @@ export default function QuickPicksPage() {
               </CardHeader>
               <CardContent className="space-y-6">
                 {defensivePicks.map((teamData, index) => (
-                  <div key={teamData.teamCode} className="border-l-4 border-l-blue-500 pl-6">
+                  <div key={teamData.team_name_short} className="border-l-4 border-l-blue-500 pl-6">
                     {/* Team Header */}
                     <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div className="flex items-center gap-3">
@@ -357,9 +357,6 @@ export default function QuickPicksPage() {
                                 </div>
                                 <div className="flex items-center gap-2">
                                   <PositionBadge position={player.position} />
-                                  <Badge variant="outline" className="text-xs">
-                                    {teamData.teamCode}
-                                  </Badge>
                                 </div>
                               </div>
 

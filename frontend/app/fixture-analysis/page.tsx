@@ -240,6 +240,7 @@ export default function FixtureAnalysisPage() {
 					</h1>
 					<p className="text-sm sm:text-lg text-muted-foreground">
 						Comprehensive gameweek analysis with strategic opportunities
+						and team fixture difficulty insights to optimize your fantasy lineup.
 					</p>
 				</div>
 
