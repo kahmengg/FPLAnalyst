@@ -3,3 +3,6 @@ flask-cors==5.0.0
 pandas==2.2.3
 numpy==1.24.0
 python-dotenv==1.0.0
+gunicorn==22.0.0
+uvicorn==0.29.0
+setuptools==69.5.1
