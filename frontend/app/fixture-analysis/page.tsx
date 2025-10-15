@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, CalendarIcon, Target, Shield, TrendingUp, Users, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
 
-const API_BASE_URL = "http://localhost:5000"; // Adjust if deployed elsewhere
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
 
 const getLevelColor = (level) => {
 	switch (level) {

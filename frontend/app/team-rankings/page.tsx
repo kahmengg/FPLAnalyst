@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Crosshair, TrendingUp, TrendingDown, Shield, TrophyIcon } from "lucide-react"
 
-const API_BASE_URL = "http://localhost:5000"; // Adjust if deployed elsewhere
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
 
 export default function TeamRankingsPage() {
   const [view, setView] = useState<"attack" | "defense" | "combined">("combined")

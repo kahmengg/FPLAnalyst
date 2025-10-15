@@ -8,7 +8,7 @@ import { TrendingUp, Shield, Target, Star, Users, Award, DollarSign, Clock } fro
 
 // Data from your notebook analysis - Attacking Picks by Team Strength
 // Attacking Picks by Team Strength (with numerical form field)
-const API_BASE_URL = "http://localhost:5000"; // Adjust if deployed elsewhere
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
 
 const PositionBadge = ({ position }) => {
   // Map full position names to abbreviations
