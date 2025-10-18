@@ -3,20 +3,59 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Home, TrendingUp, Trophy, Calendar, Gem, ArrowLeftRight, Target, Menu, X, Clock } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+const MAX_RETRIES = 3
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home, color: "text-emerald-500", bgColor: "bg-emerald-500/10", hoverColor: "hover:bg-emerald-500/20" },
   { name: "Top Performers", href: "/top-performers", icon: TrendingUp, color: "text-blue-500", bgColor: "bg-blue-500/10", hoverColor: "hover:bg-blue-500/20" },
   { name: "Team Rankings", href: "/team-rankings", icon: Trophy, color: "text-amber-500", bgColor: "bg-amber-500/10", hoverColor: "hover:bg-amber-500/20" },
   { name: "Fixture Analysis", href: "/fixture-analysis", icon: Calendar, color: "text-purple-500", bgColor: "bg-purple-500/10", hoverColor: "hover:bg-purple-500/20" },
-    { name: "Quick Picks", href: "/quick-picks", icon: Target, color: "text-indigo-500", bgColor: "bg-indigo-500/10", hoverColor: "hover:bg-indigo-500/20" },
+  { name: "Quick Picks", href: "/quick-picks", icon: Target, color: "text-indigo-500", bgColor: "bg-indigo-500/10", hoverColor: "hover:bg-indigo-500/20" },
   { name: "Transfer Strategy", href: "/transfer-strategy", icon: ArrowLeftRight, color: "text-red-500", bgColor: "bg-red-500/10", hoverColor: "hover:bg-red-500/20" },
 ]
+
+async function fetchWithRetry(url, retries = MAX_RETRIES) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      }
+      return await response.json()
+    } catch (err) {
+      if (i === retries - 1) throw err
+      await new Promise(resolve => setTimeout(resolve, 1000)) // 1s delay between retries
+    }
+  }
+}
 
 export function Sidebar() {
   const pathname = usePathname()
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const [gameweek, setGameWeek] = useState(15) // Default gameweek
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true)
+      setError(null)
+      try {
+        const data = await fetchWithRetry(`${API_BASE_URL}/api/layout`)
+        const summary = data[0] // Assume single object in array
+        setGameWeek(summary.total_gameweeks)
+      } catch (err) {
+        setError(`Failed to fetch gameweek: ${err.message}`)
+        setGameWeek(15) // Fallback to default
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
 
   return (
     <>
@@ -73,7 +112,7 @@ export function Sidebar() {
                 <div className="flex items-center gap-2">
                   <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                   <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                    GW 15 • 2024/25 • Live
+                    GW {gameweek} • 2025/26 • Live
                   </p>
                 </div>
               </div>

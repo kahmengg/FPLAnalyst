@@ -7,7 +7,7 @@ from routes.rankings import rankings_bp
 from routes.top_performers import top_performers_bp
 from routes.health import health_bp
 from config.config import Config
-
+import os
 app = Flask(__name__)
 CORS(app)
 app.config.from_object(Config)
