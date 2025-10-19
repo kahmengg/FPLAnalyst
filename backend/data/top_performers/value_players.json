@@ -1,0 +1,122 @@
+[
+  {
+    "player": "Keane",
+    "team": "Everton",
+    "team_short": "EVE",
+    "position": "Defender",
+    "pointsPerMillion": 7.78,
+    "totalPoints": 35,
+    "price": 4.5,
+    "form": 5.9
+  },
+  {
+    "player": "Rodon",
+    "team": "Leeds",
+    "team_short": "LEE",
+    "position": "Defender",
+    "pointsPerMillion": 7.5,
+    "totalPoints": 30,
+    "price": 4.0,
+    "form": 3.7
+  },
+  {
+    "player": "Cullen",
+    "team": "Burnley",
+    "team_short": "BUR",
+    "position": "Midfielder",
+    "pointsPerMillion": 7.4,
+    "totalPoints": 37,
+    "price": 5.0,
+    "form": 4.2
+  },
+  {
+    "player": "Richards",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
+    "position": "Defender",
+    "pointsPerMillion": 7.33,
+    "totalPoints": 33,
+    "price": 4.5,
+    "form": 4.0
+  },
+  {
+    "player": "Lacroix",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
+    "position": "Defender",
+    "pointsPerMillion": 7.25,
+    "totalPoints": 37,
+    "price": 5.1,
+    "form": 3.3
+  },
+  {
+    "player": "Livramento",
+    "team": "Newcastle",
+    "team_short": "NEW",
+    "position": "Defender",
+    "pointsPerMillion": 7.25,
+    "totalPoints": 37,
+    "price": 5.1,
+    "form": 4.4
+  },
+  {
+    "player": "Truffert",
+    "team": "Bournemouth",
+    "team_short": "BOU",
+    "position": "Defender",
+    "pointsPerMillion": 7.11,
+    "totalPoints": 32,
+    "price": 4.5,
+    "form": 6.2
+  },
+  {
+    "player": "Mitchell",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
+    "position": "Defender",
+    "pointsPerMillion": 7.0,
+    "totalPoints": 35,
+    "price": 5.0,
+    "form": 4.8
+  },
+  {
+    "player": "Chalobah",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "position": "Defender",
+    "pointsPerMillion": 6.86,
+    "totalPoints": 35,
+    "price": 5.1,
+    "form": 1.8
+  },
+  {
+    "player": "Vicario",
+    "team": "Spurs",
+    "team_short": "TOT",
+    "position": "Goalkeeper",
+    "pointsPerMillion": 6.86,
+    "totalPoints": 35,
+    "price": 5.1,
+    "form": 2.4
+  },
+  {
+    "player": "Mukiele",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Defender",
+    "pointsPerMillion": 6.75,
+    "totalPoints": 27,
+    "price": 4.0,
+    "form": 4.8
+  },
+  {
+    "player": "Van de Ven",
+    "team": "Spurs",
+    "team_short": "TOT",
+    "position": "Defender",
+    "pointsPerMillion": 6.67,
+    "totalPoints": 32,
+    "price": 4.8,
+    "form": 1.8
+  }
+]

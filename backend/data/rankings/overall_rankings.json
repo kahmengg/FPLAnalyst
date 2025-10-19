@@ -1,0 +1,222 @@
+[
+  {
+    "team": "Arsenal",
+    "team_short": "ARS",
+    "overall_rank": 1,
+    "overall_strength": 2.777,
+    "goals_per_game": 2.0,
+    "expected_goals_per_game": 1.7,
+    "goals_conceded_per_game": 0.43,
+    "clean_sheet_rate": 0.57,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Liverpool",
+    "team_short": "LIV",
+    "overall_rank": 2,
+    "overall_strength": 2.584,
+    "goals_per_game": 1.86,
+    "expected_goals_per_game": 1.54,
+    "goals_conceded_per_game": 1.29,
+    "clean_sheet_rate": 0.29,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Man Utd",
+    "team_short": "MUN",
+    "overall_rank": 3,
+    "overall_strength": 2.503,
+    "goals_per_game": 1.0,
+    "expected_goals_per_game": 1.94,
+    "goals_conceded_per_game": 1.57,
+    "clean_sheet_rate": 0.14,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Man City",
+    "team_short": "MCI",
+    "overall_rank": 4,
+    "overall_strength": 2.482,
+    "goals_per_game": 1.86,
+    "expected_goals_per_game": 1.63,
+    "goals_conceded_per_game": 0.86,
+    "clean_sheet_rate": 0.43,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "overall_rank": 5,
+    "overall_strength": 2.331,
+    "goals_per_game": 1.86,
+    "expected_goals_per_game": 1.54,
+    "goals_conceded_per_game": 1.29,
+    "clean_sheet_rate": 0.29,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Bournemouth",
+    "team_short": "BOU",
+    "overall_rank": 6,
+    "overall_strength": 2.263,
+    "goals_per_game": 2.75,
+    "expected_goals_per_game": 2.17,
+    "goals_conceded_per_game": 1.0,
+    "clean_sheet_rate": 0.25,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Crystal Palace",
+    "team_short": "CRY",
+    "overall_rank": 7,
+    "overall_strength": 2.257,
+    "goals_per_game": 1.29,
+    "expected_goals_per_game": 1.79,
+    "goals_conceded_per_game": 0.71,
+    "clean_sheet_rate": 0.43,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Everton",
+    "team_short": "EVE",
+    "overall_rank": 8,
+    "overall_strength": 2.107,
+    "goals_per_game": 1.29,
+    "expected_goals_per_game": 1.36,
+    "goals_conceded_per_game": 1.0,
+    "clean_sheet_rate": 0.29,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Newcastle",
+    "team_short": "NEW",
+    "overall_rank": 9,
+    "overall_strength": 2.084,
+    "goals_per_game": 0.86,
+    "expected_goals_per_game": 1.11,
+    "goals_conceded_per_game": 0.71,
+    "clean_sheet_rate": 0.71,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Brighton",
+    "team_short": "BHA",
+    "overall_rank": 10,
+    "overall_strength": 2.035,
+    "goals_per_game": 1.43,
+    "expected_goals_per_game": 1.64,
+    "goals_conceded_per_game": 1.43,
+    "clean_sheet_rate": 0.0,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Spurs",
+    "team_short": "TOT",
+    "overall_rank": 11,
+    "overall_strength": 2.029,
+    "goals_per_game": 1.71,
+    "expected_goals_per_game": 1.04,
+    "goals_conceded_per_game": 0.71,
+    "clean_sheet_rate": 0.43,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Leeds",
+    "team_short": "LEE",
+    "overall_rank": 12,
+    "overall_strength": 1.841,
+    "goals_per_game": 1.0,
+    "expected_goals_per_game": 1.07,
+    "goals_conceded_per_game": 1.57,
+    "clean_sheet_rate": 0.29,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Aston Villa",
+    "team_short": "AVL",
+    "overall_rank": 13,
+    "overall_strength": 1.832,
+    "goals_per_game": 0.86,
+    "expected_goals_per_game": 0.9,
+    "goals_conceded_per_game": 1.0,
+    "clean_sheet_rate": 0.29,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Nott'm Forest",
+    "team_short": "NFO",
+    "overall_rank": 14,
+    "overall_strength": 1.8,
+    "goals_per_game": 0.71,
+    "expected_goals_per_game": 0.9,
+    "goals_conceded_per_game": 1.71,
+    "clean_sheet_rate": 0.0,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Fulham",
+    "team_short": "FUL",
+    "overall_rank": 15,
+    "overall_strength": 1.756,
+    "goals_per_game": 0.86,
+    "expected_goals_per_game": 1.01,
+    "goals_conceded_per_game": 1.57,
+    "clean_sheet_rate": 0.14,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "overall_rank": 16,
+    "overall_strength": 1.685,
+    "goals_per_game": 1.0,
+    "expected_goals_per_game": 0.9,
+    "goals_conceded_per_game": 0.86,
+    "clean_sheet_rate": 0.43,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "West Ham",
+    "team_short": "WHU",
+    "overall_rank": 17,
+    "overall_strength": 1.645,
+    "goals_per_game": 0.86,
+    "expected_goals_per_game": 0.89,
+    "goals_conceded_per_game": 2.29,
+    "clean_sheet_rate": 0.14,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Brentford",
+    "team_short": "BRE",
+    "overall_rank": 18,
+    "overall_strength": 1.518,
+    "goals_per_game": 1.29,
+    "expected_goals_per_game": 1.21,
+    "goals_conceded_per_game": 1.71,
+    "clean_sheet_rate": 0.14,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Wolves",
+    "team_short": "WOL",
+    "overall_rank": 19,
+    "overall_strength": 1.488,
+    "goals_per_game": 0.57,
+    "expected_goals_per_game": 0.8,
+    "goals_conceded_per_game": 2.0,
+    "clean_sheet_rate": 0.0,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Burnley",
+    "team_short": "BUR",
+    "overall_rank": 20,
+    "overall_strength": 1.336,
+    "goals_per_game": 1.0,
+    "expected_goals_per_game": 0.63,
+    "goals_conceded_per_game": 2.14,
+    "clean_sheet_rate": 0.14,
+    "defensive_contribution": 0
+  }
+]

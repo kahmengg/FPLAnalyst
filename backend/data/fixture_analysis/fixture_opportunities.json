@@ -1,0 +1,206 @@
+{
+    "attack": [
+        {
+            "gameweek": 10,
+            "team": "Arsenal",
+            "short_name": "ARS",
+            "opponent": "Burnley",
+            "attack_score": 9.0,
+            "defense_score": 9.5,
+            "combined_score": 9.2,
+            "venue": "A"
+        },
+        {
+            "gameweek": 10,
+            "team": "Crystal Palace",
+            "short_name": "CRY",
+            "opponent": "Brentford",
+            "attack_score": 5.1,
+            "defense_score": 8.1,
+            "combined_score": 6.6,
+            "venue": "H"
+        },
+        {
+            "gameweek": 8,
+            "team": "Arsenal",
+            "short_name": "ARS",
+            "opponent": "Fulham",
+            "attack_score": 5.5,
+            "defense_score": 7.0,
+            "combined_score": 6.2,
+            "venue": "A"
+        },
+        {
+            "gameweek": 9,
+            "team": "Liverpool",
+            "short_name": "LIV",
+            "opponent": "Brentford",
+            "attack_score": 7.5,
+            "defense_score": 4.0,
+            "combined_score": 5.8,
+            "venue": "A"
+        },
+        {
+            "gameweek": 9,
+            "team": "Bournemouth",
+            "short_name": "BOU",
+            "opponent": "Nott'm Forest",
+            "attack_score": 7.1,
+            "defense_score": 3.6,
+            "combined_score": 5.3,
+            "venue": "H"
+        },
+        {
+            "gameweek": 10,
+            "team": "Newcastle",
+            "short_name": "NEW",
+            "opponent": "West Ham",
+            "attack_score": 3.5,
+            "defense_score": 7.0,
+            "combined_score": 5.2,
+            "venue": "A"
+        },
+        {
+            "gameweek": 8,
+            "team": "Leeds",
+            "short_name": "LEE",
+            "opponent": "Burnley",
+            "attack_score": 3.0,
+            "defense_score": 6.0,
+            "combined_score": 4.5,
+            "venue": "A"
+        },
+        {
+            "gameweek": 9,
+            "team": "Newcastle",
+            "short_name": "NEW",
+            "opponent": "Fulham",
+            "attack_score": 1.6,
+            "defense_score": 7.0,
+            "combined_score": 4.3,
+            "venue": "H"
+        },
+        {
+            "gameweek": 9,
+            "team": "Man City",
+            "short_name": "MCI",
+            "opponent": "Aston Villa",
+            "attack_score": 3.5,
+            "defense_score": 4.0,
+            "combined_score": 3.8,
+            "venue": "A"
+        },
+        {
+            "gameweek": 9,
+            "team": "Leeds",
+            "short_name": "LEE",
+            "opponent": "West Ham",
+            "attack_score": 2.6,
+            "defense_score": 4.6,
+            "combined_score": 3.6,
+            "venue": "H"
+        }
+    ],
+    "defense": [
+        {
+            "gameweek": 10,
+            "team": "Arsenal",
+            "short_name": "ARS",
+            "opponent": "Burnley",
+            "attack_score": 9.0,
+            "defense_score": 9.5,
+            "combined_score": 9.2,
+            "venue": "A"
+        },
+        {
+            "gameweek": 10,
+            "team": "Crystal Palace",
+            "short_name": "CRY",
+            "opponent": "Brentford",
+            "attack_score": 5.1,
+            "defense_score": 8.1,
+            "combined_score": 6.6,
+            "venue": "H"
+        },
+        {
+            "gameweek": 8,
+            "team": "Arsenal",
+            "short_name": "ARS",
+            "opponent": "Fulham",
+            "attack_score": 5.5,
+            "defense_score": 7.0,
+            "combined_score": 6.2,
+            "venue": "A"
+        },
+        {
+            "gameweek": 9,
+            "team": "Liverpool",
+            "short_name": "LIV",
+            "opponent": "Brentford",
+            "attack_score": 7.5,
+            "defense_score": 4.0,
+            "combined_score": 5.8,
+            "venue": "A"
+        },
+        {
+            "gameweek": 9,
+            "team": "Bournemouth",
+            "short_name": "BOU",
+            "opponent": "Nott'm Forest",
+            "attack_score": 7.1,
+            "defense_score": 3.6,
+            "combined_score": 5.3,
+            "venue": "H"
+        },
+        {
+            "gameweek": 10,
+            "team": "Newcastle",
+            "short_name": "NEW",
+            "opponent": "West Ham",
+            "attack_score": 3.5,
+            "defense_score": 7.0,
+            "combined_score": 5.2,
+            "venue": "A"
+        },
+        {
+            "gameweek": 8,
+            "team": "Leeds",
+            "short_name": "LEE",
+            "opponent": "Burnley",
+            "attack_score": 3.0,
+            "defense_score": 6.0,
+            "combined_score": 4.5,
+            "venue": "A"
+        },
+        {
+            "gameweek": 9,
+            "team": "Newcastle",
+            "short_name": "NEW",
+            "opponent": "Fulham",
+            "attack_score": 1.6,
+            "defense_score": 7.0,
+            "combined_score": 4.3,
+            "venue": "H"
+        },
+        {
+            "gameweek": 9,
+            "team": "Man City",
+            "short_name": "MCI",
+            "opponent": "Aston Villa",
+            "attack_score": 3.5,
+            "defense_score": 4.0,
+            "combined_score": 3.8,
+            "venue": "A"
+        },
+        {
+            "gameweek": 9,
+            "team": "Leeds",
+            "short_name": "LEE",
+            "opponent": "West Ham",
+            "attack_score": 2.6,
+            "defense_score": 4.6,
+            "combined_score": 3.6,
+            "venue": "H"
+        }
+    ]
+}
