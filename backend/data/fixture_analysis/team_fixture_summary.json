@@ -98,16 +98,16 @@
         "num_favorable_fixtures": 1
     },
     {
-        "team": "West Ham",
-        "avg_attack_difficulty": -1.067,
-        "avg_defense_difficulty": 0.767,
+        "team": "Nott'm Forest",
+        "avg_attack_difficulty": 3.1,
+        "avg_defense_difficulty": -3.4,
         "overall_difficulty": -0.15,
         "num_favorable_fixtures": 1
     },
     {
-        "team": "Nott'm Forest",
-        "avg_attack_difficulty": 3.1,
-        "avg_defense_difficulty": -3.4,
+        "team": "West Ham",
+        "avg_attack_difficulty": -1.067,
+        "avg_defense_difficulty": 0.767,
         "overall_difficulty": -0.15,
         "num_favorable_fixtures": 1
     },
