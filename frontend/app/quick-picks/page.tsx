@@ -214,7 +214,10 @@ export default function QuickPicksPage() {
               </CardHeader>
               <CardContent className="space-y-6">
                 {attackingPicks.map((teamData, index) => (
-                  <div key={teamData.team_name_short} className="border-l-4 border-l-red-500 pl-6">
+                  <div
+                    key={`${teamData.team}-${teamData.attack_rank}-${index}`} // Use composite key for uniqueness
+                    className="border-l-4 border-l-red-500 pl-6"
+                  >
                     {/* Team Header */}
                     <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div className="flex items-center gap-3">
@@ -236,7 +239,7 @@ export default function QuickPicksPage() {
                         const ownershipCat = getOwnershipCategory(player.ownership)
                         return (
                           <Card
-                            key={player.name}
+                            key={`${player.web_name}-${playerIndex}`} // Use web_name with index for uniqueness
                             className="border border-border/50 hover:border-red-300 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer bg-gradient-to-br from-card to-secondary/20"
                           >
                             <CardContent className="p-4">
