@@ -9,7 +9,7 @@ from routes.health import health_bp
 from config.config import Config
 import os
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": ["https://fpelly.vercel.app"]}})  # Restrict to Vercel domain
 app.config.from_object(Config)
 
 # Register blueprints
