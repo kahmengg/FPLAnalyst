@@ -12,61 +12,67 @@ export default function TeamRankingsPage() {
   const [view, setView] = useState<"attack" | "defense" | "combined">("combined")
   const [teams, setTeams] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null) // ADDED: Error state
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true)
-      try {
-        const [overallRes, attackRes, defenseRes] = await Promise.all([
-          fetch(`${API_BASE_URL}/api/overall_rankings`),
-          fetch(`${API_BASE_URL}/api/attack_rankings`),
-          fetch(`${API_BASE_URL}/api/defense_rankings`)
-        ])
+  // START: Added fetchData for reuse
+  const fetchData = async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const [overallRes, attackRes, defenseRes] = await Promise.all([
+        fetch(`${API_BASE_URL}/api/overall_rankings`, { cache: 'no-store' }),
+        fetch(`${API_BASE_URL}/api/attack_rankings`, { cache: 'no-store' }),
+        fetch(`${API_BASE_URL}/api/defense_rankings`, { cache: 'no-store' })
+      ])
 
-        if (!overallRes.ok || !attackRes.ok || !defenseRes.ok) {
-          throw new Error('Failed to fetch rankings')
-        }
-
-        const overall = await overallRes.json()
-        const attack = await attackRes.json()
-        const defense = await defenseRes.json()
-
-        const attackMap = new Map(attack.map(t => [t.team, t]))
-        const defenseMap = new Map(defense.map(t => [t.team, t]))
-
-        const maxGoalsPerGame = Math.max(...overall.map(t => t.goals_per_game))
-        const maxCleanSheetPct = Math.max(...overall.map(t => t.clean_sheet_rate)) * 100
-        const maxOverallStrength = Math.max(...overall.map(t => t.overall_strength))
-
-        const mergedTeams = overall.map(o => {
-          const a = attackMap.get(o.team) || {}
-          const d = defenseMap.get(o.team) || {}
-          return {
-            name: o.team,
-            code: o.team_short,
-            attackRank: a.attack_rank || 'N/A',
-            defenseRank: d.defense_rank || 'N/A',
-            goalsPerGame: o.goals_per_game,
-            xGPerGame: o.expected_goals_per_game ,
-            cleanSheetPct: o.clean_sheet_rate * 100,
-            goalsConceded: o.goals_conceded_per_game,
-            attackStrength: a.attack_strength || 0,
-            defenseStrength: d.defense_strength || 0,
-            attackScore: Math.round((o.goals_per_game / maxGoalsPerGame) * 100), // Normalized for progress bar
-            defenseScore: Math.round((o.clean_sheet_rate * 100) / maxCleanSheetPct * 100), // Normalized for progress bar
-            overallStrength: Math.round((o.overall_strength / maxOverallStrength) * 100)
-          }
-        })
-
-        setTeams(mergedTeams)
-      } catch (err) {
-        console.error(err)
-      } finally {
-        setLoading(false)
+      if (!overallRes.ok || !attackRes.ok || !defenseRes.ok) {
+        throw new Error('Failed to fetch rankings')
       }
+
+      const overall = await overallRes.json()
+      const attack = await attackRes.json()
+      const defense = await defenseRes.json()
+
+      const attackMap = new Map(attack.map(t => [t.team, t]))
+      const defenseMap = new Map(defense.map(t => [t.team, t]))
+
+      const maxGoalsPerGame = Math.max(...overall.map(t => t.goals_per_game))
+      const maxCleanSheetPct = Math.max(...overall.map(t => t.clean_sheet_rate)) * 100
+      const maxOverallStrength = Math.max(...overall.map(t => t.overall_strength))
+
+      const mergedTeams = overall.map(o => {
+        const a = attackMap.get(o.team) || {}
+        const d = defenseMap.get(o.team) || {}
+        return {
+          name: o.team,
+          code: o.team_short,
+          attackRank: a.attack_rank || 'N/A',
+          defenseRank: d.defense_rank || 'N/A',
+          goalsPerGame: o.goals_per_game,
+          xGPerGame: o.expected_goals_per_game,
+          cleanSheetPct: o.clean_sheet_rate * 100,
+          goalsConceded: o.goals_conceded_per_game,
+          attackStrength: a.attack_strength || 0,
+          defenseStrength: d.defense_strength || 0,
+          attackScore: Math.round((o.goals_per_game / maxGoalsPerGame) * 100),
+          defenseScore: Math.round((o.clean_sheet_rate * 100) / maxCleanSheetPct * 100),
+          overallStrength: Math.round((o.overall_strength / maxOverallStrength) * 100)
+        }
+      })
+
+      setTeams(mergedTeams)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
     }
+  }
+  // END: Added fetchData
+
+  // CHANGED: Added view dependency
+  useEffect(() => {
     fetchData()
-  }, [])
+  }, [view])
 
   const sortedTeams = [...teams].sort((a, b) => {
     if (view === "attack") return a.attackRank - b.attackRank
@@ -84,9 +90,18 @@ export default function TeamRankingsPage() {
   const weakestAttack = sortedTeams[sortedTeams.length - 1]?.name || "Unknown"
   const weakestDefense = teams.sort((a, b) => b.defenseRank - a.defenseRank)[0]?.name || "Unknown"
 
-  if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading rankings...</div>
-  }
+  if (loading) return <div className="min-h-screen flex items-center justify-center">Loading rankings...</div>
+  if (error) return (
+    <div className="min-h-screen flex items-center justify-center text-red-500">
+      Error: {error}
+      <button
+        onClick={() => fetchData()}
+        className="ml-4 px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Retry
+      </button>
+    </div>
+  )
 
   return (
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
@@ -151,11 +166,10 @@ export default function TeamRankingsPage() {
         <div className="mb-6 flex flex-wrap gap-2 p-1 bg-secondary/50 rounded-xl">
           <button
             onClick={() => setView("combined")}
-            className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${
-              view === "combined"
+            className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "combined"
                 ? "bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg shadow-primary/25 border border-primary/20"
                 : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-white/10 active:bg-white/20"
-            }`}
+              }`}
           >
             <span className="relative z-10">📊 Overall Rankings</span>
             {view === "combined" && (
@@ -164,11 +178,10 @@ export default function TeamRankingsPage() {
           </button>
           <button
             onClick={() => setView("attack")}
-            className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${
-              view === "attack"
+            className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "attack"
                 ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25 border border-red-500/20"
                 : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-red-50 hover:text-red-600 active:bg-red-100"
-            }`}
+              }`}
           >
             <span className="relative z-10">⚽ Attack Rankings</span>
             {view === "attack" && (
@@ -177,11 +190,10 @@ export default function TeamRankingsPage() {
           </button>
           <button
             onClick={() => setView("defense")}
-            className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${
-              view === "defense"
+            className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "defense"
                 ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 border border-blue-500/20"
                 : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-blue-50 hover:text-blue-600 active:bg-blue-100"
-            }`}
+              }`}
           >
             <span className="relative z-10">🛡️ Defense Rankings</span>
             {view === "defense" && (
@@ -195,19 +207,17 @@ export default function TeamRankingsPage() {
           {teamsWithOverallRank.map((team, index) => (
             <Card
               key={team.code}
-              className={`group border-border bg-card transition-all duration-300 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 hover:-translate-y-1 cursor-pointer ${
-                index < 3 ? "ring-2 ring-yellow-500/20 bg-gradient-to-br from-yellow-50/50 to-card" : ""
-              }`}
+              className={`group border-border bg-card transition-all duration-300 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 hover:-translate-y-1 cursor-pointer ${index < 3 ? "ring-2 ring-yellow-500/20 bg-gradient-to-br from-yellow-50/50 to-card" : ""
+                }`}
             >
               <CardContent className="p-6 sm:p-8">
                 <div className="mb-4 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div
-                      className={`flex h-12 w-12 items-center justify-center rounded-lg transition-all duration-300 group-hover:scale-110 ${
-                        index < 3
+                      className={`flex h-12 w-12 items-center justify-center rounded-lg transition-all duration-300 group-hover:scale-110 ${index < 3
                           ? "bg-gradient-to-br from-yellow-400 to-yellow-500 text-white shadow-lg"
                           : "bg-secondary group-hover:bg-primary/10"
-                      }`}
+                        }`}
                     >
                       <span className="font-mono text-lg font-bold">{team.code}</span>
                     </div>

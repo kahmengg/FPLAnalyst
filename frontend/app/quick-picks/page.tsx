@@ -108,64 +108,77 @@ export default function QuickPicksPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true)
-      setError(null)
-      try {
-        // Fetch attacking picks
-        const resAttacking = await fetch(`${API_BASE_URL}/api/top-attacking_qp`)
-        if (!resAttacking.ok) throw new Error('Failed to fetch attacking picks')
-        const dataAttacking = await resAttacking.json()
-        const transformedAttacking = dataAttacking.map(team => ({
-          team: team.team,
-          teamCode: team.short_name || team.team.substring(0, 3).toUpperCase(), // Fallback to abbreviation if short_name not present
-          attackRank: team.attack_rank,
-          attackStrength: team.attack_strength,
-          players: team.players.map(player => ({
-            name: player.web_name,
-            position: player.position_name,
-            price: player.now_cost,
-            goals_pg: player.goals_per_game || 0, // Use defaults if fields missing
-            assists_pg: player.assists_per_game || 0,
-            points_pg: player.points_per_game,
-            ownership: player.selected_by_percent,
-            form: player.form ?? 5.0 // Default form if missing
-          }))
+  // START: Added fetchData for reuse
+  const fetchData = async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const resAttacking = await fetch(`${API_BASE_URL}/api/top-attacking_qp`, { cache: 'no-store' })
+      if (!resAttacking.ok) throw new Error('Failed to fetch attacking picks')
+      const dataAttacking = await resAttacking.json()
+      const transformedAttacking = dataAttacking.map(team => ({
+        team: team.team,
+        teamCode: team.short_name || team.team.substring(0, 3).toUpperCase(),
+        attackRank: team.attack_rank,
+        attackStrength: team.attack_strength,
+        players: team.players.map(player => ({
+          name: player.web_name,
+          position: player.position_name,
+          price: player.now_cost,
+          goals_pg: player.goals_per_game || 0,
+          assists_pg: player.assists_per_game || 0,
+          points_pg: player.points_per_game,
+          ownership: player.selected_by_percent,
+          form: player.form ?? 5.0
         }))
-        setAttackingPicks(transformedAttacking)
+      }))
+      setAttackingPicks(transformedAttacking)
 
-        // Fetch defensive picks
-        const resDefensive = await fetch(`${API_BASE_URL}/api/top-defensive_qp`)
-        if (!resDefensive.ok) throw new Error('Failed to fetch defensive picks')
-        const dataDefensive = await resDefensive.json()
-        const transformedDefensive = dataDefensive.map(team => ({
-          team: team.team,
-          teamCode: team.short_name || team.team.substring(0, 3).toUpperCase(),
-          defenseRank: team.defense_rank,
-          defenseStrength: team.defense_strength,
-          players: team.players.map(player => ({
-            name: player.web_name,
-            position: player.position_name,
-            price: player.now_cost,
-            cs_rate: player.clean_sheet_rate,
-            points_pg: player.points_per_game,
-            ownership: player.selected_by_percent,
-            form: player.form ?? 5.0
-          }))
+      const resDefensive = await fetch(`${API_BASE_URL}/api/top-defensive_qp`, { cache: 'no-store' })
+      if (!resDefensive.ok) throw new Error('Failed to fetch defensive picks')
+      const dataDefensive = await resDefensive.json()
+      const transformedDefensive = dataDefensive.map(team => ({
+        team: team.team,
+        teamCode: team.short_name || team.team.substring(0, 3).toUpperCase(),
+        defenseRank: team.defense_rank,
+        defenseStrength: team.defense_strength,
+        players: team.players.map(player => ({
+          name: player.web_name,
+          position: player.position_name,
+          price: player.now_cost,
+          cs_rate: player.clean_sheet_rate,
+          points_pg: player.points_per_game,
+          ownership: player.selected_by_percent,
+          form: player.form ?? 5.0
         }))
-        setDefensivePicks(transformedDefensive)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
+      }))
+      setDefensivePicks(transformedDefensive)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
     }
-    fetchData()
-  }, [])
+  }
+  // END: Added fetchData
 
+  // CHANGED: Added activeTab dependency
+  useEffect(() => {
+    fetchData()
+  }, [activeTab])
+
+  // CHANGED: Added retry button to error state
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>
-  if (error) return <div className="min-h-screen flex items-center justify-center text-red-500">Error: {error}</div>
+  if (error) return (
+    <div className="min-h-screen flex items-center justify-center text-red-500">
+      Error: {error}
+      <button
+        onClick={() => fetchData()}
+        className="ml-4 px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Retry
+      </button>
+    </div>
+  )
 
   return (
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">

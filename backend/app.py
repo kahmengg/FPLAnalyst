@@ -11,7 +11,7 @@ import os
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": ["https://fpelly.vercel.app"]}})  # Restrict to Vercel domain
 app.config.from_object(Config)
-
+# CORS(app)
 # Register blueprints
 app.register_blueprint(fixtures_bp, url_prefix='/api')
 app.register_blueprint(quick_picks_bp, url_prefix='/api')

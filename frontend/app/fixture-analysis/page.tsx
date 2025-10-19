@@ -149,7 +149,7 @@ export default function FixtureAnalysisPage() {
       setError(null);
       try {
         // Fetch fixtures
-        const resFixtures = await fetch(`${API_BASE_URL}/api/fixtures`);
+        const resFixtures = await fetch(`${API_BASE_URL}/api/fixtures`, { cache: 'no-store' })
         if (!resFixtures.ok) throw new Error("Failed to fetch fixtures");
         const dataFixtures = await resFixtures.json();
         const gameweeks = dataFixtures.map((f) => f.gameweek).filter((gw) => typeof gw === "number" && !isNaN(gw));
@@ -229,7 +229,7 @@ export default function FixtureAnalysisPage() {
       }
     }
     fetchData();
-  }, []);
+  }, [activeTab]);
 
   const sortedTeamData = useMemo(() => {
     return [...teamFixtureSummary].sort((a, b) => {
@@ -265,8 +265,25 @@ export default function FixtureAnalysisPage() {
     return stats;
   }, [currentFixtures]);
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
-  if (error) return <div className="min-h-screen flex items-center justify-center text-red-500">Error: {error}</div>;
+  if (loading) return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+        <p className="mt-2 text-muted-foreground">Loading performers...</p>
+      </div>
+    </div>
+  )
+  if (error) return (
+    <div className="min-h-screen flex items-center justify-center text-red-500">
+      Error: {error}
+      <button
+        onClick={() => fetchData()}
+        className="ml-4 px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Retry
+      </button>
+    </div>
+  )
 
   return (
     <div className="min-h-screen p-2 sm:p-4 lg:p-6 bg-gradient-to-br from-background via-secondary/5 to-secondary/10">

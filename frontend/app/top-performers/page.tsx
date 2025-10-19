@@ -256,7 +256,7 @@ export default function TopPerformersPage() {
   async function fetchWithRetry(url, retries = MAX_RETRIES) {
     for (let i = 0; i < retries; i++) {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, { cache: 'no-store' });
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
@@ -355,18 +355,34 @@ export default function TopPerformersPage() {
       }
     }
     fetchData()
-  }, [])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-2 text-muted-foreground">Loading performers...</p>
-        </div>
+  }, [activeTab])
+  
+  if (loading) return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+        <p className="mt-2 text-muted-foreground">Loading performers...</p>
       </div>
-    )
-  }
+    </div>
+  )
+  if (Object.keys(errors).length > 0) return (
+    <div className="min-h-screen flex items-center justify-center text-red-500">
+      <div className="text-center">
+        <p>Error loading data:</p>
+        <ul>
+          {Object.entries(errors).map(([key, message]) => (
+            <li key={key}>{message}</li>
+          ))}
+        </ul>
+        <button
+          onClick={() => fetchData()}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+        >
+          Retry
+        </button>
+      </div>
+    </div>
+  );
   return (
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
       <div className="max-w-7xl mx-auto">
