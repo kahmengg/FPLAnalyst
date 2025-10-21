@@ -1,58 +1,58 @@
 [
     {
+        "player": "Haaland",
+        "team": "Man City",
+        "team_short": "MCI",
+        "goals": 11,
+        "xG": 8.0,
+        "overperformance": 3.0,
+        "overperformance_per_90": 0.375,
+        "sustainable": false,
+        "form": 10.0
+    },
+    {
         "player": "Caicedo",
         "team": "Chelsea",
         "team_short": "CHE",
         "goals": 3,
         "xG": 0.6,
         "overperformance": 2.4,
-        "overperformance_per_90": 0.343,
+        "overperformance_per_90": 0.3,
         "sustainable": false,
-        "form": 4.8
+        "form": 3.9
     },
     {
         "player": "Semenyo",
         "team": "Bournemouth",
         "team_short": "BOU",
         "goals": 6,
-        "xG": 3.8,
-        "overperformance": 2.2,
-        "overperformance_per_90": 0.314,
+        "xG": 3.9,
+        "overperformance": 2.1,
+        "overperformance_per_90": 0.263,
         "sustainable": false,
-        "form": 9.0
+        "form": 8.7
+    },
+    {
+        "player": "Woltemade",
+        "team": "Newcastle",
+        "team_short": "NEW",
+        "goals": 4,
+        "xG": 2.7,
+        "overperformance": 1.3,
+        "overperformance_per_90": 0.26,
+        "sustainable": false,
+        "form": 6.3
     },
     {
         "player": "Bowen",
         "team": "West Ham",
         "team_short": "WHU",
         "goals": 3,
-        "xG": 1.0,
-        "overperformance": 2.0,
-        "overperformance_per_90": 0.286,
+        "xG": 1.1,
+        "overperformance": 1.9,
+        "overperformance_per_90": 0.237,
         "sustainable": false,
-        "form": 6.0
-    },
-    {
-        "player": "Haaland",
-        "team": "Man City",
-        "team_short": "MCI",
-        "goals": 9,
-        "xG": 7.0,
-        "overperformance": 2.0,
-        "overperformance_per_90": 0.286,
-        "sustainable": false,
-        "form": 9.9
-    },
-    {
-        "player": "Woltemade",
-        "team": "Newcastle",
-        "team_short": "NEW",
-        "goals": 3,
-        "xG": 1.9,
-        "overperformance": 1.1,
-        "overperformance_per_90": 0.275,
-        "sustainable": false,
-        "form": 4.5
+        "form": 3.9
     },
     {
         "player": "Isidor",
@@ -61,9 +61,9 @@
         "goals": 3,
         "xG": 1.1,
         "overperformance": 1.9,
-        "overperformance_per_90": 0.271,
+        "overperformance_per_90": 0.237,
         "sustainable": false,
-        "form": 3.6
+        "form": 1.5
     },
     {
         "player": "Anthony",
@@ -72,9 +72,9 @@
         "goals": 4,
         "xG": 2.2,
         "overperformance": 1.8,
-        "overperformance_per_90": 0.257,
+        "overperformance_per_90": 0.225,
         "sustainable": false,
-        "form": 5.1
+        "form": 2.7
     },
     {
         "player": "Gravenberch",
@@ -83,8 +83,8 @@
         "goals": 2,
         "xG": 0.3,
         "overperformance": 1.7,
-        "overperformance_per_90": 0.243,
+        "overperformance_per_90": 0.212,
         "sustainable": false,
-        "form": 7.5
+        "form": 3.6
     }
 ]
