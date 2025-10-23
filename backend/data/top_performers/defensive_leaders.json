@@ -138,33 +138,5 @@
     "defensiveContributions": 75,
     "price": 4.0,
     "form": 9.5
-  },
-  {
-    "player": "Alderete",
-    "team": "Sunderland",
-    "team_short": "SUN",
-    "position": "Defender",
-    "points": 45,
-    "ppg": 5.6,
-    "cleanSheets": 4,
-    "csRate": 50.0,
-    "tackles": 12,
-    "defensiveContributions": 72,
-    "price": 4.1,
-    "form": 8.4
-  },
-  {
-    "player": "Kilman",
-    "team": "West Ham",
-    "team_short": "WHU",
-    "position": "Defender",
-    "points": 16,
-    "ppg": 2.0,
-    "cleanSheets": 1,
-    "csRate": 12.5,
-    "tackles": 9,
-    "defensiveContributions": 78,
-    "price": 4.4,
-    "form": 2.6
   }
 ]

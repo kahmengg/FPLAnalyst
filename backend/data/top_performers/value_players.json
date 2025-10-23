@@ -98,25 +98,5 @@
     "totalPoints": 33,
     "price": 4.5,
     "form": 3.3
-  },
-  {
-    "player": "Dúbravka",
-    "team": "Burnley",
-    "team_short": "BUR",
-    "position": "Goalkeeper",
-    "pointsPerMillion": 7.25,
-    "totalPoints": 29,
-    "price": 4.0,
-    "form": 4.8
-  },
-  {
-    "player": "Garner",
-    "team": "Everton",
-    "team_short": "EVE",
-    "position": "Midfielder",
-    "pointsPerMillion": 7.2,
-    "totalPoints": 36,
-    "price": 5.0,
-    "form": 3.3
   }
 ]
