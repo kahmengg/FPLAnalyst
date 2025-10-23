@@ -46,6 +46,20 @@
                 "selected_by_percent": 14.9,
                 "team_name_short": "ARS",
                 "form": 4.8
+            },
+            {
+                "web_name": "Raya",
+                "position_name": "Goalkeeper",
+                "now_cost": 5.7,
+                "clean_sheet_rate": 0.625,
+                "xcs_per_game": 0.5,
+                "goals_conceded_per_game": 0.375,
+                "points_per_game": 5.0,
+                "points_per_million": 7.018,
+                "consistency_score": 1.0,
+                "selected_by_percent": 28.5,
+                "team_name_short": "ARS",
+                "form": 5.6
             }
         ]
     },
@@ -96,6 +110,20 @@
                 "selected_by_percent": 4.3,
                 "team_name_short": "NEW",
                 "form": 2.2
+            },
+            {
+                "web_name": "Trippier",
+                "position_name": "Defender",
+                "now_cost": 5.0,
+                "clean_sheet_rate": 0.625,
+                "xcs_per_game": 0.509,
+                "goals_conceded_per_game": 0.875,
+                "points_per_game": 3.5,
+                "points_per_million": 5.6,
+                "consistency_score": 0.721,
+                "selected_by_percent": 2.7,
+                "team_name_short": "NEW",
+                "form": 2.6
             }
         ]
     },
@@ -146,6 +174,20 @@
                 "selected_by_percent": 0.6,
                 "team_name_short": "MCI",
                 "form": 8.8
+            },
+            {
+                "web_name": "Donnarumma",
+                "position_name": "Goalkeeper",
+                "now_cost": 5.7,
+                "clean_sheet_rate": 0.6,
+                "xcs_per_game": 0.376,
+                "goals_conceded_per_game": 0.4,
+                "points_per_game": 4.2,
+                "points_per_million": 3.684,
+                "consistency_score": 1.0,
+                "selected_by_percent": 10.0,
+                "team_name_short": "MCI",
+                "form": 5.6
             }
         ]
     },
@@ -196,6 +238,20 @@
                 "selected_by_percent": 5.5,
                 "team_name_short": "SUN",
                 "form": 7.6
+            },
+            {
+                "web_name": "Hume",
+                "position_name": "Defender",
+                "now_cost": 4.5,
+                "clean_sheet_rate": 0.5,
+                "xcs_per_game": 0.272,
+                "goals_conceded_per_game": 0.75,
+                "points_per_game": 4.625,
+                "points_per_million": 8.222,
+                "consistency_score": 0.983,
+                "selected_by_percent": 0.3,
+                "team_name_short": "SUN",
+                "form": 6.6
             }
         ]
     },
@@ -246,6 +302,20 @@
                 "selected_by_percent": 6.7,
                 "team_name_short": "TOT",
                 "form": 1.1
+            },
+            {
+                "web_name": "Pedro Porro",
+                "position_name": "Defender",
+                "now_cost": 5.6,
+                "clean_sheet_rate": 0.375,
+                "xcs_per_game": 0.288,
+                "goals_conceded_per_game": 0.875,
+                "points_per_game": 3.875,
+                "points_per_million": 5.536,
+                "consistency_score": 0.882,
+                "selected_by_percent": 20.6,
+                "team_name_short": "TOT",
+                "form": 3.3
             }
         ]
     },
@@ -296,6 +366,20 @@
                 "selected_by_percent": 3.3,
                 "team_name_short": "CRY",
                 "form": 3.7
+            },
+            {
+                "web_name": "Lacroix",
+                "position_name": "Defender",
+                "now_cost": 5.1,
+                "clean_sheet_rate": 0.375,
+                "xcs_per_game": 0.255,
+                "goals_conceded_per_game": 1.0,
+                "points_per_game": 4.75,
+                "points_per_million": 7.451,
+                "consistency_score": 1.0,
+                "selected_by_percent": 3.9,
+                "team_name_short": "CRY",
+                "form": 2.9
             }
         ]
     },
@@ -346,6 +430,20 @@
                 "selected_by_percent": 1.5,
                 "team_name_short": "CHE",
                 "form": 5.9
+            },
+            {
+                "web_name": "Cucurella",
+                "position_name": "Defender",
+                "now_cost": 6.1,
+                "clean_sheet_rate": 0.375,
+                "xcs_per_game": 0.199,
+                "goals_conceded_per_game": 1.125,
+                "points_per_game": 4.375,
+                "points_per_million": 5.738,
+                "consistency_score": 0.869,
+                "selected_by_percent": 22.2,
+                "team_name_short": "CHE",
+                "form": 5.5
             }
         ]
     },
@@ -396,6 +494,20 @@
                 "selected_by_percent": 0.4,
                 "team_name_short": "LEE",
                 "form": 1.5
+            },
+            {
+                "web_name": "Bogle",
+                "position_name": "Defender",
+                "now_cost": 4.5,
+                "clean_sheet_rate": 0.25,
+                "xcs_per_game": 0.358,
+                "goals_conceded_per_game": 1.625,
+                "points_per_game": 3.0,
+                "points_per_million": 5.333,
+                "consistency_score": 0.975,
+                "selected_by_percent": 0.2,
+                "team_name_short": "LEE",
+                "form": 2.6
             }
         ]
     },
@@ -446,6 +558,20 @@
                 "selected_by_percent": 5.7,
                 "team_name_short": "BOU",
                 "form": 3.2
+            },
+            {
+                "web_name": "Diakité",
+                "position_name": "Defender",
+                "now_cost": 4.5,
+                "clean_sheet_rate": 0.375,
+                "xcs_per_game": 0.428,
+                "goals_conceded_per_game": 1.375,
+                "points_per_game": 3.625,
+                "points_per_million": 6.444,
+                "consistency_score": 0.875,
+                "selected_by_percent": 0.5,
+                "team_name_short": "BOU",
+                "form": 2.9
             }
         ]
     },
@@ -496,6 +622,20 @@
                 "selected_by_percent": 1.0,
                 "team_name_short": "AVL",
                 "form": 0.4
+            },
+            {
+                "web_name": "Konsa",
+                "position_name": "Defender",
+                "now_cost": 4.5,
+                "clean_sheet_rate": 0.25,
+                "xcs_per_game": 0.232,
+                "goals_conceded_per_game": 1.0,
+                "points_per_game": 2.25,
+                "points_per_million": 4.0,
+                "consistency_score": 0.84,
+                "selected_by_percent": 9.6,
+                "team_name_short": "AVL",
+                "form": 2.2
             }
         ]
     },
@@ -546,6 +686,20 @@
                 "selected_by_percent": 6.9,
                 "team_name_short": "LIV",
                 "form": 0.8
+            },
+            {
+                "web_name": "Kerkez",
+                "position_name": "Defender",
+                "now_cost": 5.8,
+                "clean_sheet_rate": 0.25,
+                "xcs_per_game": 0.292,
+                "goals_conceded_per_game": 1.375,
+                "points_per_game": 1.75,
+                "points_per_million": 2.414,
+                "consistency_score": 0.833,
+                "selected_by_percent": 4.0,
+                "team_name_short": "LIV",
+                "form": 1.1
             }
         ]
     },
@@ -596,6 +750,20 @@
                 "selected_by_percent": 10.2,
                 "team_name_short": "EVE",
                 "form": 2.8
+            },
+            {
+                "web_name": "O'Brien",
+                "position_name": "Defender",
+                "now_cost": 5.0,
+                "clean_sheet_rate": 0.25,
+                "xcs_per_game": 0.248,
+                "goals_conceded_per_game": 1.125,
+                "points_per_game": 3.0,
+                "points_per_million": 4.8,
+                "consistency_score": 1.0,
+                "selected_by_percent": 0.5,
+                "team_name_short": "EVE",
+                "form": 2.9
             }
         ]
     },
@@ -646,6 +814,20 @@
                 "selected_by_percent": 0.6,
                 "team_name_short": "BRE",
                 "form": 3.7
+            },
+            {
+                "web_name": "Collins",
+                "position_name": "Defender",
+                "now_cost": 4.9,
+                "clean_sheet_rate": 0.25,
+                "xcs_per_game": 0.284,
+                "goals_conceded_per_game": 1.5,
+                "points_per_game": 3.375,
+                "points_per_million": 5.51,
+                "consistency_score": 1.0,
+                "selected_by_percent": 1.2,
+                "team_name_short": "BRE",
+                "form": 4.4
             }
         ]
     },
@@ -696,6 +878,20 @@
                 "selected_by_percent": 0.5,
                 "team_name_short": "FUL",
                 "form": 0.7
+            },
+            {
+                "web_name": "Tete",
+                "position_name": "Defender",
+                "now_cost": 4.5,
+                "clean_sheet_rate": 0.125,
+                "xcs_per_game": 0.178,
+                "goals_conceded_per_game": 1.5,
+                "points_per_game": 1.875,
+                "points_per_million": 3.333,
+                "consistency_score": 0.625,
+                "selected_by_percent": 0.1,
+                "team_name_short": "FUL",
+                "form": 0.0
             }
         ]
     },
@@ -746,6 +942,20 @@
                 "selected_by_percent": 1.9,
                 "team_name_short": "MUN",
                 "form": 2.9
+            },
+            {
+                "web_name": "Dalot",
+                "position_name": "Defender",
+                "now_cost": 4.4,
+                "clean_sheet_rate": 0.125,
+                "xcs_per_game": 0.188,
+                "goals_conceded_per_game": 1.5,
+                "points_per_game": 2.5,
+                "points_per_million": 4.545,
+                "consistency_score": 0.59,
+                "selected_by_percent": 0.9,
+                "team_name_short": "MUN",
+                "form": 5.1
             }
         ]
     },
@@ -796,6 +1006,20 @@
                 "selected_by_percent": 0.2,
                 "team_name_short": "WOL",
                 "form": 0.7
+            },
+            {
+                "web_name": "Krejčí",
+                "position_name": "Defender",
+                "now_cost": 4.5,
+                "clean_sheet_rate": 0.0,
+                "xcs_per_game": 0.29,
+                "goals_conceded_per_game": 1.833,
+                "points_per_game": 1.833,
+                "points_per_million": 2.444,
+                "consistency_score": 0.833,
+                "selected_by_percent": 0.1,
+                "team_name_short": "WOL",
+                "form": 1.1
             }
         ]
     },
@@ -846,6 +1070,20 @@
                 "selected_by_percent": 2.3,
                 "team_name_short": "BHA",
                 "form": 3.7
+            },
+            {
+                "web_name": "Verbruggen",
+                "position_name": "Goalkeeper",
+                "now_cost": 4.4,
+                "clean_sheet_rate": 0.0,
+                "xcs_per_game": 0.21,
+                "goals_conceded_per_game": 1.375,
+                "points_per_game": 1.625,
+                "points_per_million": 2.955,
+                "consistency_score": 1.0,
+                "selected_by_percent": 4.2,
+                "team_name_short": "BHA",
+                "form": 2.0
             }
         ]
     },
@@ -896,6 +1134,20 @@
                 "selected_by_percent": 13.1,
                 "team_name_short": "BUR",
                 "form": 2.6
+            },
+            {
+                "web_name": "Walker",
+                "position_name": "Defender",
+                "now_cost": 4.4,
+                "clean_sheet_rate": 0.25,
+                "xcs_per_game": 0.121,
+                "goals_conceded_per_game": 1.875,
+                "points_per_game": 3.125,
+                "points_per_million": 5.682,
+                "consistency_score": 1.0,
+                "selected_by_percent": 1.6,
+                "team_name_short": "BUR",
+                "form": 5.1
             }
         ]
     },
@@ -946,6 +1198,20 @@
                 "selected_by_percent": 0.2,
                 "team_name_short": "WHU",
                 "form": 2.6
+            },
+            {
+                "web_name": "Walker-Peters",
+                "position_name": "Defender",
+                "now_cost": 4.4,
+                "clean_sheet_rate": 0.125,
+                "xcs_per_game": 0.192,
+                "goals_conceded_per_game": 2.25,
+                "points_per_game": 1.5,
+                "points_per_million": 2.727,
+                "consistency_score": 0.606,
+                "selected_by_percent": 0.3,
+                "team_name_short": "WHU",
+                "form": 1.1
             }
         ]
     },
@@ -994,6 +1260,20 @@
                 "points_per_million": 2.453,
                 "consistency_score": 1.0,
                 "selected_by_percent": 4.7,
+                "team_name_short": "NFO",
+                "form": 1.8
+            },
+            {
+                "web_name": "Morato",
+                "position_name": "Defender",
+                "now_cost": 4.4,
+                "clean_sheet_rate": 0.0,
+                "xcs_per_game": 0.105,
+                "goals_conceded_per_game": 1.875,
+                "points_per_game": 0.875,
+                "points_per_million": 1.591,
+                "consistency_score": 0.606,
+                "selected_by_percent": 0.1,
                 "team_name_short": "NFO",
                 "form": 1.8
             }

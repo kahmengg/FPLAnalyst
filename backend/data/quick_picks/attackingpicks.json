@@ -58,6 +58,24 @@
                 "selected_by_percent": 3.7,
                 "team_name_short": "LIV",
                 "form": 3.0
+            },
+            {
+                "web_name": "Ekitiké",
+                "position_name": "Forward",
+                "now_cost": 8.7,
+                "goals_per_game": 0.375,
+                "assists_per_game": 0.125,
+                "xg_per_game": 0.238,
+                "xa_per_game": 0.025,
+                "shots_per_game": 1.5,
+                "SoT_per_game": 0.5,
+                "SiB_per_game": 1.0,
+                "points_per_game": 4.25,
+                "points_per_million": 3.908,
+                "consistency_score": 0.568,
+                "selected_by_percent": 15.8,
+                "team_name_short": "LIV",
+                "form": 0.6
             }
         ]
     },
@@ -120,6 +138,24 @@
                 "selected_by_percent": 23.4,
                 "team_name_short": "ARS",
                 "form": 1.8
+            },
+            {
+                "web_name": "Eze",
+                "position_name": "Midfielder",
+                "now_cost": 7.6,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.333,
+                "xg_per_game": 0.183,
+                "xa_per_game": 0.133,
+                "shots_per_game": 2.0,
+                "SoT_per_game": 0.667,
+                "SiB_per_game": 1.667,
+                "points_per_game": 3.667,
+                "points_per_million": 2.895,
+                "consistency_score": 0.689,
+                "selected_by_percent": 13.8,
+                "team_name_short": "ARS",
+                "form": 3.3
             }
         ]
     },
@@ -182,6 +218,24 @@
                 "selected_by_percent": 7.4,
                 "team_name_short": "MCI",
                 "form": 3.6
+            },
+            {
+                "web_name": "Foden",
+                "position_name": "Midfielder",
+                "now_cost": 8.1,
+                "goals_per_game": 0.125,
+                "assists_per_game": 0.0,
+                "xg_per_game": 0.112,
+                "xa_per_game": 0.075,
+                "shots_per_game": 1.25,
+                "SoT_per_game": 0.375,
+                "SiB_per_game": 0.625,
+                "points_per_game": 2.875,
+                "points_per_million": 2.84,
+                "consistency_score": 0.614,
+                "selected_by_percent": 5.9,
+                "team_name_short": "MCI",
+                "form": 2.1
             }
         ]
     },
@@ -244,6 +298,24 @@
                 "selected_by_percent": 5.2,
                 "team_name_short": "MUN",
                 "form": 5.4
+            },
+            {
+                "web_name": "Mount",
+                "position_name": "Midfielder",
+                "now_cost": 5.9,
+                "goals_per_game": 0.125,
+                "assists_per_game": 0.0,
+                "xg_per_game": 0.075,
+                "xa_per_game": 0.05,
+                "shots_per_game": 0.75,
+                "SoT_per_game": 0.25,
+                "SiB_per_game": 0.625,
+                "points_per_game": 2.625,
+                "points_per_million": 3.559,
+                "consistency_score": 0.46,
+                "selected_by_percent": 0.3,
+                "team_name_short": "MUN",
+                "form": 4.2
             }
         ]
     },
@@ -306,6 +378,24 @@
                 "selected_by_percent": 58.9,
                 "team_name_short": "CHE",
                 "form": 1.8
+            },
+            {
+                "web_name": "Neto",
+                "position_name": "Midfielder",
+                "now_cost": 7.0,
+                "goals_per_game": 0.25,
+                "assists_per_game": 0.125,
+                "xg_per_game": 0.1,
+                "xa_per_game": 0.188,
+                "shots_per_game": 1.375,
+                "SoT_per_game": 0.375,
+                "SiB_per_game": 1.0,
+                "points_per_game": 4.0,
+                "points_per_million": 4.571,
+                "consistency_score": 0.812,
+                "selected_by_percent": 4.4,
+                "team_name_short": "CHE",
+                "form": 4.8
             }
         ]
     },
@@ -368,6 +458,24 @@
                 "selected_by_percent": 0.2,
                 "team_name_short": "CRY",
                 "form": 3.3
+            },
+            {
+                "web_name": "Wharton",
+                "position_name": "Midfielder",
+                "now_cost": 5.0,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.0,
+                "xg_per_game": 0.012,
+                "xa_per_game": 0.225,
+                "shots_per_game": 0.5,
+                "SoT_per_game": 0.0,
+                "SiB_per_game": 0.0,
+                "points_per_game": 2.625,
+                "points_per_million": 4.2,
+                "consistency_score": 0.751,
+                "selected_by_percent": 0.5,
+                "team_name_short": "CRY",
+                "form": 2.4
             }
         ]
     },
@@ -430,6 +538,24 @@
                 "selected_by_percent": 0.3,
                 "team_name_short": "BOU",
                 "form": 2.1
+            },
+            {
+                "web_name": "Kroupi.Jr",
+                "position_name": "Forward",
+                "now_cost": 4.5,
+                "goals_per_game": 0.375,
+                "assists_per_game": 0.0,
+                "xg_per_game": 0.175,
+                "xa_per_game": 0.0,
+                "shots_per_game": 0.625,
+                "SoT_per_game": 0.5,
+                "SiB_per_game": 0.5,
+                "points_per_game": 2.625,
+                "points_per_million": 4.667,
+                "consistency_score": 0.132,
+                "selected_by_percent": 2.3,
+                "team_name_short": "BOU",
+                "form": 5.4
             }
         ]
     },
@@ -492,6 +618,24 @@
                 "selected_by_percent": 0.3,
                 "team_name_short": "BHA",
                 "form": 1.8
+            },
+            {
+                "web_name": "Georginio",
+                "position_name": "Midfielder",
+                "now_cost": 5.7,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.25,
+                "xg_per_game": 0.05,
+                "xa_per_game": 0.212,
+                "shots_per_game": 1.0,
+                "SoT_per_game": 0.625,
+                "SiB_per_game": 0.5,
+                "points_per_game": 2.875,
+                "points_per_million": 4.035,
+                "consistency_score": 0.606,
+                "selected_by_percent": 0.4,
+                "team_name_short": "BHA",
+                "form": 3.0
             }
         ]
     },
@@ -554,6 +698,24 @@
                 "selected_by_percent": 1.5,
                 "team_name_short": "NEW",
                 "form": 3.3
+            },
+            {
+                "web_name": "J.Murphy",
+                "position_name": "Midfielder",
+                "now_cost": 6.2,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.125,
+                "xg_per_game": 0.175,
+                "xa_per_game": 0.112,
+                "shots_per_game": 1.875,
+                "SoT_per_game": 0.625,
+                "SiB_per_game": 0.75,
+                "points_per_game": 2.25,
+                "points_per_million": 2.903,
+                "consistency_score": 0.492,
+                "selected_by_percent": 0.9,
+                "team_name_short": "NEW",
+                "form": 1.5
             }
         ]
     },
@@ -616,6 +778,24 @@
                 "selected_by_percent": 12.5,
                 "team_name_short": "TOT",
                 "form": 1.2
+            },
+            {
+                "web_name": "P.M.Sarr",
+                "position_name": "Midfielder",
+                "now_cost": 4.9,
+                "goals_per_game": 0.125,
+                "assists_per_game": 0.25,
+                "xg_per_game": 0.038,
+                "xa_per_game": 0.062,
+                "shots_per_game": 0.375,
+                "SoT_per_game": 0.25,
+                "SiB_per_game": 0.375,
+                "points_per_game": 3.125,
+                "points_per_million": 5.102,
+                "consistency_score": 0.525,
+                "selected_by_percent": 2.0,
+                "team_name_short": "TOT",
+                "form": 1.8
             }
         ]
     },
@@ -678,6 +858,24 @@
                 "selected_by_percent": 1.7,
                 "team_name_short": "LEE",
                 "form": 1.8
+            },
+            {
+                "web_name": "Aaronson",
+                "position_name": "Midfielder",
+                "now_cost": 5.4,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.0,
+                "xg_per_game": 0.15,
+                "xa_per_game": 0.1,
+                "shots_per_game": 1.125,
+                "SoT_per_game": 0.5,
+                "SiB_per_game": 0.875,
+                "points_per_game": 2.625,
+                "points_per_million": 3.889,
+                "consistency_score": 0.639,
+                "selected_by_percent": 0.1,
+                "team_name_short": "LEE",
+                "form": 3.3
             }
         ]
     },
@@ -740,6 +938,24 @@
                 "selected_by_percent": 18.5,
                 "team_name_short": "EVE",
                 "form": 3.6
+            },
+            {
+                "web_name": "Gana",
+                "position_name": "Midfielder",
+                "now_cost": 5.4,
+                "goals_per_game": 0.125,
+                "assists_per_game": 0.0,
+                "xg_per_game": 0.1,
+                "xa_per_game": 0.025,
+                "shots_per_game": 1.25,
+                "SoT_per_game": 0.25,
+                "SiB_per_game": 0.375,
+                "points_per_game": 3.25,
+                "points_per_million": 4.815,
+                "consistency_score": 0.95,
+                "selected_by_percent": 0.1,
+                "team_name_short": "EVE",
+                "form": 1.8
             }
         ]
     },
@@ -802,6 +1018,24 @@
                 "selected_by_percent": 9.1,
                 "team_name_short": "NFO",
                 "form": 1.5
+            },
+            {
+                "web_name": "Hudson-Odoi",
+                "position_name": "Midfielder",
+                "now_cost": 5.9,
+                "goals_per_game": 0.125,
+                "assists_per_game": 0.0,
+                "xg_per_game": 0.038,
+                "xa_per_game": 0.162,
+                "shots_per_game": 0.75,
+                "SoT_per_game": 0.5,
+                "SiB_per_game": 0.5,
+                "points_per_game": 2.375,
+                "points_per_million": 3.22,
+                "consistency_score": 0.6,
+                "selected_by_percent": 0.9,
+                "team_name_short": "NFO",
+                "form": 0.9
             }
         ]
     },
@@ -864,6 +1098,24 @@
                 "selected_by_percent": 0.4,
                 "team_name_short": "BRE",
                 "form": 2.7
+            },
+            {
+                "web_name": "O.Dango",
+                "position_name": "Midfielder",
+                "now_cost": 6.0,
+                "goals_per_game": 0.143,
+                "assists_per_game": 0.0,
+                "xg_per_game": 0.271,
+                "xa_per_game": 0.1,
+                "shots_per_game": 1.571,
+                "SoT_per_game": 0.571,
+                "SiB_per_game": 1.571,
+                "points_per_game": 3.143,
+                "points_per_million": 3.667,
+                "consistency_score": 0.613,
+                "selected_by_percent": 0.4,
+                "team_name_short": "BRE",
+                "form": 1.5
             }
         ]
     },
@@ -926,6 +1178,24 @@
                 "selected_by_percent": 0.2,
                 "team_name_short": "AVL",
                 "form": 5.7
+            },
+            {
+                "web_name": "McGinn",
+                "position_name": "Midfielder",
+                "now_cost": 5.4,
+                "goals_per_game": 0.125,
+                "assists_per_game": 0.0,
+                "xg_per_game": 0.088,
+                "xa_per_game": 0.15,
+                "shots_per_game": 1.0,
+                "SoT_per_game": 0.25,
+                "SiB_per_game": 0.125,
+                "points_per_game": 2.875,
+                "points_per_million": 4.259,
+                "consistency_score": 0.883,
+                "selected_by_percent": 0.7,
+                "team_name_short": "AVL",
+                "form": 3.3
             }
         ]
     },
@@ -986,6 +1256,24 @@
                 "points_per_million": 4.34,
                 "consistency_score": 0.719,
                 "selected_by_percent": 0.4,
+                "team_name_short": "FUL",
+                "form": 1.8
+            },
+            {
+                "web_name": "Berge",
+                "position_name": "Midfielder",
+                "now_cost": 4.9,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.0,
+                "xg_per_game": 0.05,
+                "xa_per_game": 0.038,
+                "shots_per_game": 0.125,
+                "SoT_per_game": 0.0,
+                "SiB_per_game": 0.125,
+                "points_per_game": 2.25,
+                "points_per_million": 3.673,
+                "consistency_score": 0.956,
+                "selected_by_percent": 0.1,
                 "team_name_short": "FUL",
                 "form": 1.8
             }
@@ -1050,6 +1338,24 @@
                 "selected_by_percent": 0.4,
                 "team_name_short": "SUN",
                 "form": 3.0
+            },
+            {
+                "web_name": "Talbi",
+                "position_name": "Midfielder",
+                "now_cost": 5.0,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.125,
+                "xg_per_game": 0.112,
+                "xa_per_game": 0.025,
+                "shots_per_game": 1.0,
+                "SoT_per_game": 0.125,
+                "SiB_per_game": 0.875,
+                "points_per_game": 3.0,
+                "points_per_million": 4.8,
+                "consistency_score": 0.733,
+                "selected_by_percent": 0.2,
+                "team_name_short": "SUN",
+                "form": 2.4
             }
         ]
     },
@@ -1112,6 +1418,24 @@
                 "selected_by_percent": 0.1,
                 "team_name_short": "WHU",
                 "form": 1.2
+            },
+            {
+                "web_name": "M.Fernandes",
+                "position_name": "Midfielder",
+                "now_cost": 5.5,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.0,
+                "xg_per_game": 0.033,
+                "xa_per_game": 0.083,
+                "shots_per_game": 0.5,
+                "SoT_per_game": 0.0,
+                "SiB_per_game": 0.0,
+                "points_per_game": 2.333,
+                "points_per_million": 2.545,
+                "consistency_score": 0.82,
+                "selected_by_percent": 0.0,
+                "team_name_short": "WHU",
+                "form": 2.1
             }
         ]
     },
@@ -1174,6 +1498,24 @@
                 "selected_by_percent": 0.1,
                 "team_name_short": "WOL",
                 "form": 3.6
+            },
+            {
+                "web_name": "J.Arias",
+                "position_name": "Midfielder",
+                "now_cost": 5.2,
+                "goals_per_game": 0.0,
+                "assists_per_game": 0.0,
+                "xg_per_game": 0.05,
+                "xa_per_game": 0.05,
+                "shots_per_game": 1.0,
+                "SoT_per_game": 0.25,
+                "SiB_per_game": 0.375,
+                "points_per_game": 2.0,
+                "points_per_million": 3.077,
+                "consistency_score": 0.601,
+                "selected_by_percent": 0.2,
+                "team_name_short": "WOL",
+                "form": 3.0
             }
         ]
     },
@@ -1236,6 +1578,24 @@
                 "selected_by_percent": 0.1,
                 "team_name_short": "BUR",
                 "form": 5.4
+            },
+            {
+                "web_name": "Foster",
+                "position_name": "Forward",
+                "now_cost": 5.0,
+                "goals_per_game": 0.125,
+                "assists_per_game": 0.125,
+                "xg_per_game": 0.112,
+                "xa_per_game": 0.088,
+                "shots_per_game": 0.875,
+                "SoT_per_game": 0.125,
+                "SiB_per_game": 0.625,
+                "points_per_game": 2.625,
+                "points_per_million": 4.2,
+                "consistency_score": 0.785,
+                "selected_by_percent": 2.1,
+                "team_name_short": "BUR",
+                "form": 0.9
             }
         ]
     }
