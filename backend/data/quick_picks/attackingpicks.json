@@ -21,7 +21,8 @@
                 "consistency_score": 0.835,
                 "selected_by_percent": 6.3,
                 "team_name_short": "LIV",
-                "form": 3.6
+                "form": 3.6,
+                "attacker_score": 1.916
             },
             {
                 "web_name": "Gakpo",
@@ -39,7 +40,8 @@
                 "consistency_score": 0.896,
                 "selected_by_percent": 12.8,
                 "team_name_short": "LIV",
-                "form": 4.5
+                "form": 4.5,
+                "attacker_score": 1.716
             },
             {
                 "web_name": "Szoboszlai",
@@ -57,7 +59,8 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 3.7,
                 "team_name_short": "LIV",
-                "form": 3.0
+                "form": 3.0,
+                "attacker_score": 1.442
             },
             {
                 "web_name": "Ekitiké",
@@ -75,7 +78,8 @@
                 "consistency_score": 0.568,
                 "selected_by_percent": 15.8,
                 "team_name_short": "LIV",
-                "form": 0.6
+                "form": 0.6,
+                "attacker_score": 1.21
             }
         ]
     },
@@ -101,7 +105,8 @@
                 "consistency_score": 0.878,
                 "selected_by_percent": 11.1,
                 "team_name_short": "ARS",
-                "form": 6.9
+                "form": 6.9,
+                "attacker_score": 1.839
             },
             {
                 "web_name": "Zubimendi",
@@ -119,7 +124,8 @@
                 "consistency_score": 0.946,
                 "selected_by_percent": 4.1,
                 "team_name_short": "ARS",
-                "form": 2.4
+                "form": 2.4,
+                "attacker_score": 1.796
             },
             {
                 "web_name": "Gyökeres",
@@ -137,7 +143,8 @@
                 "consistency_score": 0.925,
                 "selected_by_percent": 23.4,
                 "team_name_short": "ARS",
-                "form": 1.8
+                "form": 1.8,
+                "attacker_score": 1.133
             },
             {
                 "web_name": "Eze",
@@ -155,7 +162,8 @@
                 "consistency_score": 0.689,
                 "selected_by_percent": 13.8,
                 "team_name_short": "ARS",
-                "form": 3.3
+                "form": 3.3,
+                "attacker_score": 0.98
             }
         ]
     },
@@ -181,7 +189,8 @@
                 "consistency_score": 0.949,
                 "selected_by_percent": 65.7,
                 "team_name_short": "MCI",
-                "form": 10.0
+                "form": 10.0,
+                "attacker_score": 2.122
             },
             {
                 "web_name": "Reijnders",
@@ -199,7 +208,8 @@
                 "consistency_score": 0.924,
                 "selected_by_percent": 31.2,
                 "team_name_short": "MCI",
-                "form": 1.8
+                "form": 1.8,
+                "attacker_score": 1.691
             },
             {
                 "web_name": "Doku",
@@ -217,7 +227,8 @@
                 "consistency_score": 0.615,
                 "selected_by_percent": 7.4,
                 "team_name_short": "MCI",
-                "form": 3.6
+                "form": 3.6,
+                "attacker_score": 1.347
             },
             {
                 "web_name": "Foden",
@@ -235,7 +246,8 @@
                 "consistency_score": 0.614,
                 "selected_by_percent": 5.9,
                 "team_name_short": "MCI",
-                "form": 2.1
+                "form": 2.1,
+                "attacker_score": 0.878
             }
         ]
     },
@@ -261,7 +273,8 @@
                 "consistency_score": 0.951,
                 "selected_by_percent": 14.0,
                 "team_name_short": "MUN",
-                "form": 5.1
+                "form": 5.1,
+                "attacker_score": 1.486
             },
             {
                 "web_name": "B.Fernandes",
@@ -279,7 +292,8 @@
                 "consistency_score": 0.986,
                 "selected_by_percent": 16.8,
                 "team_name_short": "MUN",
-                "form": 3.0
+                "form": 3.0,
+                "attacker_score": 1.377
             },
             {
                 "web_name": "Šeško",
@@ -297,7 +311,8 @@
                 "consistency_score": 0.574,
                 "selected_by_percent": 5.2,
                 "team_name_short": "MUN",
-                "form": 5.4
+                "form": 5.4,
+                "attacker_score": 1.041
             },
             {
                 "web_name": "Mount",
@@ -315,7 +330,8 @@
                 "consistency_score": 0.46,
                 "selected_by_percent": 0.3,
                 "team_name_short": "MUN",
-                "form": 4.2
+                "form": 4.2,
+                "attacker_score": 1.021
             }
         ]
     },
@@ -341,7 +357,8 @@
                 "consistency_score": 0.938,
                 "selected_by_percent": 16.4,
                 "team_name_short": "CHE",
-                "form": 3.9
+                "form": 3.9,
+                "attacker_score": 2.204
             },
             {
                 "web_name": "Enzo",
@@ -359,7 +376,8 @@
                 "consistency_score": 0.858,
                 "selected_by_percent": 13.7,
                 "team_name_short": "CHE",
-                "form": 3.3
+                "form": 3.3,
+                "attacker_score": 1.858
             },
             {
                 "web_name": "João Pedro",
@@ -377,7 +395,8 @@
                 "consistency_score": 0.935,
                 "selected_by_percent": 58.9,
                 "team_name_short": "CHE",
-                "form": 1.8
+                "form": 1.8,
+                "attacker_score": 1.679
             },
             {
                 "web_name": "Neto",
@@ -395,7 +414,8 @@
                 "consistency_score": 0.812,
                 "selected_by_percent": 4.4,
                 "team_name_short": "CHE",
-                "form": 4.8
+                "form": 4.8,
+                "attacker_score": 1.393
             }
         ]
     },
@@ -421,7 +441,8 @@
                 "consistency_score": 0.725,
                 "selected_by_percent": 8.3,
                 "team_name_short": "CRY",
-                "form": 6.0
+                "form": 6.0,
+                "attacker_score": 1.745
             },
             {
                 "web_name": "Mateta",
@@ -439,7 +460,8 @@
                 "consistency_score": 0.958,
                 "selected_by_percent": 12.0,
                 "team_name_short": "CRY",
-                "form": 6.3
+                "form": 6.3,
+                "attacker_score": 1.736
             },
             {
                 "web_name": "Kamada",
@@ -457,7 +479,8 @@
                 "consistency_score": 0.731,
                 "selected_by_percent": 0.2,
                 "team_name_short": "CRY",
-                "form": 3.3
+                "form": 3.3,
+                "attacker_score": 1.249
             },
             {
                 "web_name": "Wharton",
@@ -475,7 +498,8 @@
                 "consistency_score": 0.751,
                 "selected_by_percent": 0.5,
                 "team_name_short": "CRY",
-                "form": 2.4
+                "form": 2.4,
+                "attacker_score": 1.199
             }
         ]
     },
@@ -501,7 +525,8 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 63.3,
                 "team_name_short": "BOU",
-                "form": 8.7
+                "form": 8.7,
+                "attacker_score": 2.658
             },
             {
                 "web_name": "Tavernier",
@@ -519,7 +544,8 @@
                 "consistency_score": 0.814,
                 "selected_by_percent": 1.2,
                 "team_name_short": "BOU",
-                "form": 2.7
+                "form": 2.7,
+                "attacker_score": 1.672
             },
             {
                 "web_name": "Scott",
@@ -537,7 +563,8 @@
                 "consistency_score": 0.714,
                 "selected_by_percent": 0.3,
                 "team_name_short": "BOU",
-                "form": 2.1
+                "form": 2.1,
+                "attacker_score": 1.451
             },
             {
                 "web_name": "Kroupi.Jr",
@@ -555,7 +582,8 @@
                 "consistency_score": 0.132,
                 "selected_by_percent": 2.3,
                 "team_name_short": "BOU",
-                "form": 5.4
+                "form": 5.4,
+                "attacker_score": 1.293
             }
         ]
     },
@@ -581,7 +609,8 @@
                 "consistency_score": 0.947,
                 "selected_by_percent": 3.6,
                 "team_name_short": "BHA",
-                "form": 2.7
+                "form": 2.7,
+                "attacker_score": 1.686
             },
             {
                 "web_name": "Welbeck",
@@ -599,7 +628,8 @@
                 "consistency_score": 0.631,
                 "selected_by_percent": 3.0,
                 "team_name_short": "BHA",
-                "form": 7.5
+                "form": 7.5,
+                "attacker_score": 1.51
             },
             {
                 "web_name": "Ayari",
@@ -617,7 +647,8 @@
                 "consistency_score": 0.878,
                 "selected_by_percent": 0.3,
                 "team_name_short": "BHA",
-                "form": 1.8
+                "form": 1.8,
+                "attacker_score": 1.311
             },
             {
                 "web_name": "Georginio",
@@ -635,7 +666,8 @@
                 "consistency_score": 0.606,
                 "selected_by_percent": 0.4,
                 "team_name_short": "BHA",
-                "form": 3.0
+                "form": 3.0,
+                "attacker_score": 1.197
             }
         ]
     },
@@ -661,7 +693,8 @@
                 "consistency_score": 0.873,
                 "selected_by_percent": 16.9,
                 "team_name_short": "NEW",
-                "form": 6.3
+                "form": 6.3,
+                "attacker_score": 1.498
             },
             {
                 "web_name": "Bruno G.",
@@ -679,7 +712,8 @@
                 "consistency_score": 0.868,
                 "selected_by_percent": 2.3,
                 "team_name_short": "NEW",
-                "form": 5.4
+                "form": 5.4,
+                "attacker_score": 1.441
             },
             {
                 "web_name": "Tonali",
@@ -697,7 +731,8 @@
                 "consistency_score": 0.936,
                 "selected_by_percent": 1.5,
                 "team_name_short": "NEW",
-                "form": 3.3
+                "form": 3.3,
+                "attacker_score": 1.372
             },
             {
                 "web_name": "J.Murphy",
@@ -715,7 +750,8 @@
                 "consistency_score": 0.492,
                 "selected_by_percent": 0.9,
                 "team_name_short": "NEW",
-                "form": 1.5
+                "form": 1.5,
+                "attacker_score": 0.9
             }
         ]
     },
@@ -741,7 +777,8 @@
                 "consistency_score": 0.838,
                 "selected_by_percent": 1.3,
                 "team_name_short": "TOT",
-                "form": 5.7
+                "form": 5.7,
+                "attacker_score": 1.979
             },
             {
                 "web_name": "Kudus",
@@ -759,7 +796,8 @@
                 "consistency_score": 0.983,
                 "selected_by_percent": 35.3,
                 "team_name_short": "TOT",
-                "form": 4.8
+                "form": 4.8,
+                "attacker_score": 1.831
             },
             {
                 "web_name": "Richarlison",
@@ -777,7 +815,8 @@
                 "consistency_score": 0.671,
                 "selected_by_percent": 12.5,
                 "team_name_short": "TOT",
-                "form": 1.2
+                "form": 1.2,
+                "attacker_score": 1.537
             },
             {
                 "web_name": "P.M.Sarr",
@@ -795,7 +834,8 @@
                 "consistency_score": 0.525,
                 "selected_by_percent": 2.0,
                 "team_name_short": "TOT",
-                "form": 1.8
+                "form": 1.8,
+                "attacker_score": 1.427
             }
         ]
     },
@@ -821,7 +861,8 @@
                 "consistency_score": 0.942,
                 "selected_by_percent": 3.3,
                 "team_name_short": "LEE",
-                "form": 1.8
+                "form": 1.8,
+                "attacker_score": 1.956
             },
             {
                 "web_name": "Longstaff",
@@ -839,7 +880,8 @@
                 "consistency_score": 0.785,
                 "selected_by_percent": 0.9,
                 "team_name_short": "LEE",
-                "form": 5.7
+                "form": 5.7,
+                "attacker_score": 1.721
             },
             {
                 "web_name": "Calvert-Lewin",
@@ -857,7 +899,8 @@
                 "consistency_score": 0.711,
                 "selected_by_percent": 1.7,
                 "team_name_short": "LEE",
-                "form": 1.8
+                "form": 1.8,
+                "attacker_score": 1.161
             },
             {
                 "web_name": "Aaronson",
@@ -875,7 +918,8 @@
                 "consistency_score": 0.639,
                 "selected_by_percent": 0.1,
                 "team_name_short": "LEE",
-                "form": 3.3
+                "form": 3.3,
+                "attacker_score": 1.151
             }
         ]
     },
@@ -901,7 +945,8 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 1.0,
                 "team_name_short": "EVE",
-                "form": 3.3
+                "form": 3.3,
+                "attacker_score": 2.04
             },
             {
                 "web_name": "Ndiaye",
@@ -919,7 +964,8 @@
                 "consistency_score": 0.935,
                 "selected_by_percent": 10.8,
                 "team_name_short": "EVE",
-                "form": 3.9
+                "form": 3.9,
+                "attacker_score": 1.898
             },
             {
                 "web_name": "Grealish",
@@ -937,7 +983,8 @@
                 "consistency_score": 0.772,
                 "selected_by_percent": 18.5,
                 "team_name_short": "EVE",
-                "form": 3.6
+                "form": 3.6,
+                "attacker_score": 1.636
             },
             {
                 "web_name": "Gana",
@@ -955,7 +1002,8 @@
                 "consistency_score": 0.95,
                 "selected_by_percent": 0.1,
                 "team_name_short": "EVE",
-                "form": 1.8
+                "form": 1.8,
+                "attacker_score": 1.402
             }
         ]
     },
@@ -981,7 +1029,8 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 3.4,
                 "team_name_short": "NFO",
-                "form": 2.4
+                "form": 2.4,
+                "attacker_score": 1.425
             },
             {
                 "web_name": "Ndoye",
@@ -999,7 +1048,8 @@
                 "consistency_score": 0.685,
                 "selected_by_percent": 1.6,
                 "team_name_short": "NFO",
-                "form": 0.9
+                "form": 0.9,
+                "attacker_score": 1.173
             },
             {
                 "web_name": "Wood",
@@ -1017,7 +1067,8 @@
                 "consistency_score": 0.747,
                 "selected_by_percent": 9.1,
                 "team_name_short": "NFO",
-                "form": 1.5
+                "form": 1.5,
+                "attacker_score": 1.146
             },
             {
                 "web_name": "Hudson-Odoi",
@@ -1035,7 +1086,8 @@
                 "consistency_score": 0.6,
                 "selected_by_percent": 0.9,
                 "team_name_short": "NFO",
-                "form": 0.9
+                "form": 0.9,
+                "attacker_score": 0.971
             }
         ]
     },
@@ -1061,7 +1113,8 @@
                 "consistency_score": 0.904,
                 "selected_by_percent": 4.0,
                 "team_name_short": "BRE",
-                "form": 6.9
+                "form": 6.9,
+                "attacker_score": 2.041
             },
             {
                 "web_name": "Yarmoliuk",
@@ -1079,7 +1132,8 @@
                 "consistency_score": 0.958,
                 "selected_by_percent": 0.1,
                 "team_name_short": "BRE",
-                "form": 3.6
+                "form": 3.6,
+                "attacker_score": 1.476
             },
             {
                 "web_name": "Henderson",
@@ -1097,7 +1151,8 @@
                 "consistency_score": 0.783,
                 "selected_by_percent": 0.4,
                 "team_name_short": "BRE",
-                "form": 2.7
+                "form": 2.7,
+                "attacker_score": 1.357
             },
             {
                 "web_name": "O.Dango",
@@ -1115,7 +1170,8 @@
                 "consistency_score": 0.613,
                 "selected_by_percent": 0.4,
                 "team_name_short": "BRE",
-                "form": 1.5
+                "form": 1.5,
+                "attacker_score": 1.154
             }
         ]
     },
@@ -1141,7 +1197,8 @@
                 "consistency_score": 0.988,
                 "selected_by_percent": 5.1,
                 "team_name_short": "AVL",
-                "form": 5.1
+                "form": 5.1,
+                "attacker_score": 1.328
             },
             {
                 "web_name": "Malen",
@@ -1159,7 +1216,8 @@
                 "consistency_score": 0.4,
                 "selected_by_percent": 0.8,
                 "team_name_short": "AVL",
-                "form": 5.4
+                "form": 5.4,
+                "attacker_score": 1.322
             },
             {
                 "web_name": "Buendía",
@@ -1177,7 +1235,8 @@
                 "consistency_score": 0.468,
                 "selected_by_percent": 0.2,
                 "team_name_short": "AVL",
-                "form": 5.7
+                "form": 5.7,
+                "attacker_score": 1.293
             },
             {
                 "web_name": "McGinn",
@@ -1195,7 +1254,8 @@
                 "consistency_score": 0.883,
                 "selected_by_percent": 0.7,
                 "team_name_short": "AVL",
-                "form": 3.3
+                "form": 3.3,
+                "attacker_score": 1.262
             }
         ]
     },
@@ -1221,7 +1281,8 @@
                 "consistency_score": 0.876,
                 "selected_by_percent": 1.5,
                 "team_name_short": "FUL",
-                "form": 2.4
+                "form": 2.4,
+                "attacker_score": 1.534
             },
             {
                 "web_name": "Sessegnon",
@@ -1239,7 +1300,8 @@
                 "consistency_score": 0.786,
                 "selected_by_percent": 0.1,
                 "team_name_short": "FUL",
-                "form": 3.9
+                "form": 3.9,
+                "attacker_score": 1.332
             },
             {
                 "web_name": "Wilson",
@@ -1257,7 +1319,8 @@
                 "consistency_score": 0.719,
                 "selected_by_percent": 0.4,
                 "team_name_short": "FUL",
-                "form": 1.8
+                "form": 1.8,
+                "attacker_score": 1.275
             },
             {
                 "web_name": "Berge",
@@ -1275,7 +1338,8 @@
                 "consistency_score": 0.956,
                 "selected_by_percent": 0.1,
                 "team_name_short": "FUL",
-                "form": 1.8
+                "form": 1.8,
+                "attacker_score": 1.08
             }
         ]
     },
@@ -1301,7 +1365,8 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 4.6,
                 "team_name_short": "SUN",
-                "form": 5.1
+                "form": 5.1,
+                "attacker_score": 2.066
             },
             {
                 "web_name": "Isidor",
@@ -1319,7 +1384,8 @@
                 "consistency_score": 0.628,
                 "selected_by_percent": 3.3,
                 "team_name_short": "SUN",
-                "form": 1.5
+                "form": 1.5,
+                "attacker_score": 1.574
             },
             {
                 "web_name": "E.Le Fée",
@@ -1337,7 +1403,8 @@
                 "consistency_score": 0.646,
                 "selected_by_percent": 0.4,
                 "team_name_short": "SUN",
-                "form": 3.0
+                "form": 3.0,
+                "attacker_score": 1.419
             },
             {
                 "web_name": "Talbi",
@@ -1355,7 +1422,8 @@
                 "consistency_score": 0.733,
                 "selected_by_percent": 0.2,
                 "team_name_short": "SUN",
-                "form": 2.4
+                "form": 2.4,
+                "attacker_score": 1.375
             }
         ]
     },
@@ -1381,7 +1449,8 @@
                 "consistency_score": 0.968,
                 "selected_by_percent": 3.0,
                 "team_name_short": "WHU",
-                "form": 2.1
+                "form": 2.1,
+                "attacker_score": 1.573
             },
             {
                 "web_name": "Bowen",
@@ -1399,7 +1468,8 @@
                 "consistency_score": 1.0,
                 "selected_by_percent": 9.0,
                 "team_name_short": "WHU",
-                "form": 3.9
+                "form": 3.9,
+                "attacker_score": 1.492
             },
             {
                 "web_name": "Summerville",
@@ -1417,7 +1487,8 @@
                 "consistency_score": 0.557,
                 "selected_by_percent": 0.1,
                 "team_name_short": "WHU",
-                "form": 1.2
+                "form": 1.2,
+                "attacker_score": 0.812
             },
             {
                 "web_name": "M.Fernandes",
@@ -1435,7 +1506,8 @@
                 "consistency_score": 0.82,
                 "selected_by_percent": 0.0,
                 "team_name_short": "WHU",
-                "form": 2.1
+                "form": 2.1,
+                "attacker_score": 0.778
             }
         ]
     },
@@ -1461,7 +1533,8 @@
                 "consistency_score": 0.846,
                 "selected_by_percent": 0.1,
                 "team_name_short": "WOL",
-                "form": 3.9
+                "form": 3.9,
+                "attacker_score": 1.27
             },
             {
                 "web_name": "Gomes",
@@ -1479,7 +1552,8 @@
                 "consistency_score": 0.942,
                 "selected_by_percent": 0.1,
                 "team_name_short": "WOL",
-                "form": 2.4
+                "form": 2.4,
+                "attacker_score": 1.083
             },
             {
                 "web_name": "André",
@@ -1497,7 +1571,8 @@
                 "consistency_score": 0.739,
                 "selected_by_percent": 0.1,
                 "team_name_short": "WOL",
-                "form": 3.6
+                "form": 3.6,
+                "attacker_score": 1.083
             },
             {
                 "web_name": "J.Arias",
@@ -1515,7 +1590,8 @@
                 "consistency_score": 0.601,
                 "selected_by_percent": 0.2,
                 "team_name_short": "WOL",
-                "form": 3.0
+                "form": 3.0,
+                "attacker_score": 0.895
             }
         ]
     },
@@ -1541,7 +1617,8 @@
                 "consistency_score": 0.929,
                 "selected_by_percent": 7.0,
                 "team_name_short": "BUR",
-                "form": 2.7
+                "form": 2.7,
+                "attacker_score": 2.214
             },
             {
                 "web_name": "Cullen",
@@ -1559,7 +1636,8 @@
                 "consistency_score": 0.944,
                 "selected_by_percent": 2.4,
                 "team_name_short": "BUR",
-                "form": 3.9
+                "form": 3.9,
+                "attacker_score": 2.199
             },
             {
                 "web_name": "Ugochukwu",
@@ -1577,7 +1655,8 @@
                 "consistency_score": 0.51,
                 "selected_by_percent": 0.1,
                 "team_name_short": "BUR",
-                "form": 5.4
+                "form": 5.4,
+                "attacker_score": 1.289
             },
             {
                 "web_name": "Foster",
@@ -1595,7 +1674,8 @@
                 "consistency_score": 0.785,
                 "selected_by_percent": 2.1,
                 "team_name_short": "BUR",
-                "form": 0.9
+                "form": 0.9,
+                "attacker_score": 1.25
             }
         ]
     }
