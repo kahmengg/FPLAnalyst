@@ -41,32 +41,37 @@ const PositionBadge = ({ position }) => {
 
 
 // Define recommendation logic
-const getRecommendation = (points_per_game, form) => {
+const getRecommendation = (player) => {
+  const { points_per_game, form, position_name, attacker_score = 0, defender_score = 0, selected_by_percent, clean_sheet_rate = 0 } = player;
+
+  const isAttacker = position_name === 'Midfielder' || position_name === 'Forward';
+  const score = isAttacker ? attacker_score : defender_score;
+
   const categories = [
     {
-      condition: points_per_game >= 5 && form >= 6,
+      condition: (isAttacker && score >= 1.8) || (!isAttacker && (score >= 1.4 || clean_sheet_rate >= 0.5)) || (points_per_game >= 4.5 && form >= 4.5),
       label: "⭐ Top Pick",
-      className: "bg-green-100 text-green-800 border-green-300 font-medium dark:bg-green-900 dark:text-green-200",
+      className: "text-green-800 dark:text-green-200 font-medium",
     },
     {
-      condition: points_per_game >= 3.5 && points_per_game < 5 && form >= 4.5 && form < 6,
-      label: "📊 Solid Choice",
-      className: "bg-blue-100 text-blue-800 border-blue-300 font-medium dark:bg-blue-900 dark:text-blue-200",
-    },
-    {
-      condition: points_per_game >= 2.5 && points_per_game < 3.5 && form >= 3.5 && form < 4.5,
+      condition: score >= 1.2 && score < (isAttacker ? 1.8 : 1.4) && selected_by_percent < 15,
       label: "🎯 Differential",
-      className: "bg-purple-100 text-purple-800 border-purple-300 font-medium dark:bg-purple-900 dark:text-purple-200",
+      className: "text-purple-800 dark:text-purple-200 font-medium",
     },
     {
-      condition: points_per_game < 2.5 && form < 3.5,
+      condition: score >= 1.2 && score < (isAttacker ? 1.8 : 1.4),
+      label: "📊 Solid Choice",
+      className: "text-blue-800 dark:text-blue-200 font-medium",
+    },
+    {
+      condition: score >= 0.8 && score < 1.2,
+      label: "🔍 Monitor",
+      className: "text-orange-800 dark:text-orange-200 font-medium",
+    },
+    {
+      condition: score < 0.8,
       label: "⚠️ Risky",
-      className: "bg-yellow-100 text-yellow-800 border-yellow-300 font-medium dark:bg-yellow-900 dark:text-yellow-200",
-    },
-    {
-      condition: true, // Default
-      label: "📉 Monitor",
-      className: "bg-gray-100 text-gray-800 border-gray-300 font-medium dark:bg-gray-800 dark:text-gray-200",
+      className: "text-yellow-800 dark:text-yellow-200 font-medium",
     },
   ];
 
@@ -79,25 +84,29 @@ const getOwnershipCategory = (ownership) => {
     {
       condition: ownership < 10,
       label: "🎯 Differential",
-      className: "bg-purple-100 text-purple-800 border-purple-300 font-medium dark:bg-purple-900 dark:text-purple-200",
+      className: "text-purple-800 dark:text-purple-200",
     },
     {
-      condition: ownership < 20,
-      label: "🔽 Low Owned",
-      className: "bg-blue-100 text-blue-800 border-blue-300 font-medium dark:bg-blue-900 dark:text-blue-200",
+      condition: ownership >= 10 && ownership < 30,
+      label: "🔹 Low Owned",
+      className: "text-blue-800 dark:text-blue-200",
     },
     {
-      condition: ownership < 30,
+      condition: ownership >= 30 && ownership < 60,
+      label: "⚖️ Moderate",
+      className: "text-gray-800 dark:text-gray-200",
+    },
+    {
+      condition: ownership >= 60 && ownership < 80,
       label: "📈 Popular",
-      className: "bg-orange-100 text-orange-800 border-orange-300 font-medium dark:bg-orange-900 dark:text-orange-200",
+      className: "text-orange-800 dark:text-orange-200",
     },
     {
-      condition: true,
-      label: "🔥 Template",
-      className: "bg-red-100 text-red-800 border-red-300 font-medium dark:bg-red-900 dark:text-red-200",
+      condition: ownership >= 80,
+      label: "🏆 Template",
+      className: "text-green-800 dark:text-green-200",
     },
   ];
-
   return categories.find(cat => cat.condition) || categories[categories.length - 1];
 };
 
@@ -129,6 +138,7 @@ export default function QuickPicksPage() {
           assists_pg: player.assists_per_game || 0,
           points_pg: player.points_per_game,
           ownership: player.selected_by_percent,
+          attacker_score: player.attacker_score || 0,
           form: player.form ?? 5.0
         }))
       }))
@@ -149,6 +159,7 @@ export default function QuickPicksPage() {
           cs_rate: player.clean_sheet_rate,
           points_pg: player.points_per_game,
           ownership: player.selected_by_percent,
+          defender_score: player.defender_score || 0,
           form: player.form ?? 5.0
         }))
       }))
@@ -247,7 +258,7 @@ export default function QuickPicksPage() {
                     </div>
 
                     {/* Players Grid */}
-                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
                       {teamData.players.map((player, playerIndex) => {
                         const ownershipCat = getOwnershipCategory(player.ownership)
                         return (
@@ -277,12 +288,12 @@ export default function QuickPicksPage() {
                                   <span className="font-mono font-medium text-red-600">{player.goals_pg.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                  <span className="text-muted-foreground">Assists/Game:</span>
-                                  <span className="font-mono font-medium text-red-600">{player.assists_pg.toFixed(2)}</span>
-                                </div>
-                                <div className="flex justify-between">
                                   <span className="text-muted-foreground">Points/Game:</span>
                                   <span className="font-mono font-bold text-red-600">{player.points_pg.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-muted-foreground">Attack Score:</span>
+                                  <span className="font-mono font-bold text-red-600">{player.attacker_score.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Form:</span>
@@ -290,8 +301,8 @@ export default function QuickPicksPage() {
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Ownership:</span>
-                                  <span className={`font-mono font-bold ${ownershipCat.color}`}>
-                                    {player.ownership}% ({ownershipCat.label})
+                                  <span className={`font-mono font-medium ${ownershipCat.className}`}>
+                                    {player.ownership}%
                                   </span>
                                 </div>
                               </div>
@@ -301,10 +312,10 @@ export default function QuickPicksPage() {
                                 <div className="flex items-center justify-between text-xs">
                                   <span className="text-muted-foreground">Recommendation:</span>
                                   <Badge
-                                    aria-label={`Recommendation for ${player.web_name}: ${getRecommendation(player.points_per_game, player.form).label}`}
-                                    className={getRecommendation(player.points_per_game, player.form).className}
+                                    aria-label={`Recommendation for ${player.web_name}: ${getRecommendation(player).label}`}
+                                    className={getRecommendation(player).className}
                                   >
-                                    {getRecommendation(player.points_per_game, player.form).label}
+                                    {getRecommendation(player).label}
                                   </Badge>
                                 </div>
                               </div>
@@ -352,12 +363,12 @@ export default function QuickPicksPage() {
                     </div>
 
                     {/* Players Grid */}
-                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
                       {teamData.players.map((player, playerIndex) => {
                         const ownershipCat = getOwnershipCategory(player.ownership)
                         return (
                           <Card
-                            key={player.name}
+                            key={`${player.web_name}-${playerIndex}`}
                             className="border border-border/50 hover:border-blue-300 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer bg-gradient-to-br from-card to-secondary/20"
                           >
                             <CardContent className="p-4">
@@ -386,13 +397,17 @@ export default function QuickPicksPage() {
                                   <span className="font-mono font-bold text-blue-600">{player.points_pg.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
+                                  <span className="text-muted-foreground">Defender Score:</span>
+                                  <span className="font-mono font-bold text-red-600">{player.defender_score.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between">
                                   <span className="text-muted-foreground">Form:</span>
                                   <span className="font-mono font-bold text-blue-600">{player.form.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Ownership:</span>
-                                  <span className={`font-mono font-medium ${ownershipCat.color}`}>
-                                    {player.ownership}% ({ownershipCat.label})
+                                  <span className={`font-mono font-medium ${ownershipCat.className}`}>
+                                    {player.ownership}%
                                   </span>
                                 </div>
                               </div>
@@ -401,13 +416,12 @@ export default function QuickPicksPage() {
                               <div className="mt-3 pt-3 border-t border-border/50">
                                 <div className="flex items-center justify-between text-xs">
                                   <span className="text-muted-foreground">Recommendation:</span>
-                                  {player.cs_rate >= 0.6 ? (
-                                    <span className="text-green-600 font-medium">🔒 Premium Pick</span>
-                                  ) : player.ownership < 15 ? (
-                                    <span className="text-purple-600 font-medium">🎯 Differential</span>
-                                  ) : (
-                                    <span className="text-blue-600 font-medium">📊 Solid Option</span>
-                                  )}
+                                  <Badge
+                                    aria-label={`Recommendation for ${player.web_name}: ${getRecommendation(player).label}`}
+                                    className={getRecommendation(player).className}
+                                  >
+                                    {getRecommendation(player).label}
+                                  </Badge>
                                 </div>
                               </div>
                             </CardContent>

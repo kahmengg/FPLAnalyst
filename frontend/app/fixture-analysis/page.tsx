@@ -95,6 +95,7 @@ const getColorStyles = (metricType, value, context = null, returnType = "classes
   return returnType === "classes" ? "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200" : "🔴";
 };
 
+
 // TeamBadge component (unchanged)
 const TeamBadge = ({ team }) => {
   const colors = {
@@ -248,22 +249,22 @@ export default function FixtureAnalysisPage() {
     }
   };
 
+  const { minGameweek, maxGameweek } = useMemo(() => {
+  const gameweeks = fixtures.map((f) => f.gw).filter((gw) => typeof gw === "number" && !isNaN(gw));
+  const minGw = gameweeks.length > 0 ? Math.min(...gameweeks) + 1 : 2; // Current gameweek + 1
+  return {
+    minGameweek: minGw,
+    maxGameweek: gameweeks.length > 0 ? Math.max(...gameweeks) : 38
+  };
+}, [fixtures]);
+
   const getSortIcon = (column) => {
     if (sortBy !== column) return <ArrowUpDown className="h-3 w-3" />;
     return sortOrder === "desc" ? <ArrowDown className="h-3 w-3" /> : <ArrowUp className="h-3 w-3" />;
   };
 
   const currentFixtures = fixtures.filter((f) => f.gw === gameweek);
-  const fixtureStats = useMemo(() => {
-    const stats = { target: 0, consider: 0, avoid: 0 };
-    currentFixtures.forEach((f) => {
-      const avgHomeScore = (f.teams.home.attack.score + f.teams.home.defense.score) / 2;
-      if (avgHomeScore >= 4) stats.target++;
-      else if (avgHomeScore >= 2) stats.consider++;
-      else stats.avoid++;
-    });
-    return stats;
-  }, [currentFixtures]);
+
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center">
@@ -337,7 +338,7 @@ export default function FixtureAnalysisPage() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center justify-center gap-3 sm:gap-6">
                 <Button
-                  onClick={() => setGameweek(Math.max(gameweek, gameweek - 1))}
+                  onClick={() => setGameweek(Math.max(minGameweek - 1, gameweek - 1))}
                   variant="ghost"
                   size="icon"
                   className="h-9 w-9 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition"
@@ -348,24 +349,13 @@ export default function FixtureAnalysisPage() {
                   Gameweek {gameweek}
                 </div>
                 <Button
-                  onClick={() => setGameweek(gameweek + 1)}
+                  onClick={() => setGameweek(Math.min(maxGameweek, gameweek + 1))}
                   variant="ghost"
                   size="icon"
                   className="h-9 w-9 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition"
                 >
                   <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
-              </div>
-              <div className="flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm">
-                <Badge variant="secondary" className="bg-green-500/20 text-green-700 dark:text-green-300">
-                  Target: {fixtureStats.target}
-                </Badge>
-                <Badge variant="secondary" className="bg-blue-500/20 text-blue-700 dark:text-blue-300">
-                  Consider: {fixtureStats.consider}
-                </Badge>
-                <Badge variant="secondary" className="bg-red-500/20 text-red-700 dark:text-red-300">
-                  Avoid: {fixtureStats.avoid}
-                </Badge>
               </div>
             </div>
 

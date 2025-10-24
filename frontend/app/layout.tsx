@@ -15,7 +15,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata = {
   title: "FPL Analyst - Your Strategic Advantage",
-  description: "Comprehensive Fantasy Premier League analytics and insights"
+  description: "Comprehensive Fantasy Premier League analytics and insights",
+    generator: 'v0.app'
 }
 
 export default function RootLayout({

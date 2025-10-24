@@ -42,25 +42,25 @@ const PositionBadge = ({ position }) => {
 const TeamBadge = ({ team }) => {
   const colors = {
     ARS: "bg-red-600 text-white border-red-700",           // Arsenal - red & white
-    AVL: "bg-claret-700 text-sky-100 border-claret-800",   // Aston Villa - claret & sky blue (custom class or closest match)
-    BOU: "bg-red-700 text-white border-red-800",           // Bournemouth - red & black (approx with strong red)
-    BRE: "bg-red-500 text-white border-red-600",           // Brentford - red & white
-    BHA: "bg-blue-400 text-white border-blue-500",         // Brighton - blue & white
-    BUR: "bg-rose-700 text-white border-rose-900",         // Burnley - claret (rose) & blue
-    CHE: "bg-blue-700 text-white border-blue-800",         // Chelsea - royal blue
-    CRY: "bg-blue-800 text-red-300 border-blue-900",       // Crystal Palace - blue with red accents
-    EVE: "bg-blue-600 text-white border-blue-700",         // Everton - strong royal blue
-    FUL: "bg-white text-black border-gray-300",            // Fulham - white & black
-    LEE: "bg-yellow text-blue-800 border-gray-300",         // Leeds - white & blue
-    LIV: "bg-red-800 text-white border-red-900",           // Liverpool - deep red
-    MCI: "bg-sky-400 text-white border-sky-500",           // Man City - sky blue
-    MUN: "bg-red-600 text-white border-red-700",           // Man United - red
-    NEW: "bg-black text-white border-gray-800",            // Newcastle - black & white
-    NFO: "bg-red-600 text-white border-red-700",           // Nottingham Forest - red
-    SUN: "bg-red-500 text-white border-red-600",           // Sunderland - red & white
-    TOT: "bg-white text-blue-900 border-gray-400",         // Spurs - white with navy
-    WHU: "bg-rose-800 text-sky-200 border-rose-900",       // West Ham - claret & blue
-    WOL: "bg-yellow-400 text-black border-yellow-500",     // Wolves - gold/yellow & black
+    AVL: "bg-[#7A003C] text-[#95BFE5] border-[#5A002A]",   // Aston Villa - claret & sky blue
+    BOU: "bg-[#DA291C] text-white border-[#000000]",       // Bournemouth - red & black
+    BRE: "bg-[#E30613] text-white border-[#B3000B]",       // Brentford - red & white
+    BHA: "bg-[#0057B8] text-white border-[#003F87]",       // Brighton - blue & white
+    BUR: "bg-[#6C1D45] text-[#8BB8E8] border-[#4A1230]",   // Burnley - claret & sky blue
+    CHE: "bg-[#034694] text-white border-[#003087]",       // Chelsea - royal blue
+    CRY: "bg-[#1B458F] text-[#C81E2E] border-[#143A6F]",   // Crystal Palace - blue & red
+    EVE: "bg-[#003399] text-white border-[#002875]",       // Everton - royal blue
+    FUL: "bg-white text-black border-[#000000]",           // Fulham - white & black
+    LEE: "bg-white text-[#1D3D7B] border-[#FFCC00]",        // Leeds - white, blue & yellow
+    LIV: "bg-[#C8102E] text-white border-[#A00D24]",       // Liverpool - deep red
+    MCI: "bg-[#6CABDD] text-white border-[#4A90C0]",       // Man City - sky blue
+    MUN: "bg-[#DA291C] text-white border-[#B3000B]",       // Man United - red
+    NEW: "bg-black text-white border-[#241F20]",           // Newcastle - black & white
+    NFO: "bg-[#DD0000] text-white border-[#B30000]",       // Nottingham Forest - red
+    SUN: "bg-[#ED1C24] text-white border-[#C8102E]",       // Sunderland - red & white
+    TOT: "bg-white text-[#132257] border-[#001C37]",       // Spurs - white & navy
+    WHU: "bg-[#7A263A] text-[#F3D2B3] border-[#591C2A]",   // West Ham - claret & light blue
+    WOL: "bg-[#FDB913] text-black border-[#D9A00E]",       // Wolves - gold & black
   };
   return (
     <Badge
@@ -71,7 +71,6 @@ const TeamBadge = ({ team }) => {
     </Badge>
   );
 };
-
 // New: FormBadge - colored pill based on form value
 const FormBadge = ({ value }: { value: number }) => {
   // green >= 7, amber 5-7, red <5
