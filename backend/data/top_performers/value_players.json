@@ -1,122 +1,102 @@
 [
   {
-    "player": "Hume",
+    "player": "Mukiele",
     "team": "Sunderland",
     "team_short": "SUN",
     "position": "Defender",
-    "pointsPerMillion": 8.22,
-    "totalPoints": 37,
-    "price": 4.5,
-    "form": 6.6
+    "pointsPerMillion": 11.22,
+    "totalPoints": 46,
+    "price": 4.1,
+    "form": 8.1
   },
   {
-    "player": "Chalobah",
-    "team": "Chelsea",
-    "team_short": "CHE",
+    "player": "Alderete",
+    "team": "Sunderland",
+    "team_short": "SUN",
     "position": "Defender",
-    "pointsPerMillion": 8.04,
-    "totalPoints": 41,
-    "price": 5.1,
-    "form": 1.1
-  },
-  {
-    "player": "Cullen",
-    "team": "Burnley",
-    "team_short": "BUR",
-    "position": "Midfielder",
-    "pointsPerMillion": 8.0,
-    "totalPoints": 40,
-    "price": 5.0,
-    "form": 3.9
-  },
-  {
-    "player": "Keane",
-    "team": "Everton",
-    "team_short": "EVE",
-    "position": "Defender",
-    "pointsPerMillion": 8.0,
-    "totalPoints": 36,
-    "price": 4.5,
-    "form": 5.9
-  },
-  {
-    "player": "Richards",
-    "team": "Crystal Palace",
-    "team_short": "CRY",
-    "position": "Defender",
-    "pointsPerMillion": 8.0,
-    "totalPoints": 36,
-    "price": 4.5,
-    "form": 3.7
+    "pointsPerMillion": 10.98,
+    "totalPoints": 45,
+    "price": 4.1,
+    "form": 2.2
   },
   {
     "player": "Rodon",
     "team": "Leeds",
     "team_short": "LEE",
     "position": "Defender",
-    "pointsPerMillion": 7.56,
-    "totalPoints": 31,
+    "pointsPerMillion": 10.73,
+    "totalPoints": 44,
     "price": 4.1,
-    "form": 3.3
-  },
-  {
-    "player": "Lacroix",
-    "team": "Crystal Palace",
-    "team_short": "CRY",
-    "position": "Defender",
-    "pointsPerMillion": 7.45,
-    "totalPoints": 38,
-    "price": 5.1,
-    "form": 2.9
-  },
-  {
-    "player": "Livramento",
-    "team": "Newcastle",
-    "team_short": "NEW",
-    "position": "Defender",
-    "pointsPerMillion": 7.4,
-    "totalPoints": 37,
-    "price": 5.0,
-    "form": 2.2
-  },
-  {
-    "player": "Xhaka",
-    "team": "Sunderland",
-    "team_short": "SUN",
-    "position": "Midfielder",
-    "pointsPerMillion": 7.4,
-    "totalPoints": 37,
-    "price": 5.0,
-    "form": 5.1
+    "form": 5.5
   },
   {
     "player": "Truffert",
     "team": "Bournemouth",
     "team_short": "BOU",
     "position": "Defender",
-    "pointsPerMillion": 7.33,
-    "totalPoints": 33,
+    "pointsPerMillion": 9.56,
+    "totalPoints": 43,
     "price": 4.5,
-    "form": 3.3
+    "form": 5.9
   },
   {
-    "player": "Dúbravka",
-    "team": "Burnley",
-    "team_short": "BUR",
+    "player": "Pope",
+    "team": "Newcastle",
+    "team_short": "NEW",
     "position": "Goalkeeper",
-    "pointsPerMillion": 7.25,
-    "totalPoints": 29,
-    "price": 4.0,
+    "pointsPerMillion": 8.85,
+    "totalPoints": 46,
+    "price": 5.2,
     "form": 4.8
   },
   {
-    "player": "Garner",
-    "team": "Everton",
-    "team_short": "EVE",
+    "player": "Hume",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Defender",
+    "pointsPerMillion": 8.67,
+    "totalPoints": 39,
+    "price": 4.5,
+    "form": 5.1
+  },
+  {
+    "player": "Hartman",
+    "team": "Burnley",
+    "team_short": "BUR",
+    "position": "Defender",
+    "pointsPerMillion": 8.5,
+    "totalPoints": 34,
+    "price": 4.0,
+    "form": 6.2
+  },
+  {
+    "player": "Richards",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
+    "position": "Defender",
+    "pointsPerMillion": 8.44,
+    "totalPoints": 38,
+    "price": 4.5,
+    "form": 2.9
+  },
+  {
+    "player": "Cullen",
+    "team": "Burnley",
+    "team_short": "BUR",
     "position": "Midfielder",
-    "pointsPerMillion": 7.2,
-    "totalPoints": 36,
+    "pointsPerMillion": 8.4,
+    "totalPoints": 42,
     "price": 5.0,
     "form": 3.3
+  },
+  {
+    "player": "Chalobah",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "position": "Defender",
+    "pointsPerMillion": 8.24,
+    "totalPoints": 42,
+    "price": 5.1,
+    "form": 2.6
   }
 ]

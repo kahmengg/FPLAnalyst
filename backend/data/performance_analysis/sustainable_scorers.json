@@ -6,9 +6,20 @@
         "goals": 3,
         "xG": 2.8,
         "overperformance": 0.2,
-        "overperformance_per_90": 0.025,
+        "overperformance_per_90": 0.022,
         "sustainable": true,
-        "form": 4.5
+        "form": 4.8
+    },
+    {
+        "player": "M.Salah",
+        "team": "Liverpool",
+        "team_short": "LIV",
+        "goals": 3,
+        "xG": 3.0,
+        "overperformance": 0.0,
+        "overperformance_per_90": 0.0,
+        "sustainable": true,
+        "form": 3.0
     },
     {
         "player": "Sarr",
@@ -17,42 +28,42 @@
         "goals": 3,
         "xG": 3.1,
         "overperformance": -0.1,
-        "overperformance_per_90": -0.013,
+        "overperformance_per_90": -0.011,
         "sustainable": true,
-        "form": 6.0
+        "form": 3.3
     },
     {
-        "player": "Gyökeres",
-        "team": "Arsenal",
-        "team_short": "ARS",
-        "goals": 3,
-        "xG": 3.3,
-        "overperformance": -0.3,
-        "overperformance_per_90": -0.037,
+        "player": "O.Dango",
+        "team": "Brentford",
+        "team_short": "BRE",
+        "goals": 2,
+        "xG": 2.2,
+        "overperformance": -0.2,
+        "overperformance_per_90": -0.025,
         "sustainable": true,
-        "form": 1.8
+        "form": 4.2
     },
     {
-        "player": "Gabriel",
-        "team": "Arsenal",
-        "team_short": "ARS",
-        "goals": 1,
-        "xG": 1.1,
-        "overperformance": -0.1,
-        "overperformance_per_90": -0.013,
-        "sustainable": true,
-        "form": 10.0
-    },
-    {
-        "player": "Casemiro",
-        "team": "Man Utd",
-        "team_short": "MUN",
+        "player": "Grealish",
+        "team": "Everton",
+        "team_short": "EVE",
         "goals": 1,
         "xG": 1.0,
         "overperformance": 0.0,
         "overperformance_per_90": 0.0,
         "sustainable": true,
-        "form": 1.2
+        "form": 3.3
+    },
+    {
+        "player": "McGinn",
+        "team": "Aston Villa",
+        "team_short": "AVL",
+        "goals": 1,
+        "xG": 1.0,
+        "overperformance": 0.0,
+        "overperformance_per_90": 0.0,
+        "sustainable": true,
+        "form": 2.4
     },
     {
         "player": "Szoboszlai",
@@ -61,19 +72,19 @@
         "goals": 1,
         "xG": 1.1,
         "overperformance": -0.1,
-        "overperformance_per_90": -0.013,
+        "overperformance_per_90": -0.011,
         "sustainable": true,
-        "form": 3.0
+        "form": 4.5
     },
     {
-        "player": "Trossard",
-        "team": "Arsenal",
-        "team_short": "ARS",
+        "player": "Talbi",
+        "team": "Sunderland",
+        "team_short": "SUN",
         "goals": 1,
         "xG": 1.0,
         "overperformance": 0.0,
         "overperformance_per_90": 0.0,
         "sustainable": true,
-        "form": 4.5
+        "form": 3.9
     }
 ]

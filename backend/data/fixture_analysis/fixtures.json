@@ -6,7 +6,7 @@
             "name": "Leeds",
             "short_name": "LEE",
             "attack": {
-                "score": 4.6,
+                "score": 5.6,
                 "level": "Very Easy"
             },
             "defense": {
@@ -14,8 +14,8 @@
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 11,
-                "defense": 8
+                "attack": 10,
+                "defense": 9
             }
         },
         "away_team": {
@@ -26,12 +26,12 @@
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -4.0,
+                "score": -5.0,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 18,
-                "defense": 19
+                "attack": 19,
+                "defense": 20
             }
         },
         "favorability": "Leeds"
@@ -43,32 +43,32 @@
             "name": "Chelsea",
             "short_name": "CHE",
             "attack": {
-                "score": 0.1,
+                "score": 0.6,
                 "level": "Medium"
             },
             "defense": {
-                "score": 5.6,
+                "score": 4.6,
                 "level": "Very Easy"
             },
             "rank": {
                 "attack": 5,
-                "defense": 7
+                "defense": 10
             }
         },
         "away_team": {
             "name": "Sunderland",
             "short_name": "SUN",
             "attack": {
-                "score": -5.0,
+                "score": -4.0,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": 0.5,
+                "score": 0.0,
                 "level": "Medium"
             },
             "rank": {
-                "attack": 17,
-                "defense": 4
+                "attack": 18,
+                "defense": 5
             }
         },
         "favorability": "Chelsea"
@@ -117,15 +117,15 @@
             "name": "Man Utd",
             "short_name": "MUN",
             "attack": {
-                "score": 7.1,
+                "score": 8.0,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": -2.9,
+                "score": -3.9,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 4,
+                "attack": 2,
                 "defense": 15
             }
         },
@@ -133,15 +133,15 @@
             "name": "Brighton",
             "short_name": "BHA",
             "attack": {
-                "score": 3.5,
-                "level": "Easy"
+                "score": 4.5,
+                "level": "Very Easy"
             },
             "defense": {
-                "score": -6.5,
+                "score": -7.5,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 8,
+                "attack": 6,
                 "defense": 17
             }
         },
@@ -154,28 +154,28 @@
             "name": "Brentford",
             "short_name": "BRE",
             "attack": {
-                "score": -0.9,
-                "level": "Hard"
+                "score": 0.6,
+                "level": "Medium"
             },
             "defense": {
-                "score": -5.4,
+                "score": -4.9,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 14,
-                "defense": 13
+                "attack": 11,
+                "defense": 12
             }
         },
         "away_team": {
             "name": "Liverpool",
             "short_name": "LIV",
             "attack": {
-                "score": 6.0,
+                "score": 5.5,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 1.5,
-                "level": "Medium-Easy"
+                "score": 0.0,
+                "level": "Medium"
             },
             "rank": {
                 "attack": 1,
@@ -191,32 +191,32 @@
             "name": "Bournemouth",
             "short_name": "BOU",
             "attack": {
-                "score": 7.1,
+                "score": 6.1,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 2.6,
-                "level": "Easy"
+                "score": 4.1,
+                "level": "Very Easy"
             },
             "rank": {
-                "attack": 7,
-                "defense": 9
+                "attack": 8,
+                "defense": 7
             }
         },
         "away_team": {
             "name": "Nott'm Forest",
             "short_name": "NFO",
             "attack": {
-                "score": -2.0,
-                "level": "Hard"
+                "score": -3.5,
+                "level": "Very Hard"
             },
             "defense": {
-                "score": -6.5,
+                "score": -5.5,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 13,
-                "defense": 20
+                "attack": 14,
+                "defense": 19
             }
         },
         "favorability": "Bournemouth"
@@ -228,15 +228,15 @@
             "name": "Arsenal",
             "short_name": "ARS",
             "attack": {
-                "score": 2.5,
-                "level": "Easy"
+                "score": 1.6,
+                "level": "Medium-Easy"
             },
             "defense": {
-                "score": 2.5,
+                "score": 3.0,
                 "level": "Easy"
             },
             "rank": {
-                "attack": 2,
+                "attack": 4,
                 "defense": 1
             }
         },
@@ -244,15 +244,15 @@
             "name": "Crystal Palace",
             "short_name": "CRY",
             "attack": {
-                "score": -2.5,
+                "score": -3.0,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -2.0,
+                "score": -1.0,
                 "level": "Hard"
             },
             "rank": {
-                "attack": 6,
+                "attack": 7,
                 "defense": 6
             }
         },
@@ -269,19 +269,19 @@
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -2.9,
-                "level": "Very Hard"
+                "score": -1.9,
+                "level": "Hard"
             },
             "rank": {
                 "attack": 15,
-                "defense": 10
+                "defense": 8
             }
         },
         "away_team": {
             "name": "Man City",
             "short_name": "MCI",
             "attack": {
-                "score": 3.5,
+                "score": 2.5,
                 "level": "Easy"
             },
             "defense": {
@@ -302,15 +302,15 @@
             "name": "Wolves",
             "short_name": "WOL",
             "attack": {
-                "score": 0.1,
-                "level": "Medium"
+                "score": 1.1,
+                "level": "Medium-Easy"
             },
             "defense": {
                 "score": 2.6,
                 "level": "Easy"
             },
             "rank": {
-                "attack": 19,
+                "attack": 17,
                 "defense": 16
             }
         },
@@ -322,7 +322,7 @@
                 "level": "Hard"
             },
             "defense": {
-                "score": 0.5,
+                "score": -0.5,
                 "level": "Medium"
             },
             "rank": {
@@ -339,32 +339,32 @@
             "name": "Everton",
             "short_name": "EVE",
             "attack": {
-                "score": -2.9,
+                "score": -3.9,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -0.4,
+                "score": 0.1,
                 "level": "Medium"
             },
             "rank": {
-                "attack": 12,
-                "defense": 12
+                "attack": 13,
+                "defense": 13
             }
         },
         "away_team": {
             "name": "Spurs",
             "short_name": "TOT",
             "attack": {
-                "score": 1.0,
-                "level": "Medium-Easy"
+                "score": 0.5,
+                "level": "Medium"
             },
             "defense": {
-                "score": 3.5,
-                "level": "Easy"
+                "score": 4.5,
+                "level": "Very Easy"
             },
             "rank": {
-                "attack": 10,
-                "defense": 5
+                "attack": 12,
+                "defense": 4
             }
         },
         "favorability": "Spurs"
@@ -376,15 +376,15 @@
             "name": "Brighton",
             "short_name": "BHA",
             "attack": {
-                "score": 0.6,
-                "level": "Medium"
+                "score": 2.1,
+                "level": "Medium-Easy"
             },
             "defense": {
-                "score": -2.4,
+                "score": -2.9,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 8,
+                "attack": 6,
                 "defense": 17
             }
         },
@@ -392,16 +392,16 @@
             "name": "Leeds",
             "short_name": "LEE",
             "attack": {
-                "score": 3.0,
+                "score": 3.5,
                 "level": "Easy"
             },
             "defense": {
-                "score": 0.0,
-                "level": "Medium"
+                "score": -1.5,
+                "level": "Hard"
             },
             "rank": {
-                "attack": 11,
-                "defense": 8
+                "attack": 10,
+                "defense": 9
             }
         },
         "favorability": "Leeds"
@@ -417,7 +417,7 @@
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -7.4,
+                "score": -6.4,
                 "level": "Very Hard"
             },
             "rank": {
@@ -429,7 +429,7 @@
             "name": "Arsenal",
             "short_name": "ARS",
             "attack": {
-                "score": 8.0,
+                "score": 7.0,
                 "level": "Very Easy"
             },
             "defense": {
@@ -437,7 +437,7 @@
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 2,
+                "attack": 4,
                 "defense": 1
             }
         },
@@ -450,15 +450,15 @@
             "name": "Crystal Palace",
             "short_name": "CRY",
             "attack": {
-                "score": 4.1,
-                "level": "Very Easy"
+                "score": 3.1,
+                "level": "Easy"
             },
             "defense": {
-                "score": 4.6,
-                "level": "Very Easy"
+                "score": 3.1,
+                "level": "Easy"
             },
             "rank": {
-                "attack": 6,
+                "attack": 7,
                 "defense": 6
             }
         },
@@ -466,16 +466,16 @@
             "name": "Brentford",
             "short_name": "BRE",
             "attack": {
-                "score": -4.0,
+                "score": -2.5,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -3.5,
+                "score": -2.5,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 14,
-                "defense": 13
+                "attack": 11,
+                "defense": 12
             }
         },
         "favorability": "Crystal Palace"
@@ -491,8 +491,8 @@
                 "level": "Medium"
             },
             "defense": {
-                "score": 3.1,
-                "level": "Easy"
+                "score": 2.1,
+                "level": "Medium-Easy"
             },
             "rank": {
                 "attack": 16,
@@ -503,15 +503,15 @@
             "name": "Wolves",
             "short_name": "WOL",
             "attack": {
-                "score": -2.5,
-                "level": "Very Hard"
+                "score": -1.5,
+                "level": "Hard"
             },
             "defense": {
                 "score": 0.0,
                 "level": "Medium"
             },
             "rank": {
-                "attack": 19,
+                "attack": 17,
                 "defense": 16
             }
         },
@@ -524,8 +524,8 @@
             "name": "Liverpool",
             "short_name": "LIV",
             "attack": {
-                "score": 4.5,
-                "level": "Very Easy"
+                "score": 3.5,
+                "level": "Easy"
             },
             "defense": {
                 "score": 2.6,
@@ -544,12 +544,12 @@
                 "level": "Hard"
             },
             "defense": {
-                "score": -4.5,
+                "score": -3.5,
                 "level": "Very Hard"
             },
             "rank": {
                 "attack": 15,
-                "defense": 10
+                "defense": 8
             }
         },
         "favorability": "Liverpool"
@@ -561,11 +561,11 @@
             "name": "Man City",
             "short_name": "MCI",
             "attack": {
-                "score": 3.6,
+                "score": 2.6,
                 "level": "Easy"
             },
             "defense": {
-                "score": 2.6,
+                "score": 3.1,
                 "level": "Easy"
             },
             "rank": {
@@ -577,16 +577,16 @@
             "name": "Bournemouth",
             "short_name": "BOU",
             "attack": {
+                "score": -2.5,
+                "level": "Very Hard"
+            },
+            "defense": {
                 "score": -2.0,
                 "level": "Hard"
             },
-            "defense": {
-                "score": -3.0,
-                "level": "Very Hard"
-            },
             "rank": {
-                "attack": 7,
-                "defense": 9
+                "attack": 8,
+                "defense": 7
             }
         },
         "favorability": "Man City"
@@ -598,31 +598,31 @@
             "name": "Nott'm Forest",
             "short_name": "NFO",
             "attack": {
-                "score": 1.6,
+                "score": 1.1,
                 "level": "Medium-Easy"
             },
             "defense": {
-                "score": -7.4,
+                "score": -7.9,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 13,
-                "defense": 20
+                "attack": 14,
+                "defense": 19
             }
         },
         "away_team": {
             "name": "Man Utd",
             "short_name": "MUN",
             "attack": {
-                "score": 8.0,
+                "score": 8.5,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": -1.0,
-                "level": "Hard"
+                "score": -0.5,
+                "level": "Medium"
             },
             "rank": {
-                "attack": 4,
+                "attack": 2,
                 "defense": 15
             }
         },
@@ -643,8 +643,8 @@
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 17,
-                "defense": 4
+                "attack": 18,
+                "defense": 5
             }
         },
         "away_team": {
@@ -659,8 +659,8 @@
                 "level": "Easy"
             },
             "rank": {
-                "attack": 12,
-                "defense": 12
+                "attack": 13,
+                "defense": 13
             }
         },
         "favorability": "Sunderland"
@@ -672,35 +672,35 @@
             "name": "Spurs",
             "short_name": "TOT",
             "attack": {
-                "score": -0.9,
-                "level": "Hard"
-            },
-            "defense": {
-                "score": 0.6,
+                "score": -0.4,
                 "level": "Medium"
             },
+            "defense": {
+                "score": 1.1,
+                "level": "Medium-Easy"
+            },
             "rank": {
-                "attack": 10,
-                "defense": 5
+                "attack": 12,
+                "defense": 4
             }
         },
         "away_team": {
             "name": "Chelsea",
             "short_name": "CHE",
             "attack": {
-                "score": 0.0,
+                "score": -0.5,
                 "level": "Medium"
             },
             "defense": {
-                "score": 1.5,
+                "score": 1.0,
                 "level": "Medium-Easy"
             },
             "rank": {
                 "attack": 5,
-                "defense": 7
+                "defense": 10
             }
         },
-        "favorability": "Chelsea"
+        "favorability": "Spurs"
     },
     {
         "gameweek": 10,
@@ -709,27 +709,27 @@
             "name": "West Ham",
             "short_name": "WHU",
             "attack": {
-                "score": -7.4,
+                "score": -7.9,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -4.4,
+                "score": -4.9,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 18,
-                "defense": 19
+                "attack": 19,
+                "defense": 20
             }
         },
         "away_team": {
             "name": "Newcastle",
             "short_name": "NEW",
             "attack": {
-                "score": 5.0,
+                "score": 5.5,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 8.0,
+                "score": 8.5,
                 "level": "Very Easy"
             },
             "rank": {
@@ -746,32 +746,32 @@
             "name": "Aston Villa",
             "short_name": "AVL",
             "attack": {
-                "score": -2.4,
+                "score": -3.4,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -0.9,
-                "level": "Hard"
+                "score": 0.6,
+                "level": "Medium"
             },
             "rank": {
                 "attack": 15,
-                "defense": 10
+                "defense": 8
             }
         },
         "away_team": {
             "name": "Bournemouth",
             "short_name": "BOU",
             "attack": {
-                "score": 1.5,
-                "level": "Medium-Easy"
+                "score": 0.0,
+                "level": "Medium"
             },
             "defense": {
-                "score": 3.0,
-                "level": "Easy"
+                "score": 4.0,
+                "level": "Very Easy"
             },
             "rank": {
-                "attack": 7,
-                "defense": 9
+                "attack": 8,
+                "defense": 7
             }
         },
         "favorability": "Bournemouth"
@@ -783,27 +783,27 @@
             "name": "Brentford",
             "short_name": "BRE",
             "attack": {
-                "score": -5.4,
+                "score": -3.9,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -1.4,
+                "score": -0.9,
                 "level": "Hard"
             },
             "rank": {
-                "attack": 14,
-                "defense": 13
+                "attack": 11,
+                "defense": 12
             }
         },
         "away_team": {
             "name": "Newcastle",
             "short_name": "NEW",
             "attack": {
-                "score": 2.0,
+                "score": 1.5,
                 "level": "Medium-Easy"
             },
             "defense": {
-                "score": 6.0,
+                "score": 4.5,
                 "level": "Very Easy"
             },
             "rank": {
@@ -824,19 +824,19 @@
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 6.6,
+                "score": 4.1,
                 "level": "Very Easy"
             },
             "rank": {
                 "attack": 5,
-                "defense": 7
+                "defense": 10
             }
         },
         "away_team": {
             "name": "Wolves",
             "short_name": "WOL",
             "attack": {
-                "score": -6.0,
+                "score": -3.5,
                 "level": "Very Hard"
             },
             "defense": {
@@ -844,7 +844,7 @@
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 19,
+                "attack": 17,
                 "defense": 16
             }
         },
@@ -857,15 +857,15 @@
             "name": "Crystal Palace",
             "short_name": "CRY",
             "attack": {
-                "score": 6.1,
+                "score": 5.6,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 1.6,
-                "level": "Medium-Easy"
+                "score": 0.6,
+                "level": "Medium"
             },
             "rank": {
-                "attack": 6,
+                "attack": 7,
                 "defense": 6
             }
         },
@@ -873,15 +873,15 @@
             "name": "Brighton",
             "short_name": "BHA",
             "attack": {
-                "score": -1.0,
-                "level": "Hard"
+                "score": 0.0,
+                "level": "Medium"
             },
             "defense": {
-                "score": -5.5,
+                "score": -5.0,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 8,
+                "attack": 6,
                 "defense": 17
             }
         },
@@ -894,28 +894,28 @@
             "name": "Everton",
             "short_name": "EVE",
             "attack": {
-                "score": 1.6,
+                "score": 1.1,
                 "level": "Medium-Easy"
             },
             "defense": {
-                "score": 2.6,
-                "level": "Easy"
+                "score": 2.1,
+                "level": "Medium-Easy"
             },
             "rank": {
-                "attack": 12,
-                "defense": 12
+                "attack": 13,
+                "defense": 13
             }
         },
         "away_team": {
             "name": "Fulham",
             "short_name": "FUL",
             "attack": {
-                "score": -2.0,
+                "score": -1.5,
                 "level": "Hard"
             },
             "defense": {
-                "score": -1.0,
-                "level": "Hard"
+                "score": -0.5,
+                "level": "Medium"
             },
             "rank": {
                 "attack": 16,
@@ -976,8 +976,8 @@
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 13,
-                "defense": 20
+                "attack": 14,
+                "defense": 19
             }
         },
         "away_team": {
@@ -992,8 +992,8 @@
                 "level": "Easy"
             },
             "rank": {
-                "attack": 11,
-                "defense": 8
+                "attack": 10,
+                "defense": 9
             }
         },
         "favorability": "Leeds"
@@ -1005,31 +1005,31 @@
             "name": "Sunderland",
             "short_name": "SUN",
             "attack": {
-                "score": -7.4,
+                "score": -7.9,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -0.4,
+                "score": 0.1,
                 "level": "Medium"
             },
             "rank": {
-                "attack": 17,
-                "defense": 4
+                "attack": 18,
+                "defense": 5
             }
         },
         "away_team": {
             "name": "Arsenal",
             "short_name": "ARS",
             "attack": {
-                "score": 1.0,
-                "level": "Medium-Easy"
+                "score": 0.5,
+                "level": "Medium"
             },
             "defense": {
-                "score": 8.0,
+                "score": 8.5,
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 2,
+                "attack": 4,
                 "defense": 1
             }
         },
@@ -1042,31 +1042,31 @@
             "name": "Spurs",
             "short_name": "TOT",
             "attack": {
-                "score": 3.1,
-                "level": "Easy"
+                "score": 2.1,
+                "level": "Medium-Easy"
             },
             "defense": {
-                "score": 0.1,
+                "score": -0.4,
                 "level": "Medium"
             },
             "rank": {
-                "attack": 10,
-                "defense": 5
+                "attack": 12,
+                "defense": 4
             }
         },
         "away_team": {
             "name": "Man Utd",
             "short_name": "MUN",
             "attack": {
-                "score": 0.5,
-                "level": "Medium"
+                "score": 1.0,
+                "level": "Medium-Easy"
             },
             "defense": {
-                "score": -2.5,
-                "level": "Very Hard"
+                "score": -1.5,
+                "level": "Hard"
             },
             "rank": {
-                "attack": 4,
+                "attack": 2,
                 "defense": 15
             }
         },
@@ -1079,27 +1079,27 @@
             "name": "West Ham",
             "short_name": "WHU",
             "attack": {
-                "score": 0.6,
+                "score": 0.1,
                 "level": "Medium"
             },
             "defense": {
-                "score": 1.1,
-                "level": "Medium-Easy"
+                "score": 0.6,
+                "level": "Medium"
             },
             "rank": {
-                "attack": 18,
-                "defense": 19
+                "attack": 19,
+                "defense": 20
             }
         },
         "away_team": {
             "name": "Burnley",
             "short_name": "BUR",
             "attack": {
-                "score": -0.5,
+                "score": 0.0,
                 "level": "Medium"
             },
             "defense": {
-                "score": 0.0,
+                "score": 0.5,
                 "level": "Medium"
             },
             "rank": {
@@ -1120,19 +1120,19 @@
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 5.1,
+                "score": 6.6,
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 7,
-                "defense": 9
+                "attack": 8,
+                "defense": 7
             }
         },
         "away_team": {
             "name": "West Ham",
             "short_name": "WHU",
             "attack": {
-                "score": -4.5,
+                "score": -6.0,
                 "level": "Very Hard"
             },
             "defense": {
@@ -1140,8 +1140,8 @@
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 18,
-                "defense": 19
+                "attack": 19,
+                "defense": 20
             }
         },
         "favorability": "Bournemouth"
@@ -1153,15 +1153,15 @@
             "name": "Arsenal",
             "short_name": "ARS",
             "attack": {
-                "score": 2.0,
-                "level": "Medium-Easy"
+                "score": 0.6,
+                "level": "Medium"
             },
             "defense": {
-                "score": 4.5,
+                "score": 5.5,
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 2,
+                "attack": 4,
                 "defense": 1
             }
         },
@@ -1169,16 +1169,16 @@
             "name": "Spurs",
             "short_name": "TOT",
             "attack": {
-                "score": -4.5,
+                "score": -5.5,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -1.5,
-                "level": "Hard"
+                "score": 0.0,
+                "level": "Medium"
             },
             "rank": {
-                "attack": 10,
-                "defense": 5
+                "attack": 12,
+                "defense": 4
             }
         },
         "favorability": "Arsenal"
@@ -1190,15 +1190,15 @@
             "name": "Brighton",
             "short_name": "BHA",
             "attack": {
-                "score": 3.1,
+                "score": 3.6,
                 "level": "Easy"
             },
             "defense": {
-                "score": -0.9,
-                "level": "Hard"
+                "score": -2.4,
+                "level": "Very Hard"
             },
             "rank": {
-                "attack": 8,
+                "attack": 6,
                 "defense": 17
             }
         },
@@ -1206,16 +1206,16 @@
             "name": "Brentford",
             "short_name": "BRE",
             "attack": {
-                "score": 1.5,
-                "level": "Medium-Easy"
+                "score": 3.0,
+                "level": "Easy"
             },
             "defense": {
-                "score": -2.5,
+                "score": -3.0,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 14,
-                "defense": 13
+                "attack": 11,
+                "defense": 12
             }
         },
         "favorability": "Brighton"
@@ -1227,7 +1227,7 @@
             "name": "Burnley",
             "short_name": "BUR",
             "attack": {
-                "score": -5.9,
+                "score": -4.4,
                 "level": "Very Hard"
             },
             "defense": {
@@ -1247,12 +1247,12 @@
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 6.5,
+                "score": 5.0,
                 "level": "Very Easy"
             },
             "rank": {
                 "attack": 5,
-                "defense": 7
+                "defense": 10
             }
         },
         "favorability": "Chelsea"
@@ -1264,12 +1264,12 @@
             "name": "Fulham",
             "short_name": "FUL",
             "attack": {
-                "score": -5.4,
+                "score": -4.9,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": 2.1,
-                "level": "Medium-Easy"
+                "score": 2.6,
+                "level": "Easy"
             },
             "rank": {
                 "attack": 16,
@@ -1280,16 +1280,16 @@
             "name": "Sunderland",
             "short_name": "SUN",
             "attack": {
-                "score": -1.5,
+                "score": -2.0,
                 "level": "Hard"
             },
             "defense": {
-                "score": 6.0,
+                "score": 5.5,
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 17,
-                "defense": 4
+                "attack": 18,
+                "defense": 5
             }
         },
         "favorability": "Sunderland"
@@ -1301,32 +1301,32 @@
             "name": "Leeds",
             "short_name": "LEE",
             "attack": {
-                "score": 0.1,
+                "score": -0.4,
                 "level": "Medium"
             },
             "defense": {
-                "score": 4.1,
-                "level": "Very Easy"
+                "score": 3.6,
+                "level": "Easy"
             },
             "rank": {
-                "attack": 11,
-                "defense": 8
+                "attack": 10,
+                "defense": 9
             }
         },
         "away_team": {
             "name": "Aston Villa",
             "short_name": "AVL",
             "attack": {
-                "score": -3.5,
+                "score": -3.0,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": 0.5,
-                "level": "Medium"
+                "score": 1.0,
+                "level": "Medium-Easy"
             },
             "rank": {
                 "attack": 15,
-                "defense": 10
+                "defense": 8
             }
         },
         "favorability": "Leeds"
@@ -1338,11 +1338,11 @@
             "name": "Liverpool",
             "short_name": "LIV",
             "attack": {
-                "score": 9.5,
+                "score": 9.0,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 1.6,
+                "score": 2.1,
                 "level": "Medium-Easy"
             },
             "rank": {
@@ -1354,16 +1354,16 @@
             "name": "Nott'm Forest",
             "short_name": "NFO",
             "attack": {
-                "score": -1.0,
+                "score": -1.5,
                 "level": "Hard"
             },
             "defense": {
-                "score": -9.5,
+                "score": -9.0,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 13,
-                "defense": 20
+                "attack": 14,
+                "defense": 19
             }
         },
         "favorability": "Liverpool"
@@ -1375,15 +1375,15 @@
             "name": "Man Utd",
             "short_name": "MUN",
             "attack": {
-                "score": 4.6,
+                "score": 6.0,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": -0.9,
-                "level": "Hard"
+                "score": -0.4,
+                "level": "Medium"
             },
             "rank": {
-                "attack": 4,
+                "attack": 2,
                 "defense": 15
             }
         },
@@ -1391,16 +1391,16 @@
             "name": "Everton",
             "short_name": "EVE",
             "attack": {
-                "score": 1.5,
+                "score": 1.0,
                 "level": "Medium-Easy"
             },
             "defense": {
-                "score": -4.0,
+                "score": -5.5,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 12,
-                "defense": 12
+                "attack": 13,
+                "defense": 13
             }
         },
         "favorability": "Man Utd"
@@ -1449,15 +1449,15 @@
             "name": "Wolves",
             "short_name": "WOL",
             "attack": {
-                "score": -5.9,
+                "score": -4.9,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -4.4,
+                "score": -3.9,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 19,
+                "attack": 17,
                 "defense": 16
             }
         },
@@ -1465,15 +1465,15 @@
             "name": "Crystal Palace",
             "short_name": "CRY",
             "attack": {
-                "score": 5.0,
+                "score": 4.5,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 6.5,
+                "score": 5.5,
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 6,
+                "attack": 7,
                 "defense": 6
             }
         },
@@ -1495,7 +1495,7 @@
             },
             "rank": {
                 "attack": 15,
-                "defense": 10
+                "defense": 8
             }
         },
         "away_team": {
@@ -1510,7 +1510,7 @@
                 "level": "Medium"
             },
             "rank": {
-                "attack": 19,
+                "attack": 17,
                 "defense": 16
             }
         },
@@ -1523,28 +1523,28 @@
             "name": "Brentford",
             "short_name": "BRE",
             "attack": {
-                "score": 2.6,
-                "level": "Easy"
-            },
-            "defense": {
                 "score": 4.1,
                 "level": "Very Easy"
             },
+            "defense": {
+                "score": 4.6,
+                "level": "Very Easy"
+            },
             "rank": {
-                "attack": 14,
-                "defense": 13
+                "attack": 11,
+                "defense": 12
             }
         },
         "away_team": {
             "name": "Burnley",
             "short_name": "BUR",
             "attack": {
-                "score": -3.5,
+                "score": -4.0,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -2.0,
-                "level": "Hard"
+                "score": -3.5,
+                "level": "Very Hard"
             },
             "rank": {
                 "attack": 20,
@@ -1564,19 +1564,19 @@
                 "level": "Hard"
             },
             "defense": {
-                "score": -1.9,
-                "level": "Hard"
+                "score": -2.4,
+                "level": "Very Hard"
             },
             "rank": {
                 "attack": 5,
-                "defense": 7
+                "defense": 10
             }
         },
         "away_team": {
             "name": "Arsenal",
             "short_name": "ARS",
             "attack": {
-                "score": 2.5,
+                "score": 3.0,
                 "level": "Easy"
             },
             "defense": {
@@ -1584,7 +1584,7 @@
                 "level": "Medium-Easy"
             },
             "rank": {
-                "attack": 2,
+                "attack": 4,
                 "defense": 1
             }
         },
@@ -1597,15 +1597,15 @@
             "name": "Crystal Palace",
             "short_name": "CRY",
             "attack": {
-                "score": 5.1,
+                "score": 4.6,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": -0.4,
-                "level": "Medium"
+                "score": -1.4,
+                "level": "Hard"
             },
             "rank": {
-                "attack": 6,
+                "attack": 7,
                 "defense": 6
             }
         },
@@ -1613,15 +1613,15 @@
             "name": "Man Utd",
             "short_name": "MUN",
             "attack": {
-                "score": 1.0,
+                "score": 2.0,
                 "level": "Medium-Easy"
             },
             "defense": {
-                "score": -4.5,
+                "score": -4.0,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 4,
+                "attack": 2,
                 "defense": 15
             }
         },
@@ -1634,27 +1634,27 @@
             "name": "Everton",
             "short_name": "EVE",
             "attack": {
-                "score": -4.4,
+                "score": -4.9,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -0.9,
+                "score": -1.4,
                 "level": "Hard"
             },
             "rank": {
-                "attack": 12,
-                "defense": 12
+                "attack": 13,
+                "defense": 13
             }
         },
         "away_team": {
             "name": "Newcastle",
             "short_name": "NEW",
             "attack": {
-                "score": 1.5,
+                "score": 2.0,
                 "level": "Medium-Easy"
             },
             "defense": {
-                "score": 5.0,
+                "score": 5.5,
                 "level": "Very Easy"
             },
             "rank": {
@@ -1671,11 +1671,11 @@
             "name": "Man City",
             "short_name": "MCI",
             "attack": {
-                "score": 3.1,
+                "score": 3.6,
                 "level": "Easy"
             },
             "defense": {
-                "score": 4.6,
+                "score": 4.1,
                 "level": "Very Easy"
             },
             "rank": {
@@ -1687,16 +1687,16 @@
             "name": "Leeds",
             "short_name": "LEE",
             "attack": {
-                "score": -4.0,
+                "score": -3.5,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -2.5,
+                "score": -3.0,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 11,
-                "defense": 8
+                "attack": 10,
+                "defense": 9
             }
         },
         "favorability": "Man City"
@@ -1708,31 +1708,31 @@
             "name": "Nott'm Forest",
             "short_name": "NFO",
             "attack": {
-                "score": 2.6,
-                "level": "Easy"
+                "score": 2.1,
+                "level": "Medium-Easy"
             },
             "defense": {
-                "score": -5.4,
+                "score": -5.9,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 13,
-                "defense": 20
+                "attack": 14,
+                "defense": 19
             }
         },
         "away_team": {
             "name": "Brighton",
             "short_name": "BHA",
             "attack": {
-                "score": 6.0,
+                "score": 6.5,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": -2.0,
+                "score": -1.5,
                 "level": "Hard"
             },
             "rank": {
-                "attack": 8,
+                "attack": 6,
                 "defense": 17
             }
         },
@@ -1745,7 +1745,7 @@
             "name": "Sunderland",
             "short_name": "SUN",
             "attack": {
-                "score": -3.4,
+                "score": -4.9,
                 "level": "Very Hard"
             },
             "defense": {
@@ -1753,8 +1753,8 @@
                 "level": "Medium-Easy"
             },
             "rank": {
-                "attack": 17,
-                "defense": 4
+                "attack": 18,
+                "defense": 5
             }
         },
         "away_team": {
@@ -1765,12 +1765,12 @@
                 "level": "Hard"
             },
             "defense": {
-                "score": 4.0,
+                "score": 5.5,
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 7,
-                "defense": 9
+                "attack": 8,
+                "defense": 7
             }
         },
         "favorability": "Bournemouth"
@@ -1782,27 +1782,27 @@
             "name": "Spurs",
             "short_name": "TOT",
             "attack": {
-                "score": 2.6,
-                "level": "Easy"
+                "score": 1.6,
+                "level": "Medium-Easy"
             },
             "defense": {
-                "score": 6.1,
+                "score": 6.6,
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 10,
-                "defense": 5
+                "attack": 12,
+                "defense": 4
             }
         },
         "away_team": {
             "name": "Fulham",
             "short_name": "FUL",
             "attack": {
-                "score": -5.5,
+                "score": -6.0,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -2.0,
+                "score": -1.0,
                 "level": "Hard"
             },
             "rank": {
@@ -1819,28 +1819,28 @@
             "name": "West Ham",
             "short_name": "WHU",
             "attack": {
-                "score": -2.9,
+                "score": -3.4,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -8.4,
+                "score": -8.9,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 18,
-                "defense": 19
+                "attack": 19,
+                "defense": 20
             }
         },
         "away_team": {
             "name": "Liverpool",
             "short_name": "LIV",
             "attack": {
-                "score": 9.0,
+                "score": 9.5,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 3.5,
-                "level": "Easy"
+                "score": 4.0,
+                "level": "Very Easy"
             },
             "rank": {
                 "attack": 1,
@@ -1860,28 +1860,28 @@
                 "level": "Easy"
             },
             "defense": {
-                "score": 2.1,
-                "level": "Medium-Easy"
+                "score": 3.6,
+                "level": "Easy"
             },
             "rank": {
-                "attack": 7,
-                "defense": 9
+                "attack": 8,
+                "defense": 7
             }
         },
         "away_team": {
             "name": "Everton",
             "short_name": "EVE",
             "attack": {
-                "score": -1.5,
-                "level": "Hard"
+                "score": -3.0,
+                "level": "Very Hard"
             },
             "defense": {
                 "score": -2.5,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 12,
-                "defense": 12
+                "attack": 13,
+                "defense": 13
             }
         },
         "favorability": "Bournemouth"
@@ -1893,15 +1893,15 @@
             "name": "Arsenal",
             "short_name": "ARS",
             "attack": {
-                "score": 6.0,
+                "score": 4.6,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 6.5,
+                "score": 5.0,
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 2,
+                "attack": 4,
                 "defense": 1
             }
         },
@@ -1909,16 +1909,16 @@
             "name": "Brentford",
             "short_name": "BRE",
             "attack": {
-                "score": -6.5,
+                "score": -5.0,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -5.5,
+                "score": -4.0,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 14,
-                "defense": 13
+                "attack": 11,
+                "defense": 12
             }
         },
         "favorability": "Arsenal"
@@ -1938,7 +1938,7 @@
                 "level": "Medium"
             },
             "rank": {
-                "attack": 8,
+                "attack": 6,
                 "defense": 17
             }
         },
@@ -1955,7 +1955,7 @@
             },
             "rank": {
                 "attack": 15,
-                "defense": 10
+                "defense": 8
             }
         },
         "favorability": "Brighton"
@@ -1971,7 +1971,7 @@
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -5.4,
+                "score": -4.9,
                 "level": "Very Hard"
             },
             "rank": {
@@ -1983,7 +1983,7 @@
             "name": "Crystal Palace",
             "short_name": "CRY",
             "attack": {
-                "score": 6.0,
+                "score": 5.5,
                 "level": "Very Easy"
             },
             "defense": {
@@ -1991,7 +1991,7 @@
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 6,
+                "attack": 7,
                 "defense": 6
             }
         },
@@ -2041,191 +2041,6 @@
             "name": "Leeds",
             "short_name": "LEE",
             "attack": {
-                "score": -1.4,
-                "level": "Hard"
-            },
-            "defense": {
-                "score": -0.9,
-                "level": "Hard"
-            },
-            "rank": {
-                "attack": 11,
-                "defense": 8
-            }
-        },
-        "away_team": {
-            "name": "Chelsea",
-            "short_name": "CHE",
-            "attack": {
-                "score": 1.5,
-                "level": "Medium-Easy"
-            },
-            "defense": {
-                "score": 2.0,
-                "level": "Medium-Easy"
-            },
-            "rank": {
-                "attack": 5,
-                "defense": 7
-            }
-        },
-        "favorability": "Chelsea"
-    },
-    {
-        "gameweek": 14,
-        "fixture": "Liverpool vs Sunderland",
-        "home_team": {
-            "name": "Liverpool",
-            "short_name": "LIV",
-            "attack": {
-                "score": 1.5,
-                "level": "Medium-Easy"
-            },
-            "defense": {
-                "score": 3.6,
-                "level": "Easy"
-            },
-            "rank": {
-                "attack": 1,
-                "defense": 11
-            }
-        },
-        "away_team": {
-            "name": "Sunderland",
-            "short_name": "SUN",
-            "attack": {
-                "score": -3.0,
-                "level": "Very Hard"
-            },
-            "defense": {
-                "score": -1.5,
-                "level": "Hard"
-            },
-            "rank": {
-                "attack": 17,
-                "defense": 4
-            }
-        },
-        "favorability": "Liverpool"
-    },
-    {
-        "gameweek": 14,
-        "fixture": "Man Utd vs West Ham",
-        "home_team": {
-            "name": "Man Utd",
-            "short_name": "MUN",
-            "attack": {
-                "score": 8.1,
-                "level": "Very Easy"
-            },
-            "defense": {
-                "score": 2.1,
-                "level": "Medium-Easy"
-            },
-            "rank": {
-                "attack": 4,
-                "defense": 15
-            }
-        },
-        "away_team": {
-            "name": "West Ham",
-            "short_name": "WHU",
-            "attack": {
-                "score": -1.5,
-                "level": "Hard"
-            },
-            "defense": {
-                "score": -7.5,
-                "level": "Very Hard"
-            },
-            "rank": {
-                "attack": 18,
-                "defense": 19
-            }
-        },
-        "favorability": "Man Utd"
-    },
-    {
-        "gameweek": 14,
-        "fixture": "Newcastle vs Spurs",
-        "home_team": {
-            "name": "Newcastle",
-            "short_name": "NEW",
-            "attack": {
-                "score": -1.4,
-                "level": "Hard"
-            },
-            "defense": {
-                "score": 4.5,
-                "level": "Very Easy"
-            },
-            "rank": {
-                "attack": 9,
-                "defense": 2
-            }
-        },
-        "away_team": {
-            "name": "Spurs",
-            "short_name": "TOT",
-            "attack": {
-                "score": -4.0,
-                "level": "Very Hard"
-            },
-            "defense": {
-                "score": 2.0,
-                "level": "Medium-Easy"
-            },
-            "rank": {
-                "attack": 10,
-                "defense": 5
-            }
-        },
-        "favorability": "Newcastle"
-    },
-    {
-        "gameweek": 14,
-        "fixture": "Wolves vs Nott'm Forest",
-        "home_team": {
-            "name": "Wolves",
-            "short_name": "WOL",
-            "attack": {
-                "score": 1.1,
-                "level": "Medium-Easy"
-            },
-            "defense": {
-                "score": -0.9,
-                "level": "Hard"
-            },
-            "rank": {
-                "attack": 19,
-                "defense": 16
-            }
-        },
-        "away_team": {
-            "name": "Nott'm Forest",
-            "short_name": "NFO",
-            "attack": {
-                "score": 1.5,
-                "level": "Medium-Easy"
-            },
-            "defense": {
-                "score": -0.5,
-                "level": "Medium"
-            },
-            "rank": {
-                "attack": 13,
-                "defense": 20
-            }
-        },
-        "favorability": "Nott'm Forest"
-    },
-    {
-        "gameweek": 15,
-        "fixture": "Bournemouth vs Chelsea",
-        "home_team": {
-            "name": "Bournemouth",
-            "short_name": "BOU",
-            "attack": {
                 "score": 0.6,
                 "level": "Medium"
             },
@@ -2234,7 +2049,7 @@
                 "level": "Hard"
             },
             "rank": {
-                "attack": 7,
+                "attack": 10,
                 "defense": 9
             }
         },
@@ -2251,10 +2066,195 @@
             },
             "rank": {
                 "attack": 5,
-                "defense": 7
+                "defense": 10
             }
         },
         "favorability": "Chelsea"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Liverpool vs Sunderland",
+        "home_team": {
+            "name": "Liverpool",
+            "short_name": "LIV",
+            "attack": {
+                "score": 2.0,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": 4.1,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 1,
+                "defense": 11
+            }
+        },
+        "away_team": {
+            "name": "Sunderland",
+            "short_name": "SUN",
+            "attack": {
+                "score": -3.5,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": -2.0,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 18,
+                "defense": 5
+            }
+        },
+        "favorability": "Liverpool"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Man Utd vs West Ham",
+        "home_team": {
+            "name": "Man Utd",
+            "short_name": "MUN",
+            "attack": {
+                "score": 9.5,
+                "level": "Very Easy"
+            },
+            "defense": {
+                "score": 2.6,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 2,
+                "defense": 15
+            }
+        },
+        "away_team": {
+            "name": "West Ham",
+            "short_name": "WHU",
+            "attack": {
+                "score": -2.0,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": -9.0,
+                "level": "Very Hard"
+            },
+            "rank": {
+                "attack": 19,
+                "defense": 20
+            }
+        },
+        "favorability": "Man Utd"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Newcastle vs Spurs",
+        "home_team": {
+            "name": "Newcastle",
+            "short_name": "NEW",
+            "attack": {
+                "score": -1.9,
+                "level": "Hard"
+            },
+            "defense": {
+                "score": 5.5,
+                "level": "Very Easy"
+            },
+            "rank": {
+                "attack": 9,
+                "defense": 2
+            }
+        },
+        "away_team": {
+            "name": "Spurs",
+            "short_name": "TOT",
+            "attack": {
+                "score": -5.0,
+                "level": "Very Hard"
+            },
+            "defense": {
+                "score": 2.5,
+                "level": "Easy"
+            },
+            "rank": {
+                "attack": 12,
+                "defense": 4
+            }
+        },
+        "favorability": "Newcastle"
+    },
+    {
+        "gameweek": 14,
+        "fixture": "Wolves vs Nott'm Forest",
+        "home_team": {
+            "name": "Wolves",
+            "short_name": "WOL",
+            "attack": {
+                "score": 1.6,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": -0.4,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 17,
+                "defense": 16
+            }
+        },
+        "away_team": {
+            "name": "Nott'm Forest",
+            "short_name": "NFO",
+            "attack": {
+                "score": 1.0,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": -1.0,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 14,
+                "defense": 19
+            }
+        },
+        "favorability": "Wolves"
+    },
+    {
+        "gameweek": 15,
+        "fixture": "Bournemouth vs Chelsea",
+        "home_team": {
+            "name": "Bournemouth",
+            "short_name": "BOU",
+            "attack": {
+                "score": 1.6,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": -0.4,
+                "level": "Medium"
+            },
+            "rank": {
+                "attack": 8,
+                "defense": 7
+            }
+        },
+        "away_team": {
+            "name": "Chelsea",
+            "short_name": "CHE",
+            "attack": {
+                "score": 1.0,
+                "level": "Medium-Easy"
+            },
+            "defense": {
+                "score": -1.0,
+                "level": "Hard"
+            },
+            "rank": {
+                "attack": 5,
+                "defense": 10
+            }
+        },
+        "favorability": "Bournemouth"
     },
     {
         "gameweek": 15,
@@ -2267,27 +2267,27 @@
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -3.4,
-                "level": "Very Hard"
+                "score": -1.4,
+                "level": "Hard"
             },
             "rank": {
                 "attack": 15,
-                "defense": 10
+                "defense": 8
             }
         },
         "away_team": {
             "name": "Arsenal",
             "short_name": "ARS",
             "attack": {
-                "score": 4.0,
-                "level": "Very Easy"
+                "score": 2.0,
+                "level": "Medium-Easy"
             },
             "defense": {
                 "score": 7.0,
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 2,
+                "attack": 4,
                 "defense": 1
             }
         },
@@ -2300,15 +2300,15 @@
             "name": "Brighton",
             "short_name": "BHA",
             "attack": {
-                "score": 6.1,
+                "score": 7.6,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 1.1,
+                "score": 1.6,
                 "level": "Medium-Easy"
             },
             "rank": {
-                "attack": 8,
+                "attack": 6,
                 "defense": 17
             }
         },
@@ -2316,16 +2316,16 @@
             "name": "West Ham",
             "short_name": "WHU",
             "attack": {
-                "score": -0.5,
-                "level": "Medium"
+                "score": -1.0,
+                "level": "Hard"
             },
             "defense": {
-                "score": -5.5,
+                "score": -7.0,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 18,
-                "defense": 19
+                "attack": 19,
+                "defense": 20
             }
         },
         "favorability": "Brighton"
@@ -2337,16 +2337,16 @@
             "name": "Everton",
             "short_name": "EVE",
             "attack": {
-                "score": 4.6,
-                "level": "Very Easy"
+                "score": 3.6,
+                "level": "Easy"
             },
             "defense": {
                 "score": 1.1,
                 "level": "Medium-Easy"
             },
             "rank": {
-                "attack": 12,
-                "defense": 12
+                "attack": 13,
+                "defense": 13
             }
         },
         "away_team": {
@@ -2357,12 +2357,12 @@
                 "level": "Medium"
             },
             "defense": {
-                "score": -4.0,
+                "score": -3.0,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 13,
-                "defense": 20
+                "attack": 14,
+                "defense": 19
             }
         },
         "favorability": "Everton"
@@ -2378,7 +2378,7 @@
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -3.4,
+                "score": -2.9,
                 "level": "Very Hard"
             },
             "rank": {
@@ -2390,15 +2390,15 @@
             "name": "Crystal Palace",
             "short_name": "CRY",
             "attack": {
-                "score": 4.0,
-                "level": "Very Easy"
+                "score": 3.5,
+                "level": "Easy"
             },
             "defense": {
                 "score": 5.0,
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 6,
+                "attack": 7,
                 "defense": 6
             }
         },
@@ -2411,27 +2411,27 @@
             "name": "Leeds",
             "short_name": "LEE",
             "attack": {
-                "score": 0.6,
-                "level": "Medium"
+                "score": 1.1,
+                "level": "Medium-Easy"
             },
             "defense": {
-                "score": -2.9,
+                "score": -3.4,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 11,
-                "defense": 8
+                "attack": 10,
+                "defense": 9
             }
         },
         "away_team": {
             "name": "Liverpool",
             "short_name": "LIV",
             "attack": {
-                "score": 3.5,
-                "level": "Easy"
+                "score": 4.0,
+                "level": "Very Easy"
             },
             "defense": {
-                "score": 0.0,
+                "score": -0.5,
                 "level": "Medium"
             },
             "rank": {
@@ -2448,11 +2448,11 @@
             "name": "Man City",
             "short_name": "MCI",
             "attack": {
-                "score": 1.1,
+                "score": 1.6,
                 "level": "Medium-Easy"
             },
             "defense": {
-                "score": 7.6,
+                "score": 8.1,
                 "level": "Very Easy"
             },
             "rank": {
@@ -2464,16 +2464,16 @@
             "name": "Sunderland",
             "short_name": "SUN",
             "attack": {
-                "score": -7.0,
+                "score": -7.5,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -0.5,
-                "level": "Medium"
+                "score": -1.0,
+                "level": "Hard"
             },
             "rank": {
-                "attack": 17,
-                "defense": 4
+                "attack": 18,
+                "defense": 5
             }
         },
         "favorability": "Man City"
@@ -2522,32 +2522,32 @@
             "name": "Spurs",
             "short_name": "TOT",
             "attack": {
-                "score": 2.1,
-                "level": "Medium-Easy"
+                "score": 0.6,
+                "level": "Medium"
             },
             "defense": {
-                "score": 5.1,
+                "score": 4.1,
                 "level": "Very Easy"
             },
             "rank": {
-                "attack": 10,
-                "defense": 5
+                "attack": 12,
+                "defense": 4
             }
         },
         "away_team": {
             "name": "Brentford",
             "short_name": "BRE",
             "attack": {
-                "score": -4.5,
+                "score": -3.5,
                 "level": "Very Hard"
             },
             "defense": {
-                "score": -1.5,
-                "level": "Hard"
+                "score": 0.0,
+                "level": "Medium"
             },
             "rank": {
-                "attack": 14,
-                "defense": 13
+                "attack": 11,
+                "defense": 12
             }
         },
         "favorability": "Spurs"
@@ -2559,15 +2559,15 @@
             "name": "Wolves",
             "short_name": "WOL",
             "attack": {
-                "score": -1.4,
-                "level": "Hard"
+                "score": -0.4,
+                "level": "Medium"
             },
             "defense": {
-                "score": -5.4,
+                "score": -6.4,
                 "level": "Very Hard"
             },
             "rank": {
-                "attack": 19,
+                "attack": 17,
                 "defense": 16
             }
         },
@@ -2575,15 +2575,15 @@
             "name": "Man Utd",
             "short_name": "MUN",
             "attack": {
-                "score": 6.0,
+                "score": 7.0,
                 "level": "Very Easy"
             },
             "defense": {
-                "score": 2.0,
+                "score": 1.0,
                 "level": "Medium-Easy"
             },
             "rank": {
-                "attack": 4,
+                "attack": 2,
                 "defense": 15
             }
         },

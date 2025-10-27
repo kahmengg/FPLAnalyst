@@ -4,54 +4,65 @@
     "team": "Everton",
     "team_short": "EVE",
     "assists": 4,
-    "assistsPerGame": 0.5,
-    "points": 37,
+    "assistsPerGame": 0.44,
+    "points": 38,
     "price": 6.9,
     "ownership": 18.5,
-    "form": 3.6
+    "form": 3.3
+  },
+  {
+    "player": "Hartman",
+    "team": "Burnley",
+    "team_short": "BUR",
+    "assists": 4,
+    "assistsPerGame": 0.44,
+    "points": 34,
+    "price": 4.0,
+    "ownership": 0.7,
+    "form": 6.2
   },
   {
     "player": "Kudus",
     "team": "Spurs",
     "team_short": "TOT",
     "assists": 4,
-    "assistsPerGame": 0.5,
-    "points": 41,
+    "assistsPerGame": 0.44,
+    "points": 44,
     "price": 6.8,
-    "ownership": 35.3,
-    "form": 4.8
+    "ownership": 33.8,
+    "form": 5.1
   },
   {
     "player": "Diouf",
     "team": "West Ham",
     "team_short": "WHU",
     "assists": 3,
-    "assistsPerGame": 0.38,
-    "points": 27,
+    "assistsPerGame": 0.33,
+    "points": 28,
     "price": 4.4,
-    "ownership": 3.8,
-    "form": 3.3
+    "ownership": 3.6,
+    "form": 1.8
   },
   {
     "player": "Doku",
     "team": "Man City",
     "team_short": "MCI",
     "assists": 3,
-    "assistsPerGame": 0.38,
-    "points": 30,
+    "assistsPerGame": 0.33,
+    "points": 31,
     "price": 6.6,
-    "ownership": 7.4,
-    "form": 3.6
+    "ownership": 6.3,
+    "form": 0.9
   },
   {
     "player": "João Pedro",
     "team": "Chelsea",
     "team_short": "CHE",
     "assists": 3,
-    "assistsPerGame": 0.38,
-    "points": 41,
+    "assistsPerGame": 0.33,
+    "points": 43,
     "price": 7.5,
-    "ownership": 58.9,
+    "ownership": 53.9,
     "form": 1.8
   },
   {
@@ -59,76 +70,65 @@
     "team": "Bournemouth",
     "team_short": "BOU",
     "assists": 3,
-    "assistsPerGame": 0.38,
-    "points": 70,
-    "price": 8.0,
-    "ownership": 63.3,
-    "form": 8.7
+    "assistsPerGame": 0.33,
+    "points": 73,
+    "price": 8.1,
+    "ownership": 64.5,
+    "form": 7.5
   },
   {
     "player": "Xhaka",
     "team": "Sunderland",
     "team_short": "SUN",
     "assists": 3,
-    "assistsPerGame": 0.38,
-    "points": 37,
-    "price": 5.0,
-    "ownership": 4.6,
-    "form": 5.1
+    "assistsPerGame": 0.33,
+    "points": 39,
+    "price": 5.1,
+    "ownership": 4.8,
+    "form": 3.0
+  },
+  {
+    "player": "Buendía",
+    "team": "Aston Villa",
+    "team_short": "AVL",
+    "assists": 2,
+    "assistsPerGame": 0.22,
+    "points": 28,
+    "price": 5.3,
+    "ownership": 0.3,
+    "form": 3.3
   },
   {
     "player": "Calafiori",
     "team": "Arsenal",
     "team_short": "ARS",
     "assists": 2,
-    "assistsPerGame": 0.25,
-    "points": 48,
+    "assistsPerGame": 0.22,
+    "points": 54,
     "price": 5.8,
-    "ownership": 14.9,
-    "form": 4.8
+    "ownership": 15.4,
+    "form": 6.6
   },
   {
     "player": "Cucurella",
     "team": "Chelsea",
     "team_short": "CHE",
     "assists": 2,
-    "assistsPerGame": 0.25,
-    "points": 35,
+    "assistsPerGame": 0.22,
+    "points": 36,
     "price": 6.1,
-    "ownership": 22.2,
-    "form": 5.5
+    "ownership": 22.5,
+    "form": 5.9
   },
   {
     "player": "Digne",
     "team": "Aston Villa",
     "team_short": "AVL",
     "assists": 2,
-    "assistsPerGame": 0.25,
-    "points": 26,
+    "assistsPerGame": 0.22,
+    "points": 32,
     "price": 4.5,
-    "ownership": 1.8,
-    "form": 4.0
-  },
-  {
-    "player": "Eze",
-    "team": "Arsenal",
-    "team_short": "ARS",
-    "assists": 2,
-    "assistsPerGame": 0.33,
-    "points": 22,
-    "price": 7.6,
-    "ownership": 13.8,
-    "form": 3.3
-  },
-  {
-    "player": "Gakpo",
-    "team": "Liverpool",
-    "team_short": "LIV",
-    "assists": 2,
-    "assistsPerGame": 0.25,
-    "points": 40,
-    "price": 7.5,
-    "ownership": 12.8,
-    "form": 4.5
+    "ownership": 1.6,
+    "form": 4.4
   }
 ]
