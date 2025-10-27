@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, CalendarIcon, Target, Shield, TrendingUp, Users, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
+import { ChevronLeft, ChevronRight, CalendarIcon, Target, Shield, TrendingUp, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
 
@@ -73,10 +73,10 @@ const colorConfig = {
   },
 };
 
-// Unified color function
+// Updated getColorStyles function
 const getColorStyles = (metricType, value, context = null, returnType = "classes") => {
   const config = colorConfig[metricType];
-  if (!config) return returnType === "classes" ? "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200" : "🔴";
+  if (!config) return returnType === "classes" ? "text-gray-600 dark:text-gray-400" : "🔴";
 
   if (metricType === "level") {
     return config[value]?.classes || config.default.classes;
@@ -92,44 +92,7 @@ const getColorStyles = (metricType, value, context = null, returnType = "classes
     const range = config.ranges.find((r) => value <= r.max);
     return range?.classes || config.ranges[config.ranges.length - 1].classes;
   }
-  return returnType === "classes" ? "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200" : "🔴";
-};
-
-
-// TeamBadge component (unchanged)
-const TeamBadge = ({ team }) => {
-  const colors = {
-    ARS: "bg-red-100 text-red-800 border-red-200",
-    BOU: "bg-red-600 text-white border-red-700",
-    BRE: "bg-red-200 text-red-900 border-red-300",
-    BHA: "bg-blue-200 text-blue-900 border-blue-300",
-    BUR: "bg-red-500 text-white border-red-600",
-    CHE: "bg-blue-100 text-blue-800 border-blue-200",
-    CRY: "bg-blue-300 text-blue-900 border-blue-400",
-    EVE: "bg-blue-400 text-blue-900 border-blue-500",
-    FUL: "bg-white text-gray-800 border-gray-200",
-    LEE: "bg-white text-blue-800 border-gray-300",
-    LIV: "bg-green-100 text-green-800 border-green-200",
-    MCI: "bg-sky-100 text-sky-800 border-sky-200",
-    MUN: "bg-yellow-100 text-yellow-800 border-yellow-200",
-    NEW: "bg-gray-900 text-white border-gray-950",
-    TOT: "bg-white text-blue-900 border-gray-400",
-    SUN: "bg-red-300 text-white border-red-400",
-    WHU: "bg-red-400 text-sky-800 border-red-500",
-    WOL: "bg-yellow-200 text-gray-900 border-yellow-300",
-    NFO: "bg-red-400 text-white border-red-500",
-    AVL: "bg-red-500 text-blue-900 border-red-600",
-  };
-  return (
-    <Badge
-      variant="outline"
-      className={`text-xs font-sans uppercase px-2 py-0.5 rounded-lg border-dashed border-2 ${
-        colors[team] || "bg-orange-50 text-orange-700 border-orange-500 hover:bg-orange-100 transition-all duration-200"
-      }`}
-    >
-      {team}
-    </Badge>
-  );
+  return returnType === "classes" ? "text-gray-600 dark:text-gray-400" : "🔴";
 };
 
 export default function FixtureAnalysisPage() {
@@ -143,6 +106,8 @@ export default function FixtureAnalysisPage() {
   const [teamFixtureSummary, setTeamFixtureSummary] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [fixtureSortBy, setFixtureSortBy] = useState("combined_score"); // New
+  const [fixtureSortOrder, setFixtureSortOrder] = useState("desc"); // New
 
   useEffect(() => {
     async function fetchData() {
@@ -157,36 +122,42 @@ export default function FixtureAnalysisPage() {
         const minGameweek = gameweeks.length > 0 ? Math.min(...gameweeks) : 1;
         setGameweek(minGameweek);
         const transformedFixtures = dataFixtures.map((f) => {
-          const homeAvgScore = (f.home_team.attack.score + f.home_team.defense.score) / 2;
-          const awayAvgScore = (f.away_team.attack.score + f.away_team.defense.score) / 2;
-          let favorability;
-          if (homeAvgScore > awayAvgScore + 0.5) {
-            favorability = f.home_team.name;
-          } else if (awayAvgScore > homeAvgScore + 0.5) {
-            favorability = f.away_team.name;
-          } else {
-            favorability = "Neutral";
-          }
-          return {
-            gw: f.gameweek,
-            fixture: f.fixture,
-            teams: {
-              home: {
-                team: f.home_team.name,
-                attack: { ...f.home_team.attack, level: f.home_team.attack.level },
-                defense: { ...f.home_team.defense, level: f.home_team.defense.level },
-                rank: f.home_team.rank,
-              },
-              away: {
-                team: f.away_team.name,
-                attack: { ...f.away_team.attack, level: f.away_team.attack.level },
-                defense: { ...f.away_team.defense, level: f.away_team.defense.level },
-                rank: f.away_team.rank,
-              },
+        const homeAvgScore = (f.home_team.attack.score + f.home_team.defense.score) / 2;
+        const awayAvgScore = (f.away_team.attack.score + f.away_team.defense.score) / 2;
+        let favorability;
+        if (homeAvgScore > awayAvgScore + 0.5) {
+          favorability = f.home_team.name;
+        } else if (awayAvgScore > homeAvgScore + 0.5) {
+          favorability = f.away_team.name;
+        } else {
+          favorability = "Neutral";
+        }
+        return {
+          gw: f.gameweek,
+          fixture: f.fixture,
+          teams: {
+            home: {
+              team: f.home_team.name,
+              attack: { ...f.home_team.attack, level: f.home_team.attack.level },
+              defense: { ...f.home_team.defense, level: f.home_team.defense.level },
+              rank: f.home_team.rank,
             },
-            favorability,
-          };
-        });
+            away: {
+              team: f.away_team.name,
+              attack: { ...f.away_team.attack, level: f.away_team.attack.level },
+              defense: { ...f.away_team.defense, level: f.away_team.defense.level },
+              rank: f.away_team.rank,
+            },
+          },
+          favorability,
+          maxOpportunityScore: Math.max(
+            f.home_team.attack.score,
+            f.home_team.defense.score,
+            f.away_team.attack.score,
+            f.away_team.defense.score
+          ),
+        };
+      });
         setFixtures(transformedFixtures);
 
         // Fetch fixture opportunities
@@ -248,6 +219,11 @@ export default function FixtureAnalysisPage() {
       setSortOrder("desc");
     }
   };
+  
+  const currentFixtures = fixtures.filter((f) => f.gw === gameweek);
+  const sortedCurrentFixtures = useMemo(() => {
+    return [...currentFixtures].sort((a, b) => b.maxOpportunityScore - a.maxOpportunityScore);
+  }, [currentFixtures]);
 
   const { minGameweek, maxGameweek } = useMemo(() => {
   const gameweeks = fixtures.map((f) => f.gw).filter((gw) => typeof gw === "number" && !isNaN(gw));
@@ -263,7 +239,6 @@ export default function FixtureAnalysisPage() {
     return sortOrder === "desc" ? <ArrowDown className="h-3 w-3" /> : <ArrowUp className="h-3 w-3" />;
   };
 
-  const currentFixtures = fixtures.filter((f) => f.gw === gameweek);
 
 
   if (loading) return (
@@ -302,7 +277,7 @@ export default function FixtureAnalysisPage() {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="bg-secondary/50 p-1 rounded-lg border w-full grid grid-cols-2 sm:grid-cols-4 gap-1 text-background">
+          <TabsList className="bg-secondary/50 p-1 rounded-lg border w-full grid grid-cols-3 gap-1 text-background">
             <TabsTrigger
               value="fixtures"
               className="flex items-center justify-center gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white"
@@ -323,13 +298,6 @@ export default function FixtureAnalysisPage() {
             >
               <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden sm:inline">Summary</span>
-            </TabsTrigger>
-            <TabsTrigger
-              value="transfers"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-green-600 data-[state=active]:text-white"
-            >
-              <Users className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="hidden sm:inline">Transfers</span>
             </TabsTrigger>
           </TabsList>
 
@@ -361,7 +329,7 @@ export default function FixtureAnalysisPage() {
 
             {/* Fixtures Grid */}
             <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {currentFixtures.map((fixture, index) => (
+              {sortedCurrentFixtures.map((fixture, index) => (
                 <Card
                   key={index}
                   className="overflow-hidden border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
@@ -684,11 +652,11 @@ export default function FixtureAnalysisPage() {
                 <CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
                   🏆 Team Fixture Difficulty Summary
                   <Badge variant="secondary" className="ml-auto text-xs">
-                    Next 4-5 GWs
+                    Next 3 GWs
                   </Badge>
                 </CardTitle>
                 <p className="text-xs sm:text-sm text-muted-foreground">
-                  Higher scores = easier fixtures, negative = harder fixtures
+                  Scores show fixture difficulty over the next 3 gameweeks. <strong>Attack</strong> and <strong>Defense</strong> scores indicate how easy it is for a team’s attackers or defenders to score points (higher = easier, negative = harder). <strong>Overall</strong> averages these scores. <strong>Fixtures</strong> counts favorable matchups (attack or defense score ≥ 2.5).
                 </p>
               </CardHeader>
               <CardContent className="p-3 sm:p-6">
@@ -775,65 +743,7 @@ export default function FixtureAnalysisPage() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="transfers" className="space-y-6">
-            <div className="grid gap-6 lg:grid-cols-2">
-              <Card className="border-green-500/50 bg-green-50/50 dark:bg-green-950/20 backdrop-blur">
-                <CardHeader>
-                  <CardTitle className="text-green-800 dark:text-green-200 flex items-center gap-2">
-                    🎯 Target Teams for Transfers
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold text-green-700 dark:text-green-300 mb-2">🔥 Attacking Assets:</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• Liverpool (3 good fixtures)</li>
-                        <li>• Arsenal (2 good fixtures)</li>
-                        <li>• Newcastle (2 good fixtures)</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-green-700 dark:text-green-300 mb-2">🛡️ Defensive Assets:</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• Arsenal (3 good fixtures)</li>
-                        <li>• Liverpool (2 good fixtures)</li>
-                        <li>• Chelsea (2 good fixtures)</li>
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
 
-              <Card className="border-red-500/50 bg-red-50/50 dark:bg-red-950/20 backdrop-blur">
-                <CardHeader>
-                  <CardTitle className="text-red-800 dark:text-red-200 flex items-center gap-2">
-                    ❌ Avoid These Teams
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold text-red-700 dark:text-red-300 mb-2">⚔️ Poor Attacking Fixtures:</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• Man United (3 tough fixtures)</li>
-                        <li>• West Ham (2 tough fixtures)</li>
-                        <li>• Wolves (2 tough fixtures)</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-red-700 dark:text-red-300 mb-2">🏰 Poor Defensive Fixtures:</h4>
-                      <ul className="space-y-1 text-sm">
-                        <li>• Brighton (3 tough fixtures)</li>
-                        <li>• Everton (2 tough fixtures)</li>
-                        <li>• Southampton (2 tough fixtures)</li>
-                      </ul>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
         </Tabs>
       </div>
     </div>
