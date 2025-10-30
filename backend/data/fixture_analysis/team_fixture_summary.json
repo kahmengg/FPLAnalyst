@@ -56,18 +56,18 @@
         "num_favorable_fixtures": 1
     },
     {
-        "team": "Crystal Palace",
-        "avg_attack_difficulty": 1.267,
-        "avg_defense_difficulty": -0.067,
-        "overall_difficulty": 0.6,
-        "num_favorable_fixtures": 2
-    },
-    {
         "team": "Fulham",
         "avg_attack_difficulty": -1.067,
         "avg_defense_difficulty": 2.267,
         "overall_difficulty": 0.6,
         "num_favorable_fixtures": 1
+    },
+    {
+        "team": "Crystal Palace",
+        "avg_attack_difficulty": 1.267,
+        "avg_defense_difficulty": -0.067,
+        "overall_difficulty": 0.6,
+        "num_favorable_fixtures": 2
     },
     {
         "team": "Brentford",
