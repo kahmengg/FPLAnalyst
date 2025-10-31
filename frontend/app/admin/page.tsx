@@ -21,7 +21,9 @@ import {
   Lock,
   LogOut,
   Eye,
-  EyeOff
+  EyeOff,
+  Play,
+  Zap
 } from "lucide-react"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
@@ -52,6 +54,11 @@ export default function AdminPage() {
   const [clearingGameWeek, setClearingGameWeek] = useState<number | null>(null)
   const [clearStatus, setClearStatus] = useState<"idle" | "success" | "error">("idle")
   const [clearMessage, setClearMessage] = useState("")
+
+  // Feature 3: Process Notebook
+  const [processingNotebook, setProcessingNotebook] = useState(false)
+  const [processStatus, setProcessStatus] = useState<"idle" | "success" | "error">("idle")
+  const [processMessage, setProcessMessage] = useState("")
 
   // Check authentication on mount
   useEffect(() => {
@@ -232,6 +239,46 @@ export default function AdminPage() {
     }
   }
 
+  // Handle process notebook
+  const handleProcessNotebook = async () => {
+    if (!confirm("This will process the CSV data and regenerate all analytics. This may take a few minutes. Continue?")) {
+      return
+    }
+
+    setProcessingNotebook(true)
+    setProcessStatus("idle")
+    setProcessMessage("Processing data... This may take a few minutes.")
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/admin/process-notebook`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || "Failed to process data")
+      }
+
+      const result = await response.json()
+      setProcessStatus("success")
+      setProcessMessage(result.message || "Successfully processed all data and updated analytics")
+      
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        setProcessStatus("idle")
+        setProcessMessage("")
+      }, 5000)
+    } catch (error) {
+      setProcessStatus("error")
+      setProcessMessage(error instanceof Error ? error.message : "Failed to process data")
+    } finally {
+      setProcessingNotebook(false)
+    }
+  }
+
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "uploading":
@@ -368,6 +415,94 @@ export default function AdminPage() {
             </p>
           </div>
         </div>
+
+        {/* Process Data Feature - Prominent Card */}
+        <Card className="mb-6 border-2 border-primary/30 bg-gradient-to-br from-primary/5 via-purple-500/5 to-blue-500/5 backdrop-blur-md shadow-2xl">
+          <CardHeader className="pb-4 bg-gradient-to-r from-primary/10 to-purple-500/10">
+            <div className="flex items-center gap-2">
+              <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-purple-600 shadow-lg">
+                <Zap className="h-6 w-6 text-white" />
+              </div>
+              <div className="flex-1">
+                <CardTitle className="text-xl text-foreground">
+                  Process FPL Data
+                </CardTitle>
+                <CardDescription className="text-sm mt-1">
+                  Run analytics workflow to generate JSON files from CSV data
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="bg-blue-500/5 border border-blue-500/20 rounded-lg p-4">
+              <div className="flex items-start gap-3 mb-3">
+                <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                <div className="text-sm text-blue-700 dark:text-blue-300">
+                  <p className="font-semibold mb-2">Workflow:</p>
+                  <ol className="list-decimal list-inside space-y-1 ml-2">
+                    <li>Upload your CSV file (fpl-data-stats.csv)</li>
+                    <li>Click "Process Data" below</li>
+                    <li>System runs Jupyter notebook to analyze data</li>
+                    <li>All JSON analytics files are automatically updated</li>
+                    <li>Frontend displays refreshed data</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+
+            <Button
+              onClick={handleProcessNotebook}
+              disabled={processingNotebook}
+              className="w-full h-14 text-lg font-bold bg-gradient-to-r from-primary via-purple-600 to-blue-600 hover:from-primary/90 hover:via-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              {processingNotebook ? (
+                <>
+                  <Loader2 className="mr-3 h-6 w-6 animate-spin" />
+                  Processing Data...
+                </>
+              ) : (
+                <>
+                  <Play className="mr-3 h-6 w-6" />
+                  Process Data & Generate Analytics
+                </>
+              )}
+            </Button>
+
+            {/* Process Status Message */}
+            {processMessage && (
+              <div
+                className={`
+                  flex items-start gap-3 p-4 rounded-xl border animate-in slide-in-from-top-2 fade-in duration-300
+                  ${processStatus === "success" 
+                    ? 'bg-green-500/10 border-green-500/30' 
+                    : processStatus === "error"
+                    ? 'bg-red-500/10 border-red-500/30'
+                    : 'bg-blue-500/10 border-blue-500/30'
+                  }
+                `}
+              >
+                {processStatus === "success" ? (
+                  <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0" />
+                ) : processStatus === "error" ? (
+                  <XCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
+                ) : (
+                  <Loader2 className="h-5 w-5 text-blue-500 animate-spin flex-shrink-0" />
+                )}
+                <p className={`
+                  text-sm flex-1
+                  ${processStatus === "success" 
+                    ? 'text-green-700 dark:text-green-300' 
+                    : processStatus === "error"
+                    ? 'text-red-700 dark:text-red-300'
+                    : 'text-blue-700 dark:text-blue-300'
+                  }
+                `}>
+                  {processMessage}
+                </p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Feature 1: Upload CSV */}

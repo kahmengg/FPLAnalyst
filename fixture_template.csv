@@ -59,3 +59,233 @@ gameweek,home_team,away_team
 15,Newcastle,Burnley
 15,Spurs,Brentford
 15,Wolves,Man Utd
+16,Chelsea,Everton
+16,Liverpool,Brighton
+16,Burnley,Fulham
+16,Arsenal,Wolves
+16,Man Utd,Bournemouth
+16,West Ham,Aston Villa
+16,Brentford,Leeds
+16,Crystal Palace,Man City
+16,Nott'm Forest,Spurs
+16,Sunderland,Newcastle
+17,Newcastle,Chelsea
+17,Bournemouth,Burnley
+17,Brighton,Sunderland
+17,Man City,West Ham
+17,Wolves,Brentford
+17,Spurs,Liverpool
+17,Everton,Arsenal
+17,Leeds,Crystal Palace
+17,Aston Villa,Man Utd
+17,Fulham,Nott'm Forest
+18,Arsenal,Brighton
+18,Brentford,Bournemouth
+18,Burnley,Everton
+18,Chelsea,Aston Villa
+18,Crystal Palace,Spurs
+18,Liverpool,Wolves
+18,Man Utd,Newcastle
+18,Nott'm Forest,Man City
+18,Sunderland,Leeds
+18,West Ham,Fulham
+19,Arsenal,Aston Villa
+19,Brentford,Spurs
+19,Burnley,Newcastle
+19,Chelsea,Bournemouth
+19,Crystal Palace,Fulham
+19,Liverpool,Leeds
+19,Man Utd,Wolves
+19,Nott'm Forest,Everton
+19,Sunderland,Man City
+19,West Ham,Brighton
+20,Aston Villa,Nott'm Forest
+20,Bournemouth,Arsenal
+20,Brighton,Burnley
+20,Everton,Brentford
+20,Fulham,Liverpool
+20,Leeds,Man Utd
+20,Man City,Chelsea
+20,Newcastle,Crystal Palace
+20,Spurs,Sunderland
+20,Wolves,West Ham
+21,Arsenal,Liverpool
+21,Bournemouth,Spurs
+21,Brentford,Sunderland
+21,Burnley,Man Utd
+21,Crystal Palace,Aston Villa
+21,Everton,Wolves
+21,Fulham,Chelsea
+21,Man City,Brighton
+21,Newcastle,Leeds
+21,West Ham,Nott'm Forest
+22,Aston Villa,Everton
+22,Brighton,Bournemouth
+22,Chelsea,Brentford
+22,Leeds,Fulham
+22,Liverpool,Burnley
+22,Man Utd,Man City
+22,Nott'm Forest,Arsenal
+22,Spurs,West Ham
+22,Sunderland,Crystal Palace
+22,Wolves,Newcastle
+23,Arsenal,Man Utd
+23,Bournemouth,Liverpool
+23,Brentford,Nott'm Forest
+23,Burnley,Spurs
+23,Crystal Palace,Chelsea
+23,Everton,Leeds
+23,Fulham,Brighton
+23,Man City,Wolves
+23,Newcastle,Aston Villa
+23,West Ham,Sunderland
+24,Aston Villa,Brentford
+24,Brighton,Everton
+24,Chelsea,West Ham
+24,Leeds,Arsenal
+24,Liverpool,Newcastle
+24,Man Utd,Fulham
+24,Nott'm Forest,Crystal Palace
+24,Spurs,Man City
+24,Sunderland,Burnley
+24,Wolves,Bournemouth
+25,Arsenal,Sunderland
+25,Bournemouth,Aston Villa
+25,Brighton,Crystal Palace
+25,Burnley,West Ham
+25,Fulham,Everton
+25,Leeds,Nott'm Forest
+25,Liverpool,Man City
+25,Man Utd,Spurs
+25,Newcastle,Brentford
+25,Wolves,Chelsea
+26,Aston Villa,Brighton
+26,Brentford,Arsenal
+26,Chelsea,Leeds
+26,Crystal Palace,Burnley
+26,Everton,Bournemouth
+26,Man City,Fulham
+26,Nott'm Forest,Wolves
+26,Spurs,Newcastle
+26,Sunderland,Liverpool
+26,West Ham,Man Utd
+27,Aston Villa,Leeds
+27,Brentford,Brighton
+27,Chelsea,Burnley
+27,Crystal Palace,Wolves
+27,Everton,Man Utd
+27,Man City,Newcastle
+27,Nott'm Forest,Liverpool
+27,Spurs,Arsenal
+27,Sunderland,Fulham
+27,West Ham,Bournemouth
+28,Arsenal,Chelsea
+28,Bournemouth,Sunderland
+28,Brighton,Nott'm Forest
+28,Burnley,Brentford
+28,Fulham,Spurs
+28,Leeds,Man City
+28,Liverpool,West Ham
+28,Man Utd,Crystal Palace
+28,Newcastle,Everton
+28,Wolves,Aston Villa
+29,Aston Villa,Chelsea
+29,Bournemouth,Brentford
+29,Brighton,Arsenal
+29,Everton,Burnley
+29,Fulham,West Ham
+29,Leeds,Sunderland
+29,Man City,Nott'm Forest
+29,Newcastle,Man Utd
+29,Spurs,Crystal Palace
+29,Wolves,Liverpool
+30,Arsenal,Everton
+30,Brentford,Wolves
+30,Burnley,Bournemouth
+30,Chelsea,Newcastle
+30,Crystal Palace,Leeds
+30,Liverpool,Spurs
+30,Man Utd,Aston Villa
+30,Nott'm Forest,Fulham
+30,Sunderland,Brighton
+30,West Ham,Man City
+31,Aston Villa,West Ham
+31,Bournemouth,Man Utd
+31,Brighton,Liverpool
+31,Everton,Chelsea
+31,Fulham,Burnley
+31,Leeds,Brentford
+31,Man City,Crystal Palace
+31,Newcastle,Sunderland
+31,Spurs,Nott'm Forest
+31,Wolves,Arsenal
+32,Arsenal,Bournemouth
+32,Brentford,Everton
+32,Burnley,Brighton
+32,Chelsea,Man City
+32,Crystal Palace,Newcastle
+32,Liverpool,Fulham
+32,Man Utd,Leeds
+32,Nott'm Forest,Aston Villa
+32,Sunderland,Spurs
+32,West Ham,Wolves
+33,Aston Villa,Sunderland
+33,Brentford,Fulham
+33,Chelsea,Man Utd
+33,Crystal Palace,West Ham
+33,Everton,Liverpool
+33,Leeds,Wolves
+33,Man City,Arsenal
+33,Newcastle,Bournemouth
+33,Nott'm Forest,Burnley
+33,Spurs,Brighton
+34,Arsenal,Newcastle
+34,Bournemouth,Leeds
+34,Brighton,Chelsea
+34,Burnley,Man City
+34,Fulham,Aston Villa
+34,Liverpool,Crystal Palace
+34,Man Utd,Brentford
+34,Sunderland,Nott'm Forest
+34,West Ham,Everton
+34,Wolves,Spurs
+35,Arsenal,Fulham
+35,Aston Villa,Spurs
+35,Bournemouth,Crystal Palace
+35,Brentford,West Ham
+35,Chelsea,Nott'm Forest
+35,Everton,Man City
+35,Leeds,Burnley
+35,Man Utd,Liverpool
+35,Newcastle,Brighton
+35,Wolves,Sunderland
+36,Brighton,Wolves
+36,Burnley,Aston Villa
+36,Crystal Palace,Everton
+36,Fulham,Bournemouth
+36,Liverpool,Chelsea
+36,Man City,Brentford
+36,Nott'm Forest,Newcastle
+36,Spurs,Leeds
+36,Sunderland,Man Utd
+36,West Ham,Arsenal
+37,Arsenal,Burnley
+37,Aston Villa,Liverpool
+37,Bournemouth,Man City
+37,Brentford,Crystal Palace
+37,Chelsea,Spurs
+37,Everton,Sunderland
+37,Leeds,Brighton
+37,Man Utd,Nott'm Forest
+37,Newcastle,West Ham
+37,Wolves,Fulham
+38,Brighton,Man Utd
+38,Burnley,Wolves
+38,Crystal Palace,Arsenal
+38,Fulham,Newcastle
+38,Liverpool,Brentford
+38,Man City,Aston Villa
+38,Nott'm Forest,Bournemouth
+38,Spurs,Everton
+38,Sunderland,Chelsea
+38,West Ham,Leeds

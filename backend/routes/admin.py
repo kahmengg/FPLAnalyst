@@ -211,12 +211,9 @@ def clear_gameweek():
         with open(fixtures_file, 'w') as f:
             json.dump(save_data, f, indent=2)
         
-        # Also update related files if they exist
-        update_related_files(gameweek)
-        
         return jsonify({
             'success': True,
-            'message': f'Successfully deleted {deleted_count} fixture(s) from Game Week {gameweek}',
+            'message': f'Successfully deleted {deleted_count} fixture(s) from Game Week {gameweek}. Run "Process Data" to update analytics.',
             'deleted_count': deleted_count,
             'remaining_fixtures': len(filtered_fixtures)
         }), 200
@@ -233,51 +230,73 @@ def clear_gameweek():
         }), 500
 
 
-def update_related_files(gameweek):
+@admin_bp.route('/admin/process-notebook', methods=['POST'])
+def process_notebook():
     """
-    Update related fixture analysis files after clearing a gameweek
-    This ensures consistency across all fixture-related data
+    Execute the Jupyter notebook to process CSV data and generate JSON files
+    This runs the fpl.ipynb notebook which reads CSV and outputs analytics JSON
     """
     try:
-        fixture_analysis_dir = os.path.join(Config.DATA_DIR, 'fixture_analysis')
+        import subprocess
+        import sys
         
-        # Update fixture_opportunities.json
-        opportunities_file = os.path.join(fixture_analysis_dir, 'fixture_opportunities.json')
-        if os.path.exists(opportunities_file):
-            with open(opportunities_file, 'r') as f:
-                opportunities_data = json.load(f)
-            
-            # Filter out opportunities for the cleared gameweek
-            if isinstance(opportunities_data, dict):
-                for key in opportunities_data:
-                    if isinstance(opportunities_data[key], list):
-                        opportunities_data[key] = [
-                            opp for opp in opportunities_data[key]
-                            if opp.get('gameweek', opp.get('GW')) != gameweek
-                        ]
-            
-            with open(opportunities_file, 'w') as f:
-                json.dump(opportunities_data, f, indent=2)
+        # Get the project root directory (where fpl.ipynb is located)
+        notebook_path = os.path.join(Config.PROJECT_ROOT, 'fpl.ipynb')
         
-        # Update team_fixture_summary.json
-        summary_file = os.path.join(fixture_analysis_dir, 'team_fixture_summary.json')
-        if os.path.exists(summary_file):
-            with open(summary_file, 'r') as f:
-                summary_data = json.load(f)
-            
-            # Update team summaries to exclude the cleared gameweek
-            if isinstance(summary_data, dict):
-                for team in summary_data:
-                    if isinstance(summary_data[team], dict):
-                        if 'fixtures' in summary_data[team] and isinstance(summary_data[team]['fixtures'], list):
-                            summary_data[team]['fixtures'] = [
-                                fix for fix in summary_data[team]['fixtures']
-                                if fix.get('gameweek', fix.get('GW')) != gameweek
-                            ]
-            
-            with open(summary_file, 'w') as f:
-                json.dump(summary_data, f, indent=2)
+        # Check if notebook exists
+        if not os.path.exists(notebook_path):
+            return jsonify({
+                'success': False,
+                'message': f'Notebook not found at {notebook_path}'
+            }), 404
         
+        # Check if CSV file exists
+        if not os.path.exists(Config.FPL_DATA_CSV):
+            return jsonify({
+                'success': False,
+                'message': 'CSV file not found. Please upload fpl-data-stats.csv first.'
+            }), 404
+        
+        # Execute the notebook using nbconvert
+        # This runs the notebook and generates all JSON outputs
+        result = subprocess.run(
+            [
+                sys.executable, '-m', 'jupyter', 'nbconvert',
+                '--to', 'notebook',
+                '--execute',
+                '--inplace',
+                notebook_path
+            ],
+            capture_output=True,
+            text=True,
+            timeout=300  # 5 minute timeout
+        )
+        
+        if result.returncode != 0:
+            error_message = result.stderr if result.stderr else 'Unknown error during notebook execution'
+            return jsonify({
+                'success': False,
+                'message': f'Notebook execution failed: {error_message}'
+            }), 500
+        
+        return jsonify({
+            'success': True,
+            'message': 'Successfully processed data and updated all analytics files',
+            'output': result.stdout if result.stdout else 'Notebook executed successfully'
+        }), 200
+    
+    except subprocess.TimeoutExpired:
+        return jsonify({
+            'success': False,
+            'message': 'Notebook execution timed out (exceeded 5 minutes)'
+        }), 500
+    except FileNotFoundError:
+        return jsonify({
+            'success': False,
+            'message': 'Jupyter is not installed. Please install it with: pip install jupyter nbconvert'
+        }), 500
     except Exception as e:
-        # Log error but don't fail the main operation
-        print(f"Warning: Error updating related files: {str(e)}")
+        return jsonify({
+            'success': False,
+            'message': f'Error executing notebook: {str(e)}'
+        }), 500

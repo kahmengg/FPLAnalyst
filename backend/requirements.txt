@@ -6,3 +6,5 @@ python-dotenv==1.0.0
 gunicorn==23.0.0
 uvicorn==0.37.0
 setuptools==80.9.0
+jupyter==1.1.1
+nbconvert==7.16.4
