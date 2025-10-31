@@ -6,10 +6,12 @@ from routes.quick_picks import quick_picks_bp
 from routes.rankings import rankings_bp
 from routes.top_performers import top_performers_bp
 from routes.health import health_bp
+from routes.admin import admin_bp
 from config.config import Config
 import os
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": ["https://fpelly.vercel.app"]}})  # Restrict to Vercel domain
+# Enable CORS for both production (Vercel) and local development
+CORS(app, resources={r"/api/*": {"origins": ["https://fpelly.vercel.app", "http://localhost:3000"]}})
 app.config.from_object(Config)
 # CORS(app)
 # Register blueprints
@@ -18,6 +20,7 @@ app.register_blueprint(quick_picks_bp, url_prefix='/api')
 app.register_blueprint(rankings_bp, url_prefix='/api')
 app.register_blueprint(top_performers_bp, url_prefix='/api')
 app.register_blueprint(health_bp, url_prefix='/api')
+app.register_blueprint(admin_bp, url_prefix='/api')
 
 if __name__ == '__main__':
     print("🚀 Starting FPL Analyst API...")

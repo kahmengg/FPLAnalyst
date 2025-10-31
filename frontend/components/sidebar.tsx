@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, TrendingUp, Trophy, Calendar, Gem, ArrowLeftRight, Target, Menu, X, Clock } from "lucide-react"
+import { Home, TrendingUp, Trophy, Calendar, Gem, ArrowLeftRight, Target, Menu, X, Clock, Shield } from "lucide-react"
 import { useState, useEffect } from "react"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
@@ -15,6 +15,10 @@ const navigation = [
   { name: "Fixture Analysis", href: "/fixture-analysis", icon: Calendar, color: "text-purple-500", bgColor: "bg-purple-500/10", hoverColor: "hover:bg-purple-500/20" },
   { name: "Quick Picks", href: "/quick-picks", icon: Target, color: "text-indigo-500", bgColor: "bg-indigo-500/10", hoverColor: "hover:bg-indigo-500/20" },
   { name: "Transfer Strategy", href: "/transfer-strategy", icon: ArrowLeftRight, color: "text-red-500", bgColor: "bg-red-500/10", hoverColor: "hover:bg-red-500/20" },
+]
+
+const adminNavigation = [
+  { name: "Admin Panel", href: "/admin", icon: Shield, color: "text-orange-500", bgColor: "bg-orange-500/10", hoverColor: "hover:bg-orange-500/20" },
 ]
 
 async function fetchWithRetry(url, retries = MAX_RETRIES) {
@@ -120,7 +124,7 @@ export function Sidebar() {
           </div>
 
           {/* Enhanced Navigation */}
-          <nav className="flex-1 space-y-2 px-4 py-6">
+          <nav className="flex-1 space-y-2 px-4 py-6 overflow-y-auto">
             <div className="mb-6">
               <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-3 mb-3">
                 Analytics
@@ -142,6 +146,68 @@ export function Sidebar() {
                     `}
                     style={{ 
                       animationDelay: `${index * 75}ms`,
+                      animationFillMode: 'both'
+                    }}
+                  >
+                    {/* Active indicator */}
+                    {isActive && (
+                      <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 ${item.color.replace('text-', 'bg-')} rounded-r-full`}></div>
+                    )}
+                    
+                    {/* Icon with enhanced styling */}
+                    <div className={`
+                      relative flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-300
+                      ${isActive 
+                        ? `${item.bgColor.replace('/10', '/20')} ${item.color}` 
+                        : 'group-hover:bg-slate-100 dark:group-hover:bg-slate-700/50'
+                      }
+                      group-hover:scale-110
+                    `}>
+                      <item.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+                      
+                      {/* Subtle glow for active state */}
+                      {isActive && (
+                        <div className={`absolute inset-0 rounded-lg ${item.bgColor.replace('/10', '/30')} blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                      )}
+                    </div>
+                    
+                    <span className="flex-1 transition-all duration-300 group-hover:translate-x-1">
+                      {item.name}
+                    </span>
+                    
+                    {/* Hover arrow indicator */}
+                    <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </Link>
+                )
+              })}
+            </div>
+
+            {/* Admin Section */}
+            <div className="pt-4 border-t border-slate-200/50 dark:border-slate-700/50">
+              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-3 mb-3">
+                Administration
+              </p>
+              {adminNavigation.map((item, index) => {
+                const isActive = pathname === item.href
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsMobileOpen(false)}
+                    className={`
+                      group relative flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-300
+                      animate-in fade-in slide-in-from-left-4
+                      ${isActive
+                        ? `${item.bgColor} ${item.color} shadow-lg shadow-${item.color.split('-')[1]}-500/20`
+                        : `text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white ${item.hoverColor}`
+                      }
+                    `}
+                    style={{ 
+                      animationDelay: `${(navigation.length + index) * 75}ms`,
                       animationFillMode: 'both'
                     }}
                   >
