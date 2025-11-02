@@ -6,8 +6,8 @@
     "position": "Forward",
     "points": 85,
     "ppg": 9.4,
-    "price": 14.7,
-    "ownership": 68.3,
+    "price": 14.8,
+    "ownership": 68.6,
     "form": 6.9
   },
   {
@@ -18,7 +18,7 @@
     "points": 73,
     "ppg": 8.1,
     "price": 8.1,
-    "ownership": 64.5,
+    "ownership": 64.3,
     "form": 7.5
   },
   {
@@ -28,8 +28,8 @@
     "position": "Defender",
     "points": 68,
     "ppg": 7.6,
-    "price": 6.4,
-    "ownership": 35.6,
+    "price": 6.5,
+    "ownership": 36.9,
     "form": 10.0
   },
   {
@@ -39,8 +39,8 @@
     "position": "Defender",
     "points": 60,
     "ppg": 6.7,
-    "price": 6.0,
-    "ownership": 23.0,
+    "price": 6.1,
+    "ownership": 23.6,
     "form": 8.4
   },
   {
@@ -51,7 +51,7 @@
     "points": 55,
     "ppg": 6.1,
     "price": 4.7,
-    "ownership": 31.2,
+    "ownership": 31.9,
     "form": 9.2
   },
   {
@@ -62,7 +62,7 @@
     "points": 54,
     "ppg": 6.0,
     "price": 5.8,
-    "ownership": 15.4,
+    "ownership": 15.5,
     "form": 6.6
   },
   {
@@ -73,7 +73,7 @@
     "points": 54,
     "ppg": 6.0,
     "price": 4.9,
-    "ownership": 32.4,
+    "ownership": 32.7,
     "form": 4.0
   },
   {
@@ -84,7 +84,7 @@
     "points": 53,
     "ppg": 5.9,
     "price": 5.0,
-    "ownership": 27.0,
+    "ownership": 26.7,
     "form": 3.3
   },
   {
@@ -94,8 +94,8 @@
     "position": "Goalkeeper",
     "points": 52,
     "ppg": 5.8,
-    "price": 4.6,
-    "ownership": 6.1,
+    "price": 4.7,
+    "ownership": 6.4,
     "form": 5.2
   },
   {
@@ -105,8 +105,8 @@
     "position": "Midfielder",
     "points": 51,
     "ppg": 5.7,
-    "price": 8.1,
-    "ownership": 19.3,
+    "price": 8.2,
+    "ownership": 22.3,
     "form": 9.0
   },
   {
@@ -116,8 +116,8 @@
     "position": "Midfielder",
     "points": 50,
     "ppg": 5.6,
-    "price": 6.6,
-    "ownership": 12.9,
+    "price": 6.7,
+    "ownership": 13.5,
     "form": 6.3
   },
   {
@@ -128,7 +128,7 @@
     "points": 48,
     "ppg": 5.3,
     "price": 5.9,
-    "ownership": 18.1,
+    "ownership": 18.2,
     "form": 3.9
   },
   {
@@ -138,8 +138,8 @@
     "position": "Defender",
     "points": 48,
     "ppg": 5.3,
-    "price": 5.6,
-    "ownership": 13.7,
+    "price": 5.7,
+    "ownership": 14.1,
     "form": 7.3
   },
   {
@@ -161,7 +161,7 @@
     "points": 46,
     "ppg": 5.1,
     "price": 4.6,
-    "ownership": 4.9,
+    "ownership": 5.0,
     "form": 7.0
   }
 ]

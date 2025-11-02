@@ -5,7 +5,7 @@
     "team_short": "BRE",
     "position": "FWD",
     "points": 45,
-    "ownership": 6.0,
+    "ownership": 6.8,
     "price": 6.2,
     "xG": 4.4,
     "xA": 1.1,
@@ -19,13 +19,13 @@
     "team_short": "BHA",
     "position": "FWD",
     "points": 37,
-    "ownership": 4.7,
+    "ownership": 5.6,
     "price": 6.4,
     "xG": 3.5,
     "xA": 0.2,
     "xCS": 1.78,
     "form": 6.0,
-    "potentialScore": 9.11
+    "potentialScore": 9.12
   },
   {
     "player": "Neto",
@@ -33,13 +33,13 @@
     "team_short": "CHE",
     "position": "MID",
     "points": 40,
-    "ownership": 5.3,
+    "ownership": 5.4,
     "price": 7.0,
     "xG": 0.8,
     "xA": 1.6,
     "xCS": 1.68,
     "form": 6.6,
-    "potentialScore": 8.36
+    "potentialScore": 8.38
   },
   {
     "player": "Minteh",
@@ -47,13 +47,13 @@
     "team_short": "BHA",
     "position": "MID",
     "points": 38,
-    "ownership": 3.6,
+    "ownership": 3.7,
     "price": 6.0,
     "xG": 1.6,
     "xA": 2.1,
     "xCS": 1.78,
     "form": 2.7,
-    "potentialScore": 8.14
+    "potentialScore": 8.15
   },
   {
     "player": "Tavernier",
@@ -61,13 +61,13 @@
     "team_short": "BOU",
     "position": "MID",
     "points": 43,
-    "ownership": 1.3,
+    "ownership": 1.4,
     "price": 5.5,
     "xG": 1.0,
     "xA": 1.4,
     "xCS": 4.15,
     "form": 5.7,
-    "potentialScore": 7.88
+    "potentialScore": 7.9
   },
   {
     "player": "Schade",
@@ -81,7 +81,7 @@
     "xA": 1.0,
     "xCS": 2.33,
     "form": 4.2,
-    "potentialScore": 7.63
+    "potentialScore": 7.65
   },
   {
     "player": "Szoboszlai",
@@ -89,13 +89,13 @@
     "team_short": "LIV",
     "position": "MID",
     "points": 41,
-    "ownership": 3.9,
+    "ownership": 4.1,
     "price": 6.5,
     "xG": 1.1,
     "xA": 1.5,
     "xCS": 2.35,
     "form": 4.5,
-    "potentialScore": 7.38
+    "potentialScore": 7.4
   },
   {
     "player": "Mukiele",
@@ -103,13 +103,13 @@
     "team_short": "SUN",
     "position": "DEF",
     "points": 46,
-    "ownership": 4.4,
+    "ownership": 4.8,
     "price": 4.1,
     "xG": 0.5,
     "xA": 0.2,
     "xCS": 1.88,
     "form": 8.1,
-    "potentialScore": 7.37
+    "potentialScore": 7.39
   },
   {
     "player": "Bruno G.",
@@ -117,13 +117,13 @@
     "team_short": "NEW",
     "position": "MID",
     "points": 42,
-    "ownership": 2.7,
+    "ownership": 3.0,
     "price": 6.5,
     "xG": 1.4,
     "xA": 0.4,
     "xCS": 4.13,
     "form": 7.8,
-    "potentialScore": 7.36
+    "potentialScore": 7.38
   },
   {
     "player": "Rodon",
@@ -131,13 +131,13 @@
     "team_short": "LEE",
     "position": "DEF",
     "points": 44,
-    "ownership": 6.1,
+    "ownership": 6.3,
     "price": 4.1,
     "xG": 0.7,
     "xA": 0.1,
     "xCS": 3.45,
     "form": 5.5,
-    "potentialScore": 7.35
+    "potentialScore": 7.36
   },
   {
     "player": "Aaronson",
@@ -145,13 +145,13 @@
     "team_short": "LEE",
     "position": "MID",
     "points": 32,
-    "ownership": 0.1,
+    "ownership": 0.2,
     "price": 5.4,
     "xG": 1.8,
     "xA": 0.9,
     "xCS": 3.45,
     "form": 5.4,
-    "potentialScore": 7.1
+    "potentialScore": 7.12
   },
   {
     "player": "Longstaff",
@@ -165,7 +165,7 @@
     "xA": 1.5,
     "xCS": 3.45,
     "form": 3.0,
-    "potentialScore": 6.49
+    "potentialScore": 6.5
   },
   {
     "player": "O.Dango",
@@ -173,13 +173,13 @@
     "team_short": "BRE",
     "position": "MID",
     "points": 33,
-    "ownership": 0.4,
+    "ownership": 0.5,
     "price": 6.0,
     "xG": 2.2,
     "xA": 0.7,
     "xCS": 2.22,
     "form": 4.2,
-    "potentialScore": 6.37
+    "potentialScore": 6.4
   },
   {
     "player": "O’Reilly",
@@ -193,7 +193,7 @@
     "xA": 0.6,
     "xCS": 3.1,
     "form": 6.2,
-    "potentialScore": 6.18
+    "potentialScore": 6.19
   },
   {
     "player": "Lukić",
@@ -207,6 +207,6 @@
     "xA": 1.2,
     "xCS": 1.44,
     "form": 3.0,
-    "potentialScore": 6.1
+    "potentialScore": 6.12
   }
 ]

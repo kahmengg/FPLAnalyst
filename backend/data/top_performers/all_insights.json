@@ -7,8 +7,8 @@
       "position": "Forward",
       "points": 85,
       "ppg": 9.4,
-      "price": 14.7,
-      "ownership": 68.3,
+      "price": 14.8,
+      "ownership": 68.6,
       "form": 6.9
     },
     {
@@ -19,7 +19,7 @@
       "points": 73,
       "ppg": 8.1,
       "price": 8.1,
-      "ownership": 64.5,
+      "ownership": 64.3,
       "form": 7.5
     },
     {
@@ -29,8 +29,8 @@
       "position": "Defender",
       "points": 68,
       "ppg": 7.6,
-      "price": 6.4,
-      "ownership": 35.6,
+      "price": 6.5,
+      "ownership": 36.9,
       "form": 10.0
     },
     {
@@ -40,8 +40,8 @@
       "position": "Defender",
       "points": 60,
       "ppg": 6.7,
-      "price": 6.0,
-      "ownership": 23.0,
+      "price": 6.1,
+      "ownership": 23.6,
       "form": 8.4
     },
     {
@@ -52,7 +52,7 @@
       "points": 55,
       "ppg": 6.1,
       "price": 4.7,
-      "ownership": 31.2,
+      "ownership": 31.9,
       "form": 9.2
     },
     {
@@ -63,7 +63,7 @@
       "points": 54,
       "ppg": 6.0,
       "price": 5.8,
-      "ownership": 15.4,
+      "ownership": 15.5,
       "form": 6.6
     },
     {
@@ -74,7 +74,7 @@
       "points": 54,
       "ppg": 6.0,
       "price": 4.9,
-      "ownership": 32.4,
+      "ownership": 32.7,
       "form": 4.0
     },
     {
@@ -85,7 +85,7 @@
       "points": 53,
       "ppg": 5.9,
       "price": 5.0,
-      "ownership": 27.0,
+      "ownership": 26.7,
       "form": 3.3
     },
     {
@@ -95,8 +95,8 @@
       "position": "Goalkeeper",
       "points": 52,
       "ppg": 5.8,
-      "price": 4.6,
-      "ownership": 6.1,
+      "price": 4.7,
+      "ownership": 6.4,
       "form": 5.2
     },
     {
@@ -106,8 +106,8 @@
       "position": "Midfielder",
       "points": 51,
       "ppg": 5.7,
-      "price": 8.1,
-      "ownership": 19.3,
+      "price": 8.2,
+      "ownership": 22.3,
       "form": 9.0
     },
     {
@@ -117,8 +117,8 @@
       "position": "Midfielder",
       "points": 50,
       "ppg": 5.6,
-      "price": 6.6,
-      "ownership": 12.9,
+      "price": 6.7,
+      "ownership": 13.5,
       "form": 6.3
     },
     {
@@ -129,7 +129,7 @@
       "points": 48,
       "ppg": 5.3,
       "price": 5.9,
-      "ownership": 18.1,
+      "ownership": 18.2,
       "form": 3.9
     },
     {
@@ -139,8 +139,8 @@
       "position": "Defender",
       "points": 48,
       "ppg": 5.3,
-      "price": 5.6,
-      "ownership": 13.7,
+      "price": 5.7,
+      "ownership": 14.1,
       "form": 7.3
     },
     {
@@ -162,7 +162,7 @@
       "points": 46,
       "ppg": 5.1,
       "price": 4.6,
-      "ownership": 4.9,
+      "ownership": 5.0,
       "form": 7.0
     }
   ],
@@ -258,14 +258,14 @@
       "form": 3.3
     },
     {
-      "player": "Chalobah",
-      "team": "Chelsea",
-      "team_short": "CHE",
+      "player": "Lacroix",
+      "team": "Crystal Palace",
+      "team_short": "CRY",
       "position": "Defender",
-      "pointsPerMillion": 8.24,
+      "pointsPerMillion": 8.4,
       "totalPoints": 42,
-      "price": 5.1,
-      "form": 2.6
+      "price": 5.0,
+      "form": 2.9
     }
   ],
   "hidden_gems": [
@@ -275,7 +275,7 @@
       "team_short": "BRE",
       "position": "FWD",
       "points": 45,
-      "ownership": 6.0,
+      "ownership": 6.8,
       "price": 6.2,
       "xG": 4.4,
       "xA": 1.1,
@@ -289,13 +289,13 @@
       "team_short": "BHA",
       "position": "FWD",
       "points": 37,
-      "ownership": 4.7,
+      "ownership": 5.6,
       "price": 6.4,
       "xG": 3.5,
       "xA": 0.2,
       "xCS": 1.78,
       "form": 6.0,
-      "potentialScore": 9.11
+      "potentialScore": 9.12
     },
     {
       "player": "Neto",
@@ -303,13 +303,13 @@
       "team_short": "CHE",
       "position": "MID",
       "points": 40,
-      "ownership": 5.3,
+      "ownership": 5.4,
       "price": 7.0,
       "xG": 0.8,
       "xA": 1.6,
       "xCS": 1.68,
       "form": 6.6,
-      "potentialScore": 8.36
+      "potentialScore": 8.38
     },
     {
       "player": "Minteh",
@@ -317,13 +317,13 @@
       "team_short": "BHA",
       "position": "MID",
       "points": 38,
-      "ownership": 3.6,
+      "ownership": 3.7,
       "price": 6.0,
       "xG": 1.6,
       "xA": 2.1,
       "xCS": 1.78,
       "form": 2.7,
-      "potentialScore": 8.14
+      "potentialScore": 8.15
     },
     {
       "player": "Tavernier",
@@ -331,13 +331,13 @@
       "team_short": "BOU",
       "position": "MID",
       "points": 43,
-      "ownership": 1.3,
+      "ownership": 1.4,
       "price": 5.5,
       "xG": 1.0,
       "xA": 1.4,
       "xCS": 4.15,
       "form": 5.7,
-      "potentialScore": 7.88
+      "potentialScore": 7.9
     },
     {
       "player": "Schade",
@@ -351,7 +351,7 @@
       "xA": 1.0,
       "xCS": 2.33,
       "form": 4.2,
-      "potentialScore": 7.63
+      "potentialScore": 7.65
     },
     {
       "player": "Szoboszlai",
@@ -359,13 +359,13 @@
       "team_short": "LIV",
       "position": "MID",
       "points": 41,
-      "ownership": 3.9,
+      "ownership": 4.1,
       "price": 6.5,
       "xG": 1.1,
       "xA": 1.5,
       "xCS": 2.35,
       "form": 4.5,
-      "potentialScore": 7.38
+      "potentialScore": 7.4
     },
     {
       "player": "Mukiele",
@@ -373,13 +373,13 @@
       "team_short": "SUN",
       "position": "DEF",
       "points": 46,
-      "ownership": 4.4,
+      "ownership": 4.8,
       "price": 4.1,
       "xG": 0.5,
       "xA": 0.2,
       "xCS": 1.88,
       "form": 8.1,
-      "potentialScore": 7.37
+      "potentialScore": 7.39
     },
     {
       "player": "Bruno G.",
@@ -387,13 +387,13 @@
       "team_short": "NEW",
       "position": "MID",
       "points": 42,
-      "ownership": 2.7,
+      "ownership": 3.0,
       "price": 6.5,
       "xG": 1.4,
       "xA": 0.4,
       "xCS": 4.13,
       "form": 7.8,
-      "potentialScore": 7.36
+      "potentialScore": 7.38
     },
     {
       "player": "Rodon",
@@ -401,13 +401,13 @@
       "team_short": "LEE",
       "position": "DEF",
       "points": 44,
-      "ownership": 6.1,
+      "ownership": 6.3,
       "price": 4.1,
       "xG": 0.7,
       "xA": 0.1,
       "xCS": 3.45,
       "form": 5.5,
-      "potentialScore": 7.35
+      "potentialScore": 7.36
     },
     {
       "player": "Aaronson",
@@ -415,13 +415,13 @@
       "team_short": "LEE",
       "position": "MID",
       "points": 32,
-      "ownership": 0.1,
+      "ownership": 0.2,
       "price": 5.4,
       "xG": 1.8,
       "xA": 0.9,
       "xCS": 3.45,
       "form": 5.4,
-      "potentialScore": 7.1
+      "potentialScore": 7.12
     },
     {
       "player": "Longstaff",
@@ -435,7 +435,7 @@
       "xA": 1.5,
       "xCS": 3.45,
       "form": 3.0,
-      "potentialScore": 6.49
+      "potentialScore": 6.5
     },
     {
       "player": "O.Dango",
@@ -443,13 +443,13 @@
       "team_short": "BRE",
       "position": "MID",
       "points": 33,
-      "ownership": 0.4,
+      "ownership": 0.5,
       "price": 6.0,
       "xG": 2.2,
       "xA": 0.7,
       "xCS": 2.22,
       "form": 4.2,
-      "potentialScore": 6.37
+      "potentialScore": 6.4
     },
     {
       "player": "O’Reilly",
@@ -463,7 +463,7 @@
       "xA": 0.6,
       "xCS": 3.1,
       "form": 6.2,
-      "potentialScore": 6.18
+      "potentialScore": 6.19
     },
     {
       "player": "Lukić",
@@ -477,7 +477,7 @@
       "xA": 1.2,
       "xCS": 1.44,
       "form": 3.0,
-      "potentialScore": 6.1
+      "potentialScore": 6.12
     }
   ],
   "goal_scorers": [
@@ -489,8 +489,8 @@
       "goals": 11,
       "goalsPerGame": 1.22,
       "points": 85,
-      "price": 14.7,
-      "ownership": 68.3,
+      "price": 14.8,
+      "ownership": 68.6,
       "form": 6.9
     },
     {
@@ -502,7 +502,7 @@
       "goalsPerGame": 0.67,
       "points": 73,
       "price": 8.1,
-      "ownership": 64.5,
+      "ownership": 64.3,
       "form": 7.5
     },
     {
@@ -514,7 +514,7 @@
       "goalsPerGame": 0.67,
       "points": 45,
       "price": 6.2,
-      "ownership": 6.0,
+      "ownership": 6.8,
       "form": 4.5
     },
     {
@@ -526,7 +526,7 @@
       "goalsPerGame": 0.56,
       "points": 39,
       "price": 7.7,
-      "ownership": 14.7,
+      "ownership": 16.4,
       "form": 6.3
     },
     {
@@ -538,7 +538,7 @@
       "goalsPerGame": 0.56,
       "points": 37,
       "price": 6.4,
-      "ownership": 4.7,
+      "ownership": 5.6,
       "form": 6.0
     },
     {
@@ -550,7 +550,7 @@
       "goalsPerGame": 0.44,
       "points": 45,
       "price": 5.7,
-      "ownership": 7.0,
+      "ownership": 6.8,
       "form": 1.5
     },
     {
@@ -562,7 +562,7 @@
       "goalsPerGame": 0.44,
       "points": 37,
       "price": 5.6,
-      "ownership": 3.2,
+      "ownership": 3.4,
       "form": 3.0
     },
     {
@@ -574,7 +574,7 @@
       "goalsPerGame": 0.44,
       "points": 27,
       "price": 4.6,
-      "ownership": 3.2,
+      "ownership": 3.4,
       "form": 5.4
     },
     {
@@ -585,8 +585,8 @@
       "goals": 4,
       "goalsPerGame": 0.44,
       "points": 51,
-      "price": 8.1,
-      "ownership": 19.3,
+      "price": 8.2,
+      "ownership": 22.3,
       "form": 9.0
     },
     {
@@ -598,7 +598,7 @@
       "goalsPerGame": 0.67,
       "points": 34,
       "price": 7.5,
-      "ownership": 22.1,
+      "ownership": 22.9,
       "form": 4.8
     },
     {
@@ -610,7 +610,7 @@
       "goalsPerGame": 0.33,
       "points": 42,
       "price": 7.8,
-      "ownership": 8.6,
+      "ownership": 8.4,
       "form": 2.7
     },
     {
@@ -622,7 +622,7 @@
       "goalsPerGame": 0.33,
       "points": 42,
       "price": 6.5,
-      "ownership": 2.7,
+      "ownership": 3.0,
       "form": 7.8
     },
     {
@@ -634,7 +634,7 @@
       "goalsPerGame": 0.33,
       "points": 48,
       "price": 5.9,
-      "ownership": 18.1,
+      "ownership": 18.2,
       "form": 3.9
     },
     {
@@ -646,7 +646,7 @@
       "goalsPerGame": 0.33,
       "points": 36,
       "price": 8.6,
-      "ownership": 16.8,
+      "ownership": 16.6,
       "form": 1.2
     },
     {
@@ -658,7 +658,7 @@
       "goalsPerGame": 0.33,
       "points": 43,
       "price": 6.7,
-      "ownership": 15.0,
+      "ownership": 14.8,
       "form": 1.2
     }
   ],
@@ -671,7 +671,7 @@
       "assistsPerGame": 0.44,
       "points": 38,
       "price": 6.9,
-      "ownership": 18.5,
+      "ownership": 18.2,
       "form": 3.3
     },
     {
@@ -693,7 +693,7 @@
       "assistsPerGame": 0.44,
       "points": 44,
       "price": 6.8,
-      "ownership": 33.8,
+      "ownership": 33.1,
       "form": 5.1
     },
     {
@@ -704,7 +704,7 @@
       "assistsPerGame": 0.33,
       "points": 28,
       "price": 4.4,
-      "ownership": 3.6,
+      "ownership": 3.5,
       "form": 1.8
     },
     {
@@ -714,8 +714,8 @@
       "assists": 3,
       "assistsPerGame": 0.33,
       "points": 31,
-      "price": 6.6,
-      "ownership": 6.3,
+      "price": 6.5,
+      "ownership": 5.9,
       "form": 0.9
     },
     {
@@ -726,7 +726,7 @@
       "assistsPerGame": 0.33,
       "points": 43,
       "price": 7.5,
-      "ownership": 53.9,
+      "ownership": 51.3,
       "form": 1.8
     },
     {
@@ -737,7 +737,7 @@
       "assistsPerGame": 0.33,
       "points": 73,
       "price": 8.1,
-      "ownership": 64.5,
+      "ownership": 64.3,
       "form": 7.5
     },
     {
@@ -748,7 +748,7 @@
       "assistsPerGame": 0.33,
       "points": 39,
       "price": 5.1,
-      "ownership": 4.8,
+      "ownership": 4.9,
       "form": 3.0
     },
     {
@@ -770,7 +770,7 @@
       "assistsPerGame": 0.22,
       "points": 54,
       "price": 5.8,
-      "ownership": 15.4,
+      "ownership": 15.5,
       "form": 6.6
     },
     {
@@ -781,7 +781,7 @@
       "assistsPerGame": 0.22,
       "points": 36,
       "price": 6.1,
-      "ownership": 22.5,
+      "ownership": 22.2,
       "form": 5.9
     },
     {
@@ -836,7 +836,7 @@
       "csRate": 33.3,
       "tackles": 18,
       "defensiveContributions": 100,
-      "price": 5.1,
+      "price": 5.0,
       "form": 2.9
     },
     {

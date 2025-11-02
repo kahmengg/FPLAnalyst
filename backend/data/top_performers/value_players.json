@@ -90,13 +90,13 @@
     "form": 3.3
   },
   {
-    "player": "Chalobah",
-    "team": "Chelsea",
-    "team_short": "CHE",
+    "player": "Lacroix",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
     "position": "Defender",
-    "pointsPerMillion": 8.24,
+    "pointsPerMillion": 8.4,
     "totalPoints": 42,
-    "price": 5.1,
-    "form": 2.6
+    "price": 5.0,
+    "form": 2.9
   }
 ]
