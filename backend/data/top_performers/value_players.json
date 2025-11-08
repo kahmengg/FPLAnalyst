@@ -4,10 +4,10 @@
     "team": "Sunderland",
     "team_short": "SUN",
     "position": "Defender",
-    "pointsPerMillion": 11.22,
-    "totalPoints": 46,
-    "price": 4.1,
-    "form": 8.1
+    "pointsPerMillion": 11.19,
+    "totalPoints": 47,
+    "price": 4.2,
+    "form": 7.3
   },
   {
     "player": "Alderete",
@@ -24,79 +24,79 @@
     "team": "Leeds",
     "team_short": "LEE",
     "position": "Defender",
-    "pointsPerMillion": 10.73,
-    "totalPoints": 44,
+    "pointsPerMillion": 10.98,
+    "totalPoints": 45,
     "price": 4.1,
     "form": 5.5
   },
   {
-    "player": "Truffert",
-    "team": "Bournemouth",
-    "team_short": "BOU",
+    "player": "Cash",
+    "team": "Aston Villa",
+    "team_short": "AVL",
     "position": "Defender",
-    "pointsPerMillion": 9.56,
-    "totalPoints": 43,
-    "price": 4.5,
-    "form": 5.9
-  },
-  {
-    "player": "Pope",
-    "team": "Newcastle",
-    "team_short": "NEW",
-    "position": "Goalkeeper",
-    "pointsPerMillion": 8.85,
+    "pointsPerMillion": 10.0,
     "totalPoints": 46,
-    "price": 5.2,
-    "form": 4.8
-  },
-  {
-    "player": "Hume",
-    "team": "Sunderland",
-    "team_short": "SUN",
-    "position": "Defender",
-    "pointsPerMillion": 8.67,
-    "totalPoints": 39,
-    "price": 4.5,
-    "form": 5.1
-  },
-  {
-    "player": "Hartman",
-    "team": "Burnley",
-    "team_short": "BUR",
-    "position": "Defender",
-    "pointsPerMillion": 8.5,
-    "totalPoints": 34,
-    "price": 4.0,
+    "price": 4.6,
     "form": 6.2
-  },
-  {
-    "player": "Richards",
-    "team": "Crystal Palace",
-    "team_short": "CRY",
-    "position": "Defender",
-    "pointsPerMillion": 8.44,
-    "totalPoints": 38,
-    "price": 4.5,
-    "form": 2.9
-  },
-  {
-    "player": "Cullen",
-    "team": "Burnley",
-    "team_short": "BUR",
-    "position": "Midfielder",
-    "pointsPerMillion": 8.4,
-    "totalPoints": 42,
-    "price": 5.0,
-    "form": 3.3
   },
   {
     "player": "Lacroix",
     "team": "Crystal Palace",
     "team_short": "CRY",
     "position": "Defender",
-    "pointsPerMillion": 8.4,
-    "totalPoints": 42,
+    "pointsPerMillion": 10.0,
+    "totalPoints": 50,
     "price": 5.0,
-    "form": 2.9
+    "form": 4.8
+  },
+  {
+    "player": "Truffert",
+    "team": "Bournemouth",
+    "team_short": "BOU",
+    "position": "Defender",
+    "pointsPerMillion": 10.0,
+    "totalPoints": 45,
+    "price": 4.5,
+    "form": 4.8
+  },
+  {
+    "player": "Richards",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
+    "position": "Defender",
+    "pointsPerMillion": 9.78,
+    "totalPoints": 44,
+    "price": 4.5,
+    "form": 4.0
+  },
+  {
+    "player": "Chalobah",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "position": "Defender",
+    "pointsPerMillion": 9.61,
+    "totalPoints": 49,
+    "price": 5.1,
+    "form": 5.1
+  },
+  {
+    "player": "Xhaka",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Midfielder",
+    "pointsPerMillion": 9.61,
+    "totalPoints": 49,
+    "price": 5.1,
+    "form": 5.1
+  },
+  {
+    "player": "Pope",
+    "team": "Newcastle",
+    "team_short": "NEW",
+    "position": "Goalkeeper",
+    "pointsPerMillion": 9.42,
+    "totalPoints": 49,
+    "price": 5.2,
+    "form": 3.2
   }
 ]

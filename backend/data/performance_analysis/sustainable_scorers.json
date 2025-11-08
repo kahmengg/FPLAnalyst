@@ -1,17 +1,17 @@
 [
     {
-        "player": "Gakpo",
-        "team": "Liverpool",
-        "team_short": "LIV",
-        "goals": 3,
-        "xG": 2.8,
-        "overperformance": 0.2,
-        "overperformance_per_90": 0.022,
+        "player": "Gyökeres",
+        "team": "Arsenal",
+        "team_short": "ARS",
+        "goals": 4,
+        "xG": 4.4,
+        "overperformance": -0.4,
+        "overperformance_per_90": -0.04,
         "sustainable": true,
-        "form": 4.8
+        "form": 3.3
     },
     {
-        "player": "M.Salah",
+        "player": "Gakpo",
         "team": "Liverpool",
         "team_short": "LIV",
         "goals": 3,
@@ -19,65 +19,65 @@
         "overperformance": 0.0,
         "overperformance_per_90": 0.0,
         "sustainable": true,
-        "form": 3.0
+        "form": 3.6
     },
     {
-        "player": "Sarr",
-        "team": "Crystal Palace",
-        "team_short": "CRY",
+        "player": "João Pedro",
+        "team": "Chelsea",
+        "team_short": "CHE",
         "goals": 3,
-        "xG": 3.1,
-        "overperformance": -0.1,
-        "overperformance_per_90": -0.011,
-        "sustainable": true,
-        "form": 3.3
-    },
-    {
-        "player": "O.Dango",
-        "team": "Brentford",
-        "team_short": "BRE",
-        "goals": 2,
-        "xG": 2.2,
+        "xG": 3.2,
         "overperformance": -0.2,
-        "overperformance_per_90": -0.025,
+        "overperformance_per_90": -0.02,
         "sustainable": true,
-        "form": 4.2
+        "form": 3.9
     },
     {
-        "player": "Grealish",
-        "team": "Everton",
-        "team_short": "EVE",
-        "goals": 1,
-        "xG": 1.0,
-        "overperformance": 0.0,
-        "overperformance_per_90": 0.0,
+        "player": "J.Murphy",
+        "team": "Newcastle",
+        "team_short": "NEW",
+        "goals": 2,
+        "xG": 2.1,
+        "overperformance": -0.1,
+        "overperformance_per_90": -0.01,
         "sustainable": true,
-        "form": 3.3
+        "form": 5.1
     },
     {
-        "player": "McGinn",
-        "team": "Aston Villa",
-        "team_short": "AVL",
-        "goals": 1,
-        "xG": 1.0,
-        "overperformance": 0.0,
-        "overperformance_per_90": 0.0,
+        "player": "Saka",
+        "team": "Arsenal",
+        "team_short": "ARS",
+        "goals": 2,
+        "xG": 1.9,
+        "overperformance": 0.1,
+        "overperformance_per_90": 0.01,
         "sustainable": true,
-        "form": 2.4
+        "form": 3.9
     },
     {
-        "player": "Szoboszlai",
-        "team": "Liverpool",
-        "team_short": "LIV",
+        "player": "Šeško",
+        "team": "Man Utd",
+        "team_short": "MUN",
+        "goals": 2,
+        "xG": 1.9,
+        "overperformance": 0.1,
+        "overperformance_per_90": 0.01,
+        "sustainable": true,
+        "form": 2.1
+    },
+    {
+        "player": "Ayari",
+        "team": "Brighton",
+        "team_short": "BHA",
         "goals": 1,
         "xG": 1.1,
         "overperformance": -0.1,
-        "overperformance_per_90": -0.011,
+        "overperformance_per_90": -0.01,
         "sustainable": true,
-        "form": 4.5
+        "form": 1.8
     },
     {
-        "player": "Talbi",
+        "player": "Ballard",
         "team": "Sunderland",
         "team_short": "SUN",
         "goals": 1,
@@ -85,6 +85,6 @@
         "overperformance": 0.0,
         "overperformance_per_90": 0.0,
         "sustainable": true,
-        "form": 3.9
+        "form": 5.9
     }
 ]

@@ -3,23 +3,23 @@
         "player": "Haaland",
         "team": "Man City",
         "team_short": "MCI",
-        "goals": 11,
-        "xG": 8.2,
-        "overperformance": 2.8,
-        "overperformance_per_90": 0.311,
+        "goals": 13,
+        "xG": 9.5,
+        "overperformance": 3.5,
+        "overperformance_per_90": 0.35,
         "sustainable": false,
-        "form": 6.9
+        "form": 8.4
     },
     {
-        "player": "Kroupi.Jr",
-        "team": "Bournemouth",
-        "team_short": "BOU",
-        "goals": 4,
-        "xG": 1.5,
-        "overperformance": 2.5,
-        "overperformance_per_90": 0.278,
+        "player": "Gravenberch",
+        "team": "Liverpool",
+        "team_short": "LIV",
+        "goals": 3,
+        "xG": 0.4,
+        "overperformance": 2.6,
+        "overperformance_per_90": 0.26,
         "sustainable": false,
-        "form": 5.4
+        "form": 3.9
     },
     {
         "player": "Caicedo",
@@ -28,20 +28,31 @@
         "goals": 3,
         "xG": 0.6,
         "overperformance": 2.4,
-        "overperformance_per_90": 0.267,
+        "overperformance_per_90": 0.24,
         "sustainable": false,
         "form": 3.9
+    },
+    {
+        "player": "Kroupi.Jr",
+        "team": "Bournemouth",
+        "team_short": "BOU",
+        "goals": 4,
+        "xG": 1.8,
+        "overperformance": 2.2,
+        "overperformance_per_90": 0.22,
+        "sustainable": false,
+        "form": 6.0
     },
     {
         "player": "Isidor",
         "team": "Sunderland",
         "team_short": "SUN",
         "goals": 4,
-        "xG": 1.6,
-        "overperformance": 2.4,
-        "overperformance_per_90": 0.267,
+        "xG": 1.9,
+        "overperformance": 2.1,
+        "overperformance_per_90": 0.21,
         "sustainable": false,
-        "form": 3.0
+        "form": 3.3
     },
     {
         "player": "Semenyo",
@@ -50,20 +61,20 @@
         "goals": 6,
         "xG": 3.9,
         "overperformance": 2.1,
-        "overperformance_per_90": 0.233,
+        "overperformance_per_90": 0.21,
         "sustainable": false,
-        "form": 7.5
+        "form": 2.7
     },
     {
-        "player": "Bowen",
-        "team": "West Ham",
-        "team_short": "WHU",
+        "player": "Casemiro",
+        "team": "Man Utd",
+        "team_short": "MUN",
         "goals": 3,
         "xG": 1.2,
         "overperformance": 1.8,
-        "overperformance_per_90": 0.2,
+        "overperformance_per_90": 0.18,
         "sustainable": false,
-        "form": 2.7
+        "form": 8.1
     },
     {
         "player": "Cash",
@@ -72,19 +83,8 @@
         "goals": 2,
         "xG": 0.2,
         "overperformance": 1.8,
-        "overperformance_per_90": 0.2,
+        "overperformance_per_90": 0.18,
         "sustainable": false,
-        "form": 7.0
-    },
-    {
-        "player": "Anthony",
-        "team": "Burnley",
-        "team_short": "BUR",
-        "goals": 4,
-        "xG": 2.3,
-        "overperformance": 1.7,
-        "overperformance_per_90": 0.189,
-        "sustainable": false,
-        "form": 1.5
+        "form": 6.2
     }
 ]
