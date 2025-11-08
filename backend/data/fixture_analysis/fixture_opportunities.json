@@ -5,9 +5,9 @@
             "team": "Arsenal",
             "short_name": "ARS",
             "opponent": "Wolves",
-            "attack_score": 7.4,
+            "attack_score": 7.1,
             "defense_score": 9.0,
-            "combined_score": 8.2,
+            "combined_score": 8.1,
             "venue": "H"
         },
         {
@@ -15,9 +15,9 @@
             "team": "Newcastle",
             "short_name": "NEW",
             "opponent": "Burnley",
-            "attack_score": 6.9,
-            "defense_score": 8.9,
-            "combined_score": 7.9,
+            "attack_score": 6.6,
+            "defense_score": 8.6,
+            "combined_score": 7.6,
             "venue": "H"
         },
         {
@@ -45,9 +45,9 @@
             "team": "Chelsea",
             "short_name": "CHE",
             "opponent": "Wolves",
-            "attack_score": 6.9,
-            "defense_score": 6.9,
-            "combined_score": 6.9,
+            "attack_score": 6.6,
+            "defense_score": 6.6,
+            "combined_score": 6.6,
             "venue": "H"
         },
         {
@@ -71,26 +71,6 @@
             "venue": "A"
         },
         {
-            "gameweek": 12,
-            "team": "Bournemouth",
-            "short_name": "BOU",
-            "opponent": "West Ham",
-            "attack_score": 5.4,
-            "defense_score": 5.9,
-            "combined_score": 5.7,
-            "venue": "H"
-        },
-        {
-            "gameweek": 14,
-            "team": "Arsenal",
-            "short_name": "ARS",
-            "opponent": "Brentford",
-            "attack_score": 5.4,
-            "defense_score": 6.0,
-            "combined_score": 5.7,
-            "venue": "H"
-        },
-        {
             "gameweek": 13,
             "team": "Man City",
             "short_name": "MCI",
@@ -98,6 +78,26 @@
             "attack_score": 5.5,
             "defense_score": 5.5,
             "combined_score": 5.5,
+            "venue": "H"
+        },
+        {
+            "gameweek": 14,
+            "team": "Arsenal",
+            "short_name": "ARS",
+            "opponent": "Brentford",
+            "attack_score": 5.1,
+            "defense_score": 6.0,
+            "combined_score": 5.5,
+            "venue": "H"
+        },
+        {
+            "gameweek": 12,
+            "team": "Bournemouth",
+            "short_name": "BOU",
+            "opponent": "West Ham",
+            "attack_score": 5.1,
+            "defense_score": 5.6,
+            "combined_score": 5.3,
             "venue": "H"
         }
     ],
@@ -107,9 +107,9 @@
             "team": "Arsenal",
             "short_name": "ARS",
             "opponent": "Wolves",
-            "attack_score": 7.4,
+            "attack_score": 7.1,
             "defense_score": 9.0,
-            "combined_score": 8.2,
+            "combined_score": 8.1,
             "venue": "H"
         },
         {
@@ -117,9 +117,9 @@
             "team": "Newcastle",
             "short_name": "NEW",
             "opponent": "Burnley",
-            "attack_score": 6.9,
-            "defense_score": 8.9,
-            "combined_score": 7.9,
+            "attack_score": 6.6,
+            "defense_score": 8.6,
+            "combined_score": 7.6,
             "venue": "H"
         },
         {
@@ -147,9 +147,9 @@
             "team": "Chelsea",
             "short_name": "CHE",
             "opponent": "Wolves",
-            "attack_score": 6.9,
-            "defense_score": 6.9,
-            "combined_score": 6.9,
+            "attack_score": 6.6,
+            "defense_score": 6.6,
+            "combined_score": 6.6,
             "venue": "H"
         },
         {
@@ -173,26 +173,6 @@
             "venue": "A"
         },
         {
-            "gameweek": 12,
-            "team": "Bournemouth",
-            "short_name": "BOU",
-            "opponent": "West Ham",
-            "attack_score": 5.4,
-            "defense_score": 5.9,
-            "combined_score": 5.7,
-            "venue": "H"
-        },
-        {
-            "gameweek": 14,
-            "team": "Arsenal",
-            "short_name": "ARS",
-            "opponent": "Brentford",
-            "attack_score": 5.4,
-            "defense_score": 6.0,
-            "combined_score": 5.7,
-            "venue": "H"
-        },
-        {
             "gameweek": 13,
             "team": "Man City",
             "short_name": "MCI",
@@ -200,6 +180,26 @@
             "attack_score": 5.5,
             "defense_score": 5.5,
             "combined_score": 5.5,
+            "venue": "H"
+        },
+        {
+            "gameweek": 14,
+            "team": "Arsenal",
+            "short_name": "ARS",
+            "opponent": "Brentford",
+            "attack_score": 5.1,
+            "defense_score": 6.0,
+            "combined_score": 5.5,
+            "venue": "H"
+        },
+        {
+            "gameweek": 12,
+            "team": "Bournemouth",
+            "short_name": "BOU",
+            "opponent": "West Ham",
+            "attack_score": 5.1,
+            "defense_score": 5.6,
+            "combined_score": 5.3,
             "venue": "H"
         }
     ]
