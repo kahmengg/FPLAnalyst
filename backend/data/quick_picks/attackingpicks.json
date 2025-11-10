@@ -147,23 +147,23 @@
                 "attacker_score": 1.915
             },
             {
-                "web_name": "Chiesa",
-                "position_name": "Midfielder",
-                "now_cost": 6.4,
-                "goals_per_game": 1.538,
-                "assists_per_game": 0.769,
-                "xg_per_game": 0.692,
-                "xa_per_game": 0.692,
-                "shots_per_game": 5.385,
-                "SoT_per_game": 1.538,
-                "SiB_per_game": 3.077,
-                "points_per_game": 15.385,
-                "points_per_million": 3.125,
+                "web_name": "Ekitiké",
+                "position_name": "Forward",
+                "now_cost": 8.6,
+                "goals_per_game": 0.429,
+                "assists_per_game": 0.143,
+                "xg_per_game": 0.314,
+                "xa_per_game": 0.057,
+                "shots_per_game": 2.286,
+                "SoT_per_game": 0.571,
+                "SiB_per_game": 1.571,
+                "points_per_game": 5.571,
+                "points_per_million": 4.535,
                 "consistency_score": 1.0,
-                "selected_by_percent": 0.3,
+                "selected_by_percent": 15.5,
                 "team_name_short": "LIV",
-                "form": 0.6,
-                "attacker_score": 1.552
+                "form": 1.5,
+                "attacker_score": 1.477
             }
         ]
     },
