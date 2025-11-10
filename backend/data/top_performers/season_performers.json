@@ -4,22 +4,22 @@
     "team": "Man City",
     "team_short": "MCI",
     "position": "Forward",
-    "points": 98,
-    "ppg": 9.8,
+    "points": 102,
+    "ppg": 9.3,
     "price": 14.8,
-    "ownership": 69.8,
-    "form": 8.4
+    "ownership": 70.5,
+    "form": 5.7
   },
   {
     "player": "Gabriel",
     "team": "Arsenal",
     "team_short": "ARS",
     "position": "Defender",
-    "points": 80,
-    "ppg": 8.0,
+    "points": 81,
+    "ppg": 7.4,
     "price": 6.6,
-    "ownership": 41.4,
-    "form": 10.0
+    "ownership": 43.5,
+    "form": 8.1
   },
   {
     "player": "Semenyo",
@@ -27,20 +27,31 @@
     "team_short": "BOU",
     "position": "Midfielder",
     "points": 75,
-    "ppg": 7.5,
+    "ppg": 6.8,
     "price": 8.1,
-    "ownership": 64.4,
-    "form": 2.7
+    "ownership": 64.3,
+    "form": 1.5
   },
   {
     "player": "J.Timber",
     "team": "Arsenal",
     "team_short": "ARS",
     "position": "Defender",
-    "points": 66,
-    "ppg": 6.6,
+    "points": 67,
+    "ppg": 6.1,
     "price": 6.1,
-    "ownership": 25.2,
+    "ownership": 25.6,
+    "form": 4.8
+  },
+  {
+    "player": "Rice",
+    "team": "Arsenal",
+    "team_short": "ARS",
+    "position": "Midfielder",
+    "points": 65,
+    "ppg": 5.9,
+    "price": 6.9,
+    "ownership": 20.3,
     "form": 6.6
   },
   {
@@ -49,119 +60,108 @@
     "team_short": "CRY",
     "position": "Defender",
     "points": 64,
-    "ppg": 6.4,
-    "price": 5.0,
-    "ownership": 34.3,
-    "form": 6.6
-  },
-  {
-    "player": "Rice",
-    "team": "Arsenal",
-    "team_short": "ARS",
-    "position": "Midfielder",
-    "points": 63,
-    "ppg": 6.3,
-    "price": 6.8,
-    "ownership": 16.8,
-    "form": 6.9
+    "ppg": 5.8,
+    "price": 5.1,
+    "ownership": 35.3,
+    "form": 5.1
   },
   {
     "player": "Calafiori",
     "team": "Arsenal",
     "team_short": "ARS",
     "position": "Defender",
-    "points": 60,
-    "ppg": 6.0,
+    "points": 61,
+    "ppg": 5.5,
     "price": 5.8,
-    "ownership": 16.0,
-    "form": 6.6
+    "ownership": 16.1,
+    "form": 4.8
   },
   {
     "player": "Caicedo",
     "team": "Chelsea",
     "team_short": "CHE",
     "position": "Midfielder",
-    "points": 58,
-    "ppg": 5.8,
+    "points": 60,
+    "ppg": 5.5,
     "price": 6.0,
-    "ownership": 20.3,
-    "form": 3.9
-  },
-  {
-    "player": "Van de Ven",
-    "team": "Spurs",
-    "team_short": "TOT",
-    "position": "Defender",
-    "points": 57,
-    "ppg": 5.7,
-    "price": 4.8,
-    "ownership": 32.6,
-    "form": 9.2
-  },
-  {
-    "player": "Senesi",
-    "team": "Bournemouth",
-    "team_short": "BOU",
-    "position": "Defender",
-    "points": 56,
-    "ppg": 5.6,
-    "price": 5.0,
-    "ownership": 26.2,
-    "form": 3.7
-  },
-  {
-    "player": "Muñoz",
-    "team": "Crystal Palace",
-    "team_short": "CRY",
-    "position": "Defender",
-    "points": 54,
-    "ppg": 5.4,
-    "price": 5.7,
-    "ownership": 15.4,
-    "form": 6.6
-  },
-  {
-    "player": "Roefs",
-    "team": "Sunderland",
-    "team_short": "SUN",
-    "position": "Goalkeeper",
-    "points": 54,
-    "ppg": 5.4,
-    "price": 4.7,
-    "ownership": 7.0,
-    "form": 5.2
+    "ownership": 23.1,
+    "form": 4.2
   },
   {
     "player": "Mbeumo",
     "team": "Man Utd",
     "team_short": "MUN",
     "position": "Midfielder",
-    "points": 53,
-    "ppg": 5.3,
-    "price": 8.4,
-    "ownership": 28.7,
-    "form": 7.8
+    "points": 60,
+    "ppg": 5.5,
+    "price": 8.5,
+    "ownership": 31.6,
+    "form": 7.2
+  },
+  {
+    "player": "Muñoz",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
+    "position": "Defender",
+    "points": 60,
+    "ppg": 5.5,
+    "price": 5.7,
+    "ownership": 15.8,
+    "form": 5.1
+  },
+  {
+    "player": "Thiago",
+    "team": "Brentford",
+    "team_short": "BRE",
+    "position": "Forward",
+    "points": 60,
+    "ppg": 5.5,
+    "price": 6.3,
+    "ownership": 9.6,
+    "form": 6.0
   },
   {
     "player": "João Pedro",
     "team": "Chelsea",
     "team_short": "CHE",
     "position": "Forward",
-    "points": 52,
-    "ppg": 5.2,
-    "price": 7.4,
-    "ownership": 45.8,
-    "form": 3.9
+    "points": 59,
+    "ppg": 5.4,
+    "price": 7.5,
+    "ownership": 48.3,
+    "form": 5.4
   },
   {
-    "player": "M.Salah",
-    "team": "Liverpool",
-    "team_short": "LIV",
-    "position": "Midfielder",
-    "points": 52,
-    "ppg": 5.2,
-    "price": 14.2,
-    "ownership": 24.8,
-    "form": 5.4
+    "player": "Senesi",
+    "team": "Bournemouth",
+    "team_short": "BOU",
+    "position": "Defender",
+    "points": 58,
+    "ppg": 5.3,
+    "price": 5.0,
+    "ownership": 25.9,
+    "form": 3.7
+  },
+  {
+    "player": "Van de Ven",
+    "team": "Spurs",
+    "team_short": "TOT",
+    "position": "Defender",
+    "points": 58,
+    "ppg": 5.3,
+    "price": 4.8,
+    "ownership": 33.3,
+    "form": 9.5
+  },
+  {
+    "player": "Keane",
+    "team": "Everton",
+    "team_short": "EVE",
+    "position": "Defender",
+    "points": 56,
+    "ppg": 5.1,
+    "price": 4.5,
+    "ownership": 1.2,
+    "form": 7.3
   }
 ]

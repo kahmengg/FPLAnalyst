@@ -4,55 +4,55 @@
         "team": "Crystal Palace",
         "team_short": "CRY",
         "goals": 6,
-        "xG": 7.3,
-        "overperformance": -1.3,
-        "overperformance_per_90": -0.13,
+        "xG": 7.4,
+        "overperformance": -1.4,
+        "overperformance_per_90": -0.127,
         "sustainable": false,
-        "form": 8.4
-    },
-    {
-        "player": "Enzo",
-        "team": "Chelsea",
-        "team_short": "CHE",
-        "goals": 3,
-        "xG": 4.2,
-        "overperformance": -1.2,
-        "overperformance_per_90": -0.12,
-        "sustainable": false,
-        "form": 1.2
+        "form": 3.9
     },
     {
         "player": "B.Fernandes",
         "team": "Man Utd",
         "team_short": "MUN",
         "goals": 2,
-        "xG": 4.1,
-        "overperformance": -2.1,
-        "overperformance_per_90": -0.21,
+        "xG": 4.4,
+        "overperformance": -2.4,
+        "overperformance_per_90": -0.218,
         "sustainable": false,
-        "form": 5.1
+        "form": 4.2
+    },
+    {
+        "player": "Enzo",
+        "team": "Chelsea",
+        "team_short": "CHE",
+        "goals": 3,
+        "xG": 4.4,
+        "overperformance": -1.4,
+        "overperformance_per_90": -0.127,
+        "sustainable": false,
+        "form": 2.1
     },
     {
         "player": "Beto",
         "team": "Everton",
         "team_short": "EVE",
         "goals": 1,
-        "xG": 3.8,
-        "overperformance": -2.8,
-        "overperformance_per_90": -0.28,
+        "xG": 4.0,
+        "overperformance": -3.0,
+        "overperformance_per_90": -0.273,
         "sustainable": false,
-        "form": 1.5
+        "form": 1.2
     },
     {
         "player": "Sarr",
         "team": "Crystal Palace",
         "team_short": "CRY",
         "goals": 3,
-        "xG": 3.4,
-        "overperformance": -0.4,
-        "overperformance_per_90": -0.04,
+        "xG": 3.5,
+        "overperformance": -0.5,
+        "overperformance_per_90": -0.045,
         "sustainable": false,
-        "form": 2.1
+        "form": 2.4
     },
     {
         "player": "Wood",
@@ -61,20 +61,20 @@
         "goals": 2,
         "xG": 2.8,
         "overperformance": -0.8,
-        "overperformance_per_90": -0.08,
+        "overperformance_per_90": -0.073,
         "sustainable": false,
-        "form": 0.3
+        "form": 0.0
     },
     {
-        "player": "Schade",
-        "team": "Brentford",
-        "team_short": "BRE",
+        "player": "Gibbs-White",
+        "team": "Nott'm Forest",
+        "team_short": "NFO",
         "goals": 2,
-        "xG": 2.6,
-        "overperformance": -0.6,
-        "overperformance_per_90": -0.06,
+        "xG": 2.5,
+        "overperformance": -0.5,
+        "overperformance_per_90": -0.045,
         "sustainable": false,
-        "form": 4.2
+        "form": 6.0
     },
     {
         "player": "O.Dango",
@@ -83,8 +83,8 @@
         "goals": 2,
         "xG": 2.3,
         "overperformance": -0.3,
-        "overperformance_per_90": -0.033,
+        "overperformance_per_90": -0.03,
         "sustainable": false,
-        "form": 4.8
+        "form": 5.1
     }
 ]
