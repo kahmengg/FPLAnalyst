@@ -8,7 +8,7 @@
             {
                 "web_name": "Haaland",
                 "position_name": "Forward",
-                "now_cost": 14.8,
+                "now_cost": 14.9,
                 "goals_per_game": 1.335,
                 "assists_per_game": 0.095,
                 "xg_per_game": 0.982,
@@ -17,12 +17,12 @@
                 "SoT_per_game": 2.574,
                 "SiB_per_game": 4.195,
                 "points_per_game": 9.725,
-                "points_per_million": 6.892,
+                "points_per_million": 6.846,
                 "consistency_score": 1.0,
-                "selected_by_percent": 70.5,
+                "selected_by_percent": 70.9,
                 "team_name_short": "MCI",
                 "form": 5.7,
-                "attacker_score": 2.439
+                "attacker_score": 2.427
             },
             {
                 "web_name": "Doku",
@@ -38,7 +38,7 @@
                 "points_per_game": 6.418,
                 "points_per_million": 6.875,
                 "consistency_score": 1.0,
-                "selected_by_percent": 4.8,
+                "selected_by_percent": 5.9,
                 "team_name_short": "MCI",
                 "form": 4.2,
                 "attacker_score": 2.077
@@ -57,7 +57,7 @@
                 "points_per_game": 4.042,
                 "points_per_million": 6.182,
                 "consistency_score": 1.0,
-                "selected_by_percent": 19.9,
+                "selected_by_percent": 19.1,
                 "team_name_short": "MCI",
                 "form": 0.6,
                 "attacker_score": 1.856
@@ -103,7 +103,7 @@
                 "points_per_game": 5.992,
                 "points_per_million": 9.286,
                 "consistency_score": 1.0,
-                "selected_by_percent": 4.6,
+                "selected_by_percent": 4.8,
                 "team_name_short": "LIV",
                 "form": 3.9,
                 "attacker_score": 2.566
@@ -122,7 +122,7 @@
                 "points_per_game": 4.994,
                 "points_per_million": 6.133,
                 "consistency_score": 1.0,
-                "selected_by_percent": 13.2,
+                "selected_by_percent": 13.0,
                 "team_name_short": "LIV",
                 "form": 1.8,
                 "attacker_score": 1.926
@@ -141,7 +141,7 @@
                 "points_per_game": 4.0,
                 "points_per_million": 6.667,
                 "consistency_score": 1.0,
-                "selected_by_percent": 4.9,
+                "selected_by_percent": 5.3,
                 "team_name_short": "LIV",
                 "form": 3.9,
                 "attacker_score": 1.915
@@ -176,7 +176,7 @@
             {
                 "web_name": "Caicedo",
                 "position_name": "Midfielder",
-                "now_cost": 6.0,
+                "now_cost": 6.1,
                 "goals_per_game": 0.286,
                 "assists_per_game": 0.095,
                 "xg_per_game": 0.057,
@@ -185,12 +185,12 @@
                 "SoT_per_game": 0.381,
                 "SiB_per_game": 0.19,
                 "points_per_game": 5.714,
-                "points_per_million": 10.0,
+                "points_per_million": 9.836,
                 "consistency_score": 1.0,
-                "selected_by_percent": 23.1,
+                "selected_by_percent": 23.5,
                 "team_name_short": "CHE",
                 "form": 4.2,
-                "attacker_score": 2.733
+                "attacker_score": 2.692
             },
             {
                 "web_name": "João Pedro",
@@ -206,7 +206,7 @@
                 "points_per_game": 5.716,
                 "points_per_million": 7.867,
                 "consistency_score": 1.0,
-                "selected_by_percent": 48.3,
+                "selected_by_percent": 48.5,
                 "team_name_short": "CHE",
                 "form": 5.4,
                 "attacker_score": 2.358
@@ -225,7 +225,7 @@
                 "points_per_game": 4.909,
                 "points_per_million": 7.164,
                 "consistency_score": 1.0,
-                "selected_by_percent": 14.6,
+                "selected_by_percent": 13.7,
                 "team_name_short": "CHE",
                 "form": 2.1,
                 "attacker_score": 2.175
@@ -244,7 +244,7 @@
                 "points_per_game": 5.645,
                 "points_per_million": 7.324,
                 "consistency_score": 1.0,
-                "selected_by_percent": 6.0,
+                "selected_by_percent": 5.9,
                 "team_name_short": "CHE",
                 "form": 6.0,
                 "attacker_score": 2.163
@@ -271,7 +271,7 @@
                 "points_per_game": 6.551,
                 "points_per_million": 9.42,
                 "consistency_score": 1.0,
-                "selected_by_percent": 20.3,
+                "selected_by_percent": 20.9,
                 "team_name_short": "ARS",
                 "form": 6.6,
                 "attacker_score": 2.615
@@ -309,7 +309,7 @@
                 "points_per_game": 5.607,
                 "points_per_million": 5.797,
                 "consistency_score": 1.0,
-                "selected_by_percent": 0.8,
+                "selected_by_percent": 0.9,
                 "team_name_short": "ARS",
                 "form": 5.4,
                 "attacker_score": 1.787
@@ -328,7 +328,7 @@
                 "points_per_game": 5.543,
                 "points_per_million": 5.0,
                 "consistency_score": 1.0,
-                "selected_by_percent": 13.6,
+                "selected_by_percent": 13.4,
                 "team_name_short": "ARS",
                 "form": 4.8,
                 "attacker_score": 1.595
@@ -355,7 +355,7 @@
                 "points_per_game": 6.856,
                 "points_per_million": 8.545,
                 "consistency_score": 1.0,
-                "selected_by_percent": 1.0,
+                "selected_by_percent": 1.1,
                 "team_name_short": "MUN",
                 "form": 9.6,
                 "attacker_score": 2.434
@@ -374,7 +374,7 @@
                 "points_per_game": 5.654,
                 "points_per_million": 7.059,
                 "consistency_score": 1.0,
-                "selected_by_percent": 31.6,
+                "selected_by_percent": 33.3,
                 "team_name_short": "MUN",
                 "form": 7.2,
                 "attacker_score": 2.164
@@ -393,7 +393,7 @@
                 "points_per_game": 4.422,
                 "points_per_million": 5.873,
                 "consistency_score": 1.0,
-                "selected_by_percent": 1.6,
+                "selected_by_percent": 1.7,
                 "team_name_short": "MUN",
                 "form": 6.0,
                 "attacker_score": 1.785
@@ -412,7 +412,7 @@
                 "points_per_game": 4.592,
                 "points_per_million": 5.618,
                 "consistency_score": 1.0,
-                "selected_by_percent": 16.2,
+                "selected_by_percent": 16.4,
                 "team_name_short": "MUN",
                 "form": 4.2,
                 "attacker_score": 1.766
@@ -439,7 +439,7 @@
                 "points_per_game": 4.742,
                 "points_per_million": 8.333,
                 "consistency_score": 1.0,
-                "selected_by_percent": 4.7,
+                "selected_by_percent": 4.9,
                 "team_name_short": "BHA",
                 "form": 5.1,
                 "attacker_score": 2.397
@@ -458,7 +458,7 @@
                 "points_per_game": 5.712,
                 "points_per_million": 6.923,
                 "consistency_score": 1.0,
-                "selected_by_percent": 9.0,
+                "selected_by_percent": 9.2,
                 "team_name_short": "BHA",
                 "form": 4.2,
                 "attacker_score": 2.143
@@ -477,7 +477,7 @@
                 "points_per_game": 5.07,
                 "points_per_million": 7.347,
                 "consistency_score": 1.0,
-                "selected_by_percent": 0.3,
+                "selected_by_percent": 0.4,
                 "team_name_short": "BHA",
                 "form": 5.1,
                 "attacker_score": 2.061
@@ -523,7 +523,7 @@
                 "points_per_game": 5.227,
                 "points_per_million": 6.866,
                 "consistency_score": 1.0,
-                "selected_by_percent": 12.9,
+                "selected_by_percent": 13.2,
                 "team_name_short": "CRY",
                 "form": 2.4,
                 "attacker_score": 2.052
@@ -531,7 +531,7 @@
             {
                 "web_name": "Mateta",
                 "position_name": "Forward",
-                "now_cost": 8.0,
+                "now_cost": 8.1,
                 "goals_per_game": 0.563,
                 "assists_per_game": 0.0,
                 "xg_per_game": 0.694,
@@ -540,12 +540,12 @@
                 "SoT_per_game": 1.595,
                 "SiB_per_game": 2.44,
                 "points_per_game": 4.692,
-                "points_per_million": 6.25,
+                "points_per_million": 6.173,
                 "consistency_score": 1.0,
-                "selected_by_percent": 28.6,
+                "selected_by_percent": 29.4,
                 "team_name_short": "CRY",
                 "form": 3.9,
-                "attacker_score": 2.029
+                "attacker_score": 2.01
             },
             {
                 "web_name": "Kamada",
@@ -607,7 +607,7 @@
                 "points_per_game": 6.818,
                 "points_per_million": 9.259,
                 "consistency_score": 1.0,
-                "selected_by_percent": 64.3,
+                "selected_by_percent": 63.1,
                 "team_name_short": "BOU",
                 "form": 1.5,
                 "attacker_score": 2.727
@@ -626,7 +626,7 @@
                 "points_per_game": 4.942,
                 "points_per_million": 8.545,
                 "consistency_score": 1.0,
-                "selected_by_percent": 1.7,
+                "selected_by_percent": 1.8,
                 "team_name_short": "BOU",
                 "form": 4.5,
                 "attacker_score": 2.407
@@ -691,7 +691,7 @@
                 "points_per_game": 5.028,
                 "points_per_million": 7.576,
                 "consistency_score": 1.0,
-                "selected_by_percent": 3.7,
+                "selected_by_percent": 3.6,
                 "team_name_short": "NEW",
                 "form": 5.4,
                 "attacker_score": 2.154
@@ -729,7 +729,7 @@
                 "points_per_game": 5.873,
                 "points_per_million": 5.405,
                 "consistency_score": 1.0,
-                "selected_by_percent": 22.1,
+                "selected_by_percent": 21.1,
                 "team_name_short": "NEW",
                 "form": 2.4,
                 "attacker_score": 1.726
@@ -775,7 +775,7 @@
                 "points_per_game": 5.863,
                 "points_per_million": 9.524,
                 "consistency_score": 1.0,
-                "selected_by_percent": 9.6,
+                "selected_by_percent": 11.4,
                 "team_name_short": "BRE",
                 "form": 6.0,
                 "attacker_score": 2.852
@@ -832,7 +832,7 @@
                 "points_per_game": 3.913,
                 "points_per_million": 5.714,
                 "consistency_score": 1.0,
-                "selected_by_percent": 0.7,
+                "selected_by_percent": 0.9,
                 "team_name_short": "BRE",
                 "form": 4.8,
                 "attacker_score": 1.762
@@ -859,7 +859,7 @@
                 "points_per_game": 3.727,
                 "points_per_million": 7.736,
                 "consistency_score": 1.0,
-                "selected_by_percent": 3.0,
+                "selected_by_percent": 2.9,
                 "team_name_short": "NFO",
                 "form": 4.5,
                 "attacker_score": 2.175
@@ -897,7 +897,7 @@
                 "points_per_game": 3.815,
                 "points_per_million": 5.614,
                 "consistency_score": 1.0,
-                "selected_by_percent": 1.2,
+                "selected_by_percent": 1.1,
                 "team_name_short": "NFO",
                 "form": 2.4,
                 "attacker_score": 1.625
@@ -916,7 +916,7 @@
                 "points_per_game": 4.182,
                 "points_per_million": 3.472,
                 "consistency_score": 1.0,
-                "selected_by_percent": 6.0,
+                "selected_by_percent": 5.8,
                 "team_name_short": "NFO",
                 "form": 0.0,
                 "attacker_score": 1.255
@@ -1065,7 +1065,7 @@
                 "points_per_game": 6.276,
                 "points_per_million": 6.875,
                 "consistency_score": 1.0,
-                "selected_by_percent": 7.8,
+                "selected_by_percent": 7.6,
                 "team_name_short": "TOT",
                 "form": 3.3,
                 "attacker_score": 2.156
@@ -1084,7 +1084,7 @@
                 "points_per_game": 4.629,
                 "points_per_million": 6.923,
                 "consistency_score": 1.0,
-                "selected_by_percent": 22.5,
+                "selected_by_percent": 20.7,
                 "team_name_short": "TOT",
                 "form": 1.2,
                 "attacker_score": 2.038
@@ -1111,7 +1111,7 @@
                 "points_per_game": 4.223,
                 "points_per_million": 7.627,
                 "consistency_score": 1.0,
-                "selected_by_percent": 2.7,
+                "selected_by_percent": 2.5,
                 "team_name_short": "WHU",
                 "form": 4.2,
                 "attacker_score": 2.174
@@ -1130,7 +1130,7 @@
                 "points_per_game": 4.182,
                 "points_per_million": 5.974,
                 "consistency_score": 1.0,
-                "selected_by_percent": 7.6,
+                "selected_by_percent": 7.3,
                 "team_name_short": "WHU",
                 "form": 2.7,
                 "attacker_score": 1.806
@@ -1149,7 +1149,7 @@
                 "points_per_game": 5.545,
                 "points_per_million": 4.561,
                 "consistency_score": 1.0,
-                "selected_by_percent": 0.2,
+                "selected_by_percent": 0.3,
                 "team_name_short": "WHU",
                 "form": 6.0,
                 "attacker_score": 1.519
@@ -1195,7 +1195,7 @@
                 "points_per_game": 8.069,
                 "points_per_million": 7.358,
                 "consistency_score": 1.0,
-                "selected_by_percent": 0.3,
+                "selected_by_percent": 0.5,
                 "team_name_short": "AVL",
                 "form": 4.5,
                 "attacker_score": 2.216
@@ -1252,7 +1252,7 @@
                 "points_per_game": 3.227,
                 "points_per_million": 5.147,
                 "consistency_score": 1.0,
-                "selected_by_percent": 4.9,
+                "selected_by_percent": 5.0,
                 "team_name_short": "AVL",
                 "form": 1.8,
                 "attacker_score": 1.538
@@ -1317,7 +1317,7 @@
                 "points_per_game": 4.346,
                 "points_per_million": 7.755,
                 "consistency_score": 1.0,
-                "selected_by_percent": 1.1,
+                "selected_by_percent": 1.0,
                 "team_name_short": "LEE",
                 "form": 2.4,
                 "attacker_score": 2.18
@@ -1363,7 +1363,7 @@
                 "points_per_game": 5.06,
                 "points_per_million": 8.704,
                 "consistency_score": 1.0,
-                "selected_by_percent": 0.6,
+                "selected_by_percent": 0.7,
                 "team_name_short": "FUL",
                 "form": 6.6,
                 "attacker_score": 2.399
@@ -1436,7 +1436,7 @@
             {
                 "web_name": "Xhaka",
                 "position_name": "Midfielder",
-                "now_cost": 5.1,
+                "now_cost": 5.2,
                 "goals_per_game": 0.091,
                 "assists_per_game": 0.273,
                 "xg_per_game": 0.027,
@@ -1445,12 +1445,12 @@
                 "SoT_per_game": 0.273,
                 "SiB_per_game": 0.091,
                 "points_per_game": 4.727,
-                "points_per_million": 10.196,
+                "points_per_million": 10.0,
                 "consistency_score": 1.0,
-                "selected_by_percent": 5.9,
+                "selected_by_percent": 6.3,
                 "team_name_short": "SUN",
                 "form": 4.5,
-                "attacker_score": 2.771
+                "attacker_score": 2.722
             },
             {
                 "web_name": "Isidor",
@@ -1615,7 +1615,7 @@
                 "points_per_game": 5.069,
                 "points_per_million": 10.6,
                 "consistency_score": 1.0,
-                "selected_by_percent": 2.3,
+                "selected_by_percent": 2.4,
                 "team_name_short": "BUR",
                 "form": 3.9,
                 "attacker_score": 2.875
@@ -1623,7 +1623,7 @@
             {
                 "web_name": "Anthony",
                 "position_name": "Midfielder",
-                "now_cost": 5.7,
+                "now_cost": 5.6,
                 "goals_per_game": 0.406,
                 "assists_per_game": 0.102,
                 "xg_per_game": 0.234,
@@ -1632,12 +1632,12 @@
                 "SoT_per_game": 0.813,
                 "SiB_per_game": 1.117,
                 "points_per_game": 4.977,
-                "points_per_million": 8.596,
+                "points_per_million": 8.75,
                 "consistency_score": 1.0,
-                "selected_by_percent": 5.5,
+                "selected_by_percent": 5.3,
                 "team_name_short": "BUR",
                 "form": 1.8,
-                "attacker_score": 2.466
+                "attacker_score": 2.504
             },
             {
                 "web_name": "Ugochukwu",

@@ -6,8 +6,8 @@
     "position": "Forward",
     "points": 102,
     "ppg": 9.3,
-    "price": 14.8,
-    "ownership": 70.5,
+    "price": 14.9,
+    "ownership": 70.9,
     "form": 5.7
   },
   {
@@ -18,7 +18,7 @@
     "points": 81,
     "ppg": 7.4,
     "price": 6.6,
-    "ownership": 43.5,
+    "ownership": 41.7,
     "form": 8.1
   },
   {
@@ -29,7 +29,7 @@
     "points": 75,
     "ppg": 6.8,
     "price": 8.1,
-    "ownership": 64.3,
+    "ownership": 63.1,
     "form": 1.5
   },
   {
@@ -39,8 +39,8 @@
     "position": "Defender",
     "points": 67,
     "ppg": 6.1,
-    "price": 6.1,
-    "ownership": 25.6,
+    "price": 6.2,
+    "ownership": 26.2,
     "form": 4.8
   },
   {
@@ -51,7 +51,7 @@
     "points": 65,
     "ppg": 5.9,
     "price": 6.9,
-    "ownership": 20.3,
+    "ownership": 20.9,
     "form": 6.6
   },
   {
@@ -62,7 +62,7 @@
     "points": 64,
     "ppg": 5.8,
     "price": 5.1,
-    "ownership": 35.3,
+    "ownership": 34.1,
     "form": 5.1
   },
   {
@@ -73,7 +73,7 @@
     "points": 61,
     "ppg": 5.5,
     "price": 5.8,
-    "ownership": 16.1,
+    "ownership": 15.7,
     "form": 4.8
   },
   {
@@ -83,8 +83,8 @@
     "position": "Midfielder",
     "points": 60,
     "ppg": 5.5,
-    "price": 6.0,
-    "ownership": 23.1,
+    "price": 6.1,
+    "ownership": 23.5,
     "form": 4.2
   },
   {
@@ -95,7 +95,7 @@
     "points": 60,
     "ppg": 5.5,
     "price": 8.5,
-    "ownership": 31.6,
+    "ownership": 33.3,
     "form": 7.2
   },
   {
@@ -105,8 +105,8 @@
     "position": "Defender",
     "points": 60,
     "ppg": 5.5,
-    "price": 5.7,
-    "ownership": 15.8,
+    "price": 5.8,
+    "ownership": 16.7,
     "form": 5.1
   },
   {
@@ -117,7 +117,7 @@
     "points": 60,
     "ppg": 5.5,
     "price": 6.3,
-    "ownership": 9.6,
+    "ownership": 11.4,
     "form": 6.0
   },
   {
@@ -128,7 +128,7 @@
     "points": 59,
     "ppg": 5.4,
     "price": 7.5,
-    "ownership": 48.3,
+    "ownership": 48.5,
     "form": 5.4
   },
   {
@@ -139,7 +139,7 @@
     "points": 58,
     "ppg": 5.3,
     "price": 5.0,
-    "ownership": 25.9,
+    "ownership": 26.1,
     "form": 3.7
   },
   {
@@ -161,7 +161,7 @@
     "points": 56,
     "ppg": 5.1,
     "price": 4.5,
-    "ownership": 1.2,
+    "ownership": 1.3,
     "form": 7.3
   }
 ]

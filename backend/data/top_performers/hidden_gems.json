@@ -5,7 +5,7 @@
     "team_short": "BHA",
     "position": "MID",
     "points": 50,
-    "ownership": 4.7,
+    "ownership": 4.9,
     "price": 6.0,
     "xG": 1.9,
     "xA": 2.8,
@@ -19,13 +19,13 @@
     "team_short": "CHE",
     "position": "MID",
     "points": 52,
-    "ownership": 6.0,
+    "ownership": 5.9,
     "price": 7.1,
     "xG": 1.9,
     "xA": 1.7,
     "xCS": 3.43,
     "form": 6.0,
-    "potentialScore": 9.07
+    "potentialScore": 9.08
   },
   {
     "player": "Doku",
@@ -33,13 +33,13 @@
     "team_short": "MCI",
     "position": "MID",
     "points": 44,
-    "ownership": 4.8,
+    "ownership": 5.9,
     "price": 6.4,
     "xG": 1.1,
     "xA": 2.8,
     "xCS": 3.66,
     "form": 4.2,
-    "potentialScore": 8.76
+    "potentialScore": 8.75
   },
   {
     "player": "Amad",
@@ -47,13 +47,13 @@
     "team_short": "MUN",
     "position": "MID",
     "points": 37,
-    "ownership": 1.6,
+    "ownership": 1.7,
     "price": 6.3,
     "xG": 1.9,
     "xA": 1.8,
     "xCS": 2.17,
     "form": 6.0,
-    "potentialScore": 8.57
+    "potentialScore": 8.58
   },
   {
     "player": "Schade",
@@ -61,7 +61,7 @@
     "team_short": "BRE",
     "position": "MID",
     "points": 40,
-    "ownership": 0.7,
+    "ownership": 0.9,
     "price": 7.0,
     "xG": 2.9,
     "xA": 1.0,
@@ -75,7 +75,7 @@
     "team_short": "CRY",
     "position": "DEF",
     "points": 56,
-    "ownership": 3.8,
+    "ownership": 4.0,
     "price": 5.0,
     "xG": 0.8,
     "xA": 0.5,
@@ -103,13 +103,13 @@
     "team_short": "NFO",
     "position": "MID",
     "points": 41,
-    "ownership": 3.0,
+    "ownership": 2.9,
     "price": 5.3,
     "xG": 1.5,
     "xA": 1.7,
     "xCS": 2.37,
     "form": 4.5,
-    "potentialScore": 7.64
+    "potentialScore": 7.65
   },
   {
     "player": "Dewsbury-Hall",
@@ -123,7 +123,7 @@
     "xA": 2.5,
     "xCS": 2.96,
     "form": 3.9,
-    "potentialScore": 7.62
+    "potentialScore": 7.63
   },
   {
     "player": "Mitchell",
@@ -131,7 +131,7 @@
     "team_short": "CRY",
     "position": "DEF",
     "points": 55,
-    "ownership": 2.2,
+    "ownership": 2.4,
     "price": 5.0,
     "xG": 0.4,
     "xA": 0.7,
@@ -145,7 +145,7 @@
     "team_short": "CHE",
     "position": "MID",
     "points": 24,
-    "ownership": 0.8,
+    "ownership": 1.0,
     "price": 6.4,
     "xG": 0.8,
     "xA": 2.0,
@@ -159,13 +159,13 @@
     "team_short": "MCI",
     "position": "DEF",
     "points": 51,
-    "ownership": 1.5,
-    "price": 4.9,
+    "ownership": 2.3,
+    "price": 5.0,
     "xG": 0.8,
     "xA": 0.7,
     "xCS": 3.66,
     "form": 7.3,
-    "potentialScore": 7.54
+    "potentialScore": 7.51
   },
   {
     "player": "Tavernier",
@@ -173,13 +173,13 @@
     "team_short": "BOU",
     "position": "MID",
     "points": 47,
-    "ownership": 1.7,
+    "ownership": 1.8,
     "price": 5.5,
     "xG": 1.3,
     "xA": 1.7,
     "xCS": 4.28,
     "form": 4.5,
-    "potentialScore": 7.5
+    "potentialScore": 7.51
   },
   {
     "player": "Richards",
@@ -187,7 +187,7 @@
     "team_short": "CRY",
     "position": "DEF",
     "points": 52,
-    "ownership": 3.3,
+    "ownership": 3.5,
     "price": 4.5,
     "xG": 0.4,
     "xA": 0.2,
@@ -207,6 +207,6 @@
     "xA": 0.6,
     "xCS": 2.37,
     "form": 6.0,
-    "potentialScore": 7.35
+    "potentialScore": 7.36
   }
 ]

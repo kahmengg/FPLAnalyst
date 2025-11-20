@@ -7,7 +7,7 @@
     "assistsPerGame": 0.36,
     "points": 43,
     "price": 6.8,
-    "ownership": 16.5,
+    "ownership": 16.0,
     "form": 1.8
   },
   {
@@ -29,7 +29,7 @@
     "assistsPerGame": 0.36,
     "points": 45,
     "price": 6.5,
-    "ownership": 22.5,
+    "ownership": 20.7,
     "form": 1.2
   },
   {
@@ -40,7 +40,7 @@
     "assistsPerGame": 0.27,
     "points": 50,
     "price": 8.9,
-    "ownership": 16.2,
+    "ownership": 16.4,
     "form": 4.2
   },
   {
@@ -51,7 +51,7 @@
     "assistsPerGame": 0.27,
     "points": 42,
     "price": 4.5,
-    "ownership": 1.6,
+    "ownership": 1.7,
     "form": 5.9
   },
   {
@@ -62,7 +62,7 @@
     "assistsPerGame": 0.27,
     "points": 31,
     "price": 4.3,
-    "ownership": 3.1,
+    "ownership": 3.0,
     "form": 1.5
   },
   {
@@ -73,7 +73,7 @@
     "assistsPerGame": 0.27,
     "points": 44,
     "price": 6.4,
-    "ownership": 4.8,
+    "ownership": 5.9,
     "form": 4.2
   },
   {
@@ -84,7 +84,7 @@
     "assistsPerGame": 0.27,
     "points": 59,
     "price": 7.5,
-    "ownership": 48.3,
+    "ownership": 48.5,
     "form": 5.4
   },
   {
@@ -95,7 +95,7 @@
     "assistsPerGame": 0.27,
     "points": 50,
     "price": 6.0,
-    "ownership": 4.7,
+    "ownership": 4.9,
     "form": 5.1
   },
   {
@@ -106,7 +106,7 @@
     "assistsPerGame": 0.27,
     "points": 75,
     "price": 8.1,
-    "ownership": 64.3,
+    "ownership": 63.1,
     "form": 1.5
   },
   {
@@ -116,8 +116,8 @@
     "assists": 3,
     "assistsPerGame": 0.27,
     "points": 52,
-    "price": 5.1,
-    "ownership": 5.9,
+    "price": 5.2,
+    "ownership": 6.3,
     "form": 4.5
   },
   {
@@ -128,7 +128,7 @@
     "assistsPerGame": 0.18,
     "points": 37,
     "price": 6.3,
-    "ownership": 1.6,
+    "ownership": 1.7,
     "form": 6.0
   }
 ]
