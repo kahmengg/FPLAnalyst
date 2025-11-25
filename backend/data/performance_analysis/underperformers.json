@@ -4,11 +4,22 @@
         "team": "Crystal Palace",
         "team_short": "CRY",
         "goals": 6,
-        "xG": 7.4,
-        "overperformance": -1.4,
-        "overperformance_per_90": -0.127,
+        "xG": 7.8,
+        "overperformance": -1.8,
+        "overperformance_per_90": -0.15,
         "sustainable": false,
-        "form": 3.9
+        "form": 3.6
+    },
+    {
+        "player": "Enzo",
+        "team": "Chelsea",
+        "team_short": "CHE",
+        "goals": 4,
+        "xG": 5.2,
+        "overperformance": -1.2,
+        "overperformance_per_90": -0.1,
+        "sustainable": false,
+        "form": 4.8
     },
     {
         "player": "B.Fernandes",
@@ -20,17 +31,6 @@
         "overperformance_per_90": -0.218,
         "sustainable": false,
         "form": 4.2
-    },
-    {
-        "player": "Enzo",
-        "team": "Chelsea",
-        "team_short": "CHE",
-        "goals": 3,
-        "xG": 4.4,
-        "overperformance": -1.4,
-        "overperformance_per_90": -0.127,
-        "sustainable": false,
-        "form": 2.1
     },
     {
         "player": "Beto",
@@ -48,11 +48,22 @@
         "team": "Crystal Palace",
         "team_short": "CRY",
         "goals": 3,
+        "xG": 3.6,
+        "overperformance": -0.6,
+        "overperformance_per_90": -0.05,
+        "sustainable": false,
+        "form": 2.7
+    },
+    {
+        "player": "Gakpo",
+        "team": "Liverpool",
+        "team_short": "LIV",
+        "goals": 3,
         "xG": 3.5,
         "overperformance": -0.5,
-        "overperformance_per_90": -0.045,
+        "overperformance_per_90": -0.042,
         "sustainable": false,
-        "form": 2.4
+        "form": 1.8
     },
     {
         "player": "Wood",
@@ -61,30 +72,19 @@
         "goals": 2,
         "xG": 2.8,
         "overperformance": -0.8,
-        "overperformance_per_90": -0.073,
+        "overperformance_per_90": -0.067,
         "sustainable": false,
         "form": 0.0
     },
     {
-        "player": "Gibbs-White",
-        "team": "Nott'm Forest",
-        "team_short": "NFO",
-        "goals": 2,
+        "player": "Watkins",
+        "team": "Aston Villa",
+        "team_short": "AVL",
+        "goals": 1,
         "xG": 2.5,
-        "overperformance": -0.5,
-        "overperformance_per_90": -0.045,
+        "overperformance": -1.5,
+        "overperformance_per_90": -0.125,
         "sustainable": false,
-        "form": 6.0
-    },
-    {
-        "player": "O.Dango",
-        "team": "Brentford",
-        "team_short": "BRE",
-        "goals": 2,
-        "xG": 2.3,
-        "overperformance": -0.3,
-        "overperformance_per_90": -0.03,
-        "sustainable": false,
-        "form": 5.1
+        "form": 1.8
     }
 ]

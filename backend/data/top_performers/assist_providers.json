@@ -6,8 +6,8 @@
     "assists": 4,
     "assistsPerGame": 0.36,
     "points": 43,
-    "price": 6.8,
-    "ownership": 16.0,
+    "price": 6.7,
+    "ownership": 14.9,
     "form": 1.8
   },
   {
@@ -15,22 +15,33 @@
     "team": "Burnley",
     "team_short": "BUR",
     "assists": 4,
-    "assistsPerGame": 0.36,
-    "points": 36,
+    "assistsPerGame": 0.33,
+    "points": 37,
     "price": 4.0,
     "ownership": 1.0,
-    "form": 3.3
+    "form": 1.1
   },
   {
     "player": "Kudus",
     "team": "Spurs",
     "team_short": "TOT",
     "assists": 4,
-    "assistsPerGame": 0.36,
-    "points": 45,
+    "assistsPerGame": 0.33,
+    "points": 47,
     "price": 6.5,
-    "ownership": 20.7,
-    "form": 1.2
+    "ownership": 17.3,
+    "form": 0.9
+  },
+  {
+    "player": "Minteh",
+    "team": "Brighton",
+    "team_short": "BHA",
+    "assists": 4,
+    "assistsPerGame": 0.33,
+    "points": 61,
+    "price": 6.1,
+    "ownership": 6.1,
+    "form": 6.9
   },
   {
     "player": "B.Fernandes",
@@ -40,7 +51,7 @@
     "assistsPerGame": 0.27,
     "points": 50,
     "price": 8.9,
-    "ownership": 16.4,
+    "ownership": 16.7,
     "form": 4.2
   },
   {
@@ -48,87 +59,76 @@
     "team": "Aston Villa",
     "team_short": "AVL",
     "assists": 3,
-    "assistsPerGame": 0.27,
-    "points": 42,
+    "assistsPerGame": 0.25,
+    "points": 43,
     "price": 4.5,
-    "ownership": 1.7,
-    "form": 5.9
+    "ownership": 2.0,
+    "form": 4.0
   },
   {
     "player": "Diouf",
     "team": "West Ham",
     "team_short": "WHU",
     "assists": 3,
-    "assistsPerGame": 0.27,
-    "points": 31,
+    "assistsPerGame": 0.25,
+    "points": 34,
     "price": 4.3,
-    "ownership": 3.0,
-    "form": 1.5
+    "ownership": 2.9,
+    "form": 2.2
   },
   {
     "player": "Doku",
     "team": "Man City",
     "team_short": "MCI",
     "assists": 3,
-    "assistsPerGame": 0.27,
-    "points": 44,
-    "price": 6.4,
-    "ownership": 5.9,
-    "form": 4.2
+    "assistsPerGame": 0.25,
+    "points": 46,
+    "price": 6.5,
+    "ownership": 7.7,
+    "form": 4.5
   },
   {
     "player": "João Pedro",
     "team": "Chelsea",
     "team_short": "CHE",
     "assists": 3,
-    "assistsPerGame": 0.27,
-    "points": 59,
+    "assistsPerGame": 0.25,
+    "points": 60,
     "price": 7.5,
-    "ownership": 48.5,
-    "form": 5.4
+    "ownership": 47.6,
+    "form": 5.1
   },
   {
-    "player": "Minteh",
-    "team": "Brighton",
-    "team_short": "BHA",
+    "player": "Rice",
+    "team": "Arsenal",
+    "team_short": "ARS",
     "assists": 3,
-    "assistsPerGame": 0.27,
-    "points": 50,
-    "price": 6.0,
-    "ownership": 4.9,
-    "form": 5.1
+    "assistsPerGame": 0.25,
+    "points": 71,
+    "price": 6.9,
+    "ownership": 22.0,
+    "form": 6.3
   },
   {
     "player": "Semenyo",
     "team": "Bournemouth",
     "team_short": "BOU",
     "assists": 3,
-    "assistsPerGame": 0.27,
+    "assistsPerGame": 0.25,
     "points": 75,
-    "price": 8.1,
-    "ownership": 63.1,
-    "form": 1.5
+    "price": 8.0,
+    "ownership": 58.0,
+    "form": 0.6
   },
   {
-    "player": "Xhaka",
-    "team": "Sunderland",
-    "team_short": "SUN",
+    "player": "Senesi",
+    "team": "Bournemouth",
+    "team_short": "BOU",
     "assists": 3,
-    "assistsPerGame": 0.27,
-    "points": 52,
-    "price": 5.2,
-    "ownership": 6.3,
-    "form": 4.5
-  },
-  {
-    "player": "Amad",
-    "team": "Man Utd",
-    "team_short": "MUN",
-    "assists": 2,
-    "assistsPerGame": 0.18,
-    "points": 37,
-    "price": 6.3,
-    "ownership": 1.7,
-    "form": 6.0
+    "assistsPerGame": 0.25,
+    "points": 61,
+    "price": 5.0,
+    "ownership": 26.9,
+    "form": 2.9
   }
 ]

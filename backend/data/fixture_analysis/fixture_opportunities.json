@@ -5,20 +5,10 @@
             "team": "Arsenal",
             "short_name": "ARS",
             "opponent": "Wolves",
-            "attack_score": 7.9,
+            "attack_score": 8.4,
             "defense_score": 9.0,
-            "combined_score": 8.4,
+            "combined_score": 8.7,
             "venue": "H"
-        },
-        {
-            "gameweek": 12,
-            "team": "Chelsea",
-            "short_name": "CHE",
-            "opponent": "Burnley",
-            "attack_score": 8.5,
-            "defense_score": 8.0,
-            "combined_score": 8.2,
-            "venue": "A"
         },
         {
             "gameweek": 17,
@@ -26,8 +16,8 @@
             "short_name": "MCI",
             "opponent": "West Ham",
             "attack_score": 9.0,
-            "defense_score": 6.5,
-            "combined_score": 7.8,
+            "defense_score": 7.4,
+            "combined_score": 8.2,
             "venue": "H"
         },
         {
@@ -35,8 +25,8 @@
             "team": "Crystal Palace",
             "short_name": "CRY",
             "opponent": "Burnley",
-            "attack_score": 6.5,
-            "defense_score": 8.5,
+            "attack_score": 6.0,
+            "defense_score": 9.0,
             "combined_score": 7.5,
             "venue": "A"
         },
@@ -51,54 +41,64 @@
             "venue": "H"
         },
         {
+            "gameweek": 17,
+            "team": "Bournemouth",
+            "short_name": "BOU",
+            "opponent": "Burnley",
+            "attack_score": 7.9,
+            "defense_score": 5.9,
+            "combined_score": 6.9,
+            "venue": "H"
+        },
+        {
             "gameweek": 13,
             "team": "Man City",
             "short_name": "MCI",
             "opponent": "Leeds",
             "attack_score": 6.5,
-            "defense_score": 7.5,
-            "combined_score": 7.0,
-            "venue": "H"
-        },
-        {
-            "gameweek": 12,
-            "team": "Crystal Palace",
-            "short_name": "CRY",
-            "opponent": "Wolves",
-            "attack_score": 5.5,
-            "defense_score": 8.0,
-            "combined_score": 6.8,
-            "venue": "A"
-        },
-        {
-            "gameweek": 17,
-            "team": "Bournemouth",
-            "short_name": "BOU",
-            "opponent": "Burnley",
-            "attack_score": 6.9,
             "defense_score": 6.4,
-            "combined_score": 6.7,
+            "combined_score": 6.5,
             "venue": "H"
         },
         {
             "gameweek": 14,
-            "team": "Man City",
-            "short_name": "MCI",
-            "opponent": "Fulham",
-            "attack_score": 5.0,
-            "defense_score": 7.5,
+            "team": "Arsenal",
+            "short_name": "ARS",
+            "opponent": "Brentford",
+            "attack_score": 6.9,
+            "defense_score": 6.0,
+            "combined_score": 6.5,
+            "venue": "H"
+        },
+        {
+            "gameweek": 18,
+            "team": "Liverpool",
+            "short_name": "LIV",
+            "opponent": "Wolves",
+            "attack_score": 8.5,
+            "defense_score": 3.9,
             "combined_score": 6.2,
-            "venue": "A"
+            "venue": "H"
         },
         {
             "gameweek": 14,
             "team": "Chelsea",
             "short_name": "CHE",
             "opponent": "Leeds",
-            "attack_score": 5.5,
+            "attack_score": 5.0,
             "defense_score": 6.0,
-            "combined_score": 5.8,
+            "combined_score": 5.5,
             "venue": "A"
+        },
+        {
+            "gameweek": 13,
+            "team": "Aston Villa",
+            "short_name": "AVL",
+            "opponent": "Wolves",
+            "attack_score": 4.4,
+            "defense_score": 6.4,
+            "combined_score": 5.4,
+            "venue": "H"
         }
     ],
     "defense": [
@@ -107,20 +107,10 @@
             "team": "Arsenal",
             "short_name": "ARS",
             "opponent": "Wolves",
-            "attack_score": 7.9,
+            "attack_score": 8.4,
             "defense_score": 9.0,
-            "combined_score": 8.4,
+            "combined_score": 8.7,
             "venue": "H"
-        },
-        {
-            "gameweek": 12,
-            "team": "Chelsea",
-            "short_name": "CHE",
-            "opponent": "Burnley",
-            "attack_score": 8.5,
-            "defense_score": 8.0,
-            "combined_score": 8.2,
-            "venue": "A"
         },
         {
             "gameweek": 17,
@@ -128,8 +118,8 @@
             "short_name": "MCI",
             "opponent": "West Ham",
             "attack_score": 9.0,
-            "defense_score": 6.5,
-            "combined_score": 7.8,
+            "defense_score": 7.4,
+            "combined_score": 8.2,
             "venue": "H"
         },
         {
@@ -137,8 +127,8 @@
             "team": "Crystal Palace",
             "short_name": "CRY",
             "opponent": "Burnley",
-            "attack_score": 6.5,
-            "defense_score": 8.5,
+            "attack_score": 6.0,
+            "defense_score": 9.0,
             "combined_score": 7.5,
             "venue": "A"
         },
@@ -153,54 +143,64 @@
             "venue": "H"
         },
         {
+            "gameweek": 17,
+            "team": "Bournemouth",
+            "short_name": "BOU",
+            "opponent": "Burnley",
+            "attack_score": 7.9,
+            "defense_score": 5.9,
+            "combined_score": 6.9,
+            "venue": "H"
+        },
+        {
             "gameweek": 13,
             "team": "Man City",
             "short_name": "MCI",
             "opponent": "Leeds",
             "attack_score": 6.5,
-            "defense_score": 7.5,
-            "combined_score": 7.0,
-            "venue": "H"
-        },
-        {
-            "gameweek": 12,
-            "team": "Crystal Palace",
-            "short_name": "CRY",
-            "opponent": "Wolves",
-            "attack_score": 5.5,
-            "defense_score": 8.0,
-            "combined_score": 6.8,
-            "venue": "A"
-        },
-        {
-            "gameweek": 17,
-            "team": "Bournemouth",
-            "short_name": "BOU",
-            "opponent": "Burnley",
-            "attack_score": 6.9,
             "defense_score": 6.4,
-            "combined_score": 6.7,
+            "combined_score": 6.5,
             "venue": "H"
         },
         {
             "gameweek": 14,
-            "team": "Man City",
-            "short_name": "MCI",
-            "opponent": "Fulham",
-            "attack_score": 5.0,
-            "defense_score": 7.5,
+            "team": "Arsenal",
+            "short_name": "ARS",
+            "opponent": "Brentford",
+            "attack_score": 6.9,
+            "defense_score": 6.0,
+            "combined_score": 6.5,
+            "venue": "H"
+        },
+        {
+            "gameweek": 18,
+            "team": "Liverpool",
+            "short_name": "LIV",
+            "opponent": "Wolves",
+            "attack_score": 8.5,
+            "defense_score": 3.9,
             "combined_score": 6.2,
-            "venue": "A"
+            "venue": "H"
         },
         {
             "gameweek": 14,
             "team": "Chelsea",
             "short_name": "CHE",
             "opponent": "Leeds",
-            "attack_score": 5.5,
+            "attack_score": 5.0,
             "defense_score": 6.0,
-            "combined_score": 5.8,
+            "combined_score": 5.5,
             "venue": "A"
+        },
+        {
+            "gameweek": 13,
+            "team": "Aston Villa",
+            "short_name": "AVL",
+            "opponent": "Wolves",
+            "attack_score": 4.4,
+            "defense_score": 6.4,
+            "combined_score": 5.4,
+            "venue": "H"
         }
     ]
 }
