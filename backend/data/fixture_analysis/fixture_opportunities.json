@@ -5,9 +5,9 @@
             "team": "Arsenal",
             "short_name": "ARS",
             "opponent": "Wolves",
-            "attacking_fixture_rating": 99.4,
-            "defensive_fixture_rating": 99.6,
-            "combined_score": 99.5,
+            "attacking_fixture_rating": 95.0,
+            "defensive_fixture_rating": 95.9,
+            "combined_score": 95.4,
             "venue": "H"
         },
         {
@@ -15,19 +15,9 @@
             "team": "Man City",
             "short_name": "MCI",
             "opponent": "West Ham",
-            "attacking_fixture_rating": 99.6,
-            "defensive_fixture_rating": 98.8,
-            "combined_score": 99.2,
-            "venue": "H"
-        },
-        {
-            "gameweek": 15,
-            "team": "Newcastle",
-            "short_name": "NEW",
-            "opponent": "Burnley",
-            "attacking_fixture_rating": 97.9,
-            "defensive_fixture_rating": 99.1,
-            "combined_score": 98.5,
+            "attacking_fixture_rating": 95.9,
+            "defensive_fixture_rating": 93.0,
+            "combined_score": 94.4,
             "venue": "H"
         },
         {
@@ -35,19 +25,29 @@
             "team": "Crystal Palace",
             "short_name": "CRY",
             "opponent": "Burnley",
-            "attacking_fixture_rating": 97.3,
-            "defensive_fixture_rating": 99.6,
-            "combined_score": 98.4,
+            "attacking_fixture_rating": 89.1,
+            "defensive_fixture_rating": 95.9,
+            "combined_score": 92.5,
             "venue": "A"
+        },
+        {
+            "gameweek": 15,
+            "team": "Newcastle",
+            "short_name": "NEW",
+            "opponent": "Burnley",
+            "attacking_fixture_rating": 90.4,
+            "defensive_fixture_rating": 94.1,
+            "combined_score": 92.2,
+            "venue": "H"
         },
         {
             "gameweek": 17,
             "team": "Bournemouth",
             "short_name": "BOU",
             "opponent": "Burnley",
-            "attacking_fixture_rating": 99.1,
-            "defensive_fixture_rating": 97.2,
-            "combined_score": 98.2,
+            "attacking_fixture_rating": 94.1,
+            "defensive_fixture_rating": 88.7,
+            "combined_score": 91.4,
             "venue": "H"
         },
         {
@@ -55,9 +55,9 @@
             "team": "Man City",
             "short_name": "MCI",
             "opponent": "Leeds",
-            "attacking_fixture_rating": 98.0,
-            "defensive_fixture_rating": 97.9,
-            "combined_score": 98.0,
+            "attacking_fixture_rating": 90.7,
+            "defensive_fixture_rating": 90.4,
+            "combined_score": 90.6,
             "venue": "H"
         },
         {
@@ -65,9 +65,19 @@
             "team": "Arsenal",
             "short_name": "ARS",
             "opponent": "Brentford",
-            "attacking_fixture_rating": 98.4,
-            "defensive_fixture_rating": 97.3,
-            "combined_score": 97.8,
+            "attacking_fixture_rating": 91.8,
+            "defensive_fixture_rating": 89.1,
+            "combined_score": 90.4,
+            "venue": "H"
+        },
+        {
+            "gameweek": 18,
+            "team": "Liverpool",
+            "short_name": "LIV",
+            "opponent": "Wolves",
+            "attacking_fixture_rating": 95.1,
+            "defensive_fixture_rating": 79.7,
+            "combined_score": 87.4,
             "venue": "H"
         },
         {
@@ -75,9 +85,9 @@
             "team": "Chelsea",
             "short_name": "CHE",
             "opponent": "Leeds",
-            "attacking_fixture_rating": 95.3,
-            "defensive_fixture_rating": 97.3,
-            "combined_score": 96.3,
+            "attacking_fixture_rating": 85.2,
+            "defensive_fixture_rating": 89.1,
+            "combined_score": 87.2,
             "venue": "A"
         },
         {
@@ -85,19 +95,9 @@
             "team": "Aston Villa",
             "short_name": "AVL",
             "opponent": "Wolves",
-            "attacking_fixture_rating": 93.3,
-            "defensive_fixture_rating": 97.9,
-            "combined_score": 95.6,
-            "venue": "H"
-        },
-        {
-            "gameweek": 16,
-            "team": "Chelsea",
-            "short_name": "CHE",
-            "opponent": "Everton",
-            "attacking_fixture_rating": 93.3,
-            "defensive_fixture_rating": 97.9,
-            "combined_score": 95.6,
+            "attacking_fixture_rating": 82.3,
+            "defensive_fixture_rating": 90.4,
+            "combined_score": 86.4,
             "venue": "H"
         }
     ],
@@ -107,9 +107,9 @@
             "team": "Arsenal",
             "short_name": "ARS",
             "opponent": "Wolves",
-            "attacking_fixture_rating": 99.4,
-            "defensive_fixture_rating": 99.6,
-            "combined_score": 99.5,
+            "attacking_fixture_rating": 95.0,
+            "defensive_fixture_rating": 95.9,
+            "combined_score": 95.4,
             "venue": "H"
         },
         {
@@ -117,19 +117,9 @@
             "team": "Man City",
             "short_name": "MCI",
             "opponent": "West Ham",
-            "attacking_fixture_rating": 99.6,
-            "defensive_fixture_rating": 98.8,
-            "combined_score": 99.2,
-            "venue": "H"
-        },
-        {
-            "gameweek": 15,
-            "team": "Newcastle",
-            "short_name": "NEW",
-            "opponent": "Burnley",
-            "attacking_fixture_rating": 97.9,
-            "defensive_fixture_rating": 99.1,
-            "combined_score": 98.5,
+            "attacking_fixture_rating": 95.9,
+            "defensive_fixture_rating": 93.0,
+            "combined_score": 94.4,
             "venue": "H"
         },
         {
@@ -137,19 +127,29 @@
             "team": "Crystal Palace",
             "short_name": "CRY",
             "opponent": "Burnley",
-            "attacking_fixture_rating": 97.3,
-            "defensive_fixture_rating": 99.6,
-            "combined_score": 98.4,
+            "attacking_fixture_rating": 89.1,
+            "defensive_fixture_rating": 95.9,
+            "combined_score": 92.5,
             "venue": "A"
+        },
+        {
+            "gameweek": 15,
+            "team": "Newcastle",
+            "short_name": "NEW",
+            "opponent": "Burnley",
+            "attacking_fixture_rating": 90.4,
+            "defensive_fixture_rating": 94.1,
+            "combined_score": 92.2,
+            "venue": "H"
         },
         {
             "gameweek": 17,
             "team": "Bournemouth",
             "short_name": "BOU",
             "opponent": "Burnley",
-            "attacking_fixture_rating": 99.1,
-            "defensive_fixture_rating": 97.2,
-            "combined_score": 98.2,
+            "attacking_fixture_rating": 94.1,
+            "defensive_fixture_rating": 88.7,
+            "combined_score": 91.4,
             "venue": "H"
         },
         {
@@ -157,9 +157,9 @@
             "team": "Man City",
             "short_name": "MCI",
             "opponent": "Leeds",
-            "attacking_fixture_rating": 98.0,
-            "defensive_fixture_rating": 97.9,
-            "combined_score": 98.0,
+            "attacking_fixture_rating": 90.7,
+            "defensive_fixture_rating": 90.4,
+            "combined_score": 90.6,
             "venue": "H"
         },
         {
@@ -167,9 +167,19 @@
             "team": "Arsenal",
             "short_name": "ARS",
             "opponent": "Brentford",
-            "attacking_fixture_rating": 98.4,
-            "defensive_fixture_rating": 97.3,
-            "combined_score": 97.8,
+            "attacking_fixture_rating": 91.8,
+            "defensive_fixture_rating": 89.1,
+            "combined_score": 90.4,
+            "venue": "H"
+        },
+        {
+            "gameweek": 18,
+            "team": "Liverpool",
+            "short_name": "LIV",
+            "opponent": "Wolves",
+            "attacking_fixture_rating": 95.1,
+            "defensive_fixture_rating": 79.7,
+            "combined_score": 87.4,
             "venue": "H"
         },
         {
@@ -177,9 +187,9 @@
             "team": "Chelsea",
             "short_name": "CHE",
             "opponent": "Leeds",
-            "attacking_fixture_rating": 95.3,
-            "defensive_fixture_rating": 97.3,
-            "combined_score": 96.3,
+            "attacking_fixture_rating": 85.2,
+            "defensive_fixture_rating": 89.1,
+            "combined_score": 87.2,
             "venue": "A"
         },
         {
@@ -187,19 +197,9 @@
             "team": "Aston Villa",
             "short_name": "AVL",
             "opponent": "Wolves",
-            "attacking_fixture_rating": 93.3,
-            "defensive_fixture_rating": 97.9,
-            "combined_score": 95.6,
-            "venue": "H"
-        },
-        {
-            "gameweek": 16,
-            "team": "Chelsea",
-            "short_name": "CHE",
-            "opponent": "Everton",
-            "attacking_fixture_rating": 93.3,
-            "defensive_fixture_rating": 97.9,
-            "combined_score": 95.6,
+            "attacking_fixture_rating": 82.3,
+            "defensive_fixture_rating": 90.4,
+            "combined_score": 86.4,
             "venue": "H"
         }
     ]
