@@ -1,17 +1,41 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Crosshair, TrendingUp, TrendingDown, Shield, TrophyIcon } from "lucide-react"
+import { Crosshair, TrendingUp, TrendingDown, Shield, TrophyIcon, Search, X, Filter, ArrowUpDown } from "lucide-react"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+
+// Rank Medal Component
+const RankMedal = ({ rank }: { rank: number }) => {
+  if (rank > 3) return null;
+  
+  const medals = {
+    1: { emoji: "🥇", color: "from-yellow-400 to-yellow-600", glow: "shadow-yellow-500/50" },
+    2: { emoji: "🥈", color: "from-gray-300 to-gray-500", glow: "shadow-gray-500/50" },
+    3: { emoji: "🥉", color: "from-orange-400 to-orange-600", glow: "shadow-orange-500/50" }
+  };
+  
+  const medal = medals[rank as keyof typeof medals];
+  
+  return (
+    <div className={`flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br ${medal.color} ${medal.glow} shadow-lg text-base`}>
+      {medal.emoji}
+    </div>
+  );
+};
 
 export default function TeamRankingsPage() {
   const [view, setView] = useState<"attack" | "defense" | "combined">("combined")
   const [teams, setTeams] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null) // ADDED: Error state
+  const [error, setError] = useState(null)
+  
+  // New: Filter and search states
+  const [searchQuery, setSearchQuery] = useState("")
+  const [filterMode, setFilterMode] = useState<"all" | "top5" | "bottom5">("all")
+  const [sortBy, setSortBy] = useState<"rank" | "attack" | "defense" | "goals" | "cleansheets">("rank")
 
   // START: Added fetchData for reuse
   const fetchData = async () => {
@@ -38,6 +62,10 @@ export default function TeamRankingsPage() {
       const maxGoalsPerGame = Math.max(...overall.map(t => t.goals_per_game))
       const maxCleanSheetPct = Math.max(...overall.map(t => t.clean_sheet_rate)) * 100
       const maxOverallStrength = Math.max(...overall.map(t => t.overall_strength))
+      
+      // Calculate max values for proper scaling
+      const maxAttackStrength = Math.max(...attack.map(t => t.attack_strength || 0))
+      const maxDefenseStrength = Math.max(...defense.map(t => t.defense_strength || 0))
 
       const mergedTeams = overall.map(o => {
         const a = attackMap.get(o.team) || {}
@@ -53,6 +81,9 @@ export default function TeamRankingsPage() {
           goalsConceded: o.goals_conceded_per_game,
           attackStrength: a.attack_strength || 0,
           defenseStrength: d.defense_strength || 0,
+          // Scale attack and defense strength as percentages of their respective maxes
+          attackStrengthPct: ((a.attack_strength || 0) / maxAttackStrength) * 100,
+          defenseStrengthPct: ((d.defense_strength || 0) / maxDefenseStrength) * 100,
           attackScore: Math.round((o.goals_per_game / maxGoalsPerGame) * 100),
           defenseScore: Math.round((o.clean_sheet_rate * 100) / maxCleanSheetPct * 100),
           overallStrength: Math.round((o.overall_strength / maxOverallStrength) * 100)
@@ -118,6 +149,39 @@ export default function TeamRankingsPage() {
     ...team,
     overallRank: view === "combined" ? index + 1 : null
   }))
+
+  // Filter and search logic
+  const filteredTeams = useMemo(() => {
+    let result = [...teamsWithOverallRank];
+    
+    // Apply search filter
+    if (searchQuery) {
+      result = result.filter((team) =>
+        team.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        team.code.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    
+    // Apply filter mode
+    if (filterMode === "top5") {
+      result = result.slice(0, 5);
+    } else if (filterMode === "bottom5") {
+      result = result.slice(-5).reverse();
+    }
+    
+    // Apply sorting
+    if (sortBy === "attack") {
+      result.sort((a, b) => a.attackRank - b.attackRank);
+    } else if (sortBy === "defense") {
+      result.sort((a, b) => a.defenseRank - b.defenseRank);
+    } else if (sortBy === "goals") {
+      result.sort((a, b) => b.goalsPerGame - a.goalsPerGame);
+    } else if (sortBy === "cleansheets") {
+      result.sort((a, b) => b.cleanSheetPct - a.cleanSheetPct);
+    }
+    
+    return result;
+  }, [teamsWithOverallRank, searchQuery, filterMode, sortBy]);
 
   const strongestAttack = sortedTeams[0]?.name || "Unknown"
   const bestDefense = teams.sort((a, b) => a.defenseRank - b.defenseRank)[0]?.name || "Unknown"
@@ -196,49 +260,166 @@ export default function TeamRankingsPage() {
           </Card>
         </div>
 
-        {/* View Toggle */}
-        <div className="mb-6 flex flex-wrap gap-2 p-1 bg-secondary/50 rounded-xl">
-          <button
-            onClick={() => setView("combined")}
-            className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "combined"
-              ? "bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg shadow-primary/25 border border-primary/20"
-              : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-white/10 active:bg-white/20"
-              }`}
-          >
-            <span className="relative z-10">📊 Overall Rankings</span>
-            {view === "combined" && (
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 rounded-lg blur-sm" />
-            )}
-          </button>
-          <button
-            onClick={() => setView("attack")}
-            className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "attack"
-              ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25 border border-red-500/20"
-              : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-red-50 hover:text-red-600 active:bg-red-100"
-              }`}
-          >
-            <span className="relative z-10">⚽ Attack Rankings</span>
-            {view === "attack" && (
-              <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-red-400/10 rounded-lg blur-sm" />
-            )}
-          </button>
-          <button
-            onClick={() => setView("defense")}
-            className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "defense"
-              ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 border border-blue-500/20"
-              : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-blue-50 hover:text-blue-600 active:bg-blue-100"
-              }`}
-          >
-            <span className="relative z-10">🛡️ Defense Rankings</span>
-            {view === "defense" && (
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-blue-400/10 rounded-lg blur-sm" />
-            )}
-          </button>
+        {/* Search and Filter Controls */}
+        <Card className="mb-6 shadow-lg">
+          <CardContent className="p-4">
+            <div className="flex flex-col lg:flex-row gap-4">
+              {/* Search Bar */}
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  placeholder="Search teams..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-10 py-2.5 rounded-lg bg-secondary/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+
+              {/* Filter Mode */}
+              <div className="flex items-center gap-2">
+                <Filter className="h-4 w-4 text-muted-foreground" />
+                <select
+                  value={filterMode}
+                  onChange={(e) => setFilterMode(e.target.value as any)}
+                  className="px-4 py-2.5 rounded-lg bg-secondary/50 text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer"
+                >
+                  <option value="all">All Teams</option>
+                  <option value="top5">Top 5</option>
+                  <option value="bottom5">Bottom 5</option>
+                </select>
+              </div>
+
+              {/* Sort By */}
+              <div className="flex items-center gap-2">
+                <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as any)}
+                  className="px-4 py-2.5 rounded-lg bg-secondary/50 text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer"
+                >
+                  <option value="rank">Overall Rank</option>
+                  <option value="attack">Attack Strength</option>
+                  <option value="defense">Defense Strength</option>
+                  <option value="goals">Goals per Game</option>
+                  <option value="cleansheets">Clean Sheet %</option>
+                </select>
+              </div>
+
+              {/* Clear Filters */}
+              {(searchQuery || filterMode !== "all" || sortBy !== "rank") && (
+                <button
+                  onClick={() => {
+                    setSearchQuery("");
+                    setFilterMode("all");
+                    setSortBy("rank");
+                  }}
+                  className="px-4 py-2.5 rounded-lg border-2 border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground transition-all duration-200 font-medium active:scale-95 whitespace-nowrap"
+                >
+                  Clear Filters
+                </button>
+              )}
+            </div>
+
+            {/* Results Count */}
+            <div className="mt-3 text-sm text-muted-foreground">
+              Showing <span className="font-bold text-foreground">{filteredTeams.length}</span> of {teams.length} teams
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* View Toggle - Mobile & Desktop */}
+        <div className="mb-6">
+          {/* Mobile: Horizontal Scrollable */}
+          <div className="sm:hidden -mx-4 px-4">
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="inline-flex gap-3 p-2 bg-secondary/50 rounded-xl min-w-max">
+                <button
+                  onClick={() => setView("combined")}
+                  className={`flex items-center gap-2 rounded-lg px-5 py-4 text-sm font-semibold transition-all duration-300 active:scale-95 whitespace-nowrap ${view === "combined"
+                    ? "bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg shadow-primary/25 border border-primary/20"
+                    : "bg-transparent text-muted-foreground active:bg-white/20"
+                    }`}
+                >
+                  <span className="text-lg">📊</span>
+                  <span>Overall</span>
+                </button>
+                <button
+                  onClick={() => setView("attack")}
+                  className={`flex items-center gap-2 rounded-lg px-5 py-4 text-sm font-semibold transition-all duration-300 active:scale-95 whitespace-nowrap ${view === "attack"
+                    ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25 border border-red-500/20"
+                    : "bg-transparent text-muted-foreground active:bg-red-100"
+                    }`}
+                >
+                  <span className="text-lg">⚽</span>
+                  <span>Attack</span>
+                </button>
+                <button
+                  onClick={() => setView("defense")}
+                  className={`flex items-center gap-2 rounded-lg px-5 py-4 text-sm font-semibold transition-all duration-300 active:scale-95 whitespace-nowrap ${view === "defense"
+                    ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 border border-blue-500/20"
+                    : "bg-transparent text-muted-foreground active:bg-blue-100"
+                    }`}
+                >
+                  <span className="text-lg">🛡️</span>
+                  <span>Defense</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop: Flex Layout */}
+          <div className="hidden sm:flex flex-wrap gap-2 p-1 bg-secondary/50 rounded-xl">
+            <button
+              onClick={() => setView("combined")}
+              className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "combined"
+                ? "bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg shadow-primary/25 border border-primary/20"
+                : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-white/10 active:bg-white/20"
+                }`}
+            >
+              <span className="relative z-10">📊 Overall Rankings</span>
+              {view === "combined" && (
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 rounded-lg blur-sm" />
+              )}
+            </button>
+            <button
+              onClick={() => setView("attack")}
+              className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "attack"
+                ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25 border border-red-500/20"
+                : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-red-50 hover:text-red-600 active:bg-red-100"
+                }`}
+            >
+              <span className="relative z-10">⚽ Attack Rankings</span>
+              {view === "attack" && (
+                <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-red-400/10 rounded-lg blur-sm" />
+              )}
+            </button>
+            <button
+              onClick={() => setView("defense")}
+              className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "defense"
+                ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 border border-blue-500/20"
+                : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-blue-50 hover:text-blue-600 active:bg-blue-100"
+                }`}
+            >
+              <span className="relative z-10">🛡️ Defense Rankings</span>
+              {view === "defense" && (
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-blue-400/10 rounded-lg blur-sm" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Rankings Grid */}
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {teamsWithOverallRank.map((team) => {
+          {filteredTeams.map((team) => {
             const teamColors = {
               ARS: "ring-2 ring-[#C8102E]/20 bg-gradient-to-br from-[#C8102E]/10 to-card",
               AVL: "ring-2 ring-[#7A003C]/20 bg-gradient-to-br from-[#7A003C]/10 to-card",
@@ -313,7 +494,21 @@ export default function TeamRankingsPage() {
                         </div>
                       </div>
                     </div>
-                    <div className="text-right">
+                    <div className="text-right flex flex-col items-end gap-1">
+                      {/* Rank Medal for Top 3 */}
+                      {((view === "combined" && team.overallRank <= 3) ||
+                        (view === "attack" && team.attackRank <= 3) ||
+                        (view === "defense" && team.defenseRank <= 3)) && (
+                        <RankMedal
+                          rank={
+                            view === "combined"
+                              ? team.overallRank
+                              : view === "attack"
+                              ? team.attackRank
+                              : team.defenseRank
+                          }
+                        />
+                      )}
                       {view === "combined" && (
                         <>
                           <div className="text-2xl font-bold text-primary">#{team.overallRank}</div>
@@ -344,7 +539,7 @@ export default function TeamRankingsPage() {
                       <div className="mb-1 h-3 w-full overflow-hidden rounded-full bg-secondary group-hover:h-4 transition-all duration-300">
                         <div
                           className="h-full bg-gradient-to-r from-red-400 to-red-500 transition-all duration-500 ease-out group-hover:from-red-500 group-hover:to-red-600"
-                          style={{ width: `${team.attackScore}%` }}
+                          style={{ width: `${team.attackStrengthPct}%` }}
                         />
                       </div>
                       <div className="flex justify-between text-xs text-muted-foreground">
@@ -363,7 +558,7 @@ export default function TeamRankingsPage() {
                       <div className="mb-1 h-3 w-full overflow-hidden rounded-full bg-secondary group-hover:h-4 transition-all duration-300">
                         <div
                           className="h-full bg-gradient-to-r from-blue-400 to-blue-500 transition-all duration-500 ease-out group-hover:from-blue-500 group-hover:to-blue-600"
-                          style={{ width: `${team.defenseScore}%` }}
+                          style={{ width: `${team.defenseStrengthPct}%` }}
                         />
                       </div>
                       <div className="flex justify-between text-xs text-muted-foreground">

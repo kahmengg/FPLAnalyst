@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { TrendingUp, Shield, Target, Star, Users, Award, DollarSign, Clock } from "lucide-react"
+import { TrendingUp, Shield, Target, Star, Users, Award, DollarSign, Clock, X } from "lucide-react"
 
 // Data from your notebook analysis - Attacking Picks by Team Strength
 // Attacking Picks by Team Strength (with numerical form field)
@@ -49,27 +49,38 @@ const getRecommendation = (player) => {
 
   const categories = [
     {
-      condition: (isAttacker && score >= 1.8) || (!isAttacker && (score >= 1.4 || clean_sheet_rate >= 0.5)) || (points_per_game >= 4.5 && form >= 4.5),
+      // Elite picks - only the very best
+      // Attackers: 2.2+ (top tier like Gravenberch 2.43)
+      // Defenders: 3.0+ (top tier from range 3.67-1.1)
+      condition: (isAttacker && score >= 2.2) || (!isAttacker && score >= 3.0) || (points_per_game >= 6.0 && form >= 5.0),
       label: "⭐ Top Pick",
       className: "text-green-800 dark:text-green-200 font-medium",
     },
     {
-      condition: score >= 1.2 && score < (isAttacker ? 1.8 : 1.4) && selected_by_percent < 15,
+      // Strong differentials - good score but low ownership
+      // Attackers: 1.6+ | Defenders: 2.3+
+      condition: ((isAttacker && score >= 1.6) || (!isAttacker && score >= 2.3)) && selected_by_percent < 15,
       label: "🎯 Differential",
       className: "text-purple-800 dark:text-purple-200 font-medium",
     },
     {
-      condition: score >= 1.2 && score < (isAttacker ? 1.8 : 1.4),
+      // Solid options - above average
+      // Attackers: 1.5+ | Defenders: 2.0+
+      condition: (isAttacker && score >= 1.5) || (!isAttacker && score >= 2.0),
       label: "📊 Solid Choice",
       className: "text-blue-800 dark:text-blue-200 font-medium",
     },
     {
-      condition: score >= 0.8 && score < 1.2,
+      // Average - needs monitoring
+      // Attackers: 1.0+ | Defenders: 1.5+
+      condition: (isAttacker && score >= 1.0) || (!isAttacker && score >= 1.5),
       label: "🔍 Monitor",
       className: "text-orange-800 dark:text-orange-200 font-medium",
     },
     {
-      condition: score < 0.8,
+      // Below average - risky pick
+      // Attackers: <1.0 | Defenders: <1.5
+      condition: (isAttacker && score < 1.0) || (!isAttacker && score < 1.5),
       label: "⚠️ Risky",
       className: "text-yellow-800 dark:text-yellow-200 font-medium",
     },
@@ -116,6 +127,7 @@ export default function QuickPicksPage() {
   const [defensivePicks, setDefensivePicks] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [selectedTeams, setSelectedTeams] = useState([]) // Team filter state
 
   // START: Added fetchData for reuse
   const fetchData = async () => {
@@ -133,13 +145,18 @@ export default function QuickPicksPage() {
         players: team.players.map(player => ({
           name: player.web_name,
           position: player.position_name,
+          position_name: player.position_name, // For recommendation function
           price: player.now_cost,
           goals_pg: player.goals_per_game || 0,
           assists_pg: player.assists_per_game || 0,
           points_pg: player.points_per_game,
+          points_per_game: player.points_per_game, // For recommendation function
           ownership: player.selected_by_percent,
+          selected_by_percent: player.selected_by_percent, // For recommendation function
           attacker_score: player.attacker_score || 0,
-          form: player.form ?? 5.0
+          defender_score: 0, // Not applicable for attacking players
+          form: player.form ?? 5.0,
+          clean_sheet_rate: 0 // Not applicable for attacking players
         }))
       }))
       setAttackingPicks(transformedAttacking)
@@ -155,11 +172,16 @@ export default function QuickPicksPage() {
         players: team.players.map(player => ({
           name: player.web_name,
           position: player.position_name,
+          position_name: player.position_name, // For recommendation function
           price: player.now_cost,
           cs_rate: player.clean_sheet_rate,
+          clean_sheet_rate: player.clean_sheet_rate, // For recommendation function
           points_pg: player.points_per_game,
+          points_per_game: player.points_per_game, // For recommendation function
           ownership: player.selected_by_percent,
+          selected_by_percent: player.selected_by_percent, // For recommendation function
           defender_score: player.defender_score || 0,
+          attacker_score: 0, // Not applicable for defensive players
           form: player.form ?? 5.0
         }))
       }))
@@ -175,7 +197,29 @@ export default function QuickPicksPage() {
   // CHANGED: Added activeTab dependency
   useEffect(() => {
     fetchData()
+    setSelectedTeams([]) // Clear filters when switching tabs
   }, [activeTab])
+
+  // Filter picks based on selected teams
+  const filteredPicks = useMemo(() => {
+    const picks = activeTab === "attacking" ? attackingPicks : defensivePicks;
+    if (!picks || picks.length === 0) return [];
+    if (selectedTeams.length === 0) return picks;
+    return picks.filter(teamData => selectedTeams.includes(teamData.team));
+  }, [attackingPicks, defensivePicks, activeTab, selectedTeams]);
+
+  // Get all unique teams from current tab
+  const allTeams = useMemo(() => {
+    const picks = activeTab === "attacking" ? attackingPicks : defensivePicks;
+    if (!picks || picks.length === 0) return [];
+    return picks.map(t => t.team).sort(); // Sort alphabetically
+  }, [attackingPicks, defensivePicks, activeTab]);
+
+  const toggleTeamFilter = (team) => {
+    setSelectedTeams(prev => 
+      prev.includes(team) ? prev.filter(t => t !== team) : [...prev, team]
+    );
+  };
 
   // CHANGED: Added retry button to error state
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>
@@ -205,24 +249,76 @@ export default function QuickPicksPage() {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="w-full grid grid-cols-2 gap-2 bg-transparent p-0">
+          {/* Mobile Tabs with better touch targets */}
+          <TabsList className="w-full grid grid-cols-2 gap-3 bg-transparent p-0 sm:gap-2">
             <TabsTrigger
               value="attacking"
-              className="flex items-center justify-center gap-2 text-sm px-4 py-3 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white"
+              className="flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-4 sm:py-3 rounded-xl transition-all duration-300 active:scale-95 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white border-2 data-[state=active]:border-red-400 data-[state=inactive]:border-border data-[state=inactive]:bg-card/50"
             >
-              <Target className="h-4 w-4" />
-              Attacking Picks
+              <Target className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="font-semibold">Attacking</span>
             </TabsTrigger>
             <TabsTrigger
               value="defensive"
-              className="flex items-center justify-center gap-2 text-sm px-4 py-3 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white"
+              className="flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-4 sm:py-3 rounded-xl transition-all duration-300 active:scale-95 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white border-2 data-[state=active]:border-blue-400 data-[state=inactive]:border-border data-[state=inactive]:bg-card/50"
             >
-              <Shield className="h-4 w-4" />
-              Defensive Picks
+              <Shield className="h-5 w-5 sm:h-4 sm:w-4" />
+              <span className="font-semibold">Defensive</span>
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="attacking" className="space-y-6">
+            {/* Team Filter */}
+            {allTeams.length > 0 && (
+              <Card className="border-red-500/20 bg-gradient-to-br from-red-500/5 to-card shadow-lg">
+                <CardContent className="p-5">
+                  <div className="flex flex-col gap-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Target className="h-5 w-5 text-red-500" />
+                        <span className="text-sm font-semibold text-foreground">Filter by Team</span>
+                      </div>
+                      {selectedTeams.length > 0 && (
+                        <button
+                          onClick={() => setSelectedTeams([])}
+                          className="flex items-center gap-1 px-3 py-1 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-500/10 rounded-md transition-colors"
+                        >
+                          <X className="h-3 w-3" />
+                          Clear all
+                        </button>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {allTeams.map(team => (
+                        <button
+                          key={team}
+                          onClick={() => toggleTeamFilter(team)}
+                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                            selectedTeams.includes(team)
+                              ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/30 scale-105'
+                              : 'bg-secondary/50 text-foreground hover:bg-secondary hover:scale-105 border border-border'
+                          }`}
+                        >
+                          <span className="flex items-center gap-1.5">
+                            {team}
+                            {selectedTeams.includes(team) && (
+                              <X className="h-3.5 w-3.5" />
+                            )}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                    {selectedTeams.length > 0 && (
+                      <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground bg-secondary/30 px-3 py-2 rounded-md">
+                        <Shield className="h-3.5 w-3.5" />
+                        Showing {filteredPicks.length} of {allTeams.length} teams
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
             {/* Overview Card */}
             <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl">
               <CardHeader className="pb-4">
@@ -237,7 +333,7 @@ export default function QuickPicksPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                {attackingPicks.map((teamData, index) => (
+                {filteredPicks.map((teamData, index) => (
                   <div
                     key={`${teamData.team}-${teamData.attack_rank}-${index}`} // Use composite key for uniqueness
                     className="border-l-4 border-l-red-500 pl-6"
@@ -251,28 +347,40 @@ export default function QuickPicksPage() {
                         <div>
                           <h3 className="text-xl font-bold text-foreground">{teamData.team}</h3>
                           <p className="text-sm text-muted-foreground">
-                            Attack Strength: <span className="font-mono font-medium">{teamData.attackStrength.toFixed(3)}</span>
+                            Attack Strength: <span className="font-mono font-medium">{teamData.attackStrength?.toFixed(3) || 'N/A'}</span>
                           </p>
                         </div>
                       </div>
                     </div>
 
                     {/* Players Grid */}
-                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                       {teamData.players.map((player, playerIndex) => {
                         const ownershipCat = getOwnershipCategory(player.ownership)
+                        const recommendation = getRecommendation(player)
+                        const isTopPick = recommendation.label.includes("Top Pick")
+                        
                         return (
                           <Card
-                            key={`${player.web_name}-${playerIndex}`} // Use web_name with index for uniqueness
-                            className="border border-border/50 hover:border-red-300 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer bg-gradient-to-br from-card to-secondary/20"
+                            key={`${player.web_name}-${playerIndex}`}
+                            className={`relative border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer overflow-hidden ${
+                              isTopPick
+                                ? 'border-yellow-500/50 bg-gradient-to-br from-yellow-500/5 via-card to-card'
+                                : 'border-border/50 hover:border-red-400/50 bg-gradient-to-br from-card to-secondary/10'
+                            }`}
                           >
+                            {/* Top indicator bar */}
+                            {isTopPick && (
+                              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-500 to-amber-500" />
+                            )}
+                            
                             <CardContent className="p-4">
                               <div className="mb-3">
                                 <div className="flex items-center justify-between mb-2">
                                   <h4 className="font-semibold text-foreground">{player.name}</h4>
-                                  <div className="flex items-center gap-1">
-                                    <DollarSign className="h-3 w-3 text-green-600" />
-                                    <span className="font-mono text-sm font-medium text-green-600">
+                                  <div className="flex items-center gap-1 bg-green-500/10 px-2 py-1 rounded-md">
+                                    <DollarSign className="h-3.5 w-3.5 text-green-600 dark:text-green-400" />
+                                    <span className="font-mono text-sm font-bold text-green-600 dark:text-green-400">
                                       {player.price}m
                                     </span>
                                   </div>
@@ -285,19 +393,19 @@ export default function QuickPicksPage() {
                               <div className="space-y-2 text-sm">
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Goals/Game:</span>
-                                  <span className="font-mono font-medium text-red-600">{player.goals_pg.toFixed(2)}</span>
+                                  <span className="font-mono font-medium text-red-600">{player.goals_pg?.toFixed(2) || '0.00'}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Points/Game:</span>
-                                  <span className="font-mono font-bold text-red-600">{player.points_pg.toFixed(2)}</span>
+                                  <span className="font-mono font-bold text-red-600">{player.points_pg?.toFixed(2) || '0.00'}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Attack Score:</span>
-                                  <span className="font-mono font-bold text-red-600">{player.attacker_score.toFixed(2)}</span>
+                                  <span className="font-mono font-bold text-red-600">{player.attacker_score?.toFixed(2) || '0.00'}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Form:</span>
-                                  <span className="font-mono font-bold text-red-600">{player.form.toFixed(2)}</span>
+                                  <span className="font-mono font-bold text-red-600">{player.form?.toFixed(2) || '0.00'}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Ownership:</span>
@@ -310,12 +418,12 @@ export default function QuickPicksPage() {
                               {/* Quick Action Indicator */}
                               <div className="mt-3 pt-3 border-t border-border/50">
                                 <div className="flex items-center justify-between text-xs">
-                                  <span className="text-muted-foreground">Recommendation:</span>
+                                  <span className="text-muted-foreground font-medium">Status:</span>
                                   <Badge
-                                    aria-label={`Recommendation for ${player.web_name}: ${getRecommendation(player).label}`}
-                                    className={getRecommendation(player).className}
+                                    aria-label={`Recommendation for ${player.web_name}: ${recommendation.label}`}
+                                    className={`${recommendation.className} font-semibold shadow-sm`}
                                   >
-                                    {getRecommendation(player).label}
+                                    {recommendation.label}
                                   </Badge>
                                 </div>
                               </div>
@@ -331,6 +439,57 @@ export default function QuickPicksPage() {
           </TabsContent>
 
           <TabsContent value="defensive" className="space-y-6">
+            {/* Team Filter */}
+            {allTeams.length > 0 && (
+              <Card className="border-blue-500/20 bg-gradient-to-br from-blue-500/5 to-card shadow-lg">
+                <CardContent className="p-5">
+                  <div className="flex flex-col gap-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Shield className="h-5 w-5 text-blue-500" />
+                        <span className="text-sm font-semibold text-foreground">Filter by Team</span>
+                      </div>
+                      {selectedTeams.length > 0 && (
+                        <button
+                          onClick={() => setSelectedTeams([])}
+                          className="flex items-center gap-1 px-3 py-1 text-xs font-medium text-blue-600 dark:text-blue-400 hover:bg-blue-500/10 rounded-md transition-colors"
+                        >
+                          <X className="h-3 w-3" />
+                          Clear all
+                        </button>
+                      )}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {allTeams.map(team => (
+                        <button
+                          key={team}
+                          onClick={() => toggleTeamFilter(team)}
+                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                            selectedTeams.includes(team)
+                              ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/30 scale-105'
+                              : 'bg-secondary/50 text-foreground hover:bg-secondary hover:scale-105 border border-border'
+                          }`}
+                        >
+                          <span className="flex items-center gap-1.5">
+                            {team}
+                            {selectedTeams.includes(team) && (
+                              <X className="h-3.5 w-3.5" />
+                            )}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                    {selectedTeams.length > 0 && (
+                      <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground bg-secondary/30 px-3 py-2 rounded-md">
+                        <Target className="h-3.5 w-3.5" />
+                        Showing {filteredPicks.length} of {allTeams.length} teams
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
             {/* Overview Card */}
             <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl">
               <CardHeader className="pb-4">
@@ -345,7 +504,7 @@ export default function QuickPicksPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                {defensivePicks.map((teamData, index) => (
+                {filteredPicks.map((teamData, index) => (
                   <div key={teamData.team_name_short} className="border-l-4 border-l-blue-500 pl-6">
                     {/* Team Header */}
                     <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -356,28 +515,40 @@ export default function QuickPicksPage() {
                         <div>
                           <h3 className="text-xl font-bold text-foreground">{teamData.team}</h3>
                           <p className="text-sm text-muted-foreground">
-                            Defense Strength: <span className="font-mono font-medium">{teamData.defenseStrength.toFixed(3)}</span>
+                            Defense Strength: <span className="font-mono font-medium">{teamData.defenseStrength?.toFixed(3) || 'N/A'}</span>
                           </p>
                         </div>
                       </div>
                     </div>
 
                     {/* Players Grid */}
-                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                       {teamData.players.map((player, playerIndex) => {
                         const ownershipCat = getOwnershipCategory(player.ownership)
+                        const recommendation = getRecommendation(player)
+                        const isTopPick = recommendation.label.includes("Top Pick")
+                        
                         return (
                           <Card
-                            key={`${player.web_name}-${playerIndex}`}
-                            className="border border-border/50 hover:border-blue-300 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer bg-gradient-to-br from-card to-secondary/20"
+                            key={`${player.name}-${playerIndex}`}
+                            className={`relative border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer overflow-hidden ${
+                              isTopPick
+                                ? 'border-yellow-500/50 bg-gradient-to-br from-yellow-500/5 via-card to-card'
+                                : 'border-border/50 hover:border-red-400/50 bg-gradient-to-br from-card to-secondary/10'
+                            }`}
                           >
+                            {/* Top indicator bar */}
+                            {isTopPick && (
+                              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-500 to-amber-500" />
+                            )}
+                            
                             <CardContent className="p-4">
                               <div className="mb-3">
                                 <div className="flex items-center justify-between mb-2">
                                   <h4 className="font-semibold text-foreground">{player.name}</h4>
-                                  <div className="flex items-center gap-1">
-                                    <DollarSign className="h-3 w-3 text-green-600" />
-                                    <span className="font-mono text-sm font-medium text-green-600">
+                                  <div className="flex items-center gap-1 bg-green-500/10 px-2 py-1 rounded-md">
+                                    <DollarSign className="h-3.5 w-3.5 text-green-600" />
+                                    <span className="font-mono text-sm font-bold text-green-600">
                                       {player.price}m
                                     </span>
                                   </div>
@@ -394,15 +565,15 @@ export default function QuickPicksPage() {
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Points/Game:</span>
-                                  <span className="font-mono font-bold text-blue-600">{player.points_pg.toFixed(2)}</span>
+                                  <span className="font-mono font-bold text-blue-600">{player.points_pg?.toFixed(2) || '0.00'}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Defender Score:</span>
-                                  <span className="font-mono font-bold text-red-600">{player.defender_score.toFixed(2)}</span>
+                                  <span className="font-mono font-bold text-red-600">{player.defender_score?.toFixed(2) || '0.00'}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Form:</span>
-                                  <span className="font-mono font-bold text-blue-600">{player.form.toFixed(2)}</span>
+                                  <span className="font-mono font-bold text-blue-600">{player.form?.toFixed(2) || '0.00'}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Ownership:</span>
@@ -415,12 +586,12 @@ export default function QuickPicksPage() {
                               {/* Quick Action Indicator */}
                               <div className="mt-3 pt-3 border-t border-border/50">
                                 <div className="flex items-center justify-between text-xs">
-                                  <span className="text-muted-foreground">Recommendation:</span>
+                                  <span className="text-muted-foreground font-medium">Status:</span>
                                   <Badge
-                                    aria-label={`Recommendation for ${player.web_name}: ${getRecommendation(player).label}`}
-                                    className={getRecommendation(player).className}
+                                    aria-label={`Recommendation for ${player.web_name}: ${recommendation.label}`}
+                                    className={`${recommendation.className} font-semibold shadow-sm`}
                                   >
-                                    {getRecommendation(player).label}
+                                    {recommendation.label}
                                   </Badge>
                                 </div>
                               </div>

@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { useState, useEffect, useMemo } from "react"
-import { TrendingUp, Minus, Star, Shield, Target, Gem, DollarSign, Trophy, ArrowUp, ArrowUpDown, ArrowDown } from "lucide-react"
+import { TrendingUp, Minus, Star, Shield, Target, Gem, DollarSign, Trophy, ArrowUp, ArrowUpDown, ArrowDown, Search, Filter, X } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
@@ -91,6 +91,25 @@ const FormBadge = ({ value }: { value: number }) => {
   )
 }
 
+// New: RankMedal - visual indicator for top 3 positions
+const RankMedal = ({ rank }: { rank: number }) => {
+  if (rank > 3) return null;
+  
+  const medals = {
+    1: { emoji: "🥇", color: "from-yellow-400 to-yellow-600", glow: "shadow-yellow-500/50" },
+    2: { emoji: "🥈", color: "from-gray-300 to-gray-500", glow: "shadow-gray-500/50" },
+    3: { emoji: "🥉", color: "from-orange-400 to-orange-600", glow: "shadow-orange-500/50" }
+  };
+  
+  const medal = medals[rank];
+  
+  return (
+    <div className={`flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br ${medal.color} ${medal.glow} shadow-lg text-lg animate-pulse`}>
+      {medal.emoji}
+    </div>
+  );
+};
+
 
 
 export default function TopPerformersPage() {
@@ -106,6 +125,11 @@ export default function TopPerformersPage() {
   const [sustainableScorers, setSustainableScorers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState({});
+
+  // New: Filter states
+  const [searchQuery, setSearchQuery] = useState("");
+  const [positionFilter, setPositionFilter] = useState("all");
+  const [priceFilter, setPriceFilter] = useState("all");
 
   // Add sorting state
   const [sortBy, setSortBy] = useState("points"); // Default sort by points
@@ -123,84 +147,156 @@ export default function TopPerformersPage() {
   const [sustainSortDirection, setSustainSortDirection] = useState("desc");
   const [underSortBy, setUnderSortBy] = useState("xG");
   const [underSortDirection, setUnderSortDirection] = useState("desc");
+  const [goalSortBy, setGoalSortBy] = useState("goals");
+  const [goalSortDirection, setGoalSortDirection] = useState("desc");
+  const [gemSortBy, setGemSortBy] = useState("potentialScore");
+  const [gemSortDirection, setGemSortDirection] = useState("desc");
+
+  // Filter function to apply search and filters (must be defined before useMemo hooks)
+  const applyFilters = (data) => {
+    if (!Array.isArray(data)) return data;
+
+    return data.filter((player) => {
+      // Search filter
+      const searchMatch =
+        searchQuery === "" ||
+        player.player?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        player.team?.toLowerCase().includes(searchQuery.toLowerCase());
+
+      // Position filter
+      const positionMatch =
+        positionFilter === "all" || player.position === positionFilter;
+
+      // Price filter
+      const price = parseFloat(player.price) || 0;
+      let priceMatch = true;
+      if (priceFilter === "budget") priceMatch = price < 6.0;
+      else if (priceFilter === "mid") priceMatch = price >= 6.0 && price <= 9.0;
+      else if (priceFilter === "premium") priceMatch = price > 9.0;
+
+      return searchMatch && positionMatch && priceMatch;
+    });
+  };
 
   // Sorting logic for seasonPerformers
   const sortedSeasonPerformers = useMemo(() => {
-    return [...seasonPerformers].sort((a, b) => {
+    const filtered = applyFilters(seasonPerformers);
+    return filtered.sort((a, b) => {
       const aVal = a[sortBy];
       const bVal = b[sortBy];
       return sortOrder === "desc" ? bVal - aVal : aVal - bVal;
     });
-  }, [sortBy, sortOrder, seasonPerformers]);
+  }, [sortBy, sortOrder, seasonPerformers, searchQuery, positionFilter, priceFilter]);
 
   // Memoized sorting for defensive performers
   const sortedDefensiveLeaders = useMemo(() => {
-    return [...defensiveLeaders].sort((a, b) => {
+    const filtered = applyFilters(defensiveLeaders);
+    return filtered.sort((a, b) => {
       const aVal = a[defenseSortBy];
       const bVal = b[defenseSortBy];
       const order = defenseSortDirection === "desc" ? bVal - aVal : aVal - bVal;
       return order || a.player.localeCompare(b.player);
     });
-  }, [defenseSortBy, defenseSortDirection, defensiveLeaders]);
+  }, [defenseSortBy, defenseSortDirection, defensiveLeaders, searchQuery, positionFilter, priceFilter]);
 
   // Sort Best Value
   const sortedValuePlayers = useMemo(() => {
-    return [...valuePlayers].sort((a, b) => {
+    const filtered = applyFilters(valuePlayers);
+    return filtered.sort((a, b) => {
       const aVal = a[valueSortBy];
       const bVal = b[valueSortBy];
       const order = valueSortDirection === 'desc' ? bVal - aVal : aVal - bVal;
       return order || a.player.localeCompare(b.player); // Fallback to player name for ties
     });
-  }, [valueSortBy, valueSortDirection, valuePlayers]);
+  }, [valueSortBy, valueSortDirection, valuePlayers, searchQuery, positionFilter, priceFilter]);
 
   // Sort assistProviders
   const sortedAssistProviders = useMemo(() => {
-    return [...assistProviders].sort((a, b) => {
+    const filtered = applyFilters(assistProviders);
+    return filtered.sort((a, b) => {
       const aVal = a[assistSortBy];
       const bVal = b[assistSortBy];
       const order = assistSortDirection === "desc" ? bVal - aVal : aVal - bVal;
       return order || a.player.localeCompare(b.player); // Fallback to player name for ties
     });
-  }, [assistSortBy, assistSortDirection, assistProviders]);
+  }, [assistSortBy, assistSortDirection, assistProviders, searchQuery, positionFilter, priceFilter]);
 
   // Sort overperformers
   const sortedOverperformers = useMemo(() => {
-    return [...overperformers].sort((a, b) => {
+    const filtered = applyFilters(overperformers);
+    return filtered.sort((a, b) => {
       const aVal = a[overSortBy];
       const bVal = b[overSortBy];
       const order = overSortDirection === "desc" ? bVal - aVal : aVal - bVal;
       return order || a.player.localeCompare(b.player);
     });
-  }, [overSortBy, overSortDirection, overperformers]);
+  }, [overSortBy, overSortDirection, overperformers, searchQuery, positionFilter, priceFilter]);
 
   // Sort sustainable scorers
   const sortedSustainableScorers = useMemo(() => {
-    return [...sustainableScorers].sort((a, b) => {
+    const filtered = applyFilters(sustainableScorers);
+    return filtered.sort((a, b) => {
       const aVal = a[sustainSortBy];
       const bVal = b[sustainSortBy];
       const order = sustainSortDirection === "desc" ? bVal - aVal : aVal - bVal;
       return order || a.player.localeCompare(b.player);
     });
-  }, [sustainSortBy, sustainSortDirection, sustainableScorers]);
+  }, [sustainSortBy, sustainSortDirection, sustainableScorers, searchQuery, positionFilter, priceFilter]);
 
   // Sort underperformers
   const sortedUnderperformers = useMemo(() => {
-    return [...underperformers].sort((a, b) => {
+    const filtered = applyFilters(underperformers);
+    return filtered.sort((a, b) => {
       const aVal = a[underSortBy];
       const bVal = b[underSortBy];
       const order = underSortDirection === "desc" ? bVal - aVal : aVal - bVal;
       return order || a.player.localeCompare(b.player);
     });
-  }, [underSortBy, underSortDirection, underperformers]);
+  }, [underSortBy, underSortDirection, underperformers, searchQuery, positionFilter, priceFilter]);
 
-  // Handle sort click
+  // Sort goalScorers
+  const sortedGoalScorers = useMemo(() => {
+    const filtered = applyFilters(goalScorers);
+    return filtered.sort((a, b) => {
+      const aVal = a[goalSortBy];
+      const bVal = b[goalSortBy];
+      const order = goalSortDirection === "desc" ? bVal - aVal : aVal - bVal;
+      return order || a.player.localeCompare(b.player);
+    });
+  }, [goalSortBy, goalSortDirection, goalScorers, searchQuery, positionFilter, priceFilter]);
+
+  // Sort hiddenGems
+  const sortedHiddenGems = useMemo(() => {
+    const filtered = applyFilters(hiddenGems);
+    return filtered.sort((a, b) => {
+      const aVal = a[gemSortBy];
+      const bVal = b[gemSortBy];
+      const order = gemSortDirection === "desc" ? bVal - aVal : aVal - bVal;
+      return order || a.player.localeCompare(b.player);
+    });
+  }, [gemSortBy, gemSortDirection, hiddenGems, searchQuery, positionFilter, priceFilter]);
+
   const handleSort = (column, tab = 'season') => {
-    if (tab === 'assists') {
+    if (tab === 'assists' || tab === true) {
       if (assistSortBy === column) {
         setAssistSortDirection(assistSortDirection === 'desc' ? 'asc' : 'desc');
       } else {
         setAssistSortBy(column);
         setAssistSortDirection('desc');
+      }
+    } else if (tab === 'defense') {
+      if (defenseSortBy === column) {
+        setDefenseSortDirection(defenseSortDirection === 'desc' ? 'asc' : 'desc');
+      } else {
+        setDefenseSortBy(column);
+        setDefenseSortDirection('desc');
+      }
+    } else if (tab === 'value') {
+      if (valueSortBy === column) {
+        setValueSortDirection(valueSortDirection === 'desc' ? 'asc' : 'desc');
+      } else {
+        setValueSortBy(column);
+        setValueSortDirection('desc');
       }
     } else if (tab === 'overperformers') {
       if (overSortBy === column) {
@@ -223,14 +319,8 @@ export default function TopPerformersPage() {
         setUnderSortBy(column);
         setUnderSortDirection('desc');
       }
-    } else if (tab === 'value') {
-      if (valueSortBy === column) {
-        setValueSortDirection(valueSortDirection === 'desc' ? 'asc' : 'desc');
-      } else {
-        setValueSortBy(column);
-        setValueSortDirection('asc');
-      }
     } else {
+      // Default: season tab
       if (sortBy === column) {
         setSortOrder(sortOrder === 'desc' ? 'asc' : 'desc');
       } else {
@@ -242,8 +332,29 @@ export default function TopPerformersPage() {
 
   // Get sort icon
   const getSortIcon = (key, tab = "season") => {
-    const currentSortBy = tab === "assists" ? assistSortBy : tab === "defense" ? defenseSortBy : tab === "value" ? valueSortBy : sortBy;
-    const currentSortDirection = tab === "assists" ? assistSortDirection : tab === "defense" ? defenseSortDirection : tab === "value" ? valueSortDirection : sortOrder;
+    let currentSortBy = sortBy;
+    let currentSortDirection = sortOrder;
+    
+    if (tab === "assists" || tab === true) {
+      currentSortBy = assistSortBy;
+      currentSortDirection = assistSortDirection;
+    } else if (tab === "defense") {
+      currentSortBy = defenseSortBy;
+      currentSortDirection = defenseSortDirection;
+    } else if (tab === "value") {
+      currentSortBy = valueSortBy;
+      currentSortDirection = valueSortDirection;
+    } else if (tab === "overperformers") {
+      currentSortBy = overSortBy;
+      currentSortDirection = overSortDirection;
+    } else if (tab === "sustainable") {
+      currentSortBy = sustainSortBy;
+      currentSortDirection = sustainSortDirection;
+    } else if (tab === "underperformers") {
+      currentSortBy = underSortBy;
+      currentSortDirection = underSortDirection;
+    }
+    
     if (currentSortBy !== key) return <ArrowUpDown className="h-4 w-4" />;
     return currentSortDirection === "desc" ? (
       <ArrowDown className="h-4 w-4" />
@@ -395,48 +506,191 @@ export default function TopPerformersPage() {
           </p>
         </div>
 
+        {/* Filter Controls */}
+        <Card className="mb-6 sticky top-0 z-20 shadow-lg border-2">
+          <CardContent className="p-4">
+            <div className="flex flex-col lg:flex-row gap-4">
+              {/* Search Bar */}
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  type="text"
+                  placeholder="Search by player or team name..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-10 py-2.5 rounded-lg bg-secondary/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+
+              {/* Position Filter */}
+              <div className="flex items-center gap-2">
+                <Filter className="h-4 w-4 text-muted-foreground" />
+                <select
+                  value={positionFilter}
+                  onChange={(e) => setPositionFilter(e.target.value)}
+                  className="px-4 py-2.5 rounded-lg bg-secondary/50 text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer"
+                >
+                  <option value="all">All Positions</option>
+                  <option value="GK">GK</option>
+                  <option value="DEF">DEF</option>
+                  <option value="MID">MID</option>
+                  <option value="FWD">FWD</option>
+                </select>
+              </div>
+
+              {/* Price Filter */}
+              <div className="flex items-center gap-2">
+                <DollarSign className="h-4 w-4 text-muted-foreground" />
+                <select
+                  value={priceFilter}
+                  onChange={(e) => setPriceFilter(e.target.value)}
+                  className="px-4 py-2.5 rounded-lg bg-secondary/50 text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer"
+                >
+                  <option value="all">All Prices</option>
+                  <option value="budget">Budget (&lt; £6.0m)</option>
+                  <option value="mid">Mid-Range (£6.0-9.0m)</option>
+                  <option value="premium">Premium (&gt; £9.0m)</option>
+                </select>
+              </div>
+
+              {/* Clear All Filters Button */}
+              {(searchQuery || positionFilter !== "all" || priceFilter !== "all") && (
+                <button
+                  onClick={() => {
+                    setSearchQuery("");
+                    setPositionFilter("all");
+                    setPriceFilter("all");
+                  }}
+                  className="px-4 py-2.5 rounded-lg border-2 border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground transition-all duration-200 font-medium active:scale-95"
+                >
+                  Clear Filters
+                </button>
+              )}
+            </div>
+
+            {/* Filter Results Summary */}
+            {(searchQuery || positionFilter !== "all" || priceFilter !== "all") && (
+              <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+                <Badge variant="outline" className="gap-1">
+                  <Filter className="h-3 w-3" />
+                  Filters active
+                </Badge>
+                {searchQuery && (
+                  <Badge variant="secondary">
+                    Search: "{searchQuery}"
+                  </Badge>
+                )}
+                {positionFilter !== "all" && (
+                  <Badge variant="secondary">
+                    Position: {positionFilter}
+                  </Badge>
+                )}
+                {priceFilter !== "all" && (
+                  <Badge variant="secondary">
+                    Price: {priceFilter === "budget" ? "< £6.0m" : priceFilter === "mid" ? "£6.0-9.0m" : "> £9.0m"}
+                  </Badge>
+                )}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
         <Tabs defaultValue="season" className="space-y-6 sm:space-y-8">
-          <div className="sticky top-4 z-10 backdrop-blur-sm bg-background/80 p-2 rounded-xl border shadow-lg py-0 px-2 text-transparent">
-            <TabsList className="bg-secondary/50 p-1 rounded-lg border w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1 pb-11 text-card">
+          {/* Mobile: Horizontal Scrollable Tabs */}
+          <div className="sm:hidden sticky top-4 z-10 -mx-4 px-4 py-2 backdrop-blur-sm bg-background/95 border-b">
+            <div className="overflow-x-auto scrollbar-hide">
+              <TabsList className="bg-secondary/50 p-2 rounded-xl inline-flex gap-2 w-max">
+                <TabsTrigger
+                  value="season"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                >
+                  <Star className="h-4 w-4" />
+                  Season
+                </TabsTrigger>
+                <TabsTrigger
+                  value="goals"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                >
+                  <Target className="h-4 w-4" />
+                  Goals
+                </TabsTrigger>
+                <TabsTrigger
+                  value="assists"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                >
+                  <TrendingUp className="h-4 w-4" />
+                  Assists
+                </TabsTrigger>
+                <TabsTrigger
+                  value="defense"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                >
+                  <Shield className="h-4 w-4" />
+                  Defense
+                </TabsTrigger>
+                <TabsTrigger
+                  value="value"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                >
+                  <DollarSign className="h-4 w-4" />
+                  Value
+                </TabsTrigger>
+                <TabsTrigger
+                  value="gems"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-500 data-[state=active]:to-yellow-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                >
+                  <Gem className="h-4 w-4" />
+                  Gems
+                </TabsTrigger>
+              </TabsList>
+            </div>
+          </div>
+
+          {/* Desktop: Grid Layout Tabs */}
+          <div className="hidden sm:block sticky top-4 z-10 backdrop-blur-sm bg-background/80 p-2 rounded-xl shadow-lg">
+            <TabsList className="bg-secondary/50 p-1 rounded-lg w-full grid grid-cols-3 lg:grid-cols-6 gap-1">
               <TabsTrigger
                 value="season"
                 className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white"
               >
                 <Star className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="hidden sm:inline">Season</span>
-                <span className="sm:hidden">⭐</span>
+                <span>Season</span>
               </TabsTrigger>
               <TabsTrigger
                 value="goals"
                 className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white"
               >
                 <Target className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="hidden sm:inline">Goals</span>
-                <span className="sm:hidden">⚽</span>
+                <span>Goals</span>
               </TabsTrigger>
               <TabsTrigger
                 value="assists"
                 className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-green-600 data-[state=active]:text-white"
               >
-                <Target className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="hidden sm:inline">Assists</span>
-                <span className="sm:hidden">🎯</span>
+                <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span>Assists</span>
               </TabsTrigger>
               <TabsTrigger
                 value="defense"
                 className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white"
               >
                 <Shield className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="hidden sm:inline">Defense</span>
-                <span className="sm:hidden">🛡️</span>
+                <span>Defense</span>
               </TabsTrigger>
               <TabsTrigger
                 value="value"
                 className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-emerald-600 data-[state=active]:text-white"
               >
                 <DollarSign className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="hidden sm:inline">Value</span>
-                <span className="sm:hidden">💰</span>
+                <span>Value</span>
               </TabsTrigger>
               <TabsTrigger
                 value="gems"
@@ -463,6 +717,70 @@ export default function TopPerformersPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-3 sm:p-6">
+                {/* Mobile Card Layout */}
+                <div className="sm:hidden space-y-3">
+                  {sortedSeasonPerformers.map((player, index) => (
+                    <div
+                      key={player.player}
+                      className="p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-lg active:scale-[0.98]"
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          {index < 3 ? (
+                            <RankMedal rank={index + 1} />
+                          ) : (
+                            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-lg font-bold text-muted-foreground">
+                              #{index + 1}
+                            </div>
+                          )}
+                          <div>
+                            <div className="font-semibold text-foreground flex items-center gap-2">
+                              {player.player}
+                            </div>
+                            <div className="flex items-center gap-2 mt-1">
+                              <TeamBadge team={player.team_short} />
+                              <PositionBadge position={player.position} />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3 text-sm">
+                        <div>
+                          <span className="text-muted-foreground block text-xs">Points</span>
+                          <span className="font-mono font-bold text-accent text-lg">{player.points}</span>
+                          <Progress value={(player.points / 250) * 100} className="h-1.5 mt-1" />
+                        </div>
+                        <div>
+                          <span className="text-muted-foreground block text-xs">Form</span>
+                          <FormBadge value={player.form} />
+                        </div>
+                        <div>
+                          <span className="text-muted-foreground block text-xs">PPG</span>
+                          <span className="font-mono font-medium">{player.ppg.toFixed(1)}</span>
+                          <Progress value={(player.ppg / 10) * 100} className="h-1.5 mt-1" />
+                        </div>
+                        <div>
+                          <span className="text-muted-foreground block text-xs">Price</span>
+                          <span className="font-mono text-green-600 font-semibold">£{player.price}m</span>
+                        </div>
+                        <div className="col-span-2">
+                          <span className="text-muted-foreground block text-xs">Ownership</span>
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden">
+                              <div 
+                                className="h-full bg-accent transition-all duration-500"
+                                style={{ width: `${Math.min(player.ownership, 100)}%` }}
+                              ></div>
+                            </div>
+                            <span className="font-mono text-xs">{player.ownership}%</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
                 {/* Desktop Table Layout with Sorting */}
                 <div className="hidden sm:block overflow-x-auto relative">
                   <table className="w-full min-w-[920px]" role="table" aria-label="Season performers table">
@@ -586,9 +904,13 @@ export default function TopPerformersPage() {
                       >
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-3">
-                            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/20 text-accent font-bold text-sm">
-                              #{index + 1}
-                            </div>
+                            {index < 3 ? (
+                              <RankMedal rank={index + 1} />
+                            ) : (
+                              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/20 text-accent font-bold text-sm">
+                                #{index + 1}
+                              </div>
+                            )}
                             <div>
                               <div className="font-semibold text-foreground text-sm sm:text-base">{player.player}</div>
                               <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mt-1">

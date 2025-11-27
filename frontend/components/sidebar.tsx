@@ -2,8 +2,9 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, TrendingUp, Trophy, Calendar, Gem, ArrowLeftRight, Target, Menu, X, Clock, Shield } from "lucide-react"
+import { Home, TrendingUp, Trophy, Calendar, Gem, Target, Menu, X, Clock, Shield } from "lucide-react"
 import { useState, useEffect } from "react"
+import { ThemeToggle } from "./theme-toggle"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
 const MAX_RETRIES = 3
@@ -14,7 +15,6 @@ const navigation = [
   { name: "Team Rankings", href: "/team-rankings", icon: Trophy, color: "text-amber-500", bgColor: "bg-amber-500/10", hoverColor: "hover:bg-amber-500/20" },
   { name: "Fixture Analysis", href: "/fixture-analysis", icon: Calendar, color: "text-purple-500", bgColor: "bg-purple-500/10", hoverColor: "hover:bg-purple-500/20" },
   { name: "Quick Picks", href: "/quick-picks", icon: Target, color: "text-indigo-500", bgColor: "bg-indigo-500/10", hoverColor: "hover:bg-indigo-500/20" },
-  { name: "Transfer Strategy", href: "/transfer-strategy", icon: ArrowLeftRight, color: "text-red-500", bgColor: "bg-red-500/10", hoverColor: "hover:bg-red-500/20" },
 ]
 
 const adminNavigation = [
@@ -251,6 +251,9 @@ export function Sidebar() {
 
           {/* Enhanced Footer with more info */}
           <div className="border-t border-slate-200/50 dark:border-slate-700/50 p-4 space-y-3">
+            {/* Theme Toggle */}
+            <ThemeToggle />
+            
             {/* Status Card */}
             <div className="rounded-xl bg-gradient-to-r from-emerald-500/10 to-blue-500/10 p-4 border border-emerald-500/20">
               <div className="flex items-center gap-2 mb-2">

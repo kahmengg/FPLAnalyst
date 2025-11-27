@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, CalendarIcon, Target, Shield, TrendingUp, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
+import { ChevronLeft, ChevronRight, CalendarIcon, Target, Shield, TrendingUp, ArrowUpDown, ArrowUp, ArrowDown, LayoutGrid, List, Filter, X } from "lucide-react"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
 
@@ -106,8 +106,12 @@ export default function FixtureAnalysisPage() {
   const [teamFixtureSummary, setTeamFixtureSummary] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [fixtureSortBy, setFixtureSortBy] = useState("combined_score"); // New
-  const [fixtureSortOrder, setFixtureSortOrder] = useState("desc"); // New
+  const [fixtureSortBy, setFixtureSortBy] = useState("combined_score");
+  const [fixtureSortOrder, setFixtureSortOrder] = useState("desc");
+  
+  // New state for visual enhancements
+  const [viewMode, setViewMode] = useState("detailed"); // "detailed" or "compact"
+  const [difficultyFilter, setDifficultyFilter] = useState([]); // Array of difficulty levels to show
 
   useEffect(() => {
     async function fetchData() {
@@ -192,6 +196,7 @@ export default function FixtureAnalysisPage() {
           def: t.avg_defense_difficulty,
           overall: t.overall_difficulty,
           fixtures: t.num_favorable_fixtures,
+          homeFixtures: t.home_team_fixtures,
         }));
         setTeamFixtureSummary(transformedSummary);
       } catch (err) {
@@ -218,6 +223,34 @@ export default function FixtureAnalysisPage() {
       setSortBy(column);
       setSortOrder("desc");
     }
+  };
+  
+  // Filter and display fixtures based on filters
+  const displayFixtures = useMemo(() => {
+    let filtered = fixtures.filter((f) => f.gw === gameweek);
+    
+    // Apply difficulty filter
+    if (difficultyFilter.length > 0) {
+      filtered = filtered.filter((f) => {
+        const homeAttackLevel = f.teams.home.attack.level;
+        const homeDefenseLevel = f.teams.home.defense.level;
+        const awayAttackLevel = f.teams.away.attack.level;
+        const awayDefenseLevel = f.teams.away.defense.level;
+        
+        return difficultyFilter.includes(homeAttackLevel) || 
+               difficultyFilter.includes(homeDefenseLevel) || 
+               difficultyFilter.includes(awayAttackLevel) || 
+               difficultyFilter.includes(awayDefenseLevel);
+      });
+    }
+    
+    return filtered.sort((a, b) => b.maxOpportunityScore - a.maxOpportunityScore);
+  }, [fixtures, gameweek, difficultyFilter]);
+
+  const toggleDifficultyFilter = (level) => {
+    setDifficultyFilter(prev => 
+      prev.includes(level) ? prev.filter(l => l !== level) : [...prev, level]
+    );
   };
   
   const currentFixtures = fixtures.filter((f) => f.gw === gameweek);
@@ -302,34 +335,59 @@ export default function FixtureAnalysisPage() {
           </TabsList>
 
           <TabsContent value="fixtures" className="space-y-4 sm:space-y-6">
-            {/* Gameweek Selector */}
+            {/* Best Fixtures Highlight */}
+            {displayFixtures.length > 0 && (
+              <Card className="border-green-500/30 bg-gradient-to-r from-green-500/10 to-emerald-500/10 backdrop-blur-md shadow-lg">
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-green-500/20">
+                      <Target className="h-5 w-5 text-green-600 dark:text-green-400" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-sm font-bold text-foreground mb-1">🎯 Top Fixture Opportunity</h3>
+                      <p className="text-xs text-muted-foreground">
+                        Best fixture: <span className="font-bold text-foreground">{displayFixtures[0].fixture}</span> (GW {displayFixtures[0].gw})
+                        {displayFixtures[0].favorability !== "Neutral" && (
+                          <span className="ml-2 text-green-600 dark:text-green-400">⭐ {displayFixtures[0].favorability} favored</span>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Gameweek Selector - Mobile Optimized */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center justify-center gap-3 sm:gap-6">
+              <div className="flex items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto">
                 <Button
                   onClick={() => setGameweek(Math.max(minGameweek - 1, gameweek - 1))}
                   variant="ghost"
                   size="icon"
-                  className="h-9 w-9 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition"
+                  className="h-12 w-12 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition-all active:scale-90 active:bg-muted/80"
+                  aria-label="Previous gameweek"
                 >
-                  <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <ChevronLeft className="h-6 w-6 sm:h-5 sm:w-5" />
                 </Button>
-                <div className="px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl bg-secondary/70 backdrop-blur font-semibold text-lg sm:text-xl shadow-sm">
+                <div className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-secondary/70 to-secondary/50 backdrop-blur font-semibold text-xl sm:text-xl shadow-lg border border-border/50 min-w-[160px] text-center">
                   Gameweek {gameweek}
                 </div>
                 <Button
                   onClick={() => setGameweek(Math.min(maxGameweek, gameweek + 1))}
                   variant="ghost"
                   size="icon"
-                  className="h-9 w-9 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition"
+                  className="h-12 w-12 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition-all active:scale-90 active:bg-muted/80"
+                  aria-label="Next gameweek"
                 >
-                  <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <ChevronRight className="h-6 w-6 sm:h-5 sm:w-5" />
                 </Button>
               </div>
             </div>
 
-            {/* Fixtures Grid */}
-            <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {sortedCurrentFixtures.map((fixture, index) => (
+            {/* Fixtures Grid - Detailed or Compact View */}
+            {viewMode === "detailed" ? (
+              <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {displayFixtures.map((fixture, index) => (
                 <Card
                   key={index}
                   className="overflow-hidden border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
@@ -534,17 +592,80 @@ export default function FixtureAnalysisPage() {
                 </Card>
               ))}
             </div>
+            ) : (
+              /* Compact List View */
+              <div className="space-y-3">
+                {displayFixtures.map((fixture, index) => (
+                  <Card
+                    key={index}
+                    className="overflow-hidden border-border bg-card/50 backdrop-blur-md shadow-md hover:shadow-lg transition-all duration-300"
+                  >
+                    <CardContent className="p-4">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+                        {/* Gameweek Badge */}
+                        <div className="flex items-center gap-3">
+                          <Badge variant="outline" className="text-xs font-bold">
+                            GW {fixture.gw}
+                          </Badge>
+                          <span className="text-sm font-bold text-foreground">{fixture.fixture}</span>
+                        </div>
+                        
+                        {/* Home Team Compact */}
+                        <div className="flex items-center gap-2 flex-1">
+                          <span className="text-xs text-muted-foreground min-w-[60px]">{fixture.teams.home.team}</span>
+                          <div className="flex gap-1">
+                            <Badge className={`text-xs ${getColorStyles("level", fixture.teams.home.attack.level)}`}>
+                              ATT: {fixture.teams.home.attack.level}
+                            </Badge>
+                            <Badge className={`text-xs ${getColorStyles("level", fixture.teams.home.defense.level)}`}>
+                              DEF: {fixture.teams.home.defense.level}
+                            </Badge>
+                          </div>
+                        </div>
+                        
+                        {/* Away Team Compact */}
+                        <div className="flex items-center gap-2 flex-1">
+                          <span className="text-xs text-muted-foreground min-w-[60px]">{fixture.teams.away.team}</span>
+                          <div className="flex gap-1">
+                            <Badge className={`text-xs ${getColorStyles("level", fixture.teams.away.attack.level)}`}>
+                              ATT: {fixture.teams.away.attack.level}
+                            </Badge>
+                            <Badge className={`text-xs ${getColorStyles("level", fixture.teams.away.defense.level)}`}>
+                              DEF: {fixture.teams.away.defense.level}
+                            </Badge>
+                          </div>
+                        </div>
+                        
+                        {/* Favorability Badge */}
+                        {fixture.favorability !== "Neutral" ? (
+                          <Badge className="text-xs bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 whitespace-nowrap">
+                            ⭐ {fixture.favorability}
+                          </Badge>
+                        ) : (
+                          <Badge variant="outline" className="text-xs whitespace-nowrap">
+                            Neutral
+                          </Badge>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
           </TabsContent>
 
           <TabsContent value="opportunities" className="space-y-4 sm:space-y-6">
             <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
               {/* Attacking Opportunities */}
-              <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300">
-                <CardHeader className="pb-3 sm:pb-4">
+              <Card className="border-red-500/20 bg-gradient-to-br from-red-500/5 to-card backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300">
+                <CardHeader className="pb-3 sm:pb-4 border-b border-border/50 bg-gradient-to-r from-red-500/10 to-transparent">
                   <CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
-                    🔥 Best Attacking Opportunities
-                    <Badge variant="secondary" className="ml-auto text-xs">
-                      GW {gameweek } - {gameweek + 2}
+                    <div className="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center">
+                      🔥
+                    </div>
+                    Best Attacking Opportunities
+                    <Badge variant="secondary" className="ml-auto text-xs bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+                      Next 6 GWs
                     </Badge>
                   </CardTitle>
                 </CardHeader>
@@ -553,38 +674,42 @@ export default function FixtureAnalysisPage() {
                     {fixtureOpportunities.attack.map((opp, index) => (
                       <div
                         key={index}
-                        className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer"
+                        className="group p-3 sm:p-4 rounded-xl bg-gradient-to-r from-red-500/10 to-secondary/10 border border-red-500/20 hover:border-red-500/40 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer"
                         onClick={() => setExpandedOpportunity(expandedOpportunity === `att-${index}` ? null : `att-${index}`)}
                       >
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
-                            <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-red-500/20 text-red-600 font-bold text-xs flex items-center justify-center">
+                            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-red-500/30 text-red-600 dark:text-red-400 font-bold text-xs sm:text-sm flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
                               {index + 1}
                             </div>
-                            <span className="text-xs sm:text-sm font-medium text-muted-foreground">GW {opp.gw}</span>
+                            <Badge variant="outline" className="text-xs font-semibold border-red-500/30">
+                              GW {opp.gw}
+                            </Badge>
                           </div>
-                          <Badge className={`text-xs border ${getColorStyles("level", opp.level)}`}>
-                            🔥 {opp.level}
+                          <Badge className={`text-xs border-2 font-semibold ${getColorStyles("level", opp.level)}`}>
+                            {opp.level}
                           </Badge>
                         </div>
-                        <div className="mb-2">
-                          <p className="text-sm sm:text-base font-semibold text-foreground">{opp.matchup}</p>
-                          <p className="text-xs sm:text-sm text-muted-foreground">
-                            Target: <span className="text-accent font-medium">{opp.team}</span> ({opp.venue})
+                        <div className="mb-3">
+                          <p className="text-sm sm:text-base font-bold text-foreground group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
+                            {opp.matchup}
+                          </p>
+                          <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                            <span className="inline-flex items-center gap-1">
+                              <Target className="h-3 w-3" />
+                              Target: <span className="text-red-600 dark:text-red-400 font-bold">{opp.team}</span>
+                            </span>
+                            <span className="mx-2">•</span>
+                            <span className="font-medium">{opp.venue === "H" ? "🏠 Home" : "✈️ Away"}</span>
                           </p>
                         </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-muted-foreground">Difficulty Score</span>
-                          <span className={`font-mono font-bold ${getColorStyles("score", opp.score)}`}>
+                        <div className="flex items-center justify-between pt-2 border-t border-border/30">
+                          <span className="text-xs text-muted-foreground font-medium">Opportunity Score</span>
+                          <span className={`font-mono font-bold text-base ${getColorStyles("score", opp.score)}`}>
                             {opp.score > 0 ? "+" : ""}
                             {opp.score}
                           </span>
                         </div>
-                        {expandedOpportunity === `att-${index}` && (
-                          <div className="mt-3 pt-3 border-t border-border/50 text-xs text-muted-foreground">
-                            Additional analysis and player recommendations would go here.
-                          </div>
-                        )}
                       </div>
                     ))}
                   </div>
@@ -592,12 +717,15 @@ export default function FixtureAnalysisPage() {
               </Card>
 
               {/* Defensive Opportunities */}
-              <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300">
-                <CardHeader className="pb-3 sm:pb-4">
+              <Card className="border-blue-500/20 bg-gradient-to-br from-blue-500/5 to-card backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300">
+                <CardHeader className="pb-3 sm:pb-4 border-b border-border/50 bg-gradient-to-r from-blue-500/10 to-transparent">
                   <CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
-                    🛡️ Best Defensive Opportunities
-                    <Badge variant="secondary" className="ml-auto text-xs">
-                      GW {gameweek } - {gameweek + 2}
+                    <div className="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                      🛡️
+                    </div>
+                    Best Defensive Opportunities
+                    <Badge variant="secondary" className="ml-auto text-xs bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                      Next 6 GWs
                     </Badge>
                   </CardTitle>
                 </CardHeader>
@@ -606,38 +734,42 @@ export default function FixtureAnalysisPage() {
                     {fixtureOpportunities.defense.map((opp, index) => (
                       <div
                         key={index}
-                        className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer"
+                        className="group p-3 sm:p-4 rounded-xl bg-gradient-to-r from-blue-500/10 to-secondary/10 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer"
                         onClick={() => setExpandedOpportunity(expandedOpportunity === `def-${index}` ? null : `def-${index}`)}
                       >
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
-                            <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-blue-500/20 text-blue-600 font-bold text-xs flex items-center justify-center">
+                            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-blue-500/30 text-blue-600 dark:text-blue-400 font-bold text-xs sm:text-sm flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
                               {index + 1}
                             </div>
-                            <span className="text-xs sm:text-sm font-medium text-muted-foreground">GW {opp.gw}</span>
+                            <Badge variant="outline" className="text-xs font-semibold border-blue-500/30">
+                              GW {opp.gw}
+                            </Badge>
                           </div>
-                          <Badge className={`text-xs border ${getColorStyles("level", opp.level)}`}>
-                            🛡️ {opp.level}
+                          <Badge className={`text-xs border-2 font-semibold ${getColorStyles("level", opp.level)}`}>
+                            {opp.level}
                           </Badge>
                         </div>
-                        <div className="mb-2">
-                          <p className="text-sm sm:text-base font-semibold text-foreground">{opp.matchup}</p>
-                          <p className="text-xs sm:text-sm text-muted-foreground">
-                            Target: <span className="text-blue-600 font-medium">{opp.team}</span> ({opp.venue})
+                        <div className="mb-3">
+                          <p className="text-sm sm:text-base font-bold text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            {opp.matchup}
+                          </p>
+                          <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                            <span className="inline-flex items-center gap-1">
+                              <Shield className="h-3 w-3" />
+                              Target: <span className="text-blue-600 dark:text-blue-400 font-bold">{opp.team}</span>
+                            </span>
+                            <span className="mx-2">•</span>
+                            <span className="font-medium">{opp.venue === "H" ? "🏠 Home" : "✈️ Away"}</span>
                           </p>
                         </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-muted-foreground">Difficulty Score</span>
-                          <span className={`font-mono font-bold ${getColorStyles("score", opp.score)}`}>
+                        <div className="flex items-center justify-between pt-2 border-t border-border/30">
+                          <span className="text-xs text-muted-foreground font-medium">Opportunity Score</span>
+                          <span className={`font-mono font-bold text-base ${getColorStyles("score", opp.score)}`}>
                             {opp.score > 0 ? "+" : ""}
                             {opp.score}
                           </span>
                         </div>
-                        {expandedOpportunity === `def-${index}` && (
-                          <div className="mt-3 pt-3 border-t border-border/50 text-xs text-muted-foreground">
-                            Additional analysis and player recommendations would go here.
-                          </div>
-                        )}
                       </div>
                     ))}
                   </div>
@@ -652,7 +784,7 @@ export default function FixtureAnalysisPage() {
                 <CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
                   🏆 Team Fixture Difficulty Summary
                   <Badge variant="secondary" className="ml-auto text-xs">
-                    Next 3 GWs
+                    Next 6 GWs
                   </Badge>
                 </CardTitle>
                 <p className="text-xs sm:text-sm text-muted-foreground">
@@ -690,7 +822,22 @@ export default function FixtureAnalysisPage() {
                             Overall {getSortIcon("overall")}
                           </div>
                         </th>
-                        <th className="pb-2 sm:pb-3 font-medium">Fixtures</th>
+                        <th
+                          className="pb-2 sm:pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort("fixtures")}
+                        >
+                          <div className="flex items-center gap-1">
+                            Favourable Fixtures {getSortIcon("fixtures")}
+                          </div>
+                        </th>
+                        <th
+                          className="pb-2 sm:pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
+                          onClick={() => handleSort("homeFixtures")}
+                        >
+                          <div className="flex items-center gap-1">
+                            Home {getSortIcon("homeFixtures")}
+                          </div>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -733,6 +880,9 @@ export default function FixtureAnalysisPage() {
                           </td>
                           <td className="py-2 sm:py-4 font-mono text-muted-foreground group-hover:text-foreground transition-colors duration-200">
                             {team.fixtures}
+                          </td>
+                          <td className="py-2 sm:py-4 font-mono text-muted-foreground group-hover:text-foreground transition-colors duration-200">
+                            🏠 {team.homeFixtures}
                           </td>
                         </tr>
                       ))}

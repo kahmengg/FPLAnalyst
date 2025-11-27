@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link"
-import { TrendingUp, Trophy, Calendar, Gem, ArrowLeftRight, Target, Users, Shield, Activity, Clock } from "lucide-react"
+import { TrendingUp, Trophy, Calendar, Gem, Target, Users, Shield, Activity, Clock } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useState, useEffect } from "react"
 
@@ -55,16 +55,6 @@ const actionCards = [
     iconColor: "text-indigo-500",
     gradientFrom: "from-indigo-500/5",
     gradientTo: "to-blue-600/5",
-  },  
-  {
-    title: "Transfer Strategy",
-    description: "Multi-gameweek planning and recommendations",
-    icon: ArrowLeftRight,
-    href: "/transfer-strategy",
-    color: "bg-gradient-to-br from-red-500/20 to-rose-600/20",
-    iconColor: "text-red-500",
-    gradientFrom: "from-red-500/5",
-    gradientTo: "to-rose-600/5",
   },
 ]
 
@@ -215,7 +205,7 @@ export default function HomePage() {
             {actionCards.map((card, index) => (
               <Link key={card.title} href={card.href} className="group block">
                 <Card 
-                  className="relative overflow-hidden border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 h-full animate-in fade-in slide-in-from-bottom-8"
+                  className="relative overflow-hidden border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 active:scale-[0.98] active:shadow-md h-full animate-in fade-in slide-in-from-bottom-8"
                   style={{ 
                     animationDelay: `${(index * 100) + 500}ms`,
                     animationFillMode: 'both'
