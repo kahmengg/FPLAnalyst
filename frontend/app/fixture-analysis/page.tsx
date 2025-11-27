@@ -95,6 +95,51 @@ const getColorStyles = (metricType, value, context = null, returnType = "classes
   return returnType === "classes" ? "text-gray-600 dark:text-gray-400" : "🔴";
 };
 
+// Helper function to get rating color and description
+const getRatingDisplay = (rating: number) => {
+  if (rating >= 80) {
+    return {
+      color: "text-green-600 dark:text-green-400",
+      bgColor: "bg-green-100 dark:bg-green-900",
+      borderColor: "border-green-300 dark:border-green-700",
+      label: "Excellent",
+      emoji: "🔥"
+    };
+  } else if (rating >= 65) {
+    return {
+      color: "text-blue-600 dark:text-blue-400",
+      bgColor: "bg-blue-100 dark:bg-blue-900",
+      borderColor: "border-blue-300 dark:border-blue-700",
+      label: "Good",
+      emoji: "✅"
+    };
+  } else if (rating >= 45) {
+    return {
+      color: "text-yellow-600 dark:text-yellow-400",
+      bgColor: "bg-yellow-100 dark:bg-yellow-900",
+      borderColor: "border-yellow-300 dark:border-yellow-700",
+      label: "Neutral",
+      emoji: "➖"
+    };
+  } else if (rating >= 25) {
+    return {
+      color: "text-orange-600 dark:text-orange-400",
+      bgColor: "bg-orange-100 dark:bg-orange-900",
+      borderColor: "border-orange-300 dark:border-orange-700",
+      label: "Difficult",
+      emoji: "⚠️"
+    };
+  } else {
+    return {
+      color: "text-red-600 dark:text-red-400",
+      bgColor: "bg-red-100 dark:bg-red-900",
+      borderColor: "border-red-300 dark:border-red-700",
+      label: "Very Difficult",
+      emoji: "❌"
+    };
+  }
+};
+
 export default function FixtureAnalysisPage() {
   const [gameweek, setGameweek] = useState(null);
   const [activeTab, setActiveTab] = useState("fixtures");
@@ -126,12 +171,12 @@ export default function FixtureAnalysisPage() {
         const minGameweek = gameweeks.length > 0 ? Math.min(...gameweeks) : 1;
         setGameweek(minGameweek);
         const transformedFixtures = dataFixtures.map((f) => {
-        const homeAvgScore = (f.home_team.attack.score + f.home_team.defense.score) / 2;
-        const awayAvgScore = (f.away_team.attack.score + f.away_team.defense.score) / 2;
+        const homeAvgRating = (f.home_team.attacking_fixture_rating + f.home_team.defensive_fixture_rating) / 2;
+        const awayAvgRating = (f.away_team.attacking_fixture_rating + f.away_team.defensive_fixture_rating) / 2;
         let favorability;
-        if (homeAvgScore > awayAvgScore + 0.5) {
+        if (homeAvgRating > awayAvgRating + 10) {
           favorability = f.home_team.name;
-        } else if (awayAvgScore > homeAvgScore + 0.5) {
+        } else if (awayAvgRating > homeAvgRating + 10) {
           favorability = f.away_team.name;
         } else {
           favorability = "Neutral";
@@ -142,23 +187,23 @@ export default function FixtureAnalysisPage() {
           teams: {
             home: {
               team: f.home_team.name,
-              attack: { ...f.home_team.attack, level: f.home_team.attack.level },
-              defense: { ...f.home_team.defense, level: f.home_team.defense.level },
+              attackRating: f.home_team.attacking_fixture_rating,
+              defenseRating: f.home_team.defensive_fixture_rating,
               rank: f.home_team.rank,
             },
             away: {
               team: f.away_team.name,
-              attack: { ...f.away_team.attack, level: f.away_team.attack.level },
-              defense: { ...f.away_team.defense, level: f.away_team.defense.level },
+              attackRating: f.away_team.attacking_fixture_rating,
+              defenseRating: f.away_team.defensive_fixture_rating,
               rank: f.away_team.rank,
             },
           },
           favorability,
-          maxOpportunityScore: Math.max(
-            f.home_team.attack.score,
-            f.home_team.defense.score,
-            f.away_team.attack.score,
-            f.away_team.defense.score
+          maxOpportunityRating: Math.max(
+            f.home_team.attacking_fixture_rating,
+            f.home_team.defensive_fixture_rating,
+            f.away_team.attacking_fixture_rating,
+            f.away_team.defensive_fixture_rating
           ),
         };
       });
@@ -173,16 +218,14 @@ export default function FixtureAnalysisPage() {
           matchup: `${o.team} vs ${o.opponent}`,
           team: o.team,
           venue: o.venue,
-          score: o.combined_score,
-          level: o.level,
+          rating: o.combined_score,
         }));
         const transformedDefense = dataOpportunities.defense.map((o) => ({
           gw: o.gameweek,
           matchup: `${o.team} vs ${o.opponent}`,
           team: o.team,
           venue: o.venue,
-          score: o.combined_score,
-          level: o.level,
+          rating: o.combined_score,
         }));
         setFixtureOpportunities({ attack: transformedAttack, defense: transformedDefense });
 
@@ -229,23 +272,9 @@ export default function FixtureAnalysisPage() {
   const displayFixtures = useMemo(() => {
     let filtered = fixtures.filter((f) => f.gw === gameweek);
     
-    // Apply difficulty filter
-    if (difficultyFilter.length > 0) {
-      filtered = filtered.filter((f) => {
-        const homeAttackLevel = f.teams.home.attack.level;
-        const homeDefenseLevel = f.teams.home.defense.level;
-        const awayAttackLevel = f.teams.away.attack.level;
-        const awayDefenseLevel = f.teams.away.defense.level;
-        
-        return difficultyFilter.includes(homeAttackLevel) || 
-               difficultyFilter.includes(homeDefenseLevel) || 
-               difficultyFilter.includes(awayAttackLevel) || 
-               difficultyFilter.includes(awayDefenseLevel);
-      });
-    }
-    
-    return filtered.sort((a, b) => b.maxOpportunityScore - a.maxOpportunityScore);
-  }, [fixtures, gameweek, difficultyFilter]);
+    // Sort by best opportunities (highest max rating)
+    return filtered.sort((a, b) => b.maxOpportunityRating - a.maxOpportunityRating);
+  }, [fixtures, gameweek]);
 
   const toggleDifficultyFilter = (level) => {
     setDifficultyFilter(prev => 
@@ -436,7 +465,7 @@ export default function FixtureAnalysisPage() {
                             <div className="group relative">
                               <Target className="h-4 w-4" />
                               <span className="absolute hidden group-hover:block text-xs bg-gray-800 text-white p-1 rounded">
-                                Attack Strength
+                                Goal Scoring Potential
                               </span>
                             </div>
                             <Badge
@@ -449,27 +478,22 @@ export default function FixtureAnalysisPage() {
                               #{fixture.teams.home.rank.attack} Attack
                             </Badge>
                           </div>
-                          <Badge
-                            className={`text-sm w-full justify-center ${getColorStyles("level", fixture.teams.home.attack.level)}`}
-                          >
-                            {fixture.teams.home.attack.level}
-                          </Badge>
-                          <p
-                            className={`text-center font-mono font-bold text-sm ${getColorStyles(
-                              "score",
-                              fixture.teams.home.attack.score
-                            )}`}
-                          >
-                            {fixture.teams.home.attack.score > 0 ? "+" : ""}
-                            {fixture.teams.home.attack.score}
-                          </p>
+                          <div className="text-center">
+                            <p className="text-xs text-muted-foreground mb-1">🎯 Goal Threat</p>
+                            <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.attackRating).color}`}>
+                              {fixture.teams.home.attackRating}%
+                            </p>
+                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.home.attackRating).bgColor} ${getRatingDisplay(fixture.teams.home.attackRating).borderColor}`}>
+                              {getRatingDisplay(fixture.teams.home.attackRating).emoji} {getRatingDisplay(fixture.teams.home.attackRating).label}
+                            </Badge>
+                          </div>
                         </div>
                         <div className="space-y-2">
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <div className="group relative">
                               <Shield className="h-4 w-4" />
                               <span className="absolute hidden group-hover:block text-xs bg-gray-800 text-white p-1 rounded">
-                                Defense Strength
+                                Clean Sheet Potential
                               </span>
                             </div>
                             <Badge
@@ -482,20 +506,15 @@ export default function FixtureAnalysisPage() {
                               #{fixture.teams.home.rank.defense} Defense
                             </Badge>
                           </div>
-                          <Badge
-                            className={`text-sm w-full justify-center ${getColorStyles("level", fixture.teams.home.defense.level)}`}
-                          >
-                            {fixture.teams.home.defense.level}
-                          </Badge>
-                          <p
-                            className={`text-center font-mono font-bold text-sm ${getColorStyles(
-                              "score",
-                              fixture.teams.home.defense.score
-                            )}`}
-                          >
-                            {fixture.teams.home.defense.score > 0 ? "+" : ""}
-                            {fixture.teams.home.defense.score}
-                          </p>
+                          <div className="text-center">
+                            <p className="text-xs text-muted-foreground mb-1">🛡️ Clean Sheet Odds</p>
+                            <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.defenseRating).color}`}>
+                              {fixture.teams.home.defenseRating}%
+                            </p>
+                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.home.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.home.defenseRating).borderColor}`}>
+                              {getRatingDisplay(fixture.teams.home.defenseRating).emoji} {getRatingDisplay(fixture.teams.home.defenseRating).label}
+                            </Badge>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -519,7 +538,7 @@ export default function FixtureAnalysisPage() {
                             <div className="group relative">
                               <Target className="h-4 w-4" />
                               <span className="absolute hidden group-hover:block text-xs bg-gray-800 text-white p-1 rounded">
-                                Attack Strength
+                                Goal Scoring Potential
                               </span>
                             </div>
                             <Badge
@@ -532,30 +551,22 @@ export default function FixtureAnalysisPage() {
                               #{fixture.teams.away.rank.attack} Attack
                             </Badge>
                           </div>
-                          <Badge
-                            className={`text-sm w-full justify-center font-medium ${getColorStyles(
-                              "level",
-                              fixture.teams.away.attack.level
-                            )}`}
-                          >
-                            {fixture.teams.away.attack.level}
-                          </Badge>
-                          <p
-                            className={`text-center font-mono font-bold text-sm ${getColorStyles(
-                              "score",
-                              fixture.teams.away.attack.score
-                            )}`}
-                          >
-                            {fixture.teams.away.attack.score > 0 ? "+" : ""}
-                            {fixture.teams.away.attack.score}
-                          </p>
+                          <div className="text-center">
+                            <p className="text-xs text-muted-foreground mb-1">🎯 Goal Threat</p>
+                            <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.attackRating).color}`}>
+                              {fixture.teams.away.attackRating}%
+                            </p>
+                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.away.attackRating).bgColor} ${getRatingDisplay(fixture.teams.away.attackRating).borderColor}`}>
+                              {getRatingDisplay(fixture.teams.away.attackRating).emoji} {getRatingDisplay(fixture.teams.away.attackRating).label}
+                            </Badge>
+                          </div>
                         </div>
                         <div className="space-y-2">
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <div className="group relative">
                               <Shield className="h-4 w-4" />
                               <span className="absolute hidden group-hover:block text-xs bg-gray-800 text-white p-1 rounded">
-                                Defense Strength
+                                Clean Sheet Potential
                               </span>
                             </div>
                             <Badge
@@ -568,23 +579,15 @@ export default function FixtureAnalysisPage() {
                               #{fixture.teams.away.rank.defense} Defense
                             </Badge>
                           </div>
-                          <Badge
-                            className={`text-sm w-full justify-center font-medium ${getColorStyles(
-                              "level",
-                              fixture.teams.away.defense.level
-                            )}`}
-                          >
-                            {fixture.teams.away.defense.level}
-                          </Badge>
-                          <p
-                            className={`text-center font-mono font-bold text-sm ${getColorStyles(
-                              "score",
-                              fixture.teams.away.defense.score
-                            )}`}
-                          >
-                            {fixture.teams.away.defense.score > 0 ? "+" : ""}
-                            {fixture.teams.away.defense.score}
-                          </p>
+                          <div className="text-center">
+                            <p className="text-xs text-muted-foreground mb-1">🛡️ Clean Sheet Odds</p>
+                            <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.defenseRating).color}`}>
+                              {fixture.teams.away.defenseRating}%
+                            </p>
+                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.away.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.away.defenseRating).borderColor}`}>
+                              {getRatingDisplay(fixture.teams.away.defenseRating).emoji} {getRatingDisplay(fixture.teams.away.defenseRating).label}
+                            </Badge>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -614,11 +617,11 @@ export default function FixtureAnalysisPage() {
                         <div className="flex items-center gap-2 flex-1">
                           <span className="text-xs text-muted-foreground min-w-[60px]">{fixture.teams.home.team}</span>
                           <div className="flex gap-1">
-                            <Badge className={`text-xs ${getColorStyles("level", fixture.teams.home.attack.level)}`}>
-                              ATT: {fixture.teams.home.attack.level}
+                            <Badge className={`text-xs ${getRatingDisplay(fixture.teams.home.attackRating).bgColor} ${getRatingDisplay(fixture.teams.home.attackRating).color}`}>
+                              🎯 {fixture.teams.home.attackRating}%
                             </Badge>
-                            <Badge className={`text-xs ${getColorStyles("level", fixture.teams.home.defense.level)}`}>
-                              DEF: {fixture.teams.home.defense.level}
+                            <Badge className={`text-xs ${getRatingDisplay(fixture.teams.home.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.home.defenseRating).color}`}>
+                              🛡️ {fixture.teams.home.defenseRating}%
                             </Badge>
                           </div>
                         </div>
@@ -627,11 +630,11 @@ export default function FixtureAnalysisPage() {
                         <div className="flex items-center gap-2 flex-1">
                           <span className="text-xs text-muted-foreground min-w-[60px]">{fixture.teams.away.team}</span>
                           <div className="flex gap-1">
-                            <Badge className={`text-xs ${getColorStyles("level", fixture.teams.away.attack.level)}`}>
-                              ATT: {fixture.teams.away.attack.level}
+                            <Badge className={`text-xs ${getRatingDisplay(fixture.teams.away.attackRating).bgColor} ${getRatingDisplay(fixture.teams.away.attackRating).color}`}>
+                              🎯 {fixture.teams.away.attackRating}%
                             </Badge>
-                            <Badge className={`text-xs ${getColorStyles("level", fixture.teams.away.defense.level)}`}>
-                              DEF: {fixture.teams.away.defense.level}
+                            <Badge className={`text-xs ${getRatingDisplay(fixture.teams.away.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.away.defenseRating).color}`}>
+                              🛡️ {fixture.teams.away.defenseRating}%
                             </Badge>
                           </div>
                         </div>
@@ -686,8 +689,8 @@ export default function FixtureAnalysisPage() {
                               GW {opp.gw}
                             </Badge>
                           </div>
-                          <Badge className={`text-xs border-2 font-semibold ${getColorStyles("level", opp.level)}`}>
-                            {opp.level}
+                          <Badge className={`text-xs border-2 font-semibold ${getRatingDisplay(opp.rating).bgColor} ${getRatingDisplay(opp.rating).borderColor}`}>
+                            {getRatingDisplay(opp.rating).emoji} {getRatingDisplay(opp.rating).label}
                           </Badge>
                         </div>
                         <div className="mb-3">
@@ -704,10 +707,9 @@ export default function FixtureAnalysisPage() {
                           </p>
                         </div>
                         <div className="flex items-center justify-between pt-2 border-t border-border/30">
-                          <span className="text-xs text-muted-foreground font-medium">Opportunity Score</span>
-                          <span className={`font-mono font-bold text-base ${getColorStyles("score", opp.score)}`}>
-                            {opp.score > 0 ? "+" : ""}
-                            {opp.score}
+                          <span className="text-xs text-muted-foreground font-medium">Combined Rating</span>
+                          <span className={`font-mono font-bold text-base ${getRatingDisplay(opp.rating).color}`}>
+                            {opp.rating}%
                           </span>
                         </div>
                       </div>
@@ -746,8 +748,8 @@ export default function FixtureAnalysisPage() {
                               GW {opp.gw}
                             </Badge>
                           </div>
-                          <Badge className={`text-xs border-2 font-semibold ${getColorStyles("level", opp.level)}`}>
-                            {opp.level}
+                          <Badge className={`text-xs border-2 font-semibold ${getRatingDisplay(opp.rating).bgColor} ${getRatingDisplay(opp.rating).borderColor}`}>
+                            {getRatingDisplay(opp.rating).emoji} {getRatingDisplay(opp.rating).label}
                           </Badge>
                         </div>
                         <div className="mb-3">
@@ -764,10 +766,9 @@ export default function FixtureAnalysisPage() {
                           </p>
                         </div>
                         <div className="flex items-center justify-between pt-2 border-t border-border/30">
-                          <span className="text-xs text-muted-foreground font-medium">Opportunity Score</span>
-                          <span className={`font-mono font-bold text-base ${getColorStyles("score", opp.score)}`}>
-                            {opp.score > 0 ? "+" : ""}
-                            {opp.score}
+                          <span className="text-xs text-muted-foreground font-medium">Combined Rating</span>
+                          <span className={`font-mono font-bold text-base ${getRatingDisplay(opp.rating).color}`}>
+                            {opp.rating}%
                           </span>
                         </div>
                       </div>
