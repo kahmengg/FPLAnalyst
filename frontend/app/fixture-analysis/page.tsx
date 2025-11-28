@@ -811,6 +811,71 @@ export default function FixtureAnalysisPage() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Stable Fixtures Card - All other teams */}
+            <Card className="border-border/50 bg-card backdrop-blur-md shadow-lg">
+              <CardHeader className="pb-3 sm:pb-4 border-b border-border/50">
+                <CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center">
+                    ➡️
+                  </div>
+                  Stable Fixtures
+                  <Badge variant="secondary" className="ml-auto text-xs">
+                    {sortedTeamData.filter(team => team.swingCategory === "Stable").length} Teams
+                  </Badge>
+                </CardTitle>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-2">
+                  Teams with consistent fixture difficulty. Swing &lt; ±15%.
+                </p>
+              </CardHeader>
+              <CardContent className="p-3 sm:p-6">
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {sortedTeamData
+                    .filter(team => team.swingCategory === "Stable")
+                    .map((team, index) => (
+                      <div
+                        key={index}
+                        className="p-3 rounded-lg bg-secondary/20 border border-border/30 hover:border-border/60 hover:bg-secondary/30 transition-all"
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="font-semibold text-foreground text-sm">{team.team}</span>
+                          <Badge variant="outline" className="text-xs">
+                            {team.swingEmoji} {team.fixtureSwing > 0 ? '+' : ''}{team.fixtureSwing}
+                          </Badge>
+                        </div>
+                        <div className="space-y-1.5">
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="text-muted-foreground">Next 3:</span>
+                            <span className={`font-semibold ${
+                              team.nearTermRating >= 70 ? 'text-green-600 dark:text-green-400' :
+                              team.nearTermRating >= 50 ? 'text-yellow-600 dark:text-yellow-400' :
+                              'text-orange-600 dark:text-orange-400'
+                            }`}>
+                              {team.nearTermRating}%
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="text-muted-foreground">Following 3:</span>
+                            <span className={`font-semibold ${
+                              team.mediumTermRating >= 70 ? 'text-green-600 dark:text-green-400' :
+                              team.mediumTermRating >= 50 ? 'text-yellow-600 dark:text-yellow-400' :
+                              'text-orange-600 dark:text-orange-400'
+                            }`}>
+                              {team.mediumTermRating}%
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between text-xs pt-1.5 border-t border-border/30">
+                            <span className="text-muted-foreground">🏠 {team.nearTermHomeFixtures}/{team.mediumTermHomeFixtures}</span>
+                            <span className={`font-medium ${team.att > team.def ? 'text-red-600 dark:text-red-400' : 'text-blue-600 dark:text-blue-400'}`}>
+                              {team.att > team.def ? '⚔️' : '🛡️'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
 
         </Tabs>

@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, TrendingUp, Trophy, Calendar, Gem, Target, Menu, X, Clock, Shield } from "lucide-react"
+import { Home, TrendingUp, Trophy, Calendar, Gem, Target, Menu, X, Clock, Shield, Activity } from "lucide-react"
 import { useState, useEffect } from "react"
 import { ThemeToggle } from "./theme-toggle"
 
@@ -14,6 +14,7 @@ const navigation = [
   { name: "Top Performers", href: "/top-performers", icon: TrendingUp, color: "text-blue-500", bgColor: "bg-blue-500/10", hoverColor: "hover:bg-blue-500/20" },
   { name: "Team Rankings", href: "/team-rankings", icon: Trophy, color: "text-amber-500", bgColor: "bg-amber-500/10", hoverColor: "hover:bg-amber-500/20" },
   { name: "Fixture Analysis", href: "/fixture-analysis", icon: Calendar, color: "text-purple-500", bgColor: "bg-purple-500/10", hoverColor: "hover:bg-purple-500/20" },
+  { name: "Player Trends", href: "/player-trends", icon: Activity, color: "text-cyan-500", bgColor: "bg-cyan-500/10", hoverColor: "hover:bg-cyan-500/20" },
   { name: "Quick Picks", href: "/quick-picks", icon: Target, color: "text-indigo-500", bgColor: "bg-indigo-500/10", hoverColor: "hover:bg-indigo-500/20" },
 ]
 

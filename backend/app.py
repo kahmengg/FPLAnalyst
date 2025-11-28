@@ -7,6 +7,7 @@ from routes.rankings import rankings_bp
 from routes.top_performers import top_performers_bp
 from routes.health import health_bp
 from routes.admin import admin_bp
+from routes.player_trends import player_trends_bp
 from config.config import Config
 import os
 app = Flask(__name__)
@@ -21,6 +22,7 @@ app.register_blueprint(rankings_bp, url_prefix='/api')
 app.register_blueprint(top_performers_bp, url_prefix='/api')
 app.register_blueprint(health_bp, url_prefix='/api')
 app.register_blueprint(admin_bp, url_prefix='/api')
+app.register_blueprint(player_trends_bp, url_prefix='/api')
 
 if __name__ == '__main__':
     print("🚀 Starting FPL Analyst API...")
