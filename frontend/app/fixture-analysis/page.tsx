@@ -217,8 +217,10 @@ export default function FixtureAnalysisPage() {
           def: t.avg_defense_difficulty,
           overall: t.overall_difficulty,
           fixtures: t.num_favorable_fixtures,
-          homeFixtures: t.home_team_fixtures,
-          // New swing analysis fields
+          // Updated: Period-specific home fixture counts
+          nearTermHomeFixtures: t.near_term_home_fixtures,
+          mediumTermHomeFixtures: t.medium_term_home_fixtures,
+          // Swing analysis fields
           nearTermRating: t.near_term_rating,
           mediumTermRating: t.medium_term_rating,
           fixtureSwing: t.fixture_swing,
@@ -726,18 +728,27 @@ export default function FixtureAnalysisPage() {
                               {team.swingEmoji} +{team.fixtureSwing}
                             </Badge>
                           </div>
-                          <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+                          <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground mb-2">
                             <div>
                               <span className="block">Next 3 GWs:</span>
                               <span className="font-semibold text-orange-600 dark:text-orange-400">{team.nearTermRating}%</span>
                             </div>
                             <div>
-                              <span className="block">GW 4-6:</span>
+                              <span className="block">Following 3 GWs:</span>
                               <span className="font-semibold text-green-600 dark:text-green-400">{team.mediumTermRating}%</span>
                             </div>
                           </div>
+                          <div className="flex items-center justify-between pt-2 border-t border-border/30 mb-2">
+                            <div className="flex items-center gap-2 text-xs">
+                              <span className="text-muted-foreground">🏠 {team.nearTermHomeFixtures}/{team.mediumTermHomeFixtures} home</span>
+                              <span className="text-muted-foreground">•</span>
+                              <span className={`font-medium ${team.att > team.def ? 'text-red-600 dark:text-red-400' : 'text-blue-600 dark:text-blue-400'}`}>
+                                {team.att > team.def ? '⚔️ Attack' : '🛡️ Defense'}
+                              </span>
+                            </div>
+                          </div>
                           <p className="text-xs mt-2 text-green-600 dark:text-green-400 font-medium">
-                            ✅ Good time to buy - fixtures getting easier
+                            ✅ Consider buying - fixtures getting easier
                           </p>
                         </div>
                       ))}
@@ -767,14 +778,23 @@ export default function FixtureAnalysisPage() {
                               {team.swingEmoji} {team.fixtureSwing}
                             </Badge>
                           </div>
-                          <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+                          <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground mb-2">
                             <div>
                               <span className="block">Next 3 GWs:</span>
                               <span className="font-semibold text-green-600 dark:text-green-400">{team.nearTermRating}%</span>
                             </div>
                             <div>
-                              <span className="block">GW 4-6:</span>
+                              <span className="block">Following 3 GWs:</span>
                               <span className="font-semibold text-orange-600 dark:text-orange-400">{team.mediumTermRating}%</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-between pt-2 border-t border-border/30 mb-2">
+                            <div className="flex items-center gap-2 text-xs">
+                              <span className="text-muted-foreground">🏠 {team.nearTermHomeFixtures}/{team.mediumTermHomeFixtures} home</span>
+                              <span className="text-muted-foreground">•</span>
+                              <span className={`font-medium ${team.att > team.def ? 'text-red-600 dark:text-red-400' : 'text-blue-600 dark:text-blue-400'}`}>
+                                {team.att > team.def ? '⚔️ Attack' : '🛡️ Defense'}
+                              </span>
                             </div>
                           </div>
                           <p className="text-xs mt-2 text-red-600 dark:text-red-400 font-medium">
@@ -791,122 +811,7 @@ export default function FixtureAnalysisPage() {
                 </div>
               </CardContent>
             </Card>
-
-            {/* Existing Team Fixture Difficulty Summary Card */}
-            <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl">
-              <CardHeader className="pb-3 sm:pb-4">
-                <CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
-                  🏆 Team Fixture Difficulty Summary
-                  <Badge variant="secondary" className="ml-auto text-xs">
-                    Next 6 GWs
-                  </Badge>
-                </CardTitle>
-                <p className="text-xs sm:text-sm text-muted-foreground">
-                  Scores show fixture difficulty over the next 3 gameweeks. <strong>Attack</strong> and <strong>Defense</strong> scores indicate how easy it is for a team’s attackers or defenders to score points (higher = easier, negative = harder). <strong>Overall</strong> averages these scores. <strong>Fixtures</strong> counts favorable matchups (attack or defense score ≥ 2.5).
-                </p>
-              </CardHeader>
-              <CardContent className="p-3 sm:p-6">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-xs sm:text-sm">
-                    <thead>
-                      <tr className="border-b border-border text-left text-muted-foreground">
-                        <th className="pb-2 sm:pb-3 font-medium">Rank</th>
-                        <th className="pb-2 sm:pb-3 font-medium">Team</th>
-                        <th
-                          className="pb-2 sm:pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
-                          onClick={() => handleSort("att")}
-                        >
-                          <div className="flex items-center gap-1">
-                            Attack {getSortIcon("att")}
-                          </div>
-                        </th>
-                        <th
-                          className="pb-2 sm:pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
-                          onClick={() => handleSort("def")}
-                        >
-                          <div className="flex items-center gap-1">
-                            Defense {getSortIcon("def")}
-                          </div>
-                        </th>
-                        <th
-                          className="pb-2 sm:pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
-                          onClick={() => handleSort("overall")}
-                        >
-                          <div className="flex items-center gap-1">
-                            Overall {getSortIcon("overall")}
-                          </div>
-                        </th>
-                        <th
-                          className="pb-2 sm:pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
-                          onClick={() => handleSort("fixtures")}
-                        >
-                          <div className="flex items-center gap-1">
-                            Favourable Fixtures {getSortIcon("fixtures")}
-                          </div>
-                        </th>
-                        <th
-                          className="pb-2 sm:pb-3 font-medium cursor-pointer hover:text-foreground transition-colors"
-                          onClick={() => handleSort("homeFixtures")}
-                        >
-                          <div className="flex items-center gap-1">
-                            Home {getSortIcon("homeFixtures")}
-                          </div>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {sortedTeamData.map((team, index) => (
-                        <tr
-                          key={team.team}
-                          className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
-                        >
-                          <td className="py-2 sm:py-4 font-mono text-muted-foreground group-hover:text-foreground transition-colors duration-200">
-                            <div className="flex items-center gap-2">
-                              <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center text-xs font-bold transition-colors duration-200">
-                                {index + 1}
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-2 sm:py-4 font-medium text-foreground group-hover:text-accent transition-colors duration-200">
-                            {team.team}
-                          </td>
-                          <td className="py-2 sm:py-4">
-                            <div className="flex items-center gap-1 sm:gap-2">
-                              <span className="text-sm sm:text-lg">{getColorStyles("difficulty", team.att, null, "emoji")}</span>
-                              <span className={`font-mono text-xs sm:text-sm ${getColorStyles("difficulty", team.att)}`}>
-                                {team.att > 0 ? "+" : ""}
-                                {team.att.toFixed(1)}
-                              </span>
-                            </div>
-                          </td>
-                          <td className="py-2 sm:py-4">
-                            <div className="flex items-center gap-1 sm:gap-2">
-                              <span className="text-sm sm:text-lg">{getColorStyles("difficulty", team.def, null, "emoji")}</span>
-                              <span className={`font-mono text-xs sm:text-sm ${getColorStyles("difficulty", team.def)}`}>
-                                {team.def > 0 ? "+" : ""}
-                                {team.def.toFixed(1)}
-                              </span>
-                            </div>
-                          </td>
-                          <td className="py-2 sm:py-4 font-mono font-bold text-accent group-hover:text-accent/80 transition-colors duration-200">
-                            {team.overall > 0 ? "+" : ""}
-                            {team.overall.toFixed(1)}
-                          </td>
-                          <td className="py-2 sm:py-4 font-mono text-muted-foreground group-hover:text-foreground transition-colors duration-200">
-                            {team.fixtures}
-                          </td>
-                          <td className="py-2 sm:py-4 font-mono text-muted-foreground group-hover:text-foreground transition-colors duration-200">
-                            🏠 {team.homeFixtures}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
           </TabsContent>
-
 
         </Tabs>
       </div>
