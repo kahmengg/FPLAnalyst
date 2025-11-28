@@ -5,7 +5,13 @@
         "avg_defense_difficulty": 5.117,
         "overall_difficulty": 5.017,
         "num_favorable_fixtures": 5,
-        "home_team_fixtures": 3
+        "home_team_fixtures": 3,
+        "near_term_rating": 83.7,
+        "medium_term_rating": 79.6,
+        "fixture_swing": -4.1,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     },
     {
         "team": "Arsenal",
@@ -13,7 +19,13 @@
         "avg_defense_difficulty": 5.167,
         "overall_difficulty": 4.85,
         "num_favorable_fixtures": 5,
-        "home_team_fixtures": 3
+        "home_team_fixtures": 3,
+        "near_term_rating": 74.9,
+        "medium_term_rating": 87.1,
+        "fixture_swing": 12.2,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     },
     {
         "team": "Crystal Palace",
@@ -21,7 +33,13 @@
         "avg_defense_difficulty": 5.0,
         "overall_difficulty": 3.684,
         "num_favorable_fixtures": 5,
-        "home_team_fixtures": 2
+        "home_team_fixtures": 2,
+        "near_term_rating": 79.7,
+        "medium_term_rating": 67.0,
+        "fixture_swing": -12.7,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     },
     {
         "team": "Liverpool",
@@ -29,7 +47,13 @@
         "avg_defense_difficulty": 1.617,
         "overall_difficulty": 3.558,
         "num_favorable_fixtures": 6,
-        "home_team_fixtures": 3
+        "home_team_fixtures": 3,
+        "near_term_rating": 75.5,
+        "medium_term_rating": 71.3,
+        "fixture_swing": -4.2,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     },
     {
         "team": "Chelsea",
@@ -37,7 +61,13 @@
         "avg_defense_difficulty": 3.783,
         "overall_difficulty": 3.2,
         "num_favorable_fixtures": 5,
-        "home_team_fixtures": 2
+        "home_team_fixtures": 2,
+        "near_term_rating": 69.0,
+        "medium_term_rating": 77.3,
+        "fixture_swing": 8.3,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     },
     {
         "team": "Newcastle",
@@ -45,7 +75,13 @@
         "avg_defense_difficulty": 3.867,
         "overall_difficulty": 2.534,
         "num_favorable_fixtures": 5,
-        "home_team_fixtures": 2
+        "home_team_fixtures": 2,
+        "near_term_rating": 76.9,
+        "medium_term_rating": 54.9,
+        "fixture_swing": -22.0,
+        "swing_category": "Fixture Decline",
+        "swing_emoji": "\ud83d\udcc9",
+        "form_context": "sell_warning"
     },
     {
         "team": "Bournemouth",
@@ -53,7 +89,13 @@
         "avg_defense_difficulty": 1.617,
         "overall_difficulty": 2.492,
         "num_favorable_fixtures": 5,
-        "home_team_fixtures": 2
+        "home_team_fixtures": 2,
+        "near_term_rating": 58.8,
+        "medium_term_rating": 74.2,
+        "fixture_swing": 15.4,
+        "swing_category": "Fixture Improvement",
+        "swing_emoji": "\ud83d\udcc8",
+        "form_context": "buy_opportunity"
     },
     {
         "team": "Fulham",
@@ -61,7 +103,13 @@
         "avg_defense_difficulty": 1.95,
         "overall_difficulty": 1.034,
         "num_favorable_fixtures": 4,
-        "home_team_fixtures": 1
+        "home_team_fixtures": 1,
+        "near_term_rating": 38.3,
+        "medium_term_rating": 76.7,
+        "fixture_swing": 38.4,
+        "swing_category": "Fixture Improvement",
+        "swing_emoji": "\ud83d\udcc8",
+        "form_context": "buy_opportunity"
     },
     {
         "team": "Aston Villa",
@@ -69,7 +117,13 @@
         "avg_defense_difficulty": 1.033,
         "overall_difficulty": 0.908,
         "num_favorable_fixtures": 3,
-        "home_team_fixtures": 2
+        "home_team_fixtures": 2,
+        "near_term_rating": 54.7,
+        "medium_term_rating": 56.8,
+        "fixture_swing": 2.1,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     },
     {
         "team": "Brighton",
@@ -77,7 +131,13 @@
         "avg_defense_difficulty": -0.467,
         "overall_difficulty": 0.825,
         "num_favorable_fixtures": 4,
-        "home_team_fixtures": 2
+        "home_team_fixtures": 2,
+        "near_term_rating": 68.0,
+        "medium_term_rating": 43.5,
+        "fixture_swing": -24.5,
+        "swing_category": "Fixture Decline",
+        "swing_emoji": "\ud83d\udcc9",
+        "form_context": "sell_warning"
     },
     {
         "team": "Man Utd",
@@ -85,7 +145,13 @@
         "avg_defense_difficulty": -2.217,
         "overall_difficulty": 0.492,
         "num_favorable_fixtures": 3,
-        "home_team_fixtures": 2
+        "home_team_fixtures": 2,
+        "near_term_rating": 59.3,
+        "medium_term_rating": 44.9,
+        "fixture_swing": -14.4,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     },
     {
         "team": "Brentford",
@@ -93,7 +159,13 @@
         "avg_defense_difficulty": -0.467,
         "overall_difficulty": -0.342,
         "num_favorable_fixtures": 2,
-        "home_team_fixtures": 1
+        "home_team_fixtures": 1,
+        "near_term_rating": 43.5,
+        "medium_term_rating": 54.0,
+        "fixture_swing": 10.5,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     },
     {
         "team": "Spurs",
@@ -101,7 +173,13 @@
         "avg_defense_difficulty": 1.45,
         "overall_difficulty": -0.509,
         "num_favorable_fixtures": 2,
-        "home_team_fixtures": 2
+        "home_team_fixtures": 2,
+        "near_term_rating": 52.0,
+        "medium_term_rating": 42.7,
+        "fixture_swing": -9.3,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     },
     {
         "team": "Nott'm Forest",
@@ -109,7 +187,13 @@
         "avg_defense_difficulty": -1.8,
         "overall_difficulty": -0.634,
         "num_favorable_fixtures": 1,
-        "home_team_fixtures": 0
+        "home_team_fixtures": 0,
+        "near_term_rating": 54.5,
+        "medium_term_rating": 37.1,
+        "fixture_swing": -17.4,
+        "swing_category": "Fixture Decline",
+        "swing_emoji": "\ud83d\udcc9",
+        "form_context": "sell_warning"
     },
     {
         "team": "Sunderland",
@@ -117,7 +201,13 @@
         "avg_defense_difficulty": 1.283,
         "overall_difficulty": -1.175,
         "num_favorable_fixtures": 2,
-        "home_team_fixtures": 2
+        "home_team_fixtures": 2,
+        "near_term_rating": 32.5,
+        "medium_term_rating": 50.3,
+        "fixture_swing": 17.8,
+        "swing_category": "Fixture Improvement",
+        "swing_emoji": "\ud83d\udcc8",
+        "form_context": "buy_opportunity"
     },
     {
         "team": "Everton",
@@ -125,7 +215,13 @@
         "avg_defense_difficulty": -0.717,
         "overall_difficulty": -1.3,
         "num_favorable_fixtures": 1,
-        "home_team_fixtures": 0
+        "home_team_fixtures": 0,
+        "near_term_rating": 42.8,
+        "medium_term_rating": 38.3,
+        "fixture_swing": -4.5,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     },
     {
         "team": "Leeds",
@@ -133,7 +229,13 @@
         "avg_defense_difficulty": -2.717,
         "overall_difficulty": -3.133,
         "num_favorable_fixtures": 0,
-        "home_team_fixtures": 0
+        "home_team_fixtures": 0,
+        "near_term_rating": 19.8,
+        "medium_term_rating": 37.0,
+        "fixture_swing": 17.2,
+        "swing_category": "Fixture Improvement",
+        "swing_emoji": "\ud83d\udcc8",
+        "form_context": "buy_opportunity"
     },
     {
         "team": "Wolves",
@@ -141,7 +243,13 @@
         "avg_defense_difficulty": -4.883,
         "overall_difficulty": -4.05,
         "num_favorable_fixtures": 0,
-        "home_team_fixtures": 0
+        "home_team_fixtures": 0,
+        "near_term_rating": 27.8,
+        "medium_term_rating": 19.9,
+        "fixture_swing": -7.9,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     },
     {
         "team": "West Ham",
@@ -149,7 +257,13 @@
         "avg_defense_difficulty": -5.883,
         "overall_difficulty": -4.342,
         "num_favorable_fixtures": 0,
-        "home_team_fixtures": 0
+        "home_team_fixtures": 0,
+        "near_term_rating": 24.2,
+        "medium_term_rating": 19.1,
+        "fixture_swing": -5.1,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     },
     {
         "team": "Burnley",
@@ -157,6 +271,12 @@
         "avg_defense_difficulty": -4.383,
         "overall_difficulty": -4.758,
         "num_favorable_fixtures": 0,
-        "home_team_fixtures": 0
+        "home_team_fixtures": 0,
+        "near_term_rating": 15.4,
+        "medium_term_rating": 19.9,
+        "fixture_swing": 4.5,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
     }
 ]

@@ -82,6 +82,7 @@ const getRatingDisplay = (rating: number) => {
       color: "text-green-600 dark:text-green-400",
       bgColor: "bg-green-100 dark:bg-green-900",
       borderColor: "border-green-300 dark:border-green-700",
+      textColor: "text-green-800 dark:text-green-200",
       label: "Excellent",
       emoji: "🔥"
     };
@@ -90,6 +91,7 @@ const getRatingDisplay = (rating: number) => {
       color: "text-blue-600 dark:text-blue-400",
       bgColor: "bg-blue-100 dark:bg-blue-900",
       borderColor: "border-blue-300 dark:border-blue-700",
+      textColor: "text-blue-800 dark:text-blue-200",
       label: "Good",
       emoji: "✅"
     };
@@ -98,6 +100,7 @@ const getRatingDisplay = (rating: number) => {
       color: "text-yellow-600 dark:text-yellow-400",
       bgColor: "bg-yellow-100 dark:bg-yellow-900",
       borderColor: "border-yellow-300 dark:border-yellow-700",
+      textColor: "text-yellow-800 dark:text-yellow-200",
       label: "Neutral",
       emoji: "➖"
     };
@@ -106,6 +109,7 @@ const getRatingDisplay = (rating: number) => {
       color: "text-orange-600 dark:text-orange-400",
       bgColor: "bg-orange-100 dark:bg-orange-900",
       borderColor: "border-orange-300 dark:border-orange-700",
+      textColor: "text-orange-800 dark:text-orange-200",
       label: "Difficult",
       emoji: "⚠️"
     };
@@ -114,6 +118,7 @@ const getRatingDisplay = (rating: number) => {
       color: "text-red-600 dark:text-red-400",
       bgColor: "bg-red-100 dark:bg-red-900",
       borderColor: "border-red-300 dark:border-red-700",
+      textColor: "text-red-800 dark:text-red-200",
       label: "Very Difficult",
       emoji: "❌"
     };
@@ -213,6 +218,13 @@ export default function FixtureAnalysisPage() {
           overall: t.overall_difficulty,
           fixtures: t.num_favorable_fixtures,
           homeFixtures: t.home_team_fixtures,
+          // New swing analysis fields
+          nearTermRating: t.near_term_rating,
+          mediumTermRating: t.medium_term_rating,
+          fixtureSwing: t.fixture_swing,
+          swingCategory: t.swing_category,
+          swingEmoji: t.swing_emoji,
+          formContext: t.form_context,
         }));
         setTeamFixtureSummary(transformedSummary);
       } catch (err) {
@@ -442,7 +454,7 @@ export default function FixtureAnalysisPage() {
                             <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.attackRating).color}`}>
                               {fixture.teams.home.attackRating}%
                             </p>
-                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.home.attackRating).bgColor} ${getRatingDisplay(fixture.teams.home.attackRating).borderColor}`}>
+                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.home.attackRating).bgColor} ${getRatingDisplay(fixture.teams.home.attackRating).borderColor} ${getRatingDisplay(fixture.teams.home.attackRating).textColor}`}>
                               {getRatingDisplay(fixture.teams.home.attackRating).emoji} {getRatingDisplay(fixture.teams.home.attackRating).label}
                             </Badge>
                           </div>
@@ -470,7 +482,7 @@ export default function FixtureAnalysisPage() {
                             <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.defenseRating).color}`}>
                               {fixture.teams.home.defenseRating}%
                             </p>
-                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.home.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.home.defenseRating).borderColor}`}>
+                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.home.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.home.defenseRating).borderColor} ${getRatingDisplay(fixture.teams.home.defenseRating).textColor}`}>
                               {getRatingDisplay(fixture.teams.home.defenseRating).emoji} {getRatingDisplay(fixture.teams.home.defenseRating).label}
                             </Badge>
                           </div>
@@ -515,7 +527,7 @@ export default function FixtureAnalysisPage() {
                             <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.attackRating).color}`}>
                               {fixture.teams.away.attackRating}%
                             </p>
-                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.away.attackRating).bgColor} ${getRatingDisplay(fixture.teams.away.attackRating).borderColor}`}>
+                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.away.attackRating).bgColor} ${getRatingDisplay(fixture.teams.away.attackRating).borderColor} ${getRatingDisplay(fixture.teams.away.attackRating).textColor}`}>
                               {getRatingDisplay(fixture.teams.away.attackRating).emoji} {getRatingDisplay(fixture.teams.away.attackRating).label}
                             </Badge>
                           </div>
@@ -543,7 +555,7 @@ export default function FixtureAnalysisPage() {
                             <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.defenseRating).color}`}>
                               {fixture.teams.away.defenseRating}%
                             </p>
-                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.away.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.away.defenseRating).borderColor}`}>
+                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.away.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.away.defenseRating).borderColor} ${getRatingDisplay(fixture.teams.away.defenseRating).textColor}`}>
                               {getRatingDisplay(fixture.teams.away.defenseRating).emoji} {getRatingDisplay(fixture.teams.away.defenseRating).label}
                             </Badge>
                           </div>
@@ -587,7 +599,7 @@ export default function FixtureAnalysisPage() {
                               GW {opp.gw}
                             </Badge>
                           </div>
-                          <Badge className={`text-xs border-2 font-semibold ${getRatingDisplay(opp.rating).bgColor} ${getRatingDisplay(opp.rating).borderColor}`}>
+                          <Badge className={`text-xs border-2 font-semibold ${getRatingDisplay(opp.rating).bgColor} ${getRatingDisplay(opp.rating).borderColor} ${getRatingDisplay(opp.rating).textColor}`}>
                             {getRatingDisplay(opp.rating).emoji} {getRatingDisplay(opp.rating).label}
                           </Badge>
                         </div>
@@ -645,7 +657,7 @@ export default function FixtureAnalysisPage() {
                               GW {opp.gw}
                             </Badge>
                           </div>
-                          <Badge className={`text-xs border-2 font-semibold ${getRatingDisplay(opp.rating).bgColor} ${getRatingDisplay(opp.rating).borderColor}`}>
+                          <Badge className={`text-xs border-2 font-semibold ${getRatingDisplay(opp.rating).bgColor} ${getRatingDisplay(opp.rating).borderColor} ${getRatingDisplay(opp.rating).textColor}`}>
                             {getRatingDisplay(opp.rating).emoji} {getRatingDisplay(opp.rating).label}
                           </Badge>
                         </div>
@@ -677,6 +689,110 @@ export default function FixtureAnalysisPage() {
           </TabsContent>
 
           <TabsContent value="summary" className="space-y-4 sm:space-y-6">
+            {/* Fixture Swing Alerts Card */}
+            <Card className="border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-card backdrop-blur-md shadow-xl">
+              <CardHeader className="pb-3 sm:pb-4 border-b border-border/50 bg-gradient-to-r from-purple-500/10 to-transparent">
+                <CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
+                    🔄
+                  </div>
+                  Fixture Difficulty Swings
+                  <Badge variant="secondary" className="ml-auto text-xs bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+                    Transfer Planning
+                  </Badge>
+                </CardTitle>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-2">
+                  Teams transitioning from easy to hard fixture runs (or vice versa). <strong>Near-term</strong> = next 3 GWs, <strong>Medium-term</strong> = GWs 4-6.
+                </p>
+              </CardHeader>
+              <CardContent className="p-3 sm:p-6">
+                <div className="grid gap-4 lg:grid-cols-2">
+                  {/* Buy Opportunities - Teams with improving fixtures */}
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-semibold text-green-600 dark:text-green-400 flex items-center gap-2">
+                      📈 Fixture Improvements - Buy Targets
+                    </h3>
+                    {sortedTeamData
+                      .filter(team => team.swingCategory === "Fixture Improvement")
+                      .slice(0, 5)
+                      .map((team, index) => (
+                        <div
+                          key={index}
+                          className="p-3 rounded-lg bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 hover:border-green-500/40 transition-all"
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="font-semibold text-foreground">{team.team}</span>
+                            <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 text-xs">
+                              {team.swingEmoji} +{team.fixtureSwing}
+                            </Badge>
+                          </div>
+                          <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+                            <div>
+                              <span className="block">Next 3 GWs:</span>
+                              <span className="font-semibold text-orange-600 dark:text-orange-400">{team.nearTermRating}%</span>
+                            </div>
+                            <div>
+                              <span className="block">GW 4-6:</span>
+                              <span className="font-semibold text-green-600 dark:text-green-400">{team.mediumTermRating}%</span>
+                            </div>
+                          </div>
+                          <p className="text-xs mt-2 text-green-600 dark:text-green-400 font-medium">
+                            ✅ Good time to buy - fixtures getting easier
+                          </p>
+                        </div>
+                      ))}
+                    {sortedTeamData.filter(team => team.swingCategory === "Fixture Improvement").length === 0 && (
+                      <p className="text-xs text-muted-foreground italic p-3 bg-secondary/20 rounded-lg">
+                        No significant fixture improvements in the next 6 gameweeks
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Sell Warnings - Teams with declining fixtures */}
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-semibold text-red-600 dark:text-red-400 flex items-center gap-2">
+                      📉 Fixture Declines - Sell Warnings
+                    </h3>
+                    {sortedTeamData
+                      .filter(team => team.swingCategory === "Fixture Decline")
+                      .slice(0, 5)
+                      .map((team, index) => (
+                        <div
+                          key={index}
+                          className="p-3 rounded-lg bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/20 hover:border-red-500/40 transition-all"
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="font-semibold text-foreground">{team.team}</span>
+                            <Badge className="bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 text-xs">
+                              {team.swingEmoji} {team.fixtureSwing}
+                            </Badge>
+                          </div>
+                          <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+                            <div>
+                              <span className="block">Next 3 GWs:</span>
+                              <span className="font-semibold text-green-600 dark:text-green-400">{team.nearTermRating}%</span>
+                            </div>
+                            <div>
+                              <span className="block">GW 4-6:</span>
+                              <span className="font-semibold text-orange-600 dark:text-orange-400">{team.mediumTermRating}%</span>
+                            </div>
+                          </div>
+                          <p className="text-xs mt-2 text-red-600 dark:text-red-400 font-medium">
+                            ⚠️ Consider selling - fixtures getting harder
+                          </p>
+                        </div>
+                      ))}
+                    {sortedTeamData.filter(team => team.swingCategory === "Fixture Decline").length === 0 && (
+                      <p className="text-xs text-muted-foreground italic p-3 bg-secondary/20 rounded-lg">
+                        No significant fixture declines in the next 6 gameweeks
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Existing Team Fixture Difficulty Summary Card */}
             <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl">
               <CardHeader className="pb-3 sm:pb-4">
                 <CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
