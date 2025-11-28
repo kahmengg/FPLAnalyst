@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -8,6 +8,82 @@ import { TrendingUp, User, Target, Activity, BarChart3, Award } from "lucide-rea
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+
+interface Player {
+  id: number
+  name: string
+  team: string
+  position: number
+  cost: number
+  ownership: number
+}
+
+interface GameweekData {
+  gameweek: number
+  opponent: string
+  was_home: boolean | null
+  total_points: number
+  minutes: number
+  goals: number
+  assists: number
+  clean_sheets: number
+  xG: number
+  xA: number
+  xGI: number
+  xP: number
+  shots: number
+  shots_on_target: number
+  key_passes: number
+  touches: number
+  penalty_area_touches: number
+  carries_final_third: number
+  defensive_contribution: number
+  xGC: number
+  goals_conceded: number
+}
+
+interface PlayerTrendData {
+  player_name: string
+  team: string
+  position: number
+  web_name: string
+  cost: number
+  ownership: number
+  form: {
+    avg_points: number
+    avg_minutes: number
+    games_played: number
+  }
+  total_stats: {
+    games_played: number
+    total_points: number
+    total_goals: number
+    total_assists: number
+    total_xG: number
+    total_xA: number
+    total_xGI: number
+    total_xP: number
+    total_minutes: number
+    total_shots: number
+    total_key_passes: number
+  }
+  per90_stats: {
+    points_per_90: number
+    goals_per_90: number
+    assists_per_90: number
+    xG_per_90: number
+    xA_per_90: number
+    xGI_per_90: number
+    shots_per_90: number
+    key_passes_per_90: number
+  }
+  gameweeks: GameweekData[]
+}
+
+interface ChartDataPoint {
+  gameweek: number
+  [key: string]: number | null
+}
 
 const POSITION_COLORS = {
   "1": { color: "#f59e0b", label: "GK", gradient: "from-amber-500/20" },
@@ -17,13 +93,13 @@ const POSITION_COLORS = {
 }
 
 export default function PlayerTrendsPage() {
-  const [allPlayers, setAllPlayers] = useState([])
-  const [selectedPlayers, setSelectedPlayers] = useState([])
-  const [playerData, setPlayerData] = useState({})
-  const [searchQuery, setSearchQuery] = useState("")
-  const [positionFilter, setPositionFilter] = useState("all")
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [allPlayers, setAllPlayers] = useState<Player[]>([])
+  const [selectedPlayers, setSelectedPlayers] = useState<string[]>([])
+  const [playerData, setPlayerData] = useState<Record<string, PlayerTrendData>>({})
+  const [searchQuery, setSearchQuery] = useState<string>("")
+  const [positionFilter, setPositionFilter] = useState<string>("all")
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     fetchAllPlayers()
@@ -46,12 +122,12 @@ export default function PlayerTrendsPage() {
       setAllPlayers(data.players || [])
       setLoading(false)
     } catch (err) {
-      setError(err.message)
+      setError(err instanceof Error ? err.message : 'An error occurred')
       setLoading(false)
     }
   }
 
-  const fetchPlayerTrends = async (players) => {
+  const fetchPlayerTrends = async (players: string[]) => {
     try {
       const playersParam = players.join(',')
       const res = await fetch(`${API_BASE_URL}/api/player-trends?players=${encodeURIComponent(playersParam)}`)
@@ -60,7 +136,7 @@ export default function PlayerTrendsPage() {
       setPlayerData(data)
     } catch (err) {
       console.error("Error fetching player trends:", err)
-      setError(err.message)
+      setError(err instanceof Error ? err.message : 'Failed to fetch player trends')
     }
   }
 
@@ -68,11 +144,12 @@ export default function PlayerTrendsPage() {
     let filtered = allPlayers
 
     if (positionFilter !== "all") {
-      filtered = filtered.filter(p => p.position === positionFilter)
+      const positionMap: Record<string, number> = { "GK": 1, "DEF": 2, "MID": 3, "FWD": 4 }
+      filtered = filtered.filter((p: Player) => p.position === positionMap[positionFilter])
     }
 
     if (searchQuery) {
-      filtered = filtered.filter(player => 
+      filtered = filtered.filter((player: Player) => 
         player.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         player.team.toLowerCase().includes(searchQuery.toLowerCase())
       )
@@ -81,9 +158,9 @@ export default function PlayerTrendsPage() {
     return filtered.slice(0, 100)
   }, [searchQuery, allPlayers, positionFilter])
 
-  const togglePlayer = (playerName) => {
+  const togglePlayer = (playerName: string) => {
     if (selectedPlayers.includes(playerName)) {
-      setSelectedPlayers(selectedPlayers.filter(p => p !== playerName))
+      setSelectedPlayers(selectedPlayers.filter((p: string) => p !== playerName))
     } else {
       if (selectedPlayers.length >= 3) {
         alert("Maximum 3 players can be compared at once")
@@ -93,7 +170,7 @@ export default function PlayerTrendsPage() {
     }
   }
 
-  const getColorForPlayer = (index) => {
+  const getColorForPlayer = (index: number) => {
     const colors = [
       { line: "#3b82f6", bg: "bg-blue-500", text: "text-blue-600 dark:text-blue-400" },
       { line: "#22c55e", bg: "bg-green-500", text: "text-green-600 dark:text-green-400" },
@@ -102,18 +179,20 @@ export default function PlayerTrendsPage() {
     return colors[index % colors.length]
   }
 
-  const comparisonChartData = useMemo(() => {
+  const comparisonChartData = useMemo((): ChartDataPoint[] => {
     if (Object.keys(playerData).length === 0) return []
     
-    const allGameweeks = new Set()
-    Object.values(playerData).forEach(player => {
-      player.gameweeks.forEach(gw => allGameweeks.add(gw.gameweek))
+    const allGameweeks = new Set<number>()
+    Object.values(playerData).forEach((player) => {
+      const typedPlayer = player as PlayerTrendData
+      typedPlayer.gameweeks.forEach((gw: GameweekData) => allGameweeks.add(gw.gameweek))
     })
     
-    return Array.from(allGameweeks).sort((a, b) => a - b).map(gw => {
-      const point = { gameweek: gw }
+    return Array.from(allGameweeks).sort((a: number, b: number) => a - b).map((gw: number) => {
+      const point: ChartDataPoint = { gameweek: gw }
       Object.entries(playerData).forEach(([name, player]) => {
-        const gwData = player.gameweeks.find(g => g.gameweek === gw)
+        const typedPlayer = player as PlayerTrendData
+        const gwData = typedPlayer.gameweeks.find((g: GameweekData) => g.gameweek === gw)
         point[`${name}_points`] = gwData ? gwData.total_points : null
         point[`${name}_xG`] = gwData ? gwData.xG : null
         point[`${name}_xA`] = gwData ? gwData.xA : null

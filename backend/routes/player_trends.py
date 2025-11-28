@@ -126,6 +126,16 @@ def get_player_trends():
                     "total_shots": int(player_gw_data['shots'].sum()) if 'shots' in player_gw_data else 0,
                     "total_key_passes": int(player_gw_data['key_passes'].sum()) if 'key_passes' in player_gw_data else 0,
                 },
+                "per90_stats": {
+                    "points_per_90": round((player_gw_data['total_points'].sum() * 90) / max(player_gw_data['minutes'].sum(), 1), 2) if 'total_points' in player_gw_data and 'minutes' in player_gw_data else 0,
+                    "goals_per_90": round((player_gw_data['G'].sum() * 90) / max(player_gw_data['minutes'].sum(), 1), 2) if 'G' in player_gw_data and 'minutes' in player_gw_data else 0,
+                    "assists_per_90": round((player_gw_data['A'].sum() * 90) / max(player_gw_data['minutes'].sum(), 1), 2) if 'A' in player_gw_data and 'minutes' in player_gw_data else 0,
+                    "xG_per_90": round((player_gw_data['xG'].sum() * 90) / max(player_gw_data['minutes'].sum(), 1), 2) if 'xG' in player_gw_data and 'minutes' in player_gw_data else 0,
+                    "xA_per_90": round((player_gw_data['xA'].sum() * 90) / max(player_gw_data['minutes'].sum(), 1), 2) if 'xA' in player_gw_data and 'minutes' in player_gw_data else 0,
+                    "xGI_per_90": round((player_gw_data['xGI'].sum() * 90) / max(player_gw_data['minutes'].sum(), 1), 2) if 'xGI' in player_gw_data and 'minutes' in player_gw_data else 0,
+                    "shots_per_90": round((player_gw_data['shots'].sum() * 90) / max(player_gw_data['minutes'].sum(), 1), 2) if 'shots' in player_gw_data and 'minutes' in player_gw_data else 0,
+                    "key_passes_per_90": round((player_gw_data['key_passes'].sum() * 90) / max(player_gw_data['minutes'].sum(), 1), 2) if 'key_passes' in player_gw_data and 'minutes' in player_gw_data else 0,
+                },
                 "gameweeks": gameweeks
             }
         
