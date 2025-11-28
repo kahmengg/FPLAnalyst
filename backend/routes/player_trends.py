@@ -6,7 +6,7 @@ import os
 player_trends_bp = Blueprint('player_trends', __name__)
 
 # Load the full season stats CSV
-DATA_FILE = os.path.join('fpl-data-stats.csv')
+DATA_FILE = os.path.join('..', 'fpl-data-stats.csv')
 
 @player_trends_bp.route('/player-trends', methods=['GET'])
 def get_player_trends():
