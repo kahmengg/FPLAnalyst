@@ -61,16 +61,6 @@
             "venue": "H"
         },
         {
-            "gameweek": 13,
-            "team": "Man City",
-            "short_name": "MCI",
-            "opponent": "Leeds",
-            "attacking_fixture_rating": 90.7,
-            "defensive_fixture_rating": 88.7,
-            "combined_score": 89.7,
-            "venue": "H"
-        },
-        {
             "gameweek": 18,
             "team": "Liverpool",
             "short_name": "LIV",
@@ -78,16 +68,6 @@
             "attacking_fixture_rating": 95.1,
             "defensive_fixture_rating": 79.7,
             "combined_score": 87.4,
-            "venue": "H"
-        },
-        {
-            "gameweek": 13,
-            "team": "Aston Villa",
-            "short_name": "AVL",
-            "opponent": "Wolves",
-            "attacking_fixture_rating": 82.3,
-            "defensive_fixture_rating": 90.4,
-            "combined_score": 86.4,
             "venue": "H"
         },
         {
@@ -99,6 +79,26 @@
             "defensive_fixture_rating": 87.3,
             "combined_score": 85.0,
             "venue": "A"
+        },
+        {
+            "gameweek": 15,
+            "team": "Brighton",
+            "short_name": "BHA",
+            "opponent": "West Ham",
+            "attacking_fixture_rating": 91.8,
+            "defensive_fixture_rating": 76.7,
+            "combined_score": 84.2,
+            "venue": "H"
+        },
+        {
+            "gameweek": 16,
+            "team": "Chelsea",
+            "short_name": "CHE",
+            "opponent": "Everton",
+            "attacking_fixture_rating": 76.7,
+            "defensive_fixture_rating": 91.8,
+            "combined_score": 84.2,
+            "venue": "H"
         }
     ],
     "defense": [
@@ -163,16 +163,6 @@
             "venue": "H"
         },
         {
-            "gameweek": 13,
-            "team": "Man City",
-            "short_name": "MCI",
-            "opponent": "Leeds",
-            "attacking_fixture_rating": 90.7,
-            "defensive_fixture_rating": 88.7,
-            "combined_score": 89.7,
-            "venue": "H"
-        },
-        {
             "gameweek": 18,
             "team": "Liverpool",
             "short_name": "LIV",
@@ -180,16 +170,6 @@
             "attacking_fixture_rating": 95.1,
             "defensive_fixture_rating": 79.7,
             "combined_score": 87.4,
-            "venue": "H"
-        },
-        {
-            "gameweek": 13,
-            "team": "Aston Villa",
-            "short_name": "AVL",
-            "opponent": "Wolves",
-            "attacking_fixture_rating": 82.3,
-            "defensive_fixture_rating": 90.4,
-            "combined_score": 86.4,
             "venue": "H"
         },
         {
@@ -201,6 +181,26 @@
             "defensive_fixture_rating": 87.3,
             "combined_score": 85.0,
             "venue": "A"
+        },
+        {
+            "gameweek": 15,
+            "team": "Brighton",
+            "short_name": "BHA",
+            "opponent": "West Ham",
+            "attacking_fixture_rating": 91.8,
+            "defensive_fixture_rating": 76.7,
+            "combined_score": 84.2,
+            "venue": "H"
+        },
+        {
+            "gameweek": 16,
+            "team": "Chelsea",
+            "short_name": "CHE",
+            "opponent": "Everton",
+            "attacking_fixture_rating": 76.7,
+            "defensive_fixture_rating": 91.8,
+            "combined_score": 84.2,
+            "venue": "H"
         }
     ]
 }
