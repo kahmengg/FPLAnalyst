@@ -144,8 +144,7 @@ export default function PlayerTrendsPage() {
     let filtered = allPlayers
 
     if (positionFilter !== "all") {
-      const positionMap: Record<string, number> = { "GK": 1, "DEF": 2, "MID": 3, "FWD": 4 }
-      filtered = filtered.filter((p: Player) => p.position === positionMap[positionFilter])
+      filtered = filtered.filter((p: Player) => p.position === parseInt(positionFilter))
     }
 
     if (searchQuery) {
@@ -360,7 +359,7 @@ export default function PlayerTrendsPage() {
           </Card>
         ) : (
           <div className="space-y-6">
-            {selectedPlayers.length > 1 && comparisonChartData.length > 0 && (
+            {selectedPlayers.length > 0 && comparisonChartData.length > 0 && (
               <Card className="border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-card">
                 <CardHeader className="border-b border-border/50">
                   <CardTitle className="flex items-center gap-2">
@@ -409,7 +408,7 @@ export default function PlayerTrendsPage() {
                         <LineChart data={comparisonChartData}>
                           <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
                           <XAxis dataKey="gameweek" label={{ value: 'Gameweek', position: 'insideBottom', offset: -5 }} />
-                          <YAxis label={{ value: 'Expected Goal Involvements', angle: -90, position: 'insideLeft' }} />
+                          <YAxis label={{ value: 'xGI', angle: -90, position: 'insideLeft' }} />
                           <Tooltip 
                             contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid #333', borderRadius: '8px' }}
                             labelStyle={{ color: '#fff' }}
@@ -512,7 +511,168 @@ export default function PlayerTrendsPage() {
               </Card>
             )}
 
-            {/* Individual player cards will be rendered here - continuing in next message due to length */}
+            {/* Individual Player Stats Cards */}
+            {Object.entries(playerData).map(([playerName, data], index) => {
+              const typedData = data as PlayerTrendData
+              const colorInfo = getColorForPlayer(index)
+              const posInfo = POSITION_COLORS[typedData.position.toString() as keyof typeof POSITION_COLORS] || {}
+              
+              return (
+                <Card key={playerName} className="border-l-4" style={{ borderLeftColor: colorInfo.line }}>
+                  <CardHeader className="pb-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
+                             style={{ backgroundColor: colorInfo.line }}>
+                          {playerName.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <div>
+                          <CardTitle className="text-xl flex items-center gap-2">
+                            <Badge variant="secondary" className="text-xs px-2 py-1"
+                                   style={{ backgroundColor: posInfo.color + '20', color: posInfo.color }}>
+                              {posInfo.label}
+                            </Badge>
+                            {typedData.player_name}
+                          </CardTitle>
+                          <p className="text-muted-foreground">
+                            {typedData.team} • £{typedData.cost}m • {typedData.ownership}% owned
+                          </p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-primary">
+                          {typedData.form.avg_points}
+                        </div>
+                        <div className="text-xs text-muted-foreground">avg points</div>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  
+                  <CardContent className="space-y-6">
+                    {/* Key Stats Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                      <div className="text-center p-3 bg-secondary/30 rounded-lg">
+                        <div className="text-lg font-bold text-foreground">{typedData.total_stats.total_points}</div>
+                        <div className="text-xs text-muted-foreground">Total Points</div>
+                      </div>
+                      <div className="text-center p-3 bg-secondary/30 rounded-lg">
+                        <div className="text-lg font-bold text-green-600">{typedData.total_stats.total_goals}</div>
+                        <div className="text-xs text-muted-foreground">Goals</div>
+                      </div>
+                      <div className="text-center p-3 bg-secondary/30 rounded-lg">
+                        <div className="text-lg font-bold text-blue-600">{typedData.total_stats.total_assists}</div>
+                        <div className="text-xs text-muted-foreground">Assists</div>
+                      </div>
+                      <div className="text-center p-3 bg-secondary/30 rounded-lg">
+                        <div className="text-lg font-bold text-purple-600">{typedData.per90_stats.points_per_90}</div>
+                        <div className="text-xs text-muted-foreground">Pts/90</div>
+                      </div>
+                    </div>
+
+                    {/* Expected Stats */}
+                    <div>
+                      <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                        <TrendingUp className="w-4 h-4" />
+                        Expected Performance (Per 90)
+                      </h4>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <div className="text-center p-2 bg-card border rounded">
+                          <div className="font-medium text-sm">{typedData.per90_stats.xG_per_90}</div>
+                          <div className="text-xs text-muted-foreground">xG/90</div>
+                        </div>
+                        <div className="text-center p-2 bg-card border rounded">
+                          <div className="font-medium text-sm">{typedData.per90_stats.xA_per_90}</div>
+                          <div className="text-xs text-muted-foreground">xA/90</div>
+                        </div>
+                        <div className="text-center p-2 bg-card border rounded">
+                          <div className="font-medium text-sm">{typedData.per90_stats.xGI_per_90}</div>
+                          <div className="text-xs text-muted-foreground">xGI/90</div>
+                        </div>
+                        <div className="text-center p-2 bg-card border rounded">
+                          <div className="font-medium text-sm">{typedData.per90_stats.shots_per_90}</div>
+                          <div className="text-xs text-muted-foreground">Shots/90</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Form & Playing Time */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <h4 className="text-sm font-semibold mb-2">Recent Form (Last 5 GWs)</h4>
+                        <div className="space-y-2">
+                          <div className="flex justify-between">
+                            <span className="text-sm text-muted-foreground">Average Points:</span>
+                            <span className="font-medium">{typedData.form.avg_points}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-sm text-muted-foreground">Average Minutes:</span>
+                            <span className="font-medium">{typedData.form.avg_minutes}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-sm text-muted-foreground">Games Played:</span>
+                            <span className="font-medium">{typedData.form.games_played}</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h4 className="text-sm font-semibold mb-2">Season Totals</h4>
+                        <div className="space-y-2">
+                          <div className="flex justify-between">
+                            <span className="text-sm text-muted-foreground">Games:</span>
+                            <span className="font-medium">{typedData.total_stats.games_played}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-sm text-muted-foreground">Minutes:</span>
+                            <span className="font-medium">{typedData.total_stats.total_minutes}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-sm text-muted-foreground">Total xGI:</span>
+                            <span className="font-medium">{typedData.total_stats.total_xGI}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Recent Gameweeks Table */}
+                    <div>
+                      <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                        <Award className="w-4 h-4" />
+                        Recent Gameweeks (Last 10)
+                      </h4>
+                      <div className="overflow-x-auto">
+                        <div className="grid grid-cols-8 gap-2 text-xs font-medium text-muted-foreground mb-2 px-2">
+                          <div>GW</div>
+                          <div>Opp</div>
+                          <div>Pts</div>
+                          <div>Min</div>
+                          <div>G</div>
+                          <div>A</div>
+                          <div>xG</div>
+                          <div>xA</div>
+                        </div>
+                        <div className="space-y-1 max-h-64 overflow-y-auto">
+                          {typedData.gameweeks.slice(-10).reverse().map((gw: GameweekData) => (
+                            <div key={gw.gameweek} className="grid grid-cols-8 gap-2 text-xs px-2 py-2 bg-secondary/20 rounded">
+                              <div className="font-medium">{gw.gameweek}</div>
+                              <div className="text-muted-foreground">{gw.was_home ? 'vs' : '@'} {gw.opponent}</div>
+                              <div className={`font-medium ${gw.total_points >= 6 ? 'text-green-600' : gw.total_points >= 2 ? 'text-blue-600' : 'text-gray-600'}`}>
+                                {gw.total_points}
+                              </div>
+                              <div className="text-muted-foreground">{gw.minutes}</div>
+                              <div className={gw.goals > 0 ? 'text-green-600 font-medium' : 'text-muted-foreground'}>{gw.goals}</div>
+                              <div className={gw.assists > 0 ? 'text-blue-600 font-medium' : 'text-muted-foreground'}>{gw.assists}</div>
+                              <div className="text-muted-foreground">{gw.xG}</div>
+                              <div className="text-muted-foreground">{gw.xA}</div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
         )}
       </div>
