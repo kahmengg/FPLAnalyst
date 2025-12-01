@@ -30,14 +30,14 @@
     "form": 2.8
   },
   {
-    "player": "Keane",
-    "team": "Everton",
-    "team_short": "EVE",
+    "player": "Senesi",
+    "team": "Bournemouth",
+    "team_short": "BOU",
     "position": "Defender",
-    "pointsPerMillion": 12.44,
-    "totalPoints": 56,
-    "price": 4.5,
-    "form": 7.3
+    "pointsPerMillion": 12.2,
+    "totalPoints": 61,
+    "price": 5.0,
+    "form": 2.9
   },
   {
     "player": "Van de Ven",

@@ -5,9 +5,9 @@
             "team": "Arsenal",
             "short_name": "ARS",
             "opponent": "Wolves",
-            "attacking_fixture_rating": 95.0,
+            "attacking_fixture_rating": 94.1,
             "defensive_fixture_rating": 95.9,
-            "combined_score": 95.4,
+            "combined_score": 95.0,
             "venue": "H"
         },
         {
@@ -46,8 +46,18 @@
             "short_name": "BOU",
             "opponent": "Burnley",
             "attacking_fixture_rating": 94.1,
-            "defensive_fixture_rating": 88.7,
-            "combined_score": 91.4,
+            "defensive_fixture_rating": 86.9,
+            "combined_score": 90.5,
+            "venue": "H"
+        },
+        {
+            "gameweek": 14,
+            "team": "Arsenal",
+            "short_name": "ARS",
+            "opponent": "Brentford",
+            "attacking_fixture_rating": 90.4,
+            "defensive_fixture_rating": 89.1,
+            "combined_score": 89.8,
             "venue": "H"
         },
         {
@@ -56,18 +66,8 @@
             "short_name": "MCI",
             "opponent": "Leeds",
             "attacking_fixture_rating": 90.7,
-            "defensive_fixture_rating": 90.4,
-            "combined_score": 90.6,
-            "venue": "H"
-        },
-        {
-            "gameweek": 14,
-            "team": "Arsenal",
-            "short_name": "ARS",
-            "opponent": "Brentford",
-            "attacking_fixture_rating": 91.8,
-            "defensive_fixture_rating": 89.1,
-            "combined_score": 90.4,
+            "defensive_fixture_rating": 88.7,
+            "combined_score": 89.7,
             "venue": "H"
         },
         {
@@ -81,16 +81,6 @@
             "venue": "H"
         },
         {
-            "gameweek": 14,
-            "team": "Chelsea",
-            "short_name": "CHE",
-            "opponent": "Leeds",
-            "attacking_fixture_rating": 85.2,
-            "defensive_fixture_rating": 89.1,
-            "combined_score": 87.2,
-            "venue": "A"
-        },
-        {
             "gameweek": 13,
             "team": "Aston Villa",
             "short_name": "AVL",
@@ -99,6 +89,16 @@
             "defensive_fixture_rating": 90.4,
             "combined_score": 86.4,
             "venue": "H"
+        },
+        {
+            "gameweek": 14,
+            "team": "Chelsea",
+            "short_name": "CHE",
+            "opponent": "Leeds",
+            "attacking_fixture_rating": 82.8,
+            "defensive_fixture_rating": 87.3,
+            "combined_score": 85.0,
+            "venue": "A"
         }
     ],
     "defense": [
@@ -107,9 +107,9 @@
             "team": "Arsenal",
             "short_name": "ARS",
             "opponent": "Wolves",
-            "attacking_fixture_rating": 95.0,
+            "attacking_fixture_rating": 94.1,
             "defensive_fixture_rating": 95.9,
-            "combined_score": 95.4,
+            "combined_score": 95.0,
             "venue": "H"
         },
         {
@@ -148,8 +148,18 @@
             "short_name": "BOU",
             "opponent": "Burnley",
             "attacking_fixture_rating": 94.1,
-            "defensive_fixture_rating": 88.7,
-            "combined_score": 91.4,
+            "defensive_fixture_rating": 86.9,
+            "combined_score": 90.5,
+            "venue": "H"
+        },
+        {
+            "gameweek": 14,
+            "team": "Arsenal",
+            "short_name": "ARS",
+            "opponent": "Brentford",
+            "attacking_fixture_rating": 90.4,
+            "defensive_fixture_rating": 89.1,
+            "combined_score": 89.8,
             "venue": "H"
         },
         {
@@ -158,18 +168,8 @@
             "short_name": "MCI",
             "opponent": "Leeds",
             "attacking_fixture_rating": 90.7,
-            "defensive_fixture_rating": 90.4,
-            "combined_score": 90.6,
-            "venue": "H"
-        },
-        {
-            "gameweek": 14,
-            "team": "Arsenal",
-            "short_name": "ARS",
-            "opponent": "Brentford",
-            "attacking_fixture_rating": 91.8,
-            "defensive_fixture_rating": 89.1,
-            "combined_score": 90.4,
+            "defensive_fixture_rating": 88.7,
+            "combined_score": 89.7,
             "venue": "H"
         },
         {
@@ -183,16 +183,6 @@
             "venue": "H"
         },
         {
-            "gameweek": 14,
-            "team": "Chelsea",
-            "short_name": "CHE",
-            "opponent": "Leeds",
-            "attacking_fixture_rating": 85.2,
-            "defensive_fixture_rating": 89.1,
-            "combined_score": 87.2,
-            "venue": "A"
-        },
-        {
             "gameweek": 13,
             "team": "Aston Villa",
             "short_name": "AVL",
@@ -201,6 +191,16 @@
             "defensive_fixture_rating": 90.4,
             "combined_score": 86.4,
             "venue": "H"
+        },
+        {
+            "gameweek": 14,
+            "team": "Chelsea",
+            "short_name": "CHE",
+            "opponent": "Leeds",
+            "attacking_fixture_rating": 82.8,
+            "defensive_fixture_rating": 87.3,
+            "combined_score": 85.0,
+            "venue": "A"
         }
     ]
 }

@@ -7,7 +7,7 @@
     "points": 104,
     "ppg": 8.7,
     "price": 14.9,
-    "ownership": 71.4,
+    "ownership": 71.7,
     "form": 5.7
   },
   {
@@ -18,7 +18,7 @@
     "points": 81,
     "ppg": 6.8,
     "price": 6.4,
-    "ownership": 28.0,
+    "ownership": 26.0,
     "form": 4.8
   },
   {
@@ -28,8 +28,8 @@
     "position": "Midfielder",
     "points": 75,
     "ppg": 6.2,
-    "price": 8.0,
-    "ownership": 58.0,
+    "price": 7.9,
+    "ownership": 56.4,
     "form": 0.6
   },
   {
@@ -40,7 +40,7 @@
     "points": 74,
     "ppg": 6.2,
     "price": 5.9,
-    "ownership": 19.4,
+    "ownership": 20.4,
     "form": 9.5
   },
   {
@@ -51,7 +51,7 @@
     "points": 72,
     "ppg": 6.0,
     "price": 6.3,
-    "ownership": 30.0,
+    "ownership": 30.4,
     "form": 4.4
   },
   {
@@ -62,7 +62,7 @@
     "points": 71,
     "ppg": 5.9,
     "price": 6.9,
-    "ownership": 22.0,
+    "ownership": 22.2,
     "form": 6.3
   },
   {
@@ -84,8 +84,19 @@
     "points": 67,
     "ppg": 5.6,
     "price": 5.0,
-    "ownership": 4.5,
+    "ownership": 4.7,
     "form": 9.2
+  },
+  {
+    "player": "Keane",
+    "team": "Everton",
+    "team_short": "EVE",
+    "position": "Defender",
+    "points": 65,
+    "ppg": 5.4,
+    "price": 4.5,
+    "ownership": 1.6,
+    "form": 10.0
   },
   {
     "player": "Thiago",
@@ -95,7 +106,7 @@
     "points": 64,
     "ppg": 5.3,
     "price": 6.5,
-    "ownership": 15.3,
+    "ownership": 16.8,
     "form": 5.7
   },
   {
@@ -117,8 +128,19 @@
     "points": 61,
     "ppg": 5.1,
     "price": 5.1,
-    "ownership": 8.6,
+    "ownership": 8.5,
     "form": 7.0
+  },
+  {
+    "player": "Mbeumo",
+    "team": "Man Utd",
+    "team_short": "MUN",
+    "position": "Midfielder",
+    "points": 61,
+    "ppg": 5.1,
+    "price": 8.6,
+    "ownership": 36.1,
+    "form": 3.0
   },
   {
     "player": "Minteh",
@@ -128,7 +150,7 @@
     "points": 61,
     "ppg": 5.1,
     "price": 6.1,
-    "ownership": 6.1,
+    "ownership": 6.7,
     "form": 6.9
   },
   {
@@ -141,27 +163,5 @@
     "price": 5.0,
     "ownership": 2.6,
     "form": 8.4
-  },
-  {
-    "player": "Senesi",
-    "team": "Bournemouth",
-    "team_short": "BOU",
-    "position": "Defender",
-    "points": 61,
-    "ppg": 5.1,
-    "price": 5.0,
-    "ownership": 26.9,
-    "form": 2.9
-  },
-  {
-    "player": "Bruno G.",
-    "team": "Newcastle",
-    "team_short": "NEW",
-    "position": "Midfielder",
-    "points": 60,
-    "ppg": 5.0,
-    "price": 6.6,
-    "ownership": 3.7,
-    "form": 5.4
   }
 ]

@@ -8,7 +8,7 @@
       "points": 104,
       "ppg": 8.7,
       "price": 14.9,
-      "ownership": 71.4,
+      "ownership": 71.7,
       "form": 5.7
     },
     {
@@ -19,7 +19,7 @@
       "points": 81,
       "ppg": 6.8,
       "price": 6.4,
-      "ownership": 28.0,
+      "ownership": 26.0,
       "form": 4.8
     },
     {
@@ -29,8 +29,8 @@
       "position": "Midfielder",
       "points": 75,
       "ppg": 6.2,
-      "price": 8.0,
-      "ownership": 58.0,
+      "price": 7.9,
+      "ownership": 56.4,
       "form": 0.6
     },
     {
@@ -41,7 +41,7 @@
       "points": 74,
       "ppg": 6.2,
       "price": 5.9,
-      "ownership": 19.4,
+      "ownership": 20.4,
       "form": 9.5
     },
     {
@@ -52,7 +52,7 @@
       "points": 72,
       "ppg": 6.0,
       "price": 6.3,
-      "ownership": 30.0,
+      "ownership": 30.4,
       "form": 4.4
     },
     {
@@ -63,7 +63,7 @@
       "points": 71,
       "ppg": 5.9,
       "price": 6.9,
-      "ownership": 22.0,
+      "ownership": 22.2,
       "form": 6.3
     },
     {
@@ -85,8 +85,19 @@
       "points": 67,
       "ppg": 5.6,
       "price": 5.0,
-      "ownership": 4.5,
+      "ownership": 4.7,
       "form": 9.2
+    },
+    {
+      "player": "Keane",
+      "team": "Everton",
+      "team_short": "EVE",
+      "position": "Defender",
+      "points": 65,
+      "ppg": 5.4,
+      "price": 4.5,
+      "ownership": 1.6,
+      "form": 10.0
     },
     {
       "player": "Thiago",
@@ -96,7 +107,7 @@
       "points": 64,
       "ppg": 5.3,
       "price": 6.5,
-      "ownership": 15.3,
+      "ownership": 16.8,
       "form": 5.7
     },
     {
@@ -118,8 +129,19 @@
       "points": 61,
       "ppg": 5.1,
       "price": 5.1,
-      "ownership": 8.6,
+      "ownership": 8.5,
       "form": 7.0
+    },
+    {
+      "player": "Mbeumo",
+      "team": "Man Utd",
+      "team_short": "MUN",
+      "position": "Midfielder",
+      "points": 61,
+      "ppg": 5.1,
+      "price": 8.6,
+      "ownership": 36.1,
+      "form": 3.0
     },
     {
       "player": "Minteh",
@@ -129,7 +151,7 @@
       "points": 61,
       "ppg": 5.1,
       "price": 6.1,
-      "ownership": 6.1,
+      "ownership": 6.7,
       "form": 6.9
     },
     {
@@ -142,28 +164,6 @@
       "price": 5.0,
       "ownership": 2.6,
       "form": 8.4
-    },
-    {
-      "player": "Senesi",
-      "team": "Bournemouth",
-      "team_short": "BOU",
-      "position": "Defender",
-      "points": 61,
-      "ppg": 5.1,
-      "price": 5.0,
-      "ownership": 26.9,
-      "form": 2.9
-    },
-    {
-      "player": "Bruno G.",
-      "team": "Newcastle",
-      "team_short": "NEW",
-      "position": "Midfielder",
-      "points": 60,
-      "ppg": 5.0,
-      "price": 6.6,
-      "ownership": 3.7,
-      "form": 5.4
     }
   ],
   "value_players": [
@@ -198,14 +198,14 @@
       "form": 2.8
     },
     {
-      "player": "Keane",
-      "team": "Everton",
-      "team_short": "EVE",
+      "player": "Senesi",
+      "team": "Bournemouth",
+      "team_short": "BOU",
       "position": "Defender",
-      "pointsPerMillion": 12.44,
-      "totalPoints": 56,
-      "price": 4.5,
-      "form": 7.3
+      "pointsPerMillion": 12.2,
+      "totalPoints": 61,
+      "price": 5.0,
+      "form": 2.9
     },
     {
       "player": "Van de Ven",
@@ -275,7 +275,7 @@
       "team_short": "CHE",
       "position": "MID",
       "points": 60,
-      "ownership": 6.7,
+      "ownership": 6.9,
       "price": 7.1,
       "xG": 2.3,
       "xA": 1.9,
@@ -284,46 +284,46 @@
       "potentialScore": 10.0
     },
     {
+      "player": "Dewsbury-Hall",
+      "team": "Everton",
+      "team_short": "EVE",
+      "position": "MID",
+      "points": 48,
+      "ownership": 2.8,
+      "price": 4.9,
+      "xG": 0.9,
+      "xA": 2.5,
+      "xCS": 3.03,
+      "form": 7.2,
+      "potentialScore": 9.74
+    },
+    {
       "player": "Anderson",
       "team": "Nott'm Forest",
       "team_short": "NFO",
       "position": "MID",
       "points": 50,
-      "ownership": 3.0,
+      "ownership": 3.1,
       "price": 5.3,
       "xG": 1.6,
       "xA": 1.8,
       "xCS": 2.51,
       "form": 6.6,
-      "potentialScore": 9.34
-    },
-    {
-      "player": "Doku",
-      "team": "Man City",
-      "team_short": "MCI",
-      "position": "MID",
-      "points": 46,
-      "ownership": 7.7,
-      "price": 6.5,
-      "xG": 1.1,
-      "xA": 3.8,
-      "xCS": 3.67,
-      "form": 4.5,
-      "potentialScore": 9.28
+      "potentialScore": 9.3
     },
     {
       "player": "Amad",
       "team": "Man Utd",
       "team_short": "MUN",
       "position": "MID",
-      "points": 37,
+      "points": 39,
       "ownership": 1.9,
       "price": 6.3,
-      "xG": 1.9,
-      "xA": 1.8,
-      "xCS": 2.17,
-      "form": 6.0,
-      "potentialScore": 8.7
+      "xG": 2.1,
+      "xA": 1.9,
+      "xCS": 3.03,
+      "form": 5.7,
+      "potentialScore": 9.02
     },
     {
       "player": "Tavernier",
@@ -337,21 +337,7 @@
       "xA": 1.8,
       "xCS": 4.93,
       "form": 3.3,
-      "potentialScore": 8.55
-    },
-    {
-      "player": "Gibbs-White",
-      "team": "Nott'm Forest",
-      "team_short": "NFO",
-      "position": "MID",
-      "points": 48,
-      "ownership": 3.5,
-      "price": 7.3,
-      "xG": 2.8,
-      "xA": 0.6,
-      "xCS": 2.51,
-      "form": 7.8,
-      "potentialScore": 8.47
+      "potentialScore": 8.57
     },
     {
       "player": "Barnes",
@@ -359,27 +345,27 @@
       "team_short": "NEW",
       "position": "MID",
       "points": 39,
-      "ownership": 0.5,
+      "ownership": 0.8,
       "price": 6.3,
       "xG": 2.5,
       "xA": 1.2,
       "xCS": 4.34,
       "form": 7.5,
-      "potentialScore": 8.46
+      "potentialScore": 8.48
     },
     {
-      "player": "Richards",
-      "team": "Crystal Palace",
-      "team_short": "CRY",
-      "position": "DEF",
-      "points": 58,
+      "player": "Gibbs-White",
+      "team": "Nott'm Forest",
+      "team_short": "NFO",
+      "position": "MID",
+      "points": 48,
       "ownership": 3.9,
-      "price": 4.6,
-      "xG": 0.4,
-      "xA": 0.2,
-      "xCS": 3.35,
-      "form": 7.3,
-      "potentialScore": 8.25
+      "price": 7.3,
+      "xG": 2.8,
+      "xA": 0.6,
+      "xCS": 2.51,
+      "form": 7.8,
+      "potentialScore": 8.45
     },
     {
       "player": "Trossard",
@@ -387,41 +373,27 @@
       "team_short": "ARS",
       "position": "MID",
       "points": 52,
-      "ownership": 1.0,
+      "ownership": 1.2,
       "price": 6.9,
       "xG": 1.8,
       "xA": 1.0,
       "xCS": 6.26,
       "form": 8.1,
-      "potentialScore": 8.17
+      "potentialScore": 8.13
     },
     {
-      "player": "Richarlison",
-      "team": "Spurs",
-      "team_short": "TOT",
-      "position": "FWD",
-      "points": 51,
-      "ownership": 7.4,
-      "price": 6.4,
-      "xG": 2.2,
-      "xA": 1.4,
-      "xCS": 2.94,
-      "form": 4.2,
-      "potentialScore": 7.91
-    },
-    {
-      "player": "Dewsbury-Hall",
-      "team": "Everton",
-      "team_short": "EVE",
-      "position": "MID",
-      "points": 35,
-      "ownership": 2.8,
-      "price": 4.9,
-      "xG": 0.8,
-      "xA": 2.5,
-      "xCS": 2.96,
-      "form": 3.9,
-      "potentialScore": 7.82
+      "player": "Richards",
+      "team": "Crystal Palace",
+      "team_short": "CRY",
+      "position": "DEF",
+      "points": 58,
+      "ownership": 3.8,
+      "price": 4.6,
+      "xG": 0.4,
+      "xA": 0.2,
+      "xCS": 3.35,
+      "form": 7.3,
+      "potentialScore": 7.93
     },
     {
       "player": "O’Reilly",
@@ -429,13 +401,27 @@
       "team_short": "MCI",
       "position": "DEF",
       "points": 52,
-      "ownership": 4.0,
+      "ownership": 4.6,
       "price": 5.0,
       "xG": 0.9,
       "xA": 1.4,
       "xCS": 3.67,
       "form": 7.3,
-      "potentialScore": 7.79
+      "potentialScore": 7.6
+    },
+    {
+      "player": "Richarlison",
+      "team": "Spurs",
+      "team_short": "TOT",
+      "position": "FWD",
+      "points": 50,
+      "ownership": 7.5,
+      "price": 6.4,
+      "xG": 2.2,
+      "xA": 1.4,
+      "xCS": 2.94,
+      "form": 3.9,
+      "potentialScore": 7.6
     },
     {
       "player": "Andersen",
@@ -449,35 +435,49 @@
       "xA": 0.7,
       "xCS": 3.09,
       "form": 7.0,
-      "potentialScore": 7.75
+      "potentialScore": 7.49
     },
     {
-      "player": "Keane",
-      "team": "Everton",
-      "team_short": "EVE",
-      "position": "DEF",
-      "points": 56,
-      "ownership": 1.4,
-      "price": 4.5,
-      "xG": 0.9,
-      "xA": 0.1,
-      "xCS": 2.96,
-      "form": 7.3,
-      "potentialScore": 7.54
-    },
-    {
-      "player": "Casemiro",
-      "team": "Man Utd",
-      "team_short": "MUN",
+      "player": "J.Murphy",
+      "team": "Newcastle",
+      "team_short": "NEW",
       "position": "MID",
-      "points": 47,
-      "ownership": 1.5,
-      "price": 5.5,
-      "xG": 1.2,
-      "xA": 0.7,
-      "xCS": 2.17,
-      "form": 9.6,
-      "potentialScore": 7.38
+      "points": 38,
+      "ownership": 1.1,
+      "price": 6.1,
+      "xG": 2.1,
+      "xA": 2.1,
+      "xCS": 4.34,
+      "form": 3.6,
+      "potentialScore": 7.41
+    },
+    {
+      "player": "Schade",
+      "team": "Brentford",
+      "team_short": "BRE",
+      "position": "MID",
+      "points": 42,
+      "ownership": 1.3,
+      "price": 7.0,
+      "xG": 3.0,
+      "xA": 1.0,
+      "xCS": 3.7,
+      "form": 3.3,
+      "potentialScore": 7.27
+    },
+    {
+      "player": "Yeremy",
+      "team": "Crystal Palace",
+      "team_short": "CRY",
+      "position": "MID",
+      "points": 23,
+      "ownership": 0.2,
+      "price": 5.8,
+      "xG": 1.4,
+      "xA": 2.0,
+      "xCS": 2.92,
+      "form": 3.6,
+      "potentialScore": 7.25
     }
   ],
   "goal_scorers": [
@@ -490,7 +490,7 @@
       "goalsPerGame": 1.17,
       "points": 104,
       "price": 14.9,
-      "ownership": 71.4,
+      "ownership": 71.7,
       "form": 5.7
     },
     {
@@ -502,7 +502,7 @@
       "goalsPerGame": 0.75,
       "points": 64,
       "price": 6.5,
-      "ownership": 15.3,
+      "ownership": 16.8,
       "form": 5.7
     },
     {
@@ -514,7 +514,7 @@
       "goalsPerGame": 0.58,
       "points": 53,
       "price": 6.6,
-      "ownership": 9.9,
+      "ownership": 10.2,
       "form": 4.8
     },
     {
@@ -526,7 +526,7 @@
       "goalsPerGame": 0.5,
       "points": 51,
       "price": 8.1,
-      "ownership": 30.5,
+      "ownership": 30.2,
       "form": 3.6
     },
     {
@@ -537,21 +537,21 @@
       "goals": 6,
       "goalsPerGame": 0.5,
       "points": 75,
-      "price": 8.0,
-      "ownership": 58.0,
+      "price": 7.9,
+      "ownership": 56.4,
       "form": 0.6
     },
     {
       "player": "Mbeumo",
       "team": "Man Utd",
       "team_short": "MUN",
-      "xG": 3.1,
+      "xG": 3.2,
       "goals": 5,
-      "goalsPerGame": 0.45,
-      "points": 60,
+      "goalsPerGame": 0.42,
+      "points": 61,
       "price": 8.6,
-      "ownership": 36.4,
-      "form": 7.2
+      "ownership": 36.1,
+      "form": 3.0
     },
     {
       "player": "Richarlison",
@@ -560,10 +560,10 @@
       "xG": 2.2,
       "goals": 5,
       "goalsPerGame": 0.42,
-      "points": 51,
+      "points": 50,
       "price": 6.4,
-      "ownership": 7.4,
-      "form": 4.2
+      "ownership": 7.5,
+      "form": 3.9
     },
     {
       "player": "Anthony",
@@ -574,7 +574,7 @@
       "goalsPerGame": 0.33,
       "points": 51,
       "price": 5.6,
-      "ownership": 4.8,
+      "ownership": 4.6,
       "form": 1.8
     },
     {
@@ -586,7 +586,7 @@
       "goalsPerGame": 0.33,
       "points": 59,
       "price": 6.7,
-      "ownership": 13.5,
+      "ownership": 13.4,
       "form": 4.8
     },
     {
@@ -597,8 +597,8 @@
       "goals": 4,
       "goalsPerGame": 0.4,
       "points": 58,
-      "price": 7.6,
-      "ownership": 14.4,
+      "price": 7.7,
+      "ownership": 15.7,
       "form": 7.5
     },
     {
@@ -610,7 +610,7 @@
       "goalsPerGame": 0.33,
       "points": 37,
       "price": 8.8,
-      "ownership": 11.7,
+      "ownership": 11.4,
       "form": 2.1
     },
     {
@@ -622,7 +622,7 @@
       "goalsPerGame": 0.33,
       "points": 43,
       "price": 5.6,
-      "ownership": 3.5,
+      "ownership": 3.4,
       "form": 1.8
     },
     {
@@ -634,7 +634,7 @@
       "goalsPerGame": 0.33,
       "points": 60,
       "price": 7.5,
-      "ownership": 47.6,
+      "ownership": 46.6,
       "form": 5.1
     },
     {
@@ -658,7 +658,7 @@
       "goalsPerGame": 0.33,
       "points": 56,
       "price": 14.2,
-      "ownership": 23.3,
+      "ownership": 23.2,
       "form": 4.2
     }
   ],
@@ -668,11 +668,11 @@
       "team": "Everton",
       "team_short": "EVE",
       "assists": 4,
-      "assistsPerGame": 0.36,
-      "points": 43,
+      "assistsPerGame": 0.33,
+      "points": 46,
       "price": 6.7,
-      "ownership": 14.9,
-      "form": 1.8
+      "ownership": 14.6,
+      "form": 2.4
     },
     {
       "player": "Hartman",
@@ -693,7 +693,7 @@
       "assistsPerGame": 0.33,
       "points": 47,
       "price": 6.5,
-      "ownership": 17.3,
+      "ownership": 17.1,
       "form": 0.9
     },
     {
@@ -704,7 +704,7 @@
       "assistsPerGame": 0.33,
       "points": 61,
       "price": 6.1,
-      "ownership": 6.1,
+      "ownership": 6.7,
       "form": 6.9
     },
     {
@@ -712,11 +712,11 @@
       "team": "Man Utd",
       "team_short": "MUN",
       "assists": 3,
-      "assistsPerGame": 0.27,
-      "points": 50,
+      "assistsPerGame": 0.25,
+      "points": 52,
       "price": 8.9,
-      "ownership": 16.7,
-      "form": 4.2
+      "ownership": 16.6,
+      "form": 3.6
     },
     {
       "player": "Digne",
@@ -737,7 +737,7 @@
       "assistsPerGame": 0.25,
       "points": 34,
       "price": 4.3,
-      "ownership": 2.9,
+      "ownership": 2.8,
       "form": 2.2
     },
     {
@@ -748,7 +748,7 @@
       "assistsPerGame": 0.25,
       "points": 46,
       "price": 6.5,
-      "ownership": 7.7,
+      "ownership": 8.2,
       "form": 4.5
     },
     {
@@ -759,7 +759,7 @@
       "assistsPerGame": 0.25,
       "points": 60,
       "price": 7.5,
-      "ownership": 47.6,
+      "ownership": 46.6,
       "form": 5.1
     },
     {
@@ -770,7 +770,7 @@
       "assistsPerGame": 0.25,
       "points": 71,
       "price": 6.9,
-      "ownership": 22.0,
+      "ownership": 22.2,
       "form": 6.3
     },
     {
@@ -780,8 +780,8 @@
       "assists": 3,
       "assistsPerGame": 0.25,
       "points": 75,
-      "price": 8.0,
-      "ownership": 58.0,
+      "price": 7.9,
+      "ownership": 56.4,
       "form": 0.6
     },
     {
@@ -792,7 +792,7 @@
       "assistsPerGame": 0.25,
       "points": 61,
       "price": 5.0,
-      "ownership": 26.9,
+      "ownership": 26.6,
       "form": 2.9
     }
   ],
@@ -838,6 +838,20 @@
       "defensiveContributions": 94,
       "price": 5.0,
       "form": 8.4
+    },
+    {
+      "player": "Tarkowski",
+      "team": "Everton",
+      "team_short": "EVE",
+      "position": "Defender",
+      "points": 51,
+      "ppg": 4.2,
+      "cleanSheets": 4,
+      "csRate": 33.3,
+      "tackles": 15,
+      "defensiveContributions": 128,
+      "price": 5.4,
+      "form": 5.5
     },
     {
       "player": "Virgil",
@@ -896,6 +910,20 @@
       "form": 1.1
     },
     {
+      "player": "Keane",
+      "team": "Everton",
+      "team_short": "EVE",
+      "position": "Defender",
+      "points": 65,
+      "ppg": 5.4,
+      "cleanSheets": 4,
+      "csRate": 33.3,
+      "tackles": 11,
+      "defensiveContributions": 115,
+      "price": 4.5,
+      "form": 10.0
+    },
+    {
       "player": "Estève",
       "team": "Burnley",
       "team_short": "BUR",
@@ -908,34 +936,6 @@
       "defensiveContributions": 118,
       "price": 3.9,
       "form": 2.6
-    },
-    {
-      "player": "Van Hecke",
-      "team": "Brighton",
-      "team_short": "BHA",
-      "position": "Defender",
-      "points": 42,
-      "ppg": 3.5,
-      "cleanSheets": 2,
-      "csRate": 16.7,
-      "tackles": 20,
-      "defensiveContributions": 107,
-      "price": 4.4,
-      "form": 5.1
-    },
-    {
-      "player": "Walker",
-      "team": "Burnley",
-      "team_short": "BUR",
-      "position": "Defender",
-      "points": 29,
-      "ppg": 2.4,
-      "cleanSheets": 2,
-      "csRate": 16.7,
-      "tackles": 23,
-      "defensiveContributions": 90,
-      "price": 4.4,
-      "form": 0.4
     }
   ]
 }

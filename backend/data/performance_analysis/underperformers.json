@@ -26,11 +26,11 @@
         "team": "Man Utd",
         "team_short": "MUN",
         "goals": 2,
-        "xG": 4.4,
-        "overperformance": -2.4,
-        "overperformance_per_90": -0.218,
+        "xG": 4.7,
+        "overperformance": -2.7,
+        "overperformance_per_90": -0.225,
         "sustainable": false,
-        "form": 4.2
+        "form": 3.6
     },
     {
         "player": "Beto",
@@ -39,9 +39,9 @@
         "goals": 1,
         "xG": 4.0,
         "overperformance": -3.0,
-        "overperformance_per_90": -0.273,
+        "overperformance_per_90": -0.25,
         "sustainable": false,
-        "form": 1.2
+        "form": 0.9
     },
     {
         "player": "Sarr",

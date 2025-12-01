@@ -4,11 +4,11 @@
     "team": "Everton",
     "team_short": "EVE",
     "assists": 4,
-    "assistsPerGame": 0.36,
-    "points": 43,
+    "assistsPerGame": 0.33,
+    "points": 46,
     "price": 6.7,
-    "ownership": 14.9,
-    "form": 1.8
+    "ownership": 14.6,
+    "form": 2.4
   },
   {
     "player": "Hartman",
@@ -29,7 +29,7 @@
     "assistsPerGame": 0.33,
     "points": 47,
     "price": 6.5,
-    "ownership": 17.3,
+    "ownership": 17.1,
     "form": 0.9
   },
   {
@@ -40,7 +40,7 @@
     "assistsPerGame": 0.33,
     "points": 61,
     "price": 6.1,
-    "ownership": 6.1,
+    "ownership": 6.7,
     "form": 6.9
   },
   {
@@ -48,11 +48,11 @@
     "team": "Man Utd",
     "team_short": "MUN",
     "assists": 3,
-    "assistsPerGame": 0.27,
-    "points": 50,
+    "assistsPerGame": 0.25,
+    "points": 52,
     "price": 8.9,
-    "ownership": 16.7,
-    "form": 4.2
+    "ownership": 16.6,
+    "form": 3.6
   },
   {
     "player": "Digne",
@@ -73,7 +73,7 @@
     "assistsPerGame": 0.25,
     "points": 34,
     "price": 4.3,
-    "ownership": 2.9,
+    "ownership": 2.8,
     "form": 2.2
   },
   {
@@ -84,7 +84,7 @@
     "assistsPerGame": 0.25,
     "points": 46,
     "price": 6.5,
-    "ownership": 7.7,
+    "ownership": 8.2,
     "form": 4.5
   },
   {
@@ -95,7 +95,7 @@
     "assistsPerGame": 0.25,
     "points": 60,
     "price": 7.5,
-    "ownership": 47.6,
+    "ownership": 46.6,
     "form": 5.1
   },
   {
@@ -106,7 +106,7 @@
     "assistsPerGame": 0.25,
     "points": 71,
     "price": 6.9,
-    "ownership": 22.0,
+    "ownership": 22.2,
     "form": 6.3
   },
   {
@@ -116,8 +116,8 @@
     "assists": 3,
     "assistsPerGame": 0.25,
     "points": 75,
-    "price": 8.0,
-    "ownership": 58.0,
+    "price": 7.9,
+    "ownership": 56.4,
     "form": 0.6
   },
   {
@@ -128,7 +128,7 @@
     "assistsPerGame": 0.25,
     "points": 61,
     "price": 5.0,
-    "ownership": 26.9,
+    "ownership": 26.6,
     "form": 2.9
   }
 ]

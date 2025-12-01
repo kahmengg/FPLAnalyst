@@ -83,8 +83,8 @@
         "goals": 2,
         "xG": 1.9,
         "overperformance": 0.1,
-        "overperformance_per_90": 0.009,
+        "overperformance_per_90": 0.008,
         "sustainable": true,
-        "form": 2.1
+        "form": 0.9
     }
 ]

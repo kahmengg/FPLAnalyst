@@ -42,6 +42,20 @@
     "form": 8.4
   },
   {
+    "player": "Tarkowski",
+    "team": "Everton",
+    "team_short": "EVE",
+    "position": "Defender",
+    "points": 51,
+    "ppg": 4.2,
+    "cleanSheets": 4,
+    "csRate": 33.3,
+    "tackles": 15,
+    "defensiveContributions": 128,
+    "price": 5.4,
+    "form": 5.5
+  },
+  {
     "player": "Virgil",
     "team": "Liverpool",
     "team_short": "LIV",
@@ -98,6 +112,20 @@
     "form": 1.1
   },
   {
+    "player": "Keane",
+    "team": "Everton",
+    "team_short": "EVE",
+    "position": "Defender",
+    "points": 65,
+    "ppg": 5.4,
+    "cleanSheets": 4,
+    "csRate": 33.3,
+    "tackles": 11,
+    "defensiveContributions": 115,
+    "price": 4.5,
+    "form": 10.0
+  },
+  {
     "player": "Estève",
     "team": "Burnley",
     "team_short": "BUR",
@@ -110,33 +138,5 @@
     "defensiveContributions": 118,
     "price": 3.9,
     "form": 2.6
-  },
-  {
-    "player": "Van Hecke",
-    "team": "Brighton",
-    "team_short": "BHA",
-    "position": "Defender",
-    "points": 42,
-    "ppg": 3.5,
-    "cleanSheets": 2,
-    "csRate": 16.7,
-    "tackles": 20,
-    "defensiveContributions": 107,
-    "price": 4.4,
-    "form": 5.1
-  },
-  {
-    "player": "Walker",
-    "team": "Burnley",
-    "team_short": "BUR",
-    "position": "Defender",
-    "points": 29,
-    "ppg": 2.4,
-    "cleanSheets": 2,
-    "csRate": 16.7,
-    "tackles": 23,
-    "defensiveContributions": 90,
-    "price": 4.4,
-    "form": 0.4
   }
 ]

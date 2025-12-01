@@ -47,11 +47,11 @@
     "team": "Man Utd",
     "team_short": "MUN",
     "overall_rank": 5,
-    "overall_strength": 2.441,
-    "goals_per_game": 1.55,
-    "expected_goals_per_game": 1.64,
-    "goals_conceded_per_game": 1.64,
-    "clean_sheet_rate": 0.09,
+    "overall_strength": 2.582,
+    "goals_per_game": 1.42,
+    "expected_goals_per_game": 1.63,
+    "goals_conceded_per_game": 1.58,
+    "clean_sheet_rate": 0.08,
     "defensive_contribution": 0
   },
   {
@@ -132,20 +132,9 @@
     "defensive_contribution": 0
   },
   {
-    "team": "Everton",
-    "team_short": "EVE",
-    "overall_rank": 13,
-    "overall_strength": 1.9,
-    "goals_per_game": 1.09,
-    "expected_goals_per_game": 1.28,
-    "goals_conceded_per_game": 1.18,
-    "clean_sheet_rate": 0.27,
-    "defensive_contribution": 0
-  },
-  {
     "team": "Brentford",
     "team_short": "BRE",
-    "overall_rank": 14,
+    "overall_rank": 13,
     "overall_strength": 1.898,
     "goals_per_game": 1.5,
     "expected_goals_per_game": 1.5,
@@ -156,12 +145,23 @@
   {
     "team": "Leeds",
     "team_short": "LEE",
-    "overall_rank": 15,
+    "overall_rank": 14,
     "overall_strength": 1.834,
     "goals_per_game": 0.92,
     "expected_goals_per_game": 1.17,
     "goals_conceded_per_game": 1.83,
     "clean_sheet_rate": 0.17,
+    "defensive_contribution": 0
+  },
+  {
+    "team": "Everton",
+    "team_short": "EVE",
+    "overall_rank": 15,
+    "overall_strength": 1.819,
+    "goals_per_game": 1.08,
+    "expected_goals_per_game": 1.19,
+    "goals_conceded_per_game": 1.08,
+    "clean_sheet_rate": 0.33,
     "defensive_contribution": 0
   },
   {

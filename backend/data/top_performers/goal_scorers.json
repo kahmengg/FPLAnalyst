@@ -8,7 +8,7 @@
     "goalsPerGame": 1.17,
     "points": 104,
     "price": 14.9,
-    "ownership": 71.4,
+    "ownership": 71.7,
     "form": 5.7
   },
   {
@@ -20,7 +20,7 @@
     "goalsPerGame": 0.75,
     "points": 64,
     "price": 6.5,
-    "ownership": 15.3,
+    "ownership": 16.8,
     "form": 5.7
   },
   {
@@ -32,7 +32,7 @@
     "goalsPerGame": 0.58,
     "points": 53,
     "price": 6.6,
-    "ownership": 9.9,
+    "ownership": 10.2,
     "form": 4.8
   },
   {
@@ -44,7 +44,7 @@
     "goalsPerGame": 0.5,
     "points": 51,
     "price": 8.1,
-    "ownership": 30.5,
+    "ownership": 30.2,
     "form": 3.6
   },
   {
@@ -55,21 +55,21 @@
     "goals": 6,
     "goalsPerGame": 0.5,
     "points": 75,
-    "price": 8.0,
-    "ownership": 58.0,
+    "price": 7.9,
+    "ownership": 56.4,
     "form": 0.6
   },
   {
     "player": "Mbeumo",
     "team": "Man Utd",
     "team_short": "MUN",
-    "xG": 3.1,
+    "xG": 3.2,
     "goals": 5,
-    "goalsPerGame": 0.45,
-    "points": 60,
+    "goalsPerGame": 0.42,
+    "points": 61,
     "price": 8.6,
-    "ownership": 36.4,
-    "form": 7.2
+    "ownership": 36.1,
+    "form": 3.0
   },
   {
     "player": "Richarlison",
@@ -78,10 +78,10 @@
     "xG": 2.2,
     "goals": 5,
     "goalsPerGame": 0.42,
-    "points": 51,
+    "points": 50,
     "price": 6.4,
-    "ownership": 7.4,
-    "form": 4.2
+    "ownership": 7.5,
+    "form": 3.9
   },
   {
     "player": "Anthony",
@@ -92,7 +92,7 @@
     "goalsPerGame": 0.33,
     "points": 51,
     "price": 5.6,
-    "ownership": 4.8,
+    "ownership": 4.6,
     "form": 1.8
   },
   {
@@ -104,7 +104,7 @@
     "goalsPerGame": 0.33,
     "points": 59,
     "price": 6.7,
-    "ownership": 13.5,
+    "ownership": 13.4,
     "form": 4.8
   },
   {
@@ -115,8 +115,8 @@
     "goals": 4,
     "goalsPerGame": 0.4,
     "points": 58,
-    "price": 7.6,
-    "ownership": 14.4,
+    "price": 7.7,
+    "ownership": 15.7,
     "form": 7.5
   },
   {
@@ -128,7 +128,7 @@
     "goalsPerGame": 0.33,
     "points": 37,
     "price": 8.8,
-    "ownership": 11.7,
+    "ownership": 11.4,
     "form": 2.1
   },
   {
@@ -140,7 +140,7 @@
     "goalsPerGame": 0.33,
     "points": 43,
     "price": 5.6,
-    "ownership": 3.5,
+    "ownership": 3.4,
     "form": 1.8
   },
   {
@@ -152,7 +152,7 @@
     "goalsPerGame": 0.33,
     "points": 60,
     "price": 7.5,
-    "ownership": 47.6,
+    "ownership": 46.6,
     "form": 5.1
   },
   {
@@ -176,7 +176,7 @@
     "goalsPerGame": 0.33,
     "points": 56,
     "price": 14.2,
-    "ownership": 23.3,
+    "ownership": 23.2,
     "form": 4.2
   }
 ]

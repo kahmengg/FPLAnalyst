@@ -8,7 +8,7 @@
         "overperformance": 2.8,
         "overperformance_per_90": 0.233,
         "sustainable": false,
-        "form": 4.2
+        "form": 3.9
     },
     {
         "player": "Gravenberch",
@@ -55,17 +55,6 @@
         "form": 5.4
     },
     {
-        "player": "Mbeumo",
-        "team": "Man Utd",
-        "team_short": "MUN",
-        "goals": 5,
-        "xG": 3.1,
-        "overperformance": 1.9,
-        "overperformance_per_90": 0.173,
-        "sustainable": false,
-        "form": 7.2
-    },
-    {
         "player": "Eze",
         "team": "Arsenal",
         "team_short": "ARS",
@@ -86,5 +75,16 @@
         "overperformance_per_90": 0.167,
         "sustainable": false,
         "form": 2.4
+    },
+    {
+        "player": "Welbeck",
+        "team": "Brighton",
+        "team_short": "BHA",
+        "goals": 7,
+        "xG": 5.0,
+        "overperformance": 2.0,
+        "overperformance_per_90": 0.167,
+        "sustainable": false,
+        "form": 4.8
     }
 ]
