@@ -161,10 +161,6 @@ export default function PlayerTrendsPage() {
     if (selectedPlayers.includes(playerName)) {
       setSelectedPlayers(selectedPlayers.filter((p: string) => p !== playerName))
     } else {
-      if (selectedPlayers.length >= 3) {
-        alert("Maximum 3 players can be compared at once")
-        return
-      }
       setSelectedPlayers([...selectedPlayers, playerName])
     }
   }
@@ -173,7 +169,14 @@ export default function PlayerTrendsPage() {
     const colors = [
       { line: "#3b82f6", bg: "bg-blue-500", text: "text-blue-600 dark:text-blue-400" },
       { line: "#22c55e", bg: "bg-green-500", text: "text-green-600 dark:text-green-400" },
-      { line: "#a855f7", bg: "bg-purple-500", text: "text-purple-600 dark:text-purple-400" }
+      { line: "#a855f7", bg: "bg-purple-500", text: "text-purple-600 dark:text-purple-400" },
+      { line: "#f59e0b", bg: "bg-amber-500", text: "text-amber-600 dark:text-amber-400" },
+      { line: "#ef4444", bg: "bg-red-500", text: "text-red-600 dark:text-red-400" },
+      { line: "#06b6d4", bg: "bg-cyan-500", text: "text-cyan-600 dark:text-cyan-400" },
+      { line: "#8b5cf6", bg: "bg-violet-500", text: "text-violet-600 dark:text-violet-400" },
+      { line: "#ec4899", bg: "bg-pink-500", text: "text-pink-600 dark:text-pink-400" },
+      { line: "#10b981", bg: "bg-emerald-500", text: "text-emerald-600 dark:text-emerald-400" },
+      { line: "#f97316", bg: "bg-orange-500", text: "text-orange-600 dark:text-orange-400" }
     ]
     return colors[index % colors.length]
   }
@@ -238,7 +241,7 @@ export default function PlayerTrendsPage() {
             Player Performance Database
           </h1>
           <p className="text-sm sm:text-lg text-muted-foreground">
-            Advanced gameweek-by-gameweek analysis • Compare up to 3 players with xG/xA insights
+            Advanced gameweek-by-gameweek analysis • Compare multiple players with xG/xA insights
           </p>
         </div>
 
@@ -246,7 +249,7 @@ export default function PlayerTrendsPage() {
           <CardHeader className="border-b border-border/50">
             <CardTitle className="text-base sm:text-lg flex items-center gap-2">
               <User className="w-5 h-5" />
-              Player Search & Selection ({selectedPlayers.length}/3)
+              Player Search & Selection ({selectedPlayers.length} selected)
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 space-y-4">
@@ -307,7 +310,7 @@ export default function PlayerTrendsPage() {
                         onClick={() => togglePlayer(player.name)}
                         className={`px-3 py-2.5 text-xs sm:text-sm rounded-lg border transition-all text-left ${
                           isSelected
-                            ? 'bg-primary text-primary-foreground border-primary shadow-md'
+                            ? 'bg-primary/10 text-primary border-primary shadow-md ring-2 ring-primary/20'
                             : 'bg-card hover:bg-secondary/50 border-border hover:border-primary/50'
                         }`}
                       >
