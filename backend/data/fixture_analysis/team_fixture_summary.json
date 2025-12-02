@@ -25,9 +25,9 @@
         "near_term_rating": 75.6,
         "medium_term_rating": 87.2,
         "fixture_swing": 11.6,
-        "swing_category": "Stable",
-        "swing_emoji": "\u27a1\ufe0f",
-        "form_context": "hold"
+        "swing_category": "Fixture Improvement",
+        "swing_emoji": "\ud83d\udcc8",
+        "form_context": "buy_opportunity"
     },
     {
         "team": "Liverpool",
@@ -55,9 +55,9 @@
         "near_term_rating": 81.7,
         "medium_term_rating": 70.3,
         "fixture_swing": -11.4,
-        "swing_category": "Stable",
-        "swing_emoji": "\u27a1\ufe0f",
-        "form_context": "hold"
+        "swing_category": "Fixture Decline",
+        "swing_emoji": "\ud83d\udcc9",
+        "form_context": "sell_warning"
     },
     {
         "team": "Crystal Palace",
@@ -85,9 +85,9 @@
         "near_term_rating": 78.2,
         "medium_term_rating": 64.1,
         "fixture_swing": -14.1,
-        "swing_category": "Stable",
-        "swing_emoji": "\u27a1\ufe0f",
-        "form_context": "hold"
+        "swing_category": "Fixture Decline",
+        "swing_emoji": "\ud83d\udcc9",
+        "form_context": "sell_warning"
     },
     {
         "team": "Man Utd",
@@ -100,9 +100,9 @@
         "near_term_rating": 70.2,
         "medium_term_rating": 59.5,
         "fixture_swing": -10.7,
-        "swing_category": "Stable",
-        "swing_emoji": "\u27a1\ufe0f",
-        "form_context": "hold"
+        "swing_category": "Fixture Decline",
+        "swing_emoji": "\ud83d\udcc9",
+        "form_context": "sell_warning"
     },
     {
         "team": "Brighton",
@@ -145,9 +145,9 @@
         "near_term_rating": 49.3,
         "medium_term_rating": 60.6,
         "fixture_swing": 11.3,
-        "swing_category": "Stable",
-        "swing_emoji": "\u27a1\ufe0f",
-        "form_context": "hold"
+        "swing_category": "Fixture Improvement",
+        "swing_emoji": "\ud83d\udcc8",
+        "form_context": "buy_opportunity"
     },
     {
         "team": "Brentford",
@@ -160,9 +160,9 @@
         "near_term_rating": 42.8,
         "medium_term_rating": 57.7,
         "fixture_swing": 14.9,
-        "swing_category": "Stable",
-        "swing_emoji": "\u27a1\ufe0f",
-        "form_context": "hold"
+        "swing_category": "Fixture Improvement",
+        "swing_emoji": "\ud83d\udcc8",
+        "form_context": "buy_opportunity"
     },
     {
         "team": "Aston Villa",
@@ -220,9 +220,9 @@
         "near_term_rating": 32.0,
         "medium_term_rating": 44.5,
         "fixture_swing": 12.5,
-        "swing_category": "Stable",
-        "swing_emoji": "\u27a1\ufe0f",
-        "form_context": "hold"
+        "swing_category": "Fixture Improvement",
+        "swing_emoji": "\ud83d\udcc8",
+        "form_context": "buy_opportunity"
     },
     {
         "team": "Sunderland",
@@ -235,9 +235,9 @@
         "near_term_rating": 27.7,
         "medium_term_rating": 40.0,
         "fixture_swing": 12.3,
-        "swing_category": "Stable",
-        "swing_emoji": "\u27a1\ufe0f",
-        "form_context": "hold"
+        "swing_category": "Fixture Improvement",
+        "swing_emoji": "\ud83d\udcc8",
+        "form_context": "buy_opportunity"
     },
     {
         "team": "Leeds",
