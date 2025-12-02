@@ -3,37 +3,37 @@
     "player": "Haaland",
     "team": "Man City",
     "team_short": "MCI",
-    "xG": 11.8,
+    "xG": 11.9,
     "goals": 14,
-    "goalsPerGame": 1.17,
-    "points": 104,
+    "goalsPerGame": 1.08,
+    "points": 106,
     "price": 14.9,
-    "ownership": 71.7,
-    "form": 5.7
+    "ownership": 72.2,
+    "form": 2.4
   },
   {
     "player": "Thiago",
     "team": "Brentford",
     "team_short": "BRE",
-    "xG": 7.3,
-    "goals": 9,
-    "goalsPerGame": 0.75,
-    "points": 64,
-    "price": 6.5,
-    "ownership": 16.8,
-    "form": 5.7
+    "xG": 8.5,
+    "goals": 11,
+    "goalsPerGame": 0.85,
+    "points": 77,
+    "price": 6.7,
+    "ownership": 22.6,
+    "form": 9.0
   },
   {
     "player": "Welbeck",
     "team": "Brighton",
     "team_short": "BHA",
-    "xG": 5.0,
+    "xG": 5.1,
     "goals": 7,
-    "goalsPerGame": 0.58,
-    "points": 53,
+    "goalsPerGame": 0.54,
+    "points": 55,
     "price": 6.6,
-    "ownership": 10.2,
-    "form": 4.8
+    "ownership": 10.8,
+    "form": 3.6
   },
   {
     "player": "Mateta",
@@ -44,20 +44,20 @@
     "goalsPerGame": 0.5,
     "points": 51,
     "price": 8.1,
-    "ownership": 30.2,
+    "ownership": 31.0,
     "form": 3.6
   },
   {
     "player": "Semenyo",
     "team": "Bournemouth",
     "team_short": "BOU",
-    "xG": 4.7,
+    "xG": 4.8,
     "goals": 6,
-    "goalsPerGame": 0.5,
-    "points": 75,
-    "price": 7.9,
-    "ownership": 56.4,
-    "form": 0.6
+    "goalsPerGame": 0.46,
+    "points": 76,
+    "price": 7.8,
+    "ownership": 52.3,
+    "form": 0.3
   },
   {
     "player": "Mbeumo",
@@ -68,7 +68,7 @@
     "goalsPerGame": 0.42,
     "points": 61,
     "price": 8.6,
-    "ownership": 36.1,
+    "ownership": 35.9,
     "form": 3.0
   },
   {
@@ -77,11 +77,23 @@
     "team_short": "TOT",
     "xG": 2.2,
     "goals": 5,
-    "goalsPerGame": 0.42,
-    "points": 50,
+    "goalsPerGame": 0.38,
+    "points": 51,
     "price": 6.4,
-    "ownership": 7.5,
+    "ownership": 7.6,
     "form": 3.9
+  },
+  {
+    "player": "Woltemade",
+    "team": "Newcastle",
+    "team_short": "NEW",
+    "xG": 4.4,
+    "goals": 5,
+    "goalsPerGame": 0.5,
+    "points": 49,
+    "price": 7.4,
+    "ownership": 19.9,
+    "form": 4.2
   },
   {
     "player": "Anthony",
@@ -89,22 +101,22 @@
     "team_short": "BUR",
     "xG": 2.4,
     "goals": 4,
-    "goalsPerGame": 0.33,
-    "points": 51,
-    "price": 5.6,
-    "ownership": 4.6,
-    "form": 1.8
+    "goalsPerGame": 0.31,
+    "points": 55,
+    "price": 5.5,
+    "ownership": 4.1,
+    "form": 2.4
   },
   {
     "player": "Enzo",
     "team": "Chelsea",
     "team_short": "CHE",
-    "xG": 5.2,
+    "xG": 5.3,
     "goals": 4,
-    "goalsPerGame": 0.33,
-    "points": 59,
+    "goalsPerGame": 0.31,
+    "points": 61,
     "price": 6.7,
-    "ownership": 13.4,
+    "ownership": 14.0,
     "form": 4.8
   },
   {
@@ -113,11 +125,35 @@
     "team_short": "ARS",
     "xG": 2.3,
     "goals": 4,
-    "goalsPerGame": 0.4,
-    "points": 58,
-    "price": 7.7,
-    "ownership": 15.7,
-    "form": 7.5
+    "goalsPerGame": 0.36,
+    "points": 60,
+    "price": 7.8,
+    "ownership": 19.6,
+    "form": 7.2
+  },
+  {
+    "player": "Flemming",
+    "team": "Burnley",
+    "team_short": "BUR",
+    "xG": 1.8,
+    "goals": 4,
+    "goalsPerGame": 0.31,
+    "points": 33,
+    "price": 5.3,
+    "ownership": 0.4,
+    "form": 3.9
+  },
+  {
+    "player": "Gakpo",
+    "team": "Liverpool",
+    "team_short": "LIV",
+    "xG": 3.9,
+    "goals": 4,
+    "goalsPerGame": 0.31,
+    "points": 62,
+    "price": 7.5,
+    "ownership": 13.5,
+    "form": 5.1
   },
   {
     "player": "Gyökeres",
@@ -125,11 +161,11 @@
     "team_short": "ARS",
     "xG": 4.4,
     "goals": 4,
-    "goalsPerGame": 0.33,
+    "goalsPerGame": 0.31,
     "points": 37,
     "price": 8.8,
-    "ownership": 11.4,
-    "form": 2.1
+    "ownership": 10.7,
+    "form": 0.0
   },
   {
     "player": "Isidor",
@@ -137,46 +173,10 @@
     "team_short": "SUN",
     "xG": 2.1,
     "goals": 4,
-    "goalsPerGame": 0.33,
-    "points": 43,
+    "goalsPerGame": 0.31,
+    "points": 45,
     "price": 5.6,
-    "ownership": 3.4,
+    "ownership": 3.1,
     "form": 1.8
-  },
-  {
-    "player": "João Pedro",
-    "team": "Chelsea",
-    "team_short": "CHE",
-    "xG": 3.8,
-    "goals": 4,
-    "goalsPerGame": 0.33,
-    "points": 60,
-    "price": 7.5,
-    "ownership": 46.6,
-    "form": 5.1
-  },
-  {
-    "player": "Kroupi.Jr",
-    "team": "Bournemouth",
-    "team_short": "BOU",
-    "xG": 2.6,
-    "goals": 4,
-    "goalsPerGame": 0.33,
-    "points": 32,
-    "price": 4.6,
-    "ownership": 4.7,
-    "form": 1.5
-  },
-  {
-    "player": "M.Salah",
-    "team": "Liverpool",
-    "team_short": "LIV",
-    "xG": 3.8,
-    "goals": 4,
-    "goalsPerGame": 0.33,
-    "points": 56,
-    "price": 14.2,
-    "ownership": 23.2,
-    "form": 4.2
   }
 ]

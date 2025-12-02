@@ -7,7 +7,27 @@
     "pointsPerMillion": 13.1,
     "totalPoints": 55,
     "price": 4.2,
-    "form": 3.3
+    "form": 2.9
+  },
+  {
+    "player": "Cash",
+    "team": "Aston Villa",
+    "team_short": "AVL",
+    "position": "Defender",
+    "pointsPerMillion": 12.77,
+    "totalPoints": 60,
+    "price": 4.7,
+    "form": 5.1
+  },
+  {
+    "player": "Roefs",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Goalkeeper",
+    "pointsPerMillion": 12.77,
+    "totalPoints": 60,
+    "price": 4.7,
+    "form": 2.4
   },
   {
     "player": "Richards",
@@ -20,24 +40,14 @@
     "form": 7.3
   },
   {
-    "player": "Roefs",
-    "team": "Sunderland",
-    "team_short": "SUN",
-    "position": "Goalkeeper",
-    "pointsPerMillion": 12.55,
-    "totalPoints": 59,
-    "price": 4.7,
-    "form": 2.8
-  },
-  {
-    "player": "Senesi",
-    "team": "Bournemouth",
-    "team_short": "BOU",
+    "player": "Mitchell",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
     "position": "Defender",
     "pointsPerMillion": 12.2,
     "totalPoints": 61,
     "price": 5.0,
-    "form": 2.9
+    "form": 8.4
   },
   {
     "player": "Van de Ven",
@@ -47,7 +57,7 @@
     "pointsPerMillion": 12.08,
     "totalPoints": 58,
     "price": 4.8,
-    "form": 1.1
+    "form": 0.4
   },
   {
     "player": "Rodon",
@@ -57,46 +67,36 @@
     "pointsPerMillion": 11.95,
     "totalPoints": 49,
     "price": 4.1,
-    "form": 1.8
-  },
-  {
-    "player": "Cash",
-    "team": "Aston Villa",
-    "team_short": "AVL",
-    "position": "Defender",
-    "pointsPerMillion": 11.74,
-    "totalPoints": 54,
-    "price": 4.6,
-    "form": 2.9
-  },
-  {
-    "player": "Cullen",
-    "team": "Burnley",
-    "team_short": "BUR",
-    "position": "Midfielder",
-    "pointsPerMillion": 11.0,
-    "totalPoints": 55,
-    "price": 5.0,
-    "form": 3.9
-  },
-  {
-    "player": "Alderete",
-    "team": "Sunderland",
-    "team_short": "SUN",
-    "position": "Defender",
-    "pointsPerMillion": 10.98,
-    "totalPoints": 45,
-    "price": 4.1,
-    "form": 0.0
+    "form": 1.5
   },
   {
     "player": "Andersen",
     "team": "Fulham",
     "team_short": "FUL",
     "position": "Defender",
-    "pointsPerMillion": 10.89,
-    "totalPoints": 49,
+    "pointsPerMillion": 11.78,
+    "totalPoints": 53,
     "price": 4.5,
-    "form": 7.0
+    "form": 6.2
+  },
+  {
+    "player": "Ballard",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Defender",
+    "pointsPerMillion": 11.52,
+    "totalPoints": 53,
+    "price": 4.6,
+    "form": 5.1
+  },
+  {
+    "player": "Cullen",
+    "team": "Burnley",
+    "team_short": "BUR",
+    "position": "Midfielder",
+    "pointsPerMillion": 11.4,
+    "totalPoints": 57,
+    "price": 5.0,
+    "form": 4.2
   }
 ]
