@@ -96,8 +96,9 @@ export default function PlayerTrendsPage() {
   const [allPlayers, setAllPlayers] = useState<Player[]>([])
   const [selectedPlayers, setSelectedPlayers] = useState<string[]>([])
   const [playerData, setPlayerData] = useState<Record<string, PlayerTrendData>>({})
-  const [searchQuery, setSearchQuery] = useState<string>("")
+  const [searchQuery, setSearchQuery] = useState<string>("") 
   const [positionFilter, setPositionFilter] = useState<string>("all")
+  const [teamFilter, setTeamFilter] = useState<string>("all")
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -147,6 +148,10 @@ export default function PlayerTrendsPage() {
       filtered = filtered.filter((p: Player) => p.position === parseInt(positionFilter))
     }
 
+    if (teamFilter !== "all") {
+      filtered = filtered.filter((p: Player) => p.team === teamFilter)
+    }
+
     if (searchQuery) {
       filtered = filtered.filter((player: Player) => 
         player.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -155,7 +160,7 @@ export default function PlayerTrendsPage() {
     }
 
     return filtered.slice(0, 100)
-  }, [searchQuery, allPlayers, positionFilter])
+  }, [searchQuery, allPlayers, positionFilter, teamFilter])
 
   const togglePlayer = (playerName: string) => {
     if (selectedPlayers.includes(playerName)) {
@@ -253,7 +258,7 @@ export default function PlayerTrendsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <input
                 type="text"
                 placeholder="🔍 Search by player name or team..."
@@ -271,6 +276,16 @@ export default function PlayerTrendsPage() {
                 <option value="2">🛡️ Defenders</option>
                 <option value="3">⚙️ Midfielders</option>
                 <option value="4">⚔️ Forwards</option>
+              </select>
+              <select
+                value={teamFilter}
+                onChange={(e) => setTeamFilter(e.target.value)}
+                className="px-4 py-2.5 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <option value="all">All Teams</option>
+                {[...new Set(allPlayers.map(p => p.team))].sort().map(team => (
+                  <option key={team} value={team}>⚽ {team}</option>
+                ))}
               </select>
             </div>
 
@@ -381,9 +396,14 @@ export default function PlayerTrendsPage() {
                     
                     <TabsContent value="points" className="mt-4">
                       <ResponsiveContainer width="100%" height={300}>
-                        <LineChart data={comparisonChartData}>
+                        <LineChart data={comparisonChartData} margin={{ top: 5, right: 30, left: 20, bottom: 60 }}>
                           <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
-                          <XAxis dataKey="gameweek" label={{ value: 'Gameweek', position: 'insideBottom', offset: -5 }} />
+                          <XAxis 
+                            dataKey="gameweek" 
+                            label={{ value: 'Gameweek', position: 'insideBottom', offset: -10, textAnchor: 'middle' }}
+                            tick={{ fontSize: 12 }}
+                            height={60}
+                          />
                           <YAxis label={{ value: 'FPL Points', angle: -90, position: 'insideLeft' }} />
                           <Tooltip 
                             contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid #333', borderRadius: '8px' }}
@@ -408,9 +428,14 @@ export default function PlayerTrendsPage() {
 
                     <TabsContent value="xgi" className="mt-4">
                       <ResponsiveContainer width="100%" height={300}>
-                        <LineChart data={comparisonChartData}>
+                        <LineChart data={comparisonChartData} margin={{ top: 5, right: 30, left: 20, bottom: 60 }}>
                           <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
-                          <XAxis dataKey="gameweek" label={{ value: 'Gameweek', position: 'insideBottom', offset: -5 }} />
+                          <XAxis 
+                            dataKey="gameweek" 
+                            label={{ value: 'Gameweek', position: 'insideBottom', offset: -10, textAnchor: 'middle' }}
+                            tick={{ fontSize: 12 }}
+                            height={60}
+                          />
                           <YAxis label={{ value: 'xGI', angle: -90, position: 'insideLeft' }} />
                           <Tooltip 
                             contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid #333', borderRadius: '8px' }}
@@ -435,10 +460,15 @@ export default function PlayerTrendsPage() {
 
                     <TabsContent value="minutes" className="mt-4">
                       <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={comparisonChartData}>
+                        <BarChart data={comparisonChartData} margin={{ top: 5, right: 30, left: 20, bottom: 60 }}>
                           <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
-                          <XAxis dataKey="gameweek" />
-                          <YAxis />
+                          <XAxis 
+                            dataKey="gameweek" 
+                            label={{ value: 'Gameweek', position: 'insideBottom', offset: -10, textAnchor: 'middle' }}
+                            tick={{ fontSize: 12 }}
+                            height={60}
+                          />
+                          <YAxis label={{ value: 'Minutes', angle: -90, position: 'insideLeft' }} />
                           <Tooltip 
                             contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid #333', borderRadius: '8px' }}
                           />
@@ -462,9 +492,13 @@ export default function PlayerTrendsPage() {
                         <div>
                           <h4 className="text-sm font-semibold mb-2 text-center">Expected Goals (xG)</h4>
                           <ResponsiveContainer width="100%" height={250}>
-                            <LineChart data={comparisonChartData}>
+                            <LineChart data={comparisonChartData} margin={{ top: 5, right: 30, left: 20, bottom: 50 }}>
                               <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
-                              <XAxis dataKey="gameweek" />
+                              <XAxis 
+                                dataKey="gameweek" 
+                                tick={{ fontSize: 11 }}
+                                height={50}
+                              />
                               <YAxis />
                               <Tooltip contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid #333', borderRadius: '8px' }} />
                               <Legend />
@@ -486,9 +520,13 @@ export default function PlayerTrendsPage() {
                         <div>
                           <h4 className="text-sm font-semibold mb-2 text-center">Expected Assists (xA)</h4>
                           <ResponsiveContainer width="100%" height={250}>
-                            <LineChart data={comparisonChartData}>
+                            <LineChart data={comparisonChartData} margin={{ top: 5, right: 30, left: 20, bottom: 50 }}>
                               <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
-                              <XAxis dataKey="gameweek" />
+                              <XAxis 
+                                dataKey="gameweek" 
+                                tick={{ fontSize: 11 }}
+                                height={50}
+                              />
                               <YAxis />
                               <Tooltip contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid #333', borderRadius: '8px' }} />
                               <Legend />

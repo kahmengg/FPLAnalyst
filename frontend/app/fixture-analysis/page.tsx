@@ -709,13 +709,13 @@ export default function FixtureAnalysisPage() {
               </CardHeader>
               <CardContent className="p-3 sm:p-6">
                 <div className="grid gap-4 lg:grid-cols-2">
-                  {/* Buy Opportunities - Teams with improving fixtures */}
+                  {/* Buy Opportunities - Teams with declining fixtures (getting easier later) */}
                   <div className="space-y-3">
                     <h3 className="text-sm font-semibold text-green-600 dark:text-green-400 flex items-center gap-2">
                       📈 Fixture Improvements - Buy Targets
                     </h3>
                     {sortedTeamData
-                      .filter(team => team.swingCategory === "Fixture Improvement")
+                      .filter(team => team.swingCategory === "Fixture Decline")
                       .slice(0, 5)
                       .map((team, index) => (
                         <div
@@ -752,20 +752,20 @@ export default function FixtureAnalysisPage() {
                           </p>
                         </div>
                       ))}
-                    {sortedTeamData.filter(team => team.swingCategory === "Fixture Improvement").length === 0 && (
+                    {sortedTeamData.filter(team => team.swingCategory === "Fixture Decline").length === 0 && (
                       <p className="text-xs text-muted-foreground italic p-3 bg-secondary/20 rounded-lg">
-                        No significant fixture improvements in the next 6 gameweeks
+                        No teams with declining fixtures (buy opportunities) in the next 6 gameweeks
                       </p>
                     )}
                   </div>
 
-                  {/* Sell Warnings - Teams with declining fixtures */}
+                  {/* Sell Warnings - Teams with improving fixtures (getting harder later) */}
                   <div className="space-y-3">
                     <h3 className="text-sm font-semibold text-red-600 dark:text-red-400 flex items-center gap-2">
                       📉 Fixture Declines - Sell Warnings
                     </h3>
                     {sortedTeamData
-                      .filter(team => team.swingCategory === "Fixture Decline")
+                      .filter(team => team.swingCategory === "Fixture Improvement")
                       .slice(0, 5)
                       .map((team, index) => (
                         <div
@@ -802,9 +802,9 @@ export default function FixtureAnalysisPage() {
                           </p>
                         </div>
                       ))}
-                    {sortedTeamData.filter(team => team.swingCategory === "Fixture Decline").length === 0 && (
+                    {sortedTeamData.filter(team => team.swingCategory === "Fixture Improvement").length === 0 && (
                       <p className="text-xs text-muted-foreground italic p-3 bg-secondary/20 rounded-lg">
-                        No significant fixture declines in the next 6 gameweeks
+                        No teams with improving fixtures (sell warnings) in the next 6 gameweeks
                       </p>
                     )}
                   </div>
