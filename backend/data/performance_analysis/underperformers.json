@@ -15,8 +15,8 @@
         "team": "Chelsea",
         "team_short": "CHE",
         "goals": 4,
-        "xG": 5.2,
-        "overperformance": -1.2,
+        "xG": 5.3,
+        "overperformance": -1.3,
         "overperformance_per_90": -0.1,
         "sustainable": false,
         "form": 4.8
@@ -39,7 +39,7 @@
         "goals": 1,
         "xG": 4.0,
         "overperformance": -3.0,
-        "overperformance_per_90": -0.25,
+        "overperformance_per_90": -0.231,
         "sustainable": false,
         "form": 0.9
     },
@@ -55,15 +55,15 @@
         "form": 2.7
     },
     {
-        "player": "Gakpo",
-        "team": "Liverpool",
-        "team_short": "LIV",
-        "goals": 3,
-        "xG": 3.5,
-        "overperformance": -0.5,
-        "overperformance_per_90": -0.042,
+        "player": "Evanilson",
+        "team": "Bournemouth",
+        "team_short": "BOU",
+        "goals": 1,
+        "xG": 3.3,
+        "overperformance": -2.3,
+        "overperformance_per_90": -0.177,
         "sustainable": false,
-        "form": 1.8
+        "form": 3.6
     },
     {
         "player": "Wood",
@@ -72,19 +72,19 @@
         "goals": 2,
         "xG": 2.8,
         "overperformance": -0.8,
-        "overperformance_per_90": -0.067,
+        "overperformance_per_90": -0.062,
         "sustainable": false,
         "form": 0.0
     },
     {
-        "player": "Watkins",
-        "team": "Aston Villa",
-        "team_short": "AVL",
-        "goals": 1,
-        "xG": 2.5,
-        "overperformance": -1.5,
-        "overperformance_per_90": -0.125,
+        "player": "J.Timber",
+        "team": "Arsenal",
+        "team_short": "ARS",
+        "goals": 2,
+        "xG": 2.6,
+        "overperformance": -0.6,
+        "overperformance_per_90": -0.046,
         "sustainable": false,
-        "form": 1.8
+        "form": 2.9
     }
 ]
