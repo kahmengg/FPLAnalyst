@@ -1,12 +1,23 @@
 [
     {
+        "player": "Woltemade",
+        "team": "Newcastle",
+        "team_short": "NEW",
+        "goals": 5,
+        "xG": 4.6,
+        "overperformance": 0.4,
+        "overperformance_per_90": 0.036,
+        "sustainable": true,
+        "form": 4.2
+    },
+    {
         "player": "Gakpo",
         "team": "Liverpool",
         "team_short": "LIV",
         "goals": 4,
         "xG": 3.9,
         "overperformance": 0.1,
-        "overperformance_per_90": 0.008,
+        "overperformance_per_90": 0.007,
         "sustainable": true,
         "form": 5.1
     },
@@ -17,74 +28,63 @@
         "goals": 4,
         "xG": 4.4,
         "overperformance": -0.4,
-        "overperformance_per_90": -0.031,
+        "overperformance_per_90": -0.029,
         "sustainable": true,
-        "form": 0.0
+        "form": 0.3
     },
     {
         "player": "João Pedro",
         "team": "Chelsea",
         "team_short": "CHE",
         "goals": 4,
-        "xG": 4.0,
-        "overperformance": 0.0,
-        "overperformance_per_90": 0.0,
+        "xG": 4.2,
+        "overperformance": -0.2,
+        "overperformance_per_90": -0.014,
         "sustainable": true,
-        "form": 2.7
+        "form": 1.2
     },
     {
         "player": "M.Salah",
         "team": "Liverpool",
         "team_short": "LIV",
         "goals": 4,
+        "xG": 3.9,
+        "overperformance": 0.1,
+        "overperformance_per_90": 0.007,
+        "sustainable": true,
+        "form": 0.9
+    },
+    {
+        "player": "Nmecha",
+        "team": "Leeds",
+        "team_short": "LEE",
+        "goals": 4,
         "xG": 3.8,
         "overperformance": 0.2,
-        "overperformance_per_90": 0.015,
+        "overperformance_per_90": 0.014,
         "sustainable": true,
-        "form": 1.2
+        "form": 4.2
     },
     {
         "player": "Barnes",
         "team": "Newcastle",
         "team_short": "NEW",
         "goals": 3,
-        "xG": 2.8,
-        "overperformance": 0.2,
-        "overperformance_per_90": 0.015,
+        "xG": 2.9,
+        "overperformance": 0.1,
+        "overperformance_per_90": 0.007,
         "sustainable": true,
-        "form": 7.8
+        "form": 6.0
     },
     {
-        "player": "Gibbs-White",
-        "team": "Nott'm Forest",
-        "team_short": "NFO",
+        "player": "Calvert-Lewin",
+        "team": "Leeds",
+        "team_short": "LEE",
         "goals": 3,
         "xG": 3.2,
         "overperformance": -0.2,
         "overperformance_per_90": -0.015,
         "sustainable": true,
-        "form": 6.0
-    },
-    {
-        "player": "O.Dango",
-        "team": "Brentford",
-        "team_short": "BRE",
-        "goals": 3,
-        "xG": 3.1,
-        "overperformance": -0.1,
-        "overperformance_per_90": -0.008,
-        "sustainable": true,
-        "form": 6.3
-    },
-    {
-        "player": "Schade",
-        "team": "Brentford",
-        "team_short": "BRE",
-        "goals": 3,
-        "xG": 3.0,
-        "overperformance": 0.0,
-        "overperformance_per_90": 0.0,
-        "sustainable": true,
-        "form": 3.9
+        "form": 5.1
     }
 ]
