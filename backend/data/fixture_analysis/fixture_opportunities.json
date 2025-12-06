@@ -6,8 +6,8 @@
             "short_name": "BHA",
             "opponent": "West Ham",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 56.2,
-            "combined_score": 73.1,
+            "defensive_fixture_rating": 60.5,
+            "combined_score": 75.2,
             "venue": "H"
         },
         {
@@ -46,8 +46,8 @@
             "short_name": "LIV",
             "opponent": "Brighton",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 21.0,
-            "combined_score": 55.5,
+            "defensive_fixture_rating": 24.0,
+            "combined_score": 57.0,
             "venue": "H"
         },
         {
@@ -66,8 +66,8 @@
             "short_name": "MUN",
             "opponent": "Bournemouth",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 10,
-            "combined_score": 50.0,
+            "defensive_fixture_rating": 11.7,
+            "combined_score": 50.8,
             "venue": "H"
         },
         {
@@ -96,8 +96,8 @@
             "short_name": "BOU",
             "opponent": "Burnley",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 72.1,
-            "combined_score": 81.0,
+            "defensive_fixture_rating": 75,
+            "combined_score": 82.5,
             "venue": "H"
         }
     ],
@@ -137,9 +137,9 @@
             "team": "Chelsea",
             "short_name": "CHE",
             "opponent": "Everton",
-            "attacking_fixture_rating": 87.5,
+            "attacking_fixture_rating": 88.8,
             "defensive_fixture_rating": 75,
-            "combined_score": 81.2,
+            "combined_score": 81.9,
             "venue": "H"
         },
         {
@@ -161,6 +161,16 @@
             "defensive_fixture_rating": 75,
             "combined_score": 73.6,
             "venue": "A"
+        },
+        {
+            "gameweek": 17,
+            "team": "Bournemouth",
+            "short_name": "BOU",
+            "opponent": "Burnley",
+            "attacking_fixture_rating": 90,
+            "defensive_fixture_rating": 75,
+            "combined_score": 82.5,
+            "venue": "H"
         },
         {
             "gameweek": 17,
@@ -190,16 +200,6 @@
             "attacking_fixture_rating": 84.6,
             "defensive_fixture_rating": 75,
             "combined_score": 79.8,
-            "venue": "A"
-        },
-        {
-            "gameweek": 18,
-            "team": "Everton",
-            "short_name": "EVE",
-            "opponent": "Burnley",
-            "attacking_fixture_rating": 86.1,
-            "defensive_fixture_rating": 75,
-            "combined_score": 80.6,
             "venue": "A"
         }
     ]
