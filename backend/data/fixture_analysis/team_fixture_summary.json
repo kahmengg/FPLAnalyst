@@ -1,20 +1,5 @@
 [
     {
-        "team": "Arsenal",
-        "avg_attack_difficulty": 4.0,
-        "avg_defense_difficulty": 4.917,
-        "overall_difficulty": 4.458,
-        "num_favorable_fixtures": 6,
-        "near_term_home_fixtures": 1,
-        "medium_term_home_fixtures": 2,
-        "near_term_rating": 78.9,
-        "medium_term_rating": 73.1,
-        "fixture_swing": -5.8,
-        "swing_category": "Stable",
-        "swing_emoji": "\u27a1\ufe0f",
-        "form_context": "hold"
-    },
-    {
         "team": "Man City",
         "avg_attack_difficulty": 3.833,
         "avg_defense_difficulty": 5.083,
@@ -25,6 +10,21 @@
         "near_term_rating": 77.6,
         "medium_term_rating": 71.9,
         "fixture_swing": -5.7,
+        "swing_category": "Stable",
+        "swing_emoji": "\u27a1\ufe0f",
+        "form_context": "hold"
+    },
+    {
+        "team": "Arsenal",
+        "avg_attack_difficulty": 4.0,
+        "avg_defense_difficulty": 4.917,
+        "overall_difficulty": 4.458,
+        "num_favorable_fixtures": 6,
+        "near_term_home_fixtures": 1,
+        "medium_term_home_fixtures": 2,
+        "near_term_rating": 78.9,
+        "medium_term_rating": 73.1,
+        "fixture_swing": -5.8,
         "swing_category": "Stable",
         "swing_emoji": "\u27a1\ufe0f",
         "form_context": "hold"
