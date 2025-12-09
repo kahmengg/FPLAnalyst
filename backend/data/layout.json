@@ -1,13 +1,7 @@
 [
     {
-<<<<<<< HEAD
         "number_of_players":738,
         "total_teams":20,
         "total_gameweeks":15
-=======
-        "number_of_players":736,
-        "total_teams":20,
-        "total_gameweeks":14
->>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
     }
 ]

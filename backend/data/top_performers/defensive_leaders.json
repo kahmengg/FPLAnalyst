@@ -4,7 +4,6 @@
     "team": "Bournemouth",
     "team_short": "BOU",
     "position": "Defender",
-<<<<<<< HEAD
     "points": 71,
     "ppg": 4.7,
     "cleanSheets": 5,
@@ -13,23 +12,12 @@
     "defensiveContributions": 171,
     "price": 5.0,
     "form": 3.7
-=======
-    "points": 63,
-    "ppg": 4.5,
-    "cleanSheets": 4,
-    "csRate": 28.6,
-    "tackles": 22,
-    "defensiveContributions": 160,
-    "price": 5.0,
-    "form": 1.8
->>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Lacroix",
     "team": "Crystal Palace",
     "team_short": "CRY",
     "position": "Defender",
-<<<<<<< HEAD
     "points": 80,
     "ppg": 5.3,
     "cleanSheets": 7,
@@ -68,23 +56,10 @@
     "form": 2.9
   },
   {
-=======
-    "points": 78,
-    "ppg": 5.6,
-    "cleanSheets": 7,
-    "csRate": 50.0,
-    "tackles": 26,
-    "defensiveContributions": 150,
-    "price": 5.1,
-    "form": 8.1
-  },
-  {
->>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
     "player": "Andersen",
     "team": "Fulham",
     "team_short": "FUL",
     "position": "Defender",
-<<<<<<< HEAD
     "points": 54,
     "ppg": 3.6,
     "cleanSheets": 3,
@@ -107,77 +82,26 @@
     "defensiveContributions": 165,
     "price": 6.0,
     "form": 4.4
-=======
-    "points": 53,
-    "ppg": 3.8,
-    "cleanSheets": 3,
-    "csRate": 21.4,
-    "tackles": 18,
-    "defensiveContributions": 140,
-    "price": 4.5,
-    "form": 5.1
->>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Estève",
     "team": "Burnley",
     "team_short": "BUR",
     "position": "Defender",
-<<<<<<< HEAD
     "points": 41,
     "ppg": 2.7,
     "cleanSheets": 2,
     "csRate": 13.3,
     "tackles": 15,
     "defensiveContributions": 157,
-=======
-    "points": 38,
-    "ppg": 2.7,
-    "cleanSheets": 2,
-    "csRate": 14.3,
-    "tackles": 14,
-    "defensiveContributions": 148,
->>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
     "price": 3.9,
     "form": 3.7
   },
   {
-<<<<<<< HEAD
-=======
-    "player": "Collins",
-    "team": "Brentford",
-    "team_short": "BRE",
-    "position": "Defender",
-    "points": 38,
-    "ppg": 2.7,
-    "cleanSheets": 2,
-    "csRate": 14.3,
-    "tackles": 10,
-    "defensiveContributions": 137,
-    "price": 4.9,
-    "form": 2.2
-  },
-  {
-    "player": "Tarkowski",
-    "team": "Everton",
-    "team_short": "EVE",
-    "position": "Defender",
-    "points": 64,
-    "ppg": 4.6,
-    "cleanSheets": 5,
-    "csRate": 35.7,
-    "tackles": 19,
-    "defensiveContributions": 145,
-    "price": 5.4,
-    "form": 7.7
-  },
-  {
->>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
     "player": "Mitchell",
     "team": "Crystal Palace",
     "team_short": "CRY",
     "position": "Defender",
-<<<<<<< HEAD
     "points": 70,
     "ppg": 4.7,
     "cleanSheets": 7,
@@ -186,37 +110,12 @@
     "defensiveContributions": 114,
     "price": 5.0,
     "form": 3.3
-=======
-    "points": 68,
-    "ppg": 4.9,
-    "cleanSheets": 7,
-    "csRate": 50.0,
-    "tackles": 44,
-    "defensiveContributions": 106,
-    "price": 5.0,
-    "form": 4.8
-  },
-  {
-    "player": "Virgil",
-    "team": "Liverpool",
-    "team_short": "LIV",
-    "position": "Defender",
-    "points": 54,
-    "ppg": 3.9,
-    "cleanSheets": 4,
-    "csRate": 28.6,
-    "tackles": 9,
-    "defensiveContributions": 148,
-    "price": 6.0,
-    "form": 4.8
->>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Richards",
     "team": "Crystal Palace",
     "team_short": "CRY",
     "position": "Defender",
-<<<<<<< HEAD
     "points": 72,
     "ppg": 4.8,
     "cleanSheets": 7,
@@ -225,23 +124,12 @@
     "defensiveContributions": 155,
     "price": 4.6,
     "form": 5.1
-=======
-    "points": 68,
-    "ppg": 4.9,
-    "cleanSheets": 7,
-    "csRate": 50.0,
-    "tackles": 28,
-    "defensiveContributions": 144,
-    "price": 4.6,
-    "form": 5.9
->>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Truffert",
     "team": "Bournemouth",
     "team_short": "BOU",
     "position": "Defender",
-<<<<<<< HEAD
     "points": 56,
     "ppg": 3.7,
     "cleanSheets": 5,
@@ -250,15 +138,5 @@
     "defensiveContributions": 109,
     "price": 4.5,
     "form": 4.0
-=======
-    "points": 50,
-    "ppg": 3.6,
-    "cleanSheets": 4,
-    "csRate": 28.6,
-    "tackles": 30,
-    "defensiveContributions": 101,
-    "price": 4.5,
-    "form": 1.8
->>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   }
 ]
