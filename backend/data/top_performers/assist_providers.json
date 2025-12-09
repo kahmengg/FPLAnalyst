@@ -4,6 +4,7 @@
     "team": "Man Utd",
     "team_short": "MUN",
     "assists": 5,
+<<<<<<< HEAD
     "assistsPerGame": 0.36,
     "points": 67,
     "price": 9.0,
@@ -20,38 +21,68 @@
     "price": 6.4,
     "ownership": 3.6,
     "form": 4.8
+=======
+    "assistsPerGame": 0.38,
+    "points": 63,
+    "price": 9.0,
+    "ownership": 18.9,
+    "form": 5.4
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Kudus",
     "team": "Spurs",
     "team_short": "TOT",
     "assists": 5,
+<<<<<<< HEAD
     "assistsPerGame": 0.33,
     "points": 65,
     "price": 6.5,
     "ownership": 16.4,
     "form": 5.4
+=======
+    "assistsPerGame": 0.36,
+    "points": 62,
+    "price": 6.5,
+    "ownership": 16.4,
+    "form": 5.1
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Doku",
     "team": "Man City",
     "team_short": "MCI",
     "assists": 4,
+<<<<<<< HEAD
     "assistsPerGame": 0.27,
     "points": 59,
     "price": 6.6,
     "ownership": 9.4,
     "form": 3.9
+=======
+    "assistsPerGame": 0.29,
+    "points": 56,
+    "price": 6.6,
+    "ownership": 9.3,
+    "form": 3.6
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Grealish",
     "team": "Everton",
     "team_short": "EVE",
     "assists": 4,
+<<<<<<< HEAD
     "assistsPerGame": 0.27,
     "points": 62,
     "price": 6.6,
     "ownership": 12.7,
+=======
+    "assistsPerGame": 0.29,
+    "points": 59,
+    "price": 6.6,
+    "ownership": 12.8,
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
     "form": 4.8
   },
   {
@@ -59,55 +90,106 @@
     "team": "Burnley",
     "team_short": "BUR",
     "assists": 4,
+<<<<<<< HEAD
     "assistsPerGame": 0.27,
     "points": 42,
     "price": 4.0,
     "ownership": 1.0,
     "form": 1.8
+=======
+    "assistsPerGame": 0.29,
+    "points": 42,
+    "price": 4.0,
+    "ownership": 1.0,
+    "form": 2.2
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Minteh",
     "team": "Brighton",
     "team_short": "BHA",
     "assists": 4,
+<<<<<<< HEAD
     "assistsPerGame": 0.27,
     "points": 69,
     "price": 6.3,
     "ownership": 10.0,
     "form": 2.4
+=======
+    "assistsPerGame": 0.29,
+    "points": 66,
+    "price": 6.3,
+    "ownership": 9.8,
+    "form": 4.8
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Xhaka",
     "team": "Sunderland",
     "team_short": "SUN",
     "assists": 4,
+<<<<<<< HEAD
     "assistsPerGame": 0.27,
     "points": 65,
     "price": 5.2,
     "ownership": 6.7,
     "form": 3.3
+=======
+    "assistsPerGame": 0.29,
+    "points": 63,
+    "price": 5.2,
+    "ownership": 6.7,
+    "form": 3.3
+  },
+  {
+    "player": "Cherki",
+    "team": "Man City",
+    "team_short": "MCI",
+    "assists": 3,
+    "assistsPerGame": 0.21,
+    "points": 31,
+    "price": 6.4,
+    "ownership": 3.6,
+    "form": 3.3
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Chukwueze",
     "team": "Fulham",
     "team_short": "FUL",
     "assists": 3,
+<<<<<<< HEAD
     "assistsPerGame": 0.25,
     "points": 30,
     "price": 5.3,
     "ownership": 0.4,
     "form": 5.7
+=======
+    "assistsPerGame": 0.27,
+    "points": 28,
+    "price": 5.3,
+    "ownership": 0.2,
+    "form": 6.3
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Digne",
     "team": "Aston Villa",
     "team_short": "AVL",
     "assists": 3,
+<<<<<<< HEAD
     "assistsPerGame": 0.2,
     "points": 51,
     "price": 4.5,
     "ownership": 2.0,
     "form": 2.9
+=======
+    "assistsPerGame": 0.21,
+    "points": 51,
+    "price": 4.5,
+    "ownership": 2.1,
+    "form": 3.3
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Diouf",
@@ -125,10 +207,17 @@
     "team": "Sunderland",
     "team_short": "SUN",
     "assists": 3,
+<<<<<<< HEAD
     "assistsPerGame": 0.2,
     "points": 56,
     "price": 4.9,
     "ownership": 0.5,
+=======
+    "assistsPerGame": 0.21,
+    "points": 54,
+    "price": 4.9,
+    "ownership": 0.4,
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
     "form": 6.0
   }
 ]

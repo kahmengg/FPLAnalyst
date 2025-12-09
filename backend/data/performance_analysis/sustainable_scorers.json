@@ -4,13 +4,20 @@
         "team": "Newcastle",
         "team_short": "NEW",
         "goals": 5,
+<<<<<<< HEAD
         "xG": 4.8,
         "overperformance": 0.2,
         "overperformance_per_90": 0.017,
+=======
+        "xG": 4.6,
+        "overperformance": 0.4,
+        "overperformance_per_90": 0.036,
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
         "sustainable": true,
         "form": 4.2
     },
     {
+<<<<<<< HEAD
         "player": "Calvert-Lewin",
         "team": "Leeds",
         "team_short": "LEE",
@@ -22,13 +29,21 @@
         "form": 6.6
     },
     {
+=======
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
         "player": "Gakpo",
         "team": "Liverpool",
         "team_short": "LIV",
         "goals": 4,
+<<<<<<< HEAD
         "xG": 4.1,
         "overperformance": -0.1,
         "overperformance_per_90": -0.007,
+=======
+        "xG": 3.9,
+        "overperformance": 0.1,
+        "overperformance_per_90": 0.007,
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
         "sustainable": true,
         "form": 5.1
     },
@@ -39,9 +54,15 @@
         "goals": 4,
         "xG": 4.4,
         "overperformance": -0.4,
+<<<<<<< HEAD
         "overperformance_per_90": -0.027,
         "sustainable": true,
         "form": 0.6
+=======
+        "overperformance_per_90": -0.029,
+        "sustainable": true,
+        "form": 0.3
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
     },
     {
         "player": "João Pedro",
@@ -50,7 +71,11 @@
         "goals": 4,
         "xG": 4.2,
         "overperformance": -0.2,
+<<<<<<< HEAD
         "overperformance_per_90": -0.013,
+=======
+        "overperformance_per_90": -0.014,
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
         "sustainable": true,
         "form": 1.2
     },
@@ -63,7 +88,11 @@
         "overperformance": 0.1,
         "overperformance_per_90": 0.007,
         "sustainable": true,
+<<<<<<< HEAD
         "form": 0.3
+=======
+        "form": 0.9
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
     },
     {
         "player": "Nmecha",
@@ -72,9 +101,15 @@
         "goals": 4,
         "xG": 3.8,
         "overperformance": 0.2,
+<<<<<<< HEAD
         "overperformance_per_90": 0.013,
         "sustainable": true,
         "form": 1.8
+=======
+        "overperformance_per_90": 0.014,
+        "sustainable": true,
+        "form": 4.2
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
     },
     {
         "player": "Barnes",
@@ -85,6 +120,21 @@
         "overperformance": 0.1,
         "overperformance_per_90": 0.007,
         "sustainable": true,
+<<<<<<< HEAD
         "form": 1.5
+=======
+        "form": 6.0
+    },
+    {
+        "player": "Calvert-Lewin",
+        "team": "Leeds",
+        "team_short": "LEE",
+        "goals": 3,
+        "xG": 3.2,
+        "overperformance": -0.2,
+        "overperformance_per_90": -0.015,
+        "sustainable": true,
+        "form": 5.1
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
     }
 ]

@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< HEAD
     "player": "Richards",
     "team": "Crystal Palace",
     "team_short": "CRY",
@@ -58,12 +59,73 @@
     "totalPoints": 64,
     "price": 4.7,
     "form": 2.2
+=======
+    "player": "Keane",
+    "team": "Everton",
+    "team_short": "EVE",
+    "position": "Defender",
+    "pointsPerMillion": 14.57,
+    "totalPoints": 67,
+    "price": 4.6,
+    "form": 4.0
+  },
+  {
+    "player": "Van Hecke",
+    "team": "Brighton",
+    "team_short": "BHA",
+    "position": "Defender",
+    "pointsPerMillion": 13.64,
+    "totalPoints": 60,
+    "price": 4.4,
+    "form": 7.3
+  },
+  {
+    "player": "Cash",
+    "team": "Aston Villa",
+    "team_short": "AVL",
+    "position": "Defender",
+    "pointsPerMillion": 13.62,
+    "totalPoints": 64,
+    "price": 4.7,
+    "form": 4.4
+  },
+  {
+    "player": "Mukiele",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Defender",
+    "pointsPerMillion": 13.57,
+    "totalPoints": 57,
+    "price": 4.2,
+    "form": 2.2
+  },
+  {
+    "player": "Roefs",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Goalkeeper",
+    "pointsPerMillion": 13.4,
+    "totalPoints": 63,
+    "price": 4.7,
+    "form": 2.8
+  },
+  {
+    "player": "Senesi",
+    "team": "Bournemouth",
+    "team_short": "BOU",
+    "position": "Defender",
+    "pointsPerMillion": 12.6,
+    "totalPoints": 63,
+    "price": 5.0,
+    "form": 1.8
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Tarkowski",
     "team": "Everton",
     "team_short": "EVE",
     "position": "Defender",
+<<<<<<< HEAD
     "pointsPerMillion": 13.52,
     "totalPoints": 73,
     "price": 5.4,
@@ -78,6 +140,22 @@
     "totalPoints": 56,
     "price": 4.2,
     "form": 0.4
+=======
+    "pointsPerMillion": 12.44,
+    "totalPoints": 51,
+    "price": 4.1,
+    "form": 1.8
+  },
+  {
+    "player": "Ballard",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Defender",
+    "pointsPerMillion": 12.39,
+    "totalPoints": 57,
+    "price": 4.6,
+    "form": 2.9
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Burn",
@@ -94,9 +172,26 @@
     "team": "Leeds",
     "team_short": "LEE",
     "position": "Midfielder",
+<<<<<<< HEAD
     "pointsPerMillion": 12.92,
     "totalPoints": 62,
     "price": 4.8,
     "form": 5.4
+=======
+    "pointsPerMillion": 12.2,
+    "totalPoints": 61,
+    "price": 5.0,
+    "form": 2.4
+  },
+  {
+    "player": "Xhaka",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Midfielder",
+    "pointsPerMillion": 12.12,
+    "totalPoints": 63,
+    "price": 5.2,
+    "form": 3.3
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   }
 ]

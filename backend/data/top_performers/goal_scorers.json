@@ -3,12 +3,21 @@
     "player": "Haaland",
     "team": "Man City",
     "team_short": "MCI",
+<<<<<<< HEAD
     "xG": 13.2,
     "goals": 15,
     "goalsPerGame": 1.0,
     "points": 122,
     "price": 15.0,
     "ownership": 73.0,
+=======
+    "xG": 12.8,
+    "goals": 15,
+    "goalsPerGame": 1.07,
+    "points": 120,
+    "price": 14.9,
+    "ownership": 72.4,
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
     "form": 5.4
   },
   {
@@ -17,16 +26,25 @@
     "team_short": "BRE",
     "xG": 8.7,
     "goals": 11,
+<<<<<<< HEAD
     "goalsPerGame": 0.73,
     "points": 80,
     "price": 6.9,
     "ownership": 30.0,
     "form": 4.8
+=======
+    "goalsPerGame": 0.79,
+    "points": 78,
+    "price": 6.7,
+    "ownership": 24.2,
+    "form": 5.4
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Mateta",
     "team": "Crystal Palace",
     "team_short": "CRY",
+<<<<<<< HEAD
     "xG": 9.1,
     "goals": 7,
     "goalsPerGame": 0.47,
@@ -34,6 +52,75 @@
     "price": 8.0,
     "ownership": 27.0,
     "form": 3.0
+=======
+    "xG": 9.0,
+    "goals": 7,
+    "goalsPerGame": 0.5,
+    "points": 59,
+    "price": 8.1,
+    "ownership": 30.8,
+    "form": 2.7
+  },
+  {
+    "player": "Welbeck",
+    "team": "Brighton",
+    "team_short": "BHA",
+    "xG": 5.3,
+    "goals": 7,
+    "goalsPerGame": 0.5,
+    "points": 56,
+    "price": 6.6,
+    "ownership": 10.9,
+    "form": 3.3
+  },
+  {
+    "player": "Semenyo",
+    "team": "Bournemouth",
+    "team_short": "BOU",
+    "xG": 5.1,
+    "goals": 6,
+    "goalsPerGame": 0.43,
+    "points": 80,
+    "price": 7.7,
+    "ownership": 50.5,
+    "form": 1.5
+  },
+  {
+    "player": "Foden",
+    "team": "Man City",
+    "team_short": "MCI",
+    "xG": 3.0,
+    "goals": 5,
+    "goalsPerGame": 0.36,
+    "points": 65,
+    "price": 8.2,
+    "ownership": 12.1,
+    "form": 10.0
+  },
+  {
+    "player": "Mbeumo",
+    "team": "Man Utd",
+    "team_short": "MUN",
+    "xG": 3.6,
+    "goals": 5,
+    "goalsPerGame": 0.38,
+    "points": 62,
+    "price": 8.6,
+    "ownership": 35.3,
+    "form": 2.7
+  },
+  {
+    "player": "Neto",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "xG": 2.6,
+    "goals": 5,
+    "goalsPerGame": 0.36,
+    "points": 68,
+    "price": 7.2,
+    "ownership": 8.4,
+    "form": 4.8
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Welbeck",
@@ -63,6 +150,7 @@
     "player": "Richarlison",
     "team": "Spurs",
     "team_short": "TOT",
+<<<<<<< HEAD
     "xG": 3.2,
     "goals": 6,
     "goalsPerGame": 0.4,
@@ -142,17 +230,35 @@
     "price": 7.3,
     "ownership": 9.3,
     "form": 3.0
+=======
+    "xG": 2.2,
+    "goals": 5,
+    "goalsPerGame": 0.36,
+    "points": 51,
+    "price": 6.4,
+    "ownership": 7.5,
+    "form": 2.1
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   },
   {
     "player": "Woltemade",
     "team": "Newcastle",
     "team_short": "NEW",
+<<<<<<< HEAD
     "xG": 4.8,
     "goals": 5,
     "goalsPerGame": 0.42,
     "points": 56,
     "price": 7.5,
     "ownership": 23.4,
+=======
+    "xG": 4.6,
+    "goals": 5,
+    "goalsPerGame": 0.45,
+    "points": 54,
+    "price": 7.4,
+    "ownership": 21.0,
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
     "form": 4.2
   },
   {
@@ -161,6 +267,7 @@
     "team_short": "BUR",
     "xG": 2.4,
     "goals": 4,
+<<<<<<< HEAD
     "goalsPerGame": 0.27,
     "points": 57,
     "price": 5.4,
@@ -178,5 +285,60 @@
     "price": 7.5,
     "ownership": 5.5,
     "form": 4.8
+=======
+    "goalsPerGame": 0.29,
+    "points": 56,
+    "price": 5.4,
+    "ownership": 3.8,
+    "form": 2.1
+  },
+  {
+    "player": "Bruno G.",
+    "team": "Newcastle",
+    "team_short": "NEW",
+    "xG": 2.0,
+    "goals": 4,
+    "goalsPerGame": 0.29,
+    "points": 71,
+    "price": 6.7,
+    "ownership": 6.6,
+    "form": 6.3
+  },
+  {
+    "player": "Enzo",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "xG": 5.5,
+    "goals": 4,
+    "goalsPerGame": 0.29,
+    "points": 63,
+    "price": 6.7,
+    "ownership": 14.1,
+    "form": 4.5
+  },
+  {
+    "player": "Eze",
+    "team": "Arsenal",
+    "team_short": "ARS",
+    "xG": 2.3,
+    "goals": 4,
+    "goalsPerGame": 0.33,
+    "points": 61,
+    "price": 7.8,
+    "ownership": 19.9,
+    "form": 6.9
+  },
+  {
+    "player": "Flemming",
+    "team": "Burnley",
+    "team_short": "BUR",
+    "xG": 1.8,
+    "goals": 4,
+    "goalsPerGame": 0.29,
+    "points": 34,
+    "price": 5.3,
+    "ownership": 0.4,
+    "form": 2.7
+>>>>>>> 628cdc28b0f3fccc02c699a1c76860d23453d421
   }
 ]
