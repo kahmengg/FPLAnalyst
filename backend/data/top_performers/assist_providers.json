@@ -1,134 +1,134 @@
 [
   {
+    "player": "B.Fernandes",
+    "team": "Man Utd",
+    "team_short": "MUN",
+    "assists": 5,
+    "assistsPerGame": 0.36,
+    "points": 67,
+    "price": 9.0,
+    "ownership": 19.5,
+    "form": 5.1
+  },
+  {
+    "player": "Cherki",
+    "team": "Man City",
+    "team_short": "MCI",
+    "assists": 5,
+    "assistsPerGame": 0.33,
+    "points": 43,
+    "price": 6.4,
+    "ownership": 3.6,
+    "form": 4.8
+  },
+  {
+    "player": "Kudus",
+    "team": "Spurs",
+    "team_short": "TOT",
+    "assists": 5,
+    "assistsPerGame": 0.33,
+    "points": 65,
+    "price": 6.5,
+    "ownership": 16.4,
+    "form": 5.4
+  },
+  {
+    "player": "Doku",
+    "team": "Man City",
+    "team_short": "MCI",
+    "assists": 4,
+    "assistsPerGame": 0.27,
+    "points": 59,
+    "price": 6.6,
+    "ownership": 9.4,
+    "form": 3.9
+  },
+  {
     "player": "Grealish",
     "team": "Everton",
     "team_short": "EVE",
     "assists": 4,
-    "assistsPerGame": 0.31,
-    "points": 48,
+    "assistsPerGame": 0.27,
+    "points": 62,
     "price": 6.6,
-    "ownership": 13.0,
-    "form": 2.4
+    "ownership": 12.7,
+    "form": 4.8
   },
   {
     "player": "Hartman",
     "team": "Burnley",
     "team_short": "BUR",
     "assists": 4,
-    "assistsPerGame": 0.31,
-    "points": 40,
+    "assistsPerGame": 0.27,
+    "points": 42,
     "price": 4.0,
     "ownership": 1.0,
     "form": 1.8
-  },
-  {
-    "player": "Kudus",
-    "team": "Spurs",
-    "team_short": "TOT",
-    "assists": 4,
-    "assistsPerGame": 0.31,
-    "points": 55,
-    "price": 6.5,
-    "ownership": 16.5,
-    "form": 3.0
   },
   {
     "player": "Minteh",
     "team": "Brighton",
     "team_short": "BHA",
     "assists": 4,
-    "assistsPerGame": 0.31,
-    "points": 64,
-    "price": 6.2,
-    "ownership": 8.9,
-    "form": 5.1
+    "assistsPerGame": 0.27,
+    "points": 69,
+    "price": 6.3,
+    "ownership": 10.0,
+    "form": 2.4
   },
   {
     "player": "Xhaka",
     "team": "Sunderland",
     "team_short": "SUN",
     "assists": 4,
-    "assistsPerGame": 0.31,
-    "points": 59,
+    "assistsPerGame": 0.27,
+    "points": 65,
     "price": 5.2,
     "ownership": 6.7,
-    "form": 3.0
-  },
-  {
-    "player": "B.Fernandes",
-    "team": "Man Utd",
-    "team_short": "MUN",
-    "assists": 3,
-    "assistsPerGame": 0.25,
-    "points": 52,
-    "price": 8.9,
-    "ownership": 18.0,
-    "form": 3.6
-  },
-  {
-    "player": "Cherki",
-    "team": "Man City",
-    "team_short": "MCI",
-    "assists": 3,
-    "assistsPerGame": 0.23,
-    "points": 31,
-    "price": 6.4,
-    "ownership": 3.9,
-    "form": 3.6
+    "form": 3.3
   },
   {
     "player": "Chukwueze",
     "team": "Fulham",
     "team_short": "FUL",
     "assists": 3,
-    "assistsPerGame": 0.3,
-    "points": 16,
+    "assistsPerGame": 0.25,
+    "points": 30,
     "price": 5.3,
-    "ownership": 0.0,
-    "form": 3.0
+    "ownership": 0.4,
+    "form": 5.7
   },
   {
     "player": "Digne",
     "team": "Aston Villa",
     "team_short": "AVL",
     "assists": 3,
-    "assistsPerGame": 0.23,
-    "points": 50,
+    "assistsPerGame": 0.2,
+    "points": 51,
     "price": 4.5,
-    "ownership": 2.1,
-    "form": 6.2
+    "ownership": 2.0,
+    "form": 2.9
   },
   {
     "player": "Diouf",
     "team": "West Ham",
     "team_short": "WHU",
     "assists": 3,
-    "assistsPerGame": 0.23,
-    "points": 35,
+    "assistsPerGame": 0.2,
+    "points": 44,
     "price": 4.2,
-    "ownership": 2.6,
-    "form": 1.8
+    "ownership": 2.4,
+    "form": 3.7
   },
   {
-    "player": "Doku",
-    "team": "Man City",
-    "team_short": "MCI",
+    "player": "E.Le Fée",
+    "team": "Sunderland",
+    "team_short": "SUN",
     "assists": 3,
-    "assistsPerGame": 0.23,
-    "points": 48,
-    "price": 6.6,
-    "ownership": 9.1,
-    "form": 4.5
-  },
-  {
-    "player": "Gakpo",
-    "team": "Liverpool",
-    "team_short": "LIV",
-    "assists": 3,
-    "assistsPerGame": 0.23,
-    "points": 62,
-    "price": 7.5,
-    "ownership": 13.5,
-    "form": 5.1
+    "assistsPerGame": 0.2,
+    "points": 56,
+    "price": 4.9,
+    "ownership": 0.5,
+    "form": 6.0
   }
 ]
