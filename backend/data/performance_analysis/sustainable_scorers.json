@@ -8,7 +8,7 @@
         "overperformance": 0.2,
         "overperformance_per_90": 0.017,
         "sustainable": true,
-        "form": 4.2
+        "form": 3.8
     },
     {
         "player": "Calvert-Lewin",
@@ -19,7 +19,7 @@
         "overperformance": -0.2,
         "overperformance_per_90": -0.014,
         "sustainable": true,
-        "form": 6.6
+        "form": 4.3
     },
     {
         "player": "Gakpo",
@@ -30,7 +30,7 @@
         "overperformance": -0.1,
         "overperformance_per_90": -0.007,
         "sustainable": true,
-        "form": 5.1
+        "form": 3.6
     },
     {
         "player": "Gyökeres",
@@ -41,7 +41,7 @@
         "overperformance": -0.4,
         "overperformance_per_90": -0.027,
         "sustainable": true,
-        "form": 0.6
+        "form": 0.4
     },
     {
         "player": "João Pedro",
@@ -52,7 +52,7 @@
         "overperformance": -0.2,
         "overperformance_per_90": -0.013,
         "sustainable": true,
-        "form": 1.2
+        "form": 2.2
     },
     {
         "player": "M.Salah",
@@ -63,7 +63,7 @@
         "overperformance": 0.1,
         "overperformance_per_90": 0.007,
         "sustainable": true,
-        "form": 0.3
+        "form": 0.9
     },
     {
         "player": "Nmecha",
@@ -74,7 +74,7 @@
         "overperformance": 0.2,
         "overperformance_per_90": 0.013,
         "sustainable": true,
-        "form": 1.8
+        "form": 4.0
     },
     {
         "player": "Barnes",
@@ -85,6 +85,6 @@
         "overperformance": 0.1,
         "overperformance_per_90": 0.007,
         "sustainable": true,
-        "form": 1.5
+        "form": 5.2
     }
 ]

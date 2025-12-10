@@ -8,7 +8,7 @@
     "points": 67,
     "price": 9.0,
     "ownership": 19.5,
-    "form": 5.1
+    "form": 4.9
   },
   {
     "player": "Cherki",
@@ -19,7 +19,7 @@
     "points": 43,
     "price": 6.4,
     "ownership": 3.6,
-    "form": 4.8
+    "form": 4.3
   },
   {
     "player": "Kudus",
@@ -30,7 +30,7 @@
     "points": 65,
     "price": 6.5,
     "ownership": 16.4,
-    "form": 5.4
+    "form": 3.6
   },
   {
     "player": "Doku",
@@ -41,7 +41,7 @@
     "points": 59,
     "price": 6.6,
     "ownership": 9.4,
-    "form": 3.9
+    "form": 4.7
   },
   {
     "player": "Grealish",
@@ -52,7 +52,7 @@
     "points": 62,
     "price": 6.6,
     "ownership": 12.7,
-    "form": 4.8
+    "form": 4.0
   },
   {
     "player": "Hartman",
@@ -63,7 +63,7 @@
     "points": 42,
     "price": 4.0,
     "ownership": 1.0,
-    "form": 1.8
+    "form": 1.5
   },
   {
     "player": "Minteh",
@@ -74,7 +74,7 @@
     "points": 69,
     "price": 6.3,
     "ownership": 10.0,
-    "form": 2.4
+    "form": 4.0
   },
   {
     "player": "Xhaka",
@@ -85,7 +85,7 @@
     "points": 65,
     "price": 5.2,
     "ownership": 6.7,
-    "form": 3.3
+    "form": 2.9
   },
   {
     "player": "Chukwueze",
@@ -96,7 +96,7 @@
     "points": 30,
     "price": 5.3,
     "ownership": 0.4,
-    "form": 5.7
+    "form": 4.3
   },
   {
     "player": "Digne",
@@ -107,7 +107,7 @@
     "points": 51,
     "price": 4.5,
     "ownership": 2.0,
-    "form": 2.9
+    "form": 4.0
   },
   {
     "player": "Diouf",
@@ -118,7 +118,7 @@
     "points": 44,
     "price": 4.2,
     "ownership": 2.4,
-    "form": 3.7
+    "form": 3.1
   },
   {
     "player": "E.Le Fée",
@@ -129,6 +129,6 @@
     "points": 56,
     "price": 4.9,
     "ownership": 0.5,
-    "form": 6.0
+    "form": 4.3
   }
 ]

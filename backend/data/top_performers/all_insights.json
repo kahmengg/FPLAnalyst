@@ -9,7 +9,7 @@
       "ppg": 8.1,
       "price": 15.0,
       "ownership": 73.0,
-      "form": 5.4
+      "form": 4.3
     },
     {
       "player": "Guéhi",
@@ -20,7 +20,7 @@
       "ppg": 6.1,
       "price": 5.2,
       "ownership": 36.1,
-      "form": 8.1
+      "form": 5.9
     },
     {
       "player": "Muñoz",
@@ -31,7 +31,7 @@
       "ppg": 5.9,
       "price": 6.1,
       "ownership": 26.7,
-      "form": 5.5
+      "form": 7.7
     },
     {
       "player": "Rice",
@@ -42,7 +42,7 @@
       "ppg": 5.6,
       "price": 7.1,
       "ownership": 22.5,
-      "form": 3.9
+      "form": 3.8
     },
     {
       "player": "Semenyo",
@@ -53,7 +53,7 @@
       "ppg": 5.5,
       "price": 7.6,
       "ownership": 46.1,
-      "form": 2.4
+      "form": 1.4
     },
     {
       "player": "Chalobah",
@@ -64,7 +64,7 @@
       "ppg": 5.5,
       "price": 5.3,
       "ownership": 11.9,
-      "form": 7.7
+      "form": 7.3
     },
     {
       "player": "Bruno G.",
@@ -86,7 +86,7 @@
       "ppg": 5.4,
       "price": 6.2,
       "ownership": 15.9,
-      "form": 0.0
+      "form": 0.2
     },
     {
       "player": "Lacroix",
@@ -97,7 +97,7 @@
       "ppg": 5.3,
       "price": 5.1,
       "ownership": 6.6,
-      "form": 4.8
+      "form": 6.6
     },
     {
       "player": "Thiago",
@@ -108,7 +108,7 @@
       "ppg": 5.3,
       "price": 6.9,
       "ownership": 30.0,
-      "form": 4.8
+      "form": 5.9
     },
     {
       "player": "J.Timber",
@@ -119,7 +119,7 @@
       "ppg": 5.2,
       "price": 6.5,
       "ownership": 35.6,
-      "form": 2.2
+      "form": 2.6
     },
     {
       "player": "Foden",
@@ -130,7 +130,7 @@
       "ppg": 5.1,
       "price": 8.5,
       "ownership": 24.2,
-      "form": 10.0
+      "form": 8.8
     },
     {
       "player": "Keane",
@@ -141,7 +141,7 @@
       "ppg": 5.1,
       "price": 4.6,
       "ownership": 2.3,
-      "form": 4.0
+      "form": 7.7
     },
     {
       "player": "Dewsbury-Hall",
@@ -152,7 +152,7 @@
       "ppg": 4.9,
       "price": 5.1,
       "ownership": 6.5,
-      "form": 7.8
+      "form": 8.6
     },
     {
       "player": "Cash",
@@ -163,7 +163,7 @@
       "ppg": 4.9,
       "price": 4.8,
       "ownership": 8.4,
-      "form": 7.0
+      "form": 5.9
     }
   ],
   "value_players": [
@@ -175,7 +175,7 @@
       "pointsPerMillion": 15.65,
       "totalPoints": 72,
       "price": 4.6,
-      "form": 5.1
+      "form": 6.2
     },
     {
       "player": "Van Hecke",
@@ -185,7 +185,7 @@
       "pointsPerMillion": 14.44,
       "totalPoints": 65,
       "price": 4.5,
-      "form": 8.4
+      "form": 6.6
     },
     {
       "player": "Senesi",
@@ -195,7 +195,7 @@
       "pointsPerMillion": 14.2,
       "totalPoints": 71,
       "price": 5.0,
-      "form": 3.7
+      "form": 3.3
     },
     {
       "player": "Mitchell",
@@ -205,7 +205,7 @@
       "pointsPerMillion": 14.0,
       "totalPoints": 70,
       "price": 5.0,
-      "form": 3.3
+      "form": 5.7
     },
     {
       "player": "Roefs",
@@ -215,7 +215,7 @@
       "pointsPerMillion": 13.62,
       "totalPoints": 64,
       "price": 4.7,
-      "form": 2.0
+      "form": 2.4
     },
     {
       "player": "Van de Ven",
@@ -225,7 +225,7 @@
       "pointsPerMillion": 13.62,
       "totalPoints": 64,
       "price": 4.7,
-      "form": 2.2
+      "form": 1.5
     },
     {
       "player": "Tarkowski",
@@ -235,7 +235,7 @@
       "pointsPerMillion": 13.52,
       "totalPoints": 73,
       "price": 5.4,
-      "form": 8.1
+      "form": 7.7
     },
     {
       "player": "Mukiele",
@@ -245,7 +245,7 @@
       "pointsPerMillion": 13.33,
       "totalPoints": 56,
       "price": 4.2,
-      "form": 0.4
+      "form": 2.0
     },
     {
       "player": "Burn",
@@ -255,7 +255,7 @@
       "pointsPerMillion": 12.94,
       "totalPoints": 66,
       "price": 5.1,
-      "form": 6.6
+      "form": 4.0
     },
     {
       "player": "Stach",
@@ -265,80 +265,10 @@
       "pointsPerMillion": 12.92,
       "totalPoints": 62,
       "price": 4.8,
-      "form": 5.4
+      "form": 4.7
     }
   ],
   "hidden_gems": [
-    {
-      "player": "Calvert-Lewin",
-      "team": "Leeds",
-      "team_short": "LEE",
-      "position": "FWD",
-      "points": 48,
-      "ownership": 1.2,
-      "price": 5.5,
-      "xG": 4.2,
-      "xA": 0.8,
-      "xCS": 3.71,
-      "form": 6.6,
-      "potentialScore": 10.0
-    },
-    {
-      "player": "Watkins",
-      "team": "Aston Villa",
-      "team_short": "AVL",
-      "position": "FWD",
-      "points": 45,
-      "ownership": 7.0,
-      "price": 8.5,
-      "xG": 4.4,
-      "xA": 1.4,
-      "xCS": 2.99,
-      "form": 4.8,
-      "potentialScore": 8.43
-    },
-    {
-      "player": "Szoboszlai",
-      "team": "Liverpool",
-      "team_short": "LIV",
-      "position": "MID",
-      "points": 59,
-      "ownership": 5.6,
-      "price": 6.6,
-      "xG": 2.1,
-      "xA": 2.3,
-      "xCS": 4.5,
-      "form": 3.9,
-      "potentialScore": 8.11
-    },
-    {
-      "player": "Stach",
-      "team": "Leeds",
-      "team_short": "LEE",
-      "position": "MID",
-      "points": 62,
-      "ownership": 1.4,
-      "price": 4.8,
-      "xG": 1.4,
-      "xA": 1.9,
-      "xCS": 4.17,
-      "form": 5.4,
-      "potentialScore": 7.83
-    },
-    {
-      "player": "Bowen",
-      "team": "West Ham",
-      "team_short": "WHU",
-      "position": "FWD",
-      "points": 66,
-      "ownership": 5.5,
-      "price": 7.5,
-      "xG": 2.5,
-      "xA": 1.4,
-      "xCS": 2.48,
-      "form": 4.8,
-      "potentialScore": 7.64
-    },
     {
       "player": "Anderson",
       "team": "Nott'm Forest",
@@ -350,78 +280,22 @@
       "xG": 1.6,
       "xA": 2.1,
       "xCS": 3.01,
-      "form": 3.6,
-      "potentialScore": 7.5
+      "form": 5.4,
+      "potentialScore": 10.0
     },
     {
-      "player": "Cherki",
-      "team": "Man City",
-      "team_short": "MCI",
-      "position": "MID",
-      "points": 43,
-      "ownership": 3.6,
-      "price": 6.4,
-      "xG": 1.2,
-      "xA": 3.2,
-      "xCS": 4.53,
-      "form": 4.8,
-      "potentialScore": 7.34
-    },
-    {
-      "player": "Yeremy",
-      "team": "Crystal Palace",
-      "team_short": "CRY",
-      "position": "MID",
-      "points": 33,
-      "ownership": 0.2,
-      "price": 5.8,
-      "xG": 1.8,
-      "xA": 2.6,
-      "xCS": 3.62,
-      "form": 3.0,
-      "potentialScore": 7.31
-    },
-    {
-      "player": "Romero",
-      "team": "Spurs",
-      "team_short": "TOT",
-      "position": "DEF",
-      "points": 58,
-      "ownership": 4.0,
-      "price": 5.0,
-      "xG": 0.7,
-      "xA": 0.4,
-      "xCS": 4.2,
-      "form": 8.4,
-      "potentialScore": 7.2
-    },
-    {
-      "player": "Tavernier",
-      "team": "Bournemouth",
-      "team_short": "BOU",
-      "position": "MID",
-      "points": 61,
-      "ownership": 1.8,
+      "player": "Calvert-Lewin",
+      "team": "Leeds",
+      "team_short": "LEE",
+      "position": "FWD",
+      "points": 48,
+      "ownership": 1.2,
       "price": 5.5,
-      "xG": 3.0,
-      "xA": 2.0,
-      "xCS": 5.84,
-      "form": 2.1,
-      "potentialScore": 7.18
-    },
-    {
-      "player": "Van Hecke",
-      "team": "Brighton",
-      "team_short": "BHA",
-      "position": "DEF",
-      "points": 65,
-      "ownership": 3.1,
-      "price": 4.5,
-      "xG": 1.7,
-      "xA": 0.2,
-      "xCS": 3.4,
-      "form": 8.4,
-      "potentialScore": 7.11
+      "xG": 4.2,
+      "xA": 0.8,
+      "xCS": 3.71,
+      "form": 4.3,
+      "potentialScore": 9.68
     },
     {
       "player": "Amad",
@@ -434,36 +308,8 @@
       "xG": 2.1,
       "xA": 2.5,
       "xCS": 3.27,
-      "form": 1.8,
-      "potentialScore": 6.97
-    },
-    {
-      "player": "Thiaw",
-      "team": "Newcastle",
-      "team_short": "NEW",
-      "position": "DEF",
-      "points": 49,
-      "ownership": 2.8,
-      "price": 5.0,
-      "xG": 1.0,
-      "xA": 0.3,
-      "xCS": 5.0,
-      "form": 7.0,
-      "potentialScore": 6.92
-    },
-    {
-      "player": "O.Dango",
-      "team": "Brentford",
-      "team_short": "BRE",
-      "position": "MID",
-      "points": 62,
-      "ownership": 1.3,
-      "price": 6.0,
-      "xG": 3.1,
-      "xA": 1.0,
-      "xCS": 3.88,
-      "form": 5.4,
-      "potentialScore": 6.79
+      "form": 4.1,
+      "potentialScore": 9.51
     },
     {
       "player": "Richarlison",
@@ -476,8 +322,162 @@
       "xG": 3.2,
       "xA": 1.5,
       "xCS": 4.2,
-      "form": 2.7,
-      "potentialScore": 6.71
+      "form": 3.8,
+      "potentialScore": 8.86
+    },
+    {
+      "player": "Stach",
+      "team": "Leeds",
+      "team_short": "LEE",
+      "position": "MID",
+      "points": 62,
+      "ownership": 1.4,
+      "price": 4.8,
+      "xG": 1.4,
+      "xA": 1.9,
+      "xCS": 4.17,
+      "form": 4.7,
+      "potentialScore": 8.84
+    },
+    {
+      "player": "Watkins",
+      "team": "Aston Villa",
+      "team_short": "AVL",
+      "position": "FWD",
+      "points": 45,
+      "ownership": 7.0,
+      "price": 8.5,
+      "xG": 4.4,
+      "xA": 1.4,
+      "xCS": 2.99,
+      "form": 3.6,
+      "potentialScore": 8.75
+    },
+    {
+      "player": "Tavernier",
+      "team": "Bournemouth",
+      "team_short": "BOU",
+      "position": "MID",
+      "points": 61,
+      "ownership": 1.8,
+      "price": 5.5,
+      "xG": 3.0,
+      "xA": 2.0,
+      "xCS": 5.84,
+      "form": 2.9,
+      "potentialScore": 8.72
+    },
+    {
+      "player": "Yeremy",
+      "team": "Crystal Palace",
+      "team_short": "CRY",
+      "position": "MID",
+      "points": 33,
+      "ownership": 0.2,
+      "price": 5.8,
+      "xG": 1.8,
+      "xA": 2.6,
+      "xCS": 3.62,
+      "form": 3.4,
+      "potentialScore": 8.69
+    },
+    {
+      "player": "Szoboszlai",
+      "team": "Liverpool",
+      "team_short": "LIV",
+      "position": "MID",
+      "points": 59,
+      "ownership": 5.6,
+      "price": 6.6,
+      "xG": 2.1,
+      "xA": 2.3,
+      "xCS": 4.5,
+      "form": 2.9,
+      "potentialScore": 8.65
+    },
+    {
+      "player": "O’Reilly",
+      "team": "Man City",
+      "team_short": "MCI",
+      "position": "DEF",
+      "points": 62,
+      "ownership": 7.5,
+      "price": 5.2,
+      "xG": 1.9,
+      "xA": 2.4,
+      "xCS": 4.53,
+      "form": 4.8,
+      "potentialScore": 8.45
+    },
+    {
+      "player": "Bowen",
+      "team": "West Ham",
+      "team_short": "WHU",
+      "position": "FWD",
+      "points": 66,
+      "ownership": 5.5,
+      "price": 7.5,
+      "xG": 2.5,
+      "xA": 1.4,
+      "xCS": 2.48,
+      "form": 4.0,
+      "potentialScore": 8.38
+    },
+    {
+      "player": "Cherki",
+      "team": "Man City",
+      "team_short": "MCI",
+      "position": "MID",
+      "points": 43,
+      "ownership": 3.6,
+      "price": 6.4,
+      "xG": 1.2,
+      "xA": 3.2,
+      "xCS": 4.53,
+      "form": 4.3,
+      "potentialScore": 8.36
+    },
+    {
+      "player": "O.Dango",
+      "team": "Brentford",
+      "team_short": "BRE",
+      "position": "MID",
+      "points": 62,
+      "ownership": 1.3,
+      "price": 6.0,
+      "xG": 3.1,
+      "xA": 1.0,
+      "xCS": 3.88,
+      "form": 4.9,
+      "potentialScore": 7.9
+    },
+    {
+      "player": "Van Hecke",
+      "team": "Brighton",
+      "team_short": "BHA",
+      "position": "DEF",
+      "points": 65,
+      "ownership": 3.1,
+      "price": 4.5,
+      "xG": 1.7,
+      "xA": 0.2,
+      "xCS": 3.4,
+      "form": 6.6,
+      "potentialScore": 7.86
+    },
+    {
+      "player": "Barnes",
+      "team": "Newcastle",
+      "team_short": "NEW",
+      "position": "MID",
+      "points": 44,
+      "ownership": 2.5,
+      "price": 6.4,
+      "xG": 2.9,
+      "xA": 1.3,
+      "xCS": 5.0,
+      "form": 5.2,
+      "potentialScore": 7.8
     }
   ],
   "goal_scorers": [
@@ -491,7 +491,7 @@
       "points": 122,
       "price": 15.0,
       "ownership": 73.0,
-      "form": 5.4
+      "form": 4.3
     },
     {
       "player": "Thiago",
@@ -503,7 +503,7 @@
       "points": 80,
       "price": 6.9,
       "ownership": 30.0,
-      "form": 4.8
+      "form": 5.9
     },
     {
       "player": "Mateta",
@@ -515,7 +515,7 @@
       "points": 61,
       "price": 8.0,
       "ownership": 27.0,
-      "form": 3.0
+      "form": 2.3
     },
     {
       "player": "Welbeck",
@@ -527,7 +527,7 @@
       "points": 58,
       "price": 6.6,
       "ownership": 10.5,
-      "form": 1.5
+      "form": 2.7
     },
     {
       "player": "Foden",
@@ -539,7 +539,7 @@
       "points": 77,
       "price": 8.5,
       "ownership": 24.2,
-      "form": 10.0
+      "form": 8.8
     },
     {
       "player": "Richarlison",
@@ -551,7 +551,7 @@
       "points": 59,
       "price": 6.4,
       "ownership": 7.6,
-      "form": 2.7
+      "form": 3.8
     },
     {
       "player": "Semenyo",
@@ -563,7 +563,7 @@
       "points": 83,
       "price": 7.6,
       "ownership": 46.1,
-      "form": 2.4
+      "form": 1.4
     },
     {
       "player": "Bruno G.",
@@ -587,7 +587,7 @@
       "points": 55,
       "price": 8.4,
       "ownership": 12.4,
-      "form": 4.5
+      "form": 3.1
     },
     {
       "player": "Flemming",
@@ -599,7 +599,7 @@
       "points": 39,
       "price": 5.3,
       "ownership": 0.5,
-      "form": 3.6
+      "form": 3.4
     },
     {
       "player": "Mbeumo",
@@ -611,7 +611,7 @@
       "points": 64,
       "price": 8.4,
       "ownership": 30.7,
-      "form": 1.2
+      "form": 2.3
     },
     {
       "player": "Neto",
@@ -623,7 +623,7 @@
       "points": 70,
       "price": 7.3,
       "ownership": 9.3,
-      "form": 3.0
+      "form": 4.9
     },
     {
       "player": "Woltemade",
@@ -635,7 +635,7 @@
       "points": 56,
       "price": 7.5,
       "ownership": 23.4,
-      "form": 4.2
+      "form": 3.8
     },
     {
       "player": "Anthony",
@@ -659,7 +659,7 @@
       "points": 66,
       "price": 7.5,
       "ownership": 5.5,
-      "form": 4.8
+      "form": 4.0
     }
   ],
   "assist_providers": [
@@ -672,7 +672,7 @@
       "points": 67,
       "price": 9.0,
       "ownership": 19.5,
-      "form": 5.1
+      "form": 4.9
     },
     {
       "player": "Cherki",
@@ -683,7 +683,7 @@
       "points": 43,
       "price": 6.4,
       "ownership": 3.6,
-      "form": 4.8
+      "form": 4.3
     },
     {
       "player": "Kudus",
@@ -694,7 +694,7 @@
       "points": 65,
       "price": 6.5,
       "ownership": 16.4,
-      "form": 5.4
+      "form": 3.6
     },
     {
       "player": "Doku",
@@ -705,7 +705,7 @@
       "points": 59,
       "price": 6.6,
       "ownership": 9.4,
-      "form": 3.9
+      "form": 4.7
     },
     {
       "player": "Grealish",
@@ -716,7 +716,7 @@
       "points": 62,
       "price": 6.6,
       "ownership": 12.7,
-      "form": 4.8
+      "form": 4.0
     },
     {
       "player": "Hartman",
@@ -727,7 +727,7 @@
       "points": 42,
       "price": 4.0,
       "ownership": 1.0,
-      "form": 1.8
+      "form": 1.5
     },
     {
       "player": "Minteh",
@@ -738,7 +738,7 @@
       "points": 69,
       "price": 6.3,
       "ownership": 10.0,
-      "form": 2.4
+      "form": 4.0
     },
     {
       "player": "Xhaka",
@@ -749,7 +749,7 @@
       "points": 65,
       "price": 5.2,
       "ownership": 6.7,
-      "form": 3.3
+      "form": 2.9
     },
     {
       "player": "Chukwueze",
@@ -760,7 +760,7 @@
       "points": 30,
       "price": 5.3,
       "ownership": 0.4,
-      "form": 5.7
+      "form": 4.3
     },
     {
       "player": "Digne",
@@ -771,7 +771,7 @@
       "points": 51,
       "price": 4.5,
       "ownership": 2.0,
-      "form": 2.9
+      "form": 4.0
     },
     {
       "player": "Diouf",
@@ -782,7 +782,7 @@
       "points": 44,
       "price": 4.2,
       "ownership": 2.4,
-      "form": 3.7
+      "form": 3.1
     },
     {
       "player": "E.Le Fée",
@@ -793,7 +793,7 @@
       "points": 56,
       "price": 4.9,
       "ownership": 0.5,
-      "form": 6.0
+      "form": 4.3
     }
   ],
   "defensive_leaders": [
@@ -809,7 +809,7 @@
       "tackles": 23,
       "defensiveContributions": 171,
       "price": 5.0,
-      "form": 3.7
+      "form": 3.3
     },
     {
       "player": "Lacroix",
@@ -823,7 +823,7 @@
       "tackles": 29,
       "defensiveContributions": 156,
       "price": 5.1,
-      "form": 4.8
+      "form": 6.6
     },
     {
       "player": "Tarkowski",
@@ -837,7 +837,7 @@
       "tackles": 19,
       "defensiveContributions": 162,
       "price": 5.4,
-      "form": 8.1
+      "form": 7.7
     },
     {
       "player": "Collins",
@@ -851,7 +851,7 @@
       "tackles": 15,
       "defensiveContributions": 148,
       "price": 4.9,
-      "form": 2.9
+      "form": 2.4
     },
     {
       "player": "Andersen",
@@ -865,7 +865,7 @@
       "tackles": 18,
       "defensiveContributions": 147,
       "price": 4.5,
-      "form": 1.8
+      "form": 4.0
     },
     {
       "player": "Virgil",
@@ -879,7 +879,7 @@
       "tackles": 9,
       "defensiveContributions": 165,
       "price": 6.0,
-      "form": 4.4
+      "form": 3.5
     },
     {
       "player": "Estève",
@@ -893,7 +893,7 @@
       "tackles": 15,
       "defensiveContributions": 157,
       "price": 3.9,
-      "form": 3.7
+      "form": 3.5
     },
     {
       "player": "Mitchell",
@@ -907,7 +907,7 @@
       "tackles": 47,
       "defensiveContributions": 114,
       "price": 5.0,
-      "form": 3.3
+      "form": 5.7
     },
     {
       "player": "Richards",
@@ -921,7 +921,7 @@
       "tackles": 30,
       "defensiveContributions": 155,
       "price": 4.6,
-      "form": 5.1
+      "form": 6.2
     },
     {
       "player": "Truffert",
@@ -935,7 +935,7 @@
       "tackles": 32,
       "defensiveContributions": 109,
       "price": 4.5,
-      "form": 4.0
+      "form": 2.4
     }
   ]
 }

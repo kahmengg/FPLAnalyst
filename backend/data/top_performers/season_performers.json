@@ -8,7 +8,7 @@
     "ppg": 8.1,
     "price": 15.0,
     "ownership": 73.0,
-    "form": 5.4
+    "form": 4.3
   },
   {
     "player": "Guéhi",
@@ -19,7 +19,7 @@
     "ppg": 6.1,
     "price": 5.2,
     "ownership": 36.1,
-    "form": 8.1
+    "form": 5.9
   },
   {
     "player": "Muñoz",
@@ -30,7 +30,7 @@
     "ppg": 5.9,
     "price": 6.1,
     "ownership": 26.7,
-    "form": 5.5
+    "form": 7.7
   },
   {
     "player": "Rice",
@@ -41,7 +41,7 @@
     "ppg": 5.6,
     "price": 7.1,
     "ownership": 22.5,
-    "form": 3.9
+    "form": 3.8
   },
   {
     "player": "Semenyo",
@@ -52,7 +52,7 @@
     "ppg": 5.5,
     "price": 7.6,
     "ownership": 46.1,
-    "form": 2.4
+    "form": 1.4
   },
   {
     "player": "Chalobah",
@@ -63,7 +63,7 @@
     "ppg": 5.5,
     "price": 5.3,
     "ownership": 11.9,
-    "form": 7.7
+    "form": 7.3
   },
   {
     "player": "Bruno G.",
@@ -85,7 +85,7 @@
     "ppg": 5.4,
     "price": 6.2,
     "ownership": 15.9,
-    "form": 0.0
+    "form": 0.2
   },
   {
     "player": "Lacroix",
@@ -96,7 +96,7 @@
     "ppg": 5.3,
     "price": 5.1,
     "ownership": 6.6,
-    "form": 4.8
+    "form": 6.6
   },
   {
     "player": "Thiago",
@@ -107,7 +107,7 @@
     "ppg": 5.3,
     "price": 6.9,
     "ownership": 30.0,
-    "form": 4.8
+    "form": 5.9
   },
   {
     "player": "J.Timber",
@@ -118,7 +118,7 @@
     "ppg": 5.2,
     "price": 6.5,
     "ownership": 35.6,
-    "form": 2.2
+    "form": 2.6
   },
   {
     "player": "Foden",
@@ -129,7 +129,7 @@
     "ppg": 5.1,
     "price": 8.5,
     "ownership": 24.2,
-    "form": 10.0
+    "form": 8.8
   },
   {
     "player": "Keane",
@@ -140,7 +140,7 @@
     "ppg": 5.1,
     "price": 4.6,
     "ownership": 2.3,
-    "form": 4.0
+    "form": 7.7
   },
   {
     "player": "Dewsbury-Hall",
@@ -151,7 +151,7 @@
     "ppg": 4.9,
     "price": 5.1,
     "ownership": 6.5,
-    "form": 7.8
+    "form": 8.6
   },
   {
     "player": "Cash",
@@ -162,6 +162,6 @@
     "ppg": 4.9,
     "price": 4.8,
     "ownership": 8.4,
-    "form": 7.0
+    "form": 5.9
   }
 ]

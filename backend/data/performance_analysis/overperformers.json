@@ -19,7 +19,7 @@
         "overperformance": 2.8,
         "overperformance_per_90": 0.187,
         "sustainable": false,
-        "form": 2.7
+        "form": 3.8
     },
     {
         "player": "Gravenberch",
@@ -30,7 +30,7 @@
         "overperformance": 2.6,
         "overperformance_per_90": 0.173,
         "sustainable": false,
-        "form": 3.9
+        "form": 2.9
     },
     {
         "player": "Buendía",
@@ -41,7 +41,7 @@
         "overperformance": 2.4,
         "overperformance_per_90": 0.16,
         "sustainable": false,
-        "form": 2.4
+        "form": 3.6
     },
     {
         "player": "Caicedo",
@@ -63,7 +63,7 @@
         "overperformance": 2.4,
         "overperformance_per_90": 0.16,
         "sustainable": false,
-        "form": 7.0
+        "form": 5.9
     },
     {
         "player": "Dewsbury-Hall",
@@ -74,7 +74,7 @@
         "overperformance": 2.4,
         "overperformance_per_90": 0.16,
         "sustainable": false,
-        "form": 7.8
+        "form": 8.6
     },
     {
         "player": "Wilson",
@@ -85,6 +85,6 @@
         "overperformance": 2.4,
         "overperformance_per_90": 0.16,
         "sustainable": false,
-        "form": 7.8
+        "form": 5.2
     }
 ]

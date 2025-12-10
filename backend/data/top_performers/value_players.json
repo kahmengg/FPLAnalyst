@@ -7,7 +7,7 @@
     "pointsPerMillion": 15.65,
     "totalPoints": 72,
     "price": 4.6,
-    "form": 5.1
+    "form": 6.2
   },
   {
     "player": "Van Hecke",
@@ -17,7 +17,7 @@
     "pointsPerMillion": 14.44,
     "totalPoints": 65,
     "price": 4.5,
-    "form": 8.4
+    "form": 6.6
   },
   {
     "player": "Senesi",
@@ -27,7 +27,7 @@
     "pointsPerMillion": 14.2,
     "totalPoints": 71,
     "price": 5.0,
-    "form": 3.7
+    "form": 3.3
   },
   {
     "player": "Mitchell",
@@ -37,7 +37,7 @@
     "pointsPerMillion": 14.0,
     "totalPoints": 70,
     "price": 5.0,
-    "form": 3.3
+    "form": 5.7
   },
   {
     "player": "Roefs",
@@ -47,7 +47,7 @@
     "pointsPerMillion": 13.62,
     "totalPoints": 64,
     "price": 4.7,
-    "form": 2.0
+    "form": 2.4
   },
   {
     "player": "Van de Ven",
@@ -57,7 +57,7 @@
     "pointsPerMillion": 13.62,
     "totalPoints": 64,
     "price": 4.7,
-    "form": 2.2
+    "form": 1.5
   },
   {
     "player": "Tarkowski",
@@ -67,7 +67,7 @@
     "pointsPerMillion": 13.52,
     "totalPoints": 73,
     "price": 5.4,
-    "form": 8.1
+    "form": 7.7
   },
   {
     "player": "Mukiele",
@@ -77,7 +77,7 @@
     "pointsPerMillion": 13.33,
     "totalPoints": 56,
     "price": 4.2,
-    "form": 0.4
+    "form": 2.0
   },
   {
     "player": "Burn",
@@ -87,7 +87,7 @@
     "pointsPerMillion": 12.94,
     "totalPoints": 66,
     "price": 5.1,
-    "form": 6.6
+    "form": 4.0
   },
   {
     "player": "Stach",
@@ -97,6 +97,6 @@
     "pointsPerMillion": 12.92,
     "totalPoints": 62,
     "price": 4.8,
-    "form": 5.4
+    "form": 4.7
   }
 ]

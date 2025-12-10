@@ -11,7 +11,7 @@
     "tackles": 23,
     "defensiveContributions": 171,
     "price": 5.0,
-    "form": 3.7
+    "form": 3.3
   },
   {
     "player": "Lacroix",
@@ -25,7 +25,7 @@
     "tackles": 29,
     "defensiveContributions": 156,
     "price": 5.1,
-    "form": 4.8
+    "form": 6.6
   },
   {
     "player": "Tarkowski",
@@ -39,7 +39,7 @@
     "tackles": 19,
     "defensiveContributions": 162,
     "price": 5.4,
-    "form": 8.1
+    "form": 7.7
   },
   {
     "player": "Collins",
@@ -53,7 +53,7 @@
     "tackles": 15,
     "defensiveContributions": 148,
     "price": 4.9,
-    "form": 2.9
+    "form": 2.4
   },
   {
     "player": "Andersen",
@@ -67,7 +67,7 @@
     "tackles": 18,
     "defensiveContributions": 147,
     "price": 4.5,
-    "form": 1.8
+    "form": 4.0
   },
   {
     "player": "Virgil",
@@ -81,7 +81,7 @@
     "tackles": 9,
     "defensiveContributions": 165,
     "price": 6.0,
-    "form": 4.4
+    "form": 3.5
   },
   {
     "player": "Estève",
@@ -95,7 +95,7 @@
     "tackles": 15,
     "defensiveContributions": 157,
     "price": 3.9,
-    "form": 3.7
+    "form": 3.5
   },
   {
     "player": "Mitchell",
@@ -109,7 +109,7 @@
     "tackles": 47,
     "defensiveContributions": 114,
     "price": 5.0,
-    "form": 3.3
+    "form": 5.7
   },
   {
     "player": "Richards",
@@ -123,7 +123,7 @@
     "tackles": 30,
     "defensiveContributions": 155,
     "price": 4.6,
-    "form": 5.1
+    "form": 6.2
   },
   {
     "player": "Truffert",
@@ -137,6 +137,6 @@
     "tackles": 32,
     "defensiveContributions": 109,
     "price": 4.5,
-    "form": 4.0
+    "form": 2.4
   }
 ]
