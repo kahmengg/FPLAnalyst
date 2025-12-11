@@ -18,7 +18,7 @@
     "points": 91,
     "ppg": 6.1,
     "price": 5.2,
-    "ownership": 36.1,
+    "ownership": 36.6,
     "form": 5.9
   },
   {
@@ -29,8 +29,19 @@
     "points": 89,
     "ppg": 5.9,
     "price": 6.1,
-    "ownership": 26.7,
+    "ownership": 25.6,
     "form": 7.7
+  },
+  {
+    "player": "B.Fernandes",
+    "team": "Man Utd",
+    "team_short": "MUN",
+    "position": "Midfielder",
+    "points": 85,
+    "ppg": 5.7,
+    "price": 9.0,
+    "ownership": 20.7,
+    "form": 7.2
   },
   {
     "player": "Rice",
@@ -40,7 +51,7 @@
     "points": 84,
     "ppg": 5.6,
     "price": 7.1,
-    "ownership": 22.5,
+    "ownership": 23.1,
     "form": 3.8
   },
   {
@@ -51,7 +62,7 @@
     "points": 83,
     "ppg": 5.5,
     "price": 7.6,
-    "ownership": 46.1,
+    "ownership": 45.2,
     "form": 1.4
   },
   {
@@ -62,7 +73,7 @@
     "points": 82,
     "ppg": 5.5,
     "price": 5.3,
-    "ownership": 11.9,
+    "ownership": 12.7,
     "form": 7.3
   },
   {
@@ -73,7 +84,7 @@
     "points": 81,
     "ppg": 5.4,
     "price": 6.2,
-    "ownership": 15.9,
+    "ownership": 15.5,
     "form": 0.2
   },
   {
@@ -84,7 +95,7 @@
     "points": 81,
     "ppg": 5.4,
     "price": 6.9,
-    "ownership": 11.8,
+    "ownership": 12.6,
     "form": 6.3
   },
   {
@@ -95,7 +106,7 @@
     "points": 80,
     "ppg": 5.3,
     "price": 6.9,
-    "ownership": 30.0,
+    "ownership": 31.4,
     "form": 5.9
   },
   {
@@ -117,7 +128,7 @@
     "points": 78,
     "ppg": 5.2,
     "price": 6.5,
-    "ownership": 35.6,
+    "ownership": 36.1,
     "form": 2.6
   },
   {
@@ -127,8 +138,8 @@
     "position": "Midfielder",
     "points": 77,
     "ppg": 5.1,
-    "price": 8.5,
-    "ownership": 24.2,
+    "price": 8.6,
+    "ownership": 26.0,
     "form": 8.8
   },
   {
@@ -139,7 +150,7 @@
     "points": 76,
     "ppg": 5.1,
     "price": 4.6,
-    "ownership": 2.3,
+    "ownership": 2.4,
     "form": 7.7
   },
   {
@@ -150,18 +161,7 @@
     "points": 74,
     "ppg": 4.9,
     "price": 5.1,
-    "ownership": 6.5,
+    "ownership": 7.2,
     "form": 8.6
-  },
-  {
-    "player": "Cash",
-    "team": "Aston Villa",
-    "team_short": "AVL",
-    "position": "Defender",
-    "points": 73,
-    "ppg": 4.9,
-    "price": 4.8,
-    "ownership": 8.4,
-    "form": 5.9
   }
 ]

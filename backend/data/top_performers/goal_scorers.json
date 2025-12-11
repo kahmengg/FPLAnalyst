@@ -20,7 +20,7 @@
     "xG": 8.7,
     "points": 80,
     "price": 6.9,
-    "ownership": 30.0,
+    "ownership": 31.4,
     "form": 5.9
   },
   {
@@ -32,7 +32,7 @@
     "xG": 5.4,
     "points": 58,
     "price": 6.6,
-    "ownership": 10.5,
+    "ownership": 10.1,
     "form": 2.7
   },
   {
@@ -44,7 +44,7 @@
     "xG": 9.1,
     "points": 61,
     "price": 8.0,
-    "ownership": 27.0,
+    "ownership": 25.8,
     "form": 2.3
   },
   {
@@ -56,8 +56,20 @@
     "xG": 5.3,
     "points": 83,
     "price": 7.6,
-    "ownership": 46.1,
+    "ownership": 45.2,
     "form": 1.4
+  },
+  {
+    "player": "Mbeumo",
+    "team": "Man Utd",
+    "team_short": "MUN",
+    "goals": 6,
+    "goalsPerGame": 0.4,
+    "xG": 4.8,
+    "points": 72,
+    "price": 8.4,
+    "ownership": 29.5,
+    "form": 3.4
   },
   {
     "player": "Foden",
@@ -67,8 +79,8 @@
     "goalsPerGame": 0.4,
     "xG": 3.9,
     "points": 77,
-    "price": 8.5,
-    "ownership": 24.2,
+    "price": 8.6,
+    "ownership": 26.0,
     "form": 8.8
   },
   {
@@ -80,20 +92,8 @@
     "xG": 3.2,
     "points": 59,
     "price": 6.4,
-    "ownership": 7.6,
+    "ownership": 7.7,
     "form": 3.8
-  },
-  {
-    "player": "Mbeumo",
-    "team": "Man Utd",
-    "team_short": "MUN",
-    "goals": 5,
-    "goalsPerGame": 0.36,
-    "xG": 3.6,
-    "points": 64,
-    "price": 8.4,
-    "ownership": 30.7,
-    "form": 2.3
   },
   {
     "player": "Flemming",
@@ -116,7 +116,7 @@
     "xG": 2.7,
     "points": 70,
     "price": 7.3,
-    "ownership": 9.3,
+    "ownership": 9.2,
     "form": 4.9
   },
   {
@@ -128,7 +128,7 @@
     "xG": 2.1,
     "points": 81,
     "price": 6.9,
-    "ownership": 11.8,
+    "ownership": 12.6,
     "form": 6.3
   },
   {
@@ -140,7 +140,7 @@
     "xG": 3.3,
     "points": 55,
     "price": 8.4,
-    "ownership": 12.4,
+    "ownership": 12.7,
     "form": 3.1
   },
   {
@@ -152,7 +152,7 @@
     "xG": 4.8,
     "points": 56,
     "price": 7.5,
-    "ownership": 23.4,
+    "ownership": 23.2,
     "form": 3.8
   },
   {
@@ -164,7 +164,7 @@
     "xG": 3.6,
     "points": 64,
     "price": 10.2,
-    "ownership": 18.9,
+    "ownership": 19.2,
     "form": 5.6
   },
   {

@@ -11,6 +11,17 @@
         "form": 2.3
     },
     {
+        "player": "B.Fernandes",
+        "team": "Man Utd",
+        "team_short": "MUN",
+        "goals": 4,
+        "xG": 6.4,
+        "overperformance": -2.4,
+        "overperformance_per_90": -0.16,
+        "sustainable": false,
+        "form": 7.2
+    },
+    {
         "player": "Enzo",
         "team": "Chelsea",
         "team_short": "CHE",
@@ -20,17 +31,6 @@
         "overperformance_per_90": -0.12,
         "sustainable": false,
         "form": 3.8
-    },
-    {
-        "player": "B.Fernandes",
-        "team": "Man Utd",
-        "team_short": "MUN",
-        "goals": 2,
-        "xG": 5.3,
-        "overperformance": -3.3,
-        "overperformance_per_90": -0.236,
-        "sustainable": false,
-        "form": 4.9
     },
     {
         "player": "Watkins",

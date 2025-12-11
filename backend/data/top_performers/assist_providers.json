@@ -1,5 +1,16 @@
 [
   {
+    "player": "B.Fernandes",
+    "team": "Man Utd",
+    "team_short": "MUN",
+    "assists": 6,
+    "assistsPerGame": 0.4,
+    "points": 85,
+    "price": 9.0,
+    "ownership": 20.7,
+    "form": 7.2
+  },
+  {
     "player": "Cherki",
     "team": "Man City",
     "team_short": "MCI",
@@ -7,19 +18,8 @@
     "assistsPerGame": 0.33,
     "points": 43,
     "price": 6.4,
-    "ownership": 3.6,
+    "ownership": 3.8,
     "form": 4.3
-  },
-  {
-    "player": "B.Fernandes",
-    "team": "Man Utd",
-    "team_short": "MUN",
-    "assists": 5,
-    "assistsPerGame": 0.36,
-    "points": 67,
-    "price": 9.0,
-    "ownership": 19.5,
-    "form": 4.9
   },
   {
     "player": "Kudus",
@@ -29,7 +29,7 @@
     "assistsPerGame": 0.33,
     "points": 65,
     "price": 6.5,
-    "ownership": 16.4,
+    "ownership": 16.3,
     "form": 3.6
   },
   {
@@ -40,7 +40,7 @@
     "assistsPerGame": 0.27,
     "points": 69,
     "price": 6.3,
-    "ownership": 10.0,
+    "ownership": 9.5,
     "form": 4.0
   },
   {
@@ -62,7 +62,7 @@
     "assistsPerGame": 0.27,
     "points": 59,
     "price": 6.6,
-    "ownership": 9.4,
+    "ownership": 9.2,
     "form": 4.7
   },
   {
@@ -73,7 +73,7 @@
     "assistsPerGame": 0.27,
     "points": 62,
     "price": 6.6,
-    "ownership": 12.7,
+    "ownership": 12.5,
     "form": 4.0
   },
   {
@@ -84,7 +84,7 @@
     "assistsPerGame": 0.27,
     "points": 65,
     "price": 5.2,
-    "ownership": 6.7,
+    "ownership": 6.6,
     "form": 2.9
   },
   {
@@ -106,7 +106,7 @@
     "assistsPerGame": 0.2,
     "points": 84,
     "price": 7.1,
-    "ownership": 22.5,
+    "ownership": 23.1,
     "form": 3.8
   },
   {
@@ -117,7 +117,7 @@
     "assistsPerGame": 0.2,
     "points": 51,
     "price": 6.0,
-    "ownership": 3.7,
+    "ownership": 3.9,
     "form": 5.9
   },
   {
@@ -128,7 +128,7 @@
     "assistsPerGame": 0.2,
     "points": 51,
     "price": 4.5,
-    "ownership": 2.0,
+    "ownership": 1.9,
     "form": 4.0
   }
 ]

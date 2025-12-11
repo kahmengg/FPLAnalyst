@@ -10,6 +10,16 @@
     "form": 6.2
   },
   {
+    "player": "Cash",
+    "team": "Aston Villa",
+    "team_short": "AVL",
+    "position": "Defender",
+    "pointsPerMillion": 15.21,
+    "totalPoints": 73,
+    "price": 4.8,
+    "form": 5.9
+  },
+  {
     "player": "Van Hecke",
     "team": "Brighton",
     "team_short": "BHA",
@@ -88,15 +98,5 @@
     "totalPoints": 66,
     "price": 5.1,
     "form": 4.0
-  },
-  {
-    "player": "Stach",
-    "team": "Leeds",
-    "team_short": "LEE",
-    "position": "Midfielder",
-    "pointsPerMillion": 12.92,
-    "totalPoints": 62,
-    "price": 4.8,
-    "form": 4.7
   }
 ]

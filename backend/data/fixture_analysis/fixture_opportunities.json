@@ -6,8 +6,8 @@
             "short_name": "LIV",
             "opponent": "Brighton",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 18.2,
-            "combined_score": 54.1,
+            "defensive_fixture_rating": 15.8,
+            "combined_score": 52.9,
             "venue": "H"
         },
         {
@@ -26,8 +26,8 @@
             "short_name": "MUN",
             "opponent": "Bournemouth",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 21.0,
-            "combined_score": 55.5,
+            "defensive_fixture_rating": 31.0,
+            "combined_score": 60.5,
             "venue": "H"
         },
         {
@@ -56,8 +56,8 @@
             "short_name": "BHA",
             "opponent": "Sunderland",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 68.5,
-            "combined_score": 79.2,
+            "defensive_fixture_rating": 64.6,
+            "combined_score": 77.3,
             "venue": "H"
         },
         {
@@ -86,8 +86,8 @@
             "short_name": "LIV",
             "opponent": "Wolves",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 68.5,
-            "combined_score": 79.2,
+            "defensive_fixture_rating": 64.6,
+            "combined_score": 77.3,
             "venue": "H"
         },
         {
@@ -96,8 +96,8 @@
             "short_name": "MUN",
             "opponent": "Newcastle",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 18.2,
-            "combined_score": 54.1,
+            "defensive_fixture_rating": 27.4,
+            "combined_score": 58.7,
             "venue": "H"
         }
     ],
@@ -157,9 +157,9 @@
             "team": "Arsenal",
             "short_name": "ARS",
             "opponent": "Everton",
-            "attacking_fixture_rating": 74.6,
+            "attacking_fixture_rating": 72.1,
             "defensive_fixture_rating": 75,
-            "combined_score": 74.8,
+            "combined_score": 73.6,
             "venue": "A"
         },
         {

@@ -1,5 +1,19 @@
 [
   {
+    "player": "Amad",
+    "team": "Man Utd",
+    "team_short": "MUN",
+    "position": "MID",
+    "points": 49,
+    "ppg": 3.27,
+    "xG": 2.3,
+    "xA": 2.9,
+    "ownership": 1.8,
+    "price": 6.3,
+    "form": 3.6,
+    "potentialScore": 10.0
+  },
+  {
     "player": "Anderson",
     "team": "Nott'm Forest",
     "team_short": "NFO",
@@ -8,10 +22,10 @@
     "ppg": 4.13,
     "xG": 1.6,
     "xA": 2.1,
-    "ownership": 5.8,
+    "ownership": 5.7,
     "price": 5.4,
     "form": 5.4,
-    "potentialScore": 10.0
+    "potentialScore": 9.9
   },
   {
     "player": "Calvert-Lewin",
@@ -22,24 +36,10 @@
     "ppg": 3.43,
     "xG": 4.2,
     "xA": 0.8,
-    "ownership": 1.2,
+    "ownership": 1.5,
     "price": 5.5,
     "form": 4.3,
-    "potentialScore": 9.4
-  },
-  {
-    "player": "Amad",
-    "team": "Man Utd",
-    "team_short": "MUN",
-    "position": "MID",
-    "points": 43,
-    "ppg": 3.07,
-    "xG": 2.1,
-    "xA": 2.5,
-    "ownership": 1.9,
-    "price": 6.3,
-    "form": 4.1,
-    "potentialScore": 9.2
+    "potentialScore": 9.3
   },
   {
     "player": "Szoboszlai",
@@ -50,7 +50,7 @@
     "ppg": 3.93,
     "xG": 2.1,
     "xA": 2.3,
-    "ownership": 5.6,
+    "ownership": 5.7,
     "price": 6.6,
     "form": 2.9,
     "potentialScore": 8.9
@@ -64,7 +64,7 @@
     "ppg": 3.93,
     "xG": 3.2,
     "xA": 1.5,
-    "ownership": 7.6,
+    "ownership": 7.7,
     "price": 6.4,
     "form": 3.8,
     "potentialScore": 8.8
@@ -78,7 +78,7 @@
     "ppg": 4.13,
     "xG": 1.4,
     "xA": 1.9,
-    "ownership": 1.4,
+    "ownership": 1.5,
     "price": 4.8,
     "form": 4.7,
     "potentialScore": 8.8
@@ -92,10 +92,10 @@
     "ppg": 3.0,
     "xG": 4.4,
     "xA": 1.4,
-    "ownership": 7.0,
+    "ownership": 7.2,
     "price": 8.5,
     "form": 3.6,
-    "potentialScore": 8.8
+    "potentialScore": 8.7
   },
   {
     "player": "Tavernier",
@@ -106,7 +106,7 @@
     "ppg": 4.07,
     "xG": 3.0,
     "xA": 2.0,
-    "ownership": 1.8,
+    "ownership": 1.7,
     "price": 5.5,
     "form": 2.9,
     "potentialScore": 8.7
@@ -120,7 +120,7 @@
     "ppg": 2.87,
     "xG": 1.2,
     "xA": 3.2,
-    "ownership": 3.6,
+    "ownership": 3.8,
     "price": 6.4,
     "form": 4.3,
     "potentialScore": 8.6
@@ -137,6 +137,6 @@
     "ownership": 7.5,
     "price": 5.2,
     "form": 4.8,
-    "potentialScore": 8.5
+    "potentialScore": 8.4
   }
 ]
