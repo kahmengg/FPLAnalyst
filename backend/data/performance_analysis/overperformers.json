@@ -33,6 +33,17 @@
         "form": 2.9
     },
     {
+        "player": "Cash",
+        "team": "Aston Villa",
+        "team_short": "AVL",
+        "goals": 3,
+        "xG": 0.6,
+        "overperformance": 2.4,
+        "overperformance_per_90": 0.16,
+        "sustainable": false,
+        "form": 5.9
+    },
+    {
         "player": "Buendía",
         "team": "Aston Villa",
         "team_short": "AVL",
@@ -53,17 +64,6 @@
         "overperformance_per_90": 0.16,
         "sustainable": false,
         "form": 0.0
-    },
-    {
-        "player": "Cash",
-        "team": "Aston Villa",
-        "team_short": "AVL",
-        "goals": 3,
-        "xG": 0.6,
-        "overperformance": 2.4,
-        "overperformance_per_90": 0.16,
-        "sustainable": false,
-        "form": 5.9
     },
     {
         "player": "Dewsbury-Hall",

@@ -44,17 +44,6 @@
         "form": 3.6
     },
     {
-        "player": "Beto",
-        "team": "Everton",
-        "team_short": "EVE",
-        "goals": 1,
-        "xG": 4.2,
-        "overperformance": -3.2,
-        "overperformance_per_90": -0.213,
-        "sustainable": false,
-        "form": 0.9
-    },
-    {
         "player": "Evanilson",
         "team": "Bournemouth",
         "team_short": "BOU",
@@ -64,6 +53,17 @@
         "overperformance_per_90": -0.213,
         "sustainable": false,
         "form": 2.7
+    },
+    {
+        "player": "Beto",
+        "team": "Everton",
+        "team_short": "EVE",
+        "goals": 1,
+        "xG": 4.2,
+        "overperformance": -3.2,
+        "overperformance_per_90": -0.213,
+        "sustainable": false,
+        "form": 0.9
     },
     {
         "player": "Sarr",

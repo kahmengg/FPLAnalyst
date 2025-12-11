@@ -40,16 +40,6 @@
     "form": 5.7
   },
   {
-    "player": "Roefs",
-    "team": "Sunderland",
-    "team_short": "SUN",
-    "position": "Goalkeeper",
-    "pointsPerMillion": 13.62,
-    "totalPoints": 64,
-    "price": 4.7,
-    "form": 2.4
-  },
-  {
     "player": "Van de Ven",
     "team": "Spurs",
     "team_short": "TOT",
@@ -58,6 +48,16 @@
     "totalPoints": 64,
     "price": 4.7,
     "form": 1.5
+  },
+  {
+    "player": "Roefs",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Goalkeeper",
+    "pointsPerMillion": 13.62,
+    "totalPoints": 64,
+    "price": 4.7,
+    "form": 2.4
   },
   {
     "player": "Tarkowski",
