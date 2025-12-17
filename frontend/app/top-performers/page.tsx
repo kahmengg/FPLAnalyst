@@ -9,6 +9,7 @@ import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/comp
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
 const MAX_RETRIES = 3
+const RETRY_DELAY = 1000
 
 const PositionBadge = ({ position }) => {
   // Map full position names to abbreviations
@@ -17,6 +18,11 @@ const PositionBadge = ({ position }) => {
     Defender: "DEF",
     Midfielder: "MID",
     Forward: "FWD",
+    // Also handle if already abbreviated
+    GK: "GK",
+    DEF: "DEF",
+    MID: "MID",
+    FWD: "FWD"
   };
 
   // Get the abbreviated position, or use the original if not found
@@ -75,6 +81,7 @@ const TeamBadge = ({ team }) => {
 const FormBadge = ({ value }: { value: number }) => {
   // green >= 7, amber 5-7, red <5
   const v = Number(value || 0)
+  const formattedValue = isNaN(v) ? '0.0' : v.toFixed(1)
   const cls =
     v >= 7 ? "bg-emerald-100 text-emerald-800 border-emerald-200" :
       v >= 5 ? "bg-amber-100 text-amber-800 border-amber-200" :
@@ -83,10 +90,10 @@ const FormBadge = ({ value }: { value: number }) => {
   return (
     <span
       role="status"
-      aria-label={`Form ${v.toFixed(1)}`}
+      aria-label={`Form ${formattedValue}`}
       className={`inline-flex items-center gap-2 px-2 py-0.5 rounded-md text-xs font-mono ${cls}`}
     >
-      {v.toFixed(1)}
+      {formattedValue}
     </span>
   )
 }
@@ -113,6 +120,7 @@ const RankMedal = ({ rank }: { rank: number }) => {
 
 
 export default function TopPerformersPage() {
+  const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState("season");
   const [goalScorers, setGoalScorers] = useState([]);
   const [underperformers, setUnderperformers] = useState([]);
@@ -379,6 +387,8 @@ export default function TopPerformersPage() {
   }
 
   useEffect(() => {
+    setMounted(true);
+    
     async function fetchData() {
       setLoading(true)
       setErrors({})
@@ -467,7 +477,7 @@ export default function TopPerformersPage() {
     fetchData()
   }, [activeTab])
   
-  if (loading) return (
+  if (!mounted || loading) return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
@@ -757,7 +767,7 @@ export default function TopPerformersPage() {
                         </div>
                         <div>
                           <span className="text-muted-foreground block text-xs">PPG</span>
-                          <span className="font-mono font-medium">{player.ppg.toFixed(1)}</span>
+                          <span className="font-mono font-medium">{player.ppg?.toFixed(1) ?? '0.0'}</span>
                           <Progress value={(player.ppg / 10) * 100} className="h-1.5 mt-1" />
                         </div>
                         <div>
@@ -866,7 +876,7 @@ export default function TopPerformersPage() {
                             <FormBadge value={player.form} />
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
-                            {player.ppg.toFixed(1)}
+                            {player.ppg?.toFixed(1) ?? '0.0'}
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200 hidden lg:table-cell">
                             £{player.price}m
@@ -928,7 +938,7 @@ export default function TopPerformersPage() {
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-sm mb-3">
                           <div className="flex items-center gap-3 sm:gap-4">
                             <span className="font-medium">£{player.price}m</span>
-                            <span className="text-muted-foreground">{player.goalsPerGame.toFixed(2)} goals/game</span>
+                            <span className="text-muted-foreground">{(player.goalsPerGame ?? 0).toFixed(2)} goals/game</span>
                             <span className="text-accent font-medium">{player.points} pts</span>
                           </div>
                         </div>
@@ -937,11 +947,19 @@ export default function TopPerformersPage() {
                           <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
                             <span>Performance</span>
                             <span>
-                              {((player.goals / Math.max(...goalScorers.map((p) => p.goals))) * 100).toFixed(0)}%
+                              {(() => {
+                                const maxGoals = Math.max(...goalScorers.map((p) => p.goals || 0), 1);
+                                const percentage = ((player.goals || 0) / maxGoals) * 100;
+                                return isNaN(percentage) || !isFinite(percentage) ? '0%' : `${percentage.toFixed(0)}%`;
+                              })()}
                             </span>
                           </div>
                           <Progress
-                            value={(player.goals / Math.max(...goalScorers.map((p) => p.goals))) * 100}
+                            value={(() => {
+                              const maxGoals = Math.max(...goalScorers.map((p) => p.goals || 0), 1);
+                              const percentage = ((player.goals || 0) / maxGoals) * 100;
+                              return isNaN(percentage) || !isFinite(percentage) ? 0 : percentage;
+                            })()}
                             className="h-2"
                           />
                         </div>
@@ -1037,9 +1055,9 @@ export default function TopPerformersPage() {
                                     <TeamBadge team={player.team_short} />
                                   </td>
                                   <td className="py-2 px-2 text-red-600 dark:text-red-400 font-semibold">{player.goals}</td>
-                                  <td className="py-2 px-2 text-red-600 dark:text-red-400">{player.xG.toFixed(1)}</td>
-                                  <td className="py-2 px-2 text-red-600 dark:text-red-400">{player.overperformance.toFixed(1)}</td>
-                                  <td className="py-2 px-2 text-red-600 dark:text-red-400">{player.overperformance_per_90.toFixed(3)}</td>
+                                  <td className="py-2 px-2 text-red-600 dark:text-red-400">{player.xG?.toFixed(1) ?? '0.0'}</td>
+                                  <td className="py-2 px-2 text-red-600 dark:text-red-400">{player.overperformance?.toFixed(1) ?? '0.0'}</td>
+                                  <td className="py-2 px-2 text-red-600 dark:text-red-400">{player.overperformance_per_90?.toFixed(3) ?? '0.000'}</td>
                                   <td className="py-2 px-2">
                                     <FormBadge value={player.form} />
                                   </td>
@@ -1126,9 +1144,9 @@ export default function TopPerformersPage() {
                                     <TeamBadge team={player.team_short} />
                                   </td>
                                   <td className="py-2 px-2 text-green-600 dark:text-green-400 font-semibold">{player.goals}</td>
-                                  <td className="py-2 px-2 text-green-600 dark:text-green-400">{player.xG.toFixed(1)}</td>
-                                  <td className="py-2 px-2 text-green-600 dark:text-green-400">{player.overperformance.toFixed(1)}</td>
-                                  <td className="py-2 px-2 text-green-600 dark:text-green-400">{player.overperformance_per_90.toFixed(3)}</td>
+                                  <td className="py-2 px-2 text-green-600 dark:text-green-400">{player.xG?.toFixed(1) ?? '0.0'}</td>
+                                  <td className="py-2 px-2 text-green-600 dark:text-green-400">{player.overperformance?.toFixed(1) ?? '0.0'}</td>
+                                  <td className="py-2 px-2 text-green-600 dark:text-green-400">{player.overperformance_per_90?.toFixed(3) ?? '0.000'}</td>
                                   <td className="py-2 px-2">
                                     <FormBadge value={player.form} />
                                   </td>
@@ -1215,9 +1233,9 @@ export default function TopPerformersPage() {
                                     <TeamBadge team={player.team_short} />
                                   </td>
                                   <td className="py-2 px-2 text-blue-600 dark:text-blue-400 font-semibold">{player.goals}</td>
-                                  <td className="py-2 px-2 text-blue-600 dark:text-blue-400">{player.xG.toFixed(1)}</td>
-                                  <td className="py-2 px-2 text-blue-600 dark:text-blue-400">{player.overperformance.toFixed(1)}</td>
-                                  <td className="py-2 px-2 text-blue-600 dark:text-blue-400">{player.overperformance_per_90.toFixed(3)}</td>
+                                  <td className="py-2 px-2 text-blue-600 dark:text-blue-400">{player.xG?.toFixed(1) ?? '0.0'}</td>
+                                  <td className="py-2 px-2 text-blue-600 dark:text-blue-400">{player.overperformance?.toFixed(1) ?? '0.0'}</td>
+                                  <td className="py-2 px-2 text-blue-600 dark:text-blue-400">{player.overperformance_per_90?.toFixed(3) ?? '0.000'}</td>
                                   <td className="py-2 px-2">
                                     <FormBadge value={player.form} />
                                   </td>
@@ -1326,7 +1344,7 @@ export default function TopPerformersPage() {
                             {player.assists}
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
-                            {player.assistsPerGame.toFixed(2)}
+                            {player.assistsPerGame?.toFixed(2) ?? '0.00'}
                           </td>
                           <td className="py-4 font-mono text-sm text-foreground group-hover:text-accent transition-colors duration-200">
                             {player.points}
@@ -1464,7 +1482,7 @@ export default function TopPerformersPage() {
                             <FormBadge value={player.form} />
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
-                            {player.ppg.toFixed(1)}
+                            {player.ppg?.toFixed(1) ?? '0.0'}
                           </td>
                           <td className="py-4 font-mono text-sm text-foreground group-hover:text-accent transition-colors duration-200">
                             {player.cleanSheets}
@@ -1473,7 +1491,7 @@ export default function TopPerformersPage() {
                             {player.dfc}
                           </td>
                           <td className="py-4 font-mono text-sm text-green-600 group-hover:text-green-500 transition-colors duration-200">
-                            {player.csRate.toFixed(2)}%
+                            {player.csRate?.toFixed(2) ?? '0.00'}%
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden md:table-cell">
                             {player.tackles}
@@ -1586,10 +1604,10 @@ export default function TopPerformersPage() {
                             {player.totalPoints}
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200">
-                            £{player.price.toFixed(1)}m
+                            £{player.price?.toFixed(1) ?? '0.0'}m
                           </td>
                           <td className="py-4 font-mono text-sm text-green-600 group-hover:text-green-500 transition-colors duration-200">
-                            {player.pointsPerMillion.toFixed(2)}
+                            {player.pointsPerMillion?.toFixed(2) ?? '0.00'}
                           </td>
                         </tr>
                       ))}
@@ -1638,7 +1656,7 @@ export default function TopPerformersPage() {
                       <div className="mb-3 text-center">
                         <div className="flex justify-center items-center gap-2">
                           <Gem className="h-5 w-5 text-pink-500" />
-                          <span className="text-2xl font-bold text-pink-600">{player.potentialScore.toFixed(1)}</span>
+                          <span className="text-2xl font-bold text-pink-600">{player.potentialScore?.toFixed(1) ?? '0.0'}</span>
                         </div>
                         <div className="text-xs text-muted-foreground">Potential Score</div>
                       </div>
@@ -1653,9 +1671,8 @@ export default function TopPerformersPage() {
                           <span className="font-mono text-accent font-bold">{player.ownership}%</span>
                         </div>
                         <div className="flex justify-between text-xs text-muted-foreground">
-                          <span>xG: {player.xG.toFixed(2)}</span>
-                          <span>xA: {player.xA.toFixed(2)}</span>
-                          <span>xCS: {player.xCS.toFixed(2)}</span>
+                          <span>xG: {(player.xG ?? 0).toFixed(2)}</span>
+                          <span>xA: {(player.xA ?? 0).toFixed(2)}</span>
                         </div>
                       </div>
 
