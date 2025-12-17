@@ -4,99 +4,99 @@
     "team": "Crystal Palace",
     "team_short": "CRY",
     "position": "Defender",
-    "pointsPerMillion": 15.65,
-    "totalPoints": 72,
+    "pointsPerMillion": 15.87,
+    "totalPoints": 73,
     "price": 4.6,
-    "form": 6.2
-  },
-  {
-    "player": "Cash",
-    "team": "Aston Villa",
-    "team_short": "AVL",
-    "position": "Defender",
-    "pointsPerMillion": 15.21,
-    "totalPoints": 73,
-    "price": 4.8,
-    "form": 5.9
-  },
-  {
-    "player": "Van Hecke",
-    "team": "Brighton",
-    "team_short": "BHA",
-    "position": "Defender",
-    "pointsPerMillion": 14.44,
-    "totalPoints": 65,
-    "price": 4.5,
-    "form": 6.6
-  },
-  {
-    "player": "Senesi",
-    "team": "Bournemouth",
-    "team_short": "BOU",
-    "position": "Defender",
-    "pointsPerMillion": 14.2,
-    "totalPoints": 71,
-    "price": 5.0,
-    "form": 3.3
-  },
-  {
-    "player": "Mitchell",
-    "team": "Crystal Palace",
-    "team_short": "CRY",
-    "position": "Defender",
-    "pointsPerMillion": 14.0,
-    "totalPoints": 70,
-    "price": 5.0,
-    "form": 5.7
-  },
-  {
-    "player": "Van de Ven",
-    "team": "Spurs",
-    "team_short": "TOT",
-    "position": "Defender",
-    "pointsPerMillion": 13.62,
-    "totalPoints": 64,
-    "price": 4.7,
-    "form": 1.5
-  },
-  {
-    "player": "Roefs",
-    "team": "Sunderland",
-    "team_short": "SUN",
-    "position": "Goalkeeper",
-    "pointsPerMillion": 13.62,
-    "totalPoints": 64,
-    "price": 4.7,
-    "form": 2.4
-  },
-  {
-    "player": "Tarkowski",
-    "team": "Everton",
-    "team_short": "EVE",
-    "position": "Defender",
-    "pointsPerMillion": 13.52,
-    "totalPoints": 73,
-    "price": 5.4,
-    "form": 7.7
+    "form": 4.6
   },
   {
     "player": "Mukiele",
     "team": "Sunderland",
     "team_short": "SUN",
     "position": "Defender",
-    "pointsPerMillion": 13.33,
-    "totalPoints": 56,
+    "pointsPerMillion": 15.24,
+    "totalPoints": 64,
     "price": 4.2,
-    "form": 2.0
+    "form": 2.9
   },
   {
-    "player": "Burn",
-    "team": "Newcastle",
-    "team_short": "NEW",
+    "player": "Roefs",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Goalkeeper",
+    "pointsPerMillion": 15.21,
+    "totalPoints": 73,
+    "price": 4.8,
+    "form": 4.1
+  },
+  {
+    "player": "Cash",
+    "team": "Aston Villa",
+    "team_short": "AVL",
     "position": "Defender",
-    "pointsPerMillion": 12.94,
-    "totalPoints": 66,
+    "pointsPerMillion": 14.9,
+    "totalPoints": 73,
+    "price": 4.9,
+    "form": 4.6
+  },
+  {
+    "player": "Dewsbury-Hall",
+    "team": "Everton",
+    "team_short": "EVE",
+    "position": "Midfielder",
+    "pointsPerMillion": 14.71,
+    "totalPoints": 75,
     "price": 5.1,
-    "form": 4.0
+    "form": 7.2
+  },
+  {
+    "player": "Senesi",
+    "team": "Bournemouth",
+    "team_short": "BOU",
+    "position": "Defender",
+    "pointsPerMillion": 14.69,
+    "totalPoints": 72,
+    "price": 4.9,
+    "form": 3.1
+  },
+  {
+    "player": "Van Hecke",
+    "team": "Brighton",
+    "team_short": "BHA",
+    "position": "Defender",
+    "pointsPerMillion": 14.67,
+    "totalPoints": 66,
+    "price": 4.5,
+    "form": 5.7
+  },
+  {
+    "player": "Ballard",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Defender",
+    "pointsPerMillion": 14.35,
+    "totalPoints": 66,
+    "price": 4.6,
+    "form": 3.7
+  },
+  {
+    "player": "Alderete",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Defender",
+    "pointsPerMillion": 14.25,
+    "totalPoints": 57,
+    "price": 4.0,
+    "form": 2.6
+  },
+  {
+    "player": "Mitchell",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
+    "position": "Defender",
+    "pointsPerMillion": 14.2,
+    "totalPoints": 71,
+    "price": 5.0,
+    "form": 3.5
   }
 ]

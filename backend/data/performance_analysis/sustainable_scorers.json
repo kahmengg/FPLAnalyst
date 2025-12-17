@@ -1,25 +1,47 @@
 [
     {
+        "player": "Calvert-Lewin",
+        "team": "Leeds",
+        "team_short": "LEE",
+        "goals": 5,
+        "xG": 4.7,
+        "overperformance": 0.3,
+        "overperformance_per_90": 0.02,
+        "sustainable": true,
+        "form": 5.8
+    },
+    {
         "player": "Woltemade",
         "team": "Newcastle",
         "team_short": "NEW",
         "goals": 5,
         "xG": 4.8,
         "overperformance": 0.2,
-        "overperformance_per_90": 0.017,
+        "overperformance_per_90": 0.015,
         "sustainable": true,
-        "form": 3.8
+        "form": 2.9
+    },
+    {
+        "player": "Tavernier",
+        "team": "Bournemouth",
+        "team_short": "BOU",
+        "goals": 4,
+        "xG": 3.9,
+        "overperformance": 0.1,
+        "overperformance_per_90": 0.006,
+        "sustainable": true,
+        "form": 4.7
     },
     {
         "player": "João Pedro",
         "team": "Chelsea",
         "team_short": "CHE",
         "goals": 4,
-        "xG": 4.2,
-        "overperformance": -0.2,
-        "overperformance_per_90": -0.013,
+        "xG": 4.3,
+        "overperformance": -0.3,
+        "overperformance_per_90": -0.019,
         "sustainable": true,
-        "form": 2.2
+        "form": 1.3
     },
     {
         "player": "Nmecha",
@@ -30,18 +52,7 @@
         "overperformance": 0.2,
         "overperformance_per_90": 0.013,
         "sustainable": true,
-        "form": 4.0
-    },
-    {
-        "player": "M.Salah",
-        "team": "Liverpool",
-        "team_short": "LIV",
-        "goals": 4,
-        "xG": 3.9,
-        "overperformance": 0.1,
-        "overperformance_per_90": 0.007,
-        "sustainable": true,
-        "form": 0.9
+        "form": 2.5
     },
     {
         "player": "Gakpo",
@@ -50,9 +61,9 @@
         "goals": 4,
         "xG": 4.1,
         "overperformance": -0.1,
-        "overperformance_per_90": -0.007,
+        "overperformance_per_90": -0.006,
         "sustainable": true,
-        "form": 3.6
+        "form": 3.4
     },
     {
         "player": "Gyökeres",
@@ -61,30 +72,19 @@
         "goals": 4,
         "xG": 4.4,
         "overperformance": -0.4,
-        "overperformance_per_90": -0.027,
+        "overperformance_per_90": -0.025,
         "sustainable": true,
-        "form": 0.4
-    },
-    {
-        "player": "Calvert-Lewin",
-        "team": "Leeds",
-        "team_short": "LEE",
-        "goals": 4,
-        "xG": 4.2,
-        "overperformance": -0.2,
-        "overperformance_per_90": -0.014,
-        "sustainable": true,
-        "form": 4.3
+        "form": 0.7
     },
     {
         "player": "O.Dango",
         "team": "Brentford",
         "team_short": "BRE",
         "goals": 3,
-        "xG": 3.1,
-        "overperformance": -0.1,
-        "overperformance_per_90": -0.007,
+        "xG": 3.2,
+        "overperformance": -0.2,
+        "overperformance_per_90": -0.013,
         "sustainable": true,
-        "form": 4.9
+        "form": 4.5
     }
 ]
