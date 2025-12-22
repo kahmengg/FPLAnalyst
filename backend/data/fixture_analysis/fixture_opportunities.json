@@ -6,8 +6,8 @@
             "short_name": "BOU",
             "opponent": "Burnley",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 72.1,
-            "combined_score": 81.0,
+            "defensive_fixture_rating": 64.6,
+            "combined_score": 77.3,
             "venue": "H"
         },
         {
@@ -16,8 +16,8 @@
             "short_name": "MCI",
             "opponent": "West Ham",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 72.1,
-            "combined_score": 81.0,
+            "defensive_fixture_rating": 64.6,
+            "combined_score": 77.3,
             "venue": "H"
         },
         {
@@ -36,8 +36,8 @@
             "short_name": "ARS",
             "opponent": "Brighton",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 38.9,
-            "combined_score": 64.4,
+            "defensive_fixture_rating": 31.0,
+            "combined_score": 60.5,
             "venue": "H"
         },
         {
@@ -49,16 +49,6 @@
             "defensive_fixture_rating": 68.5,
             "combined_score": 79.2,
             "venue": "A"
-        },
-        {
-            "gameweek": 18,
-            "team": "Chelsea",
-            "short_name": "CHE",
-            "opponent": "Aston Villa",
-            "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 68.5,
-            "combined_score": 79.2,
-            "venue": "H"
         },
         {
             "gameweek": 18,
@@ -76,18 +66,8 @@
             "short_name": "MUN",
             "opponent": "Newcastle",
             "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 18.2,
-            "combined_score": 54.1,
-            "venue": "H"
-        },
-        {
-            "gameweek": 19,
-            "team": "Arsenal",
-            "short_name": "ARS",
-            "opponent": "Aston Villa",
-            "attacking_fixture_rating": 90,
-            "defensive_fixture_rating": 64.6,
-            "combined_score": 77.3,
+            "defensive_fixture_rating": 13.6,
+            "combined_score": 51.8,
             "venue": "H"
         },
         {
@@ -99,6 +79,26 @@
             "defensive_fixture_rating": 43.2,
             "combined_score": 66.6,
             "venue": "A"
+        },
+        {
+            "gameweek": 19,
+            "team": "Liverpool",
+            "short_name": "LIV",
+            "opponent": "Leeds",
+            "attacking_fixture_rating": 90,
+            "defensive_fixture_rating": 38.9,
+            "combined_score": 64.4,
+            "venue": "H"
+        },
+        {
+            "gameweek": 19,
+            "team": "Man Utd",
+            "short_name": "MUN",
+            "opponent": "Wolves",
+            "attacking_fixture_rating": 90,
+            "defensive_fixture_rating": 51.9,
+            "combined_score": 71.0,
+            "venue": "H"
         }
     ],
     "defense": [
@@ -117,9 +117,9 @@
             "team": "Crystal Palace",
             "short_name": "CRY",
             "opponent": "Spurs",
-            "attacking_fixture_rating": 72.1,
+            "attacking_fixture_rating": 66.8,
             "defensive_fixture_rating": 75,
-            "combined_score": 73.6,
+            "combined_score": 70.9,
             "venue": "H"
         },
         {
@@ -130,16 +130,6 @@
             "attacking_fixture_rating": 90,
             "defensive_fixture_rating": 75,
             "combined_score": 82.5,
-            "venue": "H"
-        },
-        {
-            "gameweek": 19,
-            "team": "Nott'm Forest",
-            "short_name": "NFO",
-            "opponent": "Everton",
-            "attacking_fixture_rating": 51.9,
-            "defensive_fixture_rating": 75,
-            "combined_score": 63.4,
             "venue": "H"
         },
         {
@@ -167,19 +157,9 @@
             "team": "Everton",
             "short_name": "EVE",
             "opponent": "Brentford",
-            "attacking_fixture_rating": 87.5,
+            "attacking_fixture_rating": 84.6,
             "defensive_fixture_rating": 75,
-            "combined_score": 81.2,
-            "venue": "H"
-        },
-        {
-            "gameweek": 20,
-            "team": "Spurs",
-            "short_name": "TOT",
-            "opponent": "Sunderland",
-            "attacking_fixture_rating": 61.1,
-            "defensive_fixture_rating": 75,
-            "combined_score": 68.0,
+            "combined_score": 79.8,
             "venue": "H"
         },
         {
@@ -187,9 +167,9 @@
             "team": "Everton",
             "short_name": "EVE",
             "opponent": "Wolves",
-            "attacking_fixture_rating": 88.8,
+            "attacking_fixture_rating": 86.1,
             "defensive_fixture_rating": 75,
-            "combined_score": 81.9,
+            "combined_score": 80.6,
             "venue": "H"
         },
         {
@@ -201,6 +181,26 @@
             "defensive_fixture_rating": 75,
             "combined_score": 80.6,
             "venue": "A"
+        },
+        {
+            "gameweek": 22,
+            "team": "Chelsea",
+            "short_name": "CHE",
+            "opponent": "Brentford",
+            "attacking_fixture_rating": 90,
+            "defensive_fixture_rating": 75,
+            "combined_score": 82.5,
+            "venue": "H"
+        },
+        {
+            "gameweek": 22,
+            "team": "Liverpool",
+            "short_name": "LIV",
+            "opponent": "Burnley",
+            "attacking_fixture_rating": 90,
+            "defensive_fixture_rating": 75,
+            "combined_score": 82.5,
+            "venue": "H"
         }
     ]
 }
