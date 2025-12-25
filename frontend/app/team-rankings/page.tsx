@@ -3,7 +3,8 @@
 import { useState, useEffect, useMemo } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Crosshair, TrendingUp, TrendingDown, Shield, TrophyIcon, Search, X, Filter, ArrowUpDown } from "lucide-react"
+import { Crosshair, TrendingUp, TrendingDown, Shield, TrophyIcon, Search, X, Filter, ArrowUpDown, Star } from "lucide-react"
+import TeamPicksModal from "@/components/team-picks-modal"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
 
@@ -36,16 +37,24 @@ export default function TeamRankingsPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [filterMode, setFilterMode] = useState<"all" | "top5" | "bottom5">("all")
   const [sortBy, setSortBy] = useState<"rank" | "attack" | "defense" | "goals" | "cleansheets">("rank")
+  
+  // Quick Picks states
+  const [attackingPicks, setAttackingPicks] = useState([])
+  const [defensivePicks, setDefensivePicks] = useState([])
+  const [selectedTeam, setSelectedTeam] = useState<any>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   // START: Added fetchData for reuse
   const fetchData = async () => {
     setLoading(true)
     setError(null)
     try {
-      const [overallRes, attackRes, defenseRes] = await Promise.all([
+      const [overallRes, attackRes, defenseRes, attackingPicksRes, defensivePicksRes] = await Promise.all([
         fetch(`${API_BASE_URL}/api/overall_rankings`, { cache: 'no-store' }),
         fetch(`${API_BASE_URL}/api/attack_rankings`, { cache: 'no-store' }),
-        fetch(`${API_BASE_URL}/api/defense_rankings`, { cache: 'no-store' })
+        fetch(`${API_BASE_URL}/api/defense_rankings`, { cache: 'no-store' }),
+        fetch(`${API_BASE_URL}/api/top-attacking_qp`, { cache: 'no-store' }),
+        fetch(`${API_BASE_URL}/api/top-defensive_qp`, { cache: 'no-store' })
       ])
 
       if (!overallRes.ok || !attackRes.ok || !defenseRes.ok) {
@@ -55,6 +64,16 @@ export default function TeamRankingsPage() {
       const overall = await overallRes.json()
       const attack = await attackRes.json()
       const defense = await defenseRes.json()
+      
+      // Quick Picks data
+      if (attackingPicksRes.ok) {
+        const attackingData = await attackingPicksRes.json()
+        setAttackingPicks(attackingData)
+      }
+      if (defensivePicksRes.ok) {
+        const defensiveData = await defensivePicksRes.json()
+        setDefensivePicks(defensiveData)
+      }
 
       const attackMap = new Map(attack.map(t => [t.team, t]))
       const defenseMap = new Map(defense.map(t => [t.team, t]))
@@ -103,6 +122,54 @@ export default function TeamRankingsPage() {
   useEffect(() => {
     fetchData()
   }, [view])
+
+  // Handler to open Quick Picks modal for a team
+  const handleViewPicks = (team: any) => {
+    setSelectedTeam(team)
+    setIsModalOpen(true)
+  }
+
+  // Get Quick Picks data for selected team
+  const getTeamPicksData = (teamName: string) => {
+    // Normalize team name for matching (trim and case-insensitive)
+    const normalizedName = teamName.trim().toLowerCase()
+    const attackingTeam = attackingPicks.find((t: any) => t.team.trim().toLowerCase() === normalizedName)
+    const defensiveTeam = defensivePicks.find((t: any) => t.team.trim().toLowerCase() === normalizedName)
+    
+    return {
+      attackingPlayers: attackingTeam?.players?.map((p: any) => ({
+        name: p.web_name,
+        position: p.position_name,
+        position_name: p.position_name,
+        price: p.now_cost,
+        goals_pg: p.goals_per_game || 0,
+        assists_pg: p.assists_per_game || 0,
+        points_pg: p.points_per_game,
+        points_per_game: p.points_per_game,
+        ownership: p.selected_by_percent,
+        selected_by_percent: p.selected_by_percent,
+        attacker_score: p.attacker_score || 0,
+        defender_score: 0,
+        form: p.form ?? 5.0,
+        clean_sheet_rate: 0
+      })) || [],
+      defensivePlayers: defensiveTeam?.players?.map((p: any) => ({
+        name: p.web_name,
+        position: p.position_name,
+        position_name: p.position_name,
+        price: p.now_cost,
+        cs_rate: p.clean_sheet_rate,
+        clean_sheet_rate: p.clean_sheet_rate,
+        points_pg: p.points_per_game,
+        points_per_game: p.points_per_game,
+        ownership: p.selected_by_percent,
+        selected_by_percent: p.selected_by_percent,
+        defender_score: p.defender_score || 0,
+        attacker_score: 0,
+        form: p.form ?? 5.0
+      })) || []
+    }
+  }
 
 
   const TeamBadge = ({ team }) => {
@@ -183,10 +250,10 @@ export default function TeamRankingsPage() {
     return result;
   }, [teamsWithOverallRank, searchQuery, filterMode, sortBy]);
 
-  const strongestAttack = sortedTeams[0]?.name || "Unknown"
-  const bestDefense = teams.sort((a, b) => a.defenseRank - b.defenseRank)[0]?.name || "Unknown"
-  const weakestAttack = sortedTeams[sortedTeams.length - 1]?.name || "Unknown"
-  const weakestDefense = teams.sort((a, b) => b.defenseRank - a.defenseRank)[0]?.name || "Unknown"
+  const strongestAttack = [...teams].sort((a, b) => a.attackRank - b.attackRank)[0]?.name || "Unknown"
+  const bestDefense = [...teams].sort((a, b) => a.defenseRank - b.defenseRank)[0]?.name || "Unknown"
+  const weakestAttack = [...teams].sort((a, b) => b.attackRank - a.attackRank)[0]?.name || "Unknown"
+  const weakestDefense = [...teams].sort((a, b) => b.defenseRank - a.defenseRank)[0]?.name || "Unknown"
 
   if (loading) return <div className="min-h-screen flex items-center justify-center">Loading rankings...</div>
   if (error) return (
@@ -589,8 +656,8 @@ export default function TeamRankingsPage() {
                     </div>
                   </div>
 
-                  {/* Additional Stats on Hover */}
-                  <div className="mt-4 grid grid-cols-2 gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                  {/* Additional Stats */}
+                  <div className="mt-4 grid grid-cols-2 gap-2">
                     <div className="text-center p-2 bg-red-50 rounded-lg">
                       <div className="text-xs text-red-600 font-medium">xG/Game</div>
                       <div className="text-sm font-bold text-red-700">{team.xGPerGame.toFixed(2)}</div>
@@ -600,12 +667,39 @@ export default function TeamRankingsPage() {
                       <div className="text-sm font-bold text-blue-700">{team.goalsConceded.toFixed(1)}</div>
                     </div>
                   </div>
+                  
+                  {/* View Quick Picks Button */}
+                  <div className="mt-4">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleViewPicks(team)
+                      }}
+                      className="w-full py-2.5 px-4 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-95"
+                    >
+                      <Star className="h-4 w-4" />
+                      View Quick Picks
+                    </button>
+                  </div>
                 </CardContent>
               </Card>
             );
           })}
         </div>
       </div>
+      
+      {/* Quick Picks Modal */}
+      {selectedTeam && (
+        <TeamPicksModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          teamName={selectedTeam.name}
+          teamCode={selectedTeam.code}
+          attackRank={selectedTeam.attackRank}
+          defenseRank={selectedTeam.defenseRank}
+          {...getTeamPicksData(selectedTeam.name)}
+        />
+      )}
     </div>
   )
 }
