@@ -9,6 +9,86 @@ import { ChevronLeft, ChevronRight, CalendarIcon, Target, Shield, TrendingUp, Ar
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
 
+// Team color mapping for visual identification
+const teamColors = {
+  "Arsenal": "text-red-600 dark:text-red-400",
+  "Liverpool": "text-red-700 dark:text-red-500",
+  "Man City": "text-sky-500 dark:text-sky-400",
+  "Chelsea": "text-blue-600 dark:text-blue-400",
+  "Man Utd": "text-red-600 dark:text-red-400",
+  "Spurs": "text-slate-700 dark:text-slate-300",
+  "Newcastle": "text-slate-800 dark:text-slate-200",
+  "Brighton": "text-blue-500 dark:text-blue-300",
+  "Aston Villa": "text-purple-700 dark:text-purple-400",
+  "West Ham": "text-amber-700 dark:text-amber-500",
+  "Everton": "text-blue-700 dark:text-blue-500",
+  "Wolves": "text-orange-600 dark:text-orange-400",
+  "Crystal Palace": "text-blue-600 dark:text-blue-400",
+  "Brentford": "text-red-600 dark:text-red-400",
+  "Fulham": "text-slate-800 dark:text-slate-300",
+  "Bournemouth": "text-red-700 dark:text-red-500",
+  "Nott'm Forest": "text-red-800 dark:text-red-600",
+  "Burnley": "text-purple-900 dark:text-purple-400",
+  "Leeds": "text-blue-600 dark:text-blue-400",
+  "Sunderland": "text-red-700 dark:text-red-500",
+};
+
+const getTeamColor = (teamName: string) => {
+  return teamColors[teamName] || "text-foreground";
+};
+
+const getTeamBorderColor = (teamName: string) => {
+  const borderColors = {
+    "Arsenal": "border-red-600 dark:border-red-400",
+    "Liverpool": "border-red-700 dark:border-red-500",
+    "Man City": "border-sky-500 dark:border-sky-400",
+    "Chelsea": "border-blue-600 dark:border-blue-400",
+    "Man Utd": "border-red-600 dark:border-red-400",
+    "Spurs": "border-slate-700 dark:border-slate-300",
+    "Newcastle": "border-slate-800 dark:border-slate-200",
+    "Brighton": "border-blue-500 dark:border-blue-300",
+    "Aston Villa": "border-purple-700 dark:border-purple-400",
+    "West Ham": "border-amber-700 dark:border-amber-500",
+    "Everton": "border-blue-700 dark:border-blue-500",
+    "Wolves": "border-orange-600 dark:border-orange-400",
+    "Crystal Palace": "border-blue-600 dark:border-blue-400",
+    "Brentford": "border-red-600 dark:border-red-400",
+    "Fulham": "border-slate-800 dark:border-slate-300",
+    "Bournemouth": "border-red-700 dark:border-red-500",
+    "Nott'm Forest": "border-red-800 dark:border-red-600",
+    "Burnley": "border-purple-900 dark:border-purple-400",
+    "Leeds": "border-blue-600 dark:border-blue-400",
+    "Sunderland": "border-red-700 dark:border-red-500",
+  };
+  return borderColors[teamName] || "border-border";
+};
+
+const getTeamBackgroundColor = (teamName: string) => {
+  const bgColors = {
+    "Arsenal": "bg-red-100 dark:bg-red-950",
+    "Liverpool": "bg-red-200 dark:bg-red-950",
+    "Man City": "bg-sky-100 dark:bg-sky-950",
+    "Chelsea": "bg-blue-100 dark:bg-blue-950",
+    "Man Utd": "bg-red-100 dark:bg-red-950",
+    "Spurs": "bg-slate-100 dark:bg-slate-900",
+    "Newcastle": "bg-slate-200 dark:bg-slate-900",
+    "Brighton": "bg-blue-50 dark:bg-blue-950",
+    "Aston Villa": "bg-purple-100 dark:bg-purple-950",
+    "West Ham": "bg-amber-100 dark:bg-amber-950",
+    "Everton": "bg-blue-200 dark:bg-blue-950",
+    "Wolves": "bg-orange-100 dark:bg-orange-950",
+    "Crystal Palace": "bg-blue-100 dark:bg-blue-950",
+    "Brentford": "bg-red-100 dark:bg-red-950",
+    "Fulham": "bg-slate-100 dark:bg-slate-900",
+    "Bournemouth": "bg-red-200 dark:bg-red-950",
+    "Nott'm Forest": "bg-red-300 dark:bg-red-950",
+    "Burnley": "bg-purple-200 dark:bg-purple-950",
+    "Leeds": "bg-blue-100 dark:bg-blue-950",
+    "Sunderland": "bg-red-200 dark:bg-red-950",
+  };
+  return bgColors[teamName] || "bg-secondary/20";
+};
+
 // Color configuration for rankings and difficulty scores
 const colorConfig = {
   favorability: {
@@ -191,20 +271,35 @@ export default function FixtureAnalysisPage() {
         const resOpportunities = await fetch(`${API_BASE_URL}/api/fixtures_opportunity`);
         if (!resOpportunities.ok) throw new Error("Failed to fetch fixture opportunities");
         const dataOpportunities = await resOpportunities.json();
-        const transformedAttack = dataOpportunities.attack.map((o) => ({
-          gw: o.gameweek,
-          matchup: `${o.team} vs ${o.opponent}`,
-          team: o.team,
-          venue: o.venue,
-          rating: o.combined_score,
-        }));
-        const transformedDefense = dataOpportunities.defense.map((o) => ({
-          gw: o.gameweek,
-          matchup: `${o.team} vs ${o.opponent}`,
-          team: o.team,
-          venue: o.venue,
-          rating: o.combined_score,
-        }));
+        
+        // Transform and sort attack opportunities by attacking_fixture_rating
+        const transformedAttack = dataOpportunities.attack
+          .map((o) => ({
+            gw: o.gameweek,
+            matchup: `${o.team} vs ${o.opponent}`,
+            team: o.team,
+            venue: o.venue,
+            rating: o.attacking_fixture_rating,
+            attackRating: o.attacking_fixture_rating,
+            defenseRating: o.defensive_fixture_rating,
+            combinedScore: o.combined_score,
+          }))
+          .sort((a, b) => b.attackRating - a.attackRating); // Sort by attack rating descending
+        
+        // Transform and sort defense opportunities by defensive_fixture_rating
+        const transformedDefense = dataOpportunities.defense
+          .map((o) => ({
+            gw: o.gameweek,
+            matchup: `${o.team} vs ${o.opponent}`,
+            team: o.team,
+            venue: o.venue,
+            rating: o.defensive_fixture_rating,
+            attackRating: o.attacking_fixture_rating,
+            defenseRating: o.defensive_fixture_rating,
+            combinedScore: o.combined_score,
+          }))
+          .sort((a, b) => b.defenseRating - a.defenseRating); // Sort by defense rating descending
+        
         setFixtureOpportunities({ attack: transformedAttack, defense: transformedDefense });
 
         // Fetch team fixture summary
@@ -452,7 +547,7 @@ export default function FixtureAnalysisPage() {
                             </Badge>
                           </div>
                           <div className="text-center">
-                            <p className="text-xs text-muted-foreground mb-1">🎯 Goal Threat</p>
+                            <p className="text-xs text-muted-foreground mb-1">🎯 Attacking Threat</p>
                             <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.attackRating).color}`}>
                               {fixture.teams.home.attackRating}%
                             </p>
@@ -525,7 +620,7 @@ export default function FixtureAnalysisPage() {
                             </Badge>
                           </div>
                           <div className="text-center">
-                            <p className="text-xs text-muted-foreground mb-1">🎯 Goal Threat</p>
+                            <p className="text-xs text-muted-foreground mb-1">🎯 Attacking Threat</p>
                             <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.attackRating).color}`}>
                               {fixture.teams.away.attackRating}%
                             </p>
@@ -691,188 +786,184 @@ export default function FixtureAnalysisPage() {
           </TabsContent>
 
           <TabsContent value="summary" className="space-y-4 sm:space-y-6">
-            {/* Fixture Swing Alerts Card */}
+            {/* Fixture Period Comparison */}
             <Card className="border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-card backdrop-blur-md shadow-xl">
               <CardHeader className="pb-3 sm:pb-4 border-b border-border/50 bg-gradient-to-r from-purple-500/10 to-transparent">
                 <CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
-                    🔄
+                    📊
                   </div>
-                  Fixture Difficulty Swings
+                  Fixture Difficulty by Period
                   <Badge variant="secondary" className="ml-auto text-xs bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
-                    Transfer Planning
+                    Next 6 GWs
                   </Badge>
                 </CardTitle>
                 <p className="text-xs sm:text-sm text-muted-foreground mt-2">
-                  Teams transitioning from easy to hard fixture runs (or vice versa). <strong>Near-term</strong> = next 3 GWs, <strong>Medium-term</strong> = GWs 4-6.
+                  Compare team fixture quality across two periods. Higher percentage = easier fixtures.
                 </p>
               </CardHeader>
               <CardContent className="p-3 sm:p-6">
                 <div className="grid gap-4 lg:grid-cols-2">
-                  {/* Buy Opportunities - Teams with declining fixtures (getting easier later) */}
+                  {/* Near-term: Next 3 Gameweeks */}
                   <div className="space-y-3">
-                    <h3 className="text-sm font-semibold text-green-600 dark:text-green-400 flex items-center gap-2">
-                      📈 Fixture Improvements - Buy Targets
-                    </h3>
-                    {sortedTeamData
-                      .filter(team => team.swingCategory === "Fixture Decline")
-                      .slice(0, 5)
-                      .map((team, index) => (
-                        <div
-                          key={index}
-                          className="p-3 rounded-lg bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 hover:border-green-500/40 transition-all"
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="font-semibold text-foreground">{team.team}</span>
-                            <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 text-xs">
-                              {team.swingEmoji} +{team.fixtureSwing}
-                            </Badge>
-                          </div>
-                          <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground mb-2">
-                            <div>
-                              <span className="block">Next 3 GWs:</span>
-                              <span className="font-semibold text-orange-600 dark:text-orange-400">{team.nearTermRating}%</span>
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-base font-bold text-foreground flex items-center gap-2">
+                        🔥 Next 3 Gameweeks
+                        <span className="text-xs text-muted-foreground font-normal">(GW 1-3)</span>
+                      </h3>
+                    </div>
+                    <div className="space-y-2">
+                      {[...teamFixtureSummary]
+                        .sort((a, b) => b.nearTermRating - a.nearTermRating)
+                        .slice(0, 10)
+                        .map((team, index) => {
+                          return (
+                            <div
+                              key={index}
+                              className={`p-3 rounded-lg border-2 border-slate-300 dark:border-slate-700 ${getTeamBackgroundColor(team.team)} hover:scale-[1.02] transition-all`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-3 flex-1 min-w-0">
+                                  <span className="text-xs font-bold text-muted-foreground w-6">#{index + 1}</span>
+                                  <span className="font-semibold text-sm text-foreground truncate">{team.team}</span>
+                                  {team.fixtureSwing > 0 && (
+                                    <span className="text-green-600 dark:text-green-400 text-lg font-bold" title="Fixtures improving">↑</span>
+                                  )}
+                                  {team.fixtureSwing < 0 && (
+                                    <span className="text-red-600 dark:text-red-400 text-lg font-bold" title="Fixtures declining">↓</span>
+                                  )}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-bold text-lg text-foreground">
+                                    {team.nearTermRating}%
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+                                <span>🏠 {team.nearTermHomeFixtures} home</span>
+                                <span>•</span>
+                                <span className={team.fixtureSwing > 0 ? 'text-green-600 dark:text-green-400 font-semibold' : team.fixtureSwing < 0 ? 'text-red-600 dark:text-red-400 font-semibold' : 'text-muted-foreground'}>
+                                  {team.swingEmoji} Swing: {team.fixtureSwing > 0 ? '+' : ''}{team.fixtureSwing}%
+                                </span>
+                              </div>
                             </div>
-                            <div>
-                              <span className="block">Following 3 GWs:</span>
-                              <span className="font-semibold text-green-600 dark:text-green-400">{team.mediumTermRating}%</span>
-                            </div>
-                          </div>
-                          <div className="flex items-center justify-between pt-2 border-t border-border/30 mb-2">
-                            <div className="flex items-center gap-2 text-xs">
-                              <span className="text-muted-foreground">🏠 {team.nearTermHomeFixtures}/{team.mediumTermHomeFixtures} home</span>
-                              <span className="text-muted-foreground">•</span>
-                              <span className={`font-medium ${team.att > team.def ? 'text-red-600 dark:text-red-400' : 'text-blue-600 dark:text-blue-400'}`}>
-                                {team.att > team.def ? '⚔️ Attack' : '🛡️ Defense'}
-                              </span>
-                            </div>
-                          </div>
-                          <p className="text-xs mt-2 text-green-600 dark:text-green-400 font-medium">
-                            ✅ Consider buying - fixtures getting easier
-                          </p>
-                        </div>
-                      ))}
-                    {sortedTeamData.filter(team => team.swingCategory === "Fixture Decline").length === 0 && (
-                      <p className="text-xs text-muted-foreground italic p-3 bg-secondary/20 rounded-lg">
-                        No teams with declining fixtures (buy opportunities) in the next 6 gameweeks
-                      </p>
-                    )}
+                          );
+                        })}
+                    </div>
                   </div>
 
-                  {/* Sell Warnings - Teams with improving fixtures (getting harder later) */}
+                  {/* Medium-term: Following 3 Gameweeks */}
                   <div className="space-y-3">
-                    <h3 className="text-sm font-semibold text-red-600 dark:text-red-400 flex items-center gap-2">
-                      📉 Fixture Declines - Sell Warnings
-                    </h3>
-                    {sortedTeamData
-                      .filter(team => team.swingCategory === "Fixture Improvement")
-                      .slice(0, 5)
-                      .map((team, index) => (
-                        <div
-                          key={index}
-                          className="p-3 rounded-lg bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/20 hover:border-red-500/40 transition-all"
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="font-semibold text-foreground">{team.team}</span>
-                            <Badge className="bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 text-xs">
-                              {team.swingEmoji} {team.fixtureSwing}
-                            </Badge>
-                          </div>
-                          <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground mb-2">
-                            <div>
-                              <span className="block">Next 3 GWs:</span>
-                              <span className="font-semibold text-green-600 dark:text-green-400">{team.nearTermRating}%</span>
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-base font-bold text-foreground flex items-center gap-2">
+                        📅 Following 3 Gameweeks
+                        <span className="text-xs text-muted-foreground font-normal">(GW 4-6)</span>
+                      </h3>
+                    </div>
+                    <div className="space-y-2">
+                      {[...teamFixtureSummary]
+                        .sort((a, b) => b.mediumTermRating - a.mediumTermRating)
+                        .slice(0, 10)
+                        .map((team, index) => {
+                          return (
+                            <div
+                              key={index}
+                              className={`p-3 rounded-lg border-2 border-slate-300 dark:border-slate-700 ${getTeamBackgroundColor(team.team)} hover:scale-[1.02] transition-all`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-3 flex-1 min-w-0">
+                                  <span className="text-xs font-bold text-muted-foreground w-6">#{index + 1}</span>
+                                  <span className="font-semibold text-sm text-foreground truncate">{team.team}</span>
+                                  {team.fixtureSwing > 0 && (
+                                    <span className="text-green-600 dark:text-green-400 text-lg font-bold" title="Fixtures improving">↑</span>
+                                  )}
+                                  {team.fixtureSwing < 0 && (
+                                    <span className="text-red-600 dark:text-red-400 text-lg font-bold" title="Fixtures declining">↓</span>
+                                  )}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <span className="font-bold text-lg text-foreground">
+                                    {team.mediumTermRating}%
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+                                <span>🏠 {team.mediumTermHomeFixtures} home</span>
+                                <span>•</span>
+                                <span className={team.fixtureSwing > 0 ? 'text-green-600 dark:text-green-400 font-semibold' : team.fixtureSwing < 0 ? 'text-red-600 dark:text-red-400 font-semibold' : 'text-muted-foreground'}>
+                                  {team.swingEmoji} Swing: {team.fixtureSwing > 0 ? '+' : ''}{team.fixtureSwing}%
+                                </span>
+                              </div>
                             </div>
-                            <div>
-                              <span className="block">Following 3 GWs:</span>
-                              <span className="font-semibold text-orange-600 dark:text-orange-400">{team.mediumTermRating}%</span>
-                            </div>
-                          </div>
-                          <div className="flex items-center justify-between pt-2 border-t border-border/30 mb-2">
-                            <div className="flex items-center gap-2 text-xs">
-                              <span className="text-muted-foreground">🏠 {team.nearTermHomeFixtures}/{team.mediumTermHomeFixtures} home</span>
-                              <span className="text-muted-foreground">•</span>
-                              <span className={`font-medium ${team.att > team.def ? 'text-red-600 dark:text-red-400' : 'text-blue-600 dark:text-blue-400'}`}>
-                                {team.att > team.def ? '⚔️ Attack' : '🛡️ Defense'}
-                              </span>
-                            </div>
-                          </div>
-                          <p className="text-xs mt-2 text-red-600 dark:text-red-400 font-medium">
-                            ⚠️ Consider selling - fixtures getting harder
-                          </p>
-                        </div>
-                      ))}
-                    {sortedTeamData.filter(team => team.swingCategory === "Fixture Improvement").length === 0 && (
-                      <p className="text-xs text-muted-foreground italic p-3 bg-secondary/20 rounded-lg">
-                        No teams with improving fixtures (sell warnings) in the next 6 gameweeks
-                      </p>
-                    )}
+                          );
+                        })}
+                    </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Stable Fixtures Card - All other teams */}
+            {/* Biggest Movers - Fixture Swings */}
             <Card className="border-border/50 bg-card backdrop-blur-md shadow-lg">
               <CardHeader className="pb-3 sm:pb-4 border-b border-border/50">
                 <CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center">
-                    ➡️
+                    🔄
                   </div>
-                  Stable Fixtures
+                  Biggest Fixture Swings
                   <Badge variant="secondary" className="ml-auto text-xs">
-                    {sortedTeamData.filter(team => team.swingCategory === "Stable").length} Teams
+                    Transfer Targets
                   </Badge>
                 </CardTitle>
                 <p className="text-xs sm:text-sm text-muted-foreground mt-2">
-                  Teams with consistent fixture difficulty. Swing &lt; ±15%.
+                  Teams with the largest fixture difficulty changes between periods.
                 </p>
               </CardHeader>
               <CardContent className="p-3 sm:p-6">
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {sortedTeamData
-                    .filter(team => team.swingCategory === "Stable")
-                    .map((team, index) => (
-                      <div
-                        key={index}
-                        className="p-3 rounded-lg bg-secondary/20 border border-border/30 hover:border-border/60 hover:bg-secondary/30 transition-all"
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="font-semibold text-foreground text-sm">{team.team}</span>
-                          <Badge variant="outline" className="text-xs">
-                            {team.swingEmoji} {team.fixtureSwing > 0 ? '+' : ''}{team.fixtureSwing}
-                          </Badge>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {[...teamFixtureSummary]
+                    .sort((a, b) => Math.abs(b.fixtureSwing) - Math.abs(a.fixtureSwing))
+                    .slice(0, 9)
+                    .map((team, index) => {
+                      const isImproving = team.fixtureSwing > 0;
+                      return (
+                        <div
+                          key={index}
+                          className={`p-3 rounded-lg border transition-all hover:scale-[1.02] ${
+                            isImproving
+                              ? 'bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-green-500/20 hover:border-green-500/40'
+                              : 'bg-gradient-to-r from-red-500/10 to-orange-500/10 border-red-500/20 hover:border-red-500/40'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="font-semibold text-sm text-foreground">{team.team}</span>
+                            <Badge className={isImproving 
+                              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                              : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                            }>
+                              {team.swingEmoji} {team.fixtureSwing > 0 ? '+' : ''}{team.fixtureSwing}%
+                            </Badge>
+                          </div>
+                          <div className="space-y-1.5">
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-muted-foreground">GW 1-3</span>
+                              <span className={`font-semibold ${getTeamColor(team.team)}`}>
+                                {team.nearTermRating}%
+                              </span>
+                            </div>
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="text-muted-foreground">GW 4-6</span>
+                              <span className={`font-semibold ${getTeamColor(team.team)}`}>
+                                {team.mediumTermRating}%
+                              </span>
+                            </div>
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-2">
+                            {isImproving ? '📈 Consider buying' : '📉 Consider selling'}
+                          </p>
                         </div>
-                        <div className="space-y-1.5">
-                          <div className="flex items-center justify-between text-xs">
-                            <span className="text-muted-foreground">Next 3:</span>
-                            <span className={`font-semibold ${
-                              team.nearTermRating >= 70 ? 'text-green-600 dark:text-green-400' :
-                              team.nearTermRating >= 50 ? 'text-yellow-600 dark:text-yellow-400' :
-                              'text-orange-600 dark:text-orange-400'
-                            }`}>
-                              {team.nearTermRating}%
-                            </span>
-                          </div>
-                          <div className="flex items-center justify-between text-xs">
-                            <span className="text-muted-foreground">Following 3:</span>
-                            <span className={`font-semibold ${
-                              team.mediumTermRating >= 70 ? 'text-green-600 dark:text-green-400' :
-                              team.mediumTermRating >= 50 ? 'text-yellow-600 dark:text-yellow-400' :
-                              'text-orange-600 dark:text-orange-400'
-                            }`}>
-                              {team.mediumTermRating}%
-                            </span>
-                          </div>
-                          <div className="flex items-center justify-between text-xs pt-1.5 border-t border-border/30">
-                            <span className="text-muted-foreground">🏠 {team.nearTermHomeFixtures}/{team.mediumTermHomeFixtures}</span>
-                            <span className={`font-medium ${team.att > team.def ? 'text-red-600 dark:text-red-400' : 'text-blue-600 dark:text-blue-400'}`}>
-                              {team.att > team.def ? '⚔️' : '🛡️'}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                 </div>
               </CardContent>
             </Card>
