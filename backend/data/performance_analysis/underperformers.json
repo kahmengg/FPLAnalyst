@@ -4,22 +4,22 @@
         "team": "Crystal Palace",
         "team_short": "CRY",
         "goals": 7,
-        "xG": 9.3,
-        "overperformance": -2.3,
-        "overperformance_per_90": -0.144,
+        "xG": 9.4,
+        "overperformance": -2.4,
+        "overperformance_per_90": -0.141,
         "sustainable": false,
-        "form": 2.3
+        "form": 2.5
     },
     {
         "player": "B.Fernandes",
         "team": "Man Utd",
         "team_short": "MUN",
         "goals": 5,
-        "xG": 6.6,
-        "overperformance": -1.6,
+        "xG": 6.7,
+        "overperformance": -1.7,
         "overperformance_per_90": -0.1,
         "sustainable": false,
-        "form": 8.6
+        "form": 8.5
     },
     {
         "player": "Enzo",
@@ -28,9 +28,20 @@
         "goals": 4,
         "xG": 6.1,
         "overperformance": -2.1,
-        "overperformance_per_90": -0.131,
+        "overperformance_per_90": -0.124,
         "sustainable": false,
-        "form": 3.8
+        "form": 2.0
+    },
+    {
+        "player": "Watkins",
+        "team": "Aston Villa",
+        "team_short": "AVL",
+        "goals": 3,
+        "xG": 4.6,
+        "overperformance": -1.6,
+        "overperformance_per_90": -0.094,
+        "sustainable": false,
+        "form": 4.7
     },
     {
         "player": "M.Salah",
@@ -39,9 +50,9 @@
         "goals": 4,
         "xG": 4.6,
         "overperformance": -0.6,
-        "overperformance_per_90": -0.037,
+        "overperformance_per_90": -0.035,
         "sustainable": false,
-        "form": 1.8
+        "form": 1.4
     },
     {
         "player": "Evanilson",
@@ -50,20 +61,20 @@
         "goals": 2,
         "xG": 4.5,
         "overperformance": -2.5,
-        "overperformance_per_90": -0.156,
+        "overperformance_per_90": -0.147,
         "sustainable": false,
-        "form": 3.4
+        "form": 2.9
     },
     {
-        "player": "Watkins",
-        "team": "Aston Villa",
-        "team_short": "AVL",
+        "player": "Cunha",
+        "team": "Man Utd",
+        "team_short": "MUN",
         "goals": 3,
-        "xG": 4.4,
-        "overperformance": -1.4,
+        "xG": 4.5,
+        "overperformance": -1.5,
         "overperformance_per_90": -0.088,
         "sustainable": false,
-        "form": 4.1
+        "form": 4.5
     },
     {
         "player": "Beto",
@@ -72,19 +83,8 @@
         "goals": 1,
         "xG": 4.2,
         "overperformance": -3.2,
-        "overperformance_per_90": -0.2,
+        "overperformance_per_90": -0.188,
         "sustainable": false,
         "form": 0.9
-    },
-    {
-        "player": "Sarr",
-        "team": "Crystal Palace",
-        "team_short": "CRY",
-        "goals": 3,
-        "xG": 3.8,
-        "overperformance": -0.8,
-        "overperformance_per_90": -0.05,
-        "sustainable": false,
-        "form": 1.1
     }
 ]
