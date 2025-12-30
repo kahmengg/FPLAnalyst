@@ -271,20 +271,20 @@ export default function TeamRankingsPage() {
   return (
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h1 className="mb-2 text-4xl font-bold text-foreground flex items-center gap-3">
-            <TrophyIcon className="h-8 w-8 text-yellow-500" />
+        <div className="mb-8 animate-in fade-in slide-in-from-top duration-700">
+          <h1 className="mb-2 text-4xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent flex items-center gap-3">
+            <TrophyIcon className="h-8 w-8 text-yellow-500 animate-pulse" style={{ animationDuration: '2s' }} />
             Team Rankings
           </h1>
-          <p className="text-lg text-muted-foreground">Attack and defense strength analysis for all 20 teams</p>
+          <p className="text-lg text-muted-foreground animate-in fade-in slide-in-from-top duration-700" style={{ animationDelay: '200ms' }}>Attack and defense strength analysis for all 20 teams</p>
         </div>
 
         {/* Key Insights */}
         <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <Card className="border-accent/50 bg-card">
+          <Card className="border-purple-500/50 bg-card hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-left" style={{ animationDelay: '100ms' }}>
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <TrendingUp className="h-8 w-8 text-accent" />
+                <TrendingUp className="h-8 w-8 text-purple-500 animate-pulse" style={{ animationDuration: '2s', animationDelay: '0ms' }} />
                 <div>
                   <p className="text-sm text-muted-foreground">Strongest Attack</p>
                   <p className="text-xl font-bold text-foreground">{strongestAttack}</p>
@@ -292,10 +292,10 @@ export default function TeamRankingsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-chart-3/50 bg-card">
+          <Card className="border-blue-500/50 bg-card hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-left" style={{ animationDelay: '200ms' }}>
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <Shield className="h-8 w-8 text-chart-3" />
+                <Shield className="h-8 w-8 text-blue-500 animate-pulse" style={{ animationDuration: '2s', animationDelay: '200ms' }} />
                 <div>
                   <p className="text-sm text-muted-foreground">Best Defense</p>
                   <p className="text-xl font-bold text-foreground">{bestDefense}</p>
@@ -303,10 +303,10 @@ export default function TeamRankingsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-chart-2/50 bg-card">
+          <Card className="border-indigo-500/50 bg-card hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-left" style={{ animationDelay: '300ms' }}>
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <TrendingDown className="h-8 w-8 text-chart-2" />
+                <TrendingDown className="h-8 w-8 text-indigo-500 animate-pulse" style={{ animationDuration: '2s', animationDelay: '400ms' }} />
                 <div>
                   <p className="text-sm text-muted-foreground">Weakest Attack</p>
                   <p className="text-xl font-bold text-foreground">{weakestAttack}</p>
@@ -314,10 +314,10 @@ export default function TeamRankingsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-chart-4/50 bg-card">
+          <Card className="border-slate-500/50 bg-card hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-left" style={{ animationDelay: '400ms' }}>
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <TrendingDown className="h-8 w-8 text-chart-4" />
+                <TrendingDown className="h-8 w-8 text-slate-500 animate-pulse" style={{ animationDuration: '2s', animationDelay: '600ms' }} />
                 <div>
                   <p className="text-sm text-muted-foreground">Weakest Defense</p>
                   <p className="text-xl font-bold text-foreground">{weakestDefense}</p>
@@ -412,7 +412,7 @@ export default function TeamRankingsPage() {
                 <button
                   onClick={() => setView("combined")}
                   className={`flex items-center gap-2 rounded-lg px-5 py-4 text-sm font-semibold transition-all duration-300 active:scale-95 whitespace-nowrap ${view === "combined"
-                    ? "bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg shadow-primary/25 border border-primary/20"
+                    ? "bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg shadow-purple-500/25 border border-purple-500/20"
                     : "bg-transparent text-muted-foreground active:bg-white/20"
                     }`}
                 >
@@ -422,8 +422,8 @@ export default function TeamRankingsPage() {
                 <button
                   onClick={() => setView("attack")}
                   className={`flex items-center gap-2 rounded-lg px-5 py-4 text-sm font-semibold transition-all duration-300 active:scale-95 whitespace-nowrap ${view === "attack"
-                    ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25 border border-red-500/20"
-                    : "bg-transparent text-muted-foreground active:bg-red-100"
+                    ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 border border-blue-500/20"
+                    : "bg-transparent text-muted-foreground active:bg-blue-100"
                     }`}
                 >
                   <span className="text-lg">⚽</span>
@@ -432,8 +432,8 @@ export default function TeamRankingsPage() {
                 <button
                   onClick={() => setView("defense")}
                   className={`flex items-center gap-2 rounded-lg px-5 py-4 text-sm font-semibold transition-all duration-300 active:scale-95 whitespace-nowrap ${view === "defense"
-                    ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 border border-blue-500/20"
-                    : "bg-transparent text-muted-foreground active:bg-blue-100"
+                    ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/25 border border-indigo-500/20"
+                    : "bg-transparent text-muted-foreground active:bg-indigo-100"
                     }`}
                 >
                   <span className="text-lg">🛡️</span>
@@ -448,37 +448,37 @@ export default function TeamRankingsPage() {
             <button
               onClick={() => setView("combined")}
               className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "combined"
-                ? "bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg shadow-primary/25 border border-primary/20"
+                ? "bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg shadow-purple-500/25 border border-purple-500/20"
                 : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-white/10 active:bg-white/20"
                 }`}
             >
               <span className="relative z-10">📊 Overall Rankings</span>
               {view === "combined" && (
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/10 rounded-lg blur-sm" />
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-purple-400/10 rounded-lg blur-sm" />
               )}
             </button>
             <button
               onClick={() => setView("attack")}
               className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "attack"
-                ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/25 border border-red-500/20"
-                : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-red-50 hover:text-red-600 active:bg-red-100"
+                ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 border border-blue-500/20"
+                : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-blue-50 hover:text-blue-600 active:bg-blue-100"
                 }`}
             >
               <span className="relative z-10">⚽ Attack Rankings</span>
               {view === "attack" && (
-                <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-red-400/10 rounded-lg blur-sm" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-blue-400/10 rounded-lg blur-sm" />
               )}
             </button>
             <button
               onClick={() => setView("defense")}
               className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "defense"
-                ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 border border-blue-500/20"
-                : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-blue-50 hover:text-blue-600 active:bg-blue-100"
+                ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/25 border border-indigo-500/20"
+                : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100"
                 }`}
             >
               <span className="relative z-10">🛡️ Defense Rankings</span>
               {view === "defense" && (
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-blue-400/10 rounded-lg blur-sm" />
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 to-indigo-400/10 rounded-lg blur-sm" />
               )}
             </button>
           </div>
@@ -486,7 +486,7 @@ export default function TeamRankingsPage() {
 
         {/* Rankings Grid */}
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {filteredTeams.map((team) => {
+          {filteredTeams.map((team, index) => {
             const teamColors = {
               ARS: "ring-2 ring-[#C8102E]/20 bg-gradient-to-br from-[#C8102E]/10 to-card",
               AVL: "ring-2 ring-[#7A003C]/20 bg-gradient-to-br from-[#7A003C]/10 to-card",
@@ -513,7 +513,8 @@ export default function TeamRankingsPage() {
             return (
               <Card
                 key={team.code}
-                className={`group border-border bg-card transition-all duration-300 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 hover:-translate-y-1 cursor-pointer ${teamColors[team.code] || "ring-2 ring-gray-500/20 bg-gradient-to-br from-gray-50/50 to-card"}`}
+                className={`group border-border bg-card transition-all duration-300 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1 cursor-pointer animate-in fade-in slide-in-from-bottom-4 ${teamColors[team.code] || "ring-2 ring-gray-500/20 bg-gradient-to-br from-gray-50/50 to-card"}`}
+                style={{ animationDelay: `${index * 50}ms` }}
               >
                 <CardContent className="p-6 sm:p-8">
                   <div className="mb-4 flex items-center justify-between">
@@ -532,13 +533,13 @@ export default function TeamRankingsPage() {
                             <>
                               <Badge
                                 variant="outline"
-                                className="text-xs transition-all duration-300 bg-red-50 text-red-600 border-red-200 group-hover:bg-red-100"
+                                className="text-xs transition-all duration-300 bg-blue-50 text-blue-600 border-blue-200 group-hover:bg-blue-100"
                               >
                                 ATT #{team.attackRank}
                               </Badge>
                               <Badge
                                 variant="outline"
-                                className="text-xs transition-all duration-300 bg-blue-50 text-blue-600 border-blue-200 group-hover:bg-blue-100"
+                                className="text-xs transition-all duration-300 bg-indigo-50 text-indigo-600 border-indigo-200 group-hover:bg-indigo-100"
                               >
                                 DEF #{team.defenseRank}
                               </Badge>
@@ -546,14 +547,14 @@ export default function TeamRankingsPage() {
                           ) : view === "attack" ? (
                             <Badge
                               variant="outline"
-                              className="text-xs transition-all duration-300 bg-red-50 text-red-600 border-red-200 group-hover:bg-red-100"
+                              className="text-xs transition-all duration-300 bg-blue-50 text-blue-600 border-blue-200 group-hover:bg-blue-100"
                             >
                               ATT #{team.attackRank}
                             </Badge>
                           ) : (
                             <Badge
                               variant="outline"
-                              className="text-xs transition-all duration-300 bg-blue-50 text-blue-600 border-blue-200 group-hover:bg-blue-100"
+                              className="text-xs transition-all duration-300 bg-indigo-50 text-indigo-600 border-indigo-200 group-hover:bg-indigo-100"
                             >
                               DEF #{team.defenseRank}
                             </Badge>
@@ -578,19 +579,19 @@ export default function TeamRankingsPage() {
                       )}
                       {view === "combined" && (
                         <>
-                          <div className="text-2xl font-bold text-primary">#{team.overallRank}</div>
+                          <div className="text-2xl font-bold text-purple-500">#{team.overallRank}</div>
                           <div className="text-xs text-muted-foreground">Overall Rank</div>
                         </>
                       )}
                       {view === "attack" && (
                         <>
-                          <div className="text-2xl font-bold text-red-500">#{team.attackRank}</div>
+                          <div className="text-2xl font-bold text-blue-500">#{team.attackRank}</div>
                           <div className="text-xs text-muted-foreground">Attack Rank</div>
                         </>
                       )}
                       {view === "defense" && (
                         <>
-                          <div className="text-2xl font-bold text-blue-500">#{team.defenseRank}</div>
+                          <div className="text-2xl font-bold text-indigo-500">#{team.defenseRank}</div>
                           <div className="text-xs text-muted-foreground">Defense Rank</div>
                         </>
                       )}
@@ -600,17 +601,17 @@ export default function TeamRankingsPage() {
                   <div className="grid grid-cols-3 gap-4">
                     {/* Attack Strength */}
                     <div className="group/attack">
-                      <p className="mb-2 text-xs font-medium text-muted-foreground group-hover/attack:text-red-600 transition-colors">
+                      <p className="mb-2 text-xs font-medium text-muted-foreground group-hover/attack:text-blue-600 transition-colors">
                         Attack Strength
                       </p>
                       <div className="mb-1 h-3 w-full overflow-hidden rounded-full bg-secondary group-hover:h-4 transition-all duration-300">
                         <div
-                          className="h-full bg-gradient-to-r from-red-400 to-red-500 transition-all duration-500 ease-out group-hover:from-red-500 group-hover:to-red-600"
+                          className="h-full bg-gradient-to-r from-blue-400 to-blue-500 transition-all duration-500 ease-out group-hover:from-blue-500 group-hover:to-blue-600"
                           style={{ width: `${team.attackStrengthPct}%` }}
                         />
                       </div>
                       <div className="flex justify-between text-xs text-muted-foreground">
-                        <span className="group-hover/attack:text-red-600 transition-colors">
+                        <span className="group-hover/attack:text-blue-600 transition-colors">
                           {team.goalsPerGame.toFixed(2)} goals/game
                         </span>
                         <span className="font-mono font-bold">{team.attackStrength.toFixed(2)}</span>
@@ -619,17 +620,17 @@ export default function TeamRankingsPage() {
 
                     {/* Defense Strength */}
                     <div className="group/defense">
-                      <p className="mb-2 text-xs font-medium text-muted-foreground group-hover/defense:text-blue-600 transition-colors">
+                      <p className="mb-2 text-xs font-medium text-muted-foreground group-hover/defense:text-indigo-600 transition-colors">
                         Defense Strength
                       </p>
                       <div className="mb-1 h-3 w-full overflow-hidden rounded-full bg-secondary group-hover:h-4 transition-all duration-300">
                         <div
-                          className="h-full bg-gradient-to-r from-blue-400 to-blue-500 transition-all duration-500 ease-out group-hover:from-blue-500 group-hover:to-blue-600"
+                          className="h-full bg-gradient-to-r from-indigo-400 to-indigo-500 transition-all duration-500 ease-out group-hover:from-indigo-500 group-hover:to-indigo-600"
                           style={{ width: `${team.defenseStrengthPct}%` }}
                         />
                       </div>
                       <div className="flex justify-between text-xs text-muted-foreground">
-                        <span className="group-hover/defense:text-blue-600 transition-colors">
+                        <span className="group-hover/defense:text-indigo-600 transition-colors">
                           {team.cleanSheetPct.toFixed(0)}% clean sheets
                         </span>
                         <span className="font-mono font-bold">{team.defenseStrength.toFixed(2)}</span>
@@ -638,17 +639,17 @@ export default function TeamRankingsPage() {
 
                     {/* Overall Strength */}
                     <div className="group/overall">
-                      <p className="mb-2 text-xs font-medium text-muted-foreground group-hover/overall:text-green-600 transition-colors">
+                      <p className="mb-2 text-xs font-medium text-muted-foreground group-hover/overall:text-purple-600 transition-colors">
                         Overall Strength
                       </p>
                       <div className="mb-1 h-3 w-full overflow-hidden rounded-full bg-secondary group-hover:h-4 transition-all duration-300">
                         <div
-                          className="h-full bg-gradient-to-r from-green-400 to-green-500 transition-all duration-500 ease-out group-hover:from-green-500 group-hover:to-green-600"
+                          className="h-full bg-gradient-to-r from-purple-400 to-purple-500 transition-all duration-500 ease-out group-hover:from-purple-500 group-hover:to-purple-600"
                           style={{ width: `${team.overallStrength}%` }}
                         />
                       </div>
                       <div className="flex justify-between text-xs text-muted-foreground">
-                        <span className="group-hover/overall:text-green-600 transition-colors">
+                        <span className="group-hover/overall:text-purple-600 transition-colors">
                           {team.overallStrength}
                         </span>
                         <span className="font-mono font-bold">{team.overallStrength}</span>
@@ -658,13 +659,13 @@ export default function TeamRankingsPage() {
 
                   {/* Additional Stats */}
                   <div className="mt-4 grid grid-cols-2 gap-2">
-                    <div className="text-center p-2 bg-red-50 rounded-lg">
-                      <div className="text-xs text-red-600 font-medium">xG/Game</div>
-                      <div className="text-sm font-bold text-red-700">{team.xGPerGame.toFixed(2)}</div>
+                    <div className="text-center p-2 bg-blue-50 dark:bg-blue-950/30 rounded-lg hover:shadow-md transition-all duration-300">
+                      <div className="text-xs text-blue-600 dark:text-blue-400 font-medium">xG/Game</div>
+                      <div className="text-sm font-bold text-blue-700 dark:text-blue-300">{team.xGPerGame.toFixed(2)}</div>
                     </div>
-                    <div className="text-center p-2 bg-blue-50 rounded-lg">
-                      <div className="text-xs text-blue-600 font-medium">Goals Conceded</div>
-                      <div className="text-sm font-bold text-blue-700">{team.goalsConceded.toFixed(1)}</div>
+                    <div className="text-center p-2 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg hover:shadow-md transition-all duration-300">
+                      <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium">Goals Conceded</div>
+                      <div className="text-sm font-bold text-indigo-700 dark:text-indigo-300">{team.goalsConceded.toFixed(1)}</div>
                     </div>
                   </div>
                   
@@ -675,7 +676,7 @@ export default function TeamRankingsPage() {
                         e.stopPropagation()
                         handleViewPicks(team)
                       }}
-                      className="w-full py-2.5 px-4 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-95"
+                      className="w-full py-2.5 px-4 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-95"
                     >
                       <Star className="h-4 w-4" />
                       View Quick Picks

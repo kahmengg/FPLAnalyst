@@ -506,12 +506,12 @@ export default function TopPerformersPage() {
   return (
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h1 className="mb-2 text-4xl font-bold text-foreground flex items-center gap-3">
-            <Trophy className="h-8 w-8 text-yellow-600" />
+        <div className="mb-8 animate-in fade-in slide-in-from-top duration-700">
+          <h1 className="mb-2 text-4xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent flex items-center gap-3">
+            <Trophy className="h-8 w-8 text-yellow-600 animate-pulse" style={{ animationDuration: '2s' }} />
             FPL Key Insights & Recommendations
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-muted-foreground animate-in fade-in slide-in-from-top duration-700" style={{ animationDelay: '200ms' }}>
             Comprehensive analysis based on actual season data through gameweeks
           </p>
         </div>
@@ -620,42 +620,42 @@ export default function TopPerformersPage() {
               <TabsList className="bg-secondary/50 p-2 rounded-xl inline-flex gap-2 w-max">
                 <TabsTrigger
                   value="season"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
                 >
                   <Star className="h-4 w-4" />
                   Season
                 </TabsTrigger>
                 <TabsTrigger
                   value="goals"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
                 >
                   <Target className="h-4 w-4" />
                   Goals
                 </TabsTrigger>
                 <TabsTrigger
                   value="assists"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-green-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
                 >
                   <TrendingUp className="h-4 w-4" />
                   Assists
                 </TabsTrigger>
                 <TabsTrigger
                   value="defense"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
                 >
                   <Shield className="h-4 w-4" />
                   Defense
                 </TabsTrigger>
                 <TabsTrigger
                   value="value"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
                 >
                   <DollarSign className="h-4 w-4" />
                   Value
                 </TabsTrigger>
                 <TabsTrigger
                   value="gems"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-500 data-[state=active]:to-yellow-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
                 >
                   <Gem className="h-4 w-4" />
                   Gems
@@ -669,42 +669,42 @@ export default function TopPerformersPage() {
             <TabsList className="bg-secondary/50 p-1 rounded-lg w-full grid grid-cols-3 lg:grid-cols-6 gap-1">
               <TabsTrigger
                 value="season"
-                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white"
+                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white"
               >
                 <Star className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Season</span>
               </TabsTrigger>
               <TabsTrigger
                 value="goals"
-                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white"
+                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white"
               >
                 <Target className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Goals</span>
               </TabsTrigger>
               <TabsTrigger
                 value="assists"
-                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-green-600 data-[state=active]:text-white"
+                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white"
               >
                 <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Assists</span>
               </TabsTrigger>
               <TabsTrigger
                 value="defense"
-                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white"
+                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-600 data-[state=active]:text-white"
               >
                 <Shield className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Defense</span>
               </TabsTrigger>
               <TabsTrigger
                 value="value"
-                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-emerald-600 data-[state=active]:text-white"
+                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white"
               >
                 <DollarSign className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Value</span>
               </TabsTrigger>
               <TabsTrigger
                 value="gems"
-                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-pink-500 data-[state=active]:to-pink-600 data-[state=active]:text-white"
+                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white"
               >
                 <Gem className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span className="hidden sm:inline">Gems</span>
@@ -732,7 +732,8 @@ export default function TopPerformersPage() {
                   {sortedSeasonPerformers.map((player, index) => (
                     <div
                       key={player.player}
-                      className="p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-lg active:scale-[0.98]"
+                      className="p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-purple-400/50 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] animate-in fade-in slide-in-from-bottom-4"
+                      style={{ animationDelay: `${index * 50}ms` }}
                     >
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-3">
@@ -846,7 +847,8 @@ export default function TopPerformersPage() {
                       {sortedSeasonPerformers.map((player, index) => (
                         <tr
                           key={player.player}
-                          className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
+                          className="group border-b border-border/50 transition-all duration-300 hover:bg-purple-500/10 hover:shadow-sm cursor-pointer animate-in fade-in slide-in-from-left"
+                          style={{ animationDelay: `${index * 30}ms` }}
                         >
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
                             <div className="flex items-center gap-2">
@@ -910,7 +912,8 @@ export default function TopPerformersPage() {
                     {goalScorers.map((player, index) => (
                       <div
                         key={player.player}
-                        className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:scale-[1.02]"
+                        className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-blue-400/50 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] animate-in fade-in slide-in-from-left"
+                        style={{ animationDelay: `${index * 50}ms` }}
                       >
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-3">
@@ -981,8 +984,8 @@ export default function TopPerformersPage() {
                 <CardContent className="p-3 sm:p-6">
                   <div className="space-y-6">
                     {/* Overperformers Section */}
-                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-red-50 to-red-100 dark:from-red-950/30 dark:to-red-950/10 border border-red-200 dark:border-red-800/50 hover:shadow-lg transition-all duration-300">
-                      <h4 className="font-semibold text-red-800 dark:text-red-200 mb-3 flex items-center gap-2">
+                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-950/10 border border-purple-200 dark:border-purple-800/50 hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-right" style={{ animationDelay: '100ms' }}>
+                      <h4 className="font-semibold text-purple-800 dark:text-purple-200 mb-3 flex items-center gap-2">
                         ⚠️ Potential Regression Risk
                       </h4>
                       <div className="overflow-x-auto">
@@ -1070,8 +1073,8 @@ export default function TopPerformersPage() {
                     </div>
 
                     {/* Sustainable Scorers Section */}
-                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-green-50 to-green-100 dark:from-green-950/30 dark:to-green-950/10 border border-green-200 dark:border-green-800/50 hover:shadow-lg transition-all duration-300">
-                      <h4 className="font-semibold text-green-800 dark:text-green-200 mb-3 flex items-center gap-2">
+                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-950/10 border border-blue-200 dark:border-blue-800/50 hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-right" style={{ animationDelay: '200ms' }}>
+                      <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-3 flex items-center gap-2">
                         ✅ Sustainable Performers
                       </h4>
                       <div className="overflow-x-auto">
@@ -1159,8 +1162,8 @@ export default function TopPerformersPage() {
                     </div>
 
                     {/* Underperformers Section */}
-                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-950/10 border border-blue-200 dark:border-blue-800/50 hover:shadow-lg transition-all duration-300">
-                      <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-3 flex items-center gap-2">
+                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-indigo-950/30 dark:to-indigo-950/10 border border-indigo-200 dark:border-indigo-800/50 hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-right" style={{ animationDelay: '300ms' }}>
+                      <h4 className="font-semibold text-indigo-800 dark:text-indigo-200 mb-3 flex items-center gap-2">
                         🔥 Potential Breakout Candidates
                       </h4>
                       <div className="overflow-x-auto">
@@ -1325,7 +1328,8 @@ export default function TopPerformersPage() {
                       {sortedAssistProviders.map((player, index) => (
                         <tr
                           key={player.player}
-                          className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
+                          className="group border-b border-border/50 transition-all duration-300 hover:bg-indigo-500/10 hover:shadow-sm cursor-pointer animate-in fade-in slide-in-from-left"
+                          style={{ animationDelay: `${index * 30}ms` }}
                         >
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
                             <div className="flex items-center gap-2">
@@ -1457,7 +1461,8 @@ export default function TopPerformersPage() {
                       {sortedDefensiveLeaders.map((player, index) => (
                         <tr
                           key={player.player}
-                          className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
+                          className="group border-b border-border/50 transition-all duration-300 hover:bg-purple-500/10 hover:shadow-sm cursor-pointer animate-in fade-in slide-in-from-left"
+                          style={{ animationDelay: `${index * 30}ms` }}
                         >
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
                             <div className="flex items-center gap-2">
@@ -1582,7 +1587,8 @@ export default function TopPerformersPage() {
                       {sortedValuePlayers.map((player, index) => (
                         <tr
                           key={player.player}
-                          className="group border-b border-border/50 transition-all duration-300 hover:bg-secondary/30 hover:shadow-sm cursor-pointer"
+                          className="group border-b border-border/50 transition-all duration-300 hover:bg-blue-500/10 hover:shadow-sm cursor-pointer animate-in fade-in slide-in-from-left"
+                          style={{ animationDelay: `${index * 30}ms` }}
                         >
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
                             <div className="flex items-center gap-2">
@@ -1637,7 +1643,8 @@ export default function TopPerformersPage() {
                   {hiddenGems.map((player, index) => (
                     <div
                       key={player.player}
-                      className="p-4 rounded-lg bg-gradient-to-br from-secondary/30 to-secondary/10 border transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-accent/50"
+                      className="p-4 rounded-lg bg-gradient-to-br from-secondary/30 to-secondary/10 border transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-purple-400/50 animate-in fade-in slide-in-from-bottom-4"
+                      style={{ animationDelay: `${index * 50}ms` }}
                     >
                       <div className="flex items-center justify-between mb-3">
                         <TeamBadge team={player.team_short} />
@@ -1689,27 +1696,27 @@ export default function TopPerformersPage() {
         </Tabs>
 
         {/* Key Insights Footer */}
-        <Card className="mt-8 border-border bg-card/50 backdrop-blur">
+        <Card className="mt-8 border-border bg-card/50 backdrop-blur animate-in fade-in slide-in-from-bottom duration-700">
           <CardHeader>
             <CardTitle className="text-foreground flex items-center gap-2">💡 Key Interpretations</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <div className="p-3 rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800">
-                <h4 className="font-medium text-red-800 dark:text-red-200 mb-2">⚠️ Overperformers</h4>
-                <p className="text-sm text-red-700 dark:text-red-300">
+              <div className="p-3 rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 hover:shadow-lg transition-all duration-300 animate-in fade-in" style={{ animationDelay: '100ms' }}>
+                <h4 className="font-medium text-purple-800 dark:text-purple-200 mb-2">⚠️ Overperformers</h4>
+                <p className="text-sm text-purple-700 dark:text-purple-300">
                   May see point drops as they regress to expected stats
                 </p>
               </div>
-              <div className="p-3 rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800">
-                <h4 className="font-medium text-green-800 dark:text-green-200 mb-2">✅ Sustainable Picks</h4>
-                <p className="text-sm text-green-700 dark:text-green-300">
+              <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 hover:shadow-lg transition-all duration-300 animate-in fade-in" style={{ animationDelay: '200ms' }}>
+                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">✅ Sustainable Picks</h4>
+                <p className="text-sm text-blue-700 dark:text-blue-300">
                   Reliable long-term performers for your team
                 </p>
               </div>
-              <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800">
-                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">💰 Strategy</h4>
-                <p className="text-sm text-blue-700 dark:text-blue-300">
+              <div className="p-3 rounded-lg bg-indigo-50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800 hover:shadow-lg transition-all duration-300 animate-in fade-in" style={{ animationDelay: '300ms' }}>
+                <h4 className="font-medium text-indigo-800 dark:text-indigo-200 mb-2">💰 Strategy</h4>
+                <p className="text-sm text-indigo-700 dark:text-indigo-300">
                   Consider selling overperformers at peak value
                 </p>
               </div>

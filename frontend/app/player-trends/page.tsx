@@ -212,10 +212,19 @@ export default function PlayerTrendsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-2 text-muted-foreground">Loading players...</p>
+      <div className="min-h-screen p-2 sm:p-4 lg:p-6 bg-gradient-to-br from-background via-secondary/5 to-secondary/10">
+        <div className="max-w-[1600px] mx-auto">
+          <div className="mb-6 sm:mb-8">
+            <div className="h-10 w-80 bg-secondary/50 rounded-lg animate-pulse mb-2"></div>
+            <div className="h-6 w-96 bg-secondary/30 rounded-lg animate-pulse"></div>
+          </div>
+          <div className="mb-6">
+            <div className="h-64 bg-secondary/30 rounded-xl animate-pulse"></div>
+          </div>
+          <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
+            <div className="h-96 bg-secondary/30 rounded-xl animate-pulse"></div>
+            <div className="h-96 bg-secondary/30 rounded-xl animate-pulse"></div>
+          </div>
         </div>
       </div>
     )
@@ -223,16 +232,22 @@ export default function PlayerTrendsPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center text-red-500">
-          <p>Error: {error}</p>
-          <button 
-            onClick={() => window.location.reload()}
-            className="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-lg"
-          >
-            Retry
-          </button>
-        </div>
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <Card className="max-w-md w-full">
+          <CardContent className="p-8 text-center">
+            <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-950 flex items-center justify-center mx-auto mb-4">
+              <span className="text-3xl">⚠️</span>
+            </div>
+            <h3 className="text-lg font-semibold text-foreground mb-2">Failed to load player data</h3>
+            <p className="text-sm text-muted-foreground mb-4">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-200 active:scale-95"
+            >
+              Retry
+            </button>
+          </CardContent>
+        </Card>
       </div>
     )
   }
@@ -240,20 +255,20 @@ export default function PlayerTrendsPage() {
   return (
     <div className="min-h-screen p-2 sm:p-4 lg:p-6 bg-gradient-to-br from-background via-secondary/5 to-secondary/10">
       <div className="max-w-[1600px] mx-auto">
-        <div className="mb-6 sm:mb-8">
-          <h1 className="mb-2 text-2xl sm:text-4xl font-bold text-foreground flex items-center gap-2 sm:gap-3">
-            <Activity className="w-6 h-6 sm:w-10 sm:h-10 text-primary" />
+        <div className="mb-6 sm:mb-8 animate-in fade-in slide-in-from-top duration-700">
+          <h1 className="mb-2 text-2xl sm:text-4xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent flex items-center gap-2 sm:gap-3">
+            <Activity className="w-6 h-6 sm:w-10 sm:h-10 text-purple-500 animate-pulse" style={{ animationDuration: '2s' }} />
             Player Performance Database
           </h1>
-          <p className="text-sm sm:text-lg text-muted-foreground">
+          <p className="text-sm sm:text-lg text-muted-foreground animate-in fade-in slide-in-from-top duration-700" style={{ animationDelay: '200ms' }}>
             Advanced gameweek-by-gameweek analysis • Compare multiple players with xG/xA insights
           </p>
         </div>
 
-        <Card className="mb-6 border-primary/20 bg-gradient-to-br from-primary/5 to-card shadow-lg">
+        <Card className="mb-6 border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-card shadow-lg animate-in fade-in slide-in-from-top duration-500" style={{ animationDelay: '300ms' }}>
           <CardHeader className="border-b border-border/50">
             <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-              <User className="w-5 h-5" />
+              <User className="w-5 h-5 text-purple-500" />
               Player Search & Selection ({selectedPlayers.length} selected)
             </CardTitle>
           </CardHeader>
@@ -264,12 +279,12 @@ export default function PlayerTrendsPage() {
                 placeholder="🔍 Search by player name or team..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
               />
               <select
                 value={positionFilter}
                 onChange={(e) => setPositionFilter(e.target.value)}
-                className="px-4 py-2.5 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="px-4 py-2.5 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
               >
                 <option value="all">All Positions</option>
                 <option value="1">🧤 Goalkeepers</option>
@@ -280,7 +295,7 @@ export default function PlayerTrendsPage() {
               <select
                 value={teamFilter}
                 onChange={(e) => setTeamFilter(e.target.value)}
-                className="px-4 py-2.5 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                className="px-4 py-2.5 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
               >
                 <option value="all">All Teams</option>
                 {[...new Set(allPlayers.map(p => p.team))].sort().map(team => (
@@ -323,10 +338,10 @@ export default function PlayerTrendsPage() {
                       <button
                         key={player.id}
                         onClick={() => togglePlayer(player.name)}
-                        className={`px-3 py-2.5 text-xs sm:text-sm rounded-lg border transition-all text-left ${
+                        className={`px-3 py-2.5 text-xs sm:text-sm rounded-lg border transition-all duration-200 text-left hover:scale-[1.02] ${
                           isSelected
-                            ? 'bg-primary/10 text-primary border-primary shadow-md ring-2 ring-primary/20'
-                            : 'bg-card hover:bg-secondary/50 border-border hover:border-primary/50'
+                            ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500 shadow-md ring-2 ring-purple-500/20'
+                            : 'bg-card hover:bg-secondary/50 border-border hover:border-purple-400/50'
                         }`}
                       >
                         <div className="flex items-center justify-between gap-2">
@@ -368,9 +383,9 @@ export default function PlayerTrendsPage() {
         </Card>
 
         {selectedPlayers.length === 0 ? (
-          <Card className="border-dashed border-2">
+          <Card className="border-dashed border-2 animate-in fade-in duration-500">
             <CardContent className="p-12 text-center text-muted-foreground">
-              <Target className="w-16 h-16 mx-auto mb-4 opacity-30" />
+              <Target className="w-16 h-16 mx-auto mb-4 opacity-30 animate-pulse" style={{ animationDuration: '3s' }} />
               <p className="text-lg font-medium mb-2">No Players Selected</p>
               <p className="text-sm">Search and select players above to view detailed performance analysis</p>
             </CardContent>
@@ -378,7 +393,7 @@ export default function PlayerTrendsPage() {
         ) : (
           <div className="space-y-6">
             {selectedPlayers.length > 0 && comparisonChartData.length > 0 && (
-              <Card className="border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-card">
+              <Card className="border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-card shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-500">
                 <CardHeader className="border-b border-border/50">
                   <CardTitle className="flex items-center gap-2">
                     <BarChart3 className="w-5 h-5 text-purple-500" />
@@ -387,11 +402,11 @@ export default function PlayerTrendsPage() {
                 </CardHeader>
                 <CardContent className="p-4">
                   <Tabs defaultValue="points" className="w-full">
-                    <TabsList className="grid w-full grid-cols-4">
-                      <TabsTrigger value="points">Points</TabsTrigger>
-                      <TabsTrigger value="xgi">xGI</TabsTrigger>
-                      <TabsTrigger value="minutes">Minutes</TabsTrigger>
-                      <TabsTrigger value="attacking">xG vs xA</TabsTrigger>
+                    <TabsList className="grid w-full grid-cols-4 bg-secondary/50">
+                      <TabsTrigger value="points" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white">Points</TabsTrigger>
+                      <TabsTrigger value="xgi" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white">xGI</TabsTrigger>
+                      <TabsTrigger value="minutes" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white">Minutes</TabsTrigger>
+                      <TabsTrigger value="attacking" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-600 data-[state=active]:text-white">xG vs xA</TabsTrigger>
                     </TabsList>
                     
                     <TabsContent value="points" className="mt-4">
@@ -559,7 +574,7 @@ export default function PlayerTrendsPage() {
               const posInfo = POSITION_COLORS[typedData.position.toString() as keyof typeof POSITION_COLORS] || {}
               
               return (
-                <Card key={playerName} className="border-l-4" style={{ borderLeftColor: colorInfo.line }}>
+                <Card key={playerName} className="border-l-4 hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-bottom-4" style={{ borderLeftColor: colorInfo.line, animationDelay: `${index * 100}ms` }}>
                   <CardHeader className="pb-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
@@ -581,7 +596,7 @@ export default function PlayerTrendsPage() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold text-primary">
+                        <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
                           {typedData.form.avg_points}
                         </div>
                         <div className="text-xs text-muted-foreground">avg points</div>
@@ -592,20 +607,20 @@ export default function PlayerTrendsPage() {
                   <CardContent className="space-y-6">
                     {/* Key Stats Grid */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                      <div className="text-center p-3 bg-secondary/30 rounded-lg">
-                        <div className="text-lg font-bold text-foreground">{typedData.total_stats.total_points}</div>
+                      <div className="text-center p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg hover:shadow-md transition-all duration-300">
+                        <div className="text-lg font-bold text-purple-600 dark:text-purple-400">{typedData.total_stats.total_points}</div>
                         <div className="text-xs text-muted-foreground">Total Points</div>
                       </div>
-                      <div className="text-center p-3 bg-secondary/30 rounded-lg">
-                        <div className="text-lg font-bold text-green-600">{typedData.total_stats.total_goals}</div>
+                      <div className="text-center p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg hover:shadow-md transition-all duration-300">
+                        <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{typedData.total_stats.total_goals}</div>
                         <div className="text-xs text-muted-foreground">Goals</div>
                       </div>
-                      <div className="text-center p-3 bg-secondary/30 rounded-lg">
-                        <div className="text-lg font-bold text-blue-600">{typedData.total_stats.total_assists}</div>
+                      <div className="text-center p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg hover:shadow-md transition-all duration-300">
+                        <div className="text-lg font-bold text-indigo-600 dark:text-indigo-400">{typedData.total_stats.total_assists}</div>
                         <div className="text-xs text-muted-foreground">Assists</div>
                       </div>
-                      <div className="text-center p-3 bg-secondary/30 rounded-lg">
-                        <div className="text-lg font-bold text-purple-600">{typedData.per90_stats.points_per_90}</div>
+                      <div className="text-center p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg hover:shadow-md transition-all duration-300">
+                        <div className="text-lg font-bold text-purple-600 dark:text-purple-400">{typedData.per90_stats.points_per_90}</div>
                         <div className="text-xs text-muted-foreground">Pts/90</div>
                       </div>
                     </div>
