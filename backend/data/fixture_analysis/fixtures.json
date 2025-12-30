@@ -1,2642 +1,2642 @@
 [
-    {
-        "gameweek": 19,
-        "fixture": "Arsenal vs Aston Villa",
-        "home_team": {
-            "name": "Arsenal",
-            "short_name": "ARS",
-            "attacking_fixture_rating": 85.0,
-            "defensive_fixture_rating": 51.9,
-            "rank": {
-                "attack": 4,
-                "defense": 1
-            }
-        },
-        "away_team": {
-            "name": "Aston Villa",
-            "short_name": "AVL",
-            "attacking_fixture_rating": 45.0,
-            "defensive_fixture_rating": 14.4,
-            "rank": {
-                "attack": 6,
-                "defense": 18
-            }
-        }
-    },
-    {
-        "gameweek": 19,
-        "fixture": "Brentford vs Spurs",
-        "home_team": {
-            "name": "Brentford",
-            "short_name": "BRE",
-            "attacking_fixture_rating": 35.0,
-            "defensive_fixture_rating": 46.2,
-            "rank": {
-                "attack": 18,
-                "defense": 13
-            }
-        },
-        "away_team": {
-            "name": "Spurs",
-            "short_name": "TOT",
-            "attacking_fixture_rating": 51.0,
-            "defensive_fixture_rating": 61.2,
-            "rank": {
-                "attack": 15,
-                "defense": 7
-            }
-        }
-    },
-    {
-        "gameweek": 19,
-        "fixture": "Burnley vs Newcastle",
-        "home_team": {
-            "name": "Burnley",
-            "short_name": "BUR",
-            "attacking_fixture_rating": 53.0,
-            "defensive_fixture_rating": 33.1,
-            "rank": {
-                "attack": 16,
-                "defense": 14
-            }
-        },
-        "away_team": {
-            "name": "Newcastle",
-            "short_name": "NEW",
-            "attacking_fixture_rating": 65.0,
-            "defensive_fixture_rating": 44.4,
-            "rank": {
-                "attack": 8,
-                "defense": 15
-            }
-        }
-    },
-    {
-        "gameweek": 19,
-        "fixture": "Chelsea vs Bournemouth",
-        "home_team": {
-            "name": "Chelsea",
-            "short_name": "CHE",
-            "attacking_fixture_rating": 63.0,
-            "defensive_fixture_rating": 50.0,
-            "rank": {
-                "attack": 7,
-                "defense": 5
-            }
-        },
-        "away_team": {
-            "name": "Bournemouth",
-            "short_name": "BOU",
-            "attacking_fixture_rating": 47.0,
-            "defensive_fixture_rating": 35.0,
-            "rank": {
-                "attack": 9,
-                "defense": 10
-            }
-        }
-    },
-    {
-        "gameweek": 19,
-        "fixture": "Crystal Palace vs Fulham",
-        "home_team": {
-            "name": "Crystal Palace",
-            "short_name": "CRY",
-            "attacking_fixture_rating": 45.0,
-            "defensive_fixture_rating": 48.1,
-            "rank": {
-                "attack": 12,
-                "defense": 8
-            }
-        },
-        "away_team": {
-            "name": "Fulham",
-            "short_name": "FUL",
-            "attacking_fixture_rating": 49.0,
-            "defensive_fixture_rating": 51.9,
-            "rank": {
-                "attack": 11,
-                "defense": 6
-            }
-        }
-    },
-    {
-        "gameweek": 19,
-        "fixture": "Liverpool vs Leeds",
-        "home_team": {
-            "name": "Liverpool",
-            "short_name": "LIV",
-            "attacking_fixture_rating": 83.0,
-            "defensive_fixture_rating": 31.2,
-            "rank": {
-                "attack": 3,
-                "defense": 12
-            }
-        },
-        "away_team": {
-            "name": "Leeds",
-            "short_name": "LEE",
-            "attacking_fixture_rating": 67.0,
-            "defensive_fixture_rating": 16.2,
-            "rank": {
-                "attack": 5,
-                "defense": 16
-            }
-        }
-    },
-    {
-        "gameweek": 19,
-        "fixture": "Man Utd vs Wolves",
-        "home_team": {
-            "name": "Man Utd",
-            "short_name": "MUN",
-            "attacking_fixture_rating": 91.0,
-            "defensive_fixture_rating": 61.2,
-            "rank": {
-                "attack": 2,
-                "defense": 11
-            }
-        },
-        "away_team": {
-            "name": "Wolves",
-            "short_name": "WOL",
-            "attacking_fixture_rating": 35.0,
-            "defensive_fixture_rating": 8.8,
-            "rank": {
-                "attack": 20,
-                "defense": 19
-            }
-        }
-    },
-    {
-        "gameweek": 19,
-        "fixture": "Nott'm Forest vs Everton",
-        "home_team": {
-            "name": "Nott'm Forest",
-            "short_name": "NFO",
-            "attacking_fixture_rating": 37.0,
-            "defensive_fixture_rating": 53.8,
-            "rank": {
-                "attack": 13,
-                "defense": 9
-            }
-        },
-        "away_team": {
-            "name": "Everton",
-            "short_name": "EVE",
-            "attacking_fixture_rating": 43.0,
-            "defensive_fixture_rating": 59.4,
-            "rank": {
-                "attack": 14,
-                "defense": 3
-            }
-        }
-    },
-    {
-        "gameweek": 19,
-        "fixture": "Sunderland vs Man City",
-        "home_team": {
-            "name": "Sunderland",
-            "short_name": "SUN",
-            "attacking_fixture_rating": 23.0,
-            "defensive_fixture_rating": 38.8,
-            "rank": {
-                "attack": 19,
-                "defense": 4
-            }
-        },
-        "away_team": {
-            "name": "Man City",
-            "short_name": "MCI",
-            "attacking_fixture_rating": 59.0,
-            "defensive_fixture_rating": 72.5,
-            "rank": {
-                "attack": 1,
-                "defense": 2
-            }
-        }
-    },
-    {
-        "gameweek": 19,
-        "fixture": "West Ham vs Brighton",
-        "home_team": {
-            "name": "West Ham",
-            "short_name": "WHU",
-            "attacking_fixture_rating": 57.0,
-            "defensive_fixture_rating": 25.6,
-            "rank": {
-                "attack": 17,
-                "defense": 20
-            }
-        },
-        "away_team": {
-            "name": "Brighton",
-            "short_name": "BHA",
-            "attacking_fixture_rating": 73.0,
-            "defensive_fixture_rating": 40.6,
-            "rank": {
-                "attack": 10,
-                "defense": 17
-            }
-        }
-    },
-    {
-        "gameweek": 20,
-        "fixture": "Aston Villa vs Nott'm Forest",
-        "home_team": {
-            "name": "Aston Villa",
-            "short_name": "AVL",
-            "attacking_fixture_rating": 63.0,
-            "defensive_fixture_rating": 35.0,
-            "rank": {
-                "attack": 6,
-                "defense": 18
-            }
-        },
-        "away_team": {
-            "name": "Nott'm Forest",
-            "short_name": "NFO",
-            "attacking_fixture_rating": 63.0,
-            "defensive_fixture_rating": 35.0,
-            "rank": {
-                "attack": 13,
-                "defense": 9
-            }
-        }
-    },
-    {
-        "gameweek": 20,
-        "fixture": "Bournemouth vs Arsenal",
-        "home_team": {
-            "name": "Bournemouth",
-            "short_name": "BOU",
-            "attacking_fixture_rating": 39.0,
-            "defensive_fixture_rating": 33.1,
-            "rank": {
-                "attack": 9,
-                "defense": 10
-            }
-        },
-        "away_team": {
-            "name": "Arsenal",
-            "short_name": "ARS",
-            "attacking_fixture_rating": 65.0,
-            "defensive_fixture_rating": 57.5,
-            "rank": {
-                "attack": 4,
-                "defense": 1
-            }
-        }
-    },
-    {
-        "gameweek": 20,
-        "fixture": "Brighton vs Burnley",
-        "home_team": {
-            "name": "Brighton",
-            "short_name": "BHA",
-            "attacking_fixture_rating": 65.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 10,
-                "defense": 17
-            }
-        },
-        "away_team": {
-            "name": "Burnley",
-            "short_name": "BUR",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 33.1,
-            "rank": {
-                "attack": 16,
-                "defense": 14
-            }
-        }
-    },
-    {
-        "gameweek": 20,
-        "fixture": "Everton vs Brentford",
-        "home_team": {
-            "name": "Everton",
-            "short_name": "EVE",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 72.5,
-            "rank": {
-                "attack": 14,
-                "defense": 3
-            }
-        },
-        "away_team": {
-            "name": "Brentford",
-            "short_name": "BRE",
-            "attacking_fixture_rating": 23.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 18,
-                "defense": 13
-            }
-        }
-    },
-    {
-        "gameweek": 20,
-        "fixture": "Fulham vs Liverpool",
-        "home_team": {
-            "name": "Fulham",
-            "short_name": "FUL",
-            "attacking_fixture_rating": 59.0,
-            "defensive_fixture_rating": 38.8,
-            "rank": {
-                "attack": 11,
-                "defense": 6
-            }
-        },
-        "away_team": {
-            "name": "Liverpool",
-            "short_name": "LIV",
-            "attacking_fixture_rating": 59.0,
-            "defensive_fixture_rating": 38.8,
-            "rank": {
-                "attack": 3,
-                "defense": 12
-            }
-        }
-    },
-    {
-        "gameweek": 20,
-        "fixture": "Leeds vs Man Utd",
-        "home_team": {
-            "name": "Leeds",
-            "short_name": "LEE",
-            "attacking_fixture_rating": 69.0,
-            "defensive_fixture_rating": 18.1,
-            "rank": {
-                "attack": 5,
-                "defense": 16
-            }
-        },
-        "away_team": {
-            "name": "Man Utd",
-            "short_name": "MUN",
-            "attacking_fixture_rating": 81.0,
-            "defensive_fixture_rating": 29.4,
-            "rank": {
-                "attack": 2,
-                "defense": 11
-            }
-        }
-    },
-    {
-        "gameweek": 20,
-        "fixture": "Man City vs Chelsea",
-        "home_team": {
-            "name": "Man City",
-            "short_name": "MCI",
-            "attacking_fixture_rating": 63.0,
-            "defensive_fixture_rating": 51.9,
-            "rank": {
-                "attack": 1,
-                "defense": 2
-            }
-        },
-        "away_team": {
-            "name": "Chelsea",
-            "short_name": "CHE",
-            "attacking_fixture_rating": 45.0,
-            "defensive_fixture_rating": 35.0,
-            "rank": {
-                "attack": 7,
-                "defense": 5
-            }
-        }
-    },
-    {
-        "gameweek": 20,
-        "fixture": "Newcastle vs Crystal Palace",
-        "home_team": {
-            "name": "Newcastle",
-            "short_name": "NEW",
-            "attacking_fixture_rating": 57.0,
-            "defensive_fixture_rating": 36.9,
-            "rank": {
-                "attack": 8,
-                "defense": 15
-            }
-        },
-        "away_team": {
-            "name": "Crystal Palace",
-            "short_name": "CRY",
-            "attacking_fixture_rating": 61.0,
-            "defensive_fixture_rating": 40.6,
-            "rank": {
-                "attack": 12,
-                "defense": 8
-            }
-        }
-    },
-    {
-        "gameweek": 20,
-        "fixture": "Spurs vs Sunderland",
-        "home_team": {
-            "name": "Spurs",
-            "short_name": "TOT",
-            "attacking_fixture_rating": 35.0,
-            "defensive_fixture_rating": 66.9,
-            "rank": {
-                "attack": 15,
-                "defense": 7
-            }
-        },
-        "away_team": {
-            "name": "Sunderland",
-            "short_name": "SUN",
-            "attacking_fixture_rating": 29.0,
-            "defensive_fixture_rating": 61.2,
-            "rank": {
-                "attack": 19,
-                "defense": 4
-            }
-        }
-    },
-    {
-        "gameweek": 20,
-        "fixture": "Wolves vs West Ham",
-        "home_team": {
-            "name": "Wolves",
-            "short_name": "WOL",
-            "attacking_fixture_rating": 57.0,
-            "defensive_fixture_rating": 40.6,
-            "rank": {
-                "attack": 20,
-                "defense": 19
-            }
-        },
-        "away_team": {
-            "name": "West Ham",
-            "short_name": "WHU",
-            "attacking_fixture_rating": 57.0,
-            "defensive_fixture_rating": 40.6,
-            "rank": {
-                "attack": 17,
-                "defense": 20
-            }
-        }
-    },
-    {
-        "gameweek": 21,
-        "fixture": "Arsenal vs Liverpool",
-        "home_team": {
-            "name": "Arsenal",
-            "short_name": "ARS",
-            "attacking_fixture_rating": 73.0,
-            "defensive_fixture_rating": 46.2,
-            "rank": {
-                "attack": 4,
-                "defense": 1
-            }
-        },
-        "away_team": {
-            "name": "Liverpool",
-            "short_name": "LIV",
-            "attacking_fixture_rating": 51.0,
-            "defensive_fixture_rating": 25.6,
-            "rank": {
-                "attack": 3,
-                "defense": 12
-            }
-        }
-    },
-    {
-        "gameweek": 21,
-        "fixture": "Bournemouth vs Spurs",
-        "home_team": {
-            "name": "Bournemouth",
-            "short_name": "BOU",
-            "attacking_fixture_rating": 51.0,
-            "defensive_fixture_rating": 53.8,
-            "rank": {
-                "attack": 9,
-                "defense": 10
-            }
-        },
-        "away_team": {
-            "name": "Spurs",
-            "short_name": "TOT",
-            "attacking_fixture_rating": 43.0,
-            "defensive_fixture_rating": 46.2,
-            "rank": {
-                "attack": 15,
-                "defense": 7
-            }
-        }
-    },
-    {
-        "gameweek": 21,
-        "fixture": "Brentford vs Sunderland",
-        "home_team": {
-            "name": "Brentford",
-            "short_name": "BRE",
-            "attacking_fixture_rating": 29.0,
-            "defensive_fixture_rating": 53.8,
-            "rank": {
-                "attack": 18,
-                "defense": 13
-            }
-        },
-        "away_team": {
-            "name": "Sunderland",
-            "short_name": "SUN",
-            "attacking_fixture_rating": 43.0,
-            "defensive_fixture_rating": 66.9,
-            "rank": {
-                "attack": 19,
-                "defense": 4
-            }
-        }
-    },
-    {
-        "gameweek": 21,
-        "fixture": "Burnley vs Man Utd",
-        "home_team": {
-            "name": "Burnley",
-            "short_name": "BUR",
-            "attacking_fixture_rating": 45.0,
-            "defensive_fixture_rating": 21.9,
-            "rank": {
-                "attack": 16,
-                "defense": 14
-            }
-        },
-        "away_team": {
-            "name": "Man Utd",
-            "short_name": "MUN",
-            "attacking_fixture_rating": 77.0,
-            "defensive_fixture_rating": 51.9,
-            "rank": {
-                "attack": 2,
-                "defense": 11
-            }
-        }
-    },
-    {
-        "gameweek": 21,
-        "fixture": "Crystal Palace vs Aston Villa",
-        "home_team": {
-            "name": "Crystal Palace",
-            "short_name": "CRY",
-            "attacking_fixture_rating": 69.0,
-            "defensive_fixture_rating": 38.8,
-            "rank": {
-                "attack": 12,
-                "defense": 8
-            }
-        },
-        "away_team": {
-            "name": "Aston Villa",
-            "short_name": "AVL",
-            "attacking_fixture_rating": 59.0,
-            "defensive_fixture_rating": 29.4,
-            "rank": {
-                "attack": 6,
-                "defense": 18
-            }
-        }
-    },
-    {
-        "gameweek": 21,
-        "fixture": "Everton vs Wolves",
-        "home_team": {
-            "name": "Everton",
-            "short_name": "EVE",
-            "attacking_fixture_rating": 67.0,
-            "defensive_fixture_rating": 76.2,
-            "rank": {
-                "attack": 14,
-                "defense": 3
-            }
-        },
-        "away_team": {
-            "name": "Wolves",
-            "short_name": "WOL",
-            "attacking_fixture_rating": 19.0,
-            "defensive_fixture_rating": 31.2,
-            "rank": {
-                "attack": 20,
-                "defense": 19
-            }
-        }
-    },
-    {
-        "gameweek": 21,
-        "fixture": "Fulham vs Chelsea",
-        "home_team": {
-            "name": "Fulham",
-            "short_name": "FUL",
-            "attacking_fixture_rating": 45.0,
-            "defensive_fixture_rating": 46.2,
-            "rank": {
-                "attack": 11,
-                "defense": 6
-            }
-        },
-        "away_team": {
-            "name": "Chelsea",
-            "short_name": "CHE",
-            "attacking_fixture_rating": 51.0,
-            "defensive_fixture_rating": 51.9,
-            "rank": {
-                "attack": 7,
-                "defense": 5
-            }
-        }
-    },
-    {
-        "gameweek": 21,
-        "fixture": "Man City vs Brighton",
-        "home_team": {
-            "name": "Man City",
-            "short_name": "MCI",
-            "attacking_fixture_rating": 87.0,
-            "defensive_fixture_rating": 57.5,
-            "rank": {
-                "attack": 1,
-                "defense": 2
-            }
-        },
-        "away_team": {
-            "name": "Brighton",
-            "short_name": "BHA",
-            "attacking_fixture_rating": 39.0,
-            "defensive_fixture_rating": 12.5,
-            "rank": {
-                "attack": 10,
-                "defense": 17
-            }
-        }
-    },
-    {
-        "gameweek": 21,
-        "fixture": "Newcastle vs Leeds",
-        "home_team": {
-            "name": "Newcastle",
-            "short_name": "NEW",
-            "attacking_fixture_rating": 73.0,
-            "defensive_fixture_rating": 23.8,
-            "rank": {
-                "attack": 8,
-                "defense": 15
-            }
-        },
-        "away_team": {
-            "name": "Leeds",
-            "short_name": "LEE",
-            "attacking_fixture_rating": 75.0,
-            "defensive_fixture_rating": 25.6,
-            "rank": {
-                "attack": 5,
-                "defense": 16
-            }
-        }
-    },
-    {
-        "gameweek": 21,
-        "fixture": "West Ham vs Nott'm Forest",
-        "home_team": {
-            "name": "West Ham",
-            "short_name": "WHU",
-            "attacking_fixture_rating": 41.0,
-            "defensive_fixture_rating": 31.2,
-            "rank": {
-                "attack": 17,
-                "defense": 20
-            }
-        },
-        "away_team": {
-            "name": "Nott'm Forest",
-            "short_name": "NFO",
-            "attacking_fixture_rating": 67.0,
-            "defensive_fixture_rating": 55.6,
-            "rank": {
-                "attack": 13,
-                "defense": 9
-            }
-        }
-    },
-    {
-        "gameweek": 22,
-        "fixture": "Aston Villa vs Everton",
-        "home_team": {
-            "name": "Aston Villa",
-            "short_name": "AVL",
-            "attacking_fixture_rating": 51.0,
-            "defensive_fixture_rating": 36.9,
-            "rank": {
-                "attack": 6,
-                "defense": 18
-            }
-        },
-        "away_team": {
-            "name": "Everton",
-            "short_name": "EVE",
-            "attacking_fixture_rating": 61.0,
-            "defensive_fixture_rating": 46.2,
-            "rank": {
-                "attack": 14,
-                "defense": 3
-            }
-        }
-    },
-    {
-        "gameweek": 22,
-        "fixture": "Brighton vs Bournemouth",
-        "home_team": {
-            "name": "Brighton",
-            "short_name": "BHA",
-            "attacking_fixture_rating": 57.0,
-            "defensive_fixture_rating": 29.4,
-            "rank": {
-                "attack": 10,
-                "defense": 17
-            }
-        },
-        "away_team": {
-            "name": "Bournemouth",
-            "short_name": "BOU",
-            "attacking_fixture_rating": 69.0,
-            "defensive_fixture_rating": 40.6,
-            "rank": {
-                "attack": 9,
-                "defense": 10
-            }
-        }
-    },
-    {
-        "gameweek": 22,
-        "fixture": "Chelsea vs Brentford",
-        "home_team": {
-            "name": "Chelsea",
-            "short_name": "CHE",
-            "attacking_fixture_rating": 69.0,
-            "defensive_fixture_rating": 66.9,
-            "rank": {
-                "attack": 7,
-                "defense": 5
-            }
-        },
-        "away_team": {
-            "name": "Brentford",
-            "short_name": "BRE",
-            "attacking_fixture_rating": 29.0,
-            "defensive_fixture_rating": 29.4,
-            "rank": {
-                "attack": 18,
-                "defense": 13
-            }
-        }
-    },
-    {
-        "gameweek": 22,
-        "fixture": "Leeds vs Fulham",
-        "home_team": {
-            "name": "Leeds",
-            "short_name": "LEE",
-            "attacking_fixture_rating": 59.0,
-            "defensive_fixture_rating": 35.0,
-            "rank": {
-                "attack": 5,
-                "defense": 16
-            }
-        },
-        "away_team": {
-            "name": "Fulham",
-            "short_name": "FUL",
-            "attacking_fixture_rating": 63.0,
-            "defensive_fixture_rating": 38.8,
-            "rank": {
-                "attack": 11,
-                "defense": 6
-            }
-        }
-    },
-    {
-        "gameweek": 22,
-        "fixture": "Liverpool vs Burnley",
-        "home_team": {
-            "name": "Liverpool",
-            "short_name": "LIV",
-            "attacking_fixture_rating": 79.0,
-            "defensive_fixture_rating": 51.9,
-            "rank": {
-                "attack": 3,
-                "defense": 12
-            }
-        },
-        "away_team": {
-            "name": "Burnley",
-            "short_name": "BUR",
-            "attacking_fixture_rating": 45.0,
-            "defensive_fixture_rating": 20.0,
-            "rank": {
-                "attack": 16,
-                "defense": 14
-            }
-        }
-    },
-    {
-        "gameweek": 22,
-        "fixture": "Man Utd vs Man City",
-        "home_team": {
-            "name": "Man Utd",
-            "short_name": "MUN",
-            "attacking_fixture_rating": 57.0,
-            "defensive_fixture_rating": 25.6,
-            "rank": {
-                "attack": 2,
-                "defense": 11
-            }
-        },
-        "away_team": {
-            "name": "Man City",
-            "short_name": "MCI",
-            "attacking_fixture_rating": 73.0,
-            "defensive_fixture_rating": 40.6,
-            "rank": {
-                "attack": 1,
-                "defense": 2
-            }
-        }
-    },
-    {
-        "gameweek": 22,
-        "fixture": "Nott'm Forest vs Arsenal",
-        "home_team": {
-            "name": "Nott'm Forest",
-            "short_name": "NFO",
-            "attacking_fixture_rating": 33.0,
-            "defensive_fixture_rating": 35.0,
-            "rank": {
-                "attack": 13,
-                "defense": 9
-            }
-        },
-        "away_team": {
-            "name": "Arsenal",
-            "short_name": "ARS",
-            "attacking_fixture_rating": 63.0,
-            "defensive_fixture_rating": 63.1,
-            "rank": {
-                "attack": 4,
-                "defense": 1
-            }
-        }
-    },
-    {
-        "gameweek": 22,
-        "fixture": "Spurs vs West Ham",
-        "home_team": {
-            "name": "Spurs",
-            "short_name": "TOT",
-            "attacking_fixture_rating": 67.0,
-            "defensive_fixture_rating": 63.1,
-            "rank": {
-                "attack": 15,
-                "defense": 7
-            }
-        },
-        "away_team": {
-            "name": "West Ham",
-            "short_name": "WHU",
-            "attacking_fixture_rating": 33.0,
-            "defensive_fixture_rating": 31.2,
-            "rank": {
-                "attack": 17,
-                "defense": 20
-            }
-        }
-    },
-    {
-        "gameweek": 22,
-        "fixture": "Sunderland vs Crystal Palace",
-        "home_team": {
-            "name": "Sunderland",
-            "short_name": "SUN",
-            "attacking_fixture_rating": 35.0,
-            "defensive_fixture_rating": 59.4,
-            "rank": {
-                "attack": 19,
-                "defense": 4
-            }
-        },
-        "away_team": {
-            "name": "Crystal Palace",
-            "short_name": "CRY",
-            "attacking_fixture_rating": 37.0,
-            "defensive_fixture_rating": 61.2,
-            "rank": {
-                "attack": 12,
-                "defense": 8
-            }
-        }
-    },
-    {
-        "gameweek": 22,
-        "fixture": "Wolves vs Newcastle",
-        "home_team": {
-            "name": "Wolves",
-            "short_name": "WOL",
-            "attacking_fixture_rating": 47.0,
-            "defensive_fixture_rating": 23.8,
-            "rank": {
-                "attack": 20,
-                "defense": 19
-            }
-        },
-        "away_team": {
-            "name": "Newcastle",
-            "short_name": "NEW",
-            "attacking_fixture_rating": 75.0,
-            "defensive_fixture_rating": 50.0,
-            "rank": {
-                "attack": 8,
-                "defense": 15
-            }
-        }
-    },
-    {
-        "gameweek": 23,
-        "fixture": "Arsenal vs Man Utd",
-        "home_team": {
-            "name": "Arsenal",
-            "short_name": "ARS",
-            "attacking_fixture_rating": 71.0,
-            "defensive_fixture_rating": 44.4,
-            "rank": {
-                "attack": 4,
-                "defense": 1
-            }
-        },
-        "away_team": {
-            "name": "Man Utd",
-            "short_name": "MUN",
-            "attacking_fixture_rating": 53.0,
-            "defensive_fixture_rating": 27.5,
-            "rank": {
-                "attack": 2,
-                "defense": 11
-            }
-        }
-    },
-    {
-        "gameweek": 23,
-        "fixture": "Bournemouth vs Liverpool",
-        "home_team": {
-            "name": "Bournemouth",
-            "short_name": "BOU",
-            "attacking_fixture_rating": 61.0,
-            "defensive_fixture_rating": 31.2,
-            "rank": {
-                "attack": 9,
-                "defense": 10
-            }
-        },
-        "away_team": {
-            "name": "Liverpool",
-            "short_name": "LIV",
-            "attacking_fixture_rating": 67.0,
-            "defensive_fixture_rating": 36.9,
-            "rank": {
-                "attack": 3,
-                "defense": 12
-            }
-        }
-    },
-    {
-        "gameweek": 23,
-        "fixture": "Brentford vs Nott'm Forest",
-        "home_team": {
-            "name": "Brentford",
-            "short_name": "BRE",
-            "attacking_fixture_rating": 39.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 18,
-                "defense": 13
-            }
-        },
-        "away_team": {
-            "name": "Nott'm Forest",
-            "short_name": "NFO",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 57.5,
-            "rank": {
-                "attack": 13,
-                "defense": 9
-            }
-        }
-    },
-    {
-        "gameweek": 23,
-        "fixture": "Burnley vs Spurs",
-        "home_team": {
-            "name": "Burnley",
-            "short_name": "BUR",
-            "attacking_fixture_rating": 37.0,
-            "defensive_fixture_rating": 46.2,
-            "rank": {
-                "attack": 16,
-                "defense": 14
-            }
-        },
-        "away_team": {
-            "name": "Spurs",
-            "short_name": "TOT",
-            "attacking_fixture_rating": 51.0,
-            "defensive_fixture_rating": 59.4,
-            "rank": {
-                "attack": 15,
-                "defense": 7
-            }
-        }
-    },
-    {
-        "gameweek": 23,
-        "fixture": "Crystal Palace vs Chelsea",
-        "home_team": {
-            "name": "Crystal Palace",
-            "short_name": "CRY",
-            "attacking_fixture_rating": 43.0,
-            "defensive_fixture_rating": 40.6,
-            "rank": {
-                "attack": 12,
-                "defense": 8
-            }
-        },
-        "away_team": {
-            "name": "Chelsea",
-            "short_name": "CHE",
-            "attacking_fixture_rating": 57.0,
-            "defensive_fixture_rating": 53.8,
-            "rank": {
-                "attack": 7,
-                "defense": 5
-            }
-        }
-    },
-    {
-        "gameweek": 23,
-        "fixture": "Everton vs Leeds",
-        "home_team": {
-            "name": "Everton",
-            "short_name": "EVE",
-            "attacking_fixture_rating": 61.0,
-            "defensive_fixture_rating": 48.1,
-            "rank": {
-                "attack": 14,
-                "defense": 3
-            }
-        },
-        "away_team": {
-            "name": "Leeds",
-            "short_name": "LEE",
-            "attacking_fixture_rating": 49.0,
-            "defensive_fixture_rating": 36.9,
-            "rank": {
-                "attack": 5,
-                "defense": 16
-            }
-        }
-    },
-    {
-        "gameweek": 23,
-        "fixture": "Fulham vs Brighton",
-        "home_team": {
-            "name": "Fulham",
-            "short_name": "FUL",
-            "attacking_fixture_rating": 69.0,
-            "defensive_fixture_rating": 51.9,
-            "rank": {
-                "attack": 11,
-                "defense": 6
-            }
-        },
-        "away_team": {
-            "name": "Brighton",
-            "short_name": "BHA",
-            "attacking_fixture_rating": 45.0,
-            "defensive_fixture_rating": 29.4,
-            "rank": {
-                "attack": 10,
-                "defense": 17
-            }
-        }
-    },
-    {
-        "gameweek": 23,
-        "fixture": "Man City vs Wolves",
-        "home_team": {
-            "name": "Man City",
-            "short_name": "MCI",
-            "attacking_fixture_rating": 91.0,
-            "defensive_fixture_rating": 76.2,
-            "rank": {
-                "attack": 1,
-                "defense": 2
-            }
-        },
-        "away_team": {
-            "name": "Wolves",
-            "short_name": "WOL",
-            "attacking_fixture_rating": 19.0,
-            "defensive_fixture_rating": 8.8,
-            "rank": {
-                "attack": 20,
-                "defense": 19
-            }
-        }
-    },
-    {
-        "gameweek": 23,
-        "fixture": "Newcastle vs Aston Villa",
-        "home_team": {
-            "name": "Newcastle",
-            "short_name": "NEW",
-            "attacking_fixture_rating": 77.0,
-            "defensive_fixture_rating": 25.6,
-            "rank": {
-                "attack": 8,
-                "defense": 15
-            }
-        },
-        "away_team": {
-            "name": "Aston Villa",
-            "short_name": "AVL",
-            "attacking_fixture_rating": 73.0,
-            "defensive_fixture_rating": 21.9,
-            "rank": {
-                "attack": 6,
-                "defense": 18
-            }
-        }
-    },
-    {
-        "gameweek": 23,
-        "fixture": "West Ham vs Sunderland",
-        "home_team": {
-            "name": "West Ham",
-            "short_name": "WHU",
-            "attacking_fixture_rating": 31.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 17,
-                "defense": 20
-            }
-        },
-        "away_team": {
-            "name": "Sunderland",
-            "short_name": "SUN",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 65.0,
-            "rank": {
-                "attack": 19,
-                "defense": 4
-            }
-        }
-    },
-    {
-        "gameweek": 24,
-        "fixture": "Aston Villa vs Brentford",
-        "home_team": {
-            "name": "Aston Villa",
-            "short_name": "AVL",
-            "attacking_fixture_rating": 71.0,
-            "defensive_fixture_rating": 44.4,
-            "rank": {
-                "attack": 6,
-                "defense": 18
-            }
-        },
-        "away_team": {
-            "name": "Brentford",
-            "short_name": "BRE",
-            "attacking_fixture_rating": 53.0,
-            "defensive_fixture_rating": 27.5,
-            "rank": {
-                "attack": 18,
-                "defense": 13
-            }
-        }
-    },
-    {
-        "gameweek": 24,
-        "fixture": "Brighton vs Everton",
-        "home_team": {
-            "name": "Brighton",
-            "short_name": "BHA",
-            "attacking_fixture_rating": 43.0,
-            "defensive_fixture_rating": 38.8,
-            "rank": {
-                "attack": 10,
-                "defense": 17
-            }
-        },
-        "away_team": {
-            "name": "Everton",
-            "short_name": "EVE",
-            "attacking_fixture_rating": 59.0,
-            "defensive_fixture_rating": 53.8,
-            "rank": {
-                "attack": 14,
-                "defense": 3
-            }
-        }
-    },
-    {
-        "gameweek": 24,
-        "fixture": "Chelsea vs West Ham",
-        "home_team": {
-            "name": "Chelsea",
-            "short_name": "CHE",
-            "attacking_fixture_rating": 83.0,
-            "defensive_fixture_rating": 65.0,
-            "rank": {
-                "attack": 7,
-                "defense": 5
-            }
-        },
-        "away_team": {
-            "name": "West Ham",
-            "short_name": "WHU",
-            "attacking_fixture_rating": 31.0,
-            "defensive_fixture_rating": 16.2,
-            "rank": {
-                "attack": 17,
-                "defense": 20
-            }
-        }
-    },
-    {
-        "gameweek": 24,
-        "fixture": "Leeds vs Arsenal",
-        "home_team": {
-            "name": "Leeds",
-            "short_name": "LEE",
-            "attacking_fixture_rating": 49.0,
-            "defensive_fixture_rating": 21.9,
-            "rank": {
-                "attack": 5,
-                "defense": 16
-            }
-        },
-        "away_team": {
-            "name": "Arsenal",
-            "short_name": "ARS",
-            "attacking_fixture_rating": 77.0,
-            "defensive_fixture_rating": 48.1,
-            "rank": {
-                "attack": 4,
-                "defense": 1
-            }
-        }
-    },
-    {
-        "gameweek": 24,
-        "fixture": "Liverpool vs Newcastle",
-        "home_team": {
-            "name": "Liverpool",
-            "short_name": "LIV",
-            "attacking_fixture_rating": 81.0,
-            "defensive_fixture_rating": 36.9,
-            "rank": {
-                "attack": 3,
-                "defense": 12
-            }
-        },
-        "away_team": {
-            "name": "Newcastle",
-            "short_name": "NEW",
-            "attacking_fixture_rating": 61.0,
-            "defensive_fixture_rating": 18.1,
-            "rank": {
-                "attack": 8,
-                "defense": 15
-            }
-        }
-    },
-    {
-        "gameweek": 24,
-        "fixture": "Man Utd vs Fulham",
-        "home_team": {
-            "name": "Man Utd",
-            "short_name": "MUN",
-            "attacking_fixture_rating": 65.0,
-            "defensive_fixture_rating": 44.4,
-            "rank": {
-                "attack": 2,
-                "defense": 11
-            }
-        },
-        "away_team": {
-            "name": "Fulham",
-            "short_name": "FUL",
-            "attacking_fixture_rating": 53.0,
-            "defensive_fixture_rating": 33.1,
-            "rank": {
-                "attack": 11,
-                "defense": 6
-            }
-        }
-    },
-    {
-        "gameweek": 24,
-        "fixture": "Nott'm Forest vs Crystal Palace",
-        "home_team": {
-            "name": "Nott'm Forest",
-            "short_name": "NFO",
-            "attacking_fixture_rating": 47.0,
-            "defensive_fixture_rating": 50.0,
-            "rank": {
-                "attack": 13,
-                "defense": 9
-            }
-        },
-        "away_team": {
-            "name": "Crystal Palace",
-            "short_name": "CRY",
-            "attacking_fixture_rating": 47.0,
-            "defensive_fixture_rating": 50.0,
-            "rank": {
-                "attack": 12,
-                "defense": 8
-            }
-        }
-    },
-    {
-        "gameweek": 24,
-        "fixture": "Spurs vs Man City",
-        "home_team": {
-            "name": "Spurs",
-            "short_name": "TOT",
-            "attacking_fixture_rating": 31.0,
-            "defensive_fixture_rating": 33.1,
-            "rank": {
-                "attack": 15,
-                "defense": 7
-            }
-        },
-        "away_team": {
-            "name": "Man City",
-            "short_name": "MCI",
-            "attacking_fixture_rating": 65.0,
-            "defensive_fixture_rating": 65.0,
-            "rank": {
-                "attack": 1,
-                "defense": 2
-            }
-        }
-    },
-    {
-        "gameweek": 24,
-        "fixture": "Sunderland vs Burnley",
-        "home_team": {
-            "name": "Sunderland",
-            "short_name": "SUN",
-            "attacking_fixture_rating": 47.0,
-            "defensive_fixture_rating": 66.9,
-            "rank": {
-                "attack": 19,
-                "defense": 4
-            }
-        },
-        "away_team": {
-            "name": "Burnley",
-            "short_name": "BUR",
-            "attacking_fixture_rating": 29.0,
-            "defensive_fixture_rating": 50.0,
-            "rank": {
-                "attack": 16,
-                "defense": 14
-            }
-        }
-    },
-    {
-        "gameweek": 24,
-        "fixture": "Wolves vs Bournemouth",
-        "home_team": {
-            "name": "Wolves",
-            "short_name": "WOL",
-            "attacking_fixture_rating": 37.0,
-            "defensive_fixture_rating": 25.6,
-            "rank": {
-                "attack": 20,
-                "defense": 19
-            }
-        },
-        "away_team": {
-            "name": "Bournemouth",
-            "short_name": "BOU",
-            "attacking_fixture_rating": 73.0,
-            "defensive_fixture_rating": 59.4,
-            "rank": {
-                "attack": 9,
-                "defense": 10
-            }
-        }
-    },
-    {
-        "gameweek": 25,
-        "fixture": "Arsenal vs Sunderland",
-        "home_team": {
-            "name": "Arsenal",
-            "short_name": "ARS",
-            "attacking_fixture_rating": 57.0,
-            "defensive_fixture_rating": 76.2,
-            "rank": {
-                "attack": 4,
-                "defense": 1
-            }
-        },
-        "away_team": {
-            "name": "Sunderland",
-            "short_name": "SUN",
-            "attacking_fixture_rating": 19.0,
-            "defensive_fixture_rating": 40.6,
-            "rank": {
-                "attack": 19,
-                "defense": 4
-            }
-        }
-    },
-    {
-        "gameweek": 25,
-        "fixture": "Bournemouth vs Aston Villa",
-        "home_team": {
-            "name": "Bournemouth",
-            "short_name": "BOU",
-            "attacking_fixture_rating": 73.0,
-            "defensive_fixture_rating": 36.9,
-            "rank": {
-                "attack": 9,
-                "defense": 10
-            }
-        },
-        "away_team": {
-            "name": "Aston Villa",
-            "short_name": "AVL",
-            "attacking_fixture_rating": 61.0,
-            "defensive_fixture_rating": 25.6,
-            "rank": {
-                "attack": 6,
-                "defense": 18
-            }
-        }
-    },
-    {
-        "gameweek": 25,
-        "fixture": "Brighton vs Crystal Palace",
-        "home_team": {
-            "name": "Brighton",
-            "short_name": "BHA",
-            "attacking_fixture_rating": 53.0,
-            "defensive_fixture_rating": 35.0,
-            "rank": {
-                "attack": 10,
-                "defense": 17
-            }
-        },
-        "away_team": {
-            "name": "Crystal Palace",
-            "short_name": "CRY",
-            "attacking_fixture_rating": 63.0,
-            "defensive_fixture_rating": 44.4,
-            "rank": {
-                "attack": 12,
-                "defense": 8
-            }
-        }
-    },
-    {
-        "gameweek": 25,
-        "fixture": "Burnley vs West Ham",
-        "home_team": {
-            "name": "Burnley",
-            "short_name": "BUR",
-            "attacking_fixture_rating": 63.0,
-            "defensive_fixture_rating": 50.0,
-            "rank": {
-                "attack": 16,
-                "defense": 14
-            }
-        },
-        "away_team": {
-            "name": "West Ham",
-            "short_name": "WHU",
-            "attacking_fixture_rating": 47.0,
-            "defensive_fixture_rating": 35.0,
-            "rank": {
-                "attack": 17,
-                "defense": 20
-            }
-        }
-    },
-    {
-        "gameweek": 25,
-        "fixture": "Fulham vs Everton",
-        "home_team": {
-            "name": "Fulham",
-            "short_name": "FUL",
-            "attacking_fixture_rating": 41.0,
-            "defensive_fixture_rating": 59.4,
-            "rank": {
-                "attack": 11,
-                "defense": 6
-            }
-        },
-        "away_team": {
-            "name": "Everton",
-            "short_name": "EVE",
-            "attacking_fixture_rating": 37.0,
-            "defensive_fixture_rating": 55.6,
-            "rank": {
-                "attack": 14,
-                "defense": 3
-            }
-        }
-    },
-    {
-        "gameweek": 25,
-        "fixture": "Leeds vs Nott'm Forest",
-        "home_team": {
-            "name": "Leeds",
-            "short_name": "LEE",
-            "attacking_fixture_rating": 65.0,
-            "defensive_fixture_rating": 38.8,
-            "rank": {
-                "attack": 5,
-                "defense": 16
-            }
-        },
-        "away_team": {
-            "name": "Nott'm Forest",
-            "short_name": "NFO",
-            "attacking_fixture_rating": 59.0,
-            "defensive_fixture_rating": 33.1,
-            "rank": {
-                "attack": 13,
-                "defense": 9
-            }
-        }
-    },
-    {
-        "gameweek": 25,
-        "fixture": "Liverpool vs Man City",
-        "home_team": {
-            "name": "Liverpool",
-            "short_name": "LIV",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 23.8,
-            "rank": {
-                "attack": 3,
-                "defense": 12
-            }
-        },
-        "away_team": {
-            "name": "Man City",
-            "short_name": "MCI",
-            "attacking_fixture_rating": 75.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 1,
-                "defense": 2
-            }
-        }
-    },
-    {
-        "gameweek": 25,
-        "fixture": "Man Utd vs Spurs",
-        "home_team": {
-            "name": "Man Utd",
-            "short_name": "MUN",
-            "attacking_fixture_rating": 67.0,
-            "defensive_fixture_rating": 51.9,
-            "rank": {
-                "attack": 2,
-                "defense": 11
-            }
-        },
-        "away_team": {
-            "name": "Spurs",
-            "short_name": "TOT",
-            "attacking_fixture_rating": 45.0,
-            "defensive_fixture_rating": 31.2,
-            "rank": {
-                "attack": 15,
-                "defense": 7
-            }
-        }
-    },
-    {
-        "gameweek": 25,
-        "fixture": "Newcastle vs Brentford",
-        "home_team": {
-            "name": "Newcastle",
-            "short_name": "NEW",
-            "attacking_fixture_rating": 67.0,
-            "defensive_fixture_rating": 48.1,
-            "rank": {
-                "attack": 8,
-                "defense": 15
-            }
-        },
-        "away_team": {
-            "name": "Brentford",
-            "short_name": "BRE",
-            "attacking_fixture_rating": 49.0,
-            "defensive_fixture_rating": 31.2,
-            "rank": {
-                "attack": 18,
-                "defense": 13
-            }
-        }
-    },
-    {
-        "gameweek": 25,
-        "fixture": "Wolves vs Chelsea",
-        "home_team": {
-            "name": "Wolves",
-            "short_name": "WOL",
-            "attacking_fixture_rating": 27.0,
-            "defensive_fixture_rating": 21.9,
-            "rank": {
-                "attack": 20,
-                "defense": 19
-            }
-        },
-        "away_team": {
-            "name": "Chelsea",
-            "short_name": "CHE",
-            "attacking_fixture_rating": 77.0,
-            "defensive_fixture_rating": 68.8,
-            "rank": {
-                "attack": 7,
-                "defense": 5
-            }
-        }
-    },
-    {
-        "gameweek": 26,
-        "fixture": "Aston Villa vs Brighton",
-        "home_team": {
-            "name": "Aston Villa",
-            "short_name": "AVL",
-            "attacking_fixture_rating": 79.0,
-            "defensive_fixture_rating": 29.4,
-            "rank": {
-                "attack": 6,
-                "defense": 18
-            }
-        },
-        "away_team": {
-            "name": "Brighton",
-            "short_name": "BHA",
-            "attacking_fixture_rating": 69.0,
-            "defensive_fixture_rating": 20.0,
-            "rank": {
-                "attack": 10,
-                "defense": 17
-            }
-        }
-    },
-    {
-        "gameweek": 26,
-        "fixture": "Brentford vs Arsenal",
-        "home_team": {
-            "name": "Brentford",
-            "short_name": "BRE",
-            "attacking_fixture_rating": 23.0,
-            "defensive_fixture_rating": 25.6,
-            "rank": {
-                "attack": 18,
-                "defense": 13
-            }
-        },
-        "away_team": {
-            "name": "Arsenal",
-            "short_name": "ARS",
-            "attacking_fixture_rating": 73.0,
-            "defensive_fixture_rating": 72.5,
-            "rank": {
-                "attack": 4,
-                "defense": 1
-            }
-        }
-    },
-    {
-        "gameweek": 26,
-        "fixture": "Chelsea vs Leeds",
-        "home_team": {
-            "name": "Chelsea",
-            "short_name": "CHE",
-            "attacking_fixture_rating": 75.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 7,
-                "defense": 5
-            }
-        },
-        "away_team": {
-            "name": "Leeds",
-            "short_name": "LEE",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 23.8,
-            "rank": {
-                "attack": 5,
-                "defense": 16
-            }
-        }
-    },
-    {
-        "gameweek": 26,
-        "fixture": "Crystal Palace vs Burnley",
-        "home_team": {
-            "name": "Crystal Palace",
-            "short_name": "CRY",
-            "attacking_fixture_rating": 61.0,
-            "defensive_fixture_rating": 57.5,
-            "rank": {
-                "attack": 12,
-                "defense": 8
-            }
-        },
-        "away_team": {
-            "name": "Burnley",
-            "short_name": "BUR",
-            "attacking_fixture_rating": 39.0,
-            "defensive_fixture_rating": 36.9,
-            "rank": {
-                "attack": 16,
-                "defense": 14
-            }
-        }
-    },
-    {
-        "gameweek": 26,
-        "fixture": "Everton vs Bournemouth",
-        "home_team": {
-            "name": "Everton",
-            "short_name": "EVE",
-            "attacking_fixture_rating": 49.0,
-            "defensive_fixture_rating": 55.6,
-            "rank": {
-                "attack": 14,
-                "defense": 3
-            }
-        },
-        "away_team": {
-            "name": "Bournemouth",
-            "short_name": "BOU",
-            "attacking_fixture_rating": 41.0,
-            "defensive_fixture_rating": 48.1,
-            "rank": {
-                "attack": 9,
-                "defense": 10
-            }
-        }
-    },
-    {
-        "gameweek": 26,
-        "fixture": "Man City vs Fulham",
-        "home_team": {
-            "name": "Man City",
-            "short_name": "MCI",
-            "attacking_fixture_rating": 65.0,
-            "defensive_fixture_rating": 59.4,
-            "rank": {
-                "attack": 1,
-                "defense": 2
-            }
-        },
-        "away_team": {
-            "name": "Fulham",
-            "short_name": "FUL",
-            "attacking_fixture_rating": 37.0,
-            "defensive_fixture_rating": 33.1,
-            "rank": {
-                "attack": 11,
-                "defense": 6
-            }
-        }
-    },
-    {
-        "gameweek": 26,
-        "fixture": "Nott'm Forest vs Wolves",
-        "home_team": {
-            "name": "Nott'm Forest",
-            "short_name": "NFO",
-            "attacking_fixture_rating": 69.0,
-            "defensive_fixture_rating": 65.0,
-            "rank": {
-                "attack": 13,
-                "defense": 9
-            }
-        },
-        "away_team": {
-            "name": "Wolves",
-            "short_name": "WOL",
-            "attacking_fixture_rating": 31.0,
-            "defensive_fixture_rating": 29.4,
-            "rank": {
-                "attack": 20,
-                "defense": 19
-            }
-        }
-    },
-    {
-        "gameweek": 26,
-        "fixture": "Spurs vs Newcastle",
-        "home_team": {
-            "name": "Spurs",
-            "short_name": "TOT",
-            "attacking_fixture_rating": 57.0,
-            "defensive_fixture_rating": 46.2,
-            "rank": {
-                "attack": 15,
-                "defense": 7
-            }
-        },
-        "away_team": {
-            "name": "Newcastle",
-            "short_name": "NEW",
-            "attacking_fixture_rating": 51.0,
-            "defensive_fixture_rating": 40.6,
-            "rank": {
-                "attack": 8,
-                "defense": 15
-            }
-        }
-    },
-    {
-        "gameweek": 26,
-        "fixture": "Sunderland vs Liverpool",
-        "home_team": {
-            "name": "Sunderland",
-            "short_name": "SUN",
-            "attacking_fixture_rating": 43.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 19,
-                "defense": 4
-            }
-        },
-        "away_team": {
-            "name": "Liverpool",
-            "short_name": "LIV",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 53.8,
-            "rank": {
-                "attack": 3,
-                "defense": 12
-            }
-        }
-    },
-    {
-        "gameweek": 26,
-        "fixture": "West Ham vs Man Utd",
-        "home_team": {
-            "name": "West Ham",
-            "short_name": "WHU",
-            "attacking_fixture_rating": 45.0,
-            "defensive_fixture_rating": 10.6,
-            "rank": {
-                "attack": 17,
-                "defense": 20
-            }
-        },
-        "away_team": {
-            "name": "Man Utd",
-            "short_name": "MUN",
-            "attacking_fixture_rating": 89.0,
-            "defensive_fixture_rating": 51.9,
-            "rank": {
-                "attack": 2,
-                "defense": 11
-            }
-        }
-    },
-    {
-        "gameweek": 27,
-        "fixture": "Aston Villa vs Leeds",
-        "home_team": {
-            "name": "Aston Villa",
-            "short_name": "AVL",
-            "attacking_fixture_rating": 77.0,
-            "defensive_fixture_rating": 20.0,
-            "rank": {
-                "attack": 6,
-                "defense": 18
-            }
-        },
-        "away_team": {
-            "name": "Leeds",
-            "short_name": "LEE",
-            "attacking_fixture_rating": 79.0,
-            "defensive_fixture_rating": 21.9,
-            "rank": {
-                "attack": 5,
-                "defense": 16
-            }
-        }
-    },
-    {
-        "gameweek": 27,
-        "fixture": "Brentford vs Brighton",
-        "home_team": {
-            "name": "Brentford",
-            "short_name": "BRE",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 36.9,
-            "rank": {
-                "attack": 18,
-                "defense": 13
-            }
-        },
-        "away_team": {
-            "name": "Brighton",
-            "short_name": "BHA",
-            "attacking_fixture_rating": 61.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 10,
-                "defense": 17
-            }
-        }
-    },
-    {
-        "gameweek": 27,
-        "fixture": "Chelsea vs Burnley",
-        "home_team": {
-            "name": "Chelsea",
-            "short_name": "CHE",
-            "attacking_fixture_rating": 71.0,
-            "defensive_fixture_rating": 63.1,
-            "rank": {
-                "attack": 7,
-                "defense": 5
-            }
-        },
-        "away_team": {
-            "name": "Burnley",
-            "short_name": "BUR",
-            "attacking_fixture_rating": 33.0,
-            "defensive_fixture_rating": 27.5,
-            "rank": {
-                "attack": 16,
-                "defense": 14
-            }
-        }
-    },
-    {
-        "gameweek": 27,
-        "fixture": "Crystal Palace vs Wolves",
-        "home_team": {
-            "name": "Crystal Palace",
-            "short_name": "CRY",
-            "attacking_fixture_rating": 71.0,
-            "defensive_fixture_rating": 65.0,
-            "rank": {
-                "attack": 12,
-                "defense": 8
-            }
-        },
-        "away_team": {
-            "name": "Wolves",
-            "short_name": "WOL",
-            "attacking_fixture_rating": 31.0,
-            "defensive_fixture_rating": 27.5,
-            "rank": {
-                "attack": 20,
-                "defense": 19
-            }
-        }
-    },
-    {
-        "gameweek": 27,
-        "fixture": "Everton vs Man Utd",
-        "home_team": {
-            "name": "Everton",
-            "short_name": "EVE",
-            "attacking_fixture_rating": 51.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 14,
-                "defense": 3
-            }
-        },
-        "away_team": {
-            "name": "Man Utd",
-            "short_name": "MUN",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 46.2,
-            "rank": {
-                "attack": 2,
-                "defense": 11
-            }
-        }
-    },
-    {
-        "gameweek": 27,
-        "fixture": "Man City vs Newcastle",
-        "home_team": {
-            "name": "Man City",
-            "short_name": "MCI",
-            "attacking_fixture_rating": 83.0,
-            "defensive_fixture_rating": 53.8,
-            "rank": {
-                "attack": 1,
-                "defense": 2
-            }
-        },
-        "away_team": {
-            "name": "Newcastle",
-            "short_name": "NEW",
-            "attacking_fixture_rating": 43.0,
-            "defensive_fixture_rating": 16.2,
-            "rank": {
-                "attack": 8,
-                "defense": 15
-            }
-        }
-    },
-    {
-        "gameweek": 27,
-        "fixture": "Nott'm Forest vs Liverpool",
-        "home_team": {
-            "name": "Nott'm Forest",
-            "short_name": "NFO",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 33.1,
-            "rank": {
-                "attack": 13,
-                "defense": 9
-            }
-        },
-        "away_team": {
-            "name": "Liverpool",
-            "short_name": "LIV",
-            "attacking_fixture_rating": 65.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 3,
-                "defense": 12
-            }
-        }
-    },
-    {
-        "gameweek": 27,
-        "fixture": "Spurs vs Arsenal",
-        "home_team": {
-            "name": "Spurs",
-            "short_name": "TOT",
-            "attacking_fixture_rating": 29.0,
-            "defensive_fixture_rating": 38.8,
-            "rank": {
-                "attack": 15,
-                "defense": 7
-            }
-        },
-        "away_team": {
-            "name": "Arsenal",
-            "short_name": "ARS",
-            "attacking_fixture_rating": 59.0,
-            "defensive_fixture_rating": 66.9,
-            "rank": {
-                "attack": 4,
-                "defense": 1
-            }
-        }
-    },
-    {
-        "gameweek": 27,
-        "fixture": "Sunderland vs Fulham",
-        "home_team": {
-            "name": "Sunderland",
-            "short_name": "SUN",
-            "attacking_fixture_rating": 31.0,
-            "defensive_fixture_rating": 57.5,
-            "rank": {
-                "attack": 19,
-                "defense": 4
-            }
-        },
-        "away_team": {
-            "name": "Fulham",
-            "short_name": "FUL",
-            "attacking_fixture_rating": 39.0,
-            "defensive_fixture_rating": 65.0,
-            "rank": {
-                "attack": 11,
-                "defense": 6
-            }
-        }
-    },
-    {
-        "gameweek": 27,
-        "fixture": "West Ham vs Bournemouth",
-        "home_team": {
-            "name": "West Ham",
-            "short_name": "WHU",
-            "attacking_fixture_rating": 43.0,
-            "defensive_fixture_rating": 23.8,
-            "rank": {
-                "attack": 17,
-                "defense": 20
-            }
-        },
-        "away_team": {
-            "name": "Bournemouth",
-            "short_name": "BOU",
-            "attacking_fixture_rating": 75.0,
-            "defensive_fixture_rating": 53.8,
-            "rank": {
-                "attack": 9,
-                "defense": 10
-            }
-        }
-    },
-    {
-        "gameweek": 28,
-        "fixture": "Arsenal vs Chelsea",
-        "home_team": {
-            "name": "Arsenal",
-            "short_name": "ARS",
-            "attacking_fixture_rating": 59.0,
-            "defensive_fixture_rating": 53.8,
-            "rank": {
-                "attack": 4,
-                "defense": 1
-            }
-        },
-        "away_team": {
-            "name": "Chelsea",
-            "short_name": "CHE",
-            "attacking_fixture_rating": 43.0,
-            "defensive_fixture_rating": 38.8,
-            "rank": {
-                "attack": 7,
-                "defense": 5
-            }
-        }
-    },
-    {
-        "gameweek": 28,
-        "fixture": "Bournemouth vs Sunderland",
-        "home_team": {
-            "name": "Bournemouth",
-            "short_name": "BOU",
-            "attacking_fixture_rating": 45.0,
-            "defensive_fixture_rating": 61.2,
-            "rank": {
-                "attack": 9,
-                "defense": 10
-            }
-        },
-        "away_team": {
-            "name": "Sunderland",
-            "short_name": "SUN",
-            "attacking_fixture_rating": 35.0,
-            "defensive_fixture_rating": 51.9,
-            "rank": {
-                "attack": 19,
-                "defense": 4
-            }
-        }
-    },
-    {
-        "gameweek": 28,
-        "fixture": "Brighton vs Nott'm Forest",
-        "home_team": {
-            "name": "Brighton",
-            "short_name": "BHA",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 36.9,
-            "rank": {
-                "attack": 10,
-                "defense": 17
-            }
-        },
-        "away_team": {
-            "name": "Nott'm Forest",
-            "short_name": "NFO",
-            "attacking_fixture_rating": 61.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 13,
-                "defense": 9
-            }
-        }
-    },
-    {
-        "gameweek": 28,
-        "fixture": "Burnley vs Brentford",
-        "home_team": {
-            "name": "Burnley",
-            "short_name": "BUR",
-            "attacking_fixture_rating": 49.0,
-            "defensive_fixture_rating": 51.9,
-            "rank": {
-                "attack": 16,
-                "defense": 14
-            }
-        },
-        "away_team": {
-            "name": "Brentford",
-            "short_name": "BRE",
-            "attacking_fixture_rating": 45.0,
-            "defensive_fixture_rating": 48.1,
-            "rank": {
-                "attack": 18,
-                "defense": 13
-            }
-        }
-    },
-    {
-        "gameweek": 28,
-        "fixture": "Fulham vs Spurs",
-        "home_team": {
-            "name": "Fulham",
-            "short_name": "FUL",
-            "attacking_fixture_rating": 49.0,
-            "defensive_fixture_rating": 61.2,
-            "rank": {
-                "attack": 11,
-                "defense": 6
-            }
-        },
-        "away_team": {
-            "name": "Spurs",
-            "short_name": "TOT",
-            "attacking_fixture_rating": 35.0,
-            "defensive_fixture_rating": 48.1,
-            "rank": {
-                "attack": 15,
-                "defense": 7
-            }
-        }
-    },
-    {
-        "gameweek": 28,
-        "fixture": "Leeds vs Man City",
-        "home_team": {
-            "name": "Leeds",
-            "short_name": "LEE",
-            "attacking_fixture_rating": 51.0,
-            "defensive_fixture_rating": 16.2,
-            "rank": {
-                "attack": 5,
-                "defense": 16
-            }
-        },
-        "away_team": {
-            "name": "Man City",
-            "short_name": "MCI",
-            "attacking_fixture_rating": 83.0,
-            "defensive_fixture_rating": 46.2,
-            "rank": {
-                "attack": 1,
-                "defense": 2
-            }
-        }
-    },
-    {
-        "gameweek": 28,
-        "fixture": "Liverpool vs West Ham",
-        "home_team": {
-            "name": "Liverpool",
-            "short_name": "LIV",
-            "attacking_fixture_rating": 91.0,
-            "defensive_fixture_rating": 53.8,
-            "rank": {
-                "attack": 3,
-                "defense": 12
-            }
-        },
-        "away_team": {
-            "name": "West Ham",
-            "short_name": "WHU",
-            "attacking_fixture_rating": 43.0,
-            "defensive_fixture_rating": 8.8,
-            "rank": {
-                "attack": 17,
-                "defense": 20
-            }
-        }
-    },
-    {
-        "gameweek": 28,
-        "fixture": "Man Utd vs Crystal Palace",
-        "home_team": {
-            "name": "Man Utd",
-            "short_name": "MUN",
-            "attacking_fixture_rating": 69.0,
-            "defensive_fixture_rating": 46.2,
-            "rank": {
-                "attack": 2,
-                "defense": 11
-            }
-        },
-        "away_team": {
-            "name": "Crystal Palace",
-            "short_name": "CRY",
-            "attacking_fixture_rating": 51.0,
-            "defensive_fixture_rating": 29.4,
-            "rank": {
-                "attack": 12,
-                "defense": 8
-            }
-        }
-    },
-    {
-        "gameweek": 28,
-        "fixture": "Newcastle vs Everton",
-        "home_team": {
-            "name": "Newcastle",
-            "short_name": "NEW",
-            "attacking_fixture_rating": 47.0,
-            "defensive_fixture_rating": 40.6,
-            "rank": {
-                "attack": 8,
-                "defense": 15
-            }
-        },
-        "away_team": {
-            "name": "Everton",
-            "short_name": "EVE",
-            "attacking_fixture_rating": 57.0,
-            "defensive_fixture_rating": 50.0,
-            "rank": {
-                "attack": 14,
-                "defense": 3
-            }
-        }
-    },
-    {
-        "gameweek": 28,
-        "fixture": "Wolves vs Aston Villa",
-        "home_team": {
-            "name": "Wolves",
-            "short_name": "WOL",
-            "attacking_fixture_rating": 53.0,
-            "defensive_fixture_rating": 20.0,
-            "rank": {
-                "attack": 20,
-                "defense": 19
-            }
-        },
-        "away_team": {
-            "name": "Aston Villa",
-            "short_name": "AVL",
-            "attacking_fixture_rating": 79.0,
-            "defensive_fixture_rating": 44.4,
-            "rank": {
-                "attack": 6,
-                "defense": 18
-            }
-        }
-    },
-    {
-        "gameweek": 29,
-        "fixture": "Aston Villa vs Chelsea",
-        "home_team": {
-            "name": "Aston Villa",
-            "short_name": "AVL",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 23.8,
-            "rank": {
-                "attack": 6,
-                "defense": 18
-            }
-        },
-        "away_team": {
-            "name": "Chelsea",
-            "short_name": "CHE",
-            "attacking_fixture_rating": 75.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 7,
-                "defense": 5
-            }
-        }
-    },
-    {
-        "gameweek": 29,
-        "fixture": "Bournemouth vs Brentford",
-        "home_team": {
-            "name": "Bournemouth",
-            "short_name": "BOU",
-            "attacking_fixture_rating": 63.0,
-            "defensive_fixture_rating": 59.4,
-            "rank": {
-                "attack": 9,
-                "defense": 10
-            }
-        },
-        "away_team": {
-            "name": "Brentford",
-            "short_name": "BRE",
-            "attacking_fixture_rating": 37.0,
-            "defensive_fixture_rating": 35.0,
-            "rank": {
-                "attack": 18,
-                "defense": 13
-            }
-        }
-    },
-    {
-        "gameweek": 29,
-        "fixture": "Brighton vs Arsenal",
-        "home_team": {
-            "name": "Brighton",
-            "short_name": "BHA",
-            "attacking_fixture_rating": 39.0,
-            "defensive_fixture_rating": 20.0,
-            "rank": {
-                "attack": 10,
-                "defense": 17
-            }
-        },
-        "away_team": {
-            "name": "Arsenal",
-            "short_name": "ARS",
-            "attacking_fixture_rating": 79.0,
-            "defensive_fixture_rating": 57.5,
-            "rank": {
-                "attack": 4,
-                "defense": 1
-            }
-        }
-    },
-    {
-        "gameweek": 29,
-        "fixture": "Everton vs Burnley",
-        "home_team": {
-            "name": "Everton",
-            "short_name": "EVE",
-            "attacking_fixture_rating": 57.0,
-            "defensive_fixture_rating": 68.8,
-            "rank": {
-                "attack": 14,
-                "defense": 3
-            }
-        },
-        "away_team": {
-            "name": "Burnley",
-            "short_name": "BUR",
-            "attacking_fixture_rating": 27.0,
-            "defensive_fixture_rating": 40.6,
-            "rank": {
-                "attack": 16,
-                "defense": 14
-            }
-        }
-    },
-    {
-        "gameweek": 29,
-        "fixture": "Fulham vs West Ham",
-        "home_team": {
-            "name": "Fulham",
-            "short_name": "FUL",
-            "attacking_fixture_rating": 75.0,
-            "defensive_fixture_rating": 65.0,
-            "rank": {
-                "attack": 11,
-                "defense": 6
-            }
-        },
-        "away_team": {
-            "name": "West Ham",
-            "short_name": "WHU",
-            "attacking_fixture_rating": 31.0,
-            "defensive_fixture_rating": 23.8,
-            "rank": {
-                "attack": 17,
-                "defense": 20
-            }
-        }
-    },
-    {
-        "gameweek": 29,
-        "fixture": "Leeds vs Sunderland",
-        "home_team": {
-            "name": "Leeds",
-            "short_name": "LEE",
-            "attacking_fixture_rating": 55.0,
-            "defensive_fixture_rating": 50.0,
-            "rank": {
-                "attack": 5,
-                "defense": 16
-            }
-        },
-        "away_team": {
-            "name": "Sunderland",
-            "short_name": "SUN",
-            "attacking_fixture_rating": 47.0,
-            "defensive_fixture_rating": 42.5,
-            "rank": {
-                "attack": 19,
-                "defense": 4
-            }
-        }
-    },
-    {
-        "gameweek": 29,
-        "fixture": "Man City vs Nott'm Forest",
-        "home_team": {
-            "name": "Man City",
-            "short_name": "MCI",
-            "attacking_fixture_rating": 71.0,
-            "defensive_fixture_rating": 63.1,
-            "rank": {
-                "attack": 1,
-                "defense": 2
-            }
-        },
-        "away_team": {
-            "name": "Nott'm Forest",
-            "short_name": "NFO",
-            "attacking_fixture_rating": 33.0,
-            "defensive_fixture_rating": 27.5,
-            "rank": {
-                "attack": 13,
-                "defense": 9
-            }
-        }
-    },
-    {
-        "gameweek": 29,
-        "fixture": "Newcastle vs Man Utd",
-        "home_team": {
-            "name": "Newcastle",
-            "short_name": "NEW",
-            "attacking_fixture_rating": 63.0,
-            "defensive_fixture_rating": 18.1,
-            "rank": {
-                "attack": 8,
-                "defense": 15
-            }
-        },
-        "away_team": {
-            "name": "Man Utd",
-            "short_name": "MUN",
-            "attacking_fixture_rating": 81.0,
-            "defensive_fixture_rating": 35.0,
-            "rank": {
-                "attack": 2,
-                "defense": 11
-            }
-        }
-    },
-    {
-        "gameweek": 29,
-        "fixture": "Spurs vs Crystal Palace",
-        "home_team": {
-            "name": "Spurs",
-            "short_name": "TOT",
-            "attacking_fixture_rating": 43.0,
-            "defensive_fixture_rating": 53.8,
-            "rank": {
-                "attack": 15,
-                "defense": 7
-            }
-        },
-        "away_team": {
-            "name": "Crystal Palace",
-            "short_name": "CRY",
-            "attacking_fixture_rating": 43.0,
-            "defensive_fixture_rating": 53.8,
-            "rank": {
-                "attack": 12,
-                "defense": 8
-            }
-        }
-    },
-    {
-        "gameweek": 29,
-        "fixture": "Wolves vs Liverpool",
-        "home_team": {
-            "name": "Wolves",
-            "short_name": "WOL",
-            "attacking_fixture_rating": 41.0,
-            "defensive_fixture_rating": 14.4,
-            "rank": {
-                "attack": 20,
-                "defense": 19
-            }
-        },
-        "away_team": {
-            "name": "Liverpool",
-            "short_name": "LIV",
-            "attacking_fixture_rating": 85.0,
-            "defensive_fixture_rating": 55.6,
-            "rank": {
-                "attack": 3,
-                "defense": 12
-            }
-        }
+  {
+    "gameweek": 19,
+    "fixture": "Arsenal vs Aston Villa",
+    "home_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 85.0,
+      "defensive_fixture_rating": 51.9,
+      "rank": {
+        "attack": 4,
+        "defense": 1
+      }
+    },
+    "away_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 14.4,
+      "rank": {
+        "attack": 6,
+        "defense": 18
+      }
     }
+  },
+  {
+    "gameweek": 19,
+    "fixture": "Brentford vs Spurs",
+    "home_team": {
+      "name": "Brentford",
+      "short_name": "BRE",
+      "attacking_fixture_rating": 35.0,
+      "defensive_fixture_rating": 46.2,
+      "rank": {
+        "attack": 18,
+        "defense": 13
+      }
+    },
+    "away_team": {
+      "name": "Spurs",
+      "short_name": "TOT",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 61.2,
+      "rank": {
+        "attack": 15,
+        "defense": 7
+      }
+    }
+  },
+  {
+    "gameweek": 19,
+    "fixture": "Burnley vs Newcastle",
+    "home_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 33.1,
+      "rank": {
+        "attack": 16,
+        "defense": 14
+      }
+    },
+    "away_team": {
+      "name": "Newcastle",
+      "short_name": "NEW",
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 44.4,
+      "rank": {
+        "attack": 8,
+        "defense": 15
+      }
+    }
+  },
+  {
+    "gameweek": 19,
+    "fixture": "Chelsea vs Bournemouth",
+    "home_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 50.0,
+      "rank": {
+        "attack": 7,
+        "defense": 5
+      }
+    },
+    "away_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 35.0,
+      "rank": {
+        "attack": 9,
+        "defense": 10
+      }
+    }
+  },
+  {
+    "gameweek": 19,
+    "fixture": "Crystal Palace vs Fulham",
+    "home_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 48.1,
+      "rank": {
+        "attack": 12,
+        "defense": 8
+      }
+    },
+    "away_team": {
+      "name": "Fulham",
+      "short_name": "FUL",
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 51.9,
+      "rank": {
+        "attack": 11,
+        "defense": 6
+      }
+    }
+  },
+  {
+    "gameweek": 19,
+    "fixture": "Liverpool vs Leeds",
+    "home_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 83.0,
+      "defensive_fixture_rating": 31.2,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      }
+    },
+    "away_team": {
+      "name": "Leeds",
+      "short_name": "LEE",
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 16.2,
+      "rank": {
+        "attack": 5,
+        "defense": 16
+      }
+    }
+  },
+  {
+    "gameweek": 19,
+    "fixture": "Man Utd vs Wolves",
+    "home_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 91.0,
+      "defensive_fixture_rating": 61.2,
+      "rank": {
+        "attack": 2,
+        "defense": 11
+      }
+    },
+    "away_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 35.0,
+      "defensive_fixture_rating": 8.8,
+      "rank": {
+        "attack": 20,
+        "defense": 19
+      }
+    }
+  },
+  {
+    "gameweek": 19,
+    "fixture": "Nott'm Forest vs Everton",
+    "home_team": {
+      "name": "Nott'm Forest",
+      "short_name": "NFO",
+      "attacking_fixture_rating": 37.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 13,
+        "defense": 9
+      }
+    },
+    "away_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 59.4,
+      "rank": {
+        "attack": 14,
+        "defense": 3
+      }
+    }
+  },
+  {
+    "gameweek": 19,
+    "fixture": "Sunderland vs Man City",
+    "home_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 23.0,
+      "defensive_fixture_rating": 38.8,
+      "rank": {
+        "attack": 19,
+        "defense": 4
+      }
+    },
+    "away_team": {
+      "name": "Man City",
+      "short_name": "MCI",
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 72.5,
+      "rank": {
+        "attack": 1,
+        "defense": 2
+      }
+    }
+  },
+  {
+    "gameweek": 19,
+    "fixture": "West Ham vs Brighton",
+    "home_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 25.6,
+      "rank": {
+        "attack": 17,
+        "defense": 20
+      }
+    },
+    "away_team": {
+      "name": "Brighton",
+      "short_name": "BHA",
+      "attacking_fixture_rating": 73.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 10,
+        "defense": 17
+      }
+    }
+  },
+  {
+    "gameweek": 20,
+    "fixture": "Aston Villa vs Nott'm Forest",
+    "home_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 35.0,
+      "rank": {
+        "attack": 6,
+        "defense": 18
+      }
+    },
+    "away_team": {
+      "name": "Nott'm Forest",
+      "short_name": "NFO",
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 35.0,
+      "rank": {
+        "attack": 13,
+        "defense": 9
+      }
+    }
+  },
+  {
+    "gameweek": 20,
+    "fixture": "Bournemouth vs Arsenal",
+    "home_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 39.0,
+      "defensive_fixture_rating": 33.1,
+      "rank": {
+        "attack": 9,
+        "defense": 10
+      }
+    },
+    "away_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 57.5,
+      "rank": {
+        "attack": 4,
+        "defense": 1
+      }
+    }
+  },
+  {
+    "gameweek": 20,
+    "fixture": "Brighton vs Burnley",
+    "home_team": {
+      "name": "Brighton",
+      "short_name": "BHA",
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 10,
+        "defense": 17
+      }
+    },
+    "away_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 33.1,
+      "rank": {
+        "attack": 16,
+        "defense": 14
+      }
+    }
+  },
+  {
+    "gameweek": 20,
+    "fixture": "Everton vs Brentford",
+    "home_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 72.5,
+      "rank": {
+        "attack": 14,
+        "defense": 3
+      }
+    },
+    "away_team": {
+      "name": "Brentford",
+      "short_name": "BRE",
+      "attacking_fixture_rating": 23.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 18,
+        "defense": 13
+      }
+    }
+  },
+  {
+    "gameweek": 20,
+    "fixture": "Fulham vs Liverpool",
+    "home_team": {
+      "name": "Fulham",
+      "short_name": "FUL",
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 38.8,
+      "rank": {
+        "attack": 11,
+        "defense": 6
+      }
+    },
+    "away_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 38.8,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      }
+    }
+  },
+  {
+    "gameweek": 20,
+    "fixture": "Leeds vs Man Utd",
+    "home_team": {
+      "name": "Leeds",
+      "short_name": "LEE",
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 18.1,
+      "rank": {
+        "attack": 5,
+        "defense": 16
+      }
+    },
+    "away_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 81.0,
+      "defensive_fixture_rating": 29.4,
+      "rank": {
+        "attack": 2,
+        "defense": 11
+      }
+    }
+  },
+  {
+    "gameweek": 20,
+    "fixture": "Man City vs Chelsea",
+    "home_team": {
+      "name": "Man City",
+      "short_name": "MCI",
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 51.9,
+      "rank": {
+        "attack": 1,
+        "defense": 2
+      }
+    },
+    "away_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 35.0,
+      "rank": {
+        "attack": 7,
+        "defense": 5
+      }
+    }
+  },
+  {
+    "gameweek": 20,
+    "fixture": "Newcastle vs Crystal Palace",
+    "home_team": {
+      "name": "Newcastle",
+      "short_name": "NEW",
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 36.9,
+      "rank": {
+        "attack": 8,
+        "defense": 15
+      }
+    },
+    "away_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 12,
+        "defense": 8
+      }
+    }
+  },
+  {
+    "gameweek": 20,
+    "fixture": "Spurs vs Sunderland",
+    "home_team": {
+      "name": "Spurs",
+      "short_name": "TOT",
+      "attacking_fixture_rating": 35.0,
+      "defensive_fixture_rating": 66.9,
+      "rank": {
+        "attack": 15,
+        "defense": 7
+      }
+    },
+    "away_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 29.0,
+      "defensive_fixture_rating": 61.2,
+      "rank": {
+        "attack": 19,
+        "defense": 4
+      }
+    }
+  },
+  {
+    "gameweek": 20,
+    "fixture": "Wolves vs West Ham",
+    "home_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 20,
+        "defense": 19
+      }
+    },
+    "away_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 17,
+        "defense": 20
+      }
+    }
+  },
+  {
+    "gameweek": 21,
+    "fixture": "Arsenal vs Liverpool",
+    "home_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 73.0,
+      "defensive_fixture_rating": 46.2,
+      "rank": {
+        "attack": 4,
+        "defense": 1
+      }
+    },
+    "away_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 25.6,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      }
+    }
+  },
+  {
+    "gameweek": 21,
+    "fixture": "Bournemouth vs Spurs",
+    "home_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 9,
+        "defense": 10
+      }
+    },
+    "away_team": {
+      "name": "Spurs",
+      "short_name": "TOT",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 46.2,
+      "rank": {
+        "attack": 15,
+        "defense": 7
+      }
+    }
+  },
+  {
+    "gameweek": 21,
+    "fixture": "Brentford vs Sunderland",
+    "home_team": {
+      "name": "Brentford",
+      "short_name": "BRE",
+      "attacking_fixture_rating": 29.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 18,
+        "defense": 13
+      }
+    },
+    "away_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 66.9,
+      "rank": {
+        "attack": 19,
+        "defense": 4
+      }
+    }
+  },
+  {
+    "gameweek": 21,
+    "fixture": "Burnley vs Man Utd",
+    "home_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 21.9,
+      "rank": {
+        "attack": 16,
+        "defense": 14
+      }
+    },
+    "away_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 77.0,
+      "defensive_fixture_rating": 51.9,
+      "rank": {
+        "attack": 2,
+        "defense": 11
+      }
+    }
+  },
+  {
+    "gameweek": 21,
+    "fixture": "Crystal Palace vs Aston Villa",
+    "home_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 38.8,
+      "rank": {
+        "attack": 12,
+        "defense": 8
+      }
+    },
+    "away_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 29.4,
+      "rank": {
+        "attack": 6,
+        "defense": 18
+      }
+    }
+  },
+  {
+    "gameweek": 21,
+    "fixture": "Everton vs Wolves",
+    "home_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 76.2,
+      "rank": {
+        "attack": 14,
+        "defense": 3
+      }
+    },
+    "away_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 19.0,
+      "defensive_fixture_rating": 31.2,
+      "rank": {
+        "attack": 20,
+        "defense": 19
+      }
+    }
+  },
+  {
+    "gameweek": 21,
+    "fixture": "Fulham vs Chelsea",
+    "home_team": {
+      "name": "Fulham",
+      "short_name": "FUL",
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 46.2,
+      "rank": {
+        "attack": 11,
+        "defense": 6
+      }
+    },
+    "away_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 51.9,
+      "rank": {
+        "attack": 7,
+        "defense": 5
+      }
+    }
+  },
+  {
+    "gameweek": 21,
+    "fixture": "Man City vs Brighton",
+    "home_team": {
+      "name": "Man City",
+      "short_name": "MCI",
+      "attacking_fixture_rating": 87.0,
+      "defensive_fixture_rating": 57.5,
+      "rank": {
+        "attack": 1,
+        "defense": 2
+      }
+    },
+    "away_team": {
+      "name": "Brighton",
+      "short_name": "BHA",
+      "attacking_fixture_rating": 39.0,
+      "defensive_fixture_rating": 12.5,
+      "rank": {
+        "attack": 10,
+        "defense": 17
+      }
+    }
+  },
+  {
+    "gameweek": 21,
+    "fixture": "Newcastle vs Leeds",
+    "home_team": {
+      "name": "Newcastle",
+      "short_name": "NEW",
+      "attacking_fixture_rating": 73.0,
+      "defensive_fixture_rating": 23.8,
+      "rank": {
+        "attack": 8,
+        "defense": 15
+      }
+    },
+    "away_team": {
+      "name": "Leeds",
+      "short_name": "LEE",
+      "attacking_fixture_rating": 75.0,
+      "defensive_fixture_rating": 25.6,
+      "rank": {
+        "attack": 5,
+        "defense": 16
+      }
+    }
+  },
+  {
+    "gameweek": 21,
+    "fixture": "West Ham vs Nott'm Forest",
+    "home_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 41.0,
+      "defensive_fixture_rating": 31.2,
+      "rank": {
+        "attack": 17,
+        "defense": 20
+      }
+    },
+    "away_team": {
+      "name": "Nott'm Forest",
+      "short_name": "NFO",
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 55.6,
+      "rank": {
+        "attack": 13,
+        "defense": 9
+      }
+    }
+  },
+  {
+    "gameweek": 22,
+    "fixture": "Aston Villa vs Everton",
+    "home_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 36.9,
+      "rank": {
+        "attack": 6,
+        "defense": 18
+      }
+    },
+    "away_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 46.2,
+      "rank": {
+        "attack": 14,
+        "defense": 3
+      }
+    }
+  },
+  {
+    "gameweek": 22,
+    "fixture": "Brighton vs Bournemouth",
+    "home_team": {
+      "name": "Brighton",
+      "short_name": "BHA",
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 29.4,
+      "rank": {
+        "attack": 10,
+        "defense": 17
+      }
+    },
+    "away_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 9,
+        "defense": 10
+      }
+    }
+  },
+  {
+    "gameweek": 22,
+    "fixture": "Chelsea vs Brentford",
+    "home_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 66.9,
+      "rank": {
+        "attack": 7,
+        "defense": 5
+      }
+    },
+    "away_team": {
+      "name": "Brentford",
+      "short_name": "BRE",
+      "attacking_fixture_rating": 29.0,
+      "defensive_fixture_rating": 29.4,
+      "rank": {
+        "attack": 18,
+        "defense": 13
+      }
+    }
+  },
+  {
+    "gameweek": 22,
+    "fixture": "Leeds vs Fulham",
+    "home_team": {
+      "name": "Leeds",
+      "short_name": "LEE",
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 35.0,
+      "rank": {
+        "attack": 5,
+        "defense": 16
+      }
+    },
+    "away_team": {
+      "name": "Fulham",
+      "short_name": "FUL",
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 38.8,
+      "rank": {
+        "attack": 11,
+        "defense": 6
+      }
+    }
+  },
+  {
+    "gameweek": 22,
+    "fixture": "Liverpool vs Burnley",
+    "home_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 79.0,
+      "defensive_fixture_rating": 51.9,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      }
+    },
+    "away_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 20.0,
+      "rank": {
+        "attack": 16,
+        "defense": 14
+      }
+    }
+  },
+  {
+    "gameweek": 22,
+    "fixture": "Man Utd vs Man City",
+    "home_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 25.6,
+      "rank": {
+        "attack": 2,
+        "defense": 11
+      }
+    },
+    "away_team": {
+      "name": "Man City",
+      "short_name": "MCI",
+      "attacking_fixture_rating": 73.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 1,
+        "defense": 2
+      }
+    }
+  },
+  {
+    "gameweek": 22,
+    "fixture": "Nott'm Forest vs Arsenal",
+    "home_team": {
+      "name": "Nott'm Forest",
+      "short_name": "NFO",
+      "attacking_fixture_rating": 33.0,
+      "defensive_fixture_rating": 35.0,
+      "rank": {
+        "attack": 13,
+        "defense": 9
+      }
+    },
+    "away_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 63.1,
+      "rank": {
+        "attack": 4,
+        "defense": 1
+      }
+    }
+  },
+  {
+    "gameweek": 22,
+    "fixture": "Spurs vs West Ham",
+    "home_team": {
+      "name": "Spurs",
+      "short_name": "TOT",
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 63.1,
+      "rank": {
+        "attack": 15,
+        "defense": 7
+      }
+    },
+    "away_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 33.0,
+      "defensive_fixture_rating": 31.2,
+      "rank": {
+        "attack": 17,
+        "defense": 20
+      }
+    }
+  },
+  {
+    "gameweek": 22,
+    "fixture": "Sunderland vs Crystal Palace",
+    "home_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 35.0,
+      "defensive_fixture_rating": 59.4,
+      "rank": {
+        "attack": 19,
+        "defense": 4
+      }
+    },
+    "away_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 37.0,
+      "defensive_fixture_rating": 61.2,
+      "rank": {
+        "attack": 12,
+        "defense": 8
+      }
+    }
+  },
+  {
+    "gameweek": 22,
+    "fixture": "Wolves vs Newcastle",
+    "home_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 23.8,
+      "rank": {
+        "attack": 20,
+        "defense": 19
+      }
+    },
+    "away_team": {
+      "name": "Newcastle",
+      "short_name": "NEW",
+      "attacking_fixture_rating": 75.0,
+      "defensive_fixture_rating": 50.0,
+      "rank": {
+        "attack": 8,
+        "defense": 15
+      }
+    }
+  },
+  {
+    "gameweek": 23,
+    "fixture": "Arsenal vs Man Utd",
+    "home_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 71.0,
+      "defensive_fixture_rating": 44.4,
+      "rank": {
+        "attack": 4,
+        "defense": 1
+      }
+    },
+    "away_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 27.5,
+      "rank": {
+        "attack": 2,
+        "defense": 11
+      }
+    }
+  },
+  {
+    "gameweek": 23,
+    "fixture": "Bournemouth vs Liverpool",
+    "home_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 31.2,
+      "rank": {
+        "attack": 9,
+        "defense": 10
+      }
+    },
+    "away_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 36.9,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      }
+    }
+  },
+  {
+    "gameweek": 23,
+    "fixture": "Brentford vs Nott'm Forest",
+    "home_team": {
+      "name": "Brentford",
+      "short_name": "BRE",
+      "attacking_fixture_rating": 39.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 18,
+        "defense": 13
+      }
+    },
+    "away_team": {
+      "name": "Nott'm Forest",
+      "short_name": "NFO",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 57.5,
+      "rank": {
+        "attack": 13,
+        "defense": 9
+      }
+    }
+  },
+  {
+    "gameweek": 23,
+    "fixture": "Burnley vs Spurs",
+    "home_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 37.0,
+      "defensive_fixture_rating": 46.2,
+      "rank": {
+        "attack": 16,
+        "defense": 14
+      }
+    },
+    "away_team": {
+      "name": "Spurs",
+      "short_name": "TOT",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 59.4,
+      "rank": {
+        "attack": 15,
+        "defense": 7
+      }
+    }
+  },
+  {
+    "gameweek": 23,
+    "fixture": "Crystal Palace vs Chelsea",
+    "home_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 12,
+        "defense": 8
+      }
+    },
+    "away_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 7,
+        "defense": 5
+      }
+    }
+  },
+  {
+    "gameweek": 23,
+    "fixture": "Everton vs Leeds",
+    "home_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 48.1,
+      "rank": {
+        "attack": 14,
+        "defense": 3
+      }
+    },
+    "away_team": {
+      "name": "Leeds",
+      "short_name": "LEE",
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 36.9,
+      "rank": {
+        "attack": 5,
+        "defense": 16
+      }
+    }
+  },
+  {
+    "gameweek": 23,
+    "fixture": "Fulham vs Brighton",
+    "home_team": {
+      "name": "Fulham",
+      "short_name": "FUL",
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 51.9,
+      "rank": {
+        "attack": 11,
+        "defense": 6
+      }
+    },
+    "away_team": {
+      "name": "Brighton",
+      "short_name": "BHA",
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 29.4,
+      "rank": {
+        "attack": 10,
+        "defense": 17
+      }
+    }
+  },
+  {
+    "gameweek": 23,
+    "fixture": "Man City vs Wolves",
+    "home_team": {
+      "name": "Man City",
+      "short_name": "MCI",
+      "attacking_fixture_rating": 91.0,
+      "defensive_fixture_rating": 76.2,
+      "rank": {
+        "attack": 1,
+        "defense": 2
+      }
+    },
+    "away_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 19.0,
+      "defensive_fixture_rating": 8.8,
+      "rank": {
+        "attack": 20,
+        "defense": 19
+      }
+    }
+  },
+  {
+    "gameweek": 23,
+    "fixture": "Newcastle vs Aston Villa",
+    "home_team": {
+      "name": "Newcastle",
+      "short_name": "NEW",
+      "attacking_fixture_rating": 77.0,
+      "defensive_fixture_rating": 25.6,
+      "rank": {
+        "attack": 8,
+        "defense": 15
+      }
+    },
+    "away_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 73.0,
+      "defensive_fixture_rating": 21.9,
+      "rank": {
+        "attack": 6,
+        "defense": 18
+      }
+    }
+  },
+  {
+    "gameweek": 23,
+    "fixture": "West Ham vs Sunderland",
+    "home_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 31.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 17,
+        "defense": 20
+      }
+    },
+    "away_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 65.0,
+      "rank": {
+        "attack": 19,
+        "defense": 4
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Aston Villa vs Brentford",
+    "home_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 71.0,
+      "defensive_fixture_rating": 44.4,
+      "rank": {
+        "attack": 6,
+        "defense": 18
+      }
+    },
+    "away_team": {
+      "name": "Brentford",
+      "short_name": "BRE",
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 27.5,
+      "rank": {
+        "attack": 18,
+        "defense": 13
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Brighton vs Everton",
+    "home_team": {
+      "name": "Brighton",
+      "short_name": "BHA",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 38.8,
+      "rank": {
+        "attack": 10,
+        "defense": 17
+      }
+    },
+    "away_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 14,
+        "defense": 3
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Chelsea vs West Ham",
+    "home_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 83.0,
+      "defensive_fixture_rating": 65.0,
+      "rank": {
+        "attack": 7,
+        "defense": 5
+      }
+    },
+    "away_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 31.0,
+      "defensive_fixture_rating": 16.2,
+      "rank": {
+        "attack": 17,
+        "defense": 20
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Leeds vs Arsenal",
+    "home_team": {
+      "name": "Leeds",
+      "short_name": "LEE",
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 21.9,
+      "rank": {
+        "attack": 5,
+        "defense": 16
+      }
+    },
+    "away_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 77.0,
+      "defensive_fixture_rating": 48.1,
+      "rank": {
+        "attack": 4,
+        "defense": 1
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Liverpool vs Newcastle",
+    "home_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 81.0,
+      "defensive_fixture_rating": 36.9,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      }
+    },
+    "away_team": {
+      "name": "Newcastle",
+      "short_name": "NEW",
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 18.1,
+      "rank": {
+        "attack": 8,
+        "defense": 15
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Man Utd vs Fulham",
+    "home_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 44.4,
+      "rank": {
+        "attack": 2,
+        "defense": 11
+      }
+    },
+    "away_team": {
+      "name": "Fulham",
+      "short_name": "FUL",
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 33.1,
+      "rank": {
+        "attack": 11,
+        "defense": 6
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Nott'm Forest vs Crystal Palace",
+    "home_team": {
+      "name": "Nott'm Forest",
+      "short_name": "NFO",
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 50.0,
+      "rank": {
+        "attack": 13,
+        "defense": 9
+      }
+    },
+    "away_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 50.0,
+      "rank": {
+        "attack": 12,
+        "defense": 8
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Spurs vs Man City",
+    "home_team": {
+      "name": "Spurs",
+      "short_name": "TOT",
+      "attacking_fixture_rating": 31.0,
+      "defensive_fixture_rating": 33.1,
+      "rank": {
+        "attack": 15,
+        "defense": 7
+      }
+    },
+    "away_team": {
+      "name": "Man City",
+      "short_name": "MCI",
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 65.0,
+      "rank": {
+        "attack": 1,
+        "defense": 2
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Sunderland vs Burnley",
+    "home_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 66.9,
+      "rank": {
+        "attack": 19,
+        "defense": 4
+      }
+    },
+    "away_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 29.0,
+      "defensive_fixture_rating": 50.0,
+      "rank": {
+        "attack": 16,
+        "defense": 14
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Wolves vs Bournemouth",
+    "home_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 37.0,
+      "defensive_fixture_rating": 25.6,
+      "rank": {
+        "attack": 20,
+        "defense": 19
+      }
+    },
+    "away_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 73.0,
+      "defensive_fixture_rating": 59.4,
+      "rank": {
+        "attack": 9,
+        "defense": 10
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Arsenal vs Sunderland",
+    "home_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 76.2,
+      "rank": {
+        "attack": 4,
+        "defense": 1
+      }
+    },
+    "away_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 19.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 19,
+        "defense": 4
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Bournemouth vs Aston Villa",
+    "home_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 73.0,
+      "defensive_fixture_rating": 36.9,
+      "rank": {
+        "attack": 9,
+        "defense": 10
+      }
+    },
+    "away_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 25.6,
+      "rank": {
+        "attack": 6,
+        "defense": 18
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Brighton vs Crystal Palace",
+    "home_team": {
+      "name": "Brighton",
+      "short_name": "BHA",
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 35.0,
+      "rank": {
+        "attack": 10,
+        "defense": 17
+      }
+    },
+    "away_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 44.4,
+      "rank": {
+        "attack": 12,
+        "defense": 8
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Burnley vs West Ham",
+    "home_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 50.0,
+      "rank": {
+        "attack": 16,
+        "defense": 14
+      }
+    },
+    "away_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 35.0,
+      "rank": {
+        "attack": 17,
+        "defense": 20
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Fulham vs Everton",
+    "home_team": {
+      "name": "Fulham",
+      "short_name": "FUL",
+      "attacking_fixture_rating": 41.0,
+      "defensive_fixture_rating": 59.4,
+      "rank": {
+        "attack": 11,
+        "defense": 6
+      }
+    },
+    "away_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 37.0,
+      "defensive_fixture_rating": 55.6,
+      "rank": {
+        "attack": 14,
+        "defense": 3
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Leeds vs Nott'm Forest",
+    "home_team": {
+      "name": "Leeds",
+      "short_name": "LEE",
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 38.8,
+      "rank": {
+        "attack": 5,
+        "defense": 16
+      }
+    },
+    "away_team": {
+      "name": "Nott'm Forest",
+      "short_name": "NFO",
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 33.1,
+      "rank": {
+        "attack": 13,
+        "defense": 9
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Liverpool vs Man City",
+    "home_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 23.8,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      }
+    },
+    "away_team": {
+      "name": "Man City",
+      "short_name": "MCI",
+      "attacking_fixture_rating": 75.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 1,
+        "defense": 2
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Man Utd vs Spurs",
+    "home_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 51.9,
+      "rank": {
+        "attack": 2,
+        "defense": 11
+      }
+    },
+    "away_team": {
+      "name": "Spurs",
+      "short_name": "TOT",
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 31.2,
+      "rank": {
+        "attack": 15,
+        "defense": 7
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Newcastle vs Brentford",
+    "home_team": {
+      "name": "Newcastle",
+      "short_name": "NEW",
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 48.1,
+      "rank": {
+        "attack": 8,
+        "defense": 15
+      }
+    },
+    "away_team": {
+      "name": "Brentford",
+      "short_name": "BRE",
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 31.2,
+      "rank": {
+        "attack": 18,
+        "defense": 13
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Wolves vs Chelsea",
+    "home_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 27.0,
+      "defensive_fixture_rating": 21.9,
+      "rank": {
+        "attack": 20,
+        "defense": 19
+      }
+    },
+    "away_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 77.0,
+      "defensive_fixture_rating": 68.8,
+      "rank": {
+        "attack": 7,
+        "defense": 5
+      }
+    }
+  },
+  {
+    "gameweek": 26,
+    "fixture": "Aston Villa vs Brighton",
+    "home_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 79.0,
+      "defensive_fixture_rating": 29.4,
+      "rank": {
+        "attack": 6,
+        "defense": 18
+      }
+    },
+    "away_team": {
+      "name": "Brighton",
+      "short_name": "BHA",
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 20.0,
+      "rank": {
+        "attack": 10,
+        "defense": 17
+      }
+    }
+  },
+  {
+    "gameweek": 26,
+    "fixture": "Brentford vs Arsenal",
+    "home_team": {
+      "name": "Brentford",
+      "short_name": "BRE",
+      "attacking_fixture_rating": 23.0,
+      "defensive_fixture_rating": 25.6,
+      "rank": {
+        "attack": 18,
+        "defense": 13
+      }
+    },
+    "away_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 73.0,
+      "defensive_fixture_rating": 72.5,
+      "rank": {
+        "attack": 4,
+        "defense": 1
+      }
+    }
+  },
+  {
+    "gameweek": 26,
+    "fixture": "Chelsea vs Leeds",
+    "home_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 75.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 7,
+        "defense": 5
+      }
+    },
+    "away_team": {
+      "name": "Leeds",
+      "short_name": "LEE",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 23.8,
+      "rank": {
+        "attack": 5,
+        "defense": 16
+      }
+    }
+  },
+  {
+    "gameweek": 26,
+    "fixture": "Crystal Palace vs Burnley",
+    "home_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 57.5,
+      "rank": {
+        "attack": 12,
+        "defense": 8
+      }
+    },
+    "away_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 39.0,
+      "defensive_fixture_rating": 36.9,
+      "rank": {
+        "attack": 16,
+        "defense": 14
+      }
+    }
+  },
+  {
+    "gameweek": 26,
+    "fixture": "Everton vs Bournemouth",
+    "home_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 55.6,
+      "rank": {
+        "attack": 14,
+        "defense": 3
+      }
+    },
+    "away_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 41.0,
+      "defensive_fixture_rating": 48.1,
+      "rank": {
+        "attack": 9,
+        "defense": 10
+      }
+    }
+  },
+  {
+    "gameweek": 26,
+    "fixture": "Man City vs Fulham",
+    "home_team": {
+      "name": "Man City",
+      "short_name": "MCI",
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 59.4,
+      "rank": {
+        "attack": 1,
+        "defense": 2
+      }
+    },
+    "away_team": {
+      "name": "Fulham",
+      "short_name": "FUL",
+      "attacking_fixture_rating": 37.0,
+      "defensive_fixture_rating": 33.1,
+      "rank": {
+        "attack": 11,
+        "defense": 6
+      }
+    }
+  },
+  {
+    "gameweek": 26,
+    "fixture": "Nott'm Forest vs Wolves",
+    "home_team": {
+      "name": "Nott'm Forest",
+      "short_name": "NFO",
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 65.0,
+      "rank": {
+        "attack": 13,
+        "defense": 9
+      }
+    },
+    "away_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 31.0,
+      "defensive_fixture_rating": 29.4,
+      "rank": {
+        "attack": 20,
+        "defense": 19
+      }
+    }
+  },
+  {
+    "gameweek": 26,
+    "fixture": "Spurs vs Newcastle",
+    "home_team": {
+      "name": "Spurs",
+      "short_name": "TOT",
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 46.2,
+      "rank": {
+        "attack": 15,
+        "defense": 7
+      }
+    },
+    "away_team": {
+      "name": "Newcastle",
+      "short_name": "NEW",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 8,
+        "defense": 15
+      }
+    }
+  },
+  {
+    "gameweek": 26,
+    "fixture": "Sunderland vs Liverpool",
+    "home_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 19,
+        "defense": 4
+      }
+    },
+    "away_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      }
+    }
+  },
+  {
+    "gameweek": 26,
+    "fixture": "West Ham vs Man Utd",
+    "home_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 10.6,
+      "rank": {
+        "attack": 17,
+        "defense": 20
+      }
+    },
+    "away_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 89.0,
+      "defensive_fixture_rating": 51.9,
+      "rank": {
+        "attack": 2,
+        "defense": 11
+      }
+    }
+  },
+  {
+    "gameweek": 27,
+    "fixture": "Aston Villa vs Leeds",
+    "home_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 77.0,
+      "defensive_fixture_rating": 20.0,
+      "rank": {
+        "attack": 6,
+        "defense": 18
+      }
+    },
+    "away_team": {
+      "name": "Leeds",
+      "short_name": "LEE",
+      "attacking_fixture_rating": 79.0,
+      "defensive_fixture_rating": 21.9,
+      "rank": {
+        "attack": 5,
+        "defense": 16
+      }
+    }
+  },
+  {
+    "gameweek": 27,
+    "fixture": "Brentford vs Brighton",
+    "home_team": {
+      "name": "Brentford",
+      "short_name": "BRE",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 36.9,
+      "rank": {
+        "attack": 18,
+        "defense": 13
+      }
+    },
+    "away_team": {
+      "name": "Brighton",
+      "short_name": "BHA",
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 10,
+        "defense": 17
+      }
+    }
+  },
+  {
+    "gameweek": 27,
+    "fixture": "Chelsea vs Burnley",
+    "home_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 71.0,
+      "defensive_fixture_rating": 63.1,
+      "rank": {
+        "attack": 7,
+        "defense": 5
+      }
+    },
+    "away_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 33.0,
+      "defensive_fixture_rating": 27.5,
+      "rank": {
+        "attack": 16,
+        "defense": 14
+      }
+    }
+  },
+  {
+    "gameweek": 27,
+    "fixture": "Crystal Palace vs Wolves",
+    "home_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 71.0,
+      "defensive_fixture_rating": 65.0,
+      "rank": {
+        "attack": 12,
+        "defense": 8
+      }
+    },
+    "away_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 31.0,
+      "defensive_fixture_rating": 27.5,
+      "rank": {
+        "attack": 20,
+        "defense": 19
+      }
+    }
+  },
+  {
+    "gameweek": 27,
+    "fixture": "Everton vs Man Utd",
+    "home_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 14,
+        "defense": 3
+      }
+    },
+    "away_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 46.2,
+      "rank": {
+        "attack": 2,
+        "defense": 11
+      }
+    }
+  },
+  {
+    "gameweek": 27,
+    "fixture": "Man City vs Newcastle",
+    "home_team": {
+      "name": "Man City",
+      "short_name": "MCI",
+      "attacking_fixture_rating": 83.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 1,
+        "defense": 2
+      }
+    },
+    "away_team": {
+      "name": "Newcastle",
+      "short_name": "NEW",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 16.2,
+      "rank": {
+        "attack": 8,
+        "defense": 15
+      }
+    }
+  },
+  {
+    "gameweek": 27,
+    "fixture": "Nott'm Forest vs Liverpool",
+    "home_team": {
+      "name": "Nott'm Forest",
+      "short_name": "NFO",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 33.1,
+      "rank": {
+        "attack": 13,
+        "defense": 9
+      }
+    },
+    "away_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      }
+    }
+  },
+  {
+    "gameweek": 27,
+    "fixture": "Spurs vs Arsenal",
+    "home_team": {
+      "name": "Spurs",
+      "short_name": "TOT",
+      "attacking_fixture_rating": 29.0,
+      "defensive_fixture_rating": 38.8,
+      "rank": {
+        "attack": 15,
+        "defense": 7
+      }
+    },
+    "away_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 66.9,
+      "rank": {
+        "attack": 4,
+        "defense": 1
+      }
+    }
+  },
+  {
+    "gameweek": 27,
+    "fixture": "Sunderland vs Fulham",
+    "home_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 31.0,
+      "defensive_fixture_rating": 57.5,
+      "rank": {
+        "attack": 19,
+        "defense": 4
+      }
+    },
+    "away_team": {
+      "name": "Fulham",
+      "short_name": "FUL",
+      "attacking_fixture_rating": 39.0,
+      "defensive_fixture_rating": 65.0,
+      "rank": {
+        "attack": 11,
+        "defense": 6
+      }
+    }
+  },
+  {
+    "gameweek": 27,
+    "fixture": "West Ham vs Bournemouth",
+    "home_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 23.8,
+      "rank": {
+        "attack": 17,
+        "defense": 20
+      }
+    },
+    "away_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 75.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 9,
+        "defense": 10
+      }
+    }
+  },
+  {
+    "gameweek": 28,
+    "fixture": "Arsenal vs Chelsea",
+    "home_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 4,
+        "defense": 1
+      }
+    },
+    "away_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 38.8,
+      "rank": {
+        "attack": 7,
+        "defense": 5
+      }
+    }
+  },
+  {
+    "gameweek": 28,
+    "fixture": "Bournemouth vs Sunderland",
+    "home_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 61.2,
+      "rank": {
+        "attack": 9,
+        "defense": 10
+      }
+    },
+    "away_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 35.0,
+      "defensive_fixture_rating": 51.9,
+      "rank": {
+        "attack": 19,
+        "defense": 4
+      }
+    }
+  },
+  {
+    "gameweek": 28,
+    "fixture": "Brighton vs Nott'm Forest",
+    "home_team": {
+      "name": "Brighton",
+      "short_name": "BHA",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 36.9,
+      "rank": {
+        "attack": 10,
+        "defense": 17
+      }
+    },
+    "away_team": {
+      "name": "Nott'm Forest",
+      "short_name": "NFO",
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 13,
+        "defense": 9
+      }
+    }
+  },
+  {
+    "gameweek": 28,
+    "fixture": "Burnley vs Brentford",
+    "home_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 51.9,
+      "rank": {
+        "attack": 16,
+        "defense": 14
+      }
+    },
+    "away_team": {
+      "name": "Brentford",
+      "short_name": "BRE",
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 48.1,
+      "rank": {
+        "attack": 18,
+        "defense": 13
+      }
+    }
+  },
+  {
+    "gameweek": 28,
+    "fixture": "Fulham vs Spurs",
+    "home_team": {
+      "name": "Fulham",
+      "short_name": "FUL",
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 61.2,
+      "rank": {
+        "attack": 11,
+        "defense": 6
+      }
+    },
+    "away_team": {
+      "name": "Spurs",
+      "short_name": "TOT",
+      "attacking_fixture_rating": 35.0,
+      "defensive_fixture_rating": 48.1,
+      "rank": {
+        "attack": 15,
+        "defense": 7
+      }
+    }
+  },
+  {
+    "gameweek": 28,
+    "fixture": "Leeds vs Man City",
+    "home_team": {
+      "name": "Leeds",
+      "short_name": "LEE",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 16.2,
+      "rank": {
+        "attack": 5,
+        "defense": 16
+      }
+    },
+    "away_team": {
+      "name": "Man City",
+      "short_name": "MCI",
+      "attacking_fixture_rating": 83.0,
+      "defensive_fixture_rating": 46.2,
+      "rank": {
+        "attack": 1,
+        "defense": 2
+      }
+    }
+  },
+  {
+    "gameweek": 28,
+    "fixture": "Liverpool vs West Ham",
+    "home_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 91.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      }
+    },
+    "away_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 8.8,
+      "rank": {
+        "attack": 17,
+        "defense": 20
+      }
+    }
+  },
+  {
+    "gameweek": 28,
+    "fixture": "Man Utd vs Crystal Palace",
+    "home_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 46.2,
+      "rank": {
+        "attack": 2,
+        "defense": 11
+      }
+    },
+    "away_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 29.4,
+      "rank": {
+        "attack": 12,
+        "defense": 8
+      }
+    }
+  },
+  {
+    "gameweek": 28,
+    "fixture": "Newcastle vs Everton",
+    "home_team": {
+      "name": "Newcastle",
+      "short_name": "NEW",
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 8,
+        "defense": 15
+      }
+    },
+    "away_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 50.0,
+      "rank": {
+        "attack": 14,
+        "defense": 3
+      }
+    }
+  },
+  {
+    "gameweek": 28,
+    "fixture": "Wolves vs Aston Villa",
+    "home_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 20.0,
+      "rank": {
+        "attack": 20,
+        "defense": 19
+      }
+    },
+    "away_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 79.0,
+      "defensive_fixture_rating": 44.4,
+      "rank": {
+        "attack": 6,
+        "defense": 18
+      }
+    }
+  },
+  {
+    "gameweek": 29,
+    "fixture": "Aston Villa vs Chelsea",
+    "home_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 23.8,
+      "rank": {
+        "attack": 6,
+        "defense": 18
+      }
+    },
+    "away_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 75.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 7,
+        "defense": 5
+      }
+    }
+  },
+  {
+    "gameweek": 29,
+    "fixture": "Bournemouth vs Brentford",
+    "home_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 59.4,
+      "rank": {
+        "attack": 9,
+        "defense": 10
+      }
+    },
+    "away_team": {
+      "name": "Brentford",
+      "short_name": "BRE",
+      "attacking_fixture_rating": 37.0,
+      "defensive_fixture_rating": 35.0,
+      "rank": {
+        "attack": 18,
+        "defense": 13
+      }
+    }
+  },
+  {
+    "gameweek": 29,
+    "fixture": "Brighton vs Arsenal",
+    "home_team": {
+      "name": "Brighton",
+      "short_name": "BHA",
+      "attacking_fixture_rating": 39.0,
+      "defensive_fixture_rating": 20.0,
+      "rank": {
+        "attack": 10,
+        "defense": 17
+      }
+    },
+    "away_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 79.0,
+      "defensive_fixture_rating": 57.5,
+      "rank": {
+        "attack": 4,
+        "defense": 1
+      }
+    }
+  },
+  {
+    "gameweek": 29,
+    "fixture": "Everton vs Burnley",
+    "home_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 68.8,
+      "rank": {
+        "attack": 14,
+        "defense": 3
+      }
+    },
+    "away_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 27.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 16,
+        "defense": 14
+      }
+    }
+  },
+  {
+    "gameweek": 29,
+    "fixture": "Fulham vs West Ham",
+    "home_team": {
+      "name": "Fulham",
+      "short_name": "FUL",
+      "attacking_fixture_rating": 75.0,
+      "defensive_fixture_rating": 65.0,
+      "rank": {
+        "attack": 11,
+        "defense": 6
+      }
+    },
+    "away_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 31.0,
+      "defensive_fixture_rating": 23.8,
+      "rank": {
+        "attack": 17,
+        "defense": 20
+      }
+    }
+  },
+  {
+    "gameweek": 29,
+    "fixture": "Leeds vs Sunderland",
+    "home_team": {
+      "name": "Leeds",
+      "short_name": "LEE",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 50.0,
+      "rank": {
+        "attack": 5,
+        "defense": 16
+      }
+    },
+    "away_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 19,
+        "defense": 4
+      }
+    }
+  },
+  {
+    "gameweek": 29,
+    "fixture": "Man City vs Nott'm Forest",
+    "home_team": {
+      "name": "Man City",
+      "short_name": "MCI",
+      "attacking_fixture_rating": 71.0,
+      "defensive_fixture_rating": 63.1,
+      "rank": {
+        "attack": 1,
+        "defense": 2
+      }
+    },
+    "away_team": {
+      "name": "Nott'm Forest",
+      "short_name": "NFO",
+      "attacking_fixture_rating": 33.0,
+      "defensive_fixture_rating": 27.5,
+      "rank": {
+        "attack": 13,
+        "defense": 9
+      }
+    }
+  },
+  {
+    "gameweek": 29,
+    "fixture": "Newcastle vs Man Utd",
+    "home_team": {
+      "name": "Newcastle",
+      "short_name": "NEW",
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 18.1,
+      "rank": {
+        "attack": 8,
+        "defense": 15
+      }
+    },
+    "away_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 81.0,
+      "defensive_fixture_rating": 35.0,
+      "rank": {
+        "attack": 2,
+        "defense": 11
+      }
+    }
+  },
+  {
+    "gameweek": 29,
+    "fixture": "Spurs vs Crystal Palace",
+    "home_team": {
+      "name": "Spurs",
+      "short_name": "TOT",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 15,
+        "defense": 7
+      }
+    },
+    "away_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 12,
+        "defense": 8
+      }
+    }
+  },
+  {
+    "gameweek": 29,
+    "fixture": "Wolves vs Liverpool",
+    "home_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 41.0,
+      "defensive_fixture_rating": 14.4,
+      "rank": {
+        "attack": 20,
+        "defense": 19
+      }
+    },
+    "away_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 85.0,
+      "defensive_fixture_rating": 55.6,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      }
+    }
+  }
 ]
