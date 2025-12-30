@@ -216,6 +216,26 @@ export default function FixtureAnalysisPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Loading skeleton component
+  const LoadingSkeleton = () => (
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-8">
+          <div className="h-10 w-72 bg-secondary/50 rounded-lg animate-pulse mb-2"></div>
+          <div className="h-6 w-96 bg-secondary/30 rounded-lg animate-pulse"></div>
+        </div>
+        <div className="mb-6">
+          <div className="h-16 bg-secondary/30 rounded-xl animate-pulse"></div>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="h-40 bg-secondary/30 rounded-xl animate-pulse"></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
@@ -381,14 +401,22 @@ export default function FixtureAnalysisPage() {
     </div>
   )
   if (error) return (
-    <div className="min-h-screen flex items-center justify-center text-red-500">
-      Error: {error}
-      <button
-        onClick={() => fetchData()}
-        className="ml-4 px-4 py-2 bg-blue-500 text-white rounded"
-      >
-        Retry
-      </button>
+    <div className="min-h-screen flex items-center justify-center">
+      <Card className="max-w-md">
+        <CardContent className="p-8 text-center">
+          <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-950 flex items-center justify-center mx-auto mb-4">
+            <span className="text-3xl">⚠️</span>
+          </div>
+          <h3 className="text-lg font-semibold text-foreground mb-2">Failed to load fixtures</h3>
+          <p className="text-sm text-muted-foreground mb-4">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-200 active:scale-95"
+          >
+            Retry
+          </button>
+        </CardContent>
+      </Card>
     </div>
   )
 
@@ -408,7 +436,7 @@ export default function FixtureAnalysisPage() {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="bg-secondary/50 p-1 rounded-lg border w-full grid grid-cols-3 gap-1 text-background">
+          <TabsList className="bg-secondary/50 p-1 rounded-lg border w-full grid grid-cols-2 gap-1 text-background">
             <TabsTrigger
               value="fixtures"
               className="flex items-center justify-center gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white"
@@ -422,13 +450,6 @@ export default function FixtureAnalysisPage() {
             >
               <Target className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden sm:inline">Opportunities</span>
-            </TabsTrigger>
-            <TabsTrigger
-              value="summary"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white"
-            >
-              <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="hidden sm:inline">Summary</span>
             </TabsTrigger>
           </TabsList>
 
@@ -783,190 +804,6 @@ export default function FixtureAnalysisPage() {
                 </CardContent>
               </Card>
             </div>
-          </TabsContent>
-
-          <TabsContent value="summary" className="space-y-4 sm:space-y-6">
-            {/* Fixture Period Comparison */}
-            <Card className="border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-card backdrop-blur-md shadow-xl">
-              <CardHeader className="pb-3 sm:pb-4 border-b border-border/50 bg-gradient-to-r from-purple-500/10 to-transparent">
-                <CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
-                    📊
-                  </div>
-                  Fixture Difficulty by Period
-                  <Badge variant="secondary" className="ml-auto text-xs bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
-                    Next 6 GWs
-                  </Badge>
-                </CardTitle>
-                <p className="text-xs sm:text-sm text-muted-foreground mt-2">
-                  Compare team fixture quality across two periods. Higher percentage = easier fixtures.
-                </p>
-              </CardHeader>
-              <CardContent className="p-3 sm:p-6">
-                <div className="grid gap-4 lg:grid-cols-2">
-                  {/* Near-term: Next 3 Gameweeks */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-                        🔥 Next 3 Gameweeks
-                        <span className="text-xs text-muted-foreground font-normal">(GW 1-3)</span>
-                      </h3>
-                    </div>
-                    <div className="space-y-2">
-                      {[...teamFixtureSummary]
-                        .sort((a, b) => b.nearTermRating - a.nearTermRating)
-                        .slice(0, 10)
-                        .map((team, index) => {
-                          return (
-                            <div
-                              key={index}
-                              className={`p-3 rounded-lg border-2 border-slate-300 dark:border-slate-700 ${getTeamBackgroundColor(team.team)} hover:scale-[1.02] transition-all`}
-                            >
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-3 flex-1 min-w-0">
-                                  <span className="text-xs font-bold text-muted-foreground w-6">#{index + 1}</span>
-                                  <span className="font-semibold text-sm text-foreground truncate">{team.team}</span>
-                                  {team.fixtureSwing > 0 && (
-                                    <span className="text-green-600 dark:text-green-400 text-lg font-bold" title="Fixtures improving">↑</span>
-                                  )}
-                                  {team.fixtureSwing < 0 && (
-                                    <span className="text-red-600 dark:text-red-400 text-lg font-bold" title="Fixtures declining">↓</span>
-                                  )}
-                                </div>
-                                <div className="flex items-center gap-2">
-                                  <span className="font-bold text-lg text-foreground">
-                                    {team.nearTermRating}%
-                                  </span>
-                                </div>
-                              </div>
-                              <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
-                                <span>🏠 {team.nearTermHomeFixtures} home</span>
-                                <span>•</span>
-                                <span className={team.fixtureSwing > 0 ? 'text-green-600 dark:text-green-400 font-semibold' : team.fixtureSwing < 0 ? 'text-red-600 dark:text-red-400 font-semibold' : 'text-muted-foreground'}>
-                                  {team.swingEmoji} Swing: {team.fixtureSwing > 0 ? '+' : ''}{team.fixtureSwing}%
-                                </span>
-                              </div>
-                            </div>
-                          );
-                        })}
-                    </div>
-                  </div>
-
-                  {/* Medium-term: Following 3 Gameweeks */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-                        📅 Following 3 Gameweeks
-                        <span className="text-xs text-muted-foreground font-normal">(GW 4-6)</span>
-                      </h3>
-                    </div>
-                    <div className="space-y-2">
-                      {[...teamFixtureSummary]
-                        .sort((a, b) => b.mediumTermRating - a.mediumTermRating)
-                        .slice(0, 10)
-                        .map((team, index) => {
-                          return (
-                            <div
-                              key={index}
-                              className={`p-3 rounded-lg border-2 border-slate-300 dark:border-slate-700 ${getTeamBackgroundColor(team.team)} hover:scale-[1.02] transition-all`}
-                            >
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-3 flex-1 min-w-0">
-                                  <span className="text-xs font-bold text-muted-foreground w-6">#{index + 1}</span>
-                                  <span className="font-semibold text-sm text-foreground truncate">{team.team}</span>
-                                  {team.fixtureSwing > 0 && (
-                                    <span className="text-green-600 dark:text-green-400 text-lg font-bold" title="Fixtures improving">↑</span>
-                                  )}
-                                  {team.fixtureSwing < 0 && (
-                                    <span className="text-red-600 dark:text-red-400 text-lg font-bold" title="Fixtures declining">↓</span>
-                                  )}
-                                </div>
-                                <div className="flex items-center gap-2">
-                                  <span className="font-bold text-lg text-foreground">
-                                    {team.mediumTermRating}%
-                                  </span>
-                                </div>
-                              </div>
-                              <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
-                                <span>🏠 {team.mediumTermHomeFixtures} home</span>
-                                <span>•</span>
-                                <span className={team.fixtureSwing > 0 ? 'text-green-600 dark:text-green-400 font-semibold' : team.fixtureSwing < 0 ? 'text-red-600 dark:text-red-400 font-semibold' : 'text-muted-foreground'}>
-                                  {team.swingEmoji} Swing: {team.fixtureSwing > 0 ? '+' : ''}{team.fixtureSwing}%
-                                </span>
-                              </div>
-                            </div>
-                          );
-                        })}
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Biggest Movers - Fixture Swings */}
-            <Card className="border-border/50 bg-card backdrop-blur-md shadow-lg">
-              <CardHeader className="pb-3 sm:pb-4 border-b border-border/50">
-                <CardTitle className="text-sm sm:text-base text-foreground flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center">
-                    🔄
-                  </div>
-                  Biggest Fixture Swings
-                  <Badge variant="secondary" className="ml-auto text-xs">
-                    Transfer Targets
-                  </Badge>
-                </CardTitle>
-                <p className="text-xs sm:text-sm text-muted-foreground mt-2">
-                  Teams with the largest fixture difficulty changes between periods.
-                </p>
-              </CardHeader>
-              <CardContent className="p-3 sm:p-6">
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {[...teamFixtureSummary]
-                    .sort((a, b) => Math.abs(b.fixtureSwing) - Math.abs(a.fixtureSwing))
-                    .slice(0, 9)
-                    .map((team, index) => {
-                      const isImproving = team.fixtureSwing > 0;
-                      return (
-                        <div
-                          key={index}
-                          className={`p-3 rounded-lg border transition-all hover:scale-[1.02] ${
-                            isImproving
-                              ? 'bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-green-500/20 hover:border-green-500/40'
-                              : 'bg-gradient-to-r from-red-500/10 to-orange-500/10 border-red-500/20 hover:border-red-500/40'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="font-semibold text-sm text-foreground">{team.team}</span>
-                            <Badge className={isImproving 
-                              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                              : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
-                            }>
-                              {team.swingEmoji} {team.fixtureSwing > 0 ? '+' : ''}{team.fixtureSwing}%
-                            </Badge>
-                          </div>
-                          <div className="space-y-1.5">
-                            <div className="flex items-center justify-between text-xs">
-                              <span className="text-muted-foreground">GW 1-3</span>
-                              <span className={`font-semibold ${getTeamColor(team.team)}`}>
-                                {team.nearTermRating}%
-                              </span>
-                            </div>
-                            <div className="flex items-center justify-between text-xs">
-                              <span className="text-muted-foreground">GW 4-6</span>
-                              <span className={`font-semibold ${getTeamColor(team.team)}`}>
-                                {team.mediumTermRating}%
-                              </span>
-                            </div>
-                          </div>
-                          <p className="text-xs text-muted-foreground mt-2">
-                            {isImproving ? '📈 Consider buying' : '📉 Consider selling'}
-                          </p>
-                        </div>
-                      );
-                    })}
-                </div>
-              </CardContent>
-            </Card>
           </TabsContent>
 
         </Tabs>
