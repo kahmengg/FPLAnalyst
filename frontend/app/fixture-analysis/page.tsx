@@ -18,15 +18,15 @@ const teamShortCodes: Record<string, string> = {
   "Sunderland": "SUN", "Spurs": "TOT", "West Ham": "WHU", "Wolves": "WOL"
 }
 
-// Get difficulty color based on rating (1-10 scale, lower is easier)
-// Simplified gradient: Green (easy) → Yellow (medium) → Red (hard)
+// Get difficulty color based on rating (2.1-7.4 observed range, lower is easier)
+// 6-tier system optimized for actual data distribution
 const getDifficultyColor = (rating: number) => {
-  if (rating <= 3) return "bg-green-500 dark:bg-green-600 text-white border-green-600 dark:border-green-500"
-  if (rating <= 5) return "bg-green-300 dark:bg-green-700 text-green-900 dark:text-green-100 border-green-400 dark:border-green-600"
-  if (rating <= 6) return "bg-yellow-300 dark:bg-yellow-600 text-yellow-900 dark:text-yellow-100 border-yellow-400 dark:border-yellow-500"
-  if (rating <= 7) return "bg-orange-400 dark:bg-orange-600 text-white border-orange-500 dark:border-orange-500"
-  if (rating <= 8) return "bg-red-400 dark:bg-red-600 text-white border-red-500 dark:border-red-500"
-  return "bg-red-600 dark:bg-red-700 text-white border-red-700 dark:border-red-600"
+  if (rating <= 3.5) return "bg-green-500 dark:bg-green-600 text-white border-green-600 dark:border-green-500"  // Very Easy: 2.1-3.5
+  if (rating <= 4.5) return "bg-green-300 dark:bg-green-700 text-green-900 dark:text-green-100 border-green-400 dark:border-green-600"  // Easy: 3.6-4.5
+  if (rating <= 5.3) return "bg-yellow-300 dark:bg-yellow-600 text-yellow-900 dark:text-yellow-100 border-yellow-400 dark:border-yellow-500"  // Moderate-Easy: 4.6-5.3
+  if (rating <= 6.2) return "bg-orange-400 dark:bg-orange-600 text-white border-orange-500 dark:border-orange-500"  // Moderate-Hard: 5.4-6.2
+  if (rating <= 7.0) return "bg-red-400 dark:bg-red-600 text-white border-red-500 dark:border-red-500"  // Hard: 6.3-7.0
+  return "bg-red-600 dark:bg-red-700 text-white border-red-700 dark:border-red-600"  // Very Hard: 7.0+
 }
 
 const teamColors = {
@@ -253,17 +253,21 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
 
   // Process fixtures into team-based view
   const teamFixtures = useMemo((): TeamFixtures[] => {
-    // Map fixtures with both percentage (for Fixtures tab) and FDR scale (for FDR tab)
-    const rawFixtures: Fixture[] = fixtures.map(f => ({
-      gameweek: f.gw,
-      home_team: f.teams.home.team,
-      away_team: f.teams.away.team,
-      // Use FDR scale values from backend (1-10, lower = easier)
-      attack_rating: f.attack_rating || ((f.teams.home.attackRating + f.teams.home.defenseRating) / 2),
-      defense_rating: f.defense_rating || ((f.teams.home.attackRating + f.teams.home.defenseRating) / 2),
-      fixture_rating: f.fixture_rating || ((f.teams.home.attackRating + f.teams.home.defenseRating) / 2),
-      home_advantage: f.home_advantage || 0
-    }))
+    // Map fixtures with FDR data for both home and away teams
+    const rawFixtures = fixtures.map(f => {
+      // Backend now provides separate FDR for home and away teams
+      const homeFDR = f.home_team_fdr?.overall || f.fixture_rating || 5.5;
+      const awayFDR = f.away_team?.fdr?.overall || 5.5;
+      
+      return {
+        gameweek: f.gw,
+        home_team: f.teams.home.team,
+        away_team: f.teams.away.team,
+        home_fdr: homeFDR,
+        away_fdr: awayFDR,
+        home_advantage: f.home_advantage || 0
+      };
+    })
 
     // Find current GW
     const gameweeks = rawFixtures.map(f => f.gameweek)
@@ -283,11 +287,9 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
         .slice(0, 8)
         .map(f => {
           const isHome = f.home_team === team
-          // Use pre-calculated FDR rating (1-10 scale, lower = easier)
-          // If fixture_rating is already 1-10, use it directly; otherwise convert from percentage
-          const difficulty = f.fixture_rating <= 10 
-            ? f.fixture_rating 
-            : 10 - (f.fixture_rating / 10)
+          // Use the correct FDR based on whether team is home or away
+          const difficulty = isHome ? f.home_fdr : f.away_fdr
+          
           return {
             gameweek: f.gameweek,
             opponent: isHome ? f.away_team : f.home_team,
@@ -337,12 +339,12 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
           <div className="flex items-center gap-4">
             <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">FDR:</span>
             <div className="flex-1 flex items-center gap-1">
-              <div className="h-6 flex-1 bg-green-500 dark:bg-green-600 rounded-l flex items-center justify-center text-white text-xs font-bold">1-3</div>
-              <div className="h-6 flex-1 bg-green-300 dark:bg-green-700 flex items-center justify-center text-green-900 dark:text-green-100 text-xs font-bold">4-5</div>
-              <div className="h-6 flex-1 bg-yellow-300 dark:bg-yellow-600 flex items-center justify-center text-yellow-900 dark:text-yellow-100 text-xs font-bold">6</div>
-              <div className="h-6 flex-1 bg-orange-400 dark:bg-orange-600 flex items-center justify-center text-white text-xs font-bold">7</div>
-              <div className="h-6 flex-1 bg-red-400 dark:bg-red-600 flex items-center justify-center text-white text-xs font-bold">8</div>
-              <div className="h-6 flex-1 bg-red-600 dark:bg-red-700 rounded-r flex items-center justify-center text-white text-xs font-bold">9-10</div>
+              <div className="h-6 flex-1 bg-green-500 dark:bg-green-600 rounded-l"></div>
+              <div className="h-6 flex-1 bg-green-300 dark:bg-green-700"></div>
+              <div className="h-6 flex-1 bg-yellow-300 dark:bg-yellow-600"></div>
+              <div className="h-6 flex-1 bg-orange-400 dark:bg-orange-600"></div>
+              <div className="h-6 flex-1 bg-red-400 dark:bg-red-600"></div>
+              <div className="h-6 flex-1 bg-red-600 dark:bg-red-700 rounded-r"></div>
             </div>
             <div className="flex items-center gap-2 text-xs">
               <span className="text-muted-foreground">✅ Easy</span>
@@ -429,15 +431,15 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
           <div className="space-y-4">
             {/* Color Scale */}
             <div className="flex flex-col gap-2">
-              <p className="text-sm font-medium text-muted-foreground mb-2">Fixture Difficulty Rating (1-10)</p>
+              <p className="text-sm font-medium text-muted-foreground mb-2">Fixture Difficulty Rating</p>
               <div className="flex items-center gap-2">
                 <div className="flex-1 flex items-center gap-1">
-                  <div className="h-10 flex-1 bg-green-500 dark:bg-green-600 rounded-l flex items-center justify-center text-white text-xs font-bold">1-3</div>
-                  <div className="h-10 flex-1 bg-green-300 dark:bg-green-700 flex items-center justify-center text-green-900 dark:text-green-100 text-xs font-bold">4-5</div>
-                  <div className="h-10 flex-1 bg-yellow-300 dark:bg-yellow-600 flex items-center justify-center text-yellow-900 dark:text-yellow-100 text-xs font-bold">6</div>
-                  <div className="h-10 flex-1 bg-orange-400 dark:bg-orange-600 flex items-center justify-center text-white text-xs font-bold">7</div>
-                  <div className="h-10 flex-1 bg-red-400 dark:bg-red-600 flex items-center justify-center text-white text-xs font-bold">8</div>
-                  <div className="h-10 flex-1 bg-red-600 dark:bg-red-700 rounded-r flex items-center justify-center text-white text-xs font-bold">9-10</div>
+                  <div className="h-10 flex-1 bg-green-500 dark:bg-green-600 rounded-l"></div>
+                  <div className="h-10 flex-1 bg-green-300 dark:bg-green-700"></div>
+                  <div className="h-10 flex-1 bg-yellow-300 dark:bg-yellow-600"></div>
+                  <div className="h-10 flex-1 bg-orange-400 dark:bg-orange-600"></div>
+                  <div className="h-10 flex-1 bg-red-400 dark:bg-red-600"></div>
+                  <div className="h-10 flex-1 bg-red-600 dark:bg-red-700 rounded-r"></div>
                 </div>
               </div>
               <div className="flex justify-between text-xs text-muted-foreground px-1">
@@ -714,7 +716,7 @@ export default function FixtureAnalysisPage() {
               className="flex items-center justify-center gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-600 data-[state=active]:to-purple-600 data-[state=active]:text-white"
             >
               <Target className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="hidden sm:inline">Opportunities</span>
+              <span className="hidden sm:inline">FDR</span>
             </TabsTrigger>
           </TabsList>
 
@@ -803,11 +805,7 @@ export default function FixtureAnalysisPage() {
                   <CardContent className="p-3 sm:p-4 space-y-3 sm:space-y-4">
                     {/* Home Team */}
                     <div
-                      className={`p-3 sm:p-4 rounded-xl border transition-all duration-300 hover:scale-[1.01] ${
-                        fixture.favorability === fixture.teams.home.team
-                          ? "bg-purple-500/10 border-purple-500/30"
-                          : "bg-slate-500/10 border-slate-500/30"
-                      }`}
+                      className={`p-3 sm:p-4 rounded-xl border transition-all duration-300 hover:scale-[1.01] ${getTeamBackgroundColor(fixture.teams.home.team)} ${getTeamBorderColor(fixture.teams.home.team)}`}
                     >
                       <div className="flex items-center justify-between mb-2 sm:mb-3">
                         <h3 className="font-semibold text-sm sm:text-base text-foreground truncate">
@@ -817,12 +815,7 @@ export default function FixtureAnalysisPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                         <div className="space-y-2">
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <div className="group relative">
-                              <Target className="h-4 w-4" />
-                              <span className="absolute hidden group-hover:block text-xs bg-gray-800 text-white p-1 rounded">
-                                Goal Scoring Potential
-                              </span>
-                            </div>
+                            <Target className="h-4 w-4" />
                             <Badge
                               aria-label={`Attack Rank ${fixture.teams.home.rank.attack}`}
                               className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
@@ -845,12 +838,7 @@ export default function FixtureAnalysisPage() {
                         </div>
                         <div className="space-y-2">
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <div className="group relative">
-                              <Shield className="h-4 w-4" />
-                              <span className="absolute hidden group-hover:block text-xs bg-gray-800 text-white p-1 rounded">
-                                Clean Sheet Potential
-                              </span>
-                            </div>
+                            <Shield className="h-4 w-4" />
                             <Badge
                               aria-label={`Defense Rank ${fixture.teams.home.rank.defense}`}
                               className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
@@ -876,11 +864,7 @@ export default function FixtureAnalysisPage() {
 
                     {/* Away Team */}
                     <div
-                      className={`p-3 sm:p-4 rounded-xl border transition-all duration-300 hover:scale-[1.01] ${
-                        fixture.favorability === fixture.teams.away.team
-                          ? "bg-purple-500/10 border-purple-500/30"
-                          : "bg-slate-500/10 border-slate-500/30"
-                      }`}
+                      className={`p-3 sm:p-4 rounded-xl border transition-all duration-300 hover:scale-[1.01] ${getTeamBackgroundColor(fixture.teams.away.team)} ${getTeamBorderColor(fixture.teams.away.team)}`}
                     >
                       <div className="flex items-center justify-between mb-2 sm:mb-3">
                         <h3 className="font-semibold text-sm sm:text-base text-foreground truncate">
@@ -890,12 +874,7 @@ export default function FixtureAnalysisPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                         <div className="space-y-2">
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <div className="group relative">
-                              <Target className="h-4 w-4" />
-                              <span className="absolute hidden group-hover:block text-xs bg-gray-800 text-white p-1 rounded">
-                                Goal Scoring Potential
-                              </span>
-                            </div>
+                            <Target className="h-4 w-4" />
                             <Badge
                               aria-label={`Attack Rank ${fixture.teams.away.rank.attack}`}
                               className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
@@ -918,12 +897,7 @@ export default function FixtureAnalysisPage() {
                         </div>
                         <div className="space-y-2">
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <div className="group relative">
-                              <Shield className="h-4 w-4" />
-                              <span className="absolute hidden group-hover:block text-xs bg-gray-800 text-white p-1 rounded">
-                                Clean Sheet Potential
-                              </span>
-                            </div>
+                            <Shield className="h-4 w-4" />
                             <Badge
                               aria-label={`Defense Rank ${fixture.teams.away.rank.defense}`}
                               className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
@@ -953,65 +927,6 @@ export default function FixtureAnalysisPage() {
           </TabsContent>
 
           <TabsContent value="opportunities" className="space-y-4 sm:space-y-6">
-            {/* FDR View - Replacing Opportunities */}
-            <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <Card className="border-purple-500/50 bg-card hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-                      <span className="text-2xl">✅</span>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Easiest Fixtures</p>
-                      <p className="text-xl font-bold text-green-600 dark:text-green-400">Rating 1-3</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="border-blue-500/50 bg-card hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center">
-                      <span className="text-2xl">⚡</span>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Moderate Fixtures</p>
-                      <p className="text-xl font-bold text-yellow-600 dark:text-yellow-400">Rating 4-7</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="border-indigo-500/50 bg-card hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
-                      <span className="text-2xl">🔥</span>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Difficult Fixtures</p>
-                      <p className="text-xl font-bold text-red-600 dark:text-red-400">Rating 8-10</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="border-slate-500/50 bg-card hover:shadow-lg transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-                      <Home className="h-6 w-6 text-purple-600" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Next 8 Gameweeks</p>
-                      <p className="text-xl font-bold text-purple-600 dark:text-purple-400">FDR View</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
             {/* FDR Grid */}
             <FDRGrid fixtures={fixtures} />
           </TabsContent>
