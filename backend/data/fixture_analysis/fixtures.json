@@ -22,9 +22,9 @@
         "defense": 18
       }
     },
-    "attack_rating": 1.8,
-    "defense_rating": 4.2,
-    "fixture_rating": 3.0,
+    "attack_rating": 2.0,
+    "defense_rating": 5.3,
+    "fixture_rating": 3.6,
     "home_advantage": 10.0
   },
   {
@@ -50,8 +50,8 @@
         "defense": 7
       }
     },
-    "attack_rating": 8.0,
-    "defense_rating": 5.0,
+    "attack_rating": 7.0,
+    "defense_rating": 5.9,
     "fixture_rating": 6.5,
     "home_advantage": -4.0
   },
@@ -72,15 +72,15 @@
       "name": "Newcastle",
       "short_name": "NEW",
       "attacking_fixture_rating": 65.0,
-      "defensive_fixture_rating": 44.4,
+      "defensive_fixture_rating": 46.2,
       "rank": {
         "attack": 8,
         "defense": 15
       }
     },
-    "attack_rating": 5.8,
-    "defense_rating": 6.8,
-    "fixture_rating": 6.3,
+    "attack_rating": 5.2,
+    "defense_rating": 7.2,
+    "fixture_rating": 6.2,
     "home_advantage": -3.0
   },
   {
@@ -90,7 +90,7 @@
       "name": "Chelsea",
       "short_name": "CHE",
       "attacking_fixture_rating": 63.0,
-      "defensive_fixture_rating": 50.0,
+      "defensive_fixture_rating": 48.1,
       "rank": {
         "attack": 7,
         "defense": 5
@@ -99,17 +99,17 @@
     "away_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 47.0,
+      "attacking_fixture_rating": 49.0,
       "defensive_fixture_rating": 35.0,
       "rank": {
         "attack": 9,
         "defense": 10
       }
     },
-    "attack_rating": 4.5,
-    "defense_rating": 4.5,
-    "fixture_rating": 4.5,
-    "home_advantage": 4.0
+    "attack_rating": 4.2,
+    "defense_rating": 5.7,
+    "fixture_rating": 5.0,
+    "home_advantage": 3.5
   },
   {
     "gameweek": 19,
@@ -134,8 +134,8 @@
         "defense": 6
       }
     },
-    "attack_rating": 6.8,
-    "defense_rating": 4.8,
+    "attack_rating": 6.0,
+    "defense_rating": 5.7,
     "fixture_rating": 5.8,
     "home_advantage": -1.0
   },
@@ -162,9 +162,9 @@
         "defense": 16
       }
     },
-    "attack_rating": 2.0,
-    "defense_rating": 7.0,
-    "fixture_rating": 4.5,
+    "attack_rating": 2.2,
+    "defense_rating": 7.4,
+    "fixture_rating": 4.8,
     "home_advantage": 4.0
   },
   {
@@ -190,9 +190,9 @@
         "defense": 19
       }
     },
-    "attack_rating": 1,
-    "defense_rating": 3.0,
-    "fixture_rating": 2.0,
+    "attack_rating": 1.4,
+    "defense_rating": 4.4,
+    "fixture_rating": 2.9,
     "home_advantage": 14.0
   },
   {
@@ -218,8 +218,8 @@
         "defense": 3
       }
     },
-    "attack_rating": 7.8,
-    "defense_rating": 4.0,
+    "attack_rating": 6.8,
+    "defense_rating": 5.1,
     "fixture_rating": 5.9,
     "home_advantage": -1.5
   },
@@ -246,9 +246,9 @@
         "defense": 2
       }
     },
-    "attack_rating": 9.5,
-    "defense_rating": 6.0,
-    "fixture_rating": 7.8,
+    "attack_rating": 8.2,
+    "defense_rating": 6.6,
+    "fixture_rating": 7.4,
     "home_advantage": -9.0
   },
   {
@@ -274,9 +274,9 @@
         "defense": 17
       }
     },
-    "attack_rating": 5.2,
-    "defense_rating": 7.8,
-    "fixture_rating": 6.5,
+    "attack_rating": 4.8,
+    "defense_rating": 7.9,
+    "fixture_rating": 6.3,
     "home_advantage": -4.0
   },
   {
@@ -302,9 +302,9 @@
         "defense": 9
       }
     },
-    "attack_rating": 4.5,
-    "defense_rating": 6.5,
-    "fixture_rating": 5.5,
+    "attack_rating": 4.2,
+    "defense_rating": 7.0,
+    "fixture_rating": 5.6,
     "home_advantage": 0.0
   },
   {
@@ -330,9 +330,9 @@
         "defense": 1
       }
     },
-    "attack_rating": 7.5,
-    "defense_rating": 6.8,
-    "fixture_rating": 7.2,
+    "attack_rating": 6.6,
+    "defense_rating": 7.2,
+    "fixture_rating": 6.9,
     "home_advantage": -6.5
   },
   {
@@ -342,7 +342,7 @@
       "name": "Brighton",
       "short_name": "BHA",
       "attacking_fixture_rating": 65.0,
-      "defensive_fixture_rating": 42.5,
+      "defensive_fixture_rating": 40.6,
       "rank": {
         "attack": 10,
         "defense": 17
@@ -351,17 +351,17 @@
     "away_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 55.0,
+      "attacking_fixture_rating": 57.0,
       "defensive_fixture_rating": 33.1,
       "rank": {
         "attack": 16,
         "defense": 14
       }
     },
-    "attack_rating": 4.2,
-    "defense_rating": 5.5,
-    "fixture_rating": 4.8,
-    "home_advantage": 2.5
+    "attack_rating": 4.0,
+    "defense_rating": 6.4,
+    "fixture_rating": 5.2,
+    "home_advantage": 2.0
   },
   {
     "gameweek": 20,
@@ -380,15 +380,15 @@
       "name": "Brentford",
       "short_name": "BRE",
       "attacking_fixture_rating": 23.0,
-      "defensive_fixture_rating": 42.5,
+      "defensive_fixture_rating": 44.4,
       "rank": {
         "attack": 18,
         "defense": 13
       }
     },
-    "attack_rating": 5.5,
-    "defense_rating": 1.5,
-    "fixture_rating": 3.5,
+    "attack_rating": 5.0,
+    "defense_rating": 3.2,
+    "fixture_rating": 4.1,
     "home_advantage": 8.0
   },
   {
@@ -414,9 +414,9 @@
         "defense": 12
       }
     },
-    "attack_rating": 5.0,
-    "defense_rating": 6.0,
-    "fixture_rating": 5.5,
+    "attack_rating": 4.6,
+    "defense_rating": 6.6,
+    "fixture_rating": 5.6,
     "home_advantage": 0.0
   },
   {
@@ -442,9 +442,9 @@
         "defense": 11
       }
     },
-    "attack_rating": 3.8,
-    "defense_rating": 8.8,
-    "fixture_rating": 6.3,
+    "attack_rating": 3.6,
+    "defense_rating": 8.7,
+    "fixture_rating": 6.1,
     "home_advantage": -3.0
   },
   {
@@ -464,15 +464,15 @@
       "name": "Chelsea",
       "short_name": "CHE",
       "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 35.0,
+      "defensive_fixture_rating": 36.9,
       "rank": {
         "attack": 7,
         "defense": 5
       }
     },
-    "attack_rating": 4.5,
-    "defense_rating": 4.2,
-    "fixture_rating": 4.3,
+    "attack_rating": 4.2,
+    "defense_rating": 5.3,
+    "fixture_rating": 4.8,
     "home_advantage": 4.5
   },
   {
@@ -492,15 +492,15 @@
       "name": "Crystal Palace",
       "short_name": "CRY",
       "attacking_fixture_rating": 61.0,
-      "defensive_fixture_rating": 40.6,
+      "defensive_fixture_rating": 42.5,
       "rank": {
         "attack": 12,
         "defense": 8
       }
     },
-    "attack_rating": 5.2,
-    "defense_rating": 6.2,
-    "fixture_rating": 5.7,
+    "attack_rating": 4.8,
+    "defense_rating": 6.8,
+    "fixture_rating": 5.8,
     "home_advantage": -1.0
   },
   {
@@ -526,9 +526,9 @@
         "defense": 4
       }
     },
-    "attack_rating": 8.0,
-    "defense_rating": 2.2,
-    "fixture_rating": 5.1,
+    "attack_rating": 7.0,
+    "defense_rating": 3.8,
+    "fixture_rating": 5.4,
     "home_advantage": 1.5
   },
   {
@@ -554,9 +554,9 @@
         "defense": 20
       }
     },
-    "attack_rating": 5.2,
-    "defense_rating": 5.8,
-    "fixture_rating": 5.5,
+    "attack_rating": 4.8,
+    "defense_rating": 6.4,
+    "fixture_rating": 5.6,
     "home_advantage": 0.0
   },
   {
@@ -583,8 +583,8 @@
       }
     },
     "attack_rating": 3.2,
-    "defense_rating": 5.0,
-    "fixture_rating": 4.1,
+    "defense_rating": 5.9,
+    "fixture_rating": 4.6,
     "home_advantage": 5.5
   },
   {
@@ -610,9 +610,9 @@
         "defense": 7
       }
     },
-    "attack_rating": 6.0,
-    "defense_rating": 4.0,
-    "fixture_rating": 5.0,
+    "attack_rating": 5.4,
+    "defense_rating": 5.1,
+    "fixture_rating": 5.2,
     "home_advantage": 2.0
   },
   {
@@ -638,9 +638,9 @@
         "defense": 4
       }
     },
-    "attack_rating": 8.8,
-    "defense_rating": 4.0,
-    "fixture_rating": 6.4,
+    "attack_rating": 7.6,
+    "defense_rating": 5.1,
+    "fixture_rating": 6.3,
     "home_advantage": -3.5
   },
   {
@@ -666,9 +666,9 @@
         "defense": 11
       }
     },
-    "attack_rating": 6.8,
-    "defense_rating": 8.2,
-    "fixture_rating": 7.5,
+    "attack_rating": 6.0,
+    "defense_rating": 8.3,
+    "fixture_rating": 7.2,
     "home_advantage": -8.0
   },
   {
@@ -694,9 +694,9 @@
         "defense": 18
       }
     },
-    "attack_rating": 3.8,
-    "defense_rating": 6.0,
-    "fixture_rating": 4.9,
+    "attack_rating": 3.6,
+    "defense_rating": 6.6,
+    "fixture_rating": 5.1,
     "home_advantage": 2.5
   },
   {
@@ -722,9 +722,9 @@
         "defense": 19
       }
     },
-    "attack_rating": 4.0,
-    "defense_rating": 1,
-    "fixture_rating": 2.5,
+    "attack_rating": 3.8,
+    "defense_rating": 2.9,
+    "fixture_rating": 3.3,
     "home_advantage": 12.0
   },
   {
@@ -744,15 +744,15 @@
       "name": "Chelsea",
       "short_name": "CHE",
       "attacking_fixture_rating": 51.0,
-      "defensive_fixture_rating": 51.9,
+      "defensive_fixture_rating": 53.8,
       "rank": {
         "attack": 7,
         "defense": 5
       }
     },
-    "attack_rating": 6.8,
-    "defense_rating": 5.0,
-    "fixture_rating": 5.9,
+    "attack_rating": 6.0,
+    "defense_rating": 5.9,
+    "fixture_rating": 6.0,
     "home_advantage": -1.5
   },
   {
@@ -778,9 +778,9 @@
         "defense": 17
       }
     },
-    "attack_rating": 1.5,
-    "defense_rating": 3.5,
-    "fixture_rating": 2.5,
+    "attack_rating": 1.8,
+    "defense_rating": 4.8,
+    "fixture_rating": 3.3,
     "home_advantage": 12.0
   },
   {
@@ -807,8 +807,8 @@
       }
     },
     "attack_rating": 3.2,
-    "defense_rating": 8.0,
-    "fixture_rating": 5.6,
+    "defense_rating": 8.1,
+    "fixture_rating": 5.7,
     "home_advantage": -0.5
   },
   {
@@ -834,9 +834,9 @@
         "defense": 9
       }
     },
-    "attack_rating": 7.2,
-    "defense_rating": 7.0,
-    "fixture_rating": 7.1,
+    "attack_rating": 6.4,
+    "defense_rating": 7.4,
+    "fixture_rating": 6.9,
     "home_advantage": -6.5
   },
   {
@@ -862,8 +862,8 @@
         "defense": 3
       }
     },
-    "attack_rating": 6.0,
-    "defense_rating": 6.2,
+    "attack_rating": 5.4,
+    "defense_rating": 6.8,
     "fixture_rating": 6.1,
     "home_advantage": -2.5
   },
@@ -874,7 +874,7 @@
       "name": "Brighton",
       "short_name": "BHA",
       "attacking_fixture_rating": 57.0,
-      "defensive_fixture_rating": 29.4,
+      "defensive_fixture_rating": 27.5,
       "rank": {
         "attack": 10,
         "defense": 17
@@ -883,17 +883,17 @@
     "away_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 69.0,
+      "attacking_fixture_rating": 71.0,
       "defensive_fixture_rating": 40.6,
       "rank": {
         "attack": 9,
         "defense": 10
       }
     },
-    "attack_rating": 5.2,
-    "defense_rating": 7.2,
-    "fixture_rating": 6.2,
-    "home_advantage": -3.0
+    "attack_rating": 4.8,
+    "defense_rating": 7.8,
+    "fixture_rating": 6.3,
+    "home_advantage": -3.5
   },
   {
     "gameweek": 22,
@@ -912,15 +912,15 @@
       "name": "Brentford",
       "short_name": "BRE",
       "attacking_fixture_rating": 29.0,
-      "defensive_fixture_rating": 29.4,
+      "defensive_fixture_rating": 31.2,
       "rank": {
         "attack": 18,
         "defense": 13
       }
     },
-    "attack_rating": 3.8,
-    "defense_rating": 2.2,
-    "fixture_rating": 3.0,
+    "attack_rating": 3.6,
+    "defense_rating": 3.8,
+    "fixture_rating": 3.7,
     "home_advantage": 10.0
   },
   {
@@ -946,8 +946,8 @@
         "defense": 6
       }
     },
-    "attack_rating": 5.0,
-    "defense_rating": 6.5,
+    "attack_rating": 4.6,
+    "defense_rating": 7.0,
     "fixture_rating": 5.8,
     "home_advantage": -1.0
   },
@@ -958,7 +958,7 @@
       "name": "Liverpool",
       "short_name": "LIV",
       "attacking_fixture_rating": 79.0,
-      "defensive_fixture_rating": 51.9,
+      "defensive_fixture_rating": 50.0,
       "rank": {
         "attack": 3,
         "defense": 12
@@ -967,17 +967,17 @@
     "away_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 45.0,
+      "attacking_fixture_rating": 47.0,
       "defensive_fixture_rating": 20.0,
       "rank": {
         "attack": 16,
         "defense": 14
       }
     },
-    "attack_rating": 2.5,
-    "defense_rating": 4.2,
-    "fixture_rating": 3.4,
-    "home_advantage": 8.5
+    "attack_rating": 2.6,
+    "defense_rating": 5.5,
+    "fixture_rating": 4.0,
+    "home_advantage": 8.0
   },
   {
     "gameweek": 22,
@@ -1002,9 +1002,9 @@
         "defense": 2
       }
     },
-    "attack_rating": 5.2,
-    "defense_rating": 7.8,
-    "fixture_rating": 6.5,
+    "attack_rating": 4.8,
+    "defense_rating": 7.9,
+    "fixture_rating": 6.3,
     "home_advantage": -4.0
   },
   {
@@ -1030,9 +1030,9 @@
         "defense": 1
       }
     },
-    "attack_rating": 8.2,
-    "defense_rating": 6.5,
-    "fixture_rating": 7.3,
+    "attack_rating": 7.2,
+    "defense_rating": 7.0,
+    "fixture_rating": 7.1,
     "home_advantage": -7.5
   },
   {
@@ -1058,9 +1058,9 @@
         "defense": 20
       }
     },
-    "attack_rating": 4.0,
-    "defense_rating": 2.8,
-    "fixture_rating": 3.4,
+    "attack_rating": 3.8,
+    "defense_rating": 4.2,
+    "fixture_rating": 4.0,
     "home_advantage": 8.5
   },
   {
@@ -1080,15 +1080,15 @@
       "name": "Crystal Palace",
       "short_name": "CRY",
       "attacking_fixture_rating": 37.0,
-      "defensive_fixture_rating": 61.3,
+      "defensive_fixture_rating": 63.1,
       "rank": {
         "attack": 12,
         "defense": 8
       }
     },
-    "attack_rating": 8.0,
-    "defense_rating": 3.2,
-    "fixture_rating": 5.6,
+    "attack_rating": 7.0,
+    "defense_rating": 4.6,
+    "fixture_rating": 5.8,
     "home_advantage": -0.5
   },
   {
@@ -1108,15 +1108,15 @@
       "name": "Newcastle",
       "short_name": "NEW",
       "attacking_fixture_rating": 75.0,
-      "defensive_fixture_rating": 50.0,
+      "defensive_fixture_rating": 51.9,
       "rank": {
         "attack": 8,
         "defense": 15
       }
     },
-    "attack_rating": 6.5,
-    "defense_rating": 8.0,
-    "fixture_rating": 7.2,
+    "attack_rating": 5.8,
+    "defense_rating": 8.1,
+    "fixture_rating": 6.9,
     "home_advantage": -7.0
   },
   {
@@ -1142,9 +1142,9 @@
         "defense": 11
       }
     },
-    "attack_rating": 3.5,
-    "defense_rating": 5.2,
-    "fixture_rating": 4.3,
+    "attack_rating": 3.4,
+    "defense_rating": 6.1,
+    "fixture_rating": 4.8,
     "home_advantage": 4.5
   },
   {
@@ -1170,8 +1170,8 @@
         "defense": 12
       }
     },
-    "attack_rating": 4.8,
-    "defense_rating": 7.0,
+    "attack_rating": 4.4,
+    "defense_rating": 7.4,
     "fixture_rating": 5.9,
     "home_advantage": -1.5
   },
@@ -1198,9 +1198,9 @@
         "defense": 9
       }
     },
-    "attack_rating": 7.5,
-    "defense_rating": 5.5,
-    "fixture_rating": 6.5,
+    "attack_rating": 6.6,
+    "defense_rating": 6.2,
+    "fixture_rating": 6.4,
     "home_advantage": -4.0
   },
   {
@@ -1226,9 +1226,9 @@
         "defense": 7
       }
     },
-    "attack_rating": 7.8,
-    "defense_rating": 5.0,
-    "fixture_rating": 6.4,
+    "attack_rating": 6.8,
+    "defense_rating": 5.9,
+    "fixture_rating": 6.3,
     "home_advantage": -3.5
   },
   {
@@ -1248,15 +1248,15 @@
       "name": "Chelsea",
       "short_name": "CHE",
       "attacking_fixture_rating": 57.0,
-      "defensive_fixture_rating": 53.8,
+      "defensive_fixture_rating": 55.6,
       "rank": {
         "attack": 7,
         "defense": 5
       }
     },
-    "attack_rating": 7.0,
-    "defense_rating": 5.8,
-    "fixture_rating": 6.4,
+    "attack_rating": 6.2,
+    "defense_rating": 6.4,
+    "fixture_rating": 6.3,
     "home_advantage": -3.5
   },
   {
@@ -1282,9 +1282,9 @@
         "defense": 16
       }
     },
-    "attack_rating": 4.8,
-    "defense_rating": 4.8,
-    "fixture_rating": 4.8,
+    "attack_rating": 4.4,
+    "defense_rating": 5.7,
+    "fixture_rating": 5.1,
     "home_advantage": 3.0
   },
   {
@@ -1310,9 +1310,9 @@
         "defense": 17
       }
     },
-    "attack_rating": 3.8,
-    "defense_rating": 4.2,
-    "fixture_rating": 4.0,
+    "attack_rating": 3.6,
+    "defense_rating": 5.3,
+    "fixture_rating": 4.5,
     "home_advantage": 6.0
   },
   {
@@ -1338,9 +1338,9 @@
         "defense": 19
       }
     },
-    "attack_rating": 1,
-    "defense_rating": 1,
-    "fixture_rating": 1.0,
+    "attack_rating": 1.4,
+    "defense_rating": 2.9,
+    "fixture_rating": 2.1,
     "home_advantage": 18.0
   },
   {
@@ -1367,7 +1367,7 @@
       }
     },
     "attack_rating": 2.8,
-    "defense_rating": 7.8,
+    "defense_rating": 7.9,
     "fixture_rating": 5.3,
     "home_advantage": 1.0
   },
@@ -1394,9 +1394,9 @@
         "defense": 4
       }
     },
-    "attack_rating": 8.5,
-    "defense_rating": 5.5,
-    "fixture_rating": 7.0,
+    "attack_rating": 7.4,
+    "defense_rating": 6.2,
+    "fixture_rating": 6.8,
     "home_advantage": -6.0
   },
   {
@@ -1416,15 +1416,15 @@
       "name": "Brentford",
       "short_name": "BRE",
       "attacking_fixture_rating": 53.0,
-      "defensive_fixture_rating": 27.5,
+      "defensive_fixture_rating": 29.4,
       "rank": {
         "attack": 18,
         "defense": 13
       }
     },
-    "attack_rating": 3.5,
-    "defense_rating": 5.2,
-    "fixture_rating": 4.3,
+    "attack_rating": 3.4,
+    "defense_rating": 6.1,
+    "fixture_rating": 4.8,
     "home_advantage": 4.5
   },
   {
@@ -1450,9 +1450,9 @@
         "defense": 3
       }
     },
-    "attack_rating": 7.0,
-    "defense_rating": 6.0,
-    "fixture_rating": 6.5,
+    "attack_rating": 6.2,
+    "defense_rating": 6.6,
+    "fixture_rating": 6.4,
     "home_advantage": -4.0
   },
   {
@@ -1478,9 +1478,9 @@
         "defense": 20
       }
     },
-    "attack_rating": 2.0,
-    "defense_rating": 2.5,
-    "fixture_rating": 2.2,
+    "attack_rating": 2.2,
+    "defense_rating": 4.0,
+    "fixture_rating": 3.1,
     "home_advantage": 13.0
   },
   {
@@ -1506,9 +1506,9 @@
         "defense": 1
       }
     },
-    "attack_rating": 6.2,
-    "defense_rating": 8.2,
-    "fixture_rating": 7.2,
+    "attack_rating": 5.6,
+    "defense_rating": 8.3,
+    "fixture_rating": 7.0,
     "home_advantage": -7.0
   },
   {
@@ -1528,15 +1528,15 @@
       "name": "Newcastle",
       "short_name": "NEW",
       "attacking_fixture_rating": 61.0,
-      "defensive_fixture_rating": 18.1,
+      "defensive_fixture_rating": 20.0,
       "rank": {
         "attack": 8,
         "defense": 15
       }
     },
-    "attack_rating": 2.2,
-    "defense_rating": 6.2,
-    "fixture_rating": 4.2,
+    "attack_rating": 2.4,
+    "defense_rating": 6.8,
+    "fixture_rating": 4.6,
     "home_advantage": 5.0
   },
   {
@@ -1562,9 +1562,9 @@
         "defense": 6
       }
     },
-    "attack_rating": 4.2,
-    "defense_rating": 5.2,
-    "fixture_rating": 4.7,
+    "attack_rating": 4.0,
+    "defense_rating": 6.1,
+    "fixture_rating": 5.0,
     "home_advantage": 3.0
   },
   {
@@ -1584,15 +1584,15 @@
       "name": "Crystal Palace",
       "short_name": "CRY",
       "attacking_fixture_rating": 47.0,
-      "defensive_fixture_rating": 50.0,
+      "defensive_fixture_rating": 51.9,
       "rank": {
         "attack": 12,
         "defense": 8
       }
     },
-    "attack_rating": 6.5,
-    "defense_rating": 4.5,
-    "fixture_rating": 5.5,
+    "attack_rating": 5.8,
+    "defense_rating": 5.5,
+    "fixture_rating": 5.7,
     "home_advantage": 0.0
   },
   {
@@ -1618,9 +1618,9 @@
         "defense": 2
       }
     },
-    "attack_rating": 8.5,
-    "defense_rating": 6.8,
-    "fixture_rating": 7.7,
+    "attack_rating": 7.4,
+    "defense_rating": 7.2,
+    "fixture_rating": 7.3,
     "home_advantage": -8.5
   },
   {
@@ -1630,7 +1630,7 @@
       "name": "Sunderland",
       "short_name": "SUN",
       "attacking_fixture_rating": 47.0,
-      "defensive_fixture_rating": 66.9,
+      "defensive_fixture_rating": 65.0,
       "rank": {
         "attack": 19,
         "defense": 4
@@ -1639,17 +1639,17 @@
     "away_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 29.0,
+      "attacking_fixture_rating": 31.0,
       "defensive_fixture_rating": 50.0,
       "rank": {
         "attack": 16,
         "defense": 14
       }
     },
-    "attack_rating": 6.5,
-    "defense_rating": 2.2,
-    "fixture_rating": 4.3,
-    "home_advantage": 4.5
+    "attack_rating": 5.8,
+    "defense_rating": 4.0,
+    "fixture_rating": 4.9,
+    "home_advantage": 4.0
   },
   {
     "gameweek": 24,
@@ -1658,7 +1658,7 @@
       "name": "Wolves",
       "short_name": "WOL",
       "attacking_fixture_rating": 37.0,
-      "defensive_fixture_rating": 25.6,
+      "defensive_fixture_rating": 23.8,
       "rank": {
         "attack": 20,
         "defense": 19
@@ -1667,17 +1667,17 @@
     "away_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 73.0,
+      "attacking_fixture_rating": 75.0,
       "defensive_fixture_rating": 59.4,
       "rank": {
         "attack": 9,
         "defense": 10
       }
     },
-    "attack_rating": 7.8,
-    "defense_rating": 7.8,
-    "fixture_rating": 7.8,
-    "home_advantage": -9.0
+    "attack_rating": 6.8,
+    "defense_rating": 8.1,
+    "fixture_rating": 7.4,
+    "home_advantage": -9.5
   },
   {
     "gameweek": 25,
@@ -1702,9 +1702,9 @@
         "defense": 4
       }
     },
-    "attack_rating": 5.2,
-    "defense_rating": 1,
-    "fixture_rating": 3.1,
+    "attack_rating": 4.8,
+    "defense_rating": 2.9,
+    "fixture_rating": 3.8,
     "home_advantage": 9.5
   },
   {
@@ -1731,8 +1731,8 @@
       }
     },
     "attack_rating": 3.2,
-    "defense_rating": 6.2,
-    "fixture_rating": 4.7,
+    "defense_rating": 6.8,
+    "fixture_rating": 5.0,
     "home_advantage": 3.0
   },
   {
@@ -1752,15 +1752,15 @@
       "name": "Crystal Palace",
       "short_name": "CRY",
       "attacking_fixture_rating": 63.0,
-      "defensive_fixture_rating": 44.4,
+      "defensive_fixture_rating": 46.2,
       "rank": {
         "attack": 12,
         "defense": 8
       }
     },
-    "attack_rating": 5.8,
-    "defense_rating": 6.5,
-    "fixture_rating": 6.2,
+    "attack_rating": 5.2,
+    "defense_rating": 7.0,
+    "fixture_rating": 6.1,
     "home_advantage": -2.5
   },
   {
@@ -1786,9 +1786,9 @@
         "defense": 20
       }
     },
-    "attack_rating": 4.5,
-    "defense_rating": 4.5,
-    "fixture_rating": 4.5,
+    "attack_rating": 4.2,
+    "defense_rating": 5.5,
+    "fixture_rating": 4.8,
     "home_advantage": 4.0
   },
   {
@@ -1814,9 +1814,9 @@
         "defense": 3
       }
     },
-    "attack_rating": 7.2,
-    "defense_rating": 3.2,
-    "fixture_rating": 5.2,
+    "attack_rating": 6.4,
+    "defense_rating": 4.6,
+    "fixture_rating": 5.5,
     "home_advantage": 1.0
   },
   {
@@ -1842,9 +1842,9 @@
         "defense": 9
       }
     },
-    "attack_rating": 4.2,
-    "defense_rating": 6.0,
-    "fixture_rating": 5.1,
+    "attack_rating": 4.0,
+    "defense_rating": 6.6,
+    "fixture_rating": 5.3,
     "home_advantage": 1.5
   },
   {
@@ -1870,9 +1870,9 @@
         "defense": 2
       }
     },
-    "attack_rating": 5.5,
-    "defense_rating": 8.0,
-    "fixture_rating": 6.8,
+    "attack_rating": 5.0,
+    "defense_rating": 8.1,
+    "fixture_rating": 6.5,
     "home_advantage": -5.0
   },
   {
@@ -1898,9 +1898,9 @@
         "defense": 7
       }
     },
-    "attack_rating": 4.0,
-    "defense_rating": 4.2,
-    "fixture_rating": 4.1,
+    "attack_rating": 3.8,
+    "defense_rating": 5.3,
+    "fixture_rating": 4.5,
     "home_advantage": 5.5
   },
   {
@@ -1920,15 +1920,15 @@
       "name": "Brentford",
       "short_name": "BRE",
       "attacking_fixture_rating": 49.0,
-      "defensive_fixture_rating": 31.2,
+      "defensive_fixture_rating": 33.1,
       "rank": {
         "attack": 18,
         "defense": 13
       }
     },
-    "attack_rating": 4.0,
-    "defense_rating": 4.8,
-    "fixture_rating": 4.4,
+    "attack_rating": 3.8,
+    "defense_rating": 5.7,
+    "fixture_rating": 4.8,
     "home_advantage": 4.5
   },
   {
@@ -1948,15 +1948,15 @@
       "name": "Chelsea",
       "short_name": "CHE",
       "attacking_fixture_rating": 77.0,
-      "defensive_fixture_rating": 68.8,
+      "defensive_fixture_rating": 70.6,
       "rank": {
         "attack": 7,
         "defense": 5
       }
     },
-    "attack_rating": 9.0,
-    "defense_rating": 8.2,
-    "fixture_rating": 8.6,
+    "attack_rating": 7.8,
+    "defense_rating": 8.3,
+    "fixture_rating": 8.1,
     "home_advantage": -12.5
   },
   {
@@ -1982,9 +1982,9 @@
         "defense": 17
       }
     },
-    "attack_rating": 2.5,
-    "defense_rating": 7.2,
-    "fixture_rating": 4.8,
+    "attack_rating": 2.6,
+    "defense_rating": 7.6,
+    "fixture_rating": 5.1,
     "home_advantage": 2.5
   },
   {
@@ -2010,9 +2010,9 @@
         "defense": 1
       }
     },
-    "attack_rating": 9.5,
-    "defense_rating": 7.8,
-    "fixture_rating": 8.7,
+    "attack_rating": 8.2,
+    "defense_rating": 7.9,
+    "fixture_rating": 8.1,
     "home_advantage": -12.5
   },
   {
@@ -2039,8 +2039,8 @@
       }
     },
     "attack_rating": 3.0,
-    "defense_rating": 5.5,
-    "fixture_rating": 4.2,
+    "defense_rating": 6.2,
+    "fixture_rating": 4.6,
     "home_advantage": 5.0
   },
   {
@@ -2050,7 +2050,7 @@
       "name": "Crystal Palace",
       "short_name": "CRY",
       "attacking_fixture_rating": 61.0,
-      "defensive_fixture_rating": 57.5,
+      "defensive_fixture_rating": 55.6,
       "rank": {
         "attack": 12,
         "defense": 8
@@ -2059,17 +2059,17 @@
     "away_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 39.0,
+      "attacking_fixture_rating": 41.0,
       "defensive_fixture_rating": 36.9,
       "rank": {
         "attack": 16,
         "defense": 14
       }
     },
-    "attack_rating": 4.8,
-    "defense_rating": 3.5,
-    "fixture_rating": 4.2,
-    "home_advantage": 5.5
+    "attack_rating": 4.4,
+    "defense_rating": 4.9,
+    "fixture_rating": 4.7,
+    "home_advantage": 5.0
   },
   {
     "gameweek": 26,
@@ -2078,7 +2078,7 @@
       "name": "Everton",
       "short_name": "EVE",
       "attacking_fixture_rating": 49.0,
-      "defensive_fixture_rating": 55.6,
+      "defensive_fixture_rating": 53.8,
       "rank": {
         "attack": 14,
         "defense": 3
@@ -2087,17 +2087,17 @@
     "away_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 41.0,
+      "attacking_fixture_rating": 43.0,
       "defensive_fixture_rating": 48.1,
       "rank": {
         "attack": 9,
         "defense": 10
       }
     },
-    "attack_rating": 6.2,
-    "defense_rating": 3.8,
-    "fixture_rating": 5.0,
-    "home_advantage": 2.0
+    "attack_rating": 5.6,
+    "defense_rating": 5.1,
+    "fixture_rating": 5.3,
+    "home_advantage": 1.5
   },
   {
     "gameweek": 26,
@@ -2122,9 +2122,9 @@
         "defense": 6
       }
     },
-    "attack_rating": 4.2,
-    "defense_rating": 3.2,
-    "fixture_rating": 3.7,
+    "attack_rating": 4.0,
+    "defense_rating": 4.6,
+    "fixture_rating": 4.3,
     "home_advantage": 7.0
   },
   {
@@ -2150,9 +2150,9 @@
         "defense": 19
       }
     },
-    "attack_rating": 3.8,
-    "defense_rating": 2.5,
-    "fixture_rating": 3.1,
+    "attack_rating": 3.6,
+    "defense_rating": 4.0,
+    "fixture_rating": 3.8,
     "home_advantage": 9.5
   },
   {
@@ -2172,15 +2172,15 @@
       "name": "Newcastle",
       "short_name": "NEW",
       "attacking_fixture_rating": 51.0,
-      "defensive_fixture_rating": 40.6,
+      "defensive_fixture_rating": 42.5,
       "rank": {
         "attack": 8,
         "defense": 15
       }
     },
-    "attack_rating": 5.2,
-    "defense_rating": 5.0,
-    "fixture_rating": 5.1,
+    "attack_rating": 4.8,
+    "defense_rating": 5.9,
+    "fixture_rating": 5.3,
     "home_advantage": 1.5
   },
   {
@@ -2206,8 +2206,8 @@
         "defense": 12
       }
     },
-    "attack_rating": 7.0,
-    "defense_rating": 5.5,
+    "attack_rating": 6.2,
+    "defense_rating": 6.2,
     "fixture_rating": 6.2,
     "home_advantage": -3.0
   },
@@ -2234,9 +2234,9 @@
         "defense": 11
       }
     },
-    "attack_rating": 6.8,
-    "defense_rating": 9.8,
-    "fixture_rating": 8.3,
+    "attack_rating": 6.0,
+    "defense_rating": 9.4,
+    "fixture_rating": 7.7,
     "home_advantage": -11.0
   },
   {
@@ -2290,9 +2290,9 @@
         "defense": 17
       }
     },
-    "attack_rating": 5.5,
-    "defense_rating": 6.2,
-    "fixture_rating": 5.8,
+    "attack_rating": 5.0,
+    "defense_rating": 6.8,
+    "fixture_rating": 5.9,
     "home_advantage": -1.5
   },
   {
@@ -2302,7 +2302,7 @@
       "name": "Chelsea",
       "short_name": "CHE",
       "attacking_fixture_rating": 71.0,
-      "defensive_fixture_rating": 63.1,
+      "defensive_fixture_rating": 61.3,
       "rank": {
         "attack": 7,
         "defense": 5
@@ -2311,17 +2311,17 @@
     "away_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 33.0,
+      "attacking_fixture_rating": 35.0,
       "defensive_fixture_rating": 27.5,
       "rank": {
         "attack": 16,
         "defense": 14
       }
     },
-    "attack_rating": 3.5,
-    "defense_rating": 2.8,
-    "fixture_rating": 3.1,
-    "home_advantage": 9.5
+    "attack_rating": 3.4,
+    "defense_rating": 4.4,
+    "fixture_rating": 3.9,
+    "home_advantage": 9.0
   },
   {
     "gameweek": 27,
@@ -2346,9 +2346,9 @@
         "defense": 19
       }
     },
-    "attack_rating": 3.5,
-    "defense_rating": 2.5,
-    "fixture_rating": 3.0,
+    "attack_rating": 3.4,
+    "defense_rating": 4.0,
+    "fixture_rating": 3.7,
     "home_advantage": 10.0
   },
   {
@@ -2374,8 +2374,8 @@
         "defense": 11
       }
     },
-    "attack_rating": 6.0,
-    "defense_rating": 5.5,
+    "attack_rating": 5.4,
+    "defense_rating": 6.2,
     "fixture_rating": 5.8,
     "home_advantage": -1.0
   },
@@ -2396,15 +2396,15 @@
       "name": "Newcastle",
       "short_name": "NEW",
       "attacking_fixture_rating": 43.0,
-      "defensive_fixture_rating": 16.2,
+      "defensive_fixture_rating": 18.1,
       "rank": {
         "attack": 8,
         "defense": 15
       }
     },
-    "attack_rating": 2.0,
-    "defense_rating": 4.0,
-    "fixture_rating": 3.0,
+    "attack_rating": 2.2,
+    "defense_rating": 5.1,
+    "fixture_rating": 3.6,
     "home_advantage": 10.0
   },
   {
@@ -2430,9 +2430,9 @@
         "defense": 12
       }
     },
-    "attack_rating": 5.5,
-    "defense_rating": 6.8,
-    "fixture_rating": 6.2,
+    "attack_rating": 5.0,
+    "defense_rating": 7.2,
+    "fixture_rating": 6.1,
     "home_advantage": -2.5
   },
   {
@@ -2458,9 +2458,9 @@
         "defense": 1
       }
     },
-    "attack_rating": 8.8,
-    "defense_rating": 6.0,
-    "fixture_rating": 7.4,
+    "attack_rating": 7.6,
+    "defense_rating": 6.6,
+    "fixture_rating": 7.1,
     "home_advantage": -7.5
   },
   {
@@ -2486,9 +2486,9 @@
         "defense": 6
       }
     },
-    "attack_rating": 8.5,
-    "defense_rating": 3.5,
-    "fixture_rating": 6.0,
+    "attack_rating": 7.4,
+    "defense_rating": 4.8,
+    "fixture_rating": 6.1,
     "home_advantage": -2.0
   },
   {
@@ -2498,7 +2498,7 @@
       "name": "West Ham",
       "short_name": "WHU",
       "attacking_fixture_rating": 43.0,
-      "defensive_fixture_rating": 23.8,
+      "defensive_fixture_rating": 21.9,
       "rank": {
         "attack": 17,
         "defense": 20
@@ -2507,17 +2507,17 @@
     "away_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 75.0,
+      "attacking_fixture_rating": 77.0,
       "defensive_fixture_rating": 53.8,
       "rank": {
         "attack": 9,
         "defense": 10
       }
     },
-    "attack_rating": 7.0,
-    "defense_rating": 8.0,
-    "fixture_rating": 7.5,
-    "home_advantage": -8.0
+    "attack_rating": 6.2,
+    "defense_rating": 8.3,
+    "fixture_rating": 7.2,
+    "home_advantage": -8.5
   },
   {
     "gameweek": 28,
@@ -2536,15 +2536,15 @@
       "name": "Chelsea",
       "short_name": "CHE",
       "attacking_fixture_rating": 43.0,
-      "defensive_fixture_rating": 38.8,
+      "defensive_fixture_rating": 40.6,
       "rank": {
         "attack": 7,
         "defense": 5
       }
     },
-    "attack_rating": 5.0,
-    "defense_rating": 4.0,
-    "fixture_rating": 4.5,
+    "attack_rating": 4.6,
+    "defense_rating": 5.1,
+    "fixture_rating": 4.8,
     "home_advantage": 4.0
   },
   {
@@ -2570,9 +2570,9 @@
         "defense": 4
       }
     },
-    "attack_rating": 6.8,
-    "defense_rating": 3.0,
-    "fixture_rating": 4.9,
+    "attack_rating": 6.0,
+    "defense_rating": 4.4,
+    "fixture_rating": 5.2,
     "home_advantage": 2.5
   },
   {
@@ -2598,9 +2598,9 @@
         "defense": 9
       }
     },
-    "attack_rating": 5.5,
-    "defense_rating": 6.2,
-    "fixture_rating": 5.8,
+    "attack_rating": 5.0,
+    "defense_rating": 6.8,
+    "fixture_rating": 5.9,
     "home_advantage": -1.5
   },
   {
@@ -2620,15 +2620,15 @@
       "name": "Brentford",
       "short_name": "BRE",
       "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 48.1,
+      "defensive_fixture_rating": 50.0,
       "rank": {
         "attack": 18,
         "defense": 13
       }
     },
-    "attack_rating": 6.2,
-    "defense_rating": 4.2,
-    "fixture_rating": 5.2,
+    "attack_rating": 5.6,
+    "defense_rating": 5.3,
+    "fixture_rating": 5.4,
     "home_advantage": 1.0
   },
   {
@@ -2654,9 +2654,9 @@
         "defense": 7
       }
     },
-    "attack_rating": 6.2,
-    "defense_rating": 3.0,
-    "fixture_rating": 4.6,
+    "attack_rating": 5.6,
+    "defense_rating": 4.4,
+    "fixture_rating": 5.0,
     "home_advantage": 3.5
   },
   {
@@ -2682,9 +2682,9 @@
         "defense": 2
       }
     },
-    "attack_rating": 6.0,
-    "defense_rating": 9.0,
-    "fixture_rating": 7.5,
+    "attack_rating": 5.4,
+    "defense_rating": 8.9,
+    "fixture_rating": 7.2,
     "home_advantage": -8.0
   },
   {
@@ -2710,9 +2710,9 @@
         "defense": 20
       }
     },
-    "attack_rating": 1,
-    "defense_rating": 4.0,
-    "fixture_rating": 2.5,
+    "attack_rating": 1.4,
+    "defense_rating": 5.1,
+    "fixture_rating": 3.2,
     "home_advantage": 12.0
   },
   {
@@ -2732,15 +2732,15 @@
       "name": "Crystal Palace",
       "short_name": "CRY",
       "attacking_fixture_rating": 51.0,
-      "defensive_fixture_rating": 29.4,
+      "defensive_fixture_rating": 31.2,
       "rank": {
         "attack": 12,
         "defense": 8
       }
     },
-    "attack_rating": 3.8,
-    "defense_rating": 5.0,
-    "fixture_rating": 4.4,
+    "attack_rating": 3.6,
+    "defense_rating": 5.9,
+    "fixture_rating": 4.8,
     "home_advantage": 4.5
   },
   {
@@ -2766,9 +2766,9 @@
         "defense": 3
       }
     },
-    "attack_rating": 6.5,
-    "defense_rating": 5.8,
-    "fixture_rating": 6.2,
+    "attack_rating": 5.8,
+    "defense_rating": 6.4,
+    "fixture_rating": 6.1,
     "home_advantage": -2.5
   },
   {
@@ -2794,9 +2794,9 @@
         "defense": 18
       }
     },
-    "attack_rating": 5.8,
+    "attack_rating": 5.2,
     "defense_rating": 8.5,
-    "fixture_rating": 7.2,
+    "fixture_rating": 6.8,
     "home_advantage": -6.5
   },
   {
@@ -2816,15 +2816,15 @@
       "name": "Chelsea",
       "short_name": "CHE",
       "attacking_fixture_rating": 75.0,
-      "defensive_fixture_rating": 42.5,
+      "defensive_fixture_rating": 44.4,
       "rank": {
         "attack": 7,
         "defense": 5
       }
     },
-    "attack_rating": 5.5,
-    "defense_rating": 8.0,
-    "fixture_rating": 6.8,
+    "attack_rating": 5.0,
+    "defense_rating": 8.1,
+    "fixture_rating": 6.5,
     "home_advantage": -5.0
   },
   {
@@ -2844,15 +2844,15 @@
       "name": "Brentford",
       "short_name": "BRE",
       "attacking_fixture_rating": 37.0,
-      "defensive_fixture_rating": 35.0,
+      "defensive_fixture_rating": 36.9,
       "rank": {
         "attack": 18,
         "defense": 13
       }
     },
-    "attack_rating": 4.5,
-    "defense_rating": 3.2,
-    "fixture_rating": 3.9,
+    "attack_rating": 4.2,
+    "defense_rating": 4.6,
+    "fixture_rating": 4.4,
     "home_advantage": 6.5
   },
   {
@@ -2878,9 +2878,9 @@
         "defense": 1
       }
     },
-    "attack_rating": 7.5,
+    "attack_rating": 6.6,
     "defense_rating": 8.5,
-    "fixture_rating": 8.0,
+    "fixture_rating": 7.5,
     "home_advantage": -10.0
   },
   {
@@ -2890,7 +2890,7 @@
       "name": "Everton",
       "short_name": "EVE",
       "attacking_fixture_rating": 57.0,
-      "defensive_fixture_rating": 68.8,
+      "defensive_fixture_rating": 66.9,
       "rank": {
         "attack": 14,
         "defense": 3
@@ -2899,17 +2899,17 @@
     "away_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 27.0,
+      "attacking_fixture_rating": 29.0,
       "defensive_fixture_rating": 40.6,
       "rank": {
         "attack": 16,
         "defense": 14
       }
     },
-    "attack_rating": 5.2,
-    "defense_rating": 2.0,
-    "fixture_rating": 3.6,
-    "home_advantage": 7.5
+    "attack_rating": 4.8,
+    "defense_rating": 3.8,
+    "fixture_rating": 4.3,
+    "home_advantage": 7.0
   },
   {
     "gameweek": 29,
@@ -2935,8 +2935,8 @@
       }
     },
     "attack_rating": 3.0,
-    "defense_rating": 2.5,
-    "fixture_rating": 2.8,
+    "defense_rating": 4.0,
+    "fixture_rating": 3.5,
     "home_advantage": 11.0
   },
   {
@@ -2962,9 +2962,9 @@
         "defense": 4
       }
     },
-    "attack_rating": 5.5,
-    "defense_rating": 4.5,
-    "fixture_rating": 5.0,
+    "attack_rating": 5.0,
+    "defense_rating": 5.5,
+    "fixture_rating": 5.2,
     "home_advantage": 2.0
   },
   {
@@ -2990,9 +2990,9 @@
         "defense": 9
       }
     },
-    "attack_rating": 3.5,
-    "defense_rating": 2.8,
-    "fixture_rating": 3.1,
+    "attack_rating": 3.4,
+    "defense_rating": 4.2,
+    "fixture_rating": 3.8,
     "home_advantage": 9.5
   },
   {
@@ -3018,9 +3018,9 @@
         "defense": 11
       }
     },
-    "attack_rating": 4.5,
-    "defense_rating": 8.8,
-    "fixture_rating": 6.7,
+    "attack_rating": 4.2,
+    "defense_rating": 8.7,
+    "fixture_rating": 6.4,
     "home_advantage": -4.5
   },
   {
@@ -3040,15 +3040,15 @@
       "name": "Crystal Palace",
       "short_name": "CRY",
       "attacking_fixture_rating": 43.0,
-      "defensive_fixture_rating": 53.8,
+      "defensive_fixture_rating": 55.6,
       "rank": {
         "attack": 12,
         "defense": 8
       }
     },
-    "attack_rating": 7.0,
-    "defense_rating": 4.0,
-    "fixture_rating": 5.5,
+    "attack_rating": 6.2,
+    "defense_rating": 5.1,
+    "fixture_rating": 5.7,
     "home_advantage": 0.0
   },
   {
@@ -3074,9 +3074,9 @@
         "defense": 12
       }
     },
-    "attack_rating": 7.2,
-    "defense_rating": 9.2,
-    "fixture_rating": 8.2,
+    "attack_rating": 6.4,
+    "defense_rating": 9.1,
+    "fixture_rating": 7.8,
     "home_advantage": -11.0
   }
 ]
