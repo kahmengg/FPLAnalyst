@@ -249,39 +249,32 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
 
   // Process fixtures into team-based view
   const teamFixtures = useMemo((): TeamFixtures[] => {
-    // Map fixtures with both percentage (for Fixtures tab) and FDR scale (for FDR tab)
-    const rawFixtures: Fixture[] = fixtures.map(f => ({
-      gameweek: f.gw,
-      home_team: f.teams.home.team,
-      away_team: f.teams.away.team
-    }))
-
     // Find current GW
-    const gameweeks = rawFixtures.map(f => f.gameweek)
+    const gameweeks = fixtures.map(f => f.gw)
     const minGW = gameweeks.length > 0 ? Math.min(...gameweeks) : 1
     if (currentGW === 1) setCurrentGW(minGW)
 
     const teams = new Set<string>()
-    rawFixtures.forEach(f => {
-      teams.add(f.home_team)
-      teams.add(f.away_team)
+    fixtures.forEach(f => {
+      teams.add(f.teams.home.team)
+      teams.add(f.teams.away.team)
     })
 
     const result: TeamFixtures[] = Array.from(teams).map(team => {
-      const teamFix = rawFixtures
-        .filter(f => (f.home_team === team || f.away_team === team) && f.gameweek >= (currentGW || minGW))
-        .sort((a, b) => a.gameweek - b.gameweek)
+      const teamFix = fixtures
+        .filter(f => (f.teams.home.team === team || f.teams.away.team === team) && f.gw >= (currentGW || minGW))
+        .sort((a, b) => a.gw - b.gw)
         .slice(0, 8)
         .map(f => {
-          const isHome = f.home_team === team
+          const isHome = f.teams.home.team === team
           // Use team-specific FDR rating (1-10 scale, lower = easier)
           // Home team uses home_team.fdr.overall, away team uses away_team.fdr.overall
           const difficulty = isHome 
-            ? (f.teams?.home?.fdr?.overall || f.home_team?.fdr?.overall || 5)
-            : (f.teams?.away?.fdr?.overall || f.away_team?.fdr?.overall || 5)
+            ? (f.teams?.home?.fdr?.overall || 5)
+            : (f.teams?.away?.fdr?.overall || 5)
           return {
-            gameweek: f.gameweek,
-            opponent: isHome ? f.away_team : f.home_team,
+            gameweek: f.gw,
+            opponent: isHome ? f.teams.away.team : f.teams.home.team,
             isHome,
             difficulty: Math.max(1, Math.min(10, difficulty))
           }
