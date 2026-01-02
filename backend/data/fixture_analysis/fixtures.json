@@ -10,6 +10,11 @@
       "rank": {
         "attack": 4,
         "defense": 1
+      },
+      "fdr": {
+        "attack": 2.0,
+        "defense": 5.3,
+        "overall": 3.6
       }
     },
     "away_team": {
@@ -26,16 +31,7 @@
         "defense": 9.1,
         "overall": 7.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 2.0,
-      "defense": 5.3,
-      "overall": 3.6
-    },
-    "home_advantage": 10.0,
-    "attack_rating": 2.0,
-    "defense_rating": 5.3,
-    "fixture_rating": 3.6
+    }
   },
   {
     "gameweek": 19,
@@ -48,6 +44,11 @@
       "rank": {
         "attack": 18,
         "defense": 13
+      },
+      "fdr": {
+        "attack": 7.0,
+        "defense": 5.9,
+        "overall": 6.5
       }
     },
     "away_team": {
@@ -64,16 +65,7 @@
         "defense": 4.4,
         "overall": 4.9
       }
-    },
-    "home_team_fdr": {
-      "attack": 7.0,
-      "defense": 5.9,
-      "overall": 6.5
-    },
-    "home_advantage": -4.0,
-    "attack_rating": 7.0,
-    "defense_rating": 5.9,
-    "fixture_rating": 6.5
+    }
   },
   {
     "gameweek": 19,
@@ -86,6 +78,11 @@
       "rank": {
         "attack": 16,
         "defense": 14
+      },
+      "fdr": {
+        "attack": 5.2,
+        "defense": 7.2,
+        "overall": 6.2
       }
     },
     "away_team": {
@@ -102,16 +99,7 @@
         "defense": 5.9,
         "overall": 5.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.2,
-      "defense": 7.2,
-      "overall": 6.2
-    },
-    "home_advantage": -3.0,
-    "attack_rating": 5.2,
-    "defense_rating": 7.2,
-    "fixture_rating": 6.2
+    }
   },
   {
     "gameweek": 19,
@@ -124,6 +112,11 @@
       "rank": {
         "attack": 7,
         "defense": 5
+      },
+      "fdr": {
+        "attack": 4.2,
+        "defense": 5.7,
+        "overall": 5.0
       }
     },
     "away_team": {
@@ -140,16 +133,7 @@
         "defense": 7.0,
         "overall": 6.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.2,
-      "defense": 5.7,
-      "overall": 5.0
-    },
-    "home_advantage": 3.5,
-    "attack_rating": 4.2,
-    "defense_rating": 5.7,
-    "fixture_rating": 5.0
+    }
   },
   {
     "gameweek": 19,
@@ -162,6 +146,11 @@
       "rank": {
         "attack": 12,
         "defense": 8
+      },
+      "fdr": {
+        "attack": 6.0,
+        "defense": 5.7,
+        "overall": 5.8
       }
     },
     "away_team": {
@@ -178,16 +167,7 @@
         "defense": 5.3,
         "overall": 5.4
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.0,
-      "defense": 5.7,
-      "overall": 5.8
-    },
-    "home_advantage": -1.0,
-    "attack_rating": 6.0,
-    "defense_rating": 5.7,
-    "fixture_rating": 5.8
+    }
   },
   {
     "gameweek": 19,
@@ -200,6 +180,11 @@
       "rank": {
         "attack": 3,
         "defense": 12
+      },
+      "fdr": {
+        "attack": 2.2,
+        "defense": 7.4,
+        "overall": 4.8
       }
     },
     "away_team": {
@@ -216,16 +201,7 @@
         "defense": 8.9,
         "overall": 6.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 2.2,
-      "defense": 7.4,
-      "overall": 4.8
-    },
-    "home_advantage": 4.0,
-    "attack_rating": 2.2,
-    "defense_rating": 7.4,
-    "fixture_rating": 4.8
+    }
   },
   {
     "gameweek": 19,
@@ -238,6 +214,11 @@
       "rank": {
         "attack": 2,
         "defense": 11
+      },
+      "fdr": {
+        "attack": 1.4,
+        "defense": 4.4,
+        "overall": 2.9
       }
     },
     "away_team": {
@@ -254,16 +235,7 @@
         "defense": 9.6,
         "overall": 8.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 1.4,
-      "defense": 4.4,
-      "overall": 2.9
-    },
-    "home_advantage": 14.0,
-    "attack_rating": 1.4,
-    "defense_rating": 4.4,
-    "fixture_rating": 2.9
+    }
   },
   {
     "gameweek": 19,
@@ -276,6 +248,11 @@
       "rank": {
         "attack": 13,
         "defense": 9
+      },
+      "fdr": {
+        "attack": 6.8,
+        "defense": 5.1,
+        "overall": 5.9
       }
     },
     "away_team": {
@@ -292,16 +269,7 @@
         "defense": 4.6,
         "overall": 5.4
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.8,
-      "defense": 5.1,
-      "overall": 5.9
-    },
-    "home_advantage": -1.5,
-    "attack_rating": 6.8,
-    "defense_rating": 5.1,
-    "fixture_rating": 5.9
+    }
   },
   {
     "gameweek": 19,
@@ -314,6 +282,11 @@
       "rank": {
         "attack": 19,
         "defense": 4
+      },
+      "fdr": {
+        "attack": 8.2,
+        "defense": 6.6,
+        "overall": 7.4
       }
     },
     "away_team": {
@@ -330,16 +303,7 @@
         "defense": 3.2,
         "overall": 3.9
       }
-    },
-    "home_team_fdr": {
-      "attack": 8.2,
-      "defense": 6.6,
-      "overall": 7.4
-    },
-    "home_advantage": -9.0,
-    "attack_rating": 8.2,
-    "defense_rating": 6.6,
-    "fixture_rating": 7.4
+    }
   },
   {
     "gameweek": 19,
@@ -352,6 +316,11 @@
       "rank": {
         "attack": 17,
         "defense": 20
+      },
+      "fdr": {
+        "attack": 4.8,
+        "defense": 7.9,
+        "overall": 6.3
       }
     },
     "away_team": {
@@ -368,16 +337,7 @@
         "defense": 6.4,
         "overall": 4.8
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.8,
-      "defense": 7.9,
-      "overall": 6.3
-    },
-    "home_advantage": -4.0,
-    "attack_rating": 4.8,
-    "defense_rating": 7.9,
-    "fixture_rating": 6.3
+    }
   },
   {
     "gameweek": 20,
@@ -390,6 +350,11 @@
       "rank": {
         "attack": 6,
         "defense": 18
+      },
+      "fdr": {
+        "attack": 4.2,
+        "defense": 7.0,
+        "overall": 5.6
       }
     },
     "away_team": {
@@ -406,16 +371,7 @@
         "defense": 7.0,
         "overall": 5.6
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.2,
-      "defense": 7.0,
-      "overall": 5.6
-    },
-    "home_advantage": 0.0,
-    "attack_rating": 4.2,
-    "defense_rating": 7.0,
-    "fixture_rating": 5.6
+    }
   },
   {
     "gameweek": 20,
@@ -428,6 +384,11 @@
       "rank": {
         "attack": 9,
         "defense": 10
+      },
+      "fdr": {
+        "attack": 6.6,
+        "defense": 7.2,
+        "overall": 6.9
       }
     },
     "away_team": {
@@ -444,16 +405,7 @@
         "defense": 4.8,
         "overall": 4.4
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.6,
-      "defense": 7.2,
-      "overall": 6.9
-    },
-    "home_advantage": -6.5,
-    "attack_rating": 6.6,
-    "defense_rating": 7.2,
-    "fixture_rating": 6.9
+    }
   },
   {
     "gameweek": 20,
@@ -466,6 +418,11 @@
       "rank": {
         "attack": 10,
         "defense": 17
+      },
+      "fdr": {
+        "attack": 4.0,
+        "defense": 6.4,
+        "overall": 5.2
       }
     },
     "away_team": {
@@ -482,16 +439,7 @@
         "defense": 7.2,
         "overall": 6.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.0,
-      "defense": 6.4,
-      "overall": 5.2
-    },
-    "home_advantage": 2.0,
-    "attack_rating": 4.0,
-    "defense_rating": 6.4,
-    "fixture_rating": 5.2
+    }
   },
   {
     "gameweek": 20,
@@ -504,6 +452,11 @@
       "rank": {
         "attack": 14,
         "defense": 3
+      },
+      "fdr": {
+        "attack": 5.0,
+        "defense": 3.2,
+        "overall": 4.1
       }
     },
     "away_team": {
@@ -520,16 +473,7 @@
         "defense": 6.1,
         "overall": 7.1
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.0,
-      "defense": 3.2,
-      "overall": 4.1
-    },
-    "home_advantage": 8.0,
-    "attack_rating": 5.0,
-    "defense_rating": 3.2,
-    "fixture_rating": 4.1
+    }
   },
   {
     "gameweek": 20,
@@ -542,6 +486,11 @@
       "rank": {
         "attack": 11,
         "defense": 6
+      },
+      "fdr": {
+        "attack": 4.6,
+        "defense": 6.6,
+        "overall": 5.6
       }
     },
     "away_team": {
@@ -558,16 +507,7 @@
         "defense": 6.6,
         "overall": 5.6
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.6,
-      "defense": 6.6,
-      "overall": 5.6
-    },
-    "home_advantage": 0.0,
-    "attack_rating": 4.6,
-    "defense_rating": 6.6,
-    "fixture_rating": 5.6
+    }
   },
   {
     "gameweek": 20,
@@ -580,6 +520,11 @@
       "rank": {
         "attack": 5,
         "defense": 16
+      },
+      "fdr": {
+        "attack": 3.6,
+        "defense": 8.7,
+        "overall": 6.1
       }
     },
     "away_team": {
@@ -596,16 +541,7 @@
         "defense": 7.6,
         "overall": 5.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.6,
-      "defense": 8.7,
-      "overall": 6.1
-    },
-    "home_advantage": -3.0,
-    "attack_rating": 3.6,
-    "defense_rating": 8.7,
-    "fixture_rating": 6.1
+    }
   },
   {
     "gameweek": 20,
@@ -618,6 +554,11 @@
       "rank": {
         "attack": 1,
         "defense": 2
+      },
+      "fdr": {
+        "attack": 4.2,
+        "defense": 5.3,
+        "overall": 4.8
       }
     },
     "away_team": {
@@ -634,16 +575,7 @@
         "defense": 6.8,
         "overall": 6.4
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.2,
-      "defense": 5.3,
-      "overall": 4.8
-    },
-    "home_advantage": 4.5,
-    "attack_rating": 4.2,
-    "defense_rating": 5.3,
-    "fixture_rating": 4.8
+    }
   },
   {
     "gameweek": 20,
@@ -656,6 +588,11 @@
       "rank": {
         "attack": 8,
         "defense": 15
+      },
+      "fdr": {
+        "attack": 4.8,
+        "defense": 6.8,
+        "overall": 5.8
       }
     },
     "away_team": {
@@ -672,16 +609,7 @@
         "defense": 6.2,
         "overall": 5.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.8,
-      "defense": 6.8,
-      "overall": 5.8
-    },
-    "home_advantage": -1.0,
-    "attack_rating": 4.8,
-    "defense_rating": 6.8,
-    "fixture_rating": 5.8
+    }
   },
   {
     "gameweek": 20,
@@ -694,6 +622,11 @@
       "rank": {
         "attack": 15,
         "defense": 7
+      },
+      "fdr": {
+        "attack": 7.0,
+        "defense": 3.8,
+        "overall": 5.4
       }
     },
     "away_team": {
@@ -710,16 +643,7 @@
         "defense": 4.4,
         "overall": 6.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 7.0,
-      "defense": 3.8,
-      "overall": 5.4
-    },
-    "home_advantage": 1.5,
-    "attack_rating": 7.0,
-    "defense_rating": 3.8,
-    "fixture_rating": 5.4
+    }
   },
   {
     "gameweek": 20,
@@ -732,6 +656,11 @@
       "rank": {
         "attack": 20,
         "defense": 19
+      },
+      "fdr": {
+        "attack": 4.8,
+        "defense": 6.4,
+        "overall": 5.6
       }
     },
     "away_team": {
@@ -748,16 +677,7 @@
         "defense": 6.4,
         "overall": 5.6
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.8,
-      "defense": 6.4,
-      "overall": 5.6
-    },
-    "home_advantage": 0.0,
-    "attack_rating": 4.8,
-    "defense_rating": 6.4,
-    "fixture_rating": 5.6
+    }
   },
   {
     "gameweek": 21,
@@ -770,6 +690,11 @@
       "rank": {
         "attack": 4,
         "defense": 1
+      },
+      "fdr": {
+        "attack": 3.2,
+        "defense": 5.9,
+        "overall": 4.6
       }
     },
     "away_team": {
@@ -786,16 +711,7 @@
         "defense": 7.9,
         "overall": 6.7
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.2,
-      "defense": 5.9,
-      "overall": 4.6
-    },
-    "home_advantage": 5.5,
-    "attack_rating": 3.2,
-    "defense_rating": 5.9,
-    "fixture_rating": 4.6
+    }
   },
   {
     "gameweek": 21,
@@ -808,6 +724,11 @@
       "rank": {
         "attack": 9,
         "defense": 10
+      },
+      "fdr": {
+        "attack": 5.4,
+        "defense": 5.1,
+        "overall": 5.2
       }
     },
     "away_team": {
@@ -824,16 +745,7 @@
         "defense": 5.9,
         "overall": 6.1
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.4,
-      "defense": 5.1,
-      "overall": 5.2
-    },
-    "home_advantage": 2.0,
-    "attack_rating": 5.4,
-    "defense_rating": 5.1,
-    "fixture_rating": 5.2
+    }
   },
   {
     "gameweek": 21,
@@ -846,6 +758,11 @@
       "rank": {
         "attack": 18,
         "defense": 13
+      },
+      "fdr": {
+        "attack": 7.6,
+        "defense": 5.1,
+        "overall": 6.3
       }
     },
     "away_team": {
@@ -862,16 +779,7 @@
         "defense": 3.8,
         "overall": 5.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 7.6,
-      "defense": 5.1,
-      "overall": 6.3
-    },
-    "home_advantage": -3.5,
-    "attack_rating": 7.6,
-    "defense_rating": 5.1,
-    "fixture_rating": 6.3
+    }
   },
   {
     "gameweek": 21,
@@ -884,6 +792,11 @@
       "rank": {
         "attack": 16,
         "defense": 14
+      },
+      "fdr": {
+        "attack": 6.0,
+        "defense": 8.3,
+        "overall": 7.2
       }
     },
     "away_team": {
@@ -900,16 +813,7 @@
         "defense": 5.3,
         "overall": 4.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.0,
-      "defense": 8.3,
-      "overall": 7.2
-    },
-    "home_advantage": -8.0,
-    "attack_rating": 6.0,
-    "defense_rating": 8.3,
-    "fixture_rating": 7.2
+    }
   },
   {
     "gameweek": 21,
@@ -922,6 +826,11 @@
       "rank": {
         "attack": 12,
         "defense": 8
+      },
+      "fdr": {
+        "attack": 3.6,
+        "defense": 6.6,
+        "overall": 5.1
       }
     },
     "away_team": {
@@ -938,16 +847,7 @@
         "defense": 7.6,
         "overall": 6.1
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.6,
-      "defense": 6.6,
-      "overall": 5.1
-    },
-    "home_advantage": 2.5,
-    "attack_rating": 3.6,
-    "defense_rating": 6.6,
-    "fixture_rating": 5.1
+    }
   },
   {
     "gameweek": 21,
@@ -960,6 +860,11 @@
       "rank": {
         "attack": 14,
         "defense": 3
+      },
+      "fdr": {
+        "attack": 3.8,
+        "defense": 2.9,
+        "overall": 3.3
       }
     },
     "away_team": {
@@ -976,16 +881,7 @@
         "defense": 7.4,
         "overall": 8.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.8,
-      "defense": 2.9,
-      "overall": 3.3
-    },
-    "home_advantage": 12.0,
-    "attack_rating": 3.8,
-    "defense_rating": 2.9,
-    "fixture_rating": 3.3
+    }
   },
   {
     "gameweek": 21,
@@ -998,6 +894,11 @@
       "rank": {
         "attack": 11,
         "defense": 6
+      },
+      "fdr": {
+        "attack": 6.0,
+        "defense": 5.9,
+        "overall": 6.0
       }
     },
     "away_team": {
@@ -1014,16 +915,7 @@
         "defense": 5.1,
         "overall": 5.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.0,
-      "defense": 5.9,
-      "overall": 6.0
-    },
-    "home_advantage": -1.5,
-    "attack_rating": 6.0,
-    "defense_rating": 5.9,
-    "fixture_rating": 6.0
+    }
   },
   {
     "gameweek": 21,
@@ -1036,6 +928,11 @@
       "rank": {
         "attack": 1,
         "defense": 2
+      },
+      "fdr": {
+        "attack": 1.8,
+        "defense": 4.8,
+        "overall": 3.3
       }
     },
     "away_team": {
@@ -1052,16 +949,7 @@
         "defense": 9.2,
         "overall": 7.9
       }
-    },
-    "home_team_fdr": {
-      "attack": 1.8,
-      "defense": 4.8,
-      "overall": 3.3
-    },
-    "home_advantage": 12.0,
-    "attack_rating": 1.8,
-    "defense_rating": 4.8,
-    "fixture_rating": 3.3
+    }
   },
   {
     "gameweek": 21,
@@ -1074,6 +962,11 @@
       "rank": {
         "attack": 8,
         "defense": 15
+      },
+      "fdr": {
+        "attack": 3.2,
+        "defense": 8.1,
+        "overall": 5.7
       }
     },
     "away_team": {
@@ -1090,16 +983,7 @@
         "defense": 7.9,
         "overall": 5.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.2,
-      "defense": 8.1,
-      "overall": 5.7
-    },
-    "home_advantage": -0.5,
-    "attack_rating": 3.2,
-    "defense_rating": 8.1,
-    "fixture_rating": 5.7
+    }
   },
   {
     "gameweek": 21,
@@ -1112,6 +996,11 @@
       "rank": {
         "attack": 17,
         "defense": 20
+      },
+      "fdr": {
+        "attack": 6.4,
+        "defense": 7.4,
+        "overall": 6.9
       }
     },
     "away_team": {
@@ -1128,16 +1017,7 @@
         "defense": 4.9,
         "overall": 4.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.4,
-      "defense": 7.4,
-      "overall": 6.9
-    },
-    "home_advantage": -6.5,
-    "attack_rating": 6.4,
-    "defense_rating": 7.4,
-    "fixture_rating": 6.9
+    }
   },
   {
     "gameweek": 22,
@@ -1150,6 +1030,11 @@
       "rank": {
         "attack": 6,
         "defense": 18
+      },
+      "fdr": {
+        "attack": 5.4,
+        "defense": 6.8,
+        "overall": 6.1
       }
     },
     "away_team": {
@@ -1166,16 +1051,7 @@
         "defense": 5.9,
         "overall": 5.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.4,
-      "defense": 6.8,
-      "overall": 6.1
-    },
-    "home_advantage": -2.5,
-    "attack_rating": 5.4,
-    "defense_rating": 6.8,
-    "fixture_rating": 6.1
+    }
   },
   {
     "gameweek": 22,
@@ -1188,6 +1064,11 @@
       "rank": {
         "attack": 10,
         "defense": 17
+      },
+      "fdr": {
+        "attack": 4.8,
+        "defense": 7.8,
+        "overall": 6.3
       }
     },
     "away_team": {
@@ -1204,16 +1085,7 @@
         "defense": 6.4,
         "overall": 4.9
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.8,
-      "defense": 7.8,
-      "overall": 6.3
-    },
-    "home_advantage": -3.5,
-    "attack_rating": 4.8,
-    "defense_rating": 7.8,
-    "fixture_rating": 6.3
+    }
   },
   {
     "gameweek": 22,
@@ -1226,6 +1098,11 @@
       "rank": {
         "attack": 7,
         "defense": 5
+      },
+      "fdr": {
+        "attack": 3.6,
+        "defense": 3.8,
+        "overall": 3.7
       }
     },
     "away_team": {
@@ -1242,16 +1119,7 @@
         "defense": 7.4,
         "overall": 7.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.6,
-      "defense": 3.8,
-      "overall": 3.7
-    },
-    "home_advantage": 10.0,
-    "attack_rating": 3.6,
-    "defense_rating": 3.8,
-    "fixture_rating": 3.7
+    }
   },
   {
     "gameweek": 22,
@@ -1264,6 +1132,11 @@
       "rank": {
         "attack": 5,
         "defense": 16
+      },
+      "fdr": {
+        "attack": 4.6,
+        "defense": 7.0,
+        "overall": 5.8
       }
     },
     "away_team": {
@@ -1280,16 +1153,7 @@
         "defense": 6.6,
         "overall": 5.4
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.6,
-      "defense": 7.0,
-      "overall": 5.8
-    },
-    "home_advantage": -1.0,
-    "attack_rating": 4.6,
-    "defense_rating": 7.0,
-    "fixture_rating": 5.8
+    }
   },
   {
     "gameweek": 22,
@@ -1302,6 +1166,11 @@
       "rank": {
         "attack": 3,
         "defense": 12
+      },
+      "fdr": {
+        "attack": 2.6,
+        "defense": 5.5,
+        "overall": 4.0
       }
     },
     "away_team": {
@@ -1318,16 +1187,7 @@
         "defense": 8.5,
         "overall": 7.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 2.6,
-      "defense": 5.5,
-      "overall": 4.0
-    },
-    "home_advantage": 8.0,
-    "attack_rating": 2.6,
-    "defense_rating": 5.5,
-    "fixture_rating": 4.0
+    }
   },
   {
     "gameweek": 22,
@@ -1340,6 +1200,11 @@
       "rank": {
         "attack": 2,
         "defense": 11
+      },
+      "fdr": {
+        "attack": 4.8,
+        "defense": 7.9,
+        "overall": 6.3
       }
     },
     "away_team": {
@@ -1356,16 +1221,7 @@
         "defense": 6.4,
         "overall": 4.8
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.8,
-      "defense": 7.9,
-      "overall": 6.3
-    },
-    "home_advantage": -4.0,
-    "attack_rating": 4.8,
-    "defense_rating": 7.9,
-    "fixture_rating": 6.3
+    }
   },
   {
     "gameweek": 22,
@@ -1378,6 +1234,11 @@
       "rank": {
         "attack": 13,
         "defense": 9
+      },
+      "fdr": {
+        "attack": 7.2,
+        "defense": 7.0,
+        "overall": 7.1
       }
     },
     "away_team": {
@@ -1394,16 +1255,7 @@
         "defense": 4.2,
         "overall": 4.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 7.2,
-      "defense": 7.0,
-      "overall": 7.1
-    },
-    "home_advantage": -7.5,
-    "attack_rating": 7.2,
-    "defense_rating": 7.0,
-    "fixture_rating": 7.1
+    }
   },
   {
     "gameweek": 22,
@@ -1416,6 +1268,11 @@
       "rank": {
         "attack": 15,
         "defense": 7
+      },
+      "fdr": {
+        "attack": 3.8,
+        "defense": 4.2,
+        "overall": 4.0
       }
     },
     "away_team": {
@@ -1432,16 +1289,7 @@
         "defense": 7.4,
         "overall": 7.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.8,
-      "defense": 4.2,
-      "overall": 4.0
-    },
-    "home_advantage": 8.5,
-    "attack_rating": 3.8,
-    "defense_rating": 4.2,
-    "fixture_rating": 4.0
+    }
   },
   {
     "gameweek": 22,
@@ -1454,6 +1302,11 @@
       "rank": {
         "attack": 19,
         "defense": 4
+      },
+      "fdr": {
+        "attack": 7.0,
+        "defense": 4.6,
+        "overall": 5.8
       }
     },
     "away_team": {
@@ -1470,16 +1323,7 @@
         "defense": 4.2,
         "overall": 5.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 7.0,
-      "defense": 4.6,
-      "overall": 5.8
-    },
-    "home_advantage": -0.5,
-    "attack_rating": 7.0,
-    "defense_rating": 4.6,
-    "fixture_rating": 5.8
+    }
   },
   {
     "gameweek": 22,
@@ -1492,6 +1336,11 @@
       "rank": {
         "attack": 20,
         "defense": 19
+      },
+      "fdr": {
+        "attack": 5.8,
+        "defense": 8.1,
+        "overall": 6.9
       }
     },
     "away_team": {
@@ -1508,16 +1357,7 @@
         "defense": 5.3,
         "overall": 4.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.8,
-      "defense": 8.1,
-      "overall": 6.9
-    },
-    "home_advantage": -7.0,
-    "attack_rating": 5.8,
-    "defense_rating": 8.1,
-    "fixture_rating": 6.9
+    }
   },
   {
     "gameweek": 23,
@@ -1530,6 +1370,11 @@
       "rank": {
         "attack": 4,
         "defense": 1
+      },
+      "fdr": {
+        "attack": 3.4,
+        "defense": 6.1,
+        "overall": 4.8
       }
     },
     "away_team": {
@@ -1546,16 +1391,7 @@
         "defense": 7.8,
         "overall": 6.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.4,
-      "defense": 6.1,
-      "overall": 4.8
-    },
-    "home_advantage": 4.5,
-    "attack_rating": 3.4,
-    "defense_rating": 6.1,
-    "fixture_rating": 4.8
+    }
   },
   {
     "gameweek": 23,
@@ -1568,6 +1404,11 @@
       "rank": {
         "attack": 9,
         "defense": 10
+      },
+      "fdr": {
+        "attack": 4.4,
+        "defense": 7.4,
+        "overall": 5.9
       }
     },
     "away_team": {
@@ -1584,16 +1425,7 @@
         "defense": 6.8,
         "overall": 5.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.4,
-      "defense": 7.4,
-      "overall": 5.9
-    },
-    "home_advantage": -1.5,
-    "attack_rating": 4.4,
-    "defense_rating": 7.4,
-    "fixture_rating": 5.9
+    }
   },
   {
     "gameweek": 23,
@@ -1606,6 +1438,11 @@
       "rank": {
         "attack": 18,
         "defense": 13
+      },
+      "fdr": {
+        "attack": 6.6,
+        "defense": 6.2,
+        "overall": 6.4
       }
     },
     "away_team": {
@@ -1622,16 +1459,7 @@
         "defense": 4.8,
         "overall": 4.9
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.6,
-      "defense": 6.2,
-      "overall": 6.4
-    },
-    "home_advantage": -4.0,
-    "attack_rating": 6.6,
-    "defense_rating": 6.2,
-    "fixture_rating": 6.4
+    }
   },
   {
     "gameweek": 23,
@@ -1644,6 +1472,11 @@
       "rank": {
         "attack": 16,
         "defense": 14
+      },
+      "fdr": {
+        "attack": 6.8,
+        "defense": 5.9,
+        "overall": 6.3
       }
     },
     "away_team": {
@@ -1660,16 +1493,7 @@
         "defense": 4.6,
         "overall": 5.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.8,
-      "defense": 5.9,
-      "overall": 6.3
-    },
-    "home_advantage": -3.5,
-    "attack_rating": 6.8,
-    "defense_rating": 5.9,
-    "fixture_rating": 6.3
+    }
   },
   {
     "gameweek": 23,
@@ -1682,6 +1506,11 @@
       "rank": {
         "attack": 12,
         "defense": 8
+      },
+      "fdr": {
+        "attack": 6.2,
+        "defense": 6.4,
+        "overall": 6.3
       }
     },
     "away_team": {
@@ -1698,16 +1527,7 @@
         "defense": 4.9,
         "overall": 4.8
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.2,
-      "defense": 6.4,
-      "overall": 6.3
-    },
-    "home_advantage": -3.5,
-    "attack_rating": 6.2,
-    "defense_rating": 6.4,
-    "fixture_rating": 6.3
+    }
   },
   {
     "gameweek": 23,
@@ -1720,6 +1540,11 @@
       "rank": {
         "attack": 14,
         "defense": 3
+      },
+      "fdr": {
+        "attack": 4.4,
+        "defense": 5.7,
+        "overall": 5.1
       }
     },
     "away_team": {
@@ -1736,16 +1561,7 @@
         "defense": 6.8,
         "overall": 6.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.4,
-      "defense": 5.7,
-      "overall": 5.1
-    },
-    "home_advantage": 3.0,
-    "attack_rating": 4.4,
-    "defense_rating": 5.7,
-    "fixture_rating": 5.1
+    }
   },
   {
     "gameweek": 23,
@@ -1758,6 +1574,11 @@
       "rank": {
         "attack": 11,
         "defense": 6
+      },
+      "fdr": {
+        "attack": 3.6,
+        "defense": 5.3,
+        "overall": 4.5
       }
     },
     "away_team": {
@@ -1774,16 +1595,7 @@
         "defense": 7.6,
         "overall": 6.8
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.6,
-      "defense": 5.3,
-      "overall": 4.5
-    },
-    "home_advantage": 6.0,
-    "attack_rating": 3.6,
-    "defense_rating": 5.3,
-    "fixture_rating": 4.5
+    }
   },
   {
     "gameweek": 23,
@@ -1796,6 +1608,11 @@
       "rank": {
         "attack": 1,
         "defense": 2
+      },
+      "fdr": {
+        "attack": 1.4,
+        "defense": 2.9,
+        "overall": 2.1
       }
     },
     "away_team": {
@@ -1812,16 +1629,7 @@
         "defense": 9.6,
         "overall": 9.1
       }
-    },
-    "home_team_fdr": {
-      "attack": 1.4,
-      "defense": 2.9,
-      "overall": 2.1
-    },
-    "home_advantage": 18.0,
-    "attack_rating": 1.4,
-    "defense_rating": 2.9,
-    "fixture_rating": 2.1
+    }
   },
   {
     "gameweek": 23,
@@ -1834,6 +1642,11 @@
       "rank": {
         "attack": 8,
         "defense": 15
+      },
+      "fdr": {
+        "attack": 2.8,
+        "defense": 7.9,
+        "overall": 5.3
       }
     },
     "away_team": {
@@ -1850,16 +1663,7 @@
         "defense": 8.3,
         "overall": 5.8
       }
-    },
-    "home_team_fdr": {
-      "attack": 2.8,
-      "defense": 7.9,
-      "overall": 5.3
-    },
-    "home_advantage": 1.0,
-    "attack_rating": 2.8,
-    "defense_rating": 7.9,
-    "fixture_rating": 5.3
+    }
   },
   {
     "gameweek": 23,
@@ -1872,6 +1676,11 @@
       "rank": {
         "attack": 17,
         "defense": 20
+      },
+      "fdr": {
+        "attack": 7.4,
+        "defense": 6.2,
+        "overall": 6.8
       }
     },
     "away_team": {
@@ -1888,16 +1697,7 @@
         "defense": 4.0,
         "overall": 4.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 7.4,
-      "defense": 6.2,
-      "overall": 6.8
-    },
-    "home_advantage": -6.0,
-    "attack_rating": 7.4,
-    "defense_rating": 6.2,
-    "fixture_rating": 6.8
+    }
   },
   {
     "gameweek": 24,
@@ -1910,6 +1710,11 @@
       "rank": {
         "attack": 6,
         "defense": 18
+      },
+      "fdr": {
+        "attack": 3.4,
+        "defense": 6.1,
+        "overall": 4.8
       }
     },
     "away_team": {
@@ -1926,16 +1731,7 @@
         "defense": 7.6,
         "overall": 6.4
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.4,
-      "defense": 6.1,
-      "overall": 4.8
-    },
-    "home_advantage": 4.5,
-    "attack_rating": 3.4,
-    "defense_rating": 6.1,
-    "fixture_rating": 4.8
+    }
   },
   {
     "gameweek": 24,
@@ -1948,6 +1744,11 @@
       "rank": {
         "attack": 10,
         "defense": 17
+      },
+      "fdr": {
+        "attack": 6.2,
+        "defense": 6.6,
+        "overall": 6.4
       }
     },
     "away_team": {
@@ -1964,16 +1765,7 @@
         "defense": 5.1,
         "overall": 4.8
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.2,
-      "defense": 6.6,
-      "overall": 6.4
-    },
-    "home_advantage": -4.0,
-    "attack_rating": 6.2,
-    "defense_rating": 6.6,
-    "fixture_rating": 6.4
+    }
   },
   {
     "gameweek": 24,
@@ -1986,6 +1778,11 @@
       "rank": {
         "attack": 7,
         "defense": 5
+      },
+      "fdr": {
+        "attack": 2.2,
+        "defense": 4.0,
+        "overall": 3.1
       }
     },
     "away_team": {
@@ -2002,16 +1799,7 @@
         "defense": 8.9,
         "overall": 8.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 2.2,
-      "defense": 4.0,
-      "overall": 3.1
-    },
-    "home_advantage": 13.0,
-    "attack_rating": 2.2,
-    "defense_rating": 4.0,
-    "fixture_rating": 3.1
+    }
   },
   {
     "gameweek": 24,
@@ -2024,6 +1812,11 @@
       "rank": {
         "attack": 5,
         "defense": 16
+      },
+      "fdr": {
+        "attack": 5.6,
+        "defense": 8.3,
+        "overall": 7.0
       }
     },
     "away_team": {
@@ -2040,16 +1833,7 @@
         "defense": 5.7,
         "overall": 4.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.6,
-      "defense": 8.3,
-      "overall": 7.0
-    },
-    "home_advantage": -7.0,
-    "attack_rating": 5.6,
-    "defense_rating": 8.3,
-    "fixture_rating": 7.0
+    }
   },
   {
     "gameweek": 24,
@@ -2062,6 +1846,11 @@
       "rank": {
         "attack": 3,
         "defense": 12
+      },
+      "fdr": {
+        "attack": 2.4,
+        "defense": 6.8,
+        "overall": 4.6
       }
     },
     "away_team": {
@@ -2078,16 +1867,7 @@
         "defense": 8.5,
         "overall": 6.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 2.4,
-      "defense": 6.8,
-      "overall": 4.6
-    },
-    "home_advantage": 5.0,
-    "attack_rating": 2.4,
-    "defense_rating": 6.8,
-    "fixture_rating": 4.6
+    }
   },
   {
     "gameweek": 24,
@@ -2100,6 +1880,11 @@
       "rank": {
         "attack": 2,
         "defense": 11
+      },
+      "fdr": {
+        "attack": 4.0,
+        "defense": 6.1,
+        "overall": 5.0
       }
     },
     "away_team": {
@@ -2116,16 +1901,7 @@
         "defense": 7.2,
         "overall": 6.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.0,
-      "defense": 6.1,
-      "overall": 5.0
-    },
-    "home_advantage": 3.0,
-    "attack_rating": 4.0,
-    "defense_rating": 6.1,
-    "fixture_rating": 5.0
+    }
   },
   {
     "gameweek": 24,
@@ -2138,6 +1914,11 @@
       "rank": {
         "attack": 13,
         "defense": 9
+      },
+      "fdr": {
+        "attack": 5.8,
+        "defense": 5.5,
+        "overall": 5.7
       }
     },
     "away_team": {
@@ -2154,16 +1935,7 @@
         "defense": 5.3,
         "overall": 5.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.8,
-      "defense": 5.5,
-      "overall": 5.7
-    },
-    "home_advantage": 0.0,
-    "attack_rating": 5.8,
-    "defense_rating": 5.5,
-    "fixture_rating": 5.7
+    }
   },
   {
     "gameweek": 24,
@@ -2176,6 +1948,11 @@
       "rank": {
         "attack": 15,
         "defense": 7
+      },
+      "fdr": {
+        "attack": 7.4,
+        "defense": 7.2,
+        "overall": 7.3
       }
     },
     "away_team": {
@@ -2192,16 +1969,7 @@
         "defense": 4.0,
         "overall": 4.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 7.4,
-      "defense": 7.2,
-      "overall": 7.3
-    },
-    "home_advantage": -8.5,
-    "attack_rating": 7.4,
-    "defense_rating": 7.2,
-    "fixture_rating": 7.3
+    }
   },
   {
     "gameweek": 24,
@@ -2214,6 +1982,11 @@
       "rank": {
         "attack": 19,
         "defense": 4
+      },
+      "fdr": {
+        "attack": 5.8,
+        "defense": 4.0,
+        "overall": 4.9
       }
     },
     "away_team": {
@@ -2230,16 +2003,7 @@
         "defense": 5.5,
         "overall": 6.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.8,
-      "defense": 4.0,
-      "overall": 4.9
-    },
-    "home_advantage": 4.0,
-    "attack_rating": 5.8,
-    "defense_rating": 4.0,
-    "fixture_rating": 4.9
+    }
   },
   {
     "gameweek": 24,
@@ -2252,6 +2016,11 @@
       "rank": {
         "attack": 20,
         "defense": 19
+      },
+      "fdr": {
+        "attack": 6.8,
+        "defense": 8.1,
+        "overall": 7.4
       }
     },
     "away_team": {
@@ -2268,16 +2037,7 @@
         "defense": 4.6,
         "overall": 3.8
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.8,
-      "defense": 8.1,
-      "overall": 7.4
-    },
-    "home_advantage": -9.5,
-    "attack_rating": 6.8,
-    "defense_rating": 8.1,
-    "fixture_rating": 7.4
+    }
   },
   {
     "gameweek": 25,
@@ -2290,6 +2050,11 @@
       "rank": {
         "attack": 4,
         "defense": 1
+      },
+      "fdr": {
+        "attack": 4.8,
+        "defense": 2.9,
+        "overall": 3.8
       }
     },
     "away_team": {
@@ -2306,16 +2071,7 @@
         "defense": 6.4,
         "overall": 7.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.8,
-      "defense": 2.9,
-      "overall": 3.8
-    },
-    "home_advantage": 9.5,
-    "attack_rating": 4.8,
-    "defense_rating": 2.9,
-    "fixture_rating": 3.8
+    }
   },
   {
     "gameweek": 25,
@@ -2328,6 +2084,11 @@
       "rank": {
         "attack": 9,
         "defense": 10
+      },
+      "fdr": {
+        "attack": 3.2,
+        "defense": 6.8,
+        "overall": 5.0
       }
     },
     "away_team": {
@@ -2344,16 +2105,7 @@
         "defense": 7.9,
         "overall": 6.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.2,
-      "defense": 6.8,
-      "overall": 5.0
-    },
-    "home_advantage": 3.0,
-    "attack_rating": 3.2,
-    "defense_rating": 6.8,
-    "fixture_rating": 5.0
+    }
   },
   {
     "gameweek": 25,
@@ -2366,6 +2118,11 @@
       "rank": {
         "attack": 10,
         "defense": 17
+      },
+      "fdr": {
+        "attack": 5.2,
+        "defense": 7.0,
+        "overall": 6.1
       }
     },
     "away_team": {
@@ -2382,16 +2139,7 @@
         "defense": 5.9,
         "overall": 5.1
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.2,
-      "defense": 7.0,
-      "overall": 6.1
-    },
-    "home_advantage": -2.5,
-    "attack_rating": 5.2,
-    "defense_rating": 7.0,
-    "fixture_rating": 6.1
+    }
   },
   {
     "gameweek": 25,
@@ -2404,6 +2152,11 @@
       "rank": {
         "attack": 16,
         "defense": 14
+      },
+      "fdr": {
+        "attack": 4.2,
+        "defense": 5.5,
+        "overall": 4.8
       }
     },
     "away_team": {
@@ -2420,16 +2173,7 @@
         "defense": 7.0,
         "overall": 6.4
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.2,
-      "defense": 5.5,
-      "overall": 4.8
-    },
-    "home_advantage": 4.0,
-    "attack_rating": 4.2,
-    "defense_rating": 5.5,
-    "fixture_rating": 4.8
+    }
   },
   {
     "gameweek": 25,
@@ -2442,6 +2186,11 @@
       "rank": {
         "attack": 11,
         "defense": 6
+      },
+      "fdr": {
+        "attack": 6.4,
+        "defense": 4.6,
+        "overall": 5.5
       }
     },
     "away_team": {
@@ -2458,16 +2207,7 @@
         "defense": 4.9,
         "overall": 5.8
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.4,
-      "defense": 4.6,
-      "overall": 5.5
-    },
-    "home_advantage": 1.0,
-    "attack_rating": 6.4,
-    "defense_rating": 4.6,
-    "fixture_rating": 5.5
+    }
   },
   {
     "gameweek": 25,
@@ -2480,6 +2220,11 @@
       "rank": {
         "attack": 5,
         "defense": 16
+      },
+      "fdr": {
+        "attack": 4.0,
+        "defense": 6.6,
+        "overall": 5.3
       }
     },
     "away_team": {
@@ -2496,16 +2241,7 @@
         "defense": 7.2,
         "overall": 5.9
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.0,
-      "defense": 6.6,
-      "overall": 5.3
-    },
-    "home_advantage": 1.5,
-    "attack_rating": 4.0,
-    "defense_rating": 6.6,
-    "fixture_rating": 5.3
+    }
   },
   {
     "gameweek": 25,
@@ -2518,6 +2254,11 @@
       "rank": {
         "attack": 3,
         "defense": 12
+      },
+      "fdr": {
+        "attack": 5.0,
+        "defense": 8.1,
+        "overall": 6.5
       }
     },
     "away_team": {
@@ -2534,16 +2275,7 @@
         "defense": 6.2,
         "overall": 4.6
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.0,
-      "defense": 8.1,
-      "overall": 6.5
-    },
-    "home_advantage": -5.0,
-    "attack_rating": 5.0,
-    "defense_rating": 8.1,
-    "fixture_rating": 6.5
+    }
   },
   {
     "gameweek": 25,
@@ -2556,6 +2288,11 @@
       "rank": {
         "attack": 2,
         "defense": 11
+      },
+      "fdr": {
+        "attack": 3.8,
+        "defense": 5.3,
+        "overall": 4.5
       }
     },
     "away_team": {
@@ -2572,16 +2309,7 @@
         "defense": 7.4,
         "overall": 6.7
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.8,
-      "defense": 5.3,
-      "overall": 4.5
-    },
-    "home_advantage": 5.5,
-    "attack_rating": 3.8,
-    "defense_rating": 5.3,
-    "fixture_rating": 4.5
+    }
   },
   {
     "gameweek": 25,
@@ -2594,6 +2322,11 @@
       "rank": {
         "attack": 8,
         "defense": 15
+      },
+      "fdr": {
+        "attack": 3.8,
+        "defense": 5.7,
+        "overall": 4.8
       }
     },
     "away_team": {
@@ -2610,16 +2343,7 @@
         "defense": 7.2,
         "overall": 6.4
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.8,
-      "defense": 5.7,
-      "overall": 4.8
-    },
-    "home_advantage": 4.5,
-    "attack_rating": 3.8,
-    "defense_rating": 5.7,
-    "fixture_rating": 4.8
+    }
   },
   {
     "gameweek": 25,
@@ -2632,6 +2356,11 @@
       "rank": {
         "attack": 20,
         "defense": 19
+      },
+      "fdr": {
+        "attack": 7.8,
+        "defense": 8.3,
+        "overall": 8.1
       }
     },
     "away_team": {
@@ -2648,16 +2377,7 @@
         "defense": 3.4,
         "overall": 3.1
       }
-    },
-    "home_team_fdr": {
-      "attack": 7.8,
-      "defense": 8.3,
-      "overall": 8.1
-    },
-    "home_advantage": -12.5,
-    "attack_rating": 7.8,
-    "defense_rating": 8.3,
-    "fixture_rating": 8.1
+    }
   },
   {
     "gameweek": 26,
@@ -2670,6 +2390,11 @@
       "rank": {
         "attack": 6,
         "defense": 18
+      },
+      "fdr": {
+        "attack": 2.6,
+        "defense": 7.6,
+        "overall": 5.1
       }
     },
     "away_team": {
@@ -2686,16 +2411,7 @@
         "defense": 8.5,
         "overall": 6.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 2.6,
-      "defense": 7.6,
-      "overall": 5.1
-    },
-    "home_advantage": 2.5,
-    "attack_rating": 2.6,
-    "defense_rating": 7.6,
-    "fixture_rating": 5.1
+    }
   },
   {
     "gameweek": 26,
@@ -2708,6 +2424,11 @@
       "rank": {
         "attack": 18,
         "defense": 13
+      },
+      "fdr": {
+        "attack": 8.2,
+        "defense": 7.9,
+        "overall": 8.1
       }
     },
     "away_team": {
@@ -2724,16 +2445,7 @@
         "defense": 3.2,
         "overall": 3.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 8.2,
-      "defense": 7.9,
-      "overall": 8.1
-    },
-    "home_advantage": -12.5,
-    "attack_rating": 8.2,
-    "defense_rating": 7.9,
-    "fixture_rating": 8.1
+    }
   },
   {
     "gameweek": 26,
@@ -2746,6 +2458,11 @@
       "rank": {
         "attack": 7,
         "defense": 5
+      },
+      "fdr": {
+        "attack": 3.0,
+        "defense": 6.2,
+        "overall": 4.6
       }
     },
     "away_team": {
@@ -2762,16 +2479,7 @@
         "defense": 8.1,
         "overall": 6.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.0,
-      "defense": 6.2,
-      "overall": 4.6
-    },
-    "home_advantage": 5.0,
-    "attack_rating": 3.0,
-    "defense_rating": 6.2,
-    "fixture_rating": 4.6
+    }
   },
   {
     "gameweek": 26,
@@ -2784,6 +2492,11 @@
       "rank": {
         "attack": 12,
         "defense": 8
+      },
+      "fdr": {
+        "attack": 4.4,
+        "defense": 4.9,
+        "overall": 4.7
       }
     },
     "away_team": {
@@ -2800,16 +2513,7 @@
         "defense": 6.8,
         "overall": 6.6
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.4,
-      "defense": 4.9,
-      "overall": 4.7
-    },
-    "home_advantage": 5.0,
-    "attack_rating": 4.4,
-    "defense_rating": 4.9,
-    "fixture_rating": 4.7
+    }
   },
   {
     "gameweek": 26,
@@ -2822,6 +2526,11 @@
       "rank": {
         "attack": 14,
         "defense": 3
+      },
+      "fdr": {
+        "attack": 5.6,
+        "defense": 5.1,
+        "overall": 5.3
       }
     },
     "away_team": {
@@ -2838,16 +2547,7 @@
         "defense": 5.7,
         "overall": 6.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.6,
-      "defense": 5.1,
-      "overall": 5.3
-    },
-    "home_advantage": 1.5,
-    "attack_rating": 5.6,
-    "defense_rating": 5.1,
-    "fixture_rating": 5.3
+    }
   },
   {
     "gameweek": 26,
@@ -2860,6 +2560,11 @@
       "rank": {
         "attack": 1,
         "defense": 2
+      },
+      "fdr": {
+        "attack": 4.0,
+        "defense": 4.6,
+        "overall": 4.3
       }
     },
     "away_team": {
@@ -2876,16 +2581,7 @@
         "defense": 7.2,
         "overall": 7.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.0,
-      "defense": 4.6,
-      "overall": 4.3
-    },
-    "home_advantage": 7.0,
-    "attack_rating": 4.0,
-    "defense_rating": 4.6,
-    "fixture_rating": 4.3
+    }
   },
   {
     "gameweek": 26,
@@ -2898,6 +2594,11 @@
       "rank": {
         "attack": 13,
         "defense": 9
+      },
+      "fdr": {
+        "attack": 3.6,
+        "defense": 4.0,
+        "overall": 3.8
       }
     },
     "away_team": {
@@ -2914,16 +2615,7 @@
         "defense": 7.6,
         "overall": 7.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.6,
-      "defense": 4.0,
-      "overall": 3.8
-    },
-    "home_advantage": 9.5,
-    "attack_rating": 3.6,
-    "defense_rating": 4.0,
-    "fixture_rating": 3.8
+    }
   },
   {
     "gameweek": 26,
@@ -2936,6 +2628,11 @@
       "rank": {
         "attack": 15,
         "defense": 7
+      },
+      "fdr": {
+        "attack": 4.8,
+        "defense": 5.9,
+        "overall": 5.3
       }
     },
     "away_team": {
@@ -2952,16 +2649,7 @@
         "defense": 6.2,
         "overall": 5.8
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.8,
-      "defense": 5.9,
-      "overall": 5.3
-    },
-    "home_advantage": 1.5,
-    "attack_rating": 4.8,
-    "defense_rating": 5.9,
-    "fixture_rating": 5.3
+    }
   },
   {
     "gameweek": 26,
@@ -2974,6 +2662,11 @@
       "rank": {
         "attack": 19,
         "defense": 4
+      },
+      "fdr": {
+        "attack": 6.2,
+        "defense": 6.2,
+        "overall": 6.2
       }
     },
     "away_team": {
@@ -2990,16 +2683,7 @@
         "defense": 5.1,
         "overall": 5.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.2,
-      "defense": 6.2,
-      "overall": 6.2
-    },
-    "home_advantage": -3.0,
-    "attack_rating": 6.2,
-    "defense_rating": 6.2,
-    "fixture_rating": 6.2
+    }
   },
   {
     "gameweek": 26,
@@ -3012,6 +2696,11 @@
       "rank": {
         "attack": 17,
         "defense": 20
+      },
+      "fdr": {
+        "attack": 6.0,
+        "defense": 9.4,
+        "overall": 7.7
       }
     },
     "away_team": {
@@ -3028,16 +2717,7 @@
         "defense": 5.3,
         "overall": 3.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.0,
-      "defense": 9.4,
-      "overall": 7.7
-    },
-    "home_advantage": -11.0,
-    "attack_rating": 6.0,
-    "defense_rating": 9.4,
-    "fixture_rating": 7.7
+    }
   },
   {
     "gameweek": 27,
@@ -3050,6 +2730,11 @@
       "rank": {
         "attack": 6,
         "defense": 18
+      },
+      "fdr": {
+        "attack": 2.8,
+        "defense": 8.5,
+        "overall": 5.7
       }
     },
     "away_team": {
@@ -3066,16 +2751,7 @@
         "defense": 8.3,
         "overall": 5.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 2.8,
-      "defense": 8.5,
-      "overall": 5.7
-    },
-    "home_advantage": -0.5,
-    "attack_rating": 2.8,
-    "defense_rating": 8.5,
-    "fixture_rating": 5.7
+    }
   },
   {
     "gameweek": 27,
@@ -3088,6 +2764,11 @@
       "rank": {
         "attack": 18,
         "defense": 13
+      },
+      "fdr": {
+        "attack": 5.0,
+        "defense": 6.8,
+        "overall": 5.9
       }
     },
     "away_team": {
@@ -3104,16 +2785,7 @@
         "defense": 6.2,
         "overall": 5.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.0,
-      "defense": 6.8,
-      "overall": 5.9
-    },
-    "home_advantage": -1.5,
-    "attack_rating": 5.0,
-    "defense_rating": 6.8,
-    "fixture_rating": 5.9
+    }
   },
   {
     "gameweek": 27,
@@ -3126,6 +2798,11 @@
       "rank": {
         "attack": 7,
         "defense": 5
+      },
+      "fdr": {
+        "attack": 3.4,
+        "defense": 4.4,
+        "overall": 3.9
       }
     },
     "away_team": {
@@ -3142,16 +2819,7 @@
         "defense": 7.8,
         "overall": 7.4
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.4,
-      "defense": 4.4,
-      "overall": 3.9
-    },
-    "home_advantage": 9.0,
-    "attack_rating": 3.4,
-    "defense_rating": 4.4,
-    "fixture_rating": 3.9
+    }
   },
   {
     "gameweek": 27,
@@ -3164,6 +2832,11 @@
       "rank": {
         "attack": 12,
         "defense": 8
+      },
+      "fdr": {
+        "attack": 3.4,
+        "defense": 4.0,
+        "overall": 3.7
       }
     },
     "away_team": {
@@ -3180,16 +2853,7 @@
         "defense": 7.8,
         "overall": 7.6
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.4,
-      "defense": 4.0,
-      "overall": 3.7
-    },
-    "home_advantage": 10.0,
-    "attack_rating": 3.4,
-    "defense_rating": 4.0,
-    "fixture_rating": 3.7
+    }
   },
   {
     "gameweek": 27,
@@ -3202,6 +2866,11 @@
       "rank": {
         "attack": 14,
         "defense": 3
+      },
+      "fdr": {
+        "attack": 5.4,
+        "defense": 6.2,
+        "overall": 5.8
       }
     },
     "away_team": {
@@ -3218,16 +2887,7 @@
         "defense": 5.9,
         "overall": 5.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.4,
-      "defense": 6.2,
-      "overall": 5.8
-    },
-    "home_advantage": -1.0,
-    "attack_rating": 5.4,
-    "defense_rating": 6.2,
-    "fixture_rating": 5.8
+    }
   },
   {
     "gameweek": 27,
@@ -3240,6 +2900,11 @@
       "rank": {
         "attack": 1,
         "defense": 2
+      },
+      "fdr": {
+        "attack": 2.2,
+        "defense": 5.1,
+        "overall": 3.6
       }
     },
     "away_team": {
@@ -3256,16 +2921,7 @@
         "defense": 8.7,
         "overall": 7.4
       }
-    },
-    "home_team_fdr": {
-      "attack": 2.2,
-      "defense": 5.1,
-      "overall": 3.6
-    },
-    "home_advantage": 10.0,
-    "attack_rating": 2.2,
-    "defense_rating": 5.1,
-    "fixture_rating": 3.6
+    }
   },
   {
     "gameweek": 27,
@@ -3278,6 +2934,11 @@
       "rank": {
         "attack": 13,
         "defense": 9
+      },
+      "fdr": {
+        "attack": 5.0,
+        "defense": 7.2,
+        "overall": 6.1
       }
     },
     "away_team": {
@@ -3294,16 +2955,7 @@
         "defense": 6.2,
         "overall": 5.1
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.0,
-      "defense": 7.2,
-      "overall": 6.1
-    },
-    "home_advantage": -2.5,
-    "attack_rating": 5.0,
-    "defense_rating": 7.2,
-    "fixture_rating": 6.1
+    }
   },
   {
     "gameweek": 27,
@@ -3316,6 +2968,11 @@
       "rank": {
         "attack": 15,
         "defense": 7
+      },
+      "fdr": {
+        "attack": 7.6,
+        "defense": 6.6,
+        "overall": 7.1
       }
     },
     "away_team": {
@@ -3332,16 +2989,7 @@
         "defense": 3.8,
         "overall": 4.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 7.6,
-      "defense": 6.6,
-      "overall": 7.1
-    },
-    "home_advantage": -7.5,
-    "attack_rating": 7.6,
-    "defense_rating": 6.6,
-    "fixture_rating": 7.1
+    }
   },
   {
     "gameweek": 27,
@@ -3354,6 +3002,11 @@
       "rank": {
         "attack": 19,
         "defense": 4
+      },
+      "fdr": {
+        "attack": 7.4,
+        "defense": 4.8,
+        "overall": 6.1
       }
     },
     "away_team": {
@@ -3370,16 +3023,7 @@
         "defense": 4.0,
         "overall": 5.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 7.4,
-      "defense": 4.8,
-      "overall": 6.1
-    },
-    "home_advantage": -2.0,
-    "attack_rating": 7.4,
-    "defense_rating": 4.8,
-    "fixture_rating": 6.1
+    }
   },
   {
     "gameweek": 27,
@@ -3392,6 +3036,11 @@
       "rank": {
         "attack": 17,
         "defense": 20
+      },
+      "fdr": {
+        "attack": 6.2,
+        "defense": 8.3,
+        "overall": 7.2
       }
     },
     "away_team": {
@@ -3408,16 +3057,7 @@
         "defense": 5.1,
         "overall": 3.9
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.2,
-      "defense": 8.3,
-      "overall": 7.2
-    },
-    "home_advantage": -8.5,
-    "attack_rating": 6.2,
-    "defense_rating": 8.3,
-    "fixture_rating": 7.2
+    }
   },
   {
     "gameweek": 28,
@@ -3430,6 +3070,11 @@
       "rank": {
         "attack": 4,
         "defense": 1
+      },
+      "fdr": {
+        "attack": 4.6,
+        "defense": 5.1,
+        "overall": 4.8
       }
     },
     "away_team": {
@@ -3446,16 +3091,7 @@
         "defense": 6.4,
         "overall": 6.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.6,
-      "defense": 5.1,
-      "overall": 4.8
-    },
-    "home_advantage": 4.0,
-    "attack_rating": 4.6,
-    "defense_rating": 5.1,
-    "fixture_rating": 4.8
+    }
   },
   {
     "gameweek": 28,
@@ -3468,6 +3104,11 @@
       "rank": {
         "attack": 9,
         "defense": 10
+      },
+      "fdr": {
+        "attack": 6.0,
+        "defense": 4.4,
+        "overall": 5.2
       }
     },
     "away_team": {
@@ -3484,16 +3125,7 @@
         "defense": 5.3,
         "overall": 6.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.0,
-      "defense": 4.4,
-      "overall": 5.2
-    },
-    "home_advantage": 2.5,
-    "attack_rating": 6.0,
-    "defense_rating": 4.4,
-    "fixture_rating": 5.2
+    }
   },
   {
     "gameweek": 28,
@@ -3506,6 +3138,11 @@
       "rank": {
         "attack": 10,
         "defense": 17
+      },
+      "fdr": {
+        "attack": 5.0,
+        "defense": 6.8,
+        "overall": 5.9
       }
     },
     "away_team": {
@@ -3522,16 +3159,7 @@
         "defense": 6.2,
         "overall": 5.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.0,
-      "defense": 6.8,
-      "overall": 5.9
-    },
-    "home_advantage": -1.5,
-    "attack_rating": 5.0,
-    "defense_rating": 6.8,
-    "fixture_rating": 5.9
+    }
   },
   {
     "gameweek": 28,
@@ -3544,6 +3172,11 @@
       "rank": {
         "attack": 16,
         "defense": 14
+      },
+      "fdr": {
+        "attack": 5.6,
+        "defense": 5.3,
+        "overall": 5.4
       }
     },
     "away_team": {
@@ -3560,16 +3193,7 @@
         "defense": 5.5,
         "overall": 5.8
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.6,
-      "defense": 5.3,
-      "overall": 5.4
-    },
-    "home_advantage": 1.0,
-    "attack_rating": 5.6,
-    "defense_rating": 5.3,
-    "fixture_rating": 5.4
+    }
   },
   {
     "gameweek": 28,
@@ -3582,6 +3206,11 @@
       "rank": {
         "attack": 11,
         "defense": 6
+      },
+      "fdr": {
+        "attack": 5.6,
+        "defense": 4.4,
+        "overall": 5.0
       }
     },
     "away_team": {
@@ -3598,16 +3227,7 @@
         "defense": 5.7,
         "overall": 6.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.6,
-      "defense": 4.4,
-      "overall": 5.0
-    },
-    "home_advantage": 3.5,
-    "attack_rating": 5.6,
-    "defense_rating": 4.4,
-    "fixture_rating": 5.0
+    }
   },
   {
     "gameweek": 28,
@@ -3620,6 +3240,11 @@
       "rank": {
         "attack": 5,
         "defense": 16
+      },
+      "fdr": {
+        "attack": 5.4,
+        "defense": 8.9,
+        "overall": 7.2
       }
     },
     "away_team": {
@@ -3636,16 +3261,7 @@
         "defense": 5.9,
         "overall": 4.1
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.4,
-      "defense": 8.9,
-      "overall": 7.2
-    },
-    "home_advantage": -8.0,
-    "attack_rating": 5.4,
-    "defense_rating": 8.9,
-    "fixture_rating": 7.2
+    }
   },
   {
     "gameweek": 28,
@@ -3658,6 +3274,11 @@
       "rank": {
         "attack": 3,
         "defense": 12
+      },
+      "fdr": {
+        "attack": 1.4,
+        "defense": 5.1,
+        "overall": 3.2
       }
     },
     "away_team": {
@@ -3674,16 +3295,7 @@
         "defense": 9.6,
         "overall": 7.9
       }
-    },
-    "home_team_fdr": {
-      "attack": 1.4,
-      "defense": 5.1,
-      "overall": 3.2
-    },
-    "home_advantage": 12.0,
-    "attack_rating": 1.4,
-    "defense_rating": 5.1,
-    "fixture_rating": 3.2
+    }
   },
   {
     "gameweek": 28,
@@ -3696,6 +3308,11 @@
       "rank": {
         "attack": 2,
         "defense": 11
+      },
+      "fdr": {
+        "attack": 3.6,
+        "defense": 5.9,
+        "overall": 4.8
       }
     },
     "away_team": {
@@ -3712,16 +3329,7 @@
         "defense": 7.4,
         "overall": 6.4
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.6,
-      "defense": 5.9,
-      "overall": 4.8
-    },
-    "home_advantage": 4.5,
-    "attack_rating": 3.6,
-    "defense_rating": 5.9,
-    "fixture_rating": 4.8
+    }
   },
   {
     "gameweek": 28,
@@ -3734,6 +3342,11 @@
       "rank": {
         "attack": 8,
         "defense": 15
+      },
+      "fdr": {
+        "attack": 5.8,
+        "defense": 6.4,
+        "overall": 6.1
       }
     },
     "away_team": {
@@ -3750,16 +3363,7 @@
         "defense": 5.5,
         "overall": 5.2
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.8,
-      "defense": 6.4,
-      "overall": 6.1
-    },
-    "home_advantage": -2.5,
-    "attack_rating": 5.8,
-    "defense_rating": 6.4,
-    "fixture_rating": 6.1
+    }
   },
   {
     "gameweek": 28,
@@ -3772,6 +3376,11 @@
       "rank": {
         "attack": 20,
         "defense": 19
+      },
+      "fdr": {
+        "attack": 5.2,
+        "defense": 8.5,
+        "overall": 6.8
       }
     },
     "away_team": {
@@ -3788,16 +3397,7 @@
         "defense": 6.1,
         "overall": 4.3
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.2,
-      "defense": 8.5,
-      "overall": 6.8
-    },
-    "home_advantage": -6.5,
-    "attack_rating": 5.2,
-    "defense_rating": 8.5,
-    "fixture_rating": 6.8
+    }
   },
   {
     "gameweek": 29,
@@ -3810,6 +3410,11 @@
       "rank": {
         "attack": 6,
         "defense": 18
+      },
+      "fdr": {
+        "attack": 5.0,
+        "defense": 8.1,
+        "overall": 6.5
       }
     },
     "away_team": {
@@ -3826,16 +3431,7 @@
         "defense": 6.1,
         "overall": 4.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.0,
-      "defense": 8.1,
-      "overall": 6.5
-    },
-    "home_advantage": -5.0,
-    "attack_rating": 5.0,
-    "defense_rating": 8.1,
-    "fixture_rating": 6.5
+    }
   },
   {
     "gameweek": 29,
@@ -3848,6 +3444,11 @@
       "rank": {
         "attack": 9,
         "defense": 10
+      },
+      "fdr": {
+        "attack": 4.2,
+        "defense": 4.6,
+        "overall": 4.4
       }
     },
     "away_team": {
@@ -3864,16 +3465,7 @@
         "defense": 6.8,
         "overall": 6.8
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.2,
-      "defense": 4.6,
-      "overall": 4.4
-    },
-    "home_advantage": 6.5,
-    "attack_rating": 4.2,
-    "defense_rating": 4.6,
-    "fixture_rating": 4.4
+    }
   },
   {
     "gameweek": 29,
@@ -3886,6 +3478,11 @@
       "rank": {
         "attack": 10,
         "defense": 17
+      },
+      "fdr": {
+        "attack": 6.6,
+        "defense": 8.5,
+        "overall": 7.5
       }
     },
     "away_team": {
@@ -3902,16 +3499,7 @@
         "defense": 4.8,
         "overall": 3.7
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.6,
-      "defense": 8.5,
-      "overall": 7.5
-    },
-    "home_advantage": -10.0,
-    "attack_rating": 6.6,
-    "defense_rating": 8.5,
-    "fixture_rating": 7.5
+    }
   },
   {
     "gameweek": 29,
@@ -3924,6 +3512,11 @@
       "rank": {
         "attack": 14,
         "defense": 3
+      },
+      "fdr": {
+        "attack": 4.8,
+        "defense": 3.8,
+        "overall": 4.3
       }
     },
     "away_team": {
@@ -3940,16 +3533,7 @@
         "defense": 6.4,
         "overall": 7.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.8,
-      "defense": 3.8,
-      "overall": 4.3
-    },
-    "home_advantage": 7.0,
-    "attack_rating": 4.8,
-    "defense_rating": 3.8,
-    "fixture_rating": 4.3
+    }
   },
   {
     "gameweek": 29,
@@ -3962,6 +3546,11 @@
       "rank": {
         "attack": 11,
         "defense": 6
+      },
+      "fdr": {
+        "attack": 3.0,
+        "defense": 4.0,
+        "overall": 3.5
       }
     },
     "away_team": {
@@ -3978,16 +3567,7 @@
         "defense": 8.1,
         "overall": 7.8
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.0,
-      "defense": 4.0,
-      "overall": 3.5
-    },
-    "home_advantage": 11.0,
-    "attack_rating": 3.0,
-    "defense_rating": 4.0,
-    "fixture_rating": 3.5
+    }
   },
   {
     "gameweek": 29,
@@ -4000,6 +3580,11 @@
       "rank": {
         "attack": 5,
         "defense": 16
+      },
+      "fdr": {
+        "attack": 5.0,
+        "defense": 5.5,
+        "overall": 5.2
       }
     },
     "away_team": {
@@ -4016,16 +3601,7 @@
         "defense": 6.2,
         "overall": 6.0
       }
-    },
-    "home_team_fdr": {
-      "attack": 5.0,
-      "defense": 5.5,
-      "overall": 5.2
-    },
-    "home_advantage": 2.0,
-    "attack_rating": 5.0,
-    "defense_rating": 5.5,
-    "fixture_rating": 5.2
+    }
   },
   {
     "gameweek": 29,
@@ -4038,6 +3614,11 @@
       "rank": {
         "attack": 1,
         "defense": 2
+      },
+      "fdr": {
+        "attack": 3.4,
+        "defense": 4.2,
+        "overall": 3.8
       }
     },
     "away_team": {
@@ -4054,16 +3635,7 @@
         "defense": 7.8,
         "overall": 7.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 3.4,
-      "defense": 4.2,
-      "overall": 3.8
-    },
-    "home_advantage": 9.5,
-    "attack_rating": 3.4,
-    "defense_rating": 4.2,
-    "fixture_rating": 3.8
+    }
   },
   {
     "gameweek": 29,
@@ -4076,6 +3648,11 @@
       "rank": {
         "attack": 8,
         "defense": 15
+      },
+      "fdr": {
+        "attack": 4.2,
+        "defense": 8.7,
+        "overall": 6.4
       }
     },
     "away_team": {
@@ -4092,16 +3669,7 @@
         "defense": 7.0,
         "overall": 4.7
       }
-    },
-    "home_team_fdr": {
-      "attack": 4.2,
-      "defense": 8.7,
-      "overall": 6.4
-    },
-    "home_advantage": -4.5,
-    "attack_rating": 4.2,
-    "defense_rating": 8.7,
-    "fixture_rating": 6.4
+    }
   },
   {
     "gameweek": 29,
@@ -4114,6 +3682,11 @@
       "rank": {
         "attack": 15,
         "defense": 7
+      },
+      "fdr": {
+        "attack": 6.2,
+        "defense": 5.1,
+        "overall": 5.7
       }
     },
     "away_team": {
@@ -4130,16 +3703,7 @@
         "defense": 4.9,
         "overall": 5.6
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.2,
-      "defense": 5.1,
-      "overall": 5.7
-    },
-    "home_advantage": 0.0,
-    "attack_rating": 6.2,
-    "defense_rating": 5.1,
-    "fixture_rating": 5.7
+    }
   },
   {
     "gameweek": 29,
@@ -4152,6 +3716,11 @@
       "rank": {
         "attack": 20,
         "defense": 19
+      },
+      "fdr": {
+        "attack": 6.4,
+        "defense": 9.1,
+        "overall": 7.8
       }
     },
     "away_team": {
@@ -4168,15 +3737,6 @@
         "defense": 4.9,
         "overall": 3.5
       }
-    },
-    "home_team_fdr": {
-      "attack": 6.4,
-      "defense": 9.1,
-      "overall": 7.8
-    },
-    "home_advantage": -11.0,
-    "attack_rating": 6.4,
-    "defense_rating": 9.1,
-    "fixture_rating": 7.8
+    }
   }
 ]

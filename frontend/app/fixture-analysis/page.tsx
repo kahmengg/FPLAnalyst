@@ -229,10 +229,6 @@ interface Fixture {
   gameweek: number
   home_team: string
   away_team: string
-  attack_rating: number
-  defense_rating: number
-  fixture_rating: number
-  home_advantage: number
 }
 
 interface TeamFixtures {
@@ -253,21 +249,12 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
 
   // Process fixtures into team-based view
   const teamFixtures = useMemo((): TeamFixtures[] => {
-    // Map fixtures with FDR data for both home and away teams
-    const rawFixtures = fixtures.map(f => {
-      // Backend now provides separate FDR for home and away teams
-      const homeFDR = f.home_team_fdr?.overall || f.fixture_rating || 5.5;
-      const awayFDR = f.away_team?.fdr?.overall || 5.5;
-      
-      return {
-        gameweek: f.gw,
-        home_team: f.teams.home.team,
-        away_team: f.teams.away.team,
-        home_fdr: homeFDR,
-        away_fdr: awayFDR,
-        home_advantage: f.home_advantage || 0
-      };
-    })
+    // Map fixtures with both percentage (for Fixtures tab) and FDR scale (for FDR tab)
+    const rawFixtures: Fixture[] = fixtures.map(f => ({
+      gameweek: f.gw,
+      home_team: f.teams.home.team,
+      away_team: f.teams.away.team
+    }))
 
     // Find current GW
     const gameweeks = rawFixtures.map(f => f.gameweek)
@@ -287,9 +274,11 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
         .slice(0, 8)
         .map(f => {
           const isHome = f.home_team === team
-          // Use the correct FDR based on whether team is home or away
-          const difficulty = isHome ? f.home_fdr : f.away_fdr
-          
+          // Use team-specific FDR rating (1-10 scale, lower = easier)
+          // Home team uses home_team.fdr.overall, away team uses away_team.fdr.overall
+          const difficulty = isHome 
+            ? (f.teams?.home?.fdr?.overall || f.home_team?.fdr?.overall || 5)
+            : (f.teams?.away?.fdr?.overall || f.away_team?.fdr?.overall || 5)
           return {
             gameweek: f.gameweek,
             opponent: isHome ? f.away_team : f.home_team,
@@ -527,18 +516,22 @@ export default function FixtureAnalysisPage() {
         return {
           gw: f.gameweek,
           fixture: f.fixture,
+          home_team: f.home_team?.name || f.home_team,
+          away_team: f.away_team?.name || f.away_team,
           teams: {
             home: {
               team: f.home_team.name,
               attackRating: f.home_team.attacking_fixture_rating,
               defenseRating: f.home_team.defensive_fixture_rating,
               rank: f.home_team.rank,
+              fdr: f.home_team.fdr
             },
             away: {
               team: f.away_team.name,
               attackRating: f.away_team.attacking_fixture_rating,
               defenseRating: f.away_team.defensive_fixture_rating,
               rank: f.away_team.rank,
+              fdr: f.away_team.fdr
             },
           },
           favorability,
@@ -547,7 +540,7 @@ export default function FixtureAnalysisPage() {
             f.home_team.defensive_fixture_rating,
             f.away_team.attacking_fixture_rating,
             f.away_team.defensive_fixture_rating
-          ),
+          )
         };
       });
         setFixtures(transformedFixtures);
