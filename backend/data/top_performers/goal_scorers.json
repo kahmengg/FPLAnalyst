@@ -36,28 +36,16 @@
     "form": 5.9
   },
   {
-    "player": "Welbeck",
-    "team": "Brighton",
-    "team_short": "BHA",
+    "player": "Calvert-Lewin",
+    "team": "Leeds",
+    "team_short": "LEE",
     "goals": 8,
-    "goalsPerGame": 0.42,
-    "xG": 7.0,
-    "points": 63,
-    "price": 6.3,
-    "ownership": 4.8,
-    "form": 1.3
-  },
-  {
-    "player": "Mateta",
-    "team": "Crystal Palace",
-    "team_short": "CRY",
-    "goals": 8,
-    "goalsPerGame": 0.42,
-    "xG": 10.2,
-    "points": 76,
-    "price": 7.6,
-    "ownership": 11.9,
-    "form": 3.1
+    "goalsPerGame": 0.44,
+    "xG": 6.4,
+    "points": 79,
+    "price": 5.9,
+    "ownership": 10.1,
+    "form": 6.7
   },
   {
     "player": "Ekitiké",
@@ -72,28 +60,28 @@
     "form": 7.6
   },
   {
-    "player": "Calvert-Lewin",
-    "team": "Leeds",
-    "team_short": "LEE",
+    "player": "Mateta",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
     "goals": 8,
-    "goalsPerGame": 0.44,
-    "xG": 6.4,
-    "points": 79,
-    "price": 5.9,
-    "ownership": 10.1,
-    "form": 6.7
+    "goalsPerGame": 0.42,
+    "xG": 10.2,
+    "points": 76,
+    "price": 7.6,
+    "ownership": 11.9,
+    "form": 3.1
   },
   {
-    "player": "Rogers",
-    "team": "Aston Villa",
-    "team_short": "AVL",
-    "goals": 7,
-    "goalsPerGame": 0.37,
-    "xG": 2.4,
-    "points": 93,
-    "price": 7.5,
-    "ownership": 25.9,
-    "form": 6.1
+    "player": "Welbeck",
+    "team": "Brighton",
+    "team_short": "BHA",
+    "goals": 8,
+    "goalsPerGame": 0.42,
+    "xG": 7.0,
+    "points": 63,
+    "price": 6.3,
+    "ownership": 4.8,
+    "form": 1.3
   },
   {
     "player": "Foden",
@@ -120,6 +108,18 @@
     "form": 3.8
   },
   {
+    "player": "Rogers",
+    "team": "Aston Villa",
+    "team_short": "AVL",
+    "goals": 7,
+    "goalsPerGame": 0.37,
+    "xG": 2.4,
+    "points": 93,
+    "price": 7.5,
+    "ownership": 25.9,
+    "form": 6.1
+  },
+  {
     "player": "Woltemade",
     "team": "Newcastle",
     "team_short": "NEW",
@@ -132,40 +132,28 @@
     "form": 3.2
   },
   {
-    "player": "Watkins",
-    "team": "Aston Villa",
-    "team_short": "AVL",
+    "player": "Bowen",
+    "team": "West Ham",
+    "team_short": "WHU",
     "goals": 6,
     "goalsPerGame": 0.32,
-    "xG": 6.8,
-    "points": 72,
-    "price": 8.6,
-    "ownership": 8.2,
-    "form": 5.2
-  },
-  {
-    "player": "Mbeumo",
-    "team": "Man Utd",
-    "team_short": "MUN",
-    "goals": 6,
-    "goalsPerGame": 0.32,
-    "xG": 5.2,
-    "points": 74,
-    "price": 8.1,
-    "ownership": 9.6,
-    "form": 1.8
-  },
-  {
-    "player": "Schade",
-    "team": "Brentford",
-    "team_short": "BRE",
-    "goals": 6,
-    "goalsPerGame": 0.32,
-    "xG": 6.4,
-    "points": 73,
-    "price": 7.0,
-    "ownership": 1.9,
+    "xG": 4.5,
+    "points": 84,
+    "price": 7.6,
+    "ownership": 8.0,
     "form": 4.9
+  },
+  {
+    "player": "Bruno G.",
+    "team": "Newcastle",
+    "team_short": "NEW",
+    "goals": 6,
+    "goalsPerGame": 0.32,
+    "xG": 2.8,
+    "points": 96,
+    "price": 7.0,
+    "ownership": 14.8,
+    "form": 4.5
   },
   {
     "player": "João Pedro",
@@ -178,5 +166,17 @@
     "price": 7.2,
     "ownership": 28.3,
     "form": 3.2
+  },
+  {
+    "player": "Mbeumo",
+    "team": "Man Utd",
+    "team_short": "MUN",
+    "goals": 6,
+    "goalsPerGame": 0.32,
+    "xG": 5.2,
+    "points": 74,
+    "price": 8.1,
+    "ownership": 9.6,
+    "form": 1.8
   }
 ]

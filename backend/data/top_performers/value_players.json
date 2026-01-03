@@ -10,16 +10,6 @@
     "form": 6.6
   },
   {
-    "player": "Roefs",
-    "team": "Sunderland",
-    "team_short": "SUN",
-    "position": "Goalkeeper",
-    "pointsPerMillion": 18.75,
-    "totalPoints": 90,
-    "price": 4.8,
-    "form": 6.5
-  },
-  {
     "player": "Alderete",
     "team": "Sunderland",
     "team_short": "SUN",
@@ -28,6 +18,16 @@
     "totalPoints": 75,
     "price": 4.0,
     "form": 5.7
+  },
+  {
+    "player": "Roefs",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Goalkeeper",
+    "pointsPerMillion": 18.75,
+    "totalPoints": 90,
+    "price": 4.8,
+    "form": 6.5
   },
   {
     "player": "Van de Ven",
@@ -48,16 +48,6 @@
     "totalPoints": 85,
     "price": 5.0,
     "form": 5.8
-  },
-  {
-    "player": "Matheus N.",
-    "team": "Man City",
-    "team_short": "MCI",
-    "position": "Defender",
-    "pointsPerMillion": 16.85,
-    "totalPoints": 91,
-    "price": 5.4,
-    "form": 8.8
   },
   {
     "player": "Lacroix",
@@ -98,5 +88,15 @@
     "totalPoints": 81,
     "price": 4.9,
     "form": 5.6
+  },
+  {
+    "player": "Ballard",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Defender",
+    "pointsPerMillion": 15.96,
+    "totalPoints": 75,
+    "price": 4.7,
+    "form": 4.0
   }
 ]

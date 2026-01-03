@@ -1,5 +1,16 @@
 [
     {
+        "player": "João Pedro",
+        "team": "Chelsea",
+        "team_short": "CHE",
+        "goals": 6,
+        "xG": 6.3,
+        "overperformance": -0.3,
+        "overperformance_per_90": -0.016,
+        "sustainable": true,
+        "form": 3.2
+    },
+    {
         "player": "Schade",
         "team": "Brentford",
         "team_short": "BRE",
@@ -11,15 +22,15 @@
         "form": 4.9
     },
     {
-        "player": "João Pedro",
-        "team": "Chelsea",
-        "team_short": "CHE",
-        "goals": 6,
-        "xG": 6.3,
-        "overperformance": -0.3,
-        "overperformance_per_90": -0.016,
+        "player": "Gakpo",
+        "team": "Liverpool",
+        "team_short": "LIV",
+        "goals": 4,
+        "xG": 4.1,
+        "overperformance": -0.1,
+        "overperformance_per_90": -0.005,
         "sustainable": true,
-        "form": 3.2
+        "form": 0.7
     },
     {
         "player": "Malen",
@@ -33,17 +44,6 @@
         "form": 1.4
     },
     {
-        "player": "Tavernier",
-        "team": "Bournemouth",
-        "team_short": "BOU",
-        "goals": 4,
-        "xG": 4.0,
-        "overperformance": 0.0,
-        "overperformance_per_90": 0.0,
-        "sustainable": true,
-        "form": 4.1
-    },
-    {
         "player": "Nmecha",
         "team": "Leeds",
         "team_short": "LEE",
@@ -55,15 +55,15 @@
         "form": 0.5
     },
     {
-        "player": "Gakpo",
-        "team": "Liverpool",
-        "team_short": "LIV",
+        "player": "Tavernier",
+        "team": "Bournemouth",
+        "team_short": "BOU",
         "goals": 4,
-        "xG": 4.1,
-        "overperformance": -0.1,
-        "overperformance_per_90": -0.005,
+        "xG": 4.0,
+        "overperformance": 0.0,
+        "overperformance_per_90": 0.0,
         "sustainable": true,
-        "form": 0.7
+        "form": 4.1
     },
     {
         "player": "O.Dango",

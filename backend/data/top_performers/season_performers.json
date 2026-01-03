@@ -66,17 +66,6 @@
     "form": 3.1
   },
   {
-    "player": "Foden",
-    "team": "Man City",
-    "team_short": "MCI",
-    "position": "Midfielder",
-    "points": 96,
-    "ppg": 5.1,
-    "price": 9.0,
-    "ownership": 39.9,
-    "form": 5.6
-  },
-  {
     "player": "Bruno G.",
     "team": "Newcastle",
     "team_short": "NEW",
@@ -88,15 +77,15 @@
     "form": 4.5
   },
   {
-    "player": "J.Timber",
-    "team": "Arsenal",
-    "team_short": "ARS",
-    "position": "Defender",
-    "points": 95,
-    "ppg": 5.0,
-    "price": 6.4,
-    "ownership": 28.5,
-    "form": 4.4
+    "player": "Foden",
+    "team": "Man City",
+    "team_short": "MCI",
+    "position": "Midfielder",
+    "points": 96,
+    "ppg": 5.1,
+    "price": 9.0,
+    "ownership": 39.9,
+    "form": 5.6
   },
   {
     "player": "Chalobah",
@@ -108,6 +97,17 @@
     "price": 5.6,
     "ownership": 18.9,
     "form": 5.3
+  },
+  {
+    "player": "J.Timber",
+    "team": "Arsenal",
+    "team_short": "ARS",
+    "position": "Defender",
+    "points": 95,
+    "ppg": 5.0,
+    "price": 6.4,
+    "ownership": 28.5,
+    "form": 4.4
   },
   {
     "player": "Tarkowski",
@@ -132,28 +132,6 @@
     "form": 6.1
   },
   {
-    "player": "Saka",
-    "team": "Arsenal",
-    "team_short": "ARS",
-    "position": "Midfielder",
-    "points": 91,
-    "ppg": 4.8,
-    "price": 10.3,
-    "ownership": 21.5,
-    "form": 5.6
-  },
-  {
-    "player": "Thiago",
-    "team": "Brentford",
-    "team_short": "BRE",
-    "position": "Forward",
-    "points": 91,
-    "ppg": 4.8,
-    "price": 7.0,
-    "ownership": 27.5,
-    "form": 2.3
-  },
-  {
     "player": "Keane",
     "team": "Everton",
     "team_short": "EVE",
@@ -163,5 +141,27 @@
     "price": 4.8,
     "ownership": 7.3,
     "form": 5.3
+  },
+  {
+    "player": "Matheus N.",
+    "team": "Man City",
+    "team_short": "MCI",
+    "position": "Defender",
+    "points": 91,
+    "ppg": 4.8,
+    "price": 5.4,
+    "ownership": 2.7,
+    "form": 8.8
+  },
+  {
+    "player": "Saka",
+    "team": "Arsenal",
+    "team_short": "ARS",
+    "position": "Midfielder",
+    "points": 91,
+    "ppg": 4.8,
+    "price": 10.3,
+    "ownership": 21.5,
+    "form": 5.6
   }
 ]

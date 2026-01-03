@@ -11,17 +11,6 @@
         "form": 3.1
     },
     {
-        "player": "Watkins",
-        "team": "Aston Villa",
-        "team_short": "AVL",
-        "goals": 6,
-        "xG": 6.8,
-        "overperformance": -0.8,
-        "overperformance_per_90": -0.042,
-        "sustainable": false,
-        "form": 5.2
-    },
-    {
         "player": "Enzo",
         "team": "Chelsea",
         "team_short": "CHE",
@@ -31,6 +20,17 @@
         "overperformance_per_90": -0.095,
         "sustainable": false,
         "form": 3.1
+    },
+    {
+        "player": "Watkins",
+        "team": "Aston Villa",
+        "team_short": "AVL",
+        "goals": 6,
+        "xG": 6.8,
+        "overperformance": -0.8,
+        "overperformance_per_90": -0.042,
+        "sustainable": false,
+        "form": 5.2
     },
     {
         "player": "B.Fernandes",
@@ -66,17 +66,6 @@
         "form": 4.1
     },
     {
-        "player": "Saka",
-        "team": "Arsenal",
-        "team_short": "ARS",
-        "goals": 4,
-        "xG": 4.9,
-        "overperformance": -0.9,
-        "overperformance_per_90": -0.047,
-        "sustainable": false,
-        "form": 5.6
-    },
-    {
         "player": "Evanilson",
         "team": "Bournemouth",
         "team_short": "BOU",
@@ -86,5 +75,16 @@
         "overperformance_per_90": -0.153,
         "sustainable": false,
         "form": 2.3
+    },
+    {
+        "player": "Saka",
+        "team": "Arsenal",
+        "team_short": "ARS",
+        "goals": 4,
+        "xG": 4.9,
+        "overperformance": -0.9,
+        "overperformance_per_90": -0.047,
+        "sustainable": false,
+        "form": 5.6
     }
 ]
