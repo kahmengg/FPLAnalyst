@@ -2,8 +2,8 @@
     {
         "team": "Man City",
         "attack_rank": 1,
-        "attack_strength": 4.087,
-        "overall_strength": 2.839,
+        "attack_strength": 4.107,
+        "overall_strength": 2.892,
         "players": [
             {
                 "web_name": "Haaland",
@@ -86,7 +86,7 @@
     {
         "team": "Man Utd",
         "attack_rank": 2,
-        "attack_strength": 3.865,
+        "attack_strength": 3.875,
         "overall_strength": 2.533,
         "players": [
             {
@@ -170,8 +170,8 @@
     {
         "team": "Arsenal",
         "attack_rank": 3,
-        "attack_strength": 3.8,
-        "overall_strength": 2.577,
+        "attack_strength": 3.813,
+        "overall_strength": 2.595,
         "players": [
             {
                 "web_name": "Saka",
@@ -254,8 +254,8 @@
     {
         "team": "Bournemouth",
         "attack_rank": 4,
-        "attack_strength": 3.783,
-        "overall_strength": 2.492,
+        "attack_strength": 3.796,
+        "overall_strength": 2.487,
         "players": [
             {
                 "web_name": "Semenyo",
@@ -338,8 +338,8 @@
     {
         "team": "Liverpool",
         "attack_rank": 5,
-        "attack_strength": 3.69,
-        "overall_strength": 2.499,
+        "attack_strength": 3.699,
+        "overall_strength": 2.518,
         "players": [
             {
                 "web_name": "Ekitiké",
@@ -422,8 +422,8 @@
     {
         "team": "Chelsea",
         "attack_rank": 6,
-        "attack_strength": 3.573,
-        "overall_strength": 2.41,
+        "attack_strength": 3.582,
+        "overall_strength": 2.421,
         "players": [
             {
                 "web_name": "Palmer",
@@ -506,8 +506,8 @@
     {
         "team": "Brighton",
         "attack_rank": 7,
-        "attack_strength": 3.274,
-        "overall_strength": 2.14,
+        "attack_strength": 3.282,
+        "overall_strength": 2.138,
         "players": [
             {
                 "web_name": "Gomez",
@@ -590,8 +590,8 @@
     {
         "team": "Leeds",
         "attack_rank": 8,
-        "attack_strength": 3.236,
-        "overall_strength": 2.153,
+        "attack_strength": 3.249,
+        "overall_strength": 2.161,
         "players": [
             {
                 "web_name": "Calvert-Lewin",
@@ -674,8 +674,8 @@
     {
         "team": "Crystal Palace",
         "attack_rank": 9,
-        "attack_strength": 3.192,
-        "overall_strength": 2.126,
+        "attack_strength": 3.182,
+        "overall_strength": 2.091,
         "players": [
             {
                 "web_name": "Mateta",
@@ -758,8 +758,8 @@
     {
         "team": "Nott'm Forest",
         "attack_rank": 10,
-        "attack_strength": 3.135,
-        "overall_strength": 2.082,
+        "attack_strength": 3.133,
+        "overall_strength": 2.072,
         "players": [
             {
                 "web_name": "Hudson-Odoi",
@@ -842,7 +842,7 @@
     {
         "team": "Newcastle",
         "attack_rank": 11,
-        "attack_strength": 3.122,
+        "attack_strength": 3.13,
         "overall_strength": 2.063,
         "players": [
             {
@@ -926,8 +926,8 @@
     {
         "team": "Aston Villa",
         "attack_rank": 12,
-        "attack_strength": 3.011,
-        "overall_strength": 1.957,
+        "attack_strength": 3.036,
+        "overall_strength": 1.965,
         "players": [
             {
                 "web_name": "Rogers",
@@ -1010,8 +1010,8 @@
     {
         "team": "Fulham",
         "attack_rank": 13,
-        "attack_strength": 2.811,
-        "overall_strength": 1.937,
+        "attack_strength": 2.824,
+        "overall_strength": 1.939,
         "players": [
             {
                 "web_name": "Wilson",
@@ -1094,8 +1094,8 @@
     {
         "team": "Everton",
         "attack_rank": 14,
-        "attack_strength": 2.606,
-        "overall_strength": 1.866,
+        "attack_strength": 2.607,
+        "overall_strength": 1.886,
         "players": [
             {
                 "web_name": "Garner",
@@ -1178,8 +1178,8 @@
     {
         "team": "Spurs",
         "attack_rank": 15,
-        "attack_strength": 2.581,
-        "overall_strength": 1.862,
+        "attack_strength": 2.606,
+        "overall_strength": 1.89,
         "players": [
             {
                 "web_name": "Richarlison",
@@ -1262,8 +1262,8 @@
     {
         "team": "Burnley",
         "attack_rank": 16,
-        "attack_strength": 2.532,
-        "overall_strength": 1.685,
+        "attack_strength": 2.548,
+        "overall_strength": 1.689,
         "players": [
             {
                 "web_name": "Broja",
@@ -1346,8 +1346,8 @@
     {
         "team": "Brentford",
         "attack_rank": 17,
-        "attack_strength": 2.366,
-        "overall_strength": 1.657,
+        "attack_strength": 2.379,
+        "overall_strength": 1.668,
         "players": [
             {
                 "web_name": "Schade",
@@ -1430,8 +1430,8 @@
     {
         "team": "West Ham",
         "attack_rank": 18,
-        "attack_strength": 2.285,
-        "overall_strength": 1.513,
+        "attack_strength": 2.291,
+        "overall_strength": 1.495,
         "players": [
             {
                 "web_name": "Bowen",
@@ -1514,8 +1514,8 @@
     {
         "team": "Sunderland",
         "attack_rank": 19,
-        "attack_strength": 2.117,
-        "overall_strength": 1.632,
+        "attack_strength": 2.132,
+        "overall_strength": 1.657,
         "players": [
             {
                 "web_name": "Xhaka",
@@ -1598,8 +1598,8 @@
     {
         "team": "Wolves",
         "attack_rank": 20,
-        "attack_strength": 2.031,
-        "overall_strength": 1.381,
+        "attack_strength": 2.023,
+        "overall_strength": 1.344,
         "players": [
             {
                 "web_name": "Tolu",
