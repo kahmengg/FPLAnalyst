@@ -828,7 +828,7 @@ export default function FixtureAnalysisPage() {
                             </Badge>
                           </div>
                           <div className="text-center">
-                            <p className="text-xs text-muted-foreground mb-1">🛡️ Clean Sheet Odds</p>
+                            <p className="text-xs text-muted-foreground mb-1">🛡️ Defensive Odds</p>
                             <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.defenseRating).color}`}>
                               {fixture.teams.home.defenseRating}%
                             </p>
@@ -887,7 +887,7 @@ export default function FixtureAnalysisPage() {
                             </Badge>
                           </div>
                           <div className="text-center">
-                            <p className="text-xs text-muted-foreground mb-1">🛡️ Clean Sheet Odds</p>
+                            <p className="text-xs text-muted-foreground mb-1">🛡️ Defensive Odds</p>
                             <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.defenseRating).color}`}>
                               {fixture.teams.away.defenseRating}%
                             </p>

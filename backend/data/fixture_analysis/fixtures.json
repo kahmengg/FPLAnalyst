@@ -5,31 +5,31 @@
     "home_team": {
       "name": "Aston Villa",
       "short_name": "AVL",
-      "attacking_fixture_rating": 73.0,
-      "defensive_fixture_rating": 33.1,
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 27.5,
       "rank": {
-        "attack": 8,
-        "defense": 17
+        "attack": 12,
+        "defense": 20
       },
       "fdr": {
-        "attack": 3.2,
-        "defense": 7.2,
-        "overall": 5.2
+        "attack": 4.6,
+        "defense": 7.8,
+        "overall": 6.2
       }
     },
     "away_team": {
       "name": "Nott'm Forest",
       "short_name": "NFO",
-      "attacking_fixture_rating": 65.0,
-      "defensive_fixture_rating": 25.6,
+      "attacking_fixture_rating": 71.0,
+      "defensive_fixture_rating": 38.8,
       "rank": {
         "attack": 11,
-        "defense": 16
+        "defense": 13
       },
       "fdr": {
-        "attack": 4.0,
-        "defense": 7.9,
-        "overall": 6.0
+        "attack": 3.4,
+        "defense": 6.6,
+        "overall": 5.0
       }
     }
   },
@@ -39,31 +39,31 @@
     "home_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 27.5,
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 33.1,
       "rank": {
-        "attack": 6,
-        "defense": 12
+        "attack": 2,
+        "defense": 10
       },
       "fdr": {
-        "attack": 6.0,
-        "defense": 7.8,
-        "overall": 6.9
+        "attack": 4.2,
+        "defense": 7.2,
+        "overall": 5.7
       }
     },
     "away_team": {
       "name": "Arsenal",
       "short_name": "ARS",
-      "attacking_fixture_rating": 71.0,
-      "defensive_fixture_rating": 51.9,
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 35.0,
       "rank": {
-        "attack": 3,
-        "defense": 1
+        "attack": 4,
+        "defense": 6
       },
       "fdr": {
-        "attack": 3.4,
-        "defense": 5.3,
-        "overall": 4.3
+        "attack": 4.0,
+        "defense": 7.0,
+        "overall": 5.5
       }
     }
   },
@@ -73,31 +73,31 @@
     "home_team": {
       "name": "Brighton",
       "short_name": "BHA",
-      "attacking_fixture_rating": 79.0,
-      "defensive_fixture_rating": 46.2,
+      "attacking_fixture_rating": 73.0,
+      "defensive_fixture_rating": 38.8,
       "rank": {
-        "attack": 7,
-        "defense": 15
+        "attack": 8,
+        "defense": 17
       },
       "fdr": {
-        "attack": 2.6,
-        "defense": 5.9,
-        "overall": 4.2
+        "attack": 3.2,
+        "defense": 6.6,
+        "overall": 4.9
       }
     },
     "away_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 51.0,
-      "defensive_fixture_rating": 20.0,
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 25.6,
       "rank": {
-        "attack": 17,
-        "defense": 18
+        "attack": 15,
+        "defense": 16
       },
       "fdr": {
-        "attack": 5.4,
-        "defense": 8.5,
-        "overall": 7.0
+        "attack": 4.6,
+        "defense": 7.9,
+        "overall": 6.2
       }
     }
   },
@@ -107,31 +107,31 @@
     "home_team": {
       "name": "Everton",
       "short_name": "EVE",
-      "attacking_fixture_rating": 47.0,
-      "defensive_fixture_rating": 66.9,
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 68.8,
       "rank": {
-        "attack": 14,
+        "attack": 16,
         "defense": 4
       },
       "fdr": {
-        "attack": 5.8,
-        "defense": 3.8,
-        "overall": 4.8
+        "attack": 6.2,
+        "defense": 3.6,
+        "overall": 4.9
       }
     },
     "away_team": {
       "name": "Brentford",
       "short_name": "BRE",
-      "attacking_fixture_rating": 29.0,
-      "defensive_fixture_rating": 51.9,
+      "attacking_fixture_rating": 27.0,
+      "defensive_fixture_rating": 55.6,
       "rank": {
-        "attack": 16,
+        "attack": 17,
         "defense": 9
       },
       "fdr": {
-        "attack": 7.6,
-        "defense": 5.3,
-        "overall": 6.4
+        "attack": 7.8,
+        "defense": 4.9,
+        "overall": 6.3
       }
     }
   },
@@ -141,30 +141,30 @@
     "home_team": {
       "name": "Fulham",
       "short_name": "FUL",
-      "attacking_fixture_rating": 43.0,
-      "defensive_fixture_rating": 36.9,
+      "attacking_fixture_rating": 41.0,
+      "defensive_fixture_rating": 38.8,
       "rank": {
         "attack": 13,
         "defense": 8
       },
       "fdr": {
-        "attack": 6.2,
-        "defense": 6.8,
+        "attack": 6.4,
+        "defense": 6.6,
         "overall": 6.5
       }
     },
     "away_team": {
       "name": "Liverpool",
       "short_name": "LIV",
-      "attacking_fixture_rating": 61.0,
-      "defensive_fixture_rating": 53.8,
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 55.6,
       "rank": {
-        "attack": 4,
-        "defense": 6
+        "attack": 5,
+        "defense": 5
       },
       "fdr": {
-        "attack": 4.4,
-        "defense": 5.1,
+        "attack": 4.6,
+        "defense": 4.9,
         "overall": 4.8
       }
     }
@@ -175,31 +175,31 @@
     "home_team": {
       "name": "Leeds",
       "short_name": "LEE",
-      "attacking_fixture_rating": 65.0,
-      "defensive_fixture_rating": 21.9,
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 29.4,
       "rank": {
-        "attack": 10,
-        "defense": 14
+        "attack": 7,
+        "defense": 11
       },
       "fdr": {
-        "attack": 4.0,
-        "defense": 8.3,
-        "overall": 6.2
+        "attack": 3.6,
+        "defense": 7.6,
+        "overall": 5.6
       }
     },
     "away_team": {
       "name": "Man Utd",
       "short_name": "MUN",
-      "attacking_fixture_rating": 77.0,
-      "defensive_fixture_rating": 33.1,
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 29.4,
       "rank": {
-        "attack": 2,
-        "defense": 13
+        "attack": 3,
+        "defense": 12
       },
       "fdr": {
-        "attack": 2.8,
-        "defense": 7.2,
-        "overall": 5.0
+        "attack": 3.6,
+        "defense": 7.6,
+        "overall": 5.6
       }
     }
   },
@@ -210,30 +210,30 @@
       "name": "Man City",
       "short_name": "MCI",
       "attacking_fixture_rating": 67.0,
-      "defensive_fixture_rating": 48.1,
+      "defensive_fixture_rating": 51.9,
       "rank": {
         "attack": 1,
-        "defense": 2
+        "defense": 1
       },
       "fdr": {
         "attack": 3.8,
-        "defense": 5.7,
-        "overall": 4.8
+        "defense": 5.3,
+        "overall": 4.5
       }
     },
     "away_team": {
       "name": "Chelsea",
       "short_name": "CHE",
-      "attacking_fixture_rating": 49.0,
+      "attacking_fixture_rating": 45.0,
       "defensive_fixture_rating": 33.1,
       "rank": {
-        "attack": 5,
+        "attack": 6,
         "defense": 7
       },
       "fdr": {
-        "attack": 5.6,
+        "attack": 6.0,
         "defense": 7.2,
-        "overall": 6.4
+        "overall": 6.6
       }
     }
   },
@@ -243,31 +243,31 @@
     "home_team": {
       "name": "Newcastle",
       "short_name": "NEW",
-      "attacking_fixture_rating": 53.0,
-      "defensive_fixture_rating": 38.8,
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 31.2,
       "rank": {
-        "attack": 12,
-        "defense": 11
+        "attack": 10,
+        "defense": 15
       },
       "fdr": {
-        "attack": 5.2,
-        "defense": 6.6,
-        "overall": 5.9
+        "attack": 4.0,
+        "defense": 7.4,
+        "overall": 5.7
       }
     },
     "away_team": {
       "name": "Crystal Palace",
       "short_name": "CRY",
-      "attacking_fixture_rating": 59.0,
-      "defensive_fixture_rating": 46.2,
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 35.0,
       "rank": {
         "attack": 9,
-        "defense": 10
+        "defense": 14
       },
       "fdr": {
-        "attack": 4.6,
-        "defense": 5.9,
-        "overall": 5.2
+        "attack": 3.8,
+        "defense": 7.0,
+        "overall": 5.4
       }
     }
   },
@@ -278,30 +278,30 @@
       "name": "Spurs",
       "short_name": "TOT",
       "attacking_fixture_rating": 33.0,
-      "defensive_fixture_rating": 68.8,
+      "defensive_fixture_rating": 72.5,
       "rank": {
-        "attack": 15,
-        "defense": 5
+        "attack": 14,
+        "defense": 3
       },
       "fdr": {
         "attack": 7.2,
-        "defense": 3.6,
-        "overall": 5.4
+        "defense": 3.2,
+        "overall": 5.2
       }
     },
     "away_team": {
       "name": "Sunderland",
       "short_name": "SUN",
-      "attacking_fixture_rating": 27.0,
+      "attacking_fixture_rating": 23.0,
       "defensive_fixture_rating": 63.1,
       "rank": {
         "attack": 19,
-        "defense": 3
+        "defense": 2
       },
       "fdr": {
-        "attack": 7.8,
+        "attack": 8.2,
         "defense": 4.2,
-        "overall": 6.0
+        "overall": 6.2
       }
     }
   },
@@ -311,30 +311,30 @@
     "home_team": {
       "name": "Wolves",
       "short_name": "WOL",
-      "attacking_fixture_rating": 57.0,
-      "defensive_fixture_rating": 42.5,
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 44.4,
       "rank": {
         "attack": 20,
-        "defense": 19
+        "defense": 18
       },
       "fdr": {
-        "attack": 4.8,
-        "defense": 6.2,
+        "attack": 5.0,
+        "defense": 6.1,
         "overall": 5.5
       }
     },
     "away_team": {
       "name": "West Ham",
       "short_name": "WHU",
-      "attacking_fixture_rating": 55.0,
-      "defensive_fixture_rating": 40.6,
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 42.5,
       "rank": {
         "attack": 18,
-        "defense": 20
+        "defense": 19
       },
       "fdr": {
-        "attack": 5.0,
-        "defense": 6.4,
+        "attack": 5.2,
+        "defense": 6.2,
         "overall": 5.7
       }
     }
@@ -345,31 +345,31 @@
     "home_team": {
       "name": "Arsenal",
       "short_name": "ARS",
-      "attacking_fixture_rating": 63.0,
-      "defensive_fixture_rating": 48.1,
-      "rank": {
-        "attack": 3,
-        "defense": 1
-      },
-      "fdr": {
-        "attack": 4.2,
-        "defense": 5.7,
-        "overall": 5.0
-      }
-    },
-    "away_team": {
-      "name": "Liverpool",
-      "short_name": "LIV",
-      "attacking_fixture_rating": 49.0,
-      "defensive_fixture_rating": 35.0,
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 42.5,
       "rank": {
         "attack": 4,
         "defense": 6
       },
       "fdr": {
-        "attack": 5.6,
-        "defense": 7.0,
-        "overall": 6.3
+        "attack": 4.6,
+        "defense": 6.2,
+        "overall": 5.4
+      }
+    },
+    "away_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 38.8,
+      "rank": {
+        "attack": 5,
+        "defense": 5
+      },
+      "fdr": {
+        "attack": 5.0,
+        "defense": 6.6,
+        "overall": 5.8
       }
     }
   },
@@ -379,31 +379,31 @@
     "home_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 53.0,
-      "defensive_fixture_rating": 50.0,
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 51.9,
       "rank": {
-        "attack": 6,
-        "defense": 12
+        "attack": 2,
+        "defense": 10
       },
       "fdr": {
-        "attack": 5.2,
-        "defense": 5.5,
-        "overall": 5.3
+        "attack": 4.8,
+        "defense": 5.3,
+        "overall": 5.0
       }
     },
     "away_team": {
       "name": "Spurs",
       "short_name": "TOT",
-      "attacking_fixture_rating": 47.0,
-      "defensive_fixture_rating": 46.2,
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 42.5,
       "rank": {
-        "attack": 15,
-        "defense": 5
+        "attack": 14,
+        "defense": 3
       },
       "fdr": {
-        "attack": 5.8,
-        "defense": 5.9,
-        "overall": 5.8
+        "attack": 6.0,
+        "defense": 6.2,
+        "overall": 6.1
       }
     }
   },
@@ -413,31 +413,31 @@
     "home_team": {
       "name": "Brentford",
       "short_name": "BRE",
-      "attacking_fixture_rating": 31.0,
+      "attacking_fixture_rating": 27.0,
       "defensive_fixture_rating": 61.3,
       "rank": {
-        "attack": 16,
+        "attack": 17,
         "defense": 9
       },
       "fdr": {
-        "attack": 7.4,
+        "attack": 7.8,
         "defense": 4.4,
-        "overall": 5.9
+        "overall": 6.1
       }
     },
     "away_team": {
       "name": "Sunderland",
       "short_name": "SUN",
       "attacking_fixture_rating": 35.0,
-      "defensive_fixture_rating": 65.0,
+      "defensive_fixture_rating": 68.8,
       "rank": {
         "attack": 19,
-        "defense": 3
+        "defense": 2
       },
       "fdr": {
         "attack": 7.0,
-        "defense": 4.0,
-        "overall": 5.5
+        "defense": 3.6,
+        "overall": 5.3
       }
     }
   },
@@ -447,31 +447,31 @@
     "home_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 49.0,
-      "defensive_fixture_rating": 14.4,
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 20.0,
       "rank": {
-        "attack": 17,
-        "defense": 18
+        "attack": 15,
+        "defense": 16
       },
       "fdr": {
-        "attack": 5.6,
-        "defense": 9.1,
-        "overall": 7.3
+        "attack": 5.4,
+        "defense": 8.5,
+        "overall": 7.0
       }
     },
     "away_team": {
       "name": "Man Utd",
       "short_name": "MUN",
-      "attacking_fixture_rating": 85.0,
-      "defensive_fixture_rating": 48.1,
+      "attacking_fixture_rating": 79.0,
+      "defensive_fixture_rating": 46.2,
       "rank": {
-        "attack": 2,
-        "defense": 13
+        "attack": 3,
+        "defense": 12
       },
       "fdr": {
-        "attack": 2.0,
-        "defense": 5.7,
-        "overall": 3.9
+        "attack": 2.6,
+        "defense": 5.9,
+        "overall": 4.2
       }
     }
   },
@@ -481,31 +481,31 @@
     "home_team": {
       "name": "Crystal Palace",
       "short_name": "CRY",
-      "attacking_fixture_rating": 73.0,
+      "attacking_fixture_rating": 79.0,
       "defensive_fixture_rating": 38.8,
       "rank": {
         "attack": 9,
-        "defense": 10
+        "defense": 14
       },
       "fdr": {
-        "attack": 3.2,
+        "attack": 2.6,
         "defense": 6.6,
-        "overall": 4.9
+        "overall": 4.6
       }
     },
     "away_team": {
       "name": "Aston Villa",
       "short_name": "AVL",
       "attacking_fixture_rating": 59.0,
-      "defensive_fixture_rating": 25.6,
+      "defensive_fixture_rating": 20.0,
       "rank": {
-        "attack": 8,
-        "defense": 17
+        "attack": 12,
+        "defense": 20
       },
       "fdr": {
         "attack": 4.6,
-        "defense": 7.9,
-        "overall": 6.2
+        "defense": 8.5,
+        "overall": 6.5
       }
     }
   },
@@ -515,31 +515,31 @@
     "home_team": {
       "name": "Everton",
       "short_name": "EVE",
-      "attacking_fixture_rating": 67.0,
+      "attacking_fixture_rating": 61.0,
       "defensive_fixture_rating": 74.4,
       "rank": {
-        "attack": 14,
+        "attack": 16,
         "defense": 4
       },
       "fdr": {
-        "attack": 3.8,
+        "attack": 4.4,
         "defense": 3.1,
-        "overall": 3.5
+        "overall": 3.8
       }
     },
     "away_team": {
       "name": "Wolves",
       "short_name": "WOL",
       "attacking_fixture_rating": 21.0,
-      "defensive_fixture_rating": 31.2,
+      "defensive_fixture_rating": 36.9,
       "rank": {
         "attack": 20,
-        "defense": 19
+        "defense": 18
       },
       "fdr": {
         "attack": 8.4,
-        "defense": 7.4,
-        "overall": 7.9
+        "defense": 6.8,
+        "overall": 7.6
       }
     }
   },
@@ -550,30 +550,30 @@
       "name": "Fulham",
       "short_name": "FUL",
       "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 38.8,
+      "defensive_fixture_rating": 40.6,
       "rank": {
         "attack": 13,
         "defense": 8
       },
       "fdr": {
         "attack": 6.0,
-        "defense": 6.6,
-        "overall": 6.3
+        "defense": 6.4,
+        "overall": 6.2
       }
     },
     "away_team": {
       "name": "Chelsea",
       "short_name": "CHE",
-      "attacking_fixture_rating": 59.0,
+      "attacking_fixture_rating": 57.0,
       "defensive_fixture_rating": 53.8,
       "rank": {
-        "attack": 5,
+        "attack": 6,
         "defense": 7
       },
       "fdr": {
-        "attack": 4.6,
+        "attack": 4.8,
         "defense": 5.1,
-        "overall": 4.8
+        "overall": 4.9
       }
     }
   },
@@ -583,31 +583,31 @@
     "home_team": {
       "name": "Man City",
       "short_name": "MCI",
-      "attacking_fixture_rating": 83.0,
-      "defensive_fixture_rating": 51.9,
+      "attacking_fixture_rating": 87.0,
+      "defensive_fixture_rating": 55.6,
       "rank": {
         "attack": 1,
-        "defense": 2
+        "defense": 1
       },
       "fdr": {
-        "attack": 2.2,
-        "defense": 5.3,
-        "overall": 3.8
+        "attack": 1.8,
+        "defense": 4.9,
+        "overall": 3.4
       }
     },
     "away_team": {
       "name": "Brighton",
       "short_name": "BHA",
-      "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 18.1,
+      "attacking_fixture_rating": 41.0,
+      "defensive_fixture_rating": 14.4,
       "rank": {
-        "attack": 7,
-        "defense": 15
+        "attack": 8,
+        "defense": 17
       },
       "fdr": {
-        "attack": 6.0,
-        "defense": 8.7,
-        "overall": 7.3
+        "attack": 6.4,
+        "defense": 9.1,
+        "overall": 7.8
       }
     }
   },
@@ -617,31 +617,31 @@
     "home_team": {
       "name": "Newcastle",
       "short_name": "NEW",
-      "attacking_fixture_rating": 61.0,
-      "defensive_fixture_rating": 40.6,
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 27.5,
       "rank": {
-        "attack": 12,
-        "defense": 11
+        "attack": 10,
+        "defense": 15
       },
       "fdr": {
-        "attack": 4.4,
-        "defense": 6.4,
-        "overall": 5.4
+        "attack": 4.6,
+        "defense": 7.8,
+        "overall": 6.2
       }
     },
     "away_team": {
       "name": "Leeds",
       "short_name": "LEE",
-      "attacking_fixture_rating": 57.0,
-      "defensive_fixture_rating": 36.9,
+      "attacking_fixture_rating": 71.0,
+      "defensive_fixture_rating": 38.8,
       "rank": {
-        "attack": 10,
-        "defense": 14
+        "attack": 7,
+        "defense": 11
       },
       "fdr": {
-        "attack": 4.8,
-        "defense": 6.8,
-        "overall": 5.8
+        "attack": 3.4,
+        "defense": 6.6,
+        "overall": 5.0
       }
     }
   },
@@ -651,31 +651,31 @@
     "home_team": {
       "name": "West Ham",
       "short_name": "WHU",
-      "attacking_fixture_rating": 53.0,
-      "defensive_fixture_rating": 27.5,
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 29.4,
       "rank": {
         "attack": 18,
-        "defense": 20
+        "defense": 19
       },
       "fdr": {
-        "attack": 5.2,
-        "defense": 7.8,
-        "overall": 6.5
+        "attack": 5.8,
+        "defense": 7.6,
+        "overall": 6.7
       }
     },
     "away_team": {
       "name": "Nott'm Forest",
       "short_name": "NFO",
-      "attacking_fixture_rating": 71.0,
-      "defensive_fixture_rating": 44.4,
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 50.0,
       "rank": {
         "attack": 11,
-        "defense": 16
+        "defense": 13
       },
       "fdr": {
-        "attack": 3.4,
-        "defense": 6.1,
-        "overall": 4.8
+        "attack": 3.6,
+        "defense": 5.5,
+        "overall": 4.5
       }
     }
   },
@@ -685,31 +685,31 @@
     "home_team": {
       "name": "Aston Villa",
       "short_name": "AVL",
-      "attacking_fixture_rating": 49.0,
-      "defensive_fixture_rating": 38.8,
+      "attacking_fixture_rating": 41.0,
+      "defensive_fixture_rating": 36.9,
       "rank": {
-        "attack": 8,
-        "defense": 17
+        "attack": 12,
+        "defense": 20
       },
       "fdr": {
-        "attack": 5.6,
-        "defense": 6.6,
-        "overall": 6.1
+        "attack": 6.4,
+        "defense": 6.8,
+        "overall": 6.6
       }
     },
     "away_team": {
       "name": "Everton",
       "short_name": "EVE",
-      "attacking_fixture_rating": 59.0,
-      "defensive_fixture_rating": 48.1,
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 55.6,
       "rank": {
-        "attack": 14,
+        "attack": 16,
         "defense": 4
       },
       "fdr": {
-        "attack": 4.6,
-        "defense": 5.7,
-        "overall": 5.2
+        "attack": 4.4,
+        "defense": 4.9,
+        "overall": 4.7
       }
     }
   },
@@ -719,31 +719,31 @@
     "home_team": {
       "name": "Brighton",
       "short_name": "BHA",
-      "attacking_fixture_rating": 67.0,
-      "defensive_fixture_rating": 23.8,
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 12.5,
       "rank": {
-        "attack": 7,
-        "defense": 15
+        "attack": 8,
+        "defense": 17
       },
       "fdr": {
-        "attack": 3.8,
-        "defense": 8.1,
-        "overall": 5.9
+        "attack": 4.4,
+        "defense": 9.2,
+        "overall": 6.8
       }
     },
     "away_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 75.0,
-      "defensive_fixture_rating": 31.2,
+      "attacking_fixture_rating": 87.0,
+      "defensive_fixture_rating": 36.9,
       "rank": {
-        "attack": 6,
-        "defense": 12
+        "attack": 2,
+        "defense": 10
       },
       "fdr": {
-        "attack": 3.0,
-        "defense": 7.4,
-        "overall": 5.2
+        "attack": 1.8,
+        "defense": 6.8,
+        "overall": 4.3
       }
     }
   },
@@ -753,30 +753,30 @@
     "home_team": {
       "name": "Chelsea",
       "short_name": "CHE",
-      "attacking_fixture_rating": 65.0,
-      "defensive_fixture_rating": 59.4,
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 61.3,
       "rank": {
-        "attack": 5,
+        "attack": 6,
         "defense": 7
       },
       "fdr": {
-        "attack": 4.0,
-        "defense": 4.6,
+        "attack": 4.2,
+        "defense": 4.4,
         "overall": 4.3
       }
     },
     "away_team": {
       "name": "Brentford",
       "short_name": "BRE",
-      "attacking_fixture_rating": 37.0,
-      "defensive_fixture_rating": 35.0,
+      "attacking_fixture_rating": 35.0,
+      "defensive_fixture_rating": 36.9,
       "rank": {
-        "attack": 16,
+        "attack": 17,
         "defense": 9
       },
       "fdr": {
-        "attack": 6.8,
-        "defense": 7.0,
+        "attack": 7.0,
+        "defense": 6.8,
         "overall": 6.9
       }
     }
@@ -787,31 +787,31 @@
     "home_team": {
       "name": "Leeds",
       "short_name": "LEE",
-      "attacking_fixture_rating": 55.0,
-      "defensive_fixture_rating": 42.5,
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 48.1,
       "rank": {
-        "attack": 10,
-        "defense": 14
+        "attack": 7,
+        "defense": 11
       },
       "fdr": {
-        "attack": 5.0,
-        "defense": 6.2,
-        "overall": 5.6
+        "attack": 4.4,
+        "defense": 5.7,
+        "overall": 5.1
       }
     },
     "away_team": {
       "name": "Fulham",
       "short_name": "FUL",
-      "attacking_fixture_rating": 55.0,
-      "defensive_fixture_rating": 42.5,
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 36.9,
       "rank": {
         "attack": 13,
         "defense": 8
       },
       "fdr": {
-        "attack": 5.0,
-        "defense": 6.2,
-        "overall": 5.6
+        "attack": 5.6,
+        "defense": 6.8,
+        "overall": 6.2
       }
     }
   },
@@ -821,31 +821,31 @@
     "home_team": {
       "name": "Liverpool",
       "short_name": "LIV",
-      "attacking_fixture_rating": 85.0,
-      "defensive_fixture_rating": 65.0,
+      "attacking_fixture_rating": 79.0,
+      "defensive_fixture_rating": 63.1,
       "rank": {
-        "attack": 4,
-        "defense": 6
+        "attack": 5,
+        "defense": 5
       },
       "fdr": {
-        "attack": 2.0,
-        "defense": 4.0,
-        "overall": 3.0
+        "attack": 2.6,
+        "defense": 4.2,
+        "overall": 3.4
       }
     },
     "away_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 31.0,
-      "defensive_fixture_rating": 14.4,
+      "attacking_fixture_rating": 33.0,
+      "defensive_fixture_rating": 20.0,
       "rank": {
-        "attack": 17,
-        "defense": 18
+        "attack": 15,
+        "defense": 16
       },
       "fdr": {
-        "attack": 7.4,
-        "defense": 9.1,
-        "overall": 8.2
+        "attack": 7.2,
+        "defense": 8.5,
+        "overall": 7.8
       }
     }
   },
@@ -855,30 +855,30 @@
     "home_team": {
       "name": "Man Utd",
       "short_name": "MUN",
-      "attacking_fixture_rating": 57.0,
-      "defensive_fixture_rating": 21.9,
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 23.8,
       "rank": {
-        "attack": 2,
-        "defense": 13
+        "attack": 3,
+        "defense": 12
       },
       "fdr": {
-        "attack": 4.8,
-        "defense": 8.3,
-        "overall": 6.6
+        "attack": 5.2,
+        "defense": 8.1,
+        "overall": 6.7
       }
     },
     "away_team": {
       "name": "Man City",
       "short_name": "MCI",
-      "attacking_fixture_rating": 77.0,
-      "defensive_fixture_rating": 42.5,
+      "attacking_fixture_rating": 75.0,
+      "defensive_fixture_rating": 44.4,
       "rank": {
         "attack": 1,
-        "defense": 2
+        "defense": 1
       },
       "fdr": {
-        "attack": 2.8,
-        "defense": 6.2,
+        "attack": 3.0,
+        "defense": 6.1,
         "overall": 4.5
       }
     }
@@ -889,31 +889,31 @@
     "home_team": {
       "name": "Nott'm Forest",
       "short_name": "NFO",
-      "attacking_fixture_rating": 39.0,
-      "defensive_fixture_rating": 20.0,
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 27.5,
       "rank": {
         "attack": 11,
-        "defense": 16
+        "defense": 13
       },
       "fdr": {
-        "attack": 6.6,
-        "defense": 8.5,
-        "overall": 7.5
+        "attack": 5.6,
+        "defense": 7.8,
+        "overall": 6.7
       }
     },
     "away_team": {
       "name": "Arsenal",
       "short_name": "ARS",
-      "attacking_fixture_rating": 79.0,
-      "defensive_fixture_rating": 57.5,
+      "attacking_fixture_rating": 71.0,
+      "defensive_fixture_rating": 48.1,
       "rank": {
-        "attack": 3,
-        "defense": 1
+        "attack": 4,
+        "defense": 6
       },
       "fdr": {
-        "attack": 2.6,
-        "defense": 4.8,
-        "overall": 3.7
+        "attack": 3.4,
+        "defense": 5.7,
+        "overall": 4.5
       }
     }
   },
@@ -924,30 +924,30 @@
       "name": "Spurs",
       "short_name": "TOT",
       "attacking_fixture_rating": 67.0,
-      "defensive_fixture_rating": 66.9,
+      "defensive_fixture_rating": 70.6,
       "rank": {
-        "attack": 15,
-        "defense": 5
+        "attack": 14,
+        "defense": 3
       },
       "fdr": {
         "attack": 3.8,
-        "defense": 3.8,
-        "overall": 3.8
+        "defense": 3.4,
+        "overall": 3.6
       }
     },
     "away_team": {
       "name": "West Ham",
       "short_name": "WHU",
-      "attacking_fixture_rating": 29.0,
+      "attacking_fixture_rating": 25.0,
       "defensive_fixture_rating": 31.2,
       "rank": {
         "attack": 18,
-        "defense": 20
+        "defense": 19
       },
       "fdr": {
-        "attack": 7.6,
+        "attack": 8.0,
         "defense": 7.4,
-        "overall": 7.5
+        "overall": 7.7
       }
     }
   },
@@ -957,31 +957,31 @@
     "home_team": {
       "name": "Sunderland",
       "short_name": "SUN",
-      "attacking_fixture_rating": 39.0,
-      "defensive_fixture_rating": 55.6,
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 57.5,
       "rank": {
         "attack": 19,
-        "defense": 3
+        "defense": 2
       },
       "fdr": {
-        "attack": 6.6,
-        "defense": 4.9,
-        "overall": 5.8
+        "attack": 5.8,
+        "defense": 4.8,
+        "overall": 5.3
       }
     },
     "away_team": {
       "name": "Crystal Palace",
       "short_name": "CRY",
-      "attacking_fixture_rating": 41.0,
-      "defensive_fixture_rating": 59.4,
+      "attacking_fixture_rating": 39.0,
+      "defensive_fixture_rating": 51.9,
       "rank": {
         "attack": 9,
-        "defense": 10
+        "defense": 14
       },
       "fdr": {
-        "attack": 6.4,
-        "defense": 4.6,
-        "overall": 5.5
+        "attack": 6.6,
+        "defense": 5.3,
+        "overall": 5.9
       }
     }
   },
@@ -991,31 +991,31 @@
     "home_team": {
       "name": "Wolves",
       "short_name": "WOL",
-      "attacking_fixture_rating": 39.0,
-      "defensive_fixture_rating": 31.2,
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 29.4,
       "rank": {
         "attack": 20,
-        "defense": 19
+        "defense": 18
       },
       "fdr": {
-        "attack": 6.6,
-        "defense": 7.4,
-        "overall": 7.0
+        "attack": 5.8,
+        "defense": 7.6,
+        "overall": 6.7
       }
     },
     "away_team": {
       "name": "Newcastle",
       "short_name": "NEW",
-      "attacking_fixture_rating": 67.0,
-      "defensive_fixture_rating": 59.4,
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 51.9,
       "rank": {
-        "attack": 12,
-        "defense": 11
+        "attack": 10,
+        "defense": 15
       },
       "fdr": {
-        "attack": 3.8,
-        "defense": 4.6,
-        "overall": 4.2
+        "attack": 3.6,
+        "defense": 5.3,
+        "overall": 4.5
       }
     }
   },
@@ -1025,31 +1025,31 @@
     "home_team": {
       "name": "Arsenal",
       "short_name": "ARS",
-      "attacking_fixture_rating": 77.0,
-      "defensive_fixture_rating": 44.4,
+      "attacking_fixture_rating": 73.0,
+      "defensive_fixture_rating": 38.8,
       "rank": {
-        "attack": 3,
-        "defense": 1
+        "attack": 4,
+        "defense": 6
       },
       "fdr": {
-        "attack": 2.8,
-        "defense": 6.1,
-        "overall": 4.4
+        "attack": 3.2,
+        "defense": 6.6,
+        "overall": 4.9
       }
     },
     "away_team": {
       "name": "Man Utd",
       "short_name": "MUN",
-      "attacking_fixture_rating": 53.0,
-      "defensive_fixture_rating": 21.9,
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 25.6,
       "rank": {
-        "attack": 2,
-        "defense": 13
+        "attack": 3,
+        "defense": 12
       },
       "fdr": {
-        "attack": 5.2,
-        "defense": 8.3,
-        "overall": 6.8
+        "attack": 4.6,
+        "defense": 7.9,
+        "overall": 6.2
       }
     }
   },
@@ -1059,31 +1059,31 @@
     "home_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 55.0,
-      "defensive_fixture_rating": 29.4,
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 35.0,
       "rank": {
-        "attack": 6,
-        "defense": 12
+        "attack": 2,
+        "defense": 10
       },
       "fdr": {
-        "attack": 5.0,
-        "defense": 7.6,
-        "overall": 6.3
+        "attack": 4.4,
+        "defense": 7.0,
+        "overall": 5.7
       }
     },
     "away_team": {
       "name": "Liverpool",
       "short_name": "LIV",
-      "attacking_fixture_rating": 69.0,
-      "defensive_fixture_rating": 42.5,
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 36.9,
       "rank": {
-        "attack": 4,
-        "defense": 6
+        "attack": 5,
+        "defense": 5
       },
       "fdr": {
-        "attack": 3.6,
-        "defense": 6.2,
-        "overall": 4.9
+        "attack": 4.2,
+        "defense": 6.8,
+        "overall": 5.5
       }
     }
   },
@@ -1093,31 +1093,31 @@
     "home_team": {
       "name": "Brentford",
       "short_name": "BRE",
-      "attacking_fixture_rating": 57.0,
+      "attacking_fixture_rating": 49.0,
       "defensive_fixture_rating": 46.2,
       "rank": {
-        "attack": 16,
+        "attack": 17,
         "defense": 9
       },
       "fdr": {
-        "attack": 4.8,
+        "attack": 5.6,
         "defense": 5.9,
-        "overall": 5.3
+        "overall": 5.8
       }
     },
     "away_team": {
       "name": "Nott'm Forest",
       "short_name": "NFO",
       "attacking_fixture_rating": 51.0,
-      "defensive_fixture_rating": 40.6,
+      "defensive_fixture_rating": 48.1,
       "rank": {
         "attack": 11,
-        "defense": 16
+        "defense": 13
       },
       "fdr": {
         "attack": 5.4,
-        "defense": 6.4,
-        "overall": 5.9
+        "defense": 5.7,
+        "overall": 5.6
       }
     }
   },
@@ -1128,30 +1128,30 @@
       "name": "Burnley",
       "short_name": "BUR",
       "attacking_fixture_rating": 33.0,
-      "defensive_fixture_rating": 38.8,
+      "defensive_fixture_rating": 40.6,
       "rank": {
-        "attack": 17,
-        "defense": 18
+        "attack": 15,
+        "defense": 16
       },
       "fdr": {
         "attack": 7.2,
-        "defense": 6.6,
-        "overall": 6.9
+        "defense": 6.4,
+        "overall": 6.8
       }
     },
     "away_team": {
       "name": "Spurs",
       "short_name": "TOT",
-      "attacking_fixture_rating": 59.0,
+      "attacking_fixture_rating": 57.0,
       "defensive_fixture_rating": 65.0,
       "rank": {
-        "attack": 15,
-        "defense": 5
+        "attack": 14,
+        "defense": 3
       },
       "fdr": {
-        "attack": 4.6,
+        "attack": 4.8,
         "defense": 4.0,
-        "overall": 4.3
+        "overall": 4.4
       }
     }
   },
@@ -1162,30 +1162,30 @@
       "name": "Crystal Palace",
       "short_name": "CRY",
       "attacking_fixture_rating": 53.0,
-      "defensive_fixture_rating": 33.1,
+      "defensive_fixture_rating": 27.5,
       "rank": {
         "attack": 9,
-        "defense": 10
+        "defense": 14
       },
       "fdr": {
         "attack": 5.2,
-        "defense": 7.2,
-        "overall": 6.2
+        "defense": 7.8,
+        "overall": 6.5
       }
     },
     "away_team": {
       "name": "Chelsea",
       "short_name": "CHE",
-      "attacking_fixture_rating": 65.0,
+      "attacking_fixture_rating": 71.0,
       "defensive_fixture_rating": 46.2,
       "rank": {
-        "attack": 5,
+        "attack": 6,
         "defense": 7
       },
       "fdr": {
-        "attack": 4.0,
+        "attack": 3.4,
         "defense": 5.9,
-        "overall": 5.0
+        "overall": 4.7
       }
     }
   },
@@ -1195,31 +1195,31 @@
     "home_team": {
       "name": "Everton",
       "short_name": "EVE",
-      "attacking_fixture_rating": 57.0,
-      "defensive_fixture_rating": 55.6,
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 50.0,
       "rank": {
-        "attack": 14,
+        "attack": 16,
         "defense": 4
       },
       "fdr": {
-        "attack": 4.8,
-        "defense": 4.9,
-        "overall": 4.8
+        "attack": 5.8,
+        "defense": 5.5,
+        "overall": 5.7
       }
     },
     "away_team": {
       "name": "Leeds",
       "short_name": "LEE",
-      "attacking_fixture_rating": 41.0,
-      "defensive_fixture_rating": 40.6,
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 50.0,
       "rank": {
-        "attack": 10,
-        "defense": 14
+        "attack": 7,
+        "defense": 11
       },
       "fdr": {
-        "attack": 6.4,
-        "defense": 6.4,
-        "overall": 6.4
+        "attack": 5.8,
+        "defense": 5.5,
+        "overall": 5.7
       }
     }
   },
@@ -1229,31 +1229,31 @@
     "home_team": {
       "name": "Fulham",
       "short_name": "FUL",
-      "attacking_fixture_rating": 61.0,
-      "defensive_fixture_rating": 42.5,
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 44.4,
       "rank": {
         "attack": 13,
         "defense": 8
       },
       "fdr": {
-        "attack": 4.4,
-        "defense": 6.2,
-        "overall": 5.3
+        "attack": 4.0,
+        "defense": 6.1,
+        "overall": 5.0
       }
     },
     "away_team": {
       "name": "Brighton",
       "short_name": "BHA",
-      "attacking_fixture_rating": 55.0,
-      "defensive_fixture_rating": 38.8,
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 35.0,
       "rank": {
-        "attack": 7,
-        "defense": 15
+        "attack": 8,
+        "defense": 17
       },
       "fdr": {
-        "attack": 5.0,
-        "defense": 6.6,
-        "overall": 5.8
+        "attack": 5.2,
+        "defense": 7.0,
+        "overall": 6.1
       }
     }
   },
@@ -1263,30 +1263,30 @@
     "home_team": {
       "name": "Man City",
       "short_name": "MCI",
-      "attacking_fixture_rating": 91.0,
-      "defensive_fixture_rating": 76.2,
+      "attacking_fixture_rating": 89.0,
+      "defensive_fixture_rating": 78.1,
       "rank": {
         "attack": 1,
-        "defense": 2
+        "defense": 1
       },
       "fdr": {
-        "attack": 1.4,
-        "defense": 2.9,
-        "overall": 2.1
+        "attack": 1.6,
+        "defense": 2.7,
+        "overall": 2.2
       }
     },
     "away_team": {
       "name": "Wolves",
       "short_name": "WOL",
-      "attacking_fixture_rating": 19.0,
-      "defensive_fixture_rating": 8.8,
+      "attacking_fixture_rating": 17.0,
+      "defensive_fixture_rating": 10.6,
       "rank": {
         "attack": 20,
-        "defense": 19
+        "defense": 18
       },
       "fdr": {
-        "attack": 8.6,
-        "defense": 9.6,
+        "attack": 8.8,
+        "defense": 9.4,
         "overall": 9.1
       }
     }
@@ -1297,453 +1297,11 @@
     "home_team": {
       "name": "Newcastle",
       "short_name": "NEW",
-      "attacking_fixture_rating": 67.0,
-      "defensive_fixture_rating": 36.9,
-      "rank": {
-        "attack": 12,
-        "defense": 11
-      },
-      "fdr": {
-        "attack": 3.8,
-        "defense": 6.8,
-        "overall": 5.3
-      }
-    },
-    "away_team": {
-      "name": "Aston Villa",
-      "short_name": "AVL",
-      "attacking_fixture_rating": 61.0,
-      "defensive_fixture_rating": 31.2,
-      "rank": {
-        "attack": 8,
-        "defense": 17
-      },
-      "fdr": {
-        "attack": 4.4,
-        "defense": 7.4,
-        "overall": 5.9
-      }
-    }
-  },
-  {
-    "gameweek": 23,
-    "fixture": "West Ham vs Sunderland",
-    "home_team": {
-      "name": "West Ham",
-      "short_name": "WHU",
-      "attacking_fixture_rating": 27.0,
-      "defensive_fixture_rating": 42.5,
-      "rank": {
-        "attack": 18,
-        "defense": 20
-      },
-      "fdr": {
-        "attack": 7.8,
-        "defense": 6.2,
-        "overall": 7.0
-      }
-    },
-    "away_team": {
-      "name": "Sunderland",
-      "short_name": "SUN",
-      "attacking_fixture_rating": 55.0,
-      "defensive_fixture_rating": 68.8,
-      "rank": {
-        "attack": 19,
-        "defense": 3
-      },
-      "fdr": {
-        "attack": 5.0,
-        "defense": 3.6,
-        "overall": 4.3
-      }
-    }
-  },
-  {
-    "gameweek": 24,
-    "fixture": "Aston Villa vs Brentford",
-    "home_team": {
-      "name": "Aston Villa",
-      "short_name": "AVL",
-      "attacking_fixture_rating": 59.0,
-      "defensive_fixture_rating": 42.5,
-      "rank": {
-        "attack": 8,
-        "defense": 17
-      },
-      "fdr": {
-        "attack": 4.6,
-        "defense": 6.2,
-        "overall": 5.4
-      }
-    },
-    "away_team": {
-      "name": "Brentford",
-      "short_name": "BRE",
-      "attacking_fixture_rating": 55.0,
-      "defensive_fixture_rating": 40.6,
-      "rank": {
-        "attack": 16,
-        "defense": 9
-      },
-      "fdr": {
-        "attack": 5.0,
-        "defense": 6.4,
-        "overall": 5.7
-      }
-    }
-  },
-  {
-    "gameweek": 24,
-    "fixture": "Brighton vs Everton",
-    "home_team": {
-      "name": "Brighton",
-      "short_name": "BHA",
-      "attacking_fixture_rating": 51.0,
-      "defensive_fixture_rating": 40.6,
-      "rank": {
-        "attack": 7,
-        "defense": 15
-      },
-      "fdr": {
-        "attack": 5.4,
-        "defense": 6.4,
-        "overall": 5.9
-      }
-    },
-    "away_team": {
-      "name": "Everton",
-      "short_name": "EVE",
-      "attacking_fixture_rating": 57.0,
-      "defensive_fixture_rating": 46.2,
-      "rank": {
-        "attack": 14,
-        "defense": 4
-      },
-      "fdr": {
-        "attack": 4.8,
-        "defense": 5.9,
-        "overall": 5.3
-      }
-    }
-  },
-  {
-    "gameweek": 24,
-    "fixture": "Chelsea vs West Ham",
-    "home_team": {
-      "name": "Chelsea",
-      "short_name": "CHE",
-      "attacking_fixture_rating": 87.0,
-      "defensive_fixture_rating": 63.1,
-      "rank": {
-        "attack": 5,
-        "defense": 7
-      },
-      "fdr": {
-        "attack": 1.8,
-        "defense": 4.2,
-        "overall": 3.0
-      }
-    },
-    "away_team": {
-      "name": "West Ham",
-      "short_name": "WHU",
-      "attacking_fixture_rating": 33.0,
-      "defensive_fixture_rating": 12.5,
-      "rank": {
-        "attack": 18,
-        "defense": 20
-      },
-      "fdr": {
-        "attack": 7.2,
-        "defense": 9.2,
-        "overall": 8.2
-      }
-    }
-  },
-  {
-    "gameweek": 24,
-    "fixture": "Leeds vs Arsenal",
-    "home_team": {
-      "name": "Leeds",
-      "short_name": "LEE",
-      "attacking_fixture_rating": 41.0,
-      "defensive_fixture_rating": 23.8,
-      "rank": {
-        "attack": 10,
-        "defense": 14
-      },
-      "fdr": {
-        "attack": 6.4,
-        "defense": 8.1,
-        "overall": 7.2
-      }
-    },
-    "away_team": {
-      "name": "Arsenal",
-      "short_name": "ARS",
-      "attacking_fixture_rating": 75.0,
-      "defensive_fixture_rating": 55.6,
-      "rank": {
-        "attack": 3,
-        "defense": 1
-      },
-      "fdr": {
-        "attack": 3.0,
-        "defense": 4.9,
-        "overall": 4.0
-      }
-    }
-  },
-  {
-    "gameweek": 24,
-    "fixture": "Liverpool vs Newcastle",
-    "home_team": {
-      "name": "Liverpool",
-      "short_name": "LIV",
-      "attacking_fixture_rating": 71.0,
-      "defensive_fixture_rating": 55.6,
-      "rank": {
-        "attack": 4,
-        "defense": 6
-      },
-      "fdr": {
-        "attack": 3.4,
-        "defense": 4.9,
-        "overall": 4.2
-      }
-    },
-    "away_team": {
-      "name": "Newcastle",
-      "short_name": "NEW",
-      "attacking_fixture_rating": 41.0,
-      "defensive_fixture_rating": 29.4,
-      "rank": {
-        "attack": 12,
-        "defense": 11
-      },
-      "fdr": {
-        "attack": 6.4,
-        "defense": 7.6,
-        "overall": 7.0
-      }
-    }
-  },
-  {
-    "gameweek": 24,
-    "fixture": "Man Utd vs Fulham",
-    "home_team": {
-      "name": "Man Utd",
-      "short_name": "MUN",
-      "attacking_fixture_rating": 69.0,
-      "defensive_fixture_rating": 44.4,
-      "rank": {
-        "attack": 2,
-        "defense": 13
-      },
-      "fdr": {
-        "attack": 3.6,
-        "defense": 6.1,
-        "overall": 4.8
-      }
-    },
-    "away_team": {
-      "name": "Fulham",
-      "short_name": "FUL",
-      "attacking_fixture_rating": 53.0,
-      "defensive_fixture_rating": 29.4,
-      "rank": {
-        "attack": 13,
-        "defense": 8
-      },
-      "fdr": {
-        "attack": 5.2,
-        "defense": 7.6,
-        "overall": 6.4
-      }
-    }
-  },
-  {
-    "gameweek": 24,
-    "fixture": "Nott'm Forest vs Crystal Palace",
-    "home_team": {
-      "name": "Nott'm Forest",
-      "short_name": "NFO",
-      "attacking_fixture_rating": 57.0,
-      "defensive_fixture_rating": 31.2,
-      "rank": {
-        "attack": 11,
-        "defense": 16
-      },
-      "fdr": {
-        "attack": 4.8,
-        "defense": 7.4,
-        "overall": 6.1
-      }
-    },
-    "away_team": {
-      "name": "Crystal Palace",
-      "short_name": "CRY",
-      "attacking_fixture_rating": 67.0,
-      "defensive_fixture_rating": 42.5,
-      "rank": {
-        "attack": 9,
-        "defense": 10
-      },
-      "fdr": {
-        "attack": 3.8,
-        "defense": 6.2,
-        "overall": 5.0
-      }
-    }
-  },
-  {
-    "gameweek": 24,
-    "fixture": "Spurs vs Man City",
-    "home_team": {
-      "name": "Spurs",
-      "short_name": "TOT",
-      "attacking_fixture_rating": 31.0,
-      "defensive_fixture_rating": 35.0,
-      "rank": {
-        "attack": 15,
-        "defense": 5
-      },
-      "fdr": {
-        "attack": 7.4,
-        "defense": 7.0,
-        "overall": 7.2
-      }
-    },
-    "away_team": {
-      "name": "Man City",
-      "short_name": "MCI",
-      "attacking_fixture_rating": 63.0,
-      "defensive_fixture_rating": 66.9,
-      "rank": {
-        "attack": 1,
-        "defense": 2
-      },
-      "fdr": {
-        "attack": 4.2,
-        "defense": 3.8,
-        "overall": 4.0
-      }
-    }
-  },
-  {
-    "gameweek": 24,
-    "fixture": "Sunderland vs Burnley",
-    "home_team": {
-      "name": "Sunderland",
-      "short_name": "SUN",
-      "attacking_fixture_rating": 55.0,
-      "defensive_fixture_rating": 70.6,
-      "rank": {
-        "attack": 19,
-        "defense": 3
-      },
-      "fdr": {
-        "attack": 5.0,
-        "defense": 3.4,
-        "overall": 4.2
-      }
-    },
-    "away_team": {
-      "name": "Burnley",
-      "short_name": "BUR",
-      "attacking_fixture_rating": 25.0,
-      "defensive_fixture_rating": 42.5,
-      "rank": {
-        "attack": 17,
-        "defense": 18
-      },
-      "fdr": {
-        "attack": 8.0,
-        "defense": 6.2,
-        "overall": 7.1
-      }
-    }
-  },
-  {
-    "gameweek": 24,
-    "fixture": "Wolves vs Bournemouth",
-    "home_team": {
-      "name": "Wolves",
-      "short_name": "WOL",
-      "attacking_fixture_rating": 41.0,
-      "defensive_fixture_rating": 18.1,
-      "rank": {
-        "attack": 20,
-        "defense": 19
-      },
-      "fdr": {
-        "attack": 6.4,
-        "defense": 8.7,
-        "overall": 7.5
-      }
-    },
-    "away_team": {
-      "name": "Bournemouth",
-      "short_name": "BOU",
-      "attacking_fixture_rating": 81.0,
-      "defensive_fixture_rating": 55.6,
-      "rank": {
-        "attack": 6,
-        "defense": 12
-      },
-      "fdr": {
-        "attack": 2.4,
-        "defense": 4.9,
-        "overall": 3.7
-      }
-    }
-  },
-  {
-    "gameweek": 25,
-    "fixture": "Arsenal vs Sunderland",
-    "home_team": {
-      "name": "Arsenal",
-      "short_name": "ARS",
-      "attacking_fixture_rating": 57.0,
-      "defensive_fixture_rating": 76.2,
-      "rank": {
-        "attack": 3,
-        "defense": 1
-      },
-      "fdr": {
-        "attack": 4.8,
-        "defense": 2.9,
-        "overall": 3.8
-      }
-    },
-    "away_team": {
-      "name": "Sunderland",
-      "short_name": "SUN",
-      "attacking_fixture_rating": 19.0,
-      "defensive_fixture_rating": 40.6,
-      "rank": {
-        "attack": 19,
-        "defense": 3
-      },
-      "fdr": {
-        "attack": 8.6,
-        "defense": 6.4,
-        "overall": 7.5
-      }
-    }
-  },
-  {
-    "gameweek": 25,
-    "fixture": "Bournemouth vs Aston Villa",
-    "home_team": {
-      "name": "Bournemouth",
-      "short_name": "BOU",
       "attacking_fixture_rating": 77.0,
       "defensive_fixture_rating": 36.9,
       "rank": {
-        "attack": 6,
-        "defense": 12
+        "attack": 10,
+        "defense": 15
       },
       "fdr": {
         "attack": 2.8,
@@ -1757,8 +1315,8 @@
       "attacking_fixture_rating": 61.0,
       "defensive_fixture_rating": 21.9,
       "rank": {
-        "attack": 8,
-        "defense": 17
+        "attack": 12,
+        "defense": 20
       },
       "fdr": {
         "attack": 4.4,
@@ -1768,36 +1326,478 @@
     }
   },
   {
-    "gameweek": 25,
-    "fixture": "Brighton vs Crystal Palace",
+    "gameweek": 23,
+    "fixture": "West Ham vs Sunderland",
+    "home_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 25.0,
+      "defensive_fixture_rating": 44.4,
+      "rank": {
+        "attack": 18,
+        "defense": 19
+      },
+      "fdr": {
+        "attack": 8.0,
+        "defense": 6.1,
+        "overall": 7.0
+      }
+    },
+    "away_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 70.6,
+      "rank": {
+        "attack": 19,
+        "defense": 2
+      },
+      "fdr": {
+        "attack": 5.2,
+        "defense": 3.4,
+        "overall": 4.3
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Aston Villa vs Brentford",
+    "home_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 38.8,
+      "rank": {
+        "attack": 12,
+        "defense": 20
+      },
+      "fdr": {
+        "attack": 5.4,
+        "defense": 6.6,
+        "overall": 6.0
+      }
+    },
+    "away_team": {
+      "name": "Brentford",
+      "short_name": "BRE",
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 48.1,
+      "rank": {
+        "attack": 17,
+        "defense": 9
+      },
+      "fdr": {
+        "attack": 4.6,
+        "defense": 5.7,
+        "overall": 5.2
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Brighton vs Everton",
     "home_team": {
       "name": "Brighton",
       "short_name": "BHA",
-      "attacking_fixture_rating": 63.0,
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 8,
+        "defense": 17
+      },
+      "fdr": {
+        "attack": 5.6,
+        "defense": 6.4,
+        "overall": 6.0
+      }
+    },
+    "away_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 48.1,
+      "rank": {
+        "attack": 16,
+        "defense": 4
+      },
+      "fdr": {
+        "attack": 4.8,
+        "defense": 5.7,
+        "overall": 5.2
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Chelsea vs West Ham",
+    "home_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 83.0,
+      "defensive_fixture_rating": 63.1,
+      "rank": {
+        "attack": 6,
+        "defense": 7
+      },
+      "fdr": {
+        "attack": 2.2,
+        "defense": 4.2,
+        "overall": 3.2
+      }
+    },
+    "away_team": {
+      "name": "West Ham",
+      "short_name": "WHU",
+      "attacking_fixture_rating": 33.0,
+      "defensive_fixture_rating": 16.2,
+      "rank": {
+        "attack": 18,
+        "defense": 19
+      },
+      "fdr": {
+        "attack": 7.2,
+        "defense": 8.9,
+        "overall": 8.1
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Leeds vs Arsenal",
+    "home_team": {
+      "name": "Leeds",
+      "short_name": "LEE",
+      "attacking_fixture_rating": 57.0,
       "defensive_fixture_rating": 31.2,
       "rank": {
         "attack": 7,
+        "defense": 11
+      },
+      "fdr": {
+        "attack": 4.8,
+        "defense": 7.4,
+        "overall": 6.1
+      }
+    },
+    "away_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 40.6,
+      "rank": {
+        "attack": 4,
+        "defense": 6
+      },
+      "fdr": {
+        "attack": 3.8,
+        "defense": 6.4,
+        "overall": 5.1
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Liverpool vs Newcastle",
+    "home_team": {
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "attacking_fixture_rating": 77.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 5,
+        "defense": 5
+      },
+      "fdr": {
+        "attack": 2.8,
+        "defense": 5.1,
+        "overall": 3.9
+      }
+    },
+    "away_team": {
+      "name": "Newcastle",
+      "short_name": "NEW",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 23.8,
+      "rank": {
+        "attack": 10,
         "defense": 15
       },
       "fdr": {
-        "attack": 4.2,
+        "attack": 6.2,
+        "defense": 8.1,
+        "overall": 7.2
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Man Utd vs Fulham",
+    "home_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 46.2,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      },
+      "fdr": {
+        "attack": 3.8,
+        "defense": 5.9,
+        "overall": 4.8
+      }
+    },
+    "away_team": {
+      "name": "Fulham",
+      "short_name": "FUL",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 31.2,
+      "rank": {
+        "attack": 13,
+        "defense": 8
+      },
+      "fdr": {
+        "attack": 5.4,
         "defense": 7.4,
-        "overall": 5.8
+        "overall": 6.4
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Nott'm Forest vs Crystal Palace",
+    "home_team": {
+      "name": "Nott'm Forest",
+      "short_name": "NFO",
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 36.9,
+      "rank": {
+        "attack": 11,
+        "defense": 13
+      },
+      "fdr": {
+        "attack": 4.0,
+        "defense": 6.8,
+        "overall": 5.4
       }
     },
     "away_team": {
       "name": "Crystal Palace",
       "short_name": "CRY",
-      "attacking_fixture_rating": 67.0,
-      "defensive_fixture_rating": 36.9,
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 35.0,
       "rank": {
         "attack": 9,
+        "defense": 14
+      },
+      "fdr": {
+        "attack": 4.4,
+        "defense": 7.0,
+        "overall": 5.7
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Spurs vs Man City",
+    "home_team": {
+      "name": "Spurs",
+      "short_name": "TOT",
+      "attacking_fixture_rating": 31.0,
+      "defensive_fixture_rating": 38.8,
+      "rank": {
+        "attack": 14,
+        "defense": 3
+      },
+      "fdr": {
+        "attack": 7.4,
+        "defense": 6.6,
+        "overall": 7.0
+      }
+    },
+    "away_team": {
+      "name": "Man City",
+      "short_name": "MCI",
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 65.0,
+      "rank": {
+        "attack": 1,
+        "defense": 1
+      },
+      "fdr": {
+        "attack": 4.6,
+        "defense": 4.0,
+        "overall": 4.3
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Sunderland vs Burnley",
+    "home_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 68.8,
+      "rank": {
+        "attack": 19,
+        "defense": 2
+      },
+      "fdr": {
+        "attack": 5.4,
+        "defense": 3.6,
+        "overall": 4.5
+      }
+    },
+    "away_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 27.0,
+      "defensive_fixture_rating": 46.2,
+      "rank": {
+        "attack": 15,
+        "defense": 16
+      },
+      "fdr": {
+        "attack": 7.8,
+        "defense": 5.9,
+        "overall": 6.8
+      }
+    }
+  },
+  {
+    "gameweek": 24,
+    "fixture": "Wolves vs Bournemouth",
+    "home_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 37.0,
+      "defensive_fixture_rating": 12.5,
+      "rank": {
+        "attack": 20,
+        "defense": 18
+      },
+      "fdr": {
+        "attack": 6.8,
+        "defense": 9.2,
+        "overall": 8.0
+      }
+    },
+    "away_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 87.0,
+      "defensive_fixture_rating": 59.4,
+      "rank": {
+        "attack": 2,
         "defense": 10
       },
       "fdr": {
-        "attack": 3.8,
-        "defense": 6.8,
-        "overall": 5.3
+        "attack": 1.8,
+        "defense": 4.6,
+        "overall": 3.2
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Arsenal vs Sunderland",
+    "home_team": {
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 68.8,
+      "rank": {
+        "attack": 4,
+        "defense": 6
+      },
+      "fdr": {
+        "attack": 5.2,
+        "defense": 3.6,
+        "overall": 4.4
+      }
+    },
+    "away_team": {
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "attacking_fixture_rating": 27.0,
+      "defensive_fixture_rating": 44.4,
+      "rank": {
+        "attack": 19,
+        "defense": 2
+      },
+      "fdr": {
+        "attack": 7.8,
+        "defense": 6.1,
+        "overall": 6.9
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Bournemouth vs Aston Villa",
+    "home_team": {
+      "name": "Bournemouth",
+      "short_name": "BOU",
+      "attacking_fixture_rating": 91.0,
+      "defensive_fixture_rating": 48.1,
+      "rank": {
+        "attack": 2,
+        "defense": 10
+      },
+      "fdr": {
+        "attack": 1.4,
+        "defense": 5.7,
+        "overall": 3.5
+      }
+    },
+    "away_team": {
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 8.8,
+      "rank": {
+        "attack": 12,
+        "defense": 20
+      },
+      "fdr": {
+        "attack": 5.6,
+        "defense": 9.6,
+        "overall": 7.6
+      }
+    }
+  },
+  {
+    "gameweek": 25,
+    "fixture": "Brighton vs Crystal Palace",
+    "home_team": {
+      "name": "Brighton",
+      "short_name": "BHA",
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 27.5,
+      "rank": {
+        "attack": 8,
+        "defense": 17
+      },
+      "fdr": {
+        "attack": 3.6,
+        "defense": 7.8,
+        "overall": 5.7
+      }
+    },
+    "away_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 71.0,
+      "defensive_fixture_rating": 31.2,
+      "rank": {
+        "attack": 9,
+        "defense": 14
+      },
+      "fdr": {
+        "attack": 3.4,
+        "defense": 7.4,
+        "overall": 5.4
       }
     }
   },
@@ -1807,31 +1807,31 @@
     "home_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 63.0,
-      "defensive_fixture_rating": 44.4,
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 48.1,
       "rank": {
-        "attack": 17,
-        "defense": 18
+        "attack": 15,
+        "defense": 16
       },
       "fdr": {
-        "attack": 4.2,
-        "defense": 6.1,
-        "overall": 5.2
+        "attack": 4.0,
+        "defense": 5.7,
+        "overall": 4.8
       }
     },
     "away_team": {
       "name": "West Ham",
       "short_name": "WHU",
-      "attacking_fixture_rating": 53.0,
-      "defensive_fixture_rating": 35.0,
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 33.1,
       "rank": {
         "attack": 18,
-        "defense": 20
+        "defense": 19
       },
       "fdr": {
-        "attack": 5.2,
-        "defense": 7.0,
-        "overall": 6.1
+        "attack": 5.6,
+        "defense": 7.2,
+        "overall": 6.4
       }
     }
   },
@@ -1842,30 +1842,30 @@
       "name": "Fulham",
       "short_name": "FUL",
       "attacking_fixture_rating": 39.0,
-      "defensive_fixture_rating": 55.6,
+      "defensive_fixture_rating": 59.4,
       "rank": {
         "attack": 13,
         "defense": 8
       },
       "fdr": {
         "attack": 6.6,
-        "defense": 4.9,
-        "overall": 5.8
+        "defense": 4.6,
+        "overall": 5.6
       }
     },
     "away_team": {
       "name": "Everton",
       "short_name": "EVE",
-      "attacking_fixture_rating": 41.0,
+      "attacking_fixture_rating": 37.0,
       "defensive_fixture_rating": 57.5,
       "rank": {
-        "attack": 14,
+        "attack": 16,
         "defense": 4
       },
       "fdr": {
-        "attack": 6.4,
+        "attack": 6.8,
         "defense": 4.8,
-        "overall": 5.6
+        "overall": 5.8
       }
     }
   },
@@ -1876,30 +1876,30 @@
       "name": "Leeds",
       "short_name": "LEE",
       "attacking_fixture_rating": 71.0,
-      "defensive_fixture_rating": 38.8,
+      "defensive_fixture_rating": 44.4,
       "rank": {
-        "attack": 10,
-        "defense": 14
+        "attack": 7,
+        "defense": 11
       },
       "fdr": {
         "attack": 3.4,
-        "defense": 6.6,
-        "overall": 5.0
+        "defense": 6.1,
+        "overall": 4.8
       }
     },
     "away_team": {
       "name": "Nott'm Forest",
       "short_name": "NFO",
-      "attacking_fixture_rating": 59.0,
+      "attacking_fixture_rating": 53.0,
       "defensive_fixture_rating": 27.5,
       "rank": {
         "attack": 11,
-        "defense": 16
+        "defense": 13
       },
       "fdr": {
-        "attack": 4.6,
+        "attack": 5.2,
         "defense": 7.8,
-        "overall": 6.2
+        "overall": 6.5
       }
     }
   },
@@ -1909,30 +1909,30 @@
     "home_team": {
       "name": "Liverpool",
       "short_name": "LIV",
-      "attacking_fixture_rating": 53.0,
-      "defensive_fixture_rating": 35.0,
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 36.9,
       "rank": {
-        "attack": 4,
-        "defense": 6
+        "attack": 5,
+        "defense": 5
       },
       "fdr": {
-        "attack": 5.2,
-        "defense": 7.0,
-        "overall": 6.1
+        "attack": 5.6,
+        "defense": 6.8,
+        "overall": 6.2
       }
     },
     "away_team": {
       "name": "Man City",
       "short_name": "MCI",
-      "attacking_fixture_rating": 63.0,
-      "defensive_fixture_rating": 46.2,
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 48.1,
       "rank": {
         "attack": 1,
-        "defense": 2
+        "defense": 1
       },
       "fdr": {
-        "attack": 4.2,
-        "defense": 5.9,
+        "attack": 4.4,
+        "defense": 5.7,
         "overall": 5.1
       }
     }
@@ -1943,31 +1943,31 @@
     "home_team": {
       "name": "Man Utd",
       "short_name": "MUN",
-      "attacking_fixture_rating": 63.0,
+      "attacking_fixture_rating": 57.0,
       "defensive_fixture_rating": 48.1,
       "rank": {
-        "attack": 2,
-        "defense": 13
+        "attack": 3,
+        "defense": 12
       },
       "fdr": {
-        "attack": 4.2,
+        "attack": 4.8,
         "defense": 5.7,
-        "overall": 5.0
+        "overall": 5.2
       }
     },
     "away_team": {
       "name": "Spurs",
       "short_name": "TOT",
       "attacking_fixture_rating": 49.0,
-      "defensive_fixture_rating": 36.9,
+      "defensive_fixture_rating": 42.5,
       "rank": {
-        "attack": 15,
-        "defense": 5
+        "attack": 14,
+        "defense": 3
       },
       "fdr": {
         "attack": 5.6,
-        "defense": 6.8,
-        "overall": 6.2
+        "defense": 6.2,
+        "overall": 5.9
       }
     }
   },
@@ -1977,30 +1977,30 @@
     "home_team": {
       "name": "Newcastle",
       "short_name": "NEW",
-      "attacking_fixture_rating": 51.0,
-      "defensive_fixture_rating": 51.9,
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 46.2,
       "rank": {
-        "attack": 12,
-        "defense": 11
+        "attack": 10,
+        "defense": 15
       },
       "fdr": {
-        "attack": 5.4,
-        "defense": 5.3,
-        "overall": 5.3
+        "attack": 5.0,
+        "defense": 5.9,
+        "overall": 5.5
       }
     },
     "away_team": {
       "name": "Brentford",
       "short_name": "BRE",
-      "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 48.1,
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 44.4,
       "rank": {
-        "attack": 16,
+        "attack": 17,
         "defense": 9
       },
       "fdr": {
-        "attack": 6.0,
-        "defense": 5.7,
+        "attack": 5.4,
+        "defense": 6.1,
         "overall": 5.8
       }
     }
@@ -2012,30 +2012,30 @@
       "name": "Wolves",
       "short_name": "WOL",
       "attacking_fixture_rating": 31.0,
-      "defensive_fixture_rating": 18.1,
+      "defensive_fixture_rating": 21.9,
       "rank": {
         "attack": 20,
-        "defense": 19
+        "defense": 18
       },
       "fdr": {
         "attack": 7.4,
-        "defense": 8.7,
-        "overall": 8.1
+        "defense": 8.3,
+        "overall": 7.9
       }
     },
     "away_team": {
       "name": "Chelsea",
       "short_name": "CHE",
-      "attacking_fixture_rating": 81.0,
+      "attacking_fixture_rating": 77.0,
       "defensive_fixture_rating": 66.9,
       "rank": {
-        "attack": 5,
+        "attack": 6,
         "defense": 7
       },
       "fdr": {
-        "attack": 2.4,
+        "attack": 2.8,
         "defense": 3.8,
-        "overall": 3.1
+        "overall": 3.3
       }
     }
   },
@@ -2045,31 +2045,31 @@
     "home_team": {
       "name": "Aston Villa",
       "short_name": "AVL",
-      "attacking_fixture_rating": 71.0,
-      "defensive_fixture_rating": 25.6,
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 21.9,
       "rank": {
-        "attack": 8,
-        "defense": 17
+        "attack": 12,
+        "defense": 20
       },
       "fdr": {
-        "attack": 3.4,
-        "defense": 7.9,
-        "overall": 5.7
+        "attack": 3.8,
+        "defense": 8.3,
+        "overall": 6.1
       }
     },
     "away_team": {
       "name": "Brighton",
       "short_name": "BHA",
-      "attacking_fixture_rating": 73.0,
-      "defensive_fixture_rating": 29.4,
+      "attacking_fixture_rating": 77.0,
+      "defensive_fixture_rating": 33.1,
       "rank": {
-        "attack": 7,
-        "defense": 15
+        "attack": 8,
+        "defense": 17
       },
       "fdr": {
-        "attack": 3.2,
-        "defense": 7.6,
-        "overall": 5.4
+        "attack": 2.8,
+        "defense": 7.2,
+        "overall": 5.0
       }
     }
   },
@@ -2079,31 +2079,31 @@
     "home_team": {
       "name": "Brentford",
       "short_name": "BRE",
-      "attacking_fixture_rating": 27.0,
-      "defensive_fixture_rating": 31.2,
+      "attacking_fixture_rating": 35.0,
+      "defensive_fixture_rating": 33.1,
       "rank": {
-        "attack": 16,
+        "attack": 17,
         "defense": 9
       },
       "fdr": {
-        "attack": 7.8,
-        "defense": 7.4,
-        "overall": 7.6
+        "attack": 7.0,
+        "defense": 7.2,
+        "overall": 7.1
       }
     },
     "away_team": {
       "name": "Arsenal",
       "short_name": "ARS",
-      "attacking_fixture_rating": 67.0,
-      "defensive_fixture_rating": 68.8,
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 61.3,
       "rank": {
-        "attack": 3,
-        "defense": 1
+        "attack": 4,
+        "defense": 6
       },
       "fdr": {
-        "attack": 3.8,
-        "defense": 3.6,
-        "overall": 3.7
+        "attack": 4.0,
+        "defense": 4.4,
+        "overall": 4.2
       }
     }
   },
@@ -2113,31 +2113,31 @@
     "home_team": {
       "name": "Chelsea",
       "short_name": "CHE",
-      "attacking_fixture_rating": 75.0,
-      "defensive_fixture_rating": 48.1,
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 42.5,
       "rank": {
-        "attack": 5,
+        "attack": 6,
         "defense": 7
       },
       "fdr": {
-        "attack": 3.0,
-        "defense": 5.7,
-        "overall": 4.3
+        "attack": 3.8,
+        "defense": 6.2,
+        "overall": 5.0
       }
     },
     "away_team": {
       "name": "Leeds",
       "short_name": "LEE",
-      "attacking_fixture_rating": 49.0,
-      "defensive_fixture_rating": 23.8,
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 31.2,
       "rank": {
-        "attack": 10,
-        "defense": 14
+        "attack": 7,
+        "defense": 11
       },
       "fdr": {
-        "attack": 5.6,
-        "defense": 8.1,
-        "overall": 6.8
+        "attack": 5.0,
+        "defense": 7.4,
+        "overall": 6.2
       }
     }
   },
@@ -2147,31 +2147,31 @@
     "home_team": {
       "name": "Crystal Palace",
       "short_name": "CRY",
-      "attacking_fixture_rating": 75.0,
-      "defensive_fixture_rating": 55.6,
+      "attacking_fixture_rating": 71.0,
+      "defensive_fixture_rating": 44.4,
       "rank": {
         "attack": 9,
-        "defense": 10
+        "defense": 14
       },
       "fdr": {
-        "attack": 3.0,
-        "defense": 4.9,
-        "overall": 4.0
+        "attack": 3.4,
+        "defense": 6.1,
+        "overall": 4.8
       }
     },
     "away_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 41.0,
-      "defensive_fixture_rating": 23.8,
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 27.5,
       "rank": {
-        "attack": 17,
-        "defense": 18
+        "attack": 15,
+        "defense": 16
       },
       "fdr": {
-        "attack": 6.4,
-        "defense": 8.1,
-        "overall": 7.2
+        "attack": 5.2,
+        "defense": 7.8,
+        "overall": 6.5
       }
     }
   },
@@ -2181,31 +2181,31 @@
     "home_team": {
       "name": "Everton",
       "short_name": "EVE",
-      "attacking_fixture_rating": 53.0,
-      "defensive_fixture_rating": 46.2,
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 38.8,
       "rank": {
-        "attack": 14,
+        "attack": 16,
         "defense": 4
       },
       "fdr": {
-        "attack": 5.2,
-        "defense": 5.9,
-        "overall": 5.6
+        "attack": 6.0,
+        "defense": 6.6,
+        "overall": 6.3
       }
     },
     "away_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 51.0,
-      "defensive_fixture_rating": 44.4,
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 51.9,
       "rank": {
-        "attack": 6,
-        "defense": 12
+        "attack": 2,
+        "defense": 10
       },
       "fdr": {
-        "attack": 5.4,
-        "defense": 6.1,
-        "overall": 5.8
+        "attack": 4.6,
+        "defense": 5.3,
+        "overall": 4.9
       }
     }
   },
@@ -2216,30 +2216,30 @@
       "name": "Man City",
       "short_name": "MCI",
       "attacking_fixture_rating": 69.0,
-      "defensive_fixture_rating": 63.1,
+      "defensive_fixture_rating": 65.0,
       "rank": {
         "attack": 1,
-        "defense": 2
+        "defense": 1
       },
       "fdr": {
         "attack": 3.6,
-        "defense": 4.2,
-        "overall": 3.9
+        "defense": 4.0,
+        "overall": 3.8
       }
     },
     "away_team": {
       "name": "Fulham",
       "short_name": "FUL",
-      "attacking_fixture_rating": 33.0,
+      "attacking_fixture_rating": 31.0,
       "defensive_fixture_rating": 29.4,
       "rank": {
         "attack": 13,
         "defense": 8
       },
       "fdr": {
-        "attack": 7.2,
+        "attack": 7.4,
         "defense": 7.6,
-        "overall": 7.4
+        "overall": 7.5
       }
     }
   },
@@ -2249,31 +2249,31 @@
     "home_team": {
       "name": "Nott'm Forest",
       "short_name": "NFO",
-      "attacking_fixture_rating": 75.0,
-      "defensive_fixture_rating": 51.9,
+      "attacking_fixture_rating": 73.0,
+      "defensive_fixture_rating": 57.5,
       "rank": {
         "attack": 11,
-        "defense": 16
+        "defense": 13
       },
       "fdr": {
-        "attack": 3.0,
-        "defense": 5.3,
-        "overall": 4.2
+        "attack": 3.2,
+        "defense": 4.8,
+        "overall": 4.0
       }
     },
     "away_team": {
       "name": "Wolves",
       "short_name": "WOL",
-      "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 23.8,
+      "attacking_fixture_rating": 39.0,
+      "defensive_fixture_rating": 25.6,
       "rank": {
         "attack": 20,
-        "defense": 19
+        "defense": 18
       },
       "fdr": {
-        "attack": 6.0,
-        "defense": 8.1,
-        "overall": 7.0
+        "attack": 6.6,
+        "defense": 7.9,
+        "overall": 7.2
       }
     }
   },
@@ -2283,31 +2283,31 @@
     "home_team": {
       "name": "Spurs",
       "short_name": "TOT",
-      "attacking_fixture_rating": 49.0,
+      "attacking_fixture_rating": 59.0,
       "defensive_fixture_rating": 55.6,
       "rank": {
-        "attack": 15,
-        "defense": 5
+        "attack": 14,
+        "defense": 3
       },
       "fdr": {
-        "attack": 5.6,
+        "attack": 4.6,
         "defense": 4.9,
-        "overall": 5.2
+        "overall": 4.8
       }
     },
     "away_team": {
       "name": "Newcastle",
       "short_name": "NEW",
       "attacking_fixture_rating": 41.0,
-      "defensive_fixture_rating": 50.0,
+      "defensive_fixture_rating": 40.6,
       "rank": {
-        "attack": 12,
-        "defense": 11
+        "attack": 10,
+        "defense": 15
       },
       "fdr": {
         "attack": 6.4,
-        "defense": 5.5,
-        "overall": 6.0
+        "defense": 6.4,
+        "overall": 6.4
       }
     }
   },
@@ -2317,31 +2317,31 @@
     "home_team": {
       "name": "Sunderland",
       "short_name": "SUN",
-      "attacking_fixture_rating": 31.0,
-      "defensive_fixture_rating": 46.2,
+      "attacking_fixture_rating": 29.0,
+      "defensive_fixture_rating": 50.0,
       "rank": {
         "attack": 19,
-        "defense": 3
+        "defense": 2
       },
       "fdr": {
-        "attack": 7.4,
-        "defense": 5.9,
-        "overall": 6.7
+        "attack": 7.6,
+        "defense": 5.5,
+        "overall": 6.5
       }
     },
     "away_team": {
       "name": "Liverpool",
       "short_name": "LIV",
-      "attacking_fixture_rating": 51.0,
-      "defensive_fixture_rating": 65.0,
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 66.9,
       "rank": {
-        "attack": 4,
-        "defense": 6
+        "attack": 5,
+        "defense": 5
       },
       "fdr": {
-        "attack": 5.4,
-        "defense": 4.0,
-        "overall": 4.7
+        "attack": 5.8,
+        "defense": 3.8,
+        "overall": 4.8
       }
     }
   },
@@ -2351,31 +2351,31 @@
     "home_team": {
       "name": "West Ham",
       "short_name": "WHU",
-      "attacking_fixture_rating": 47.0,
-      "defensive_fixture_rating": 10.6,
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 14.4,
       "rank": {
         "attack": 18,
-        "defense": 20
+        "defense": 19
       },
       "fdr": {
-        "attack": 5.8,
-        "defense": 9.4,
-        "overall": 7.6
+        "attack": 6.0,
+        "defense": 9.1,
+        "overall": 7.5
       }
     },
     "away_team": {
       "name": "Man Utd",
       "short_name": "MUN",
-      "attacking_fixture_rating": 89.0,
-      "defensive_fixture_rating": 50.0,
+      "attacking_fixture_rating": 85.0,
+      "defensive_fixture_rating": 51.9,
       "rank": {
-        "attack": 2,
-        "defense": 13
+        "attack": 3,
+        "defense": 12
       },
       "fdr": {
-        "attack": 1.6,
-        "defense": 5.5,
-        "overall": 3.5
+        "attack": 2.0,
+        "defense": 5.3,
+        "overall": 3.6
       }
     }
   },
@@ -2385,31 +2385,31 @@
     "home_team": {
       "name": "Aston Villa",
       "short_name": "AVL",
-      "attacking_fixture_rating": 69.0,
-      "defensive_fixture_rating": 31.2,
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 20.0,
       "rank": {
-        "attack": 8,
-        "defense": 17
+        "attack": 12,
+        "defense": 20
       },
       "fdr": {
-        "attack": 3.6,
-        "defense": 7.4,
-        "overall": 5.5
+        "attack": 5.0,
+        "defense": 8.5,
+        "overall": 6.8
       }
     },
     "away_team": {
       "name": "Leeds",
       "short_name": "LEE",
-      "attacking_fixture_rating": 67.0,
-      "defensive_fixture_rating": 29.4,
+      "attacking_fixture_rating": 79.0,
+      "defensive_fixture_rating": 42.5,
       "rank": {
-        "attack": 10,
-        "defense": 14
+        "attack": 7,
+        "defense": 11
       },
       "fdr": {
-        "attack": 3.8,
-        "defense": 7.6,
-        "overall": 5.7
+        "attack": 2.6,
+        "defense": 6.2,
+        "overall": 4.4
       }
     }
   },
@@ -2419,128 +2419,26 @@
     "home_team": {
       "name": "Brentford",
       "short_name": "BRE",
-      "attacking_fixture_rating": 55.0,
-      "defensive_fixture_rating": 38.8,
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 40.6,
       "rank": {
-        "attack": 16,
+        "attack": 17,
         "defense": 9
       },
       "fdr": {
-        "attack": 5.0,
-        "defense": 6.6,
-        "overall": 5.8
+        "attack": 4.8,
+        "defense": 6.4,
+        "overall": 5.6
       }
     },
     "away_team": {
       "name": "Brighton",
       "short_name": "BHA",
-      "attacking_fixture_rating": 59.0,
-      "defensive_fixture_rating": 44.4,
-      "rank": {
-        "attack": 7,
-        "defense": 15
-      },
-      "fdr": {
-        "attack": 4.6,
-        "defense": 6.1,
-        "overall": 5.3
-      }
-    }
-  },
-  {
-    "gameweek": 27,
-    "fixture": "Chelsea vs Burnley",
-    "home_team": {
-      "name": "Chelsea",
-      "short_name": "CHE",
-      "attacking_fixture_rating": 83.0,
-      "defensive_fixture_rating": 61.3,
-      "rank": {
-        "attack": 5,
-        "defense": 7
-      },
-      "fdr": {
-        "attack": 2.2,
-        "defense": 4.4,
-        "overall": 3.3
-      }
-    },
-    "away_team": {
-      "name": "Burnley",
-      "short_name": "BUR",
-      "attacking_fixture_rating": 35.0,
-      "defensive_fixture_rating": 16.2,
-      "rank": {
-        "attack": 17,
-        "defense": 18
-      },
-      "fdr": {
-        "attack": 7.0,
-        "defense": 8.9,
-        "overall": 8.0
-      }
-    }
-  },
-  {
-    "gameweek": 27,
-    "fixture": "Crystal Palace vs Wolves",
-    "home_team": {
-      "name": "Crystal Palace",
-      "short_name": "CRY",
-      "attacking_fixture_rating": 77.0,
-      "defensive_fixture_rating": 61.3,
-      "rank": {
-        "attack": 9,
-        "defense": 10
-      },
-      "fdr": {
-        "attack": 2.8,
-        "defense": 4.4,
-        "overall": 3.6
-      }
-    },
-    "away_team": {
-      "name": "Wolves",
-      "short_name": "WOL",
-      "attacking_fixture_rating": 35.0,
-      "defensive_fixture_rating": 21.9,
-      "rank": {
-        "attack": 20,
-        "defense": 19
-      },
-      "fdr": {
-        "attack": 7.0,
-        "defense": 8.3,
-        "overall": 7.7
-      }
-    }
-  },
-  {
-    "gameweek": 27,
-    "fixture": "Everton vs Man Utd",
-    "home_team": {
-      "name": "Everton",
-      "short_name": "EVE",
-      "attacking_fixture_rating": 55.0,
-      "defensive_fixture_rating": 40.6,
-      "rank": {
-        "attack": 14,
-        "defense": 4
-      },
-      "fdr": {
-        "attack": 5.0,
-        "defense": 6.4,
-        "overall": 5.7
-      }
-    },
-    "away_team": {
-      "name": "Man Utd",
-      "short_name": "MUN",
       "attacking_fixture_rating": 57.0,
       "defensive_fixture_rating": 42.5,
       "rank": {
-        "attack": 2,
-        "defense": 13
+        "attack": 8,
+        "defense": 17
       },
       "fdr": {
         "attack": 4.8,
@@ -2551,35 +2449,137 @@
   },
   {
     "gameweek": 27,
+    "fixture": "Chelsea vs Burnley",
+    "home_team": {
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "attacking_fixture_rating": 77.0,
+      "defensive_fixture_rating": 57.5,
+      "rank": {
+        "attack": 6,
+        "defense": 7
+      },
+      "fdr": {
+        "attack": 2.8,
+        "defense": 4.8,
+        "overall": 3.8
+      }
+    },
+    "away_team": {
+      "name": "Burnley",
+      "short_name": "BUR",
+      "attacking_fixture_rating": 39.0,
+      "defensive_fixture_rating": 21.9,
+      "rank": {
+        "attack": 15,
+        "defense": 16
+      },
+      "fdr": {
+        "attack": 6.6,
+        "defense": 8.3,
+        "overall": 7.5
+      }
+    }
+  },
+  {
+    "gameweek": 27,
+    "fixture": "Crystal Palace vs Wolves",
+    "home_team": {
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "attacking_fixture_rating": 75.0,
+      "defensive_fixture_rating": 53.8,
+      "rank": {
+        "attack": 9,
+        "defense": 14
+      },
+      "fdr": {
+        "attack": 3.0,
+        "defense": 5.1,
+        "overall": 4.0
+      }
+    },
+    "away_team": {
+      "name": "Wolves",
+      "short_name": "WOL",
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 23.8,
+      "rank": {
+        "attack": 20,
+        "defense": 18
+      },
+      "fdr": {
+        "attack": 6.2,
+        "defense": 8.1,
+        "overall": 7.2
+      }
+    }
+  },
+  {
+    "gameweek": 27,
+    "fixture": "Everton vs Man Utd",
+    "home_team": {
+      "name": "Everton",
+      "short_name": "EVE",
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 42.5,
+      "rank": {
+        "attack": 16,
+        "defense": 4
+      },
+      "fdr": {
+        "attack": 5.6,
+        "defense": 6.2,
+        "overall": 5.9
+      }
+    },
+    "away_team": {
+      "name": "Man Utd",
+      "short_name": "MUN",
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 48.1,
+      "rank": {
+        "attack": 3,
+        "defense": 12
+      },
+      "fdr": {
+        "attack": 5.0,
+        "defense": 5.7,
+        "overall": 5.3
+      }
+    }
+  },
+  {
+    "gameweek": 27,
     "fixture": "Man City vs Newcastle",
     "home_team": {
       "name": "Man City",
       "short_name": "MCI",
-      "attacking_fixture_rating": 75.0,
-      "defensive_fixture_rating": 61.3,
+      "attacking_fixture_rating": 83.0,
+      "defensive_fixture_rating": 59.4,
       "rank": {
         "attack": 1,
-        "defense": 2
+        "defense": 1
       },
       "fdr": {
-        "attack": 3.0,
-        "defense": 4.4,
-        "overall": 3.7
+        "attack": 2.2,
+        "defense": 4.6,
+        "overall": 3.4
       }
     },
     "away_team": {
       "name": "Newcastle",
       "short_name": "NEW",
-      "attacking_fixture_rating": 35.0,
-      "defensive_fixture_rating": 25.6,
+      "attacking_fixture_rating": 37.0,
+      "defensive_fixture_rating": 18.1,
       "rank": {
-        "attack": 12,
-        "defense": 11
+        "attack": 10,
+        "defense": 15
       },
       "fdr": {
-        "attack": 7.0,
-        "defense": 7.9,
-        "overall": 7.5
+        "attack": 6.8,
+        "defense": 8.7,
+        "overall": 7.8
       }
     }
   },
@@ -2589,31 +2589,31 @@
     "home_team": {
       "name": "Nott'm Forest",
       "short_name": "NFO",
-      "attacking_fixture_rating": 49.0,
-      "defensive_fixture_rating": 21.9,
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 29.4,
       "rank": {
         "attack": 11,
-        "defense": 16
+        "defense": 13
       },
       "fdr": {
-        "attack": 5.6,
-        "defense": 8.3,
-        "overall": 7.0
+        "attack": 5.8,
+        "defense": 7.6,
+        "overall": 6.7
       }
     },
     "away_team": {
       "name": "Liverpool",
       "short_name": "LIV",
-      "attacking_fixture_rating": 77.0,
-      "defensive_fixture_rating": 48.1,
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 50.0,
       "rank": {
-        "attack": 4,
-        "defense": 6
+        "attack": 5,
+        "defense": 5
       },
       "fdr": {
-        "attack": 2.8,
-        "defense": 5.7,
-        "overall": 4.2
+        "attack": 3.6,
+        "defense": 5.5,
+        "overall": 4.5
       }
     }
   },
@@ -2623,31 +2623,31 @@
     "home_team": {
       "name": "Spurs",
       "short_name": "TOT",
-      "attacking_fixture_rating": 29.0,
-      "defensive_fixture_rating": 38.8,
+      "attacking_fixture_rating": 41.0,
+      "defensive_fixture_rating": 44.4,
       "rank": {
-        "attack": 15,
-        "defense": 5
+        "attack": 14,
+        "defense": 3
       },
       "fdr": {
-        "attack": 7.6,
-        "defense": 6.6,
-        "overall": 7.1
+        "attack": 6.4,
+        "defense": 6.1,
+        "overall": 6.2
       }
     },
     "away_team": {
       "name": "Arsenal",
       "short_name": "ARS",
-      "attacking_fixture_rating": 59.0,
-      "defensive_fixture_rating": 66.9,
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 55.6,
       "rank": {
-        "attack": 3,
-        "defense": 1
+        "attack": 4,
+        "defense": 6
       },
       "fdr": {
-        "attack": 4.6,
-        "defense": 3.8,
-        "overall": 4.2
+        "attack": 5.2,
+        "defense": 4.9,
+        "overall": 5.1
       }
     }
   },
@@ -2658,30 +2658,30 @@
       "name": "Sunderland",
       "short_name": "SUN",
       "attacking_fixture_rating": 35.0,
-      "defensive_fixture_rating": 63.1,
+      "defensive_fixture_rating": 65.0,
       "rank": {
         "attack": 19,
-        "defense": 3
+        "defense": 2
       },
       "fdr": {
         "attack": 7.0,
-        "defense": 4.2,
-        "overall": 5.6
+        "defense": 4.0,
+        "overall": 5.5
       }
     },
     "away_team": {
       "name": "Fulham",
       "short_name": "FUL",
-      "attacking_fixture_rating": 33.0,
+      "attacking_fixture_rating": 31.0,
       "defensive_fixture_rating": 61.3,
       "rank": {
         "attack": 13,
         "defense": 8
       },
       "fdr": {
-        "attack": 7.2,
+        "attack": 7.4,
         "defense": 4.4,
-        "overall": 5.8
+        "overall": 5.9
       }
     }
   },
@@ -2691,31 +2691,31 @@
     "home_team": {
       "name": "West Ham",
       "short_name": "WHU",
-      "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 16.2,
+      "attacking_fixture_rating": 41.0,
+      "defensive_fixture_rating": 10.6,
       "rank": {
         "attack": 18,
-        "defense": 20
+        "defense": 19
       },
       "fdr": {
-        "attack": 6.0,
-        "defense": 8.9,
-        "overall": 7.5
+        "attack": 6.4,
+        "defense": 9.4,
+        "overall": 7.9
       }
     },
     "away_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 83.0,
-      "defensive_fixture_rating": 51.9,
+      "attacking_fixture_rating": 89.0,
+      "defensive_fixture_rating": 55.6,
       "rank": {
-        "attack": 6,
-        "defense": 12
+        "attack": 2,
+        "defense": 10
       },
       "fdr": {
-        "attack": 2.2,
-        "defense": 5.3,
-        "overall": 3.8
+        "attack": 1.6,
+        "defense": 4.9,
+        "overall": 3.2
       }
     }
   },
@@ -2725,31 +2725,31 @@
     "home_team": {
       "name": "Arsenal",
       "short_name": "ARS",
-      "attacking_fixture_rating": 65.0,
-      "defensive_fixture_rating": 50.0,
+      "attacking_fixture_rating": 63.0,
+      "defensive_fixture_rating": 44.4,
       "rank": {
-        "attack": 3,
-        "defense": 1
+        "attack": 4,
+        "defense": 6
       },
       "fdr": {
-        "attack": 4.0,
-        "defense": 5.5,
-        "overall": 4.8
+        "attack": 4.2,
+        "defense": 6.1,
+        "overall": 5.2
       }
     },
     "away_team": {
       "name": "Chelsea",
       "short_name": "CHE",
-      "attacking_fixture_rating": 47.0,
-      "defensive_fixture_rating": 35.0,
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 36.9,
       "rank": {
-        "attack": 5,
+        "attack": 6,
         "defense": 7
       },
       "fdr": {
-        "attack": 5.8,
-        "defense": 7.0,
-        "overall": 6.4
+        "attack": 5.2,
+        "defense": 6.8,
+        "overall": 6.0
       }
     }
   },
@@ -2759,31 +2759,31 @@
     "home_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 49.0,
-      "defensive_fixture_rating": 57.5,
+      "attacking_fixture_rating": 55.0,
+      "defensive_fixture_rating": 61.3,
       "rank": {
-        "attack": 6,
-        "defense": 12
+        "attack": 2,
+        "defense": 10
       },
       "fdr": {
-        "attack": 5.6,
-        "defense": 4.8,
-        "overall": 5.2
+        "attack": 5.0,
+        "defense": 4.4,
+        "overall": 4.7
       }
     },
     "away_team": {
       "name": "Sunderland",
       "short_name": "SUN",
-      "attacking_fixture_rating": 39.0,
-      "defensive_fixture_rating": 48.1,
+      "attacking_fixture_rating": 35.0,
+      "defensive_fixture_rating": 42.5,
       "rank": {
         "attack": 19,
-        "defense": 3
+        "defense": 2
       },
       "fdr": {
-        "attack": 6.6,
-        "defense": 5.7,
-        "overall": 6.2
+        "attack": 7.0,
+        "defense": 6.2,
+        "overall": 6.6
       }
     }
   },
@@ -2793,31 +2793,31 @@
     "home_team": {
       "name": "Brighton",
       "short_name": "BHA",
-      "attacking_fixture_rating": 75.0,
-      "defensive_fixture_rating": 35.0,
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 31.2,
       "rank": {
-        "attack": 7,
-        "defense": 15
+        "attack": 8,
+        "defense": 17
       },
       "fdr": {
-        "attack": 3.0,
-        "defense": 7.0,
-        "overall": 5.0
+        "attack": 3.8,
+        "defense": 7.4,
+        "overall": 5.6
       }
     },
     "away_team": {
       "name": "Nott'm Forest",
       "short_name": "NFO",
-      "attacking_fixture_rating": 63.0,
-      "defensive_fixture_rating": 23.8,
+      "attacking_fixture_rating": 67.0,
+      "defensive_fixture_rating": 31.2,
       "rank": {
         "attack": 11,
-        "defense": 16
+        "defense": 13
       },
       "fdr": {
-        "attack": 4.2,
-        "defense": 8.1,
-        "overall": 6.2
+        "attack": 3.8,
+        "defense": 7.4,
+        "overall": 5.6
       }
     }
   },
@@ -2827,31 +2827,31 @@
     "home_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 41.0,
-      "defensive_fixture_rating": 40.6,
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 46.2,
       "rank": {
-        "attack": 17,
-        "defense": 18
+        "attack": 15,
+        "defense": 16
       },
       "fdr": {
-        "attack": 6.4,
-        "defense": 6.4,
-        "overall": 6.4
+        "attack": 6.0,
+        "defense": 5.9,
+        "overall": 6.0
       }
     },
     "away_team": {
       "name": "Brentford",
       "short_name": "BRE",
-      "attacking_fixture_rating": 57.0,
-      "defensive_fixture_rating": 57.5,
+      "attacking_fixture_rating": 51.0,
+      "defensive_fixture_rating": 53.8,
       "rank": {
-        "attack": 16,
+        "attack": 17,
         "defense": 9
       },
       "fdr": {
-        "attack": 4.8,
-        "defense": 4.8,
-        "overall": 4.8
+        "attack": 5.4,
+        "defense": 5.1,
+        "overall": 5.2
       }
     }
   },
@@ -2861,31 +2861,31 @@
     "home_team": {
       "name": "Fulham",
       "short_name": "FUL",
-      "attacking_fixture_rating": 41.0,
-      "defensive_fixture_rating": 57.5,
+      "attacking_fixture_rating": 37.0,
+      "defensive_fixture_rating": 55.6,
       "rank": {
         "attack": 13,
         "defense": 8
       },
       "fdr": {
-        "attack": 6.4,
-        "defense": 4.8,
-        "overall": 5.6
+        "attack": 6.8,
+        "defense": 4.9,
+        "overall": 5.8
       }
     },
     "away_team": {
       "name": "Spurs",
       "short_name": "TOT",
-      "attacking_fixture_rating": 39.0,
-      "defensive_fixture_rating": 57.5,
+      "attacking_fixture_rating": 41.0,
+      "defensive_fixture_rating": 61.3,
       "rank": {
-        "attack": 15,
-        "defense": 5
+        "attack": 14,
+        "defense": 3
       },
       "fdr": {
-        "attack": 6.6,
-        "defense": 4.8,
-        "overall": 5.7
+        "attack": 6.4,
+        "defense": 4.4,
+        "overall": 5.4
       }
     }
   },
@@ -2895,31 +2895,31 @@
     "home_team": {
       "name": "Leeds",
       "short_name": "LEE",
-      "attacking_fixture_rating": 43.0,
-      "defensive_fixture_rating": 20.0,
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 25.6,
       "rank": {
-        "attack": 10,
-        "defense": 14
+        "attack": 7,
+        "defense": 11
       },
       "fdr": {
-        "attack": 6.2,
-        "defense": 8.5,
-        "overall": 7.3
+        "attack": 5.8,
+        "defense": 7.9,
+        "overall": 6.8
       }
     },
     "away_team": {
       "name": "Man City",
       "short_name": "MCI",
-      "attacking_fixture_rating": 79.0,
-      "defensive_fixture_rating": 55.6,
+      "attacking_fixture_rating": 73.0,
+      "defensive_fixture_rating": 50.0,
       "rank": {
         "attack": 1,
-        "defense": 2
+        "defense": 1
       },
       "fdr": {
-        "attack": 2.6,
-        "defense": 4.9,
-        "overall": 3.8
+        "attack": 3.2,
+        "defense": 5.5,
+        "overall": 4.3
       }
     }
   },
@@ -2929,31 +2929,31 @@
     "home_team": {
       "name": "Liverpool",
       "short_name": "LIV",
-      "attacking_fixture_rating": 89.0,
-      "defensive_fixture_rating": 66.9,
+      "attacking_fixture_rating": 85.0,
+      "defensive_fixture_rating": 68.8,
       "rank": {
-        "attack": 4,
-        "defense": 6
+        "attack": 5,
+        "defense": 5
       },
       "fdr": {
-        "attack": 1.6,
-        "defense": 3.8,
-        "overall": 2.7
+        "attack": 2.0,
+        "defense": 3.6,
+        "overall": 2.8
       }
     },
     "away_team": {
       "name": "West Ham",
       "short_name": "WHU",
-      "attacking_fixture_rating": 29.0,
-      "defensive_fixture_rating": 10.6,
+      "attacking_fixture_rating": 27.0,
+      "defensive_fixture_rating": 14.4,
       "rank": {
         "attack": 18,
-        "defense": 20
+        "defense": 19
       },
       "fdr": {
-        "attack": 7.6,
-        "defense": 9.4,
-        "overall": 8.5
+        "attack": 7.8,
+        "defense": 9.1,
+        "overall": 8.4
       }
     }
   },
@@ -2963,31 +2963,31 @@
     "home_team": {
       "name": "Man Utd",
       "short_name": "MUN",
-      "attacking_fixture_rating": 73.0,
-      "defensive_fixture_rating": 36.9,
+      "attacking_fixture_rating": 79.0,
+      "defensive_fixture_rating": 38.8,
       "rank": {
-        "attack": 2,
-        "defense": 13
+        "attack": 3,
+        "defense": 12
       },
       "fdr": {
-        "attack": 3.2,
-        "defense": 6.8,
-        "overall": 5.0
+        "attack": 2.6,
+        "defense": 6.6,
+        "overall": 4.6
       }
     },
     "away_team": {
       "name": "Crystal Palace",
       "short_name": "CRY",
-      "attacking_fixture_rating": 61.0,
-      "defensive_fixture_rating": 27.5,
+      "attacking_fixture_rating": 59.0,
+      "defensive_fixture_rating": 21.9,
       "rank": {
         "attack": 9,
-        "defense": 10
+        "defense": 14
       },
       "fdr": {
-        "attack": 4.4,
-        "defense": 7.8,
-        "overall": 6.1
+        "attack": 4.6,
+        "defense": 8.3,
+        "overall": 6.5
       }
     }
   },
@@ -2997,30 +2997,30 @@
     "home_team": {
       "name": "Newcastle",
       "short_name": "NEW",
-      "attacking_fixture_rating": 41.0,
-      "defensive_fixture_rating": 48.1,
+      "attacking_fixture_rating": 45.0,
+      "defensive_fixture_rating": 44.4,
       "rank": {
-        "attack": 12,
-        "defense": 11
+        "attack": 10,
+        "defense": 15
       },
       "fdr": {
-        "attack": 6.4,
-        "defense": 5.7,
-        "overall": 6.1
+        "attack": 6.0,
+        "defense": 6.1,
+        "overall": 6.0
       }
     },
     "away_team": {
       "name": "Everton",
       "short_name": "EVE",
-      "attacking_fixture_rating": 49.0,
-      "defensive_fixture_rating": 55.6,
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 51.9,
       "rank": {
-        "attack": 14,
+        "attack": 16,
         "defense": 4
       },
       "fdr": {
-        "attack": 5.6,
-        "defense": 4.9,
+        "attack": 5.2,
+        "defense": 5.3,
         "overall": 5.2
       }
     }
@@ -3031,31 +3031,31 @@
     "home_team": {
       "name": "Wolves",
       "short_name": "WOL",
-      "attacking_fixture_rating": 51.0,
-      "defensive_fixture_rating": 23.8,
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 33.1,
       "rank": {
         "attack": 20,
-        "defense": 19
+        "defense": 18
       },
       "fdr": {
-        "attack": 5.4,
-        "defense": 8.1,
-        "overall": 6.8
+        "attack": 4.8,
+        "defense": 7.2,
+        "overall": 6.0
       }
     },
     "away_team": {
       "name": "Aston Villa",
       "short_name": "AVL",
-      "attacking_fixture_rating": 75.0,
-      "defensive_fixture_rating": 46.2,
+      "attacking_fixture_rating": 65.0,
+      "defensive_fixture_rating": 40.6,
       "rank": {
-        "attack": 8,
-        "defense": 17
+        "attack": 12,
+        "defense": 20
       },
       "fdr": {
-        "attack": 3.0,
-        "defense": 5.9,
-        "overall": 4.5
+        "attack": 4.0,
+        "defense": 6.4,
+        "overall": 5.2
       }
     }
   },
@@ -3065,31 +3065,31 @@
     "home_team": {
       "name": "Aston Villa",
       "short_name": "AVL",
-      "attacking_fixture_rating": 55.0,
-      "defensive_fixture_rating": 21.9,
+      "attacking_fixture_rating": 47.0,
+      "defensive_fixture_rating": 18.1,
       "rank": {
-        "attack": 8,
-        "defense": 17
+        "attack": 12,
+        "defense": 20
       },
       "fdr": {
-        "attack": 5.0,
-        "defense": 8.3,
-        "overall": 6.7
+        "attack": 5.8,
+        "defense": 8.7,
+        "overall": 7.2
       }
     },
     "away_team": {
       "name": "Chelsea",
       "short_name": "CHE",
-      "attacking_fixture_rating": 77.0,
-      "defensive_fixture_rating": 44.4,
+      "attacking_fixture_rating": 81.0,
+      "defensive_fixture_rating": 51.9,
       "rank": {
-        "attack": 5,
+        "attack": 6,
         "defense": 7
       },
       "fdr": {
-        "attack": 2.8,
-        "defense": 6.1,
-        "overall": 4.4
+        "attack": 2.4,
+        "defense": 5.3,
+        "overall": 3.8
       }
     }
   },
@@ -3099,31 +3099,31 @@
     "home_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 61.0,
-      "defensive_fixture_rating": 51.9,
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 57.5,
       "rank": {
-        "attack": 6,
-        "defense": 12
+        "attack": 2,
+        "defense": 10
       },
       "fdr": {
-        "attack": 4.4,
-        "defense": 5.3,
-        "overall": 4.8
+        "attack": 3.6,
+        "defense": 4.8,
+        "overall": 4.2
       }
     },
     "away_team": {
       "name": "Brentford",
       "short_name": "BRE",
-      "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 38.8,
+      "attacking_fixture_rating": 39.0,
+      "defensive_fixture_rating": 31.2,
       "rank": {
-        "attack": 16,
+        "attack": 17,
         "defense": 9
       },
       "fdr": {
-        "attack": 6.0,
-        "defense": 6.6,
-        "overall": 6.3
+        "attack": 6.6,
+        "defense": 7.4,
+        "overall": 7.0
       }
     }
   },
@@ -3133,31 +3133,31 @@
     "home_team": {
       "name": "Brighton",
       "short_name": "BHA",
-      "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 20.0,
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 18.1,
       "rank": {
-        "attack": 7,
-        "defense": 15
+        "attack": 8,
+        "defense": 17
       },
       "fdr": {
-        "attack": 6.0,
-        "defense": 8.5,
-        "overall": 7.2
+        "attack": 5.2,
+        "defense": 8.7,
+        "overall": 6.9
       }
     },
     "away_team": {
       "name": "Arsenal",
       "short_name": "ARS",
-      "attacking_fixture_rating": 79.0,
-      "defensive_fixture_rating": 51.9,
+      "attacking_fixture_rating": 81.0,
+      "defensive_fixture_rating": 44.4,
       "rank": {
-        "attack": 3,
-        "defense": 1
+        "attack": 4,
+        "defense": 6
       },
       "fdr": {
-        "attack": 2.6,
-        "defense": 5.3,
-        "overall": 4.0
+        "attack": 2.4,
+        "defense": 6.1,
+        "overall": 4.2
       }
     }
   },
@@ -3167,31 +3167,31 @@
     "home_team": {
       "name": "Everton",
       "short_name": "EVE",
-      "attacking_fixture_rating": 65.0,
-      "defensive_fixture_rating": 68.8,
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 65.0,
       "rank": {
-        "attack": 14,
+        "attack": 16,
         "defense": 4
       },
       "fdr": {
-        "attack": 4.0,
-        "defense": 3.6,
-        "overall": 3.8
+        "attack": 4.8,
+        "defense": 4.0,
+        "overall": 4.4
       }
     },
     "away_team": {
       "name": "Burnley",
       "short_name": "BUR",
-      "attacking_fixture_rating": 27.0,
-      "defensive_fixture_rating": 33.1,
+      "attacking_fixture_rating": 31.0,
+      "defensive_fixture_rating": 40.6,
       "rank": {
-        "attack": 17,
-        "defense": 18
+        "attack": 15,
+        "defense": 16
       },
       "fdr": {
-        "attack": 7.8,
-        "defense": 7.2,
-        "overall": 7.5
+        "attack": 7.4,
+        "defense": 6.4,
+        "overall": 6.9
       }
     }
   },
@@ -3201,31 +3201,31 @@
     "home_team": {
       "name": "Fulham",
       "short_name": "FUL",
-      "attacking_fixture_rating": 71.0,
+      "attacking_fixture_rating": 69.0,
       "defensive_fixture_rating": 63.1,
       "rank": {
         "attack": 13,
         "defense": 8
       },
       "fdr": {
-        "attack": 3.4,
+        "attack": 3.6,
         "defense": 4.2,
-        "overall": 3.8
+        "overall": 3.9
       }
     },
     "away_team": {
       "name": "West Ham",
       "short_name": "WHU",
       "attacking_fixture_rating": 33.0,
-      "defensive_fixture_rating": 27.5,
+      "defensive_fixture_rating": 29.4,
       "rank": {
         "attack": 18,
-        "defense": 20
+        "defense": 19
       },
       "fdr": {
         "attack": 7.2,
-        "defense": 7.8,
-        "overall": 7.5
+        "defense": 7.6,
+        "overall": 7.4
       }
     }
   },
@@ -3235,31 +3235,31 @@
     "home_team": {
       "name": "Leeds",
       "short_name": "LEE",
-      "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 53.8,
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 59.4,
       "rank": {
-        "attack": 10,
-        "defense": 14
+        "attack": 7,
+        "defense": 11
       },
       "fdr": {
-        "attack": 6.0,
-        "defense": 5.1,
-        "overall": 5.5
+        "attack": 5.6,
+        "defense": 4.6,
+        "overall": 5.1
       }
     },
     "away_team": {
       "name": "Sunderland",
       "short_name": "SUN",
-      "attacking_fixture_rating": 43.0,
-      "defensive_fixture_rating": 51.9,
+      "attacking_fixture_rating": 37.0,
+      "defensive_fixture_rating": 48.1,
       "rank": {
         "attack": 19,
-        "defense": 3
+        "defense": 2
       },
       "fdr": {
-        "attack": 6.2,
-        "defense": 5.3,
-        "overall": 5.8
+        "attack": 6.8,
+        "defense": 5.7,
+        "overall": 6.2
       }
     }
   },
@@ -3269,31 +3269,31 @@
     "home_team": {
       "name": "Man City",
       "short_name": "MCI",
-      "attacking_fixture_rating": 85.0,
-      "defensive_fixture_rating": 59.4,
+      "attacking_fixture_rating": 79.0,
+      "defensive_fixture_rating": 61.3,
       "rank": {
         "attack": 1,
-        "defense": 2
+        "defense": 1
       },
       "fdr": {
-        "attack": 2.0,
-        "defense": 4.6,
-        "overall": 3.3
+        "attack": 2.6,
+        "defense": 4.4,
+        "overall": 3.5
       }
     },
     "away_team": {
       "name": "Nott'm Forest",
       "short_name": "NFO",
-      "attacking_fixture_rating": 37.0,
-      "defensive_fixture_rating": 14.4,
+      "attacking_fixture_rating": 35.0,
+      "defensive_fixture_rating": 20.0,
       "rank": {
         "attack": 11,
-        "defense": 16
+        "defense": 13
       },
       "fdr": {
-        "attack": 6.8,
-        "defense": 9.1,
-        "overall": 7.9
+        "attack": 7.0,
+        "defense": 8.5,
+        "overall": 7.8
       }
     }
   },
@@ -3303,31 +3303,31 @@
     "home_team": {
       "name": "Newcastle",
       "short_name": "NEW",
-      "attacking_fixture_rating": 59.0,
-      "defensive_fixture_rating": 25.6,
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 20.0,
       "rank": {
-        "attack": 12,
-        "defense": 11
+        "attack": 10,
+        "defense": 15
       },
       "fdr": {
-        "attack": 4.6,
-        "defense": 7.9,
-        "overall": 6.2
+        "attack": 4.4,
+        "defense": 8.5,
+        "overall": 6.5
       }
     },
     "away_team": {
       "name": "Man Utd",
       "short_name": "MUN",
-      "attacking_fixture_rating": 73.0,
-      "defensive_fixture_rating": 38.8,
+      "attacking_fixture_rating": 79.0,
+      "defensive_fixture_rating": 36.9,
       "rank": {
-        "attack": 2,
-        "defense": 13
+        "attack": 3,
+        "defense": 12
       },
       "fdr": {
-        "attack": 3.2,
-        "defense": 6.6,
-        "overall": 4.9
+        "attack": 2.6,
+        "defense": 6.8,
+        "overall": 4.7
       }
     }
   },
@@ -3337,31 +3337,31 @@
     "home_team": {
       "name": "Spurs",
       "short_name": "TOT",
-      "attacking_fixture_rating": 47.0,
-      "defensive_fixture_rating": 50.0,
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 53.8,
       "rank": {
-        "attack": 15,
-        "defense": 5
+        "attack": 14,
+        "defense": 3
       },
       "fdr": {
-        "attack": 5.8,
-        "defense": 5.5,
-        "overall": 5.7
+        "attack": 4.8,
+        "defense": 5.1,
+        "overall": 4.9
       }
     },
     "away_team": {
       "name": "Crystal Palace",
       "short_name": "CRY",
-      "attacking_fixture_rating": 47.0,
-      "defensive_fixture_rating": 51.9,
+      "attacking_fixture_rating": 43.0,
+      "defensive_fixture_rating": 42.5,
       "rank": {
         "attack": 9,
-        "defense": 10
+        "defense": 14
       },
       "fdr": {
-        "attack": 5.8,
-        "defense": 5.3,
-        "overall": 5.5
+        "attack": 6.2,
+        "defense": 6.2,
+        "overall": 6.2
       }
     }
   },
@@ -3371,31 +3371,31 @@
     "home_team": {
       "name": "Wolves",
       "short_name": "WOL",
-      "attacking_fixture_rating": 29.0,
-      "defensive_fixture_rating": 16.2,
+      "attacking_fixture_rating": 27.0,
+      "defensive_fixture_rating": 20.0,
       "rank": {
         "attack": 20,
-        "defense": 19
+        "defense": 18
       },
       "fdr": {
-        "attack": 7.6,
-        "defense": 8.9,
+        "attack": 7.8,
+        "defense": 8.5,
         "overall": 8.2
       }
     },
     "away_team": {
       "name": "Liverpool",
       "short_name": "LIV",
-      "attacking_fixture_rating": 83.0,
-      "defensive_fixture_rating": 66.9,
+      "attacking_fixture_rating": 79.0,
+      "defensive_fixture_rating": 68.8,
       "rank": {
-        "attack": 4,
-        "defense": 6
+        "attack": 5,
+        "defense": 5
       },
       "fdr": {
-        "attack": 2.2,
-        "defense": 3.8,
-        "overall": 3.0
+        "attack": 2.6,
+        "defense": 3.6,
+        "overall": 3.1
       }
     }
   },
@@ -3405,31 +3405,31 @@
     "home_team": {
       "name": "Arsenal",
       "short_name": "ARS",
-      "attacking_fixture_rating": 59.0,
-      "defensive_fixture_rating": 66.9,
+      "attacking_fixture_rating": 57.0,
+      "defensive_fixture_rating": 63.1,
       "rank": {
-        "attack": 3,
-        "defense": 1
+        "attack": 4,
+        "defense": 6
       },
       "fdr": {
-        "attack": 4.6,
-        "defense": 3.8,
-        "overall": 4.2
+        "attack": 4.8,
+        "defense": 4.2,
+        "overall": 4.5
       }
     },
     "away_team": {
       "name": "Everton",
       "short_name": "EVE",
-      "attacking_fixture_rating": 29.0,
-      "defensive_fixture_rating": 38.8,
+      "attacking_fixture_rating": 33.0,
+      "defensive_fixture_rating": 40.6,
       "rank": {
-        "attack": 14,
+        "attack": 16,
         "defense": 4
       },
       "fdr": {
-        "attack": 7.6,
-        "defense": 6.6,
-        "overall": 7.1
+        "attack": 7.2,
+        "defense": 6.4,
+        "overall": 6.8
       }
     }
   },
@@ -3439,31 +3439,31 @@
     "home_team": {
       "name": "Brentford",
       "short_name": "BRE",
-      "attacking_fixture_rating": 63.0,
+      "attacking_fixture_rating": 59.0,
       "defensive_fixture_rating": 63.1,
       "rank": {
-        "attack": 16,
+        "attack": 17,
         "defense": 9
       },
       "fdr": {
-        "attack": 4.2,
+        "attack": 4.6,
         "defense": 4.2,
-        "overall": 4.2
+        "overall": 4.4
       }
     },
     "away_team": {
       "name": "Wolves",
       "short_name": "WOL",
       "attacking_fixture_rating": 33.0,
-      "defensive_fixture_rating": 35.0,
+      "defensive_fixture_rating": 38.8,
       "rank": {
         "attack": 20,
-        "defense": 19
+        "defense": 18
       },
       "fdr": {
         "attack": 7.2,
-        "defense": 7.0,
-        "overall": 7.1
+        "defense": 6.6,
+        "overall": 6.9
       }
     }
   },
@@ -3474,30 +3474,30 @@
       "name": "Burnley",
       "short_name": "BUR",
       "attacking_fixture_rating": 47.0,
-      "defensive_fixture_rating": 20.0,
+      "defensive_fixture_rating": 16.2,
       "rank": {
-        "attack": 17,
-        "defense": 18
+        "attack": 15,
+        "defense": 16
       },
       "fdr": {
         "attack": 5.8,
-        "defense": 8.5,
-        "overall": 7.2
+        "defense": 8.9,
+        "overall": 7.3
       }
     },
     "away_team": {
       "name": "Bournemouth",
       "short_name": "BOU",
-      "attacking_fixture_rating": 79.0,
+      "attacking_fixture_rating": 83.0,
       "defensive_fixture_rating": 50.0,
       "rank": {
-        "attack": 6,
-        "defense": 12
+        "attack": 2,
+        "defense": 10
       },
       "fdr": {
-        "attack": 2.6,
+        "attack": 2.2,
         "defense": 5.5,
-        "overall": 4.0
+        "overall": 3.9
       }
     }
   },
@@ -3507,31 +3507,31 @@
     "home_team": {
       "name": "Chelsea",
       "short_name": "CHE",
-      "attacking_fixture_rating": 69.0,
-      "defensive_fixture_rating": 51.9,
+      "attacking_fixture_rating": 75.0,
+      "defensive_fixture_rating": 48.1,
       "rank": {
-        "attack": 5,
+        "attack": 6,
         "defense": 7
       },
       "fdr": {
-        "attack": 3.6,
-        "defense": 5.3,
-        "overall": 4.5
+        "attack": 3.0,
+        "defense": 5.7,
+        "overall": 4.3
       }
     },
     "away_team": {
       "name": "Newcastle",
       "short_name": "NEW",
-      "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 31.2,
+      "attacking_fixture_rating": 49.0,
+      "defensive_fixture_rating": 25.6,
       "rank": {
-        "attack": 12,
-        "defense": 11
+        "attack": 10,
+        "defense": 15
       },
       "fdr": {
-        "attack": 6.0,
-        "defense": 7.4,
-        "overall": 6.7
+        "attack": 5.6,
+        "defense": 7.9,
+        "overall": 6.8
       }
     }
   },
@@ -3541,31 +3541,31 @@
     "home_team": {
       "name": "Crystal Palace",
       "short_name": "CRY",
-      "attacking_fixture_rating": 67.0,
-      "defensive_fixture_rating": 42.5,
+      "attacking_fixture_rating": 61.0,
+      "defensive_fixture_rating": 29.4,
       "rank": {
         "attack": 9,
-        "defense": 10
+        "defense": 14
       },
       "fdr": {
-        "attack": 3.8,
-        "defense": 6.2,
-        "overall": 5.0
+        "attack": 4.4,
+        "defense": 7.6,
+        "overall": 6.0
       }
     },
     "away_team": {
       "name": "Leeds",
       "short_name": "LEE",
-      "attacking_fixture_rating": 55.0,
-      "defensive_fixture_rating": 31.2,
+      "attacking_fixture_rating": 69.0,
+      "defensive_fixture_rating": 36.9,
       "rank": {
-        "attack": 10,
-        "defense": 14
+        "attack": 7,
+        "defense": 11
       },
       "fdr": {
-        "attack": 5.0,
-        "defense": 7.4,
-        "overall": 6.2
+        "attack": 3.6,
+        "defense": 6.8,
+        "overall": 5.2
       }
     }
   },
@@ -3575,31 +3575,31 @@
     "home_team": {
       "name": "Liverpool",
       "short_name": "LIV",
-      "attacking_fixture_rating": 59.0,
+      "attacking_fixture_rating": 53.0,
       "defensive_fixture_rating": 61.3,
       "rank": {
-        "attack": 4,
-        "defense": 6
+        "attack": 5,
+        "defense": 5
       },
       "fdr": {
-        "attack": 4.6,
+        "attack": 5.2,
         "defense": 4.4,
-        "overall": 4.5
+        "overall": 4.8
       }
     },
     "away_team": {
       "name": "Spurs",
       "short_name": "TOT",
       "attacking_fixture_rating": 35.0,
-      "defensive_fixture_rating": 40.6,
+      "defensive_fixture_rating": 46.2,
       "rank": {
-        "attack": 15,
-        "defense": 5
+        "attack": 14,
+        "defense": 3
       },
       "fdr": {
         "attack": 7.0,
-        "defense": 6.4,
-        "overall": 6.7
+        "defense": 5.9,
+        "overall": 6.5
       }
     }
   },
@@ -3609,31 +3609,31 @@
     "home_team": {
       "name": "Man Utd",
       "short_name": "MUN",
-      "attacking_fixture_rating": 87.0,
-      "defensive_fixture_rating": 35.0,
+      "attacking_fixture_rating": 91.0,
+      "defensive_fixture_rating": 44.4,
       "rank": {
-        "attack": 2,
-        "defense": 13
+        "attack": 3,
+        "defense": 12
       },
       "fdr": {
-        "attack": 1.8,
-        "defense": 7.0,
-        "overall": 4.4
+        "attack": 1.4,
+        "defense": 6.1,
+        "overall": 3.8
       }
     },
     "away_team": {
       "name": "Aston Villa",
       "short_name": "AVL",
-      "attacking_fixture_rating": 63.0,
-      "defensive_fixture_rating": 12.5,
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 8.8,
       "rank": {
-        "attack": 8,
-        "defense": 17
+        "attack": 12,
+        "defense": 20
       },
       "fdr": {
-        "attack": 4.2,
-        "defense": 9.2,
-        "overall": 6.7
+        "attack": 5.2,
+        "defense": 9.6,
+        "overall": 7.4
       }
     }
   },
@@ -3644,30 +3644,30 @@
       "name": "Nott'm Forest",
       "short_name": "NFO",
       "attacking_fixture_rating": 53.0,
-      "defensive_fixture_rating": 38.8,
+      "defensive_fixture_rating": 44.4,
       "rank": {
         "attack": 11,
-        "defense": 16
+        "defense": 13
       },
       "fdr": {
         "attack": 5.2,
-        "defense": 6.6,
-        "overall": 5.9
+        "defense": 6.1,
+        "overall": 5.7
       }
     },
     "away_team": {
       "name": "Fulham",
       "short_name": "FUL",
-      "attacking_fixture_rating": 59.0,
+      "attacking_fixture_rating": 53.0,
       "defensive_fixture_rating": 44.4,
       "rank": {
         "attack": 13,
         "defense": 8
       },
       "fdr": {
-        "attack": 4.6,
+        "attack": 5.2,
         "defense": 6.1,
-        "overall": 5.3
+        "overall": 5.7
       }
     }
   },
@@ -3677,31 +3677,31 @@
     "home_team": {
       "name": "Sunderland",
       "short_name": "SUN",
-      "attacking_fixture_rating": 49.0,
-      "defensive_fixture_rating": 51.9,
+      "attacking_fixture_rating": 53.0,
+      "defensive_fixture_rating": 55.6,
       "rank": {
         "attack": 19,
-        "defense": 3
+        "defense": 2
       },
       "fdr": {
-        "attack": 5.6,
-        "defense": 5.3,
-        "overall": 5.4
+        "attack": 5.2,
+        "defense": 4.9,
+        "overall": 5.1
       }
     },
     "away_team": {
       "name": "Brighton",
       "short_name": "BHA",
-      "attacking_fixture_rating": 45.0,
-      "defensive_fixture_rating": 50.0,
+      "attacking_fixture_rating": 41.0,
+      "defensive_fixture_rating": 46.2,
       "rank": {
-        "attack": 7,
-        "defense": 15
+        "attack": 8,
+        "defense": 17
       },
       "fdr": {
-        "attack": 6.0,
-        "defense": 5.5,
-        "overall": 5.8
+        "attack": 6.4,
+        "defense": 5.9,
+        "overall": 6.2
       }
     }
   },
@@ -3711,31 +3711,31 @@
     "home_team": {
       "name": "West Ham",
       "short_name": "WHU",
-      "attacking_fixture_rating": 25.0,
-      "defensive_fixture_rating": 8.8,
+      "attacking_fixture_rating": 23.0,
+      "defensive_fixture_rating": 10.6,
       "rank": {
         "attack": 18,
-        "defense": 20
+        "defense": 19
       },
       "fdr": {
-        "attack": 8.0,
-        "defense": 9.6,
+        "attack": 8.2,
+        "defense": 9.4,
         "overall": 8.8
       }
     },
     "away_team": {
       "name": "Man City",
       "short_name": "MCI",
-      "attacking_fixture_rating": 91.0,
+      "attacking_fixture_rating": 89.0,
       "defensive_fixture_rating": 72.5,
       "rank": {
         "attack": 1,
-        "defense": 2
+        "defense": 1
       },
       "fdr": {
-        "attack": 1.4,
+        "attack": 1.6,
         "defense": 3.2,
-        "overall": 2.3
+        "overall": 2.4
       }
     }
   }
