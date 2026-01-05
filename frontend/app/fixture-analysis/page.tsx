@@ -244,8 +244,9 @@ interface TeamFixtures {
 
 function FDRGrid({ fixtures }: { fixtures: any[] }) {
   const [searchQuery, setSearchQuery] = useState("")
-  const [sortBy, setSortBy] = useState<"team" | "difficulty">("team")
+  const [sortBy, setSortBy] = useState<"team" | "difficulty">("difficulty")
   const [currentGW, setCurrentGW] = useState(1)
+  const [fdrType, setFdrType] = useState<"attack" | "defense" | "overall">("overall")
 
   // Process fixtures into team-based view
   const teamFixtures = useMemo((): TeamFixtures[] => {
@@ -268,10 +269,10 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
         .map(f => {
           const isHome = f.teams.home.team === team
           // Use team-specific FDR rating (1-10 scale, lower = easier)
-          // Home team uses home_team.fdr.overall, away team uses away_team.fdr.overall
+          // Select attack or defense FDR based on fdrType
           const difficulty = isHome 
-            ? (f.teams?.home?.fdr?.overall || 5)
-            : (f.teams?.away?.fdr?.overall || 5)
+            ? (f.teams?.home?.fdr?.[fdrType] || 5)
+            : (f.teams?.away?.fdr?.[fdrType] || 5)
           return {
             gameweek: f.gw,
             opponent: isHome ? f.teams.away.team : f.teams.home.team,
@@ -288,7 +289,7 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
     })
 
     return result
-  }, [fixtures, currentGW])
+  }, [fixtures, currentGW, fdrType])
 
   // Filter and sort teams
   const filteredTeams = useMemo(() => {
@@ -315,22 +316,58 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
 
   return (
     <>
-      {/* Compact Legend */}
+      {/* FDR Type Selector with Scale */}
       <Card className="mb-3 shadow-md">
         <CardContent className="p-3">
-          <div className="flex items-center gap-4">
-            <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">FDR:</span>
-            <div className="flex-1 flex items-center gap-1">
-              <div className="h-6 flex-1 bg-green-500 dark:bg-green-600 rounded-l"></div>
-              <div className="h-6 flex-1 bg-green-300 dark:bg-green-700"></div>
-              <div className="h-6 flex-1 bg-yellow-300 dark:bg-yellow-600"></div>
-              <div className="h-6 flex-1 bg-orange-400 dark:bg-orange-600"></div>
-              <div className="h-6 flex-1 bg-red-400 dark:bg-red-600"></div>
-              <div className="h-6 flex-1 bg-red-600 dark:bg-red-700 rounded-r"></div>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <span className="text-sm font-medium text-muted-foreground">FDR:</span>
+              <div className="flex gap-1">
+                <button
+                  onClick={() => setFdrType("overall")}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
+                    fdrType === "overall"
+                      ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md"
+                      : "bg-secondary text-muted-foreground hover:bg-secondary/80"
+                  }`}
+                >
+                  📊 Overall
+                </button>
+                <button
+                  onClick={() => setFdrType("attack")}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
+                    fdrType === "attack"
+                      ? "bg-purple-600 text-white shadow-md"
+                      : "bg-secondary text-muted-foreground hover:bg-secondary/80"
+                  }`}
+                >
+                  ⚔️ Attack
+                </button>
+                <button
+                  onClick={() => setFdrType("defense")}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
+                    fdrType === "defense"
+                      ? "bg-blue-600 text-white shadow-md"
+                      : "bg-secondary text-muted-foreground hover:bg-secondary/80"
+                  }`}
+                >
+                  🛡️ Defense
+                </button>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-xs">
-              <span className="text-muted-foreground">✅ Easy</span>
-              <span className="text-muted-foreground">⚠️ Hard</span>
+            <div className="flex-1 flex items-center gap-2">
+              <div className="flex-1 flex items-center gap-0.5">
+                <div className="h-6 flex-1 bg-green-500 dark:bg-green-600 rounded-l"></div>
+                <div className="h-6 flex-1 bg-green-300 dark:bg-green-700"></div>
+                <div className="h-6 flex-1 bg-yellow-300 dark:bg-yellow-600"></div>
+                <div className="h-6 flex-1 bg-orange-400 dark:bg-orange-600"></div>
+                <div className="h-6 flex-1 bg-red-400 dark:bg-red-600"></div>
+                <div className="h-6 flex-1 bg-red-600 dark:bg-red-700 rounded-r"></div>
+              </div>
+              <div className="flex items-center gap-2 text-xs flex-shrink-0">
+                <span className="text-muted-foreground">✅ Easy</span>
+                <span className="text-muted-foreground">⚠️ Hard</span>
+              </div>
             </div>
           </div>
         </CardContent>
@@ -341,20 +378,20 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
         {filteredTeams.map((team, index) => (
           <Card
             key={team.team}
-            className="border-border hover:border-purple-400/50 hover:shadow-lg transition-all duration-300"
+            className={`border-2 ${getTeamBorderColor(team.team)} ${getTeamBackgroundColor(team.team)} hover:shadow-xl transition-all duration-300`}
           >
             <CardContent className="p-4">
               <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                 <div className="w-full sm:w-48 flex-shrink-0">
                   <div className="flex items-center gap-2">
-                    <Badge variant="outline" className="text-xs font-bold px-2 py-1">
+                    <Badge variant="outline" className={`text-xs font-bold px-2 py-1 ${getTeamBorderColor(team.team)}`}>
                       {teamShortCodes[team.team] || team.team.substring(0, 3).toUpperCase()}
                     </Badge>
-                    <h3 className="font-bold text-foreground">{team.team}</h3>
+                    <h3 className={`font-bold ${getTeamColor(team.team)}`}>{team.team}</h3>
                   </div>
                   {team.avgDifficulty && (
                     <p className="text-xs text-muted-foreground mt-1">
-                      Avg Difficulty: {team.avgDifficulty.toFixed(1)}
+                      Avg: {team.avgDifficulty.toFixed(1)}
                     </p>
                   )}
                 </div>
@@ -403,51 +440,6 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
           </CardContent>
         </Card>
       )}
-
-      {/* Legend */}
-      <Card className="mt-8 border-border bg-card/50 backdrop-blur">
-        <CardHeader>
-          <CardTitle className="text-foreground flex items-center gap-2">💡 FDR Color Scale</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {/* Color Scale */}
-            <div className="flex flex-col gap-2">
-              <p className="text-sm font-medium text-muted-foreground mb-2">Fixture Difficulty Rating</p>
-              <div className="flex items-center gap-2">
-                <div className="flex-1 flex items-center gap-1">
-                  <div className="h-10 flex-1 bg-green-500 dark:bg-green-600 rounded-l"></div>
-                  <div className="h-10 flex-1 bg-green-300 dark:bg-green-700"></div>
-                  <div className="h-10 flex-1 bg-yellow-300 dark:bg-yellow-600"></div>
-                  <div className="h-10 flex-1 bg-orange-400 dark:bg-orange-600"></div>
-                  <div className="h-10 flex-1 bg-red-400 dark:bg-red-600"></div>
-                  <div className="h-10 flex-1 bg-red-600 dark:bg-red-700 rounded-r"></div>
-                </div>
-              </div>
-              <div className="flex justify-between text-xs text-muted-foreground px-1">
-                <span>✅ Easy</span>
-                <span>⚠️ Difficult</span>
-              </div>
-            </div>
-            
-            {/* Info Cards */}
-            <div className="grid gap-4 md:grid-cols-2 pt-2">
-              <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800">
-                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">🏠 Dynamic Home Advantage</h4>
-                <p className="text-sm text-blue-700 dark:text-blue-300">
-                  Ratings adjusted based on each team's actual home/away performance splits
-                </p>
-              </div>
-              <div className="p-3 rounded-lg bg-indigo-50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800">
-                <h4 className="font-medium text-indigo-800 dark:text-indigo-200 mb-2">🎯 Strategy Tip</h4>
-                <p className="text-sm text-indigo-700 dark:text-indigo-300">
-                  Target green fixtures (1-5) for transfers and captaincy decisions
-                </p>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </>
   )
 }
