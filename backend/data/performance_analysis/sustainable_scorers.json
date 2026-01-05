@@ -1,47 +1,47 @@
 [
     {
+        "player": "João Pedro",
+        "team": "Chelsea",
+        "team_short": "CHE",
+        "goals": 6,
+        "xG": 6.3,
+        "overperformance": -0.3,
+        "overperformance_per_90": -0.016,
+        "sustainable": true,
+        "form": 3.2
+    },
+    {
         "player": "Schade",
         "team": "Brentford",
         "team_short": "BRE",
         "goals": 6,
         "xG": 6.4,
         "overperformance": -0.4,
-        "overperformance_per_90": -0.022,
+        "overperformance_per_90": -0.021,
         "sustainable": true,
-        "form": 4.5
+        "form": 4.9
     },
     {
-        "player": "João Pedro",
-        "team": "Chelsea",
-        "team_short": "CHE",
-        "goals": 6,
-        "xG": 6.2,
-        "overperformance": -0.2,
-        "overperformance_per_90": -0.011,
+        "player": "Gakpo",
+        "team": "Liverpool",
+        "team_short": "LIV",
+        "goals": 4,
+        "xG": 4.1,
+        "overperformance": -0.1,
+        "overperformance_per_90": -0.005,
         "sustainable": true,
-        "form": 3.4
+        "form": 0.7
     },
     {
-        "player": "Watkins",
+        "player": "Malen",
         "team": "Aston Villa",
         "team_short": "AVL",
-        "goals": 5,
-        "xG": 5.3,
-        "overperformance": -0.3,
-        "overperformance_per_90": -0.017,
-        "sustainable": true,
-        "form": 6.7
-    },
-    {
-        "player": "Tavernier",
-        "team": "Bournemouth",
-        "team_short": "BOU",
         "goals": 4,
-        "xG": 4.0,
-        "overperformance": 0.0,
-        "overperformance_per_90": 0.0,
+        "xG": 3.9,
+        "overperformance": 0.1,
+        "overperformance_per_90": 0.005,
         "sustainable": true,
-        "form": 3.8
+        "form": 1.4
     },
     {
         "player": "Nmecha",
@@ -55,15 +55,15 @@
         "form": 0.5
     },
     {
-        "player": "Gakpo",
-        "team": "Liverpool",
-        "team_short": "LIV",
+        "player": "Tavernier",
+        "team": "Bournemouth",
+        "team_short": "BOU",
         "goals": 4,
-        "xG": 4.1,
-        "overperformance": -0.1,
-        "overperformance_per_90": -0.006,
+        "xG": 4.0,
+        "overperformance": 0.0,
+        "overperformance_per_90": 0.0,
         "sustainable": true,
-        "form": 0.7
+        "form": 4.1
     },
     {
         "player": "O.Dango",
@@ -72,19 +72,19 @@
         "goals": 3,
         "xG": 3.2,
         "overperformance": -0.2,
-        "overperformance_per_90": -0.012,
+        "overperformance_per_90": -0.011,
         "sustainable": true,
-        "form": 1.4
+        "form": 1.1
     },
     {
-        "player": "Barnes",
-        "team": "Newcastle",
-        "team_short": "NEW",
+        "player": "Smith Rowe",
+        "team": "Fulham",
+        "team_short": "FUL",
         "goals": 3,
         "xG": 3.1,
         "overperformance": -0.1,
-        "overperformance_per_90": -0.006,
+        "overperformance_per_90": -0.005,
         "sustainable": true,
-        "form": 1.1
+        "form": 3.1
     }
 ]
