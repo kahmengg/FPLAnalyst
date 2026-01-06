@@ -4,9 +4,9 @@
         "team": "Crystal Palace",
         "team_short": "CRY",
         "goals": 8,
-        "xG": 10.2,
-        "overperformance": -2.2,
-        "overperformance_per_90": -0.116,
+        "xG": 10.3,
+        "overperformance": -2.3,
+        "overperformance_per_90": -0.115,
         "sustainable": false,
         "form": 3.1
     },
@@ -14,23 +14,12 @@
         "player": "Enzo",
         "team": "Chelsea",
         "team_short": "CHE",
-        "goals": 5,
-        "xG": 6.8,
-        "overperformance": -1.8,
-        "overperformance_per_90": -0.095,
-        "sustainable": false,
-        "form": 3.1
-    },
-    {
-        "player": "Watkins",
-        "team": "Aston Villa",
-        "team_short": "AVL",
         "goals": 6,
-        "xG": 6.8,
-        "overperformance": -0.8,
-        "overperformance_per_90": -0.042,
+        "xG": 7.7,
+        "overperformance": -1.7,
+        "overperformance_per_90": -0.085,
         "sustainable": false,
-        "form": 5.2
+        "form": 4.5
     },
     {
         "player": "B.Fernandes",
@@ -39,9 +28,9 @@
         "goals": 5,
         "xG": 6.7,
         "overperformance": -1.7,
-        "overperformance_per_90": -0.089,
+        "overperformance_per_90": -0.085,
         "sustainable": false,
-        "form": 5.8
+        "form": 2.5
     },
     {
         "player": "Gyökeres",
@@ -50,31 +39,42 @@
         "goals": 5,
         "xG": 6.1,
         "overperformance": -1.1,
-        "overperformance_per_90": -0.058,
+        "overperformance_per_90": -0.055,
         "sustainable": false,
-        "form": 2.2
+        "form": 2.3
+    },
+    {
+        "player": "Evanilson",
+        "team": "Bournemouth",
+        "team_short": "BOU",
+        "goals": 3,
+        "xG": 5.7,
+        "overperformance": -2.7,
+        "overperformance_per_90": -0.135,
+        "sustainable": false,
+        "form": 3.2
     },
     {
         "player": "Raúl",
         "team": "Fulham",
         "team_short": "FUL",
         "goals": 4,
-        "xG": 5.1,
-        "overperformance": -1.1,
-        "overperformance_per_90": -0.058,
+        "xG": 5.3,
+        "overperformance": -1.3,
+        "overperformance_per_90": -0.065,
         "sustainable": false,
         "form": 4.1
     },
     {
-        "player": "Evanilson",
-        "team": "Bournemouth",
-        "team_short": "BOU",
-        "goals": 2,
+        "player": "Cunha",
+        "team": "Man Utd",
+        "team_short": "MUN",
+        "goals": 4,
         "xG": 4.9,
-        "overperformance": -2.9,
-        "overperformance_per_90": -0.153,
+        "overperformance": -0.9,
+        "overperformance_per_90": -0.045,
         "sustainable": false,
-        "form": 2.3
+        "form": 5.4
     },
     {
         "player": "Saka",
@@ -83,7 +83,7 @@
         "goals": 4,
         "xG": 4.9,
         "overperformance": -0.9,
-        "overperformance_per_90": -0.047,
+        "overperformance_per_90": -0.045,
         "sustainable": false,
         "form": 5.6
     }
