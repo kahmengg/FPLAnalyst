@@ -45,13 +45,6 @@ def get_fixtures():
             return jsonify({"error": f"No fixtures found for gameweek {target_gw}"}), 404
     return jsonify(data)
 
-@fixtures_bp.route('/fixtures_opportunity')
-def get_fixtures_opportunity():
-    print("📊 Fetching fixture opportunities data...")
-    data = load_json_data('fixture_analysis/fixture_opportunities.json')
-    if isinstance(data, dict) and "error" in data:
-        return jsonify(data), 404
-    return jsonify(data)
 
 @fixtures_bp.route('/team_fixtures')
 def get_team_fixtures():
