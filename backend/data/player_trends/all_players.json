@@ -46,7 +46,7 @@
       "team": "Leeds",
       "position": 3,
       "cost": 5.4,
-      "ownership": 0.2
+      "ownership": 0.4
     },
     {
       "id": 513,
@@ -214,7 +214,7 @@
       "team": "Sunderland",
       "position": 2,
       "cost": 4.1,
-      "ownership": 6.1
+      "ownership": 6.3
     },
     {
       "id": 546,
@@ -241,12 +241,28 @@
       "ownership": 1.7
     },
     {
+      "id": 794,
+      "name": "Alleyne",
+      "team": "Man City",
+      "position": 2,
+      "cost": 4.5,
+      "ownership": 0.0
+    },
+    {
+      "id": 792,
+      "name": "Alysson",
+      "team": "Aston Villa",
+      "position": 3,
+      "cost": 5.0,
+      "ownership": 0.0
+    },
+    {
       "id": 452,
       "name": "Amad",
       "team": "Man Utd",
       "position": 3,
-      "cost": 6.3,
-      "ownership": 1.0
+      "cost": 6.2,
+      "ownership": 0.9
     },
     {
       "id": 445,
@@ -286,7 +302,7 @@
       "team": "Fulham",
       "position": 2,
       "cost": 4.6,
-      "ownership": 5.8
+      "ownership": 5.6
     },
     {
       "id": 517,
@@ -294,14 +310,14 @@
       "team": "Nott'm Forest",
       "position": 3,
       "cost": 5.3,
-      "ownership": 4.6
+      "ownership": 4.5
     },
     {
       "id": 534,
       "name": "Anderson",
       "team": "Sunderland",
       "position": 2,
-      "cost": 3.9,
+      "cost": 3.8,
       "ownership": 0.4
     },
     {
@@ -342,7 +358,7 @@
       "team": "Burnley",
       "position": 3,
       "cost": 5.1,
-      "ownership": 2.1
+      "ownership": 2.0
     },
     {
       "id": 454,
@@ -454,7 +470,7 @@
       "team": "Man Utd",
       "position": 3,
       "cost": 9.1,
-      "ownership": 11.5
+      "ownership": 12.2
     },
     {
       "id": 649,
@@ -509,7 +525,7 @@
       "name": "Baleba",
       "team": "Brighton",
       "position": 3,
-      "cost": 4.6,
+      "cost": 4.5,
       "ownership": 1.3
     },
     {
@@ -558,7 +574,7 @@
       "team": "Newcastle",
       "position": 3,
       "cost": 6.1,
-      "ownership": 1.0
+      "ownership": 1.2
     },
     {
       "id": 56,
@@ -574,7 +590,7 @@
       "team": "Everton",
       "position": 4,
       "cost": 5.7,
-      "ownership": 0.6
+      "ownership": 0.7
     },
     {
       "id": 318,
@@ -582,7 +598,7 @@
       "team": "Fulham",
       "position": 2,
       "cost": 4.4,
-      "ownership": 0.4
+      "ownership": 0.3
     },
     {
       "id": 306,
@@ -766,7 +782,7 @@
       "team": "Nott'm Forest",
       "position": 2,
       "cost": 3.8,
-      "ownership": 0.4
+      "ownership": 0.3
     },
     {
       "id": 345,
@@ -798,7 +814,7 @@
       "team": "West Ham",
       "position": 4,
       "cost": 7.7,
-      "ownership": 9.7
+      "ownership": 9.3
     },
     {
       "id": 375,
@@ -830,14 +846,14 @@
       "team": "Sunderland",
       "position": 4,
       "cost": 5.5,
-      "ownership": 0.3
+      "ownership": 0.4
     },
     {
       "id": 60,
       "name": "Broggio",
       "team": "Aston Villa",
       "position": 3,
-      "cost": 4.5,
+      "cost": 4.4,
       "ownership": 0.3
     },
     {
@@ -869,8 +885,8 @@
       "name": "Bruno G.",
       "team": "Newcastle",
       "position": 3,
-      "cost": 7.1,
-      "ownership": 17.5
+      "cost": 7.2,
+      "ownership": 20.8
     },
     {
       "id": 202,
@@ -910,7 +926,7 @@
       "team": "Newcastle",
       "position": 2,
       "cost": 5.0,
-      "ownership": 3.6
+      "ownership": 3.5
     },
     {
       "id": 702,
@@ -942,7 +958,7 @@
       "team": "Liverpool",
       "position": 3,
       "cost": 5.4,
-      "ownership": 0.2
+      "ownership": 0.1
     },
     {
       "id": 503,
@@ -958,7 +974,7 @@
       "team": "Chelsea",
       "position": 3,
       "cost": 5.7,
-      "ownership": 8.0
+      "ownership": 7.9
     },
     {
       "id": 331,
@@ -982,15 +998,15 @@
       "team": "Arsenal",
       "position": 2,
       "cost": 5.6,
-      "ownership": 7.5
+      "ownership": 6.8
     },
     {
       "id": 691,
       "name": "Calvert-Lewin",
       "team": "Leeds",
       "position": 4,
-      "cost": 5.9,
-      "ownership": 11.1
+      "cost": 6.0,
+      "ownership": 12.2
     },
     {
       "id": 705,
@@ -1038,7 +1054,7 @@
       "team": "Man Utd",
       "position": 3,
       "cost": 5.5,
-      "ownership": 1.5
+      "ownership": 1.4
     },
     {
       "id": 611,
@@ -1062,7 +1078,7 @@
       "team": "Aston Villa",
       "position": 2,
       "cost": 4.8,
-      "ownership": 10.2
+      "ownership": 10.6
     },
     {
       "id": 154,
@@ -1094,7 +1110,7 @@
       "team": "Chelsea",
       "position": 2,
       "cost": 5.5,
-      "ownership": 17.7
+      "ownership": 17.9
     },
     {
       "id": 787,
@@ -1110,7 +1126,7 @@
       "team": "Man City",
       "position": 3,
       "cost": 6.8,
-      "ownership": 15.8
+      "ownership": 16.0
     },
     {
       "id": 385,
@@ -1182,7 +1198,7 @@
       "team": "Crystal Palace",
       "position": 2,
       "cost": 3.8,
-      "ownership": 0.8
+      "ownership": 0.7
     },
     {
       "id": 294,
@@ -1197,8 +1213,8 @@
       "name": "Collins",
       "team": "Brentford",
       "position": 2,
-      "cost": 4.9,
-      "ownership": 1.8
+      "cost": 5.0,
+      "ownership": 2.8
     },
     {
       "id": 460,
@@ -1261,8 +1277,8 @@
       "name": "Cucurella",
       "team": "Chelsea",
       "position": 2,
-      "cost": 6.1,
-      "ownership": 17.4
+      "cost": 6.0,
+      "ownership": 16.2
     },
     {
       "id": 729,
@@ -1278,7 +1294,7 @@
       "team": "Burnley",
       "position": 3,
       "cost": 5.0,
-      "ownership": 1.3
+      "ownership": 1.2
     },
     {
       "id": 450,
@@ -1286,7 +1302,7 @@
       "team": "Man Utd",
       "position": 3,
       "cost": 8.2,
-      "ownership": 13.3
+      "ownership": 12.7
     },
     {
       "id": 247,
@@ -1326,7 +1342,7 @@
       "team": "Man Utd",
       "position": 2,
       "cost": 4.5,
-      "ownership": 4.8
+      "ownership": 4.4
     },
     {
       "id": 121,
@@ -1334,7 +1350,7 @@
       "team": "Brentford",
       "position": 3,
       "cost": 5.8,
-      "ownership": 0.6
+      "ownership": 0.5
     },
     {
       "id": 398,
@@ -1398,7 +1414,7 @@
       "team": "Brighton",
       "position": 2,
       "cost": 4.3,
-      "ownership": 2.3
+      "ownership": 2.2
     },
     {
       "id": 436,
@@ -1406,7 +1422,7 @@
       "team": "Man Utd",
       "position": 2,
       "cost": 4.9,
-      "ownership": 2.1
+      "ownership": 2.0
     },
     {
       "id": 250,
@@ -1438,7 +1454,7 @@
       "team": "Bournemouth",
       "position": 1,
       "cost": 4.0,
-      "ownership": 0.9
+      "ownership": 0.8
     },
     {
       "id": 276,
@@ -1453,8 +1469,8 @@
       "name": "Dewsbury-Hall",
       "team": "Everton",
       "position": 3,
-      "cost": 5.0,
-      "ownership": 3.1
+      "cost": 4.9,
+      "ownership": 2.6
     },
     {
       "id": 685,
@@ -1502,7 +1518,7 @@
       "team": "West Ham",
       "position": 2,
       "cost": 4.0,
-      "ownership": 1.4
+      "ownership": 1.3
     },
     {
       "id": 297,
@@ -1558,7 +1574,7 @@
       "team": "Man City",
       "position": 1,
       "cost": 5.7,
-      "ownership": 10.2
+      "ownership": 10.3
     },
     {
       "id": 130,
@@ -1574,7 +1590,7 @@
       "team": "Man Utd",
       "position": 2,
       "cost": 4.2,
-      "ownership": 7.2
+      "ownership": 7.1
     },
     {
       "id": 268,
@@ -1630,7 +1646,7 @@
       "team": "Burnley",
       "position": 1,
       "cost": 4.0,
-      "ownership": 33.4
+      "ownership": 33.1
     },
     {
       "id": 547,
@@ -1638,7 +1654,7 @@
       "team": "Sunderland",
       "position": 3,
       "cost": 4.9,
-      "ownership": 0.9
+      "ownership": 1.0
     },
     {
       "id": 620,
@@ -1709,8 +1725,8 @@
       "name": "Ekitik\u00e9",
       "team": "Liverpool",
       "position": 4,
-      "cost": 9.1,
-      "ownership": 33.5
+      "cost": 8.9,
+      "ownership": 26.7
     },
     {
       "id": 556,
@@ -1782,7 +1798,7 @@
       "team": "Chelsea",
       "position": 3,
       "cost": 6.4,
-      "ownership": 9.3
+      "ownership": 10.2
     },
     {
       "id": 269,
@@ -1806,7 +1822,7 @@
       "team": "Burnley",
       "position": 2,
       "cost": 3.9,
-      "ownership": 9.0
+      "ownership": 8.5
     },
     {
       "id": 238,
@@ -1814,7 +1830,7 @@
       "team": "Chelsea",
       "position": 3,
       "cost": 6.4,
-      "ownership": 1.9
+      "ownership": 1.8
     },
     {
       "id": 97,
@@ -1822,7 +1838,7 @@
       "team": "Bournemouth",
       "position": 4,
       "cost": 7.0,
-      "ownership": 1.5
+      "ownership": 1.6
     },
     {
       "id": 104,
@@ -1837,8 +1853,8 @@
       "name": "Eze",
       "team": "Arsenal",
       "position": 3,
-      "cost": 7.4,
-      "ownership": 10.3
+      "cost": 7.3,
+      "ownership": 9.4
     },
     {
       "id": 148,
@@ -1885,7 +1901,7 @@
       "name": "Fitzgerald",
       "team": "Man Utd",
       "position": 3,
-      "cost": 4.4,
+      "cost": 4.3,
       "ownership": 0.0
     },
     {
@@ -1917,8 +1933,8 @@
       "name": "Foden",
       "team": "Man City",
       "position": 3,
-      "cost": 8.9,
-      "ownership": 37.7
+      "cost": 8.7,
+      "ownership": 35.0
     },
     {
       "id": 601,
@@ -1934,7 +1950,7 @@
       "team": "Chelsea",
       "position": 2,
       "cost": 4.4,
-      "ownership": 0.5
+      "ownership": 0.4
     },
     {
       "id": 782,
@@ -1982,7 +1998,7 @@
       "team": "Liverpool",
       "position": 2,
       "cost": 5.7,
-      "ownership": 5.5
+      "ownership": 5.6
     },
     {
       "id": 655,
@@ -2029,8 +2045,8 @@
       "name": "Gabriel",
       "team": "Arsenal",
       "position": 2,
-      "cost": 6.6,
-      "ownership": 25.7
+      "cost": 6.7,
+      "ownership": 30.6
     },
     {
       "id": 384,
@@ -2038,7 +2054,7 @@
       "team": "Liverpool",
       "position": 3,
       "cost": 7.3,
-      "ownership": 5.3
+      "ownership": 5.5
     },
     {
       "id": 302,
@@ -2070,7 +2086,7 @@
       "team": "Everton",
       "position": 3,
       "cost": 5.1,
-      "ownership": 3.0
+      "ownership": 3.6
     },
     {
       "id": 34,
@@ -2118,7 +2134,7 @@
       "team": "Brighton",
       "position": 3,
       "cost": 5.6,
-      "ownership": 0.6
+      "ownership": 0.5
     },
     {
       "id": 515,
@@ -2126,7 +2142,7 @@
       "team": "Nott'm Forest",
       "position": 3,
       "cost": 7.3,
-      "ownership": 2.9
+      "ownership": 3.0
     },
     {
       "id": 471,
@@ -2198,15 +2214,15 @@
       "team": "Wolves",
       "position": 3,
       "cost": 4.3,
-      "ownership": 1.4
+      "ownership": 1.3
     },
     {
       "id": 485,
       "name": "Gordon",
       "team": "Newcastle",
       "position": 3,
-      "cost": 7.4,
-      "ownership": 6.1
+      "cost": 7.5,
+      "ownership": 6.0
     },
     {
       "id": 779,
@@ -2222,7 +2238,7 @@
       "team": "Liverpool",
       "position": 3,
       "cost": 5.7,
-      "ownership": 6.9
+      "ownership": 6.4
     },
     {
       "id": 591,
@@ -2254,7 +2270,7 @@
       "team": "Everton",
       "position": 3,
       "cost": 6.5,
-      "ownership": 9.6
+      "ownership": 9.9
     },
     {
       "id": 184,
@@ -2302,7 +2318,7 @@
       "team": "Leeds",
       "position": 2,
       "cost": 3.8,
-      "ownership": 4.0
+      "ownership": 4.1
     },
     {
       "id": 647,
@@ -2334,7 +2350,7 @@
       "team": "Chelsea",
       "position": 2,
       "cost": 5.0,
-      "ownership": 2.4
+      "ownership": 2.3
     },
     {
       "id": 260,
@@ -2342,15 +2358,15 @@
       "team": "Crystal Palace",
       "position": 2,
       "cost": 5.3,
-      "ownership": 40.2
+      "ownership": 39.7
     },
     {
       "id": 403,
       "name": "Gvardiol",
       "team": "Man City",
       "position": 2,
-      "cost": 6.1,
-      "ownership": 9.5
+      "cost": 6.0,
+      "ownership": 6.3
     },
     {
       "id": 361,
@@ -2366,7 +2382,7 @@
       "team": "Arsenal",
       "position": 4,
       "cost": 8.8,
-      "ownership": 9.6
+      "ownership": 9.4
     },
     {
       "id": 420,
@@ -2414,7 +2430,7 @@
       "team": "Newcastle",
       "position": 2,
       "cost": 5.3,
-      "ownership": 2.5
+      "ownership": 2.9
     },
     {
       "id": 207,
@@ -2462,7 +2478,7 @@
       "team": "Burnley",
       "position": 2,
       "cost": 4.0,
-      "ownership": 0.9
+      "ownership": 0.8
     },
     {
       "id": 672,
@@ -2550,7 +2566,7 @@
       "team": "Crystal Palace",
       "position": 1,
       "cost": 5.1,
-      "ownership": 8.1
+      "ownership": 8.0
     },
     {
       "id": 109,
@@ -2558,7 +2574,7 @@
       "team": "Brentford",
       "position": 2,
       "cost": 4.3,
-      "ownership": 0.1
+      "ownership": 0.2
     },
     {
       "id": 679,
@@ -2597,8 +2613,8 @@
       "name": "Hincapie",
       "team": "Arsenal",
       "position": 2,
-      "cost": 5.4,
-      "ownership": 1.8
+      "cost": 5.3,
+      "ownership": 1.5
     },
     {
       "id": 163,
@@ -2606,7 +2622,7 @@
       "team": "Brighton",
       "position": 3,
       "cost": 5.1,
-      "ownership": 0.1
+      "ownership": 0.0
     },
     {
       "id": 536,
@@ -2657,12 +2673,20 @@
       "ownership": 0.0
     },
     {
+      "id": 795,
+      "name": "Howell",
+      "team": "Brighton",
+      "position": 3,
+      "cost": 4.5,
+      "ownership": 0.0
+    },
+    {
       "id": 516,
       "name": "Hudson-Odoi",
       "team": "Nott'm Forest",
       "position": 3,
       "cost": 5.7,
-      "ownership": 0.9
+      "ownership": 0.8
     },
     {
       "id": 537,
@@ -2702,7 +2726,7 @@
       "team": "Nott'm Forest",
       "position": 3,
       "cost": 5.4,
-      "ownership": 0.2
+      "ownership": 0.1
     },
     {
       "id": 465,
@@ -2726,7 +2750,7 @@
       "team": "Nott'm Forest",
       "position": 4,
       "cost": 5.8,
-      "ownership": 1.2
+      "ownership": 1.1
     },
     {
       "id": 51,
@@ -2758,7 +2782,7 @@
       "team": "Liverpool",
       "position": 4,
       "cost": 10.3,
-      "ownership": 3.8
+      "ownership": 3.7
     },
     {
       "id": 560,
@@ -2766,7 +2790,7 @@
       "team": "Sunderland",
       "position": 4,
       "cost": 5.3,
-      "ownership": 2.0
+      "ownership": 1.8
     },
     {
       "id": 324,
@@ -2782,7 +2806,7 @@
       "team": "Bournemouth",
       "position": 2,
       "cost": 3.8,
-      "ownership": 0.7
+      "ownership": 0.6
     },
     {
       "id": 663,
@@ -2846,14 +2870,14 @@
       "team": "Arsenal",
       "position": 2,
       "cost": 6.3,
-      "ownership": 27.7
+      "ownership": 27.2
     },
     {
       "id": 510,
       "name": "Jair Cunha",
       "team": "Nott'm Forest",
       "position": 2,
-      "cost": 4.3,
+      "cost": 4.2,
       "ownership": 0.1
     },
     {
@@ -2862,7 +2886,7 @@
       "team": "Chelsea",
       "position": 2,
       "cost": 5.7,
-      "ownership": 11.1
+      "ownership": 11.3
     },
     {
       "id": 353,
@@ -2878,7 +2902,7 @@
       "team": "Brentford",
       "position": 3,
       "cost": 4.9,
-      "ownership": 0.1
+      "ownership": 0.2
     },
     {
       "id": 126,
@@ -2918,7 +2942,7 @@
       "team": "Newcastle",
       "position": 3,
       "cost": 5.9,
-      "ownership": 0.3
+      "ownership": 0.4
     },
     {
       "id": 715,
@@ -2926,7 +2950,7 @@
       "team": "Nott'm Forest",
       "position": 1,
       "cost": 4.0,
-      "ownership": 0.5
+      "ownership": 0.4
     },
     {
       "id": 538,
@@ -2934,7 +2958,7 @@
       "team": "Sunderland",
       "position": 2,
       "cost": 3.8,
-      "ownership": 0.2
+      "ownership": 0.3
     },
     {
       "id": 580,
@@ -2942,7 +2966,7 @@
       "team": "Crystal Palace",
       "position": 3,
       "cost": 6.5,
-      "ownership": 2.5
+      "ownership": 2.6
     },
     {
       "id": 627,
@@ -2982,7 +3006,7 @@
       "team": "Chelsea",
       "position": 4,
       "cost": 7.2,
-      "ownership": 27.5
+      "ownership": 26.8
     },
     {
       "id": 706,
@@ -3062,7 +3086,7 @@
       "team": "Everton",
       "position": 2,
       "cost": 4.8,
-      "ownership": 6.8
+      "ownership": 6.7
     },
     {
       "id": 101,
@@ -3070,7 +3094,7 @@
       "team": "Brentford",
       "position": 1,
       "cost": 4.5,
-      "ownership": 8.8
+      "ownership": 9.4
     },
     {
       "id": 371,
@@ -3110,7 +3134,7 @@
       "team": "Fulham",
       "position": 3,
       "cost": 4.4,
-      "ownership": 2.3
+      "ownership": 2.1
     },
     {
       "id": 630,
@@ -3119,6 +3143,14 @@
       "position": 1,
       "cost": 3.9,
       "ownership": 1.3
+    },
+    {
+      "id": 793,
+      "name": "King",
+      "team": "Crystal Palace",
+      "position": 2,
+      "cost": 4.0,
+      "ownership": 0.0
     },
     {
       "id": 567,
@@ -3182,7 +3214,7 @@
       "team": "Liverpool",
       "position": 2,
       "cost": 5.4,
-      "ownership": 3.4
+      "ownership": 3.3
     },
     {
       "id": 463,
@@ -3198,7 +3230,7 @@
       "team": "Aston Villa",
       "position": 2,
       "cost": 4.4,
-      "ownership": 7.5
+      "ownership": 7.4
     },
     {
       "id": 181,
@@ -3246,7 +3278,7 @@
       "team": "Bournemouth",
       "position": 4,
       "cost": 4.6,
-      "ownership": 3.8
+      "ownership": 4.0
     },
     {
       "id": 582,
@@ -3254,7 +3286,7 @@
       "team": "Spurs",
       "position": 3,
       "cost": 6.4,
-      "ownership": 13.7
+      "ownership": 12.2
     },
     {
       "id": 788,
@@ -3302,7 +3334,7 @@
       "team": "Newcastle",
       "position": 3,
       "cost": 4.5,
-      "ownership": 3.5
+      "ownership": 3.6
     },
     {
       "id": 612,
@@ -3310,7 +3342,7 @@
       "team": "West Ham",
       "position": 3,
       "cost": 5.9,
-      "ownership": 2.7
+      "ownership": 2.2
     },
     {
       "id": 755,
@@ -3326,7 +3358,7 @@
       "team": "Crystal Palace",
       "position": 2,
       "cost": 5.1,
-      "ownership": 6.0
+      "ownership": 5.9
     },
     {
       "id": 733,
@@ -3390,7 +3422,7 @@
       "team": "Fulham",
       "position": 1,
       "cost": 4.9,
-      "ownership": 1.7
+      "ownership": 1.6
     },
     {
       "id": 768,
@@ -3430,7 +3462,7 @@
       "team": "Brentford",
       "position": 2,
       "cost": 4.9,
-      "ownership": 2.3
+      "ownership": 2.4
     },
     {
       "id": 10,
@@ -3438,7 +3470,7 @@
       "team": "Arsenal",
       "position": 2,
       "cost": 5.1,
-      "ownership": 1.6
+      "ownership": 1.5
     },
     {
       "id": 719,
@@ -3534,7 +3566,7 @@
       "team": "Liverpool",
       "position": 3,
       "cost": 14.0,
-      "ownership": 14.4
+      "ownership": 14.3
     },
     {
       "id": 231,
@@ -3630,7 +3662,7 @@
       "team": "Wolves",
       "position": 4,
       "cost": 4.5,
-      "ownership": 0.4
+      "ownership": 0.7
     },
     {
       "id": 252,
@@ -3638,7 +3670,7 @@
       "team": "Chelsea",
       "position": 4,
       "cost": 4.3,
-      "ownership": 7.1
+      "ownership": 6.9
     },
     {
       "id": 159,
@@ -3694,7 +3726,7 @@
       "team": "Aston Villa",
       "position": 1,
       "cost": 5.0,
-      "ownership": 3.5
+      "ownership": 3.6
     },
     {
       "id": 437,
@@ -3710,7 +3742,7 @@
       "team": "Sunderland",
       "position": 2,
       "cost": 3.9,
-      "ownership": 0.6
+      "ownership": 0.5
     },
     {
       "id": 364,
@@ -3726,7 +3758,7 @@
       "team": "Crystal Palace",
       "position": 4,
       "cost": 7.6,
-      "ownership": 11.6
+      "ownership": 11.2
     },
     {
       "id": 558,
@@ -3741,8 +3773,8 @@
       "name": "Matheus N.",
       "team": "Man City",
       "position": 2,
-      "cost": 5.4,
-      "ownership": 3.6
+      "cost": 5.5,
+      "ownership": 4.6
     },
     {
       "id": 255,
@@ -3798,7 +3830,7 @@
       "team": "Man Utd",
       "position": 3,
       "cost": 8.1,
-      "ownership": 9.2
+      "ownership": 8.9
     },
     {
       "id": 742,
@@ -3838,7 +3870,7 @@
       "team": "Aston Villa",
       "position": 3,
       "cost": 5.4,
-      "ownership": 1.0
+      "ownership": 1.1
     },
     {
       "id": 69,
@@ -3894,7 +3926,7 @@
       "team": "Arsenal",
       "position": 3,
       "cost": 5.7,
-      "ownership": 2.2
+      "ownership": 1.8
     },
     {
       "id": 789,
@@ -3950,7 +3982,7 @@
       "team": "Nott'm Forest",
       "position": 2,
       "cost": 5.1,
-      "ownership": 3.3
+      "ownership": 3.2
     },
     {
       "id": 170,
@@ -3990,7 +4022,7 @@
       "team": "Brighton",
       "position": 3,
       "cost": 5.9,
-      "ownership": 4.9
+      "ownership": 3.5
     },
     {
       "id": 258,
@@ -3998,7 +4030,7 @@
       "team": "Crystal Palace",
       "position": 2,
       "cost": 5.0,
-      "ownership": 2.3
+      "ownership": 2.2
     },
     {
       "id": 157,
@@ -4125,8 +4157,8 @@
       "name": "Mukiele",
       "team": "Sunderland",
       "position": 2,
-      "cost": 4.3,
-      "ownership": 8.6
+      "cost": 4.4,
+      "ownership": 9.6
     },
     {
       "id": 548,
@@ -4166,7 +4198,7 @@
       "team": "Crystal Palace",
       "position": 2,
       "cost": 5.8,
-      "ownership": 6.5
+      "ownership": 6.2
     },
     {
       "id": 292,
@@ -4214,7 +4246,7 @@
       "team": "Nott'm Forest",
       "position": 2,
       "cost": 4.7,
-      "ownership": 3.4
+      "ownership": 3.3
     },
     {
       "id": 378,
@@ -4222,7 +4254,7 @@
       "team": "Liverpool",
       "position": 2,
       "cost": 3.7,
-      "ownership": 0.7
+      "ownership": 0.8
     },
     {
       "id": 299,
@@ -4230,7 +4262,7 @@
       "team": "Everton",
       "position": 3,
       "cost": 6.2,
-      "ownership": 3.4
+      "ownership": 3.3
     },
     {
       "id": 669,
@@ -4277,8 +4309,8 @@
       "name": "Neto",
       "team": "Chelsea",
       "position": 3,
-      "cost": 7.2,
-      "ownership": 7.1
+      "cost": 7.1,
+      "ownership": 6.6
     },
     {
       "id": 686,
@@ -4302,7 +4334,7 @@
       "team": "Crystal Palace",
       "position": 4,
       "cost": 5.4,
-      "ownership": 0.5
+      "ownership": 0.4
     },
     {
       "id": 240,
@@ -4398,7 +4430,7 @@
       "team": "Man City",
       "position": 2,
       "cost": 5.3,
-      "ownership": 10.1
+      "ownership": 9.7
     },
     {
       "id": 164,
@@ -4414,7 +4446,7 @@
       "team": "Brentford",
       "position": 3,
       "cost": 5.8,
-      "ownership": 0.4
+      "ownership": 0.3
     },
     {
       "id": 512,
@@ -4590,7 +4622,7 @@
       "team": "Chelsea",
       "position": 3,
       "cost": 10.4,
-      "ownership": 12.1
+      "ownership": 12.2
     },
     {
       "id": 296,
@@ -4654,7 +4686,7 @@
       "team": "Spurs",
       "position": 2,
       "cost": 5.2,
-      "ownership": 12.7
+      "ownership": 12.6
     },
     {
       "id": 540,
@@ -4686,7 +4718,7 @@
       "team": "Bournemouth",
       "position": 1,
       "cost": 4.5,
-      "ownership": 4.8
+      "ownership": 4.6
     },
     {
       "id": 89,
@@ -4718,7 +4750,7 @@
       "team": "Everton",
       "position": 1,
       "cost": 5.6,
-      "ownership": 12.6
+      "ownership": 13.1
     },
     {
       "id": 776,
@@ -4758,7 +4790,7 @@
       "team": "Wolves",
       "position": 2,
       "cost": 3.9,
-      "ownership": 1.2
+      "ownership": 1.1
     },
     {
       "id": 469,
@@ -4766,7 +4798,7 @@
       "team": "Newcastle",
       "position": 1,
       "cost": 5.1,
-      "ownership": 4.8
+      "ownership": 5.1
     },
     {
       "id": 623,
@@ -4861,8 +4893,8 @@
       "name": "Raya",
       "team": "Arsenal",
       "position": 1,
-      "cost": 6.0,
-      "ownership": 34.4
+      "cost": 5.9,
+      "ownership": 33.6
     },
     {
       "id": 337,
@@ -4902,7 +4934,7 @@
       "team": "Man City",
       "position": 3,
       "cost": 5.2,
-      "ownership": 12.1
+      "ownership": 12.5
     },
     {
       "id": 541,
@@ -4910,15 +4942,15 @@
       "team": "Sunderland",
       "position": 2,
       "cost": 3.8,
-      "ownership": 2.6
+      "ownership": 2.5
     },
     {
       "id": 21,
       "name": "Rice",
       "team": "Arsenal",
       "position": 3,
-      "cost": 7.2,
-      "ownership": 22.5
+      "cost": 7.3,
+      "ownership": 26.0
     },
     {
       "id": 261,
@@ -4926,7 +4958,7 @@
       "team": "Crystal Palace",
       "position": 2,
       "cost": 4.4,
-      "ownership": 2.1
+      "ownership": 1.9
     },
     {
       "id": 597,
@@ -4934,7 +4966,7 @@
       "team": "Spurs",
       "position": 4,
       "cost": 6.4,
-      "ownership": 7.8
+      "ownership": 7.7
     },
     {
       "id": 770,
@@ -4998,7 +5030,7 @@
       "team": "Leeds",
       "position": 2,
       "cost": 3.9,
-      "ownership": 3.6
+      "ownership": 3.4
     },
     {
       "id": 421,
@@ -5014,7 +5046,7 @@
       "team": "Sunderland",
       "position": 1,
       "cost": 4.9,
-      "ownership": 11.0
+      "ownership": 12.1
     },
     {
       "id": 112,
@@ -5030,7 +5062,7 @@
       "team": "Aston Villa",
       "position": 3,
       "cost": 7.6,
-      "ownership": 30.3
+      "ownership": 31.4
     },
     {
       "id": 569,
@@ -5094,7 +5126,7 @@
       "team": "Man City",
       "position": 2,
       "cost": 5.7,
-      "ownership": 7.3
+      "ownership": 5.4
     },
     {
       "id": 636,
@@ -5134,7 +5166,7 @@
       "team": "Arsenal",
       "position": 3,
       "cost": 10.2,
-      "ownership": 21.1
+      "ownership": 20.3
     },
     {
       "id": 6,
@@ -5198,7 +5230,7 @@
       "team": "Crystal Palace",
       "position": 3,
       "cost": 6.4,
-      "ownership": 2.1
+      "ownership": 2.0
     },
     {
       "id": 415,
@@ -5214,7 +5246,7 @@
       "team": "Nott'm Forest",
       "position": 2,
       "cost": 4.5,
-      "ownership": 0.2
+      "ownership": 0.1
     },
     {
       "id": 608,
@@ -5238,7 +5270,7 @@
       "team": "Brentford",
       "position": 3,
       "cost": 7.1,
-      "ownership": 2.2
+      "ownership": 2.6
     },
     {
       "id": 142,
@@ -5262,7 +5294,7 @@
       "team": "Newcastle",
       "position": 2,
       "cost": 5.3,
-      "ownership": 1.9
+      "ownership": 2.0
     },
     {
       "id": 90,
@@ -5286,7 +5318,7 @@
       "team": "Nott'm Forest",
       "position": 1,
       "cost": 4.6,
-      "ownership": 5.7
+      "ownership": 5.6
     },
     {
       "id": 82,
@@ -5294,7 +5326,7 @@
       "team": "Bournemouth",
       "position": 3,
       "cost": 7.6,
-      "ownership": 44.8
+      "ownership": 43.7
     },
     {
       "id": 72,
@@ -5302,7 +5334,7 @@
       "team": "Bournemouth",
       "position": 2,
       "cost": 4.8,
-      "ownership": 14.5
+      "ownership": 14.2
     },
     {
       "id": 328,
@@ -5494,7 +5526,7 @@
       "team": "Leeds",
       "position": 3,
       "cost": 4.9,
-      "ownership": 3.3
+      "ownership": 3.2
     },
     {
       "id": 524,
@@ -5558,7 +5590,7 @@
       "team": "Liverpool",
       "position": 3,
       "cost": 6.6,
-      "ownership": 4.8
+      "ownership": 4.6
     },
     {
       "id": 220,
@@ -5566,7 +5598,7 @@
       "team": "Chelsea",
       "position": 1,
       "cost": 4.9,
-      "ownership": 14.2
+      "ownership": 13.4
     },
     {
       "id": 577,
@@ -5598,15 +5630,15 @@
       "team": "Newcastle",
       "position": 2,
       "cost": 4.0,
-      "ownership": 0.2
+      "ownership": 0.1
     },
     {
       "id": 291,
       "name": "Tarkowski",
       "team": "Everton",
       "position": 2,
-      "cost": 5.6,
-      "ownership": 11.5
+      "cost": 5.7,
+      "ownership": 12.7
     },
     {
       "id": 156,
@@ -5617,12 +5649,20 @@
       "ownership": 0.1
     },
     {
+      "id": 791,
+      "name": "Taty",
+      "team": "West Ham",
+      "position": 4,
+      "cost": 5.5,
+      "ownership": 0.0
+    },
+    {
       "id": 84,
       "name": "Tavernier",
       "team": "Bournemouth",
       "position": 3,
-      "cost": 5.6,
-      "ownership": 2.5
+      "cost": 5.5,
+      "ownership": 2.4
     },
     {
       "id": 210,
@@ -5654,15 +5694,15 @@
       "team": "Fulham",
       "position": 2,
       "cost": 4.5,
-      "ownership": 0.6
+      "ownership": 0.5
     },
     {
       "id": 136,
       "name": "Thiago",
       "team": "Brentford",
       "position": 4,
-      "cost": 6.9,
-      "ownership": 27.9
+      "cost": 7.1,
+      "ownership": 33.6
     },
     {
       "id": 684,
@@ -5670,7 +5710,7 @@
       "team": "Newcastle",
       "position": 2,
       "cost": 5.1,
-      "ownership": 4.4
+      "ownership": 6.1
     },
     {
       "id": 48,
@@ -5678,7 +5718,7 @@
       "team": "Aston Villa",
       "position": 3,
       "cost": 5.9,
-      "ownership": 1.0
+      "ownership": 1.1
     },
     {
       "id": 609,
@@ -5773,8 +5813,8 @@
       "name": "Trossard",
       "team": "Arsenal",
       "position": 3,
-      "cost": 7.0,
-      "ownership": 2.0
+      "cost": 6.9,
+      "ownership": 1.8
     },
     {
       "id": 74,
@@ -5782,7 +5822,7 @@
       "team": "Bournemouth",
       "position": 2,
       "cost": 4.5,
-      "ownership": 1.9
+      "ownership": 1.8
     },
     {
       "id": 214,
@@ -5806,7 +5846,7 @@
       "team": "Burnley",
       "position": 2,
       "cost": 3.9,
-      "ownership": 1.1
+      "ownership": 1.0
     },
     {
       "id": 504,
@@ -5886,7 +5926,7 @@
       "team": "Brentford",
       "position": 1,
       "cost": 3.9,
-      "ownership": 0.7
+      "ownership": 0.6
     },
     {
       "id": 151,
@@ -5894,15 +5934,15 @@
       "team": "Brighton",
       "position": 2,
       "cost": 4.5,
-      "ownership": 4.4
+      "ownership": 4.2
     },
     {
       "id": 575,
       "name": "Van de Ven",
       "team": "Spurs",
       "position": 2,
-      "cost": 4.5,
-      "ownership": 27.4
+      "cost": 4.6,
+      "ownership": 27.9
     },
     {
       "id": 113,
@@ -5910,7 +5950,7 @@
       "team": "Brentford",
       "position": 2,
       "cost": 4.5,
-      "ownership": 1.0
+      "ownership": 0.9
     },
     {
       "id": 152,
@@ -5918,7 +5958,7 @@
       "team": "Brighton",
       "position": 2,
       "cost": 4.3,
-      "ownership": 0.2
+      "ownership": 0.1
     },
     {
       "id": 139,
@@ -5926,7 +5966,7 @@
       "team": "Brighton",
       "position": 1,
       "cost": 4.5,
-      "ownership": 5.9
+      "ownership": 5.8
     },
     {
       "id": 565,
@@ -5942,7 +5982,7 @@
       "team": "Liverpool",
       "position": 2,
       "cost": 5.9,
-      "ownership": 23.1
+      "ownership": 22.4
     },
     {
       "id": 412,
@@ -5966,7 +6006,7 @@
       "team": "Burnley",
       "position": 2,
       "cost": 4.4,
-      "ownership": 1.2
+      "ownership": 1.1
     },
     {
       "id": 659,
@@ -5981,8 +6021,8 @@
       "name": "Wan-Bissaka",
       "team": "West Ham",
       "position": 2,
-      "cost": 4.2,
-      "ownership": 4.0
+      "cost": 4.1,
+      "ownership": 3.9
     },
     {
       "id": 614,
@@ -5998,7 +6038,7 @@
       "team": "Aston Villa",
       "position": 4,
       "cost": 8.7,
-      "ownership": 10.8
+      "ownership": 13.6
     },
     {
       "id": 172,
@@ -6029,8 +6069,8 @@
       "name": "Welbeck",
       "team": "Brighton",
       "position": 4,
-      "cost": 6.3,
-      "ownership": 4.7
+      "cost": 6.2,
+      "ownership": 4.2
     },
     {
       "id": 298,
@@ -6046,7 +6086,7 @@
       "team": "Crystal Palace",
       "position": 3,
       "cost": 5.0,
-      "ownership": 0.9
+      "ownership": 0.8
     },
     {
       "id": 468,
@@ -6062,7 +6102,7 @@
       "team": "Arsenal",
       "position": 2,
       "cost": 5.1,
-      "ownership": 0.6
+      "ownership": 0.5
     },
     {
       "id": 498,
@@ -6102,7 +6142,7 @@
       "team": "Fulham",
       "position": 3,
       "cost": 5.8,
-      "ownership": 18.1
+      "ownership": 19.6
     },
     {
       "id": 671,
@@ -6110,7 +6150,7 @@
       "team": "West Ham",
       "position": 4,
       "cost": 5.8,
-      "ownership": 0.8
+      "ownership": 0.7
     },
     {
       "id": 96,
@@ -6126,7 +6166,7 @@
       "team": "Liverpool",
       "position": 3,
       "cost": 8.2,
-      "ownership": 10.6
+      "ownership": 10.7
     },
     {
       "id": 135,
@@ -6134,7 +6174,7 @@
       "team": "Newcastle",
       "position": 4,
       "cost": 7.3,
-      "ownership": 0.9
+      "ownership": 1.1
     },
     {
       "id": 714,
@@ -6142,7 +6182,7 @@
       "team": "Newcastle",
       "position": 4,
       "cost": 7.3,
-      "ownership": 17.2
+      "ownership": 16.1
     },
     {
       "id": 525,
@@ -6182,7 +6222,7 @@
       "team": "Spurs",
       "position": 3,
       "cost": 6.5,
-      "ownership": 0.9
+      "ownership": 1.0
     },
     {
       "id": 668,
@@ -6246,7 +6286,7 @@
       "team": "Man Utd",
       "position": 2,
       "cost": 4.2,
-      "ownership": 1.4
+      "ownership": 1.3
     },
     {
       "id": 63,
@@ -6286,7 +6326,7 @@
       "team": "Arsenal",
       "position": 3,
       "cost": 5.2,
-      "ownership": 2.3
+      "ownership": 2.2
     },
     {
       "id": 616,
@@ -6310,7 +6350,7 @@
       "team": "Arsenal",
       "position": 3,
       "cost": 7.8,
-      "ownership": 2.4
+      "ownership": 2.5
     },
     {
       "id": 681,
@@ -6318,8 +6358,8 @@
       "team": "Man Utd",
       "position": 4,
       "cost": 7.2,
-      "ownership": 3.3
+      "ownership": 3.4
     }
   ],
-  "count": 790
+  "count": 795
 }

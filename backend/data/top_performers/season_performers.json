@@ -4,32 +4,32 @@
     "team": "Man City",
     "team_short": "MCI",
     "position": "Forward",
-    "points": 157,
+    "points": 163,
     "ppg": 7.8,
     "price": 15.1,
     "ownership": 74.2,
-    "form": 6.3
+    "form": 5.0
   },
   {
     "player": "Rice",
     "team": "Arsenal",
     "team_short": "ARS",
     "position": "Midfielder",
-    "points": 119,
-    "ppg": 6.0,
-    "price": 7.2,
-    "ownership": 22.5,
-    "form": 6.3
+    "points": 122,
+    "ppg": 5.8,
+    "price": 7.3,
+    "ownership": 26.0,
+    "form": 6.5
   },
   {
     "player": "Semenyo",
     "team": "Bournemouth",
     "team_short": "BOU",
     "position": "Midfielder",
-    "points": 114,
+    "points": 120,
     "ppg": 5.7,
     "price": 7.6,
-    "ownership": 44.8,
+    "ownership": 43.7,
     "form": 5.6
   },
   {
@@ -37,131 +37,131 @@
     "team": "Brentford",
     "team_short": "BRE",
     "position": "Forward",
-    "points": 108,
-    "ppg": 5.4,
-    "price": 6.9,
-    "ownership": 27.9,
-    "form": 5.0
+    "points": 120,
+    "ppg": 5.7,
+    "price": 7.1,
+    "ownership": 33.6,
+    "form": 6.8
   },
   {
     "player": "Bruno G.",
     "team": "Newcastle",
     "team_short": "NEW",
     "position": "Midfielder",
-    "points": 106,
-    "ppg": 5.3,
-    "price": 7.1,
-    "ownership": 17.5,
-    "form": 4.5
+    "points": 117,
+    "ppg": 5.6,
+    "price": 7.2,
+    "ownership": 20.8,
+    "form": 6.3
   },
   {
     "player": "Gabriel",
     "team": "Arsenal",
     "team_short": "ARS",
     "position": "Defender",
-    "points": 106,
+    "points": 112,
     "ppg": 5.3,
-    "price": 6.6,
-    "ownership": 25.7,
-    "form": 5.5
+    "price": 6.7,
+    "ownership": 30.6,
+    "form": 6.8
   },
   {
     "player": "B.Fernandes",
     "team": "Man Utd",
     "team_short": "MUN",
     "position": "Midfielder",
-    "points": 99,
+    "points": 106,
     "ppg": 5.0,
     "price": 9.1,
-    "ownership": 11.5,
-    "form": 2.5
-  },
-  {
-    "player": "Chalobah",
-    "team": "Chelsea",
-    "team_short": "CHE",
-    "position": "Defender",
-    "points": 99,
-    "ppg": 5.0,
-    "price": 5.5,
-    "ownership": 17.7,
-    "form": 3.7
+    "ownership": 12.2,
+    "form": 1.4
   },
   {
     "player": "Guéhi",
     "team": "Crystal Palace",
     "team_short": "CRY",
     "position": "Defender",
-    "points": 99,
+    "points": 105,
     "ppg": 5.0,
     "price": 5.3,
-    "ownership": 40.2,
-    "form": 1.8
-  },
-  {
-    "player": "Foden",
-    "team": "Man City",
-    "team_short": "MCI",
-    "position": "Midfielder",
-    "points": 98,
-    "ppg": 4.9,
-    "price": 8.9,
-    "ownership": 37.7,
-    "form": 3.8
+    "ownership": 39.7,
+    "form": 2.9
   },
   {
     "player": "J.Timber",
     "team": "Arsenal",
     "team_short": "ARS",
     "position": "Defender",
-    "points": 98,
-    "ppg": 4.9,
+    "points": 104,
+    "ppg": 5.0,
     "price": 6.3,
-    "ownership": 27.7,
-    "form": 4.4
+    "ownership": 27.2,
+    "form": 5.3
+  },
+  {
+    "player": "Chalobah",
+    "team": "Chelsea",
+    "team_short": "CHE",
+    "position": "Defender",
+    "points": 102,
+    "ppg": 4.9,
+    "price": 5.5,
+    "ownership": 17.9,
+    "form": 2.4
+  },
+  {
+    "player": "Wilson",
+    "team": "Fulham",
+    "team_short": "FUL",
+    "position": "Midfielder",
+    "points": 102,
+    "ppg": 4.9,
+    "price": 5.8,
+    "ownership": 19.6,
+    "form": 4.3
   },
   {
     "player": "Rogers",
     "team": "Aston Villa",
     "team_short": "AVL",
     "position": "Midfielder",
-    "points": 98,
-    "ppg": 4.9,
+    "points": 101,
+    "ppg": 4.8,
     "price": 7.6,
-    "ownership": 30.3,
-    "form": 6.7
+    "ownership": 31.4,
+    "form": 4.5
+  },
+  {
+    "player": "Foden",
+    "team": "Man City",
+    "team_short": "MCI",
+    "position": "Midfielder",
+    "points": 100,
+    "ppg": 4.8,
+    "price": 8.7,
+    "ownership": 35.0,
+    "form": 2.2
   },
   {
     "player": "Tarkowski",
     "team": "Everton",
     "team_short": "EVE",
     "position": "Defender",
-    "points": 96,
-    "ppg": 4.8,
-    "price": 5.6,
-    "ownership": 11.5,
-    "form": 5.1
-  },
-  {
-    "player": "Rúben",
-    "team": "Man City",
-    "team_short": "MCI",
-    "position": "Defender",
-    "points": 95,
+    "points": 100,
     "ppg": 4.8,
     "price": 5.7,
-    "ownership": 7.3,
-    "form": 6.2
+    "ownership": 12.7,
+    "form": 5.7
   },
   {
-    "player": "Saka",
-    "team": "Arsenal",
-    "team_short": "ARS",
-    "position": "Midfielder",
-    "points": 95,
-    "ppg": 4.8,
-    "price": 10.2,
-    "ownership": 21.1,
-    "form": 5.6
+    "player": "Lacroix",
+    "team": "Crystal Palace",
+    "team_short": "CRY",
+    "position": "Defender",
+    "points": 98,
+    "ppg": 4.7,
+    "price": 5.1,
+    "ownership": 5.9,
+    "form": 3.7
   }
 ]
