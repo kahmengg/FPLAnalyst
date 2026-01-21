@@ -1,47 +1,25 @@
 [
     {
-        "player": "Watkins",
-        "team": "Aston Villa",
-        "team_short": "AVL",
-        "goals": 7,
-        "xG": 7.5,
-        "overperformance": -0.5,
-        "overperformance_per_90": -0.025,
-        "sustainable": true,
-        "form": 6.1
-    },
-    {
         "player": "João Pedro",
         "team": "Chelsea",
         "team_short": "CHE",
         "goals": 6,
         "xG": 6.3,
         "overperformance": -0.3,
-        "overperformance_per_90": -0.015,
+        "overperformance_per_90": -0.014,
         "sustainable": true,
-        "form": 3.4
-    },
-    {
-        "player": "Schade",
-        "team": "Brentford",
-        "team_short": "BRE",
-        "goals": 6,
-        "xG": 6.6,
-        "overperformance": -0.6,
-        "overperformance_per_90": -0.03,
-        "sustainable": true,
-        "form": 5.8
+        "form": 3.2
     },
     {
         "player": "Gakpo",
         "team": "Liverpool",
         "team_short": "LIV",
         "goals": 5,
-        "xG": 4.7,
-        "overperformance": 0.3,
-        "overperformance_per_90": 0.015,
+        "xG": 4.8,
+        "overperformance": 0.2,
+        "overperformance_per_90": 0.01,
         "sustainable": true,
-        "form": 1.4
+        "form": 2.0
     },
     {
         "player": "Malen",
@@ -59,11 +37,11 @@
         "team": "Leeds",
         "team_short": "LEE",
         "goals": 4,
-        "xG": 3.8,
-        "overperformance": 0.2,
-        "overperformance_per_90": 0.01,
+        "xG": 4.0,
+        "overperformance": 0.0,
+        "overperformance_per_90": 0.0,
         "sustainable": true,
-        "form": 0.7
+        "form": 0.9
     },
     {
         "player": "Tavernier",
@@ -72,9 +50,9 @@
         "goals": 4,
         "xG": 4.3,
         "overperformance": -0.3,
-        "overperformance_per_90": -0.015,
+        "overperformance_per_90": -0.014,
         "sustainable": true,
-        "form": 3.6
+        "form": 2.3
     },
     {
         "player": "O.Dango",
@@ -83,8 +61,30 @@
         "goals": 3,
         "xG": 3.2,
         "overperformance": -0.2,
-        "overperformance_per_90": -0.011,
+        "overperformance_per_90": -0.01,
         "sustainable": true,
-        "form": 0.4
+        "form": 0.0
+    },
+    {
+        "player": "Smith Rowe",
+        "team": "Fulham",
+        "team_short": "FUL",
+        "goals": 3,
+        "xG": 3.2,
+        "overperformance": -0.2,
+        "overperformance_per_90": -0.01,
+        "sustainable": true,
+        "form": 2.5
+    },
+    {
+        "player": "Cherki",
+        "team": "Man City",
+        "team_short": "MCI",
+        "goals": 2,
+        "xG": 1.9,
+        "overperformance": 0.1,
+        "overperformance_per_90": 0.005,
+        "sustainable": true,
+        "form": 4.9
     }
 ]

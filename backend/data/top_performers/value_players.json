@@ -4,99 +4,99 @@
     "team": "Sunderland",
     "team_short": "SUN",
     "position": "Defender",
-    "pointsPerMillion": 20.7,
-    "totalPoints": 89,
-    "price": 4.3,
-    "form": 7.3
-  },
-  {
-    "player": "Van de Ven",
-    "team": "Spurs",
-    "team_short": "TOT",
-    "position": "Defender",
-    "pointsPerMillion": 19.78,
-    "totalPoints": 89,
-    "price": 4.5,
-    "form": 5.5
-  },
-  {
-    "player": "Roefs",
-    "team": "Sunderland",
-    "team_short": "SUN",
-    "position": "Goalkeeper",
-    "pointsPerMillion": 18.98,
-    "totalPoints": 93,
-    "price": 4.9,
-    "form": 7.0
+    "pointsPerMillion": 20.91,
+    "totalPoints": 92,
+    "price": 4.4,
+    "form": 6.2
   },
   {
     "player": "Keane",
     "team": "Everton",
     "team_short": "EVE",
     "position": "Defender",
-    "pointsPerMillion": 18.96,
-    "totalPoints": 91,
+    "pointsPerMillion": 20.0,
+    "totalPoints": 96,
     "price": 4.8,
-    "form": 3.3
+    "form": 4.2
+  },
+  {
+    "player": "Roefs",
+    "team": "Sunderland",
+    "team_short": "SUN",
+    "position": "Goalkeeper",
+    "pointsPerMillion": 19.39,
+    "totalPoints": 95,
+    "price": 4.9,
+    "form": 5.3
+  },
+  {
+    "player": "Van de Ven",
+    "team": "Spurs",
+    "team_short": "TOT",
+    "position": "Defender",
+    "pointsPerMillion": 19.35,
+    "totalPoints": 89,
+    "price": 4.6,
+    "form": 5.3
   },
   {
     "player": "Alderete",
     "team": "Sunderland",
     "team_short": "SUN",
     "position": "Defender",
-    "pointsPerMillion": 18.54,
-    "totalPoints": 76,
+    "pointsPerMillion": 18.78,
+    "totalPoints": 77,
     "price": 4.1,
-    "form": 5.7
-  },
-  {
-    "player": "Lacroix",
-    "team": "Crystal Palace",
-    "team_short": "CRY",
-    "position": "Defender",
-    "pointsPerMillion": 17.65,
-    "totalPoints": 90,
-    "price": 5.1,
-    "form": 2.2
+    "form": 4.4
   },
   {
     "player": "Garner",
     "team": "Everton",
     "team_short": "EVE",
     "position": "Midfielder",
-    "pointsPerMillion": 17.45,
-    "totalPoints": 89,
+    "pointsPerMillion": 18.63,
+    "totalPoints": 95,
     "price": 5.1,
-    "form": 5.9
-  },
-  {
-    "player": "Stach",
-    "team": "Leeds",
-    "team_short": "LEE",
-    "position": "Midfielder",
-    "pointsPerMillion": 17.35,
-    "totalPoints": 85,
-    "price": 4.9,
-    "form": 4.1
+    "form": 6.3
   },
   {
     "player": "Senesi",
     "team": "Bournemouth",
     "team_short": "BOU",
     "position": "Defender",
-    "pointsPerMillion": 17.08,
-    "totalPoints": 82,
+    "pointsPerMillion": 18.33,
+    "totalPoints": 88,
     "price": 4.8,
-    "form": 2.4
+    "form": 3.5
   },
   {
-    "player": "Richards",
-    "team": "Crystal Palace",
-    "team_short": "CRY",
+    "player": "Cash",
+    "team": "Aston Villa",
+    "team_short": "AVL",
     "position": "Defender",
-    "pointsPerMillion": 17.05,
-    "totalPoints": 75,
-    "price": 4.4,
-    "form": 0.7
+    "pointsPerMillion": 18.12,
+    "totalPoints": 87,
+    "price": 4.8,
+    "form": 3.1
+  },
+  {
+    "player": "Kelleher",
+    "team": "Brentford",
+    "team_short": "BRE",
+    "position": "Goalkeeper",
+    "pointsPerMillion": 18.0,
+    "totalPoints": 81,
+    "price": 4.5,
+    "form": 9.1
+  },
+  {
+    "player": "Collins",
+    "team": "Brentford",
+    "team_short": "BRE",
+    "position": "Defender",
+    "pointsPerMillion": 17.8,
+    "totalPoints": 89,
+    "price": 5.0,
+    "form": 9.7
   }
 ]
