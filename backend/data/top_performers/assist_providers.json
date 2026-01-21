@@ -7,11 +7,7 @@
     "assistsPerGame": 0.38,
     "points": 106,
     "price": 9.1,
-<<<<<<< HEAD
     "ownership": 12.6,
-=======
-    "ownership": 12.2,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 1.4
   },
   {
@@ -22,11 +18,7 @@
     "assistsPerGame": 0.33,
     "points": 76,
     "price": 6.8,
-<<<<<<< HEAD
     "ownership": 15.7,
-=======
-    "ownership": 16.0,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 4.9
   },
   {
@@ -37,11 +29,7 @@
     "assistsPerGame": 0.29,
     "points": 76,
     "price": 6.5,
-<<<<<<< HEAD
     "ownership": 9.7,
-=======
-    "ownership": 9.9,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 2.2
   },
   {
@@ -52,11 +40,7 @@
     "assistsPerGame": 0.24,
     "points": 75,
     "price": 6.4,
-<<<<<<< HEAD
     "ownership": 11.9,
-=======
-    "ownership": 12.2,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 1.4
   },
   {
@@ -143,13 +127,8 @@
     "assists": 4,
     "assistsPerGame": 0.19,
     "points": 79,
-<<<<<<< HEAD
     "price": 5.8,
     "ownership": 3.3,
-=======
-    "price": 5.9,
-    "ownership": 3.5,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 1.4
   }
 ]

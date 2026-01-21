@@ -20,11 +20,7 @@
     "xG": 12.0,
     "points": 120,
     "price": 7.1,
-<<<<<<< HEAD
     "ownership": 34.3,
-=======
-    "ownership": 33.6,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 6.8
   },
   {
@@ -36,11 +32,7 @@
     "xG": 6.8,
     "points": 120,
     "price": 7.6,
-<<<<<<< HEAD
     "ownership": 43.3,
-=======
-    "ownership": 43.7,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 5.6
   },
   {
@@ -52,11 +44,7 @@
     "xG": 7.6,
     "points": 89,
     "price": 6.0,
-<<<<<<< HEAD
     "ownership": 12.6,
-=======
-    "ownership": 12.2,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 5.8
   },
   {
@@ -68,11 +56,7 @@
     "xG": 3.9,
     "points": 117,
     "price": 7.2,
-<<<<<<< HEAD
     "ownership": 21.6,
-=======
-    "ownership": 20.8,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 6.3
   },
   {
@@ -84,11 +68,7 @@
     "xG": 5.7,
     "points": 84,
     "price": 8.9,
-<<<<<<< HEAD
     "ownership": 26.0,
-=======
-    "ownership": 26.7,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 2.9
   },
   {
@@ -100,11 +80,7 @@
     "xG": 10.3,
     "points": 80,
     "price": 7.6,
-<<<<<<< HEAD
     "ownership": 11.1,
-=======
-    "ownership": 11.2,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 3.1
   },
   {
@@ -116,11 +92,7 @@
     "xG": 7.0,
     "points": 65,
     "price": 6.2,
-<<<<<<< HEAD
     "ownership": 4.1,
-=======
-    "ownership": 4.2,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 1.1
   },
   {
@@ -132,11 +104,7 @@
     "xG": 5.0,
     "points": 100,
     "price": 8.7,
-<<<<<<< HEAD
     "ownership": 34.1,
-=======
-    "ownership": 35.0,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 2.2
   },
   {
@@ -148,11 +116,7 @@
     "xG": 3.5,
     "points": 54,
     "price": 4.6,
-<<<<<<< HEAD
     "ownership": 4.1,
-=======
-    "ownership": 4.0,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 2.5
   },
   {
@@ -176,11 +140,7 @@
     "xG": 2.8,
     "points": 101,
     "price": 7.6,
-<<<<<<< HEAD
     "ownership": 31.7,
-=======
-    "ownership": 31.4,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 4.5
   },
   {
@@ -191,13 +151,8 @@
     "goalsPerGame": 0.33,
     "xG": 8.3,
     "points": 81,
-<<<<<<< HEAD
     "price": 8.8,
     "ownership": 13.8,
-=======
-    "price": 8.7,
-    "ownership": 13.6,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 5.6
   },
   {
@@ -208,13 +163,8 @@
     "goalsPerGame": 0.33,
     "xG": 3.7,
     "points": 102,
-<<<<<<< HEAD
     "price": 5.9,
     "ownership": 20.3,
-=======
-    "price": 5.8,
-    "ownership": 19.6,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 4.3
   },
   {
@@ -226,11 +176,7 @@
     "xG": 6.1,
     "points": 78,
     "price": 7.3,
-<<<<<<< HEAD
     "ownership": 16.0,
-=======
-    "ownership": 16.1,
->>>>>>> 3a324a4b95fe5e120369ec3643e48e41046cf378
     "form": 4.0
   }
 ]
