@@ -3,78 +3,111 @@
     "player": "B.Fernandes",
     "team": "Man Utd",
     "team_short": "MUN",
-    "assists": 10,
-    "assistsPerGame": 0.43,
-    "points": 121,
-    "price": 9.5,
-    "ownership": 24.1,
-    "form": 4.0
+    "assists": 12,
+    "assistsPerGame": 0.5,
+    "points": 131,
+    "price": 9.7,
+    "ownership": 32.2,
+    "form": 5.8
   },
   {
     "player": "Cherki",
     "team": "Man City",
     "team_short": "MCI",
     "assists": 7,
-    "assistsPerGame": 0.3,
-    "points": 80,
+    "assistsPerGame": 0.29,
+    "points": 88,
     "price": 6.6,
-    "ownership": 11.6,
-    "form": 2.5
+    "ownership": 9.7,
+    "form": 3.1
   },
   {
     "player": "Grealish",
     "team": "Everton",
     "team_short": "EVE",
     "assists": 6,
-    "assistsPerGame": 0.26,
+    "assistsPerGame": 0.25,
     "points": 79,
-    "price": 6.4,
-    "ownership": 7.6,
-    "form": 2.3
+    "price": 6.3,
+    "ownership": 6.7,
+    "form": 2.2
+  },
+  {
+    "player": "Haaland",
+    "team": "Man City",
+    "team_short": "MCI",
+    "assists": 5,
+    "assistsPerGame": 0.21,
+    "points": 171,
+    "price": 14.9,
+    "ownership": 70.2,
+    "form": 2.9
   },
   {
     "player": "Kudus",
     "team": "Spurs",
     "team_short": "TOT",
     "assists": 5,
-    "assistsPerGame": 0.22,
+    "assistsPerGame": 0.21,
     "points": 75,
     "price": 6.4,
-    "ownership": 10.4,
-    "form": 0.7
+    "ownership": 10.0,
+    "form": 0.2
+  },
+  {
+    "player": "M.Salah",
+    "team": "Liverpool",
+    "team_short": "LIV",
+    "assists": 5,
+    "assistsPerGame": 0.21,
+    "points": 74,
+    "price": 14.0,
+    "ownership": 14.3,
+    "form": 1.8
   },
   {
     "player": "Rogers",
     "team": "Aston Villa",
     "team_short": "AVL",
     "assists": 5,
-    "assistsPerGame": 0.22,
-    "points": 111,
-    "price": 7.7,
-    "ownership": 31.3,
-    "form": 3.4
+    "assistsPerGame": 0.21,
+    "points": 113,
+    "price": 7.6,
+    "ownership": 30.4,
+    "form": 3.6
   },
   {
     "player": "Xhaka",
     "team": "Sunderland",
     "team_short": "SUN",
     "assists": 5,
-    "assistsPerGame": 0.22,
+    "assistsPerGame": 0.21,
     "points": 90,
-    "price": 5.2,
-    "ownership": 6.1,
-    "form": 2.3
+    "price": 5.1,
+    "ownership": 4.4,
+    "form": 1.4
+  },
+  {
+    "player": "Bernardo",
+    "team": "Man City",
+    "team_short": "MCI",
+    "assists": 4,
+    "assistsPerGame": 0.17,
+    "points": 59,
+    "price": 6.2,
+    "ownership": 0.5,
+    "form": 2.9
   },
   {
     "player": "Chukwueze",
     "team": "Fulham",
     "team_short": "FUL",
     "assists": 4,
-    "assistsPerGame": 0.2,
-    "points": 41,
+    "assistsPerGame": 0.19,
+    "points": 43,
     "price": 5.3,
     "ownership": 0.1,
-    "form": 1.1
+    "form": 1.4
   },
   {
     "player": "Digne",
@@ -95,40 +128,7 @@
     "assistsPerGame": 0.17,
     "points": 72,
     "price": 6.4,
-    "ownership": 2.9,
-    "form": 2.3
-  },
-  {
-    "player": "E.Le Fée",
-    "team": "Sunderland",
-    "team_short": "SUN",
-    "assists": 4,
-    "assistsPerGame": 0.17,
-    "points": 81,
-    "price": 4.9,
-    "ownership": 1.4,
-    "form": 3.4
-  },
-  {
-    "player": "Haaland",
-    "team": "Man City",
-    "team_short": "MCI",
-    "assists": 4,
-    "assistsPerGame": 0.17,
-    "points": 166,
-    "price": 15.0,
-    "ownership": 72.6,
-    "form": 2.3
-  },
-  {
-    "player": "Hartman",
-    "team": "Burnley",
-    "team_short": "BUR",
-    "assists": 4,
-    "assistsPerGame": 0.17,
-    "points": 46,
-    "price": 4.0,
-    "ownership": 0.7,
-    "form": 0.0
+    "ownership": 2.6,
+    "form": 2.2
   }
 ]
