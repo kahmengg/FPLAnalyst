@@ -3,23 +3,45 @@
         "player": "Haaland",
         "team": "Man City",
         "team_short": "MCI",
-        "goals": 20,
-        "xG": 18.9,
-        "overperformance": 1.1,
-        "overperformance_per_90": 0.045,
+        "goals": 21,
+        "xG": 20.2,
+        "overperformance": 0.8,
+        "overperformance_per_90": 0.033,
         "sustainable": true,
-        "form": 2.9
+        "form": 4.5
     },
     {
         "player": "Calvert-Lewin",
         "team": "Leeds",
         "team_short": "LEE",
-        "goals": 9,
-        "xG": 8.9,
-        "overperformance": 0.1,
-        "overperformance_per_90": 0.003,
+        "goals": 10,
+        "xG": 9.3,
+        "overperformance": 0.7,
+        "overperformance_per_90": 0.03,
         "sustainable": true,
-        "form": 2.9
+        "form": 2.3
+    },
+    {
+        "player": "Gyökeres",
+        "team": "Arsenal",
+        "team_short": "ARS",
+        "goals": 8,
+        "xG": 8.0,
+        "overperformance": 0.0,
+        "overperformance_per_90": 0.001,
+        "sustainable": true,
+        "form": 4.1
+    },
+    {
+        "player": "Palmer",
+        "team": "Chelsea",
+        "team_short": "CHE",
+        "goals": 8,
+        "xG": 7.7,
+        "overperformance": 0.3,
+        "overperformance_per_90": 0.013,
+        "sustainable": true,
+        "form": 7.7
     },
     {
         "player": "Welbeck",
@@ -28,7 +50,7 @@
         "goals": 8,
         "xG": 8.4,
         "overperformance": -0.4,
-        "overperformance_per_90": -0.016,
+        "overperformance_per_90": -0.015,
         "sustainable": true,
         "form": 1.3
     },
@@ -37,54 +59,32 @@
         "team": "Nott'm Forest",
         "team_short": "NFO",
         "goals": 6,
-        "xG": 6.1,
-        "overperformance": -0.1,
-        "overperformance_per_90": -0.005,
+        "xG": 6.2,
+        "overperformance": -0.2,
+        "overperformance_per_90": -0.008,
         "sustainable": true,
-        "form": 6.1
-    },
-    {
-        "player": "Gakpo",
-        "team": "Liverpool",
-        "team_short": "LIV",
-        "goals": 5,
-        "xG": 5.1,
-        "overperformance": -0.1,
-        "overperformance_per_90": -0.002,
-        "sustainable": true,
-        "form": 3.1
+        "form": 5.0
     },
     {
         "player": "Nmecha",
         "team": "Leeds",
         "team_short": "LEE",
-        "goals": 5,
-        "xG": 4.9,
-        "overperformance": 0.1,
-        "overperformance_per_90": 0.004,
+        "goals": 6,
+        "xG": 5.7,
+        "overperformance": 0.3,
+        "overperformance_per_90": 0.012,
         "sustainable": true,
-        "form": 1.6
-    },
-    {
-        "player": "Tavernier",
-        "team": "Bournemouth",
-        "team_short": "BOU",
-        "goals": 5,
-        "xG": 5.1,
-        "overperformance": -0.1,
-        "overperformance_per_90": -0.004,
-        "sustainable": true,
-        "form": 2.7
+        "form": 3.2
     },
     {
         "player": "Šeško",
         "team": "Man Utd",
         "team_short": "MUN",
-        "goals": 5,
-        "xG": 5.5,
-        "overperformance": -0.5,
-        "overperformance_per_90": -0.023,
+        "goals": 6,
+        "xG": 5.9,
+        "overperformance": 0.1,
+        "overperformance_per_90": 0.005,
         "sustainable": true,
-        "form": 4.0
+        "form": 2.9
     }
 ]

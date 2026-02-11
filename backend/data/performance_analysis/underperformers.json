@@ -6,20 +6,20 @@
         "goals": 8,
         "xG": 12.0,
         "overperformance": -4.0,
-        "overperformance_per_90": -0.165,
+        "overperformance_per_90": -0.159,
         "sustainable": false,
-        "form": 1.4
+        "form": 1.1
     },
     {
         "player": "Enzo",
         "team": "Chelsea",
         "team_short": "CHE",
         "goals": 8,
-        "xG": 9.1,
-        "overperformance": -1.1,
-        "overperformance_per_90": -0.045,
+        "xG": 9.8,
+        "overperformance": -1.8,
+        "overperformance_per_90": -0.07,
         "sustainable": false,
-        "form": 6.1
+        "form": 4.7
     },
     {
         "player": "Watkins",
@@ -28,9 +28,9 @@
         "goals": 8,
         "xG": 9.1,
         "overperformance": -1.1,
-        "overperformance_per_90": -0.045,
+        "overperformance_per_90": -0.046,
         "sustainable": false,
-        "form": 3.4
+        "form": 2.5
     },
     {
         "player": "Schade",
@@ -39,52 +39,52 @@
         "goals": 6,
         "xG": 8.7,
         "overperformance": -2.7,
-        "overperformance_per_90": -0.11,
+        "overperformance_per_90": -0.106,
         "sustainable": false,
-        "form": 2.3
+        "form": 1.3
     },
     {
         "player": "B.Fernandes",
         "team": "Man Utd",
         "team_short": "MUN",
-        "goals": 5,
-        "xG": 7.4,
-        "overperformance": -2.4,
-        "overperformance_per_90": -0.1,
+        "goals": 6,
+        "xG": 8.1,
+        "overperformance": -2.1,
+        "overperformance_per_90": -0.082,
         "sustainable": false,
-        "form": 5.8
+        "form": 6.7
     },
     {
         "player": "Raúl",
         "team": "Fulham",
         "team_short": "FUL",
         "goals": 6,
-        "xG": 7.3,
-        "overperformance": -1.3,
-        "overperformance_per_90": -0.056,
+        "xG": 7.9,
+        "overperformance": -1.9,
+        "overperformance_per_90": -0.076,
         "sustainable": false,
         "form": 3.6
-    },
-    {
-        "player": "Gyökeres",
-        "team": "Arsenal",
-        "team_short": "ARS",
-        "goals": 6,
-        "xG": 7.1,
-        "overperformance": -1.1,
-        "overperformance_per_90": -0.044,
-        "sustainable": false,
-        "form": 2.3
     },
     {
         "player": "Evanilson",
         "team": "Bournemouth",
         "team_short": "BOU",
         "goals": 5,
-        "xG": 6.6,
-        "overperformance": -1.6,
-        "overperformance_per_90": -0.065,
+        "xG": 7.3,
+        "overperformance": -2.3,
+        "overperformance_per_90": -0.087,
         "sustainable": false,
-        "form": 4.5
+        "form": 2.7
+    },
+    {
+        "player": "Sarr",
+        "team": "Crystal Palace",
+        "team_short": "CRY",
+        "goals": 5,
+        "xG": 6.2,
+        "overperformance": -1.2,
+        "overperformance_per_90": -0.046,
+        "sustainable": false,
+        "form": 3.1
     }
 ]
