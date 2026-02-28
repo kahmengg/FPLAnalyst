@@ -4,22 +4,11 @@
         "team": "Bournemouth",
         "team_short": "BOU",
         "goals": 2,
-        "xG": 0.5,
-        "overperformance": 1.5,
-        "overperformance_per_90": 0.5,
+        "xG": 0.8,
+        "overperformance": 1.2,
+        "overperformance_per_90": 0.3,
         "sustainable": false,
-        "form": 5.7
-    },
-    {
-        "player": "Bruno G.",
-        "team": "Newcastle",
-        "team_short": "NEW",
-        "goals": 9,
-        "xG": 4.8,
-        "overperformance": 4.2,
-        "overperformance_per_90": 0.161,
-        "sustainable": false,
-        "form": 3.1
+        "form": 5.0
     },
     {
         "player": "Semenyo",
@@ -33,58 +22,69 @@
         "form": 5.6
     },
     {
+        "player": "Bruno G.",
+        "team": "Newcastle",
+        "team_short": "NEW",
+        "goals": 9,
+        "xG": 4.8,
+        "overperformance": 4.2,
+        "overperformance_per_90": 0.155,
+        "sustainable": false,
+        "form": 2.5
+    },
+    {
+        "player": "Wilson",
+        "team": "Fulham",
+        "team_short": "FUL",
+        "goals": 8,
+        "xG": 4.3,
+        "overperformance": 3.7,
+        "overperformance_per_90": 0.135,
+        "sustainable": false,
+        "form": 4.3
+    },
+    {
         "player": "Kroupi.Jr",
         "team": "Bournemouth",
         "team_short": "BOU",
         "goals": 8,
-        "xG": 4.4,
-        "overperformance": 3.6,
-        "overperformance_per_90": 0.137,
+        "xG": 4.5,
+        "overperformance": 3.5,
+        "overperformance_per_90": 0.131,
         "sustainable": false,
         "form": 2.3
     },
     {
-        "player": "Rogers",
-        "team": "Aston Villa",
-        "team_short": "AVL",
-        "goals": 8,
-        "xG": 4.7,
-        "overperformance": 3.3,
-        "overperformance_per_90": 0.134,
+        "player": "Eze",
+        "team": "Arsenal",
+        "team_short": "ARS",
+        "goals": 6,
+        "xG": 3.2,
+        "overperformance": 2.8,
+        "overperformance_per_90": 0.109,
         "sustainable": false,
-        "form": 4.5
+        "form": 3.2
     },
     {
-        "player": "Thiago",
-        "team": "Brentford",
-        "team_short": "BRE",
-        "goals": 17,
-        "xG": 13.9,
-        "overperformance": 3.1,
-        "overperformance_per_90": 0.122,
-        "sustainable": false,
-        "form": 4.1
-    },
-    {
-        "player": "Brobbey",
-        "team": "Sunderland",
-        "team_short": "SUN",
-        "goals": 5,
-        "xG": 2.5,
-        "overperformance": 2.5,
-        "overperformance_per_90": 0.113,
-        "sustainable": false,
-        "form": 3.8
-    },
-    {
-        "player": "Gravenberch",
-        "team": "Liverpool",
-        "team_short": "LIV",
-        "goals": 4,
-        "xG": 1.3,
-        "overperformance": 2.7,
-        "overperformance_per_90": 0.108,
+        "player": "Anthony",
+        "team": "Burnley",
+        "team_short": "BUR",
+        "goals": 6,
+        "xG": 3.2,
+        "overperformance": 2.8,
+        "overperformance_per_90": 0.104,
         "sustainable": false,
         "form": 2.7
+    },
+    {
+        "player": "Romero",
+        "team": "Spurs",
+        "team_short": "TOT",
+        "goals": 4,
+        "xG": 1.2,
+        "overperformance": 2.8,
+        "overperformance_per_90": 0.102,
+        "sustainable": false,
+        "form": 1.8
     }
 ]
