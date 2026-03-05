@@ -1894,7 +1894,7 @@
       "team": "Chelsea",
       "position": 3,
       "cost": 6.4,
-      "ownership": 2.1
+      "ownership": 2.0
     },
     {
       "id": 97,
@@ -5190,7 +5190,7 @@
       "team": "Sunderland",
       "position": 1,
       "cost": 4.9,
-      "ownership": 11.5
+      "ownership": 11.4
     },
     {
       "id": 112,
@@ -6158,7 +6158,7 @@
       "team": "Liverpool",
       "position": 2,
       "cost": 6.1,
-      "ownership": 28.7
+      "ownership": 28.8
     },
     {
       "id": 412,
