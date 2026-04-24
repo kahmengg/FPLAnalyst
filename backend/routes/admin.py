@@ -300,3 +300,57 @@ def process_notebook():
             'success': False,
             'message': f'Error executing notebook: {str(e)}'
         }), 500
+
+
+@admin_bp.route('/admin/sync-daily', methods=['POST'])
+def sync_daily_data():
+    """
+    Run the full daily ingestion pipeline:
+    - fetch latest CSV from fpl-data.co.uk
+    - rerun notebook ETL
+    - sync CSV + analytics to Supabase
+    """
+    try:
+        import subprocess
+        import sys
+
+        season_value = request.args.get('season', '2025_26')
+        script_path = os.path.join(Config.PROJECT_ROOT, 'backend', 'sync_fpl_data.py')
+
+        if not os.path.exists(script_path):
+            return jsonify({
+                'success': False,
+                'message': f'Sync script not found at {script_path}'
+            }), 404
+
+        result = subprocess.run(
+            [sys.executable, script_path, '--season', season_value],
+            capture_output=True,
+            text=True,
+            timeout=600
+        )
+
+        if result.returncode != 0:
+            error_message = result.stderr if result.stderr else 'Unknown error during daily sync'
+            return jsonify({
+                'success': False,
+                'message': f'Daily sync failed: {error_message}',
+                'output': result.stdout if result.stdout else ''
+            }), 500
+
+        return jsonify({
+            'success': True,
+            'message': 'Daily sync completed successfully',
+            'output': result.stdout if result.stdout else 'Sync completed'
+        }), 200
+
+    except subprocess.TimeoutExpired:
+        return jsonify({
+            'success': False,
+            'message': 'Daily sync timed out (exceeded 10 minutes)'
+        }), 500
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error running daily sync: {str(e)}'
+        }), 500

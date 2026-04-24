@@ -8,3 +8,5 @@ uvicorn==0.37.0
 setuptools==80.9.0
 jupyter==1.1.1
 nbconvert==7.16.4
+supabase==2.4.1
+postgrest-py==0.15.0
