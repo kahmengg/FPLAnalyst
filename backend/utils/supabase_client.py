@@ -54,7 +54,6 @@ def query_fixtures_by_gameweek(gameweek: int = None):
         if not season_id:
             return []
         
-        query = supabase.table("fixtures").select("*").eq("season_id", season_id)
         query = supabase.table("fixtures").select("*").eq("season_key", season_id)
         
         if gameweek:

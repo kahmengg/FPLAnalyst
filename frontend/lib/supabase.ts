@@ -39,7 +39,7 @@ export async function getFixtures(gameweek?: number) {
   try {
     let query = supabase
       .from('fixtures')
-      .select('*')
+       .select('*')
       .order('gameweek')
 
     if (gameweek) {
@@ -67,7 +67,7 @@ export async function getTeamRankings(rankingType: string = 'overall') {
   try {
     const { data, error } = await supabase
       .from('team_rankings')
-      .select('*')
+       .select('*')
       .eq('ranking_type', rankingType)
       .order('overall_rank')
 

@@ -12,7 +12,12 @@ from config.config import Config
 import os
 app = Flask(__name__)
 # Enable CORS for both production (Vercel) and local development
-CORS(app, resources={r"/api/*": {"origins": ["https://fpelly.vercel.app", "http://localhost:3000"]}})
+# Update the Vercel URL if your deployment domain changes
+CORS(app, resources={r"/api/*": {"origins": [
+    "https://fpelly.vercel.app",
+    "https://*.vercel.app",  # Allow all Vercel deployments
+    "http://localhost:3000"
+]}})
 app.config.from_object(Config)
 # CORS(app)
 # Register blueprints

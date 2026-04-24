@@ -83,7 +83,7 @@ const getTeamBorderColor = (teamName: string) => {
 };
 
 const getTeamBackgroundColor = (teamName: string) => {
-  const bgColors = {
+  const bgColors: { [key: string]: string } = {
     "Arsenal": "bg-red-100 dark:bg-red-950",
     "Liverpool": "bg-red-200 dark:bg-red-950",
     "Man City": "bg-sky-100 dark:bg-sky-950",
@@ -530,40 +530,9 @@ export default function FixtureAnalysisPage() {
       });
         setFixtures(transformedFixtures);
 
-        // Fetch fixture opportunities
-        const resOpportunities = await fetch(`${API_BASE_URL}/api/fixtures_opportunity`);
-        if (!resOpportunities.ok) throw new Error("Failed to fetch fixture opportunities");
-        const dataOpportunities = await resOpportunities.json();
-        
-        // Transform and sort attack opportunities by attacking_fixture_rating
-        const transformedAttack = dataOpportunities.attack
-          .map((o) => ({
-            gw: o.gameweek,
-            matchup: `${o.team} vs ${o.opponent}`,
-            team: o.team,
-            venue: o.venue,
-            rating: o.attacking_fixture_rating,
-            attackRating: o.attacking_fixture_rating,
-            defenseRating: o.defensive_fixture_rating,
-            combinedScore: o.combined_score,
-          }))
-          .sort((a, b) => b.attackRating - a.attackRating); // Sort by attack rating descending
-        
-        // Transform and sort defense opportunities by defensive_fixture_rating
-        const transformedDefense = dataOpportunities.defense
-          .map((o) => ({
-            gw: o.gameweek,
-            matchup: `${o.team} vs ${o.opponent}`,
-            team: o.team,
-            venue: o.venue,
-            rating: o.defensive_fixture_rating,
-            attackRating: o.attacking_fixture_rating,
-            defenseRating: o.defensive_fixture_rating,
-            combinedScore: o.combined_score,
-          }))
-          .sort((a, b) => b.defenseRating - a.defenseRating); // Sort by defense rating descending
-        
-        setFixtureOpportunities({ attack: transformedAttack, defense: transformedDefense });
+        // Note: fixtures_opportunity endpoint not yet implemented in backend
+        // Opportunities data temporarily disabled
+        setFixtureOpportunities({ attack: [], defense: [] });
 
         // Fetch team fixture summary
         const resSummary = await fetch(`${API_BASE_URL}/api/team_fixtures`);

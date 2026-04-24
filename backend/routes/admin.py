@@ -5,10 +5,48 @@ import pandas as pd
 import os
 import json
 from datetime import datetime
+import secrets
 
 admin_bp = Blueprint('admin', __name__)
 
+# Get admin password from environment variable
+ADMIN_PASSWORD = os.getenv('FPL_ADMIN_PASSWORD', 'fpl25')
+
+def verify_admin_auth(request):
+    """
+    Verify admin authentication from request headers or body
+    Expects: Authorization: Bearer <password> or JSON body with 'password' field
+    """
+    auth_header = request.headers.get('Authorization', '')
+    if auth_header.startswith('Bearer '):
+        password = auth_header[7:]
+    else:
+        data = request.get_json() or {}
+        password = data.get('password', '')
+    
+    return secrets.compare_digest(password, ADMIN_PASSWORD) if password else False
+
 # Admin endpoints
+
+@admin_bp.route('/admin/auth', methods=['POST'])
+def authenticate():
+    """
+    Authenticate admin user
+    Expects JSON: {'password': 'admin_password'}
+    """
+    data = request.get_json() or {}
+    password = data.get('password', '')
+    
+    if secrets.compare_digest(password, ADMIN_PASSWORD):
+        return jsonify({
+            'success': True,
+            'message': 'Authentication successful'
+        }), 200
+    else:
+        return jsonify({
+            'success': False,
+            'message': 'Invalid credentials'
+        }), 401
 
 @admin_bp.route('/admin/upload', methods=['POST'])
 def upload_csv():

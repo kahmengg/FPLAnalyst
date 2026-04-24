@@ -27,7 +27,8 @@ import {
 } from "lucide-react"
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "fpl25"
+// Note: Admin password should be set server-side, not in client code
+// Set via environment variable and validated on backend only
 
 interface GameWeek {
   gameweek: number
@@ -63,7 +64,7 @@ export default function AdminPage() {
   // Check authentication on mount
   useEffect(() => {
     const authToken = sessionStorage.getItem("admin_auth")
-    if (authToken === ADMIN_PASSWORD) {
+    if (authToken) {
       setIsAuthenticated(true)
     }
     setIsCheckingAuth(false)
@@ -74,14 +75,27 @@ export default function AdminPage() {
     e.preventDefault()
     setAuthError("")
 
-    if (password === ADMIN_PASSWORD) {
-      sessionStorage.setItem("admin_auth", password)
-      setIsAuthenticated(true)
-      setPassword("")
-    } else {
-      setAuthError("Invalid password. Please try again.")
-      setPassword("")
-    }
+    // Send password to backend for verification
+    fetch(`${API_BASE_URL}/api/admin/auth`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          sessionStorage.setItem("admin_auth", password)
+          setIsAuthenticated(true)
+          setPassword("")
+        } else {
+          setAuthError(data.message || "Invalid password. Please try again.")
+          setPassword("")
+        }
+      })
+      .catch(err => {
+        setAuthError(`Authentication error: ${err.message}`)
+        setPassword("")
+      })
   }
 
   // Handle logout
