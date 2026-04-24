@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: fplanalyst-backend
+    env: python
+    plan: free
+    region: oregon
+    pythonVersion: 3.11.0
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "cd backend && gunicorn app:app --bind 0.0.0.0:$PORT --workers 4 --timeout 120"
+    envVars:
+      - key: SUPABASE_URL
+        value: ${SUPABASE_URL}
+      - key: SUPABASE_ANON_KEY
+        value: ${SUPABASE_ANON_KEY}
+      - key: FPL_SEASON_KEY
+        value: "2025_26"
+      - key: FPL_DATA_SEASON
+        value: "2025_26"

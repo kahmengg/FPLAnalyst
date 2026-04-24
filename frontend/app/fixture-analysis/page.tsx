@@ -53,11 +53,11 @@ const teamColors = {
 };
 
 const getTeamColor = (teamName: string) => {
-  return teamColors[teamName] || "text-foreground";
+  return teamColors[teamName as keyof typeof teamColors] || "text-foreground";
 };
 
 const getTeamBorderColor = (teamName: string) => {
-  const borderColors = {
+  const borderColors: { [key: string]: string } = {
     "Arsenal": "border-red-600 dark:border-red-400",
     "Liverpool": "border-red-700 dark:border-red-500",
     "Man City": "border-sky-500 dark:border-sky-400",
