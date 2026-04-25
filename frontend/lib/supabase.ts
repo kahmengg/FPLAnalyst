@@ -196,7 +196,7 @@ export async function getDashboardSummary() {
         if (f.gameweek) gameweeks.add(f.gameweek)
       })
     }
-    const maxGameweek = gameweeks.size > 0 ? Math.max(...Array.from(gameweeks)) : 0
+    const maxGameweek = gameweeks.size > 0 ? Math.max(...(Array.from(gameweeks) as number[])) : 0
 
     return {
       total_players: playerCount,

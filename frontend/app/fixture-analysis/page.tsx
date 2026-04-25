@@ -111,7 +111,7 @@ const getTeamBackgroundColor = (teamName: string) => {
 // Color configuration for rankings and difficulty scores
 const colorConfig = {
   favorability: {
-    match: (favorability, teamName) =>
+    match: (favorability: string, teamName: string) =>
       favorability === teamName
         ? "bg-green-500/20 border-green-500/50"
         : "bg-red-500/20 border-red-500/50",
@@ -156,19 +156,24 @@ const colorConfig = {
 };
 
 // Helper function for styling rankings and difficulty
-const getColorStyles = (metricType, value, context = null, returnType = "classes") => {
-  const config = colorConfig[metricType];
+const getColorStyles = (
+  metricType: "difficulty" | "favorability" | "rank",
+  value: number | string,
+  context: string | null = null,
+  returnType: "classes" | "emoji" = "classes"
+) => {
+  const config = colorConfig[metricType] as any;
   if (!config) return returnType === "classes" ? "text-gray-600 dark:text-gray-400" : "🔴";
 
   if (metricType === "difficulty") {
-    const range = config.ranges.find((r) => value >= r.min);
+    const range = config.ranges.find((r: any) => (value as number) >= r.min);
     return range ? range[returnType] : config.ranges[config.ranges.length - 1][returnType];
   }
   if (metricType === "favorability") {
-    return config.match(value, context);
+    return config.match(value as string, context);
   }
   if (metricType === "rank") {
-    const range = config.ranges.find((r) => value <= r.max);
+    const range = config.ranges.find((r: any) => (value as number) <= r.max);
     return range?.classes || config.ranges[config.ranges.length - 1].classes;
   }
   return returnType === "classes" ? "text-gray-600 dark:text-gray-400" : "🔴";
@@ -445,15 +450,15 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
 }
 
 export default function FixtureAnalysisPage() {
-  const [gameweek, setGameweek] = useState(null);
+  const [gameweek, setGameweek] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState("fixtures");
   const [sortBy, setSortBy] = useState("overall");
   const [sortOrder, setSortOrder] = useState("desc");
-  const [fixtures, setFixtures] = useState([]);
-  const [fixtureOpportunities, setFixtureOpportunities] = useState({ attack: [], defense: [] });
-  const [teamFixtureSummary, setTeamFixtureSummary] = useState([]);
+  const [fixtures, setFixtures] = useState<any[]>([]);
+  const [fixtureOpportunities, setFixtureOpportunities] = useState<{ attack: any[]; defense: any[] }>({ attack: [], defense: [] });
+  const [teamFixtureSummary, setTeamFixtureSummary] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   // Loading skeleton component
   const LoadingSkeleton = () => (
@@ -484,10 +489,10 @@ export default function FixtureAnalysisPage() {
         const resFixtures = await fetch(`${API_BASE_URL}/api/fixtures`, { cache: 'no-store' })
         if (!resFixtures.ok) throw new Error("Failed to fetch fixtures");
         const dataFixtures = await resFixtures.json();
-        const gameweeks = dataFixtures.map((f) => f.gameweek).filter((gw) => typeof gw === "number" && !isNaN(gw));
+        const gameweeks = dataFixtures.map((f: any) => f.gameweek).filter((gw: any) => typeof gw === "number" && !isNaN(gw));
         const minGameweek = gameweeks.length > 0 ? Math.min(...gameweeks) : 1;
         setGameweek(minGameweek);
-        const transformedFixtures = dataFixtures.map((f) => {
+        const transformedFixtures = dataFixtures.map((f: any) => {
         const homeAvgRating = (f.home_team.attacking_fixture_rating + f.home_team.defensive_fixture_rating) / 2;
         const awayAvgRating = (f.away_team.attacking_fixture_rating + f.away_team.defensive_fixture_rating) / 2;
         let favorability;
@@ -538,7 +543,7 @@ export default function FixtureAnalysisPage() {
         const resSummary = await fetch(`${API_BASE_URL}/api/team_fixtures`);
         if (!resSummary.ok) throw new Error("Failed to fetch team fixture summary");
         const dataSummary = await resSummary.json();
-        const transformedSummary = dataSummary.map((t) => ({
+        const transformedSummary = dataSummary.map((t: any) => ({
           team: t.team,
           att: t.avg_attack_difficulty,
           def: t.avg_defense_difficulty,
@@ -556,8 +561,8 @@ export default function FixtureAnalysisPage() {
           formContext: t.form_context,
         }));
         setTeamFixtureSummary(transformedSummary);
-      } catch (err) {
-        setError(err.message);
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : "Failed to fetch fixture analysis data");
       } finally {
         setLoading(false);
       }
@@ -566,14 +571,14 @@ export default function FixtureAnalysisPage() {
   }, [activeTab]);
 
   const sortedTeamData = useMemo(() => {
-    return [...teamFixtureSummary].sort((a, b) => {
+    return [...teamFixtureSummary].sort((a: any, b: any) => {
       const aVal = a[sortBy];
       const bVal = b[sortBy];
       return sortOrder === "desc" ? bVal - aVal : aVal - bVal;
     });
   }, [sortBy, sortOrder, teamFixtureSummary]);
 
-  const handleSort = (column) => {
+  const handleSort = (column: string) => {
     if (sortBy === column) {
       setSortOrder(sortOrder === "desc" ? "asc" : "desc");
     } else {
@@ -599,10 +604,12 @@ export default function FixtureAnalysisPage() {
     };
   }, [fixtures]);
 
-  const getSortIcon = (column) => {
+  const getSortIcon = (column: string) => {
     if (sortBy !== column) return <ArrowUpDown className="h-3 w-3" />;
     return sortOrder === "desc" ? <ArrowDown className="h-3 w-3" /> : <ArrowUp className="h-3 w-3" />;
   };
+
+  const currentGameweek = gameweek ?? minGameweek;
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center">
@@ -694,7 +701,7 @@ export default function FixtureAnalysisPage() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto">
                 <Button
-                  onClick={() => setGameweek(Math.max(minGameweek - 1, gameweek - 1))}
+                  onClick={() => setGameweek(Math.max(minGameweek - 1, currentGameweek - 1))}
                   variant="ghost"
                   size="icon"
                   className="h-12 w-12 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition-all active:scale-90 active:bg-muted/80"
@@ -703,10 +710,10 @@ export default function FixtureAnalysisPage() {
                   <ChevronLeft className="h-6 w-6 sm:h-5 sm:w-5" />
                 </Button>
                 <div className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-secondary/70 to-secondary/50 backdrop-blur font-semibold text-xl sm:text-xl shadow-lg border border-border/50 min-w-[160px] text-center">
-                  Gameweek {gameweek}
+                  Gameweek {currentGameweek}
                 </div>
                 <Button
-                  onClick={() => setGameweek(Math.min(maxGameweek, gameweek + 1))}
+                  onClick={() => setGameweek(Math.min(maxGameweek, currentGameweek + 1))}
                   variant="ghost"
                   size="icon"
                   className="h-12 w-12 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition-all active:scale-90 active:bg-muted/80"

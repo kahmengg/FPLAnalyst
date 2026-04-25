@@ -22,7 +22,7 @@ const adminNavigation = [
   { name: "Admin Panel", href: "/admin", icon: Shield, color: "text-orange-500", bgColor: "bg-orange-500/10", hoverColor: "hover:bg-orange-500/20" },
 ]
 
-async function fetchWithRetry(url, retries = MAX_RETRIES) {
+async function fetchWithRetry(url: string, retries: number = MAX_RETRIES) {
   for (let i = 0; i < retries; i++) {
     try {
       const response = await fetch(url)
@@ -30,9 +30,9 @@ async function fetchWithRetry(url, retries = MAX_RETRIES) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`)
       }
       return await response.json()
-    } catch (err) {
+    } catch (err: unknown) {
       if (i === retries - 1) throw err
-      await new Promise(resolve => setTimeout(resolve, 1000)) // 1s delay between retries
+      await new Promise<void>((resolve) => setTimeout(resolve, 1000)) // 1s delay between retries
     }
   }
 }
@@ -42,7 +42,7 @@ export function Sidebar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [gameweek, setGameWeek] = useState(15) // Default gameweek
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     async function fetchData() {
@@ -52,8 +52,9 @@ export function Sidebar() {
         const data = await fetchWithRetry(`${API_BASE_URL}/api/layout`)
         const summary = data[0] // Assume single object in array
         setGameWeek(summary.total_gameweeks)
-      } catch (err) {
-        setError(`Failed to fetch gameweek: ${err.message}`)
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : "Unknown error"
+        setError(`Failed to fetch gameweek: ${message}`)
         setGameWeek(15) // Fallback to default
       } finally {
         setLoading(false)

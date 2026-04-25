@@ -309,7 +309,8 @@ export default function PlayerTrendsPage() {
                 <span className="text-xs text-muted-foreground self-center mr-2">Selected:</span>
                 {selectedPlayers.map((player, index) => {
                   const playerInfo = allPlayers.find(p => p.name === player)
-                  const posInfo = POSITION_COLORS[playerInfo?.position] || {}
+                  const positionKey = (playerInfo?.position ?? 0).toString() as keyof typeof POSITION_COLORS
+                  const posInfo = POSITION_COLORS[positionKey] || {}
                   return (
                     <Badge
                       key={player}
@@ -332,7 +333,8 @@ export default function PlayerTrendsPage() {
                 ) : (
                   filteredPlayers.map((player) => {
                     const isSelected = selectedPlayers.includes(player.name)
-                    const posInfo = POSITION_COLORS[player.position] || {}
+                    const positionKey = player.position.toString() as keyof typeof POSITION_COLORS
+                    const posInfo = POSITION_COLORS[positionKey] || {}
                     
                     return (
                       <button
