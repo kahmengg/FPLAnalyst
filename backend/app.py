@@ -11,13 +11,9 @@ from routes.player_trends import player_trends_bp
 from config.config import Config
 import os
 app = Flask(__name__)
-# Enable CORS for both production (Vercel) and local development
-# Update the Vercel URL if your deployment domain changes
-CORS(app, resources={r"/api/*": {"origins": [
-    "https://fpelly.vercel.app",
-    r"https://.*\.vercel\.app",  # Allow all Vercel deployments (regex)
-    "http://localhost:3000"
-]}})
+# API is public read-mostly data; allow cross-origin frontend access from
+# Vercel previews/custom domains and local dev to avoid failed browser fetches.
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.config.from_object(Config)
 # CORS(app)
 # Register blueprints
