@@ -1,23 +1,27 @@
 #!/usr/bin/env python3
-"""Daily FPL data sync.
-
-This script:
-1. Calls the FPL Data Dash callback that generates the CSV export.
-2. Saves the CSV to the project root.
-3. Re-runs the notebook ETL to refresh derived analytics.
-4. Loads raw CSV rows and derived JSON outputs into Supabase.
 """
+Simplified Daily FPL Data Sync
+
+NEW SIMPLIFIED PIPELINE (2 stages):
+1. Fetch CSV from FPL Data Dash API
+2. Run simplified ETL: CSV → Direct Supabase (no intermediate JSON files)
+
+REPLACED:
+- Removed: Jupyter notebook execution (was stage 3 of 4)
+- Removed: Python migration script (was stage 4 of 4)
+- Result: Faster, simpler, fewer error points
+"""
+
 import argparse
 import base64
 import json
 import os
-import subprocess
 import sys
 import urllib.request
 from datetime import datetime
 
 from config.config import Config
-from migrate_to_supabase import main as migrate_supabase_data
+from etl.process_fpl_data import main as run_etl
 
 FPL_DASH_URL = "https://www.fpl-data.co.uk/_dash-update-component"
 DEFAULT_SEASON_VALUE = os.getenv("FPL_DATA_SEASON", "2025_26")
@@ -66,53 +70,48 @@ def save_csv(csv_content: str) -> None:
         file_handle.write(csv_content)
 
 
-def run_notebook() -> None:
-    """Execute the notebook so JSON analytics are refreshed before migration."""
-    notebook_path = os.path.join(Config.PROJECT_ROOT, "fpl.ipynb")
-    if not os.path.exists(notebook_path):
-        raise FileNotFoundError(f"Notebook not found at {notebook_path}")
-
-    result = subprocess.run(
-        [
-            sys.executable,
-            "-m",
-            "jupyter",
-            "nbconvert",
-            "--to",
-            "notebook",
-            "--execute",
-            "--inplace",
-            notebook_path,
-        ],
-        capture_output=True,
-        text=True,
-        timeout=300,
-    )
-
-    if result.returncode != 0:
-        raise RuntimeError(result.stderr or "Notebook execution failed")
-
-
 def sync_daily_data(season_value: str = DEFAULT_SEASON_VALUE) -> None:
-    """Download the latest CSV, refresh analytics, and push to Supabase."""
+    """
+    Download the latest CSV and run simplified ETL.
+    
+    Pipeline:
+    1. Fetch CSV from FPL Data Dash API
+    2. Run ETL: CSV → Supabase (direct, no intermediate files)
+    """
     print(f"[{datetime.now().isoformat()}] Starting daily FPL sync...")
-    print(f"Fetching CSV for season value: {season_value}")
+    print(f"Season: {season_value}\n")
 
-    csv_content = fetch_csv_from_dash(season_value=season_value)
-    save_csv(csv_content)
-    print(f"Saved CSV to {Config.FPL_DATA_CSV}")
+    # Step 1: Fetch and save CSV
+    try:
+        print("📥 Fetching CSV from FPL Data Dash API...")
+        csv_content = fetch_csv_from_dash(season_value=season_value)
+        save_csv(csv_content)
+        print(f"✅ Saved CSV to {Config.FPL_DATA_CSV}\n")
+    except Exception as e:
+        print(f"❌ Error fetching/saving CSV: {e}")
+        sys.exit(1)
 
-    print("Running notebook ETL...")
-    run_notebook()
-    print("Notebook ETL complete")
-
-    print("Migrating CSV + analytics data to Supabase...")
-    migrate_supabase_data()
-    print("Daily sync complete")
+    # Step 2: Run simplified ETL (CSV → Supabase directly)
+    try:
+        print("⚡ Running simplified ETL pipeline...")
+        success = run_etl(season_value)
+        if success:
+            print(f"\n✅ Daily sync completed successfully!")
+        else:
+            print(f"\n❌ ETL pipeline failed")
+            sys.exit(1)
+    except Exception as e:
+        print(f"❌ Error running ETL: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Sync FPL Data into Supabase")
+    """Entry point for the sync script."""
+    parser = argparse.ArgumentParser(
+        description="Sync FPL Data from Dash API to Supabase (Simplified Pipeline)"
+    )
     parser.add_argument(
         "--season",
         default=DEFAULT_SEASON_VALUE,
