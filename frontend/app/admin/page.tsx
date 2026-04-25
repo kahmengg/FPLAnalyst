@@ -26,7 +26,7 @@ import {
   Zap
 } from "lucide-react"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com"
 // Note: Admin password should be set server-side, not in client code
 // Set via environment variable and validated on backend only
 

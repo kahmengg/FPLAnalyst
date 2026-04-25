@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { TrendingUp, TrendingDown, Star, ArrowUp, ArrowDown, RefreshCw } from "lucide-react"
 import TeamPicksModal from "@/components/team-picks-modal"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com"
 
 // Team color mapping
 const teamColors = {

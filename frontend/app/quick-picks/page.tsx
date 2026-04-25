@@ -9,7 +9,7 @@ import { TrendingUp, Shield, Target, Star, Users, Award, DollarSign, Clock, X } 
 
 // Data from your notebook analysis - Attacking Picks by Team Strength
 // Attacking Picks by Team Strength (with numerical form field)
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com"
 
 const PositionBadge = ({ position }: { position: string }) => {
   // Map full position names to abbreviations

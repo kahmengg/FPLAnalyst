@@ -15,7 +15,7 @@ app = Flask(__name__)
 # Update the Vercel URL if your deployment domain changes
 CORS(app, resources={r"/api/*": {"origins": [
     "https://fpelly.vercel.app",
-    "https://*.vercel.app",  # Allow all Vercel deployments
+    r"https://.*\.vercel\.app",  # Allow all Vercel deployments (regex)
     "http://localhost:3000"
 ]}})
 app.config.from_object(Config)

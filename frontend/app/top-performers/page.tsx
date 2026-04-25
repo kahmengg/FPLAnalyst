@@ -8,7 +8,7 @@ import { useState, useEffect, useMemo } from "react"
 import { TrendingUp, Minus, Star, Shield, Target, Gem, DollarSign, Trophy, ArrowUp, ArrowUpDown, ArrowDown, Search, Filter, X } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com"
 const MAX_RETRIES = 3
 const RETRY_DELAY = 1000
 
@@ -496,7 +496,7 @@ export default function TopPerformersPage() {
           ))}
         </ul>
         <button
-          onClick={() => fetchData()}
+          onClick={() => window.location.reload()}
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
         >
           Retry
