@@ -12,9 +12,11 @@ const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalys
   .replace(/\/api$/, "")
 
 interface Player {
-  id: number
-  name: string
+  id: string
+  player_name: string
+  web_name: string
   team: string
+  team_short?: string
   position: number
   cost: number
   ownership: number
@@ -156,7 +158,7 @@ export default function PlayerTrendsPage() {
 
     if (searchQuery) {
       filtered = filtered.filter((player: Player) => 
-        player.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (player.web_name || player.player_name || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
         player.team.toLowerCase().includes(searchQuery.toLowerCase())
       )
     }
@@ -334,14 +336,15 @@ export default function PlayerTrendsPage() {
                   </div>
                 ) : (
                   filteredPlayers.map((player) => {
-                    const isSelected = selectedPlayers.includes(player.name)
+                    const playerKey = player.web_name || player.player_name
+                    const isSelected = selectedPlayers.includes(playerKey)
                     const positionKey = player.position.toString() as keyof typeof POSITION_COLORS
                     const posInfo = POSITION_COLORS[positionKey] || {}
                     
                     return (
                       <button
                         key={player.id}
-                        onClick={() => togglePlayer(player.name)}
+                        onClick={() => togglePlayer(playerKey)}
                         className={`px-3 py-2.5 text-xs sm:text-sm rounded-lg border transition-all duration-200 text-left hover:scale-[1.02] ${
                           isSelected
                             ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500 shadow-md ring-2 ring-purple-500/20'
@@ -358,7 +361,7 @@ export default function PlayerTrendsPage() {
                               >
                                 {posInfo.label}
                               </Badge>
-                              <span className="font-medium truncate">{player.name}</span>
+                              <span className="font-medium truncate">{player.web_name || player.player_name}</span>
                             </div>
                             <div className="text-[10px] text-muted-foreground mt-0.5 flex items-center gap-2">
                               <span>{player.team}</span>

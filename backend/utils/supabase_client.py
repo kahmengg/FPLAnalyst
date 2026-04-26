@@ -1,4 +1,5 @@
 """Supabase client initialization and helper methods."""
+import json
 import os
 from supabase import create_client, Client
 from dotenv import load_dotenv
@@ -25,6 +26,148 @@ def get_current_season():
     return SEASON_KEY
 
 
+POSITION_NAME_MAP = {
+    1: "Goalkeeper",
+    2: "Defender",
+    3: "Midfielder",
+    4: "Forward",
+}
+
+
+def _safe_float(value, default=0.0):
+    try:
+        if value is None:
+            return default
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _safe_int(value, default=0):
+    try:
+        if value is None:
+            return default
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _to_position_name(position_value):
+    if isinstance(position_value, int):
+        return POSITION_NAME_MAP.get(position_value, "Midfielder")
+
+    if isinstance(position_value, str):
+        normalized = position_value.strip().upper()
+        if normalized == "GK":
+            return "Goalkeeper"
+        if normalized == "DEF":
+            return "Defender"
+        if normalized == "MID":
+            return "Midfielder"
+        if normalized in {"FWD", "FWD/STR", "ST"}:
+            return "Forward"
+        if position_value:
+            return position_value
+
+    return "Midfielder"
+
+
+def _normalize_insight_row(row):
+    payload = row.get("payload")
+    parsed_payload = {}
+
+    if isinstance(payload, dict):
+        parsed_payload = payload
+    elif isinstance(payload, str) and payload.strip():
+        try:
+            parsed_payload = json.loads(payload)
+        except json.JSONDecodeError:
+            parsed_payload = {}
+
+    merged = {
+        **row,
+        **parsed_payload,
+    }
+
+    player_name = merged.get("player") or merged.get("player_name") or merged.get("web_name") or ""
+    team_name = merged.get("team") or merged.get("team_name") or ""
+    team_short = merged.get("team_short") or merged.get("short_name") or ""
+
+    position_raw = merged.get("position_name") or merged.get("position")
+    position_name = _to_position_name(position_raw)
+
+    normalized = {
+        "id": merged.get("id"),
+        "season_key": merged.get("season_key"),
+        "insight_type": merged.get("insight_type"),
+        "created_at": merged.get("created_at"),
+        "rank": _safe_int(merged.get("rank"), 9999),
+        "player": player_name,
+        "player_name": player_name,
+        "web_name": merged.get("web_name") or player_name,
+        "team": team_name,
+        "team_name": team_name,
+        "team_short": team_short,
+        "position": position_name,
+        "position_name": position_name,
+        "price": _safe_float(merged.get("price") or merged.get("now_cost"), 0.0),
+        "now_cost": _safe_float(merged.get("now_cost") or merged.get("price"), 0.0),
+        "ownership": _safe_float(merged.get("ownership") or merged.get("selected_by_percent"), 0.0),
+        "selected_by_percent": _safe_float(merged.get("selected_by_percent") or merged.get("ownership"), 0.0),
+        "form": _safe_float(merged.get("form"), 0.0),
+        "points": _safe_float(merged.get("points") or merged.get("totalPoints") or merged.get("total_points"), 0.0),
+        "totalPoints": _safe_float(merged.get("totalPoints") or merged.get("total_points") or merged.get("points"), 0.0),
+        "total_points": _safe_float(merged.get("total_points") or merged.get("totalPoints") or merged.get("points"), 0.0),
+        "goals": _safe_float(merged.get("goals"), 0.0),
+        "assists": _safe_float(merged.get("assists"), 0.0),
+        "xG": _safe_float(merged.get("xG") or merged.get("xg") or merged.get("expected_goals"), 0.0),
+        "xA": _safe_float(merged.get("xA") or merged.get("xa") or merged.get("expected_assists"), 0.0),
+        "goalsPerGame": _safe_float(merged.get("goalsPerGame") or merged.get("goals_per_game"), 0.0),
+        "assistsPerGame": _safe_float(merged.get("assistsPerGame") or merged.get("assists_per_game"), 0.0),
+        "pointsPerMillion": _safe_float(merged.get("pointsPerMillion") or merged.get("points_per_million"), 0.0),
+        "ppg": _safe_float(merged.get("ppg") or merged.get("points_per_game"), 0.0),
+        "points_per_game": _safe_float(merged.get("points_per_game") or merged.get("ppg"), 0.0),
+        "cleanSheets": _safe_float(merged.get("cleanSheets") or merged.get("clean_sheets"), 0.0),
+        "csRate": _safe_float(merged.get("csRate") or merged.get("clean_sheet_rate"), 0.0),
+        "clean_sheet_rate": _safe_float(merged.get("clean_sheet_rate") or merged.get("csRate"), 0.0),
+        "defensiveContributions": _safe_float(merged.get("defensiveContributions") or merged.get("defensive_contribution"), 0.0),
+        "tackles": _safe_float(merged.get("tackles"), 0.0),
+        "overperformance": _safe_float(merged.get("overperformance"), 0.0),
+        "overperformance_per_90": _safe_float(merged.get("overperformance_per_90"), 0.0),
+        "sustainable": bool(merged.get("sustainable", False)),
+    }
+
+    normalized["attacker_score"] = normalized["goalsPerGame"] + normalized["assistsPerGame"]
+    normalized["defender_score"] = normalized["csRate"] + (normalized["ppg"] * 0.2)
+
+    return normalized
+
+
+def _dedupe_insights(rows):
+    deduped = {}
+
+    for row in rows:
+        key = (
+            row.get("insight_type", ""),
+            row.get("player_name", ""),
+            row.get("team_short", ""),
+            row.get("rank", 9999),
+        )
+
+        existing = deduped.get(key)
+        if not existing:
+            deduped[key] = row
+            continue
+
+        # Keep the newest record when duplicates exist.
+        existing_created = str(existing.get("created_at") or "")
+        candidate_created = str(row.get("created_at") or "")
+        if candidate_created > existing_created:
+            deduped[key] = row
+
+    return list(deduped.values())
+
+
 def query_player_insights_by_type(insight_type: str, limit: int = 100):
     """Query player insights by type (e.g., 'goal_scorers', 'value_players')."""
     try:
@@ -38,10 +181,14 @@ def query_player_insights_by_type(insight_type: str, limit: int = 100):
             .eq("season_key", season_id)
             .eq("insight_type", insight_type)
             .order("rank")
-            .limit(limit)
+            .limit(max(limit * 5, limit))
             .execute()
         )
-        return result.data or []
+        raw_rows = result.data or []
+        normalized_rows = [_normalize_insight_row(row) for row in raw_rows]
+        deduped_rows = _dedupe_insights(normalized_rows)
+        deduped_rows.sort(key=lambda r: (r.get("rank", 9999), -_safe_float(r.get("points", 0))))
+        return deduped_rows[:limit]
     except Exception as e:
         print(f"Error querying player insights ({insight_type}): {e}")
         return []
@@ -81,7 +228,18 @@ def query_team_rankings(ranking_type: str = "overall"):
             .order("overall_rank")
             .execute()
         )
-        return result.data or []
+        rows = []
+        for row in result.data or []:
+            team_obj = row.get("teams") if isinstance(row.get("teams"), dict) else {}
+            rows.append(
+                {
+                    **row,
+                    "team": row.get("team") or row.get("team_name") or team_obj.get("name", ""),
+                    "team_name": row.get("team_name") or row.get("team") or team_obj.get("name", ""),
+                    "team_short": row.get("team_short") or team_obj.get("short_name", ""),
+                }
+            )
+        return rows
     except Exception as e:
         print(f"Error querying team rankings: {e}")
         return []
@@ -100,7 +258,18 @@ def query_team_fixture_summary():
             .eq("season_key", season_id)
             .execute()
         )
-        return result.data or []
+        rows = []
+        for row in result.data or []:
+            team_obj = row.get("teams") if isinstance(row.get("teams"), dict) else {}
+            rows.append(
+                {
+                    **row,
+                    "team": row.get("team") or row.get("team_name") or team_obj.get("name", ""),
+                    "team_name": row.get("team_name") or row.get("team") or team_obj.get("name", ""),
+                    "team_short": row.get("team_short") or team_obj.get("short_name", ""),
+                }
+            )
+        return rows
     except Exception as e:
         print(f"Error querying team fixture summary: {e}")
         return []
@@ -162,13 +331,26 @@ def query_all_players(limit: int = 1000):
         
         # Flatten the response
         players = []
+        seen = set()
         for p in result.data or []:
             team = p.pop("teams", {})
-            players.append({
-                **p,
-                "team": team.get("name", ""),
-                "team_short": team.get("short_name", "")
-            })
+            web_name = p.get("web_name") or p.get("player_name") or ""
+            player_name = p.get("player_name") or web_name
+            dedupe_key = (player_name, team.get("short_name", ""))
+            if dedupe_key in seen:
+                continue
+            seen.add(dedupe_key)
+
+            players.append(
+                {
+                    **p,
+                    "name": web_name,
+                    "player_name": player_name,
+                    "web_name": web_name,
+                    "team": team.get("name", ""),
+                    "team_short": team.get("short_name", ""),
+                }
+            )
         return players
     except Exception as e:
         print(f"Error querying all players: {e}")
