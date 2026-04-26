@@ -312,7 +312,9 @@ export default function PlayerTrendsPage() {
               <div className="flex flex-wrap gap-2 p-3 bg-secondary/30 rounded-lg border border-border/50">
                 <span className="text-xs text-muted-foreground self-center mr-2">Selected:</span>
                 {selectedPlayers.map((player, index) => {
-                  const playerInfo = allPlayers.find(p => p.name === player)
+                  const playerInfo = allPlayers.find(
+                    p => (p.web_name || p.player_name) === player
+                  )
                   const positionKey = (playerInfo?.position ?? 0).toString() as keyof typeof POSITION_COLORS
                   const posInfo = POSITION_COLORS[positionKey] || {}
                   return (
