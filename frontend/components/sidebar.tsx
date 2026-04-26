@@ -6,7 +6,9 @@ import { Home, TrendingUp, Trophy, Calendar, Gem, Target, Menu, X, Clock, Shield
 import { useState, useEffect } from "react"
 import { ThemeToggle } from "./theme-toggle"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com")
+  .replace(/\/+$/, "")
+  .replace(/\/api$/, "")
 const MAX_RETRIES = 3
 
 const navigation = [

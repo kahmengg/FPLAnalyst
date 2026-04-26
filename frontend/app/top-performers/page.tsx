@@ -8,7 +8,9 @@ import { useState, useEffect, useMemo } from "react"
 import { TrendingUp, Minus, Star, Shield, Target, Gem, DollarSign, Trophy, ArrowUp, ArrowUpDown, ArrowDown, Search, Filter, X } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com"
+const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com")
+  .replace(/\/+$/, "")
+  .replace(/\/api$/, "")
 const MAX_RETRIES = 3
 const RETRY_DELAY = 1000
 

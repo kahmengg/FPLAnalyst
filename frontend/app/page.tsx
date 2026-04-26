@@ -4,7 +4,9 @@ import { TrendingUp, Trophy, Calendar, Gem, Target, Users, Shield, Activity, Clo
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useState, useEffect } from "react"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com"
+const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com")
+  .replace(/\/+$/, "")
+  .replace(/\/api$/, "")
 const MAX_RETRIES = 3
 
 // Default stats in case API fetch fails

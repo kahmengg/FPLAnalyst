@@ -7,7 +7,9 @@ import { Badge } from "@/components/ui/badge"
 import { Crosshair, TrendingUp, TrendingDown, Shield, TrophyIcon, Search, X, Filter, ArrowUpDown, Star } from "lucide-react"
 import TeamPicksModal from "@/components/team-picks-modal"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com"
+const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com")
+  .replace(/\/+$/, "")
+  .replace(/\/api$/, "")
 
 // Rank Medal Component
 const RankMedal = ({ rank }: { rank: number }) => {
