@@ -6,12 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { TrendingUp, Shield, Target, Star, Users, Award, DollarSign, Clock, X } from "lucide-react"
-
-// Data from your notebook analysis - Attacking Picks by Team Strength
-// Attacking Picks by Team Strength (with numerical form field)
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com")
-  .replace(/\/+$/, "")
-  .replace(/\/api$/, "")
+import { getQuickPicks } from "@/lib/supabase"
 
 const PositionBadge = ({ position }: { position: string }) => {
   // Map full position names to abbreviations
@@ -137,58 +132,13 @@ export default function QuickPicksPage() {
     setLoading(true)
     setError(null)
     try {
-      const resAttacking = await fetch(`${API_BASE_URL}/api/top-attacking_qp`, { cache: 'no-store' })
-      if (!resAttacking.ok) throw new Error('Failed to fetch attacking picks')
-      const dataAttacking: any[] = await resAttacking.json()
-      const transformedAttacking = dataAttacking.map((team: any) => ({
-        team: team.team,
-        teamCode: team.short_name || team.team.substring(0, 3).toUpperCase(),
-        attackRank: team.attack_rank,
-        attackStrength: team.attack_strength,
-        players: team.players.map((player: any) => ({
-          name: player.web_name,
-          position: player.position_name,
-          position_name: player.position_name, // For recommendation function
-          price: player.now_cost,
-          goals_pg: player.goals_per_game || 0,
-          assists_pg: player.assists_per_game || 0,
-          points_pg: player.points_per_game,
-          points_per_game: player.points_per_game, // For recommendation function
-          ownership: player.selected_by_percent,
-          selected_by_percent: player.selected_by_percent, // For recommendation function
-          attacker_score: player.attacker_score || 0,
-          defender_score: 0, // Not applicable for attacking players
-          form: player.form ?? 5.0,
-          clean_sheet_rate: 0 // Not applicable for attacking players
-        }))
-      }))
-      setAttackingPicks(transformedAttacking)
+      const [attackingData, defensiveData] = await Promise.all([
+        getQuickPicks("attacking"),
+        getQuickPicks("defensive"),
+      ])
 
-      const resDefensive = await fetch(`${API_BASE_URL}/api/top-defensive_qp`, { cache: 'no-store' })
-      if (!resDefensive.ok) throw new Error('Failed to fetch defensive picks')
-      const dataDefensive: any[] = await resDefensive.json()
-      const transformedDefensive = dataDefensive.map((team: any) => ({
-        team: team.team,
-        teamCode: team.short_name || team.team.substring(0, 3).toUpperCase(),
-        defenseRank: team.defense_rank,
-        defenseStrength: team.defense_strength,
-        players: team.players.map((player: any) => ({
-          name: player.web_name,
-          position: player.position_name,
-          position_name: player.position_name, // For recommendation function
-          price: player.now_cost,
-          cs_rate: player.clean_sheet_rate,
-          clean_sheet_rate: player.clean_sheet_rate, // For recommendation function
-          points_pg: player.points_per_game,
-          points_per_game: player.points_per_game, // For recommendation function
-          ownership: player.selected_by_percent,
-          selected_by_percent: player.selected_by_percent, // For recommendation function
-          defender_score: player.defender_score || 0,
-          attacker_score: 0, // Not applicable for defensive players
-          form: player.form ?? 5.0
-        }))
-      }))
-      setDefensivePicks(transformedDefensive)
+      setAttackingPicks(attackingData)
+      setDefensivePicks(defensiveData)
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to fetch quick picks")
     } finally {

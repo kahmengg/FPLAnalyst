@@ -6,10 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { TrendingUp, User, Target, Activity, BarChart3, Award } from "lucide-react"
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts'
-
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com")
-  .replace(/\/+$/, "")
-  .replace(/\/api$/, "")
+import { getAllPlayers, getPlayerTrends } from "@/lib/supabase"
 
 interface Player {
   id: string
@@ -121,23 +118,18 @@ export default function PlayerTrendsPage() {
   const fetchAllPlayers = async () => {
     try {
       setLoading(true)
-      const res = await fetch(`${API_BASE_URL}/api/player-search`)
-      if (!res.ok) throw new Error("Failed to fetch players")
-      const data = await res.json()
-      setAllPlayers(data.players || [])
-      setLoading(false)
+      const data = await getAllPlayers(1000)
+      setAllPlayers(data || [])
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
+    } finally {
       setLoading(false)
     }
   }
 
   const fetchPlayerTrends = async (players: string[]) => {
     try {
-      const playersParam = players.join(',')
-      const res = await fetch(`${API_BASE_URL}/api/player-trends?players=${encodeURIComponent(playersParam)}`)
-      if (!res.ok) throw new Error("Failed to fetch player trends")
-      const data = await res.json()
+      const data = await getPlayerTrends(players, 10)
       setPlayerData(data)
     } catch (err) {
       console.error("Error fetching player trends:", err)

@@ -2,12 +2,8 @@
 from flask import Flask
 from flask_cors import CORS
 from routes.fixtures import fixtures_bp
-from routes.quick_picks import quick_picks_bp
-from routes.rankings import rankings_bp
-from routes.top_performers import top_performers_bp
 from routes.health import health_bp
-from routes.admin import admin_bp
-from routes.player_trends import player_trends_bp
+from routes.players import players_bp
 from config.config import Config
 import os
 app = Flask(__name__)
@@ -18,12 +14,8 @@ app.config.from_object(Config)
 # CORS(app)
 # Register blueprints
 app.register_blueprint(fixtures_bp, url_prefix='/api')
-app.register_blueprint(quick_picks_bp, url_prefix='/api')
-app.register_blueprint(rankings_bp, url_prefix='/api')
-app.register_blueprint(top_performers_bp, url_prefix='/api')
 app.register_blueprint(health_bp, url_prefix='/api')
-app.register_blueprint(admin_bp, url_prefix='/api')
-app.register_blueprint(player_trends_bp, url_prefix='/api')
+app.register_blueprint(players_bp, url_prefix='/api')
 
 if __name__ == '__main__':
     print("🚀 Starting FPL Analyst API...")

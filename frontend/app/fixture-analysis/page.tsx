@@ -6,10 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { CalendarIcon, Home, Plane, Search, X, Filter, Target, Shield, TrendingUp, ChevronLeft, ChevronRight, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
-
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com")
-  .replace(/\/+$/, "")
-  .replace(/\/api$/, "")
+import { getFixtures, getTeamFixtureSummary } from "@/lib/supabase"
 
 // Team short codes mapping for FDR
 const teamShortCodes: Record<string, string> = {
@@ -487,82 +484,20 @@ export default function FixtureAnalysisPage() {
       setLoading(true);
       setError(null);
       try {
-        // Fetch fixtures
-        const resFixtures = await fetch(`${API_BASE_URL}/api/fixtures`, { cache: 'no-store' })
-        if (!resFixtures.ok) throw new Error("Failed to fetch fixtures");
-        const dataFixtures = await resFixtures.json();
+        const [dataFixtures, dataSummary] = await Promise.all([
+          getFixtures(),
+          getTeamFixtureSummary(),
+        ])
         const gameweeks = dataFixtures.map((f: any) => f.gameweek).filter((gw: any) => typeof gw === "number" && !isNaN(gw));
         const minGameweek = gameweeks.length > 0 ? Math.min(...gameweeks) : 1;
         setGameweek(minGameweek);
-        const transformedFixtures = dataFixtures.map((f: any) => {
-        const homeAvgRating = (f.home_team.attacking_fixture_rating + f.home_team.defensive_fixture_rating) / 2;
-        const awayAvgRating = (f.away_team.attacking_fixture_rating + f.away_team.defensive_fixture_rating) / 2;
-        let favorability;
-        if (homeAvgRating > awayAvgRating + 10) {
-          favorability = f.home_team.name;
-        } else if (awayAvgRating > homeAvgRating + 10) {
-          favorability = f.away_team.name;
-        } else {
-          favorability = "Neutral";
-        }
-        return {
-          gw: f.gameweek,
-          fixture: f.fixture,
-          home_team: f.home_team?.name || f.home_team,
-          away_team: f.away_team?.name || f.away_team,
-          teams: {
-            home: {
-              team: f.home_team.name,
-              attackRating: f.home_team.attacking_fixture_rating,
-              defenseRating: f.home_team.defensive_fixture_rating,
-              rank: f.home_team.rank,
-              fdr: f.home_team.fdr
-            },
-            away: {
-              team: f.away_team.name,
-              attackRating: f.away_team.attacking_fixture_rating,
-              defenseRating: f.away_team.defensive_fixture_rating,
-              rank: f.away_team.rank,
-              fdr: f.away_team.fdr
-            },
-          },
-          favorability,
-          maxOpportunityRating: Math.max(
-            f.home_team.attacking_fixture_rating,
-            f.home_team.defensive_fixture_rating,
-            f.away_team.attacking_fixture_rating,
-            f.away_team.defensive_fixture_rating
-          )
-        };
-      });
-        setFixtures(transformedFixtures);
+        setFixtures(dataFixtures);
 
         // Note: fixtures_opportunity endpoint not yet implemented in backend
         // Opportunities data temporarily disabled
         setFixtureOpportunities({ attack: [], defense: [] });
 
-        // Fetch team fixture summary
-        const resSummary = await fetch(`${API_BASE_URL}/api/team_fixtures`);
-        if (!resSummary.ok) throw new Error("Failed to fetch team fixture summary");
-        const dataSummary = await resSummary.json();
-        const transformedSummary = dataSummary.map((t: any) => ({
-          team: t.team,
-          att: t.avg_attack_difficulty,
-          def: t.avg_defense_difficulty,
-          overall: t.overall_difficulty,
-          fixtures: t.num_favorable_fixtures,
-          // Updated: Period-specific home fixture counts
-          nearTermHomeFixtures: t.near_term_home_fixtures,
-          mediumTermHomeFixtures: t.medium_term_home_fixtures,
-          // Swing analysis fields
-          nearTermRating: t.near_term_rating,
-          mediumTermRating: t.medium_term_rating,
-          fixtureSwing: t.fixture_swing,
-          swingCategory: t.swing_category,
-          swingEmoji: t.swing_emoji,
-          formContext: t.form_context,
-        }));
-        setTeamFixtureSummary(transformedSummary);
+        setTeamFixtureSummary(dataSummary);
       } catch (err: unknown) {
         setError(err instanceof Error ? err.message : "Failed to fetch fixture analysis data");
       } finally {

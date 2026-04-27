@@ -2,14 +2,10 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, TrendingUp, Trophy, Calendar, Gem, Target, Menu, X, Clock, Shield, Activity } from "lucide-react"
+import { Home, TrendingUp, Trophy, Calendar, Gem, Target, Menu, X, Clock, Activity } from "lucide-react"
 import { useState, useEffect } from "react"
 import { ThemeToggle } from "./theme-toggle"
-
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com")
-  .replace(/\/+$/, "")
-  .replace(/\/api$/, "")
-const MAX_RETRIES = 3
+import { getDashboardSummary } from "@/lib/supabase"
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home, color: "text-emerald-500", bgColor: "bg-emerald-500/10", hoverColor: "hover:bg-emerald-500/20" },
@@ -20,29 +16,11 @@ const navigation = [
   { name: "Quick Picks", href: "/quick-picks", icon: Target, color: "text-indigo-500", bgColor: "bg-indigo-500/10", hoverColor: "hover:bg-indigo-500/20" },
 ]
 
-const adminNavigation = [
-  { name: "Admin Panel", href: "/admin", icon: Shield, color: "text-orange-500", bgColor: "bg-orange-500/10", hoverColor: "hover:bg-orange-500/20" },
-]
-
-async function fetchWithRetry(url: string, retries: number = MAX_RETRIES) {
-  for (let i = 0; i < retries; i++) {
-    try {
-      const response = await fetch(url)
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-      }
-      return await response.json()
-    } catch (err: unknown) {
-      if (i === retries - 1) throw err
-      await new Promise<void>((resolve) => setTimeout(resolve, 1000)) // 1s delay between retries
-    }
-  }
-}
-
 export function Sidebar() {
   const pathname = usePathname()
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [gameweek, setGameWeek] = useState(15) // Default gameweek
+  const [lastSyncedAt, setLastSyncedAt] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -51,9 +29,9 @@ export function Sidebar() {
       setLoading(true)
       setError(null)
       try {
-        const data = await fetchWithRetry(`${API_BASE_URL}/api/layout`)
-        const summary = data[0] // Assume single object in array
+        const summary = await getDashboardSummary()
         setGameWeek(summary.total_gameweeks)
+        setLastSyncedAt(summary.last_synced_at)
       } catch (err: unknown) {
         const message = err instanceof Error ? err.message : "Unknown error"
         setError(`Failed to fetch gameweek: ${message}`)
@@ -190,67 +168,6 @@ export function Sidebar() {
               })}
             </div>
 
-            {/* Admin Section */}
-            <div className="pt-4 border-t border-slate-200/50 dark:border-slate-700/50">
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-3 mb-3">
-                Administration
-              </p>
-              {adminNavigation.map((item, index) => {
-                const isActive = pathname === item.href
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setIsMobileOpen(false)}
-                    className={`
-                      group relative flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-300
-                      animate-in fade-in slide-in-from-left-4
-                      ${isActive
-                        ? `${item.bgColor} ${item.color} shadow-lg shadow-${item.color.split('-')[1]}-500/20`
-                        : `text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white ${item.hoverColor}`
-                      }
-                    `}
-                    style={{ 
-                      animationDelay: `${(navigation.length + index) * 75}ms`,
-                      animationFillMode: 'both'
-                    }}
-                  >
-                    {/* Active indicator */}
-                    {isActive && (
-                      <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 ${item.color.replace('text-', 'bg-')} rounded-r-full`}></div>
-                    )}
-                    
-                    {/* Icon with enhanced styling */}
-                    <div className={`
-                      relative flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-300
-                      ${isActive 
-                        ? `${item.bgColor.replace('/10', '/20')} ${item.color}` 
-                        : 'group-hover:bg-slate-100 dark:group-hover:bg-slate-700/50'
-                      }
-                      group-hover:scale-110
-                    `}>
-                      <item.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-                      
-                      {/* Subtle glow for active state */}
-                      {isActive && (
-                        <div className={`absolute inset-0 rounded-lg ${item.bgColor.replace('/10', '/30')} blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                      )}
-                    </div>
-                    
-                    <span className="flex-1 transition-all duration-300 group-hover:translate-x-1">
-                      {item.name}
-                    </span>
-                    
-                    {/* Hover arrow indicator */}
-                    <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </Link>
-                )
-              })}
-            </div>
           </nav>
 
           {/* Enhanced Footer with more info */}
@@ -262,19 +179,21 @@ export function Sidebar() {
             <div className="rounded-xl bg-gradient-to-r from-emerald-500/10 to-blue-500/10 p-4 border border-emerald-500/20">
               <div className="flex items-center gap-2 mb-2">
                 <Clock className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">Last Updated</p>
+                <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">Last Synced</p>
               </div>
               <p className="text-sm font-mono text-slate-700 dark:text-slate-300">
-                {new Date().toLocaleString("en-GB", {
-                  day: "numeric",
-                  month: "short",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+                {lastSyncedAt
+                  ? new Date(lastSyncedAt).toLocaleString("en-GB", {
+                      day: "numeric",
+                      month: "short",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
+                  : "Unknown"}
               </p>
               <div className="flex items-center gap-2 mt-2">
                 <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                <p className="text-xs text-emerald-600 dark:text-emerald-400">Real-time data</p>
+                <p className="text-xs text-emerald-600 dark:text-emerald-400">Data refreshed from sync</p>
               </div>
             </div>
           </div>

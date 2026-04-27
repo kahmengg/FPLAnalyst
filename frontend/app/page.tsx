@@ -3,18 +3,24 @@ import Link from "next/link"
 import { TrendingUp, Trophy, Calendar, Gem, Target, Users, Shield, Activity, Clock } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useState, useEffect } from "react"
+import { getDashboardSummary } from "@/lib/supabase"
 
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com")
-  .replace(/\/+$/, "")
-  .replace(/\/api$/, "")
-const MAX_RETRIES = 3
+function formatLastSynced(value: string | null) {
+  if (!value) return "Unknown"
+  return new Date(value).toLocaleString("en-GB", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  })
+}
 
 // Default stats in case API fetch fails
 const defaultQuickStats = [
   { label: "Total Players Analyzed", value: "500+", icon: Users, color: "text-emerald-500", bgColor: "bg-emerald-500/10" },
   { label: "Teams Ranked", value: "20", icon: Shield, color: "text-blue-500", bgColor: "bg-blue-500/10" },
   { label: "Fixtures Analyzed", value: "8 GWs", icon: Activity, color: "text-purple-500", bgColor: "bg-purple-500/10" },
-  { label: "Last Updated", value: "Live", icon: Clock, color: "text-orange-500", bgColor: "bg-orange-500/10" },
+  { label: "Last Synced", value: "Unknown", icon: Clock, color: "text-orange-500", bgColor: "bg-orange-500/10" },
 ]
 
 const actionCards = [
@@ -60,24 +66,10 @@ const actionCards = [
   },
 ]
 
-async function fetchWithRetry(url: string, retries: number = MAX_RETRIES) {
-  for (let i = 0; i < retries; i++) {
-    try {
-      const response = await fetch(url)
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-      }
-      return await response.json()
-    } catch (err: unknown) {
-      if (i === retries - 1) throw err
-      await new Promise<void>((resolve) => setTimeout(resolve, 1000)) // 1s delay between retries
-    }
-  }
-}
-
 export default function HomePage() {
   const [quickStats, setQuickStats] = useState(defaultQuickStats)
   const [gameweek, setGameWeek] = useState(0)
+  const [lastSyncedAt, setLastSyncedAt] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -86,12 +78,11 @@ export default function HomePage() {
       setLoading(true)
       setError(null)
       try {
-        const data = await fetchWithRetry(`${API_BASE_URL}/api/layout`)
-        const summary = data[0] // Assume single object in array
+        const summary = await getDashboardSummary()
         const mappedStats = [
           {
             label: "Total Players Analyzed",
-            value: summary.number_of_players.toString(),
+            value: summary.total_players.toString(),
             icon: Users,
             color: "text-emerald-500",
             bgColor: "bg-emerald-500/10",
@@ -111,8 +102,8 @@ export default function HomePage() {
             bgColor: "bg-purple-500/10",
           },
           {
-            label: "Last Updated",
-            value: "Live",
+            label: "Last Synced",
+            value: formatLastSynced(summary.last_synced_at),
             icon: Clock,
             color: "text-orange-500",
             bgColor: "bg-orange-500/10",
@@ -120,6 +111,7 @@ export default function HomePage() {
         ]
         setQuickStats(mappedStats)
         setGameWeek(summary.total_gameweeks)
+        setLastSyncedAt(summary.last_synced_at)
       } catch (err: unknown) {
         const message = err instanceof Error ? err.message : "Unknown error"
         setError(`Failed to fetch summary stats: ${message}`)
@@ -159,6 +151,9 @@ export default function HomePage() {
           </p>
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Gameweek {gameweek} • 2025/26 Season 
+          </p>
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+            Data last synced: {formatLastSynced(lastSyncedAt)}
           </p>
         </div>
 

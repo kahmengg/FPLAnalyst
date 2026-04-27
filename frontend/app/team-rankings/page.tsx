@@ -6,10 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Crosshair, TrendingUp, TrendingDown, Shield, TrophyIcon, Search, X, Filter, ArrowUpDown, Star } from "lucide-react"
 import TeamPicksModal from "@/components/team-picks-modal"
-
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com")
-  .replace(/\/+$/, "")
-  .replace(/\/api$/, "")
+import { getQuickPicks, getTeamRankings } from "@/lib/supabase"
 
 // Rank Medal Component
 const RankMedal = ({ rank }: { rank: number }) => {
@@ -52,31 +49,16 @@ export default function TeamRankingsPage() {
     setLoading(true)
     setError(null)
     try {
-      const [overallRes, attackRes, defenseRes, attackingPicksRes, defensivePicksRes] = await Promise.all([
-        fetch(`${API_BASE_URL}/api/overall_rankings`, { cache: 'no-store' }),
-        fetch(`${API_BASE_URL}/api/attack_rankings`, { cache: 'no-store' }),
-        fetch(`${API_BASE_URL}/api/defense_rankings`, { cache: 'no-store' }),
-        fetch(`${API_BASE_URL}/api/top-attacking_qp`, { cache: 'no-store' }),
-        fetch(`${API_BASE_URL}/api/top-defensive_qp`, { cache: 'no-store' })
+      const [overall, attack, defense, attackingData, defensiveData] = await Promise.all([
+        getTeamRankings("overall"),
+        getTeamRankings("attack"),
+        getTeamRankings("defense"),
+        getQuickPicks("attacking"),
+        getQuickPicks("defensive"),
       ])
 
-      if (!overallRes.ok || !attackRes.ok || !defenseRes.ok) {
-        throw new Error('Failed to fetch rankings')
-      }
-
-      const overall = await overallRes.json()
-      const attack = await attackRes.json()
-      const defense = await defenseRes.json()
-      
-      // Quick Picks data
-      if (attackingPicksRes.ok) {
-        const attackingData = await attackingPicksRes.json()
-        setAttackingPicks(attackingData)
-      }
-      if (defensivePicksRes.ok) {
-        const defensiveData = await defensivePicksRes.json()
-        setDefensivePicks(defensiveData)
-      }
+      setAttackingPicks(attackingData)
+      setDefensivePicks(defensiveData)
 
       const attackMap = new Map(attack.map(t => [t.team, t]))
       const defenseMap = new Map(defense.map(t => [t.team, t]))

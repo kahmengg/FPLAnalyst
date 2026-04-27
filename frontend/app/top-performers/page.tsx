@@ -7,12 +7,7 @@ import { Progress } from "@/components/ui/progress"
 import { useState, useEffect, useMemo } from "react"
 import { TrendingUp, Minus, Star, Shield, Target, Gem, DollarSign, Trophy, ArrowUp, ArrowUpDown, ArrowDown, Search, Filter, X } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip"
-
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com")
-  .replace(/\/+$/, "")
-  .replace(/\/api$/, "")
-const MAX_RETRIES = 3
-const RETRY_DELAY = 1000
+import { getPlayerInsights } from "@/lib/supabase"
 
 const PositionBadge = ({ position }) => {
   // Map full position names to abbreviations
@@ -374,21 +369,6 @@ export default function TopPerformersPage() {
     );
   };
 
-  async function fetchWithRetry(url, retries = MAX_RETRIES) {
-    for (let i = 0; i < retries; i++) {
-      try {
-        const response = await fetch(url, { cache: 'no-store' });
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        return await response.json();
-      } catch (err) {
-        if (i === retries - 1) throw err;
-        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY));
-      }
-    }
-  }
-
   useEffect(() => {
     setMounted(true);
     
@@ -398,79 +378,60 @@ export default function TopPerformersPage() {
       const newErrors = {};
 
       try {
-        const endpoints = [
-          {
-            key: 'goalScorers', url: `${API_BASE_URL}/api/goal_scorer-picks`, setter: setGoalScorers, mapper: p => ({
-              player: p.player, team: p.team, team_short: p.team_short, goals: p.goals,
-              goalsPerGame: p.goalsPerGame, points: p.points, price: p.price,
-              ownership: p.ownership, form: p.form
-            })
-          },
-          {
-            key: 'assistProviders', url: `${API_BASE_URL}/api/assist-gems`, setter: setAssistProviders, mapper: p => ({
-              player: p.player, team: p.team, team_short: p.team_short, assists: p.assists,
-              assistsPerGame: p.assistsPerGame, points: p.points, price: p.price,
-              ownership: p.ownership, form: p.form
-            })
-          },
-          {
-            key: 'defensiveLeaders', url: `${API_BASE_URL}/api/def_lead`, setter: setDefensiveLeaders, mapper: p => ({
-              player: p.player, team: p.team, team_short: p.team_short, position: p.position,
-              points: p.points, ppg: p.ppg, cleanSheets: p.cleanSheets, csRate: p.csRate, dfc: p.defensiveContributions,
-              tackles: p.tackles, price: p.price, form: p.form
-            })
-          },
-          {
-            key: 'seasonPerformers', url: `${API_BASE_URL}/api/season-performers`, setter: setSeasonPerformers, mapper: p => ({
-              player: p.player, team: p.team, team_short: p.team_short, position: p.position,
-              points: p.points, ppg: p.ppg, price: p.price, ownership: p.ownership, form: p.form
-            })
-          },
-          {
-            key: 'hiddenGems', url: `${API_BASE_URL}/api/hidden-gems`, setter: setHiddenGems, mapper: p => ({
-              player: p.player, team: p.team, team_short: p.team_short, position: p.position,
-              points: p.points, ownership: p.ownership, price: p.price, xG: p.xG,
-              xA: p.xA, xCS: p.xCS, potentialScore: p.potentialScore, form: p.form
-            })
-          },
-          {
-            key: 'valuePlayers', url: `${API_BASE_URL}/api/value-players`, setter: setValuePlayers, mapper: p => ({
-              player: p.player, team: p.team, team_short: p.team_short, position: p.position,
-              pointsPerMillion: p.pointsPerMillion, totalPoints: p.totalPoints, price: p.price, form: p.form
-            })
-          },
-          {
-            key: 'overperformers', url: `${API_BASE_URL}/api/overperformers`, setter: setOverperformers, mapper: p => ({
-              player: p.player, team: p.team, team_short: p.team_short, goals: p.goals,
-              xG: p.xG, overperformance: p.overperformance, sustainable: p.sustainable, form: p.form, overperformance_per_90: p.overperformance_per_90
-            })
-          },
-          {
-            key: 'underperformers', url: `${API_BASE_URL}/api/underperformers`, setter: setUnderperformers, mapper: p => ({
-              player: p.player, team: p.team, team_short: p.team_short, goals: p.goals,
-              xG: p.xG, overperformance: p.overperformance, sustainable: p.sustainable, form: p.form, overperformance_per_90: p.overperformance_per_90
-            })
-          },
-          {
-            key: 'sustainableScorers', url: `${API_BASE_URL}/api/sustainable-scorers`, setter: setSustainableScorers, mapper: p => ({
-              player: p.player, team: p.team, team_short: p.team_short, goals: p.goals,
-              xG: p.xG, overperformance: p.overperformance, sustainable: p.sustainable, form: p.form, overperformance_per_90: p.overperformance_per_90
-            })
-          }
-        ];
+        const [goalScorers, assistProviders, defensiveLeaders, seasonPerformers, hiddenGems, valuePlayers, overperformers, underperformers, sustainableScorers] = await Promise.all([
+          getPlayerInsights('goal_scorers', 100),
+          getPlayerInsights('assist_providers', 100),
+          getPlayerInsights('defensive_leaders', 100),
+          getPlayerInsights('season_performers', 100),
+          getPlayerInsights('hidden_gems', 100),
+          getPlayerInsights('value_players', 100),
+          getPlayerInsights('overperformers', 100),
+          getPlayerInsights('underperformers', 100),
+          getPlayerInsights('sustainable_scorers', 100),
+        ])
 
-        await Promise.all(endpoints.map(async ({ key, url, setter, mapper }) => {
-          try {
-            const data = await fetchWithRetry(url);
-            setter(data.map(mapper));
-          } catch (err) {
-            newErrors[key] = `Failed to fetch ${key}: ${err.message}`;
-          }
-        }));
+        setGoalScorers(goalScorers.map((p: any) => ({
+          player: p.player, team: p.team, team_short: p.team_short, goals: p.goals ?? p.points ?? 0,
+          goalsPerGame: p.goalsPerGame ?? p.goals_per_game ?? 0, points: p.points, price: p.price,
+          ownership: p.ownership, form: p.form
+        })))
+        setAssistProviders(assistProviders.map((p: any) => ({
+          player: p.player, team: p.team, team_short: p.team_short, assists: p.assists ?? p.points ?? 0,
+          assistsPerGame: p.assistsPerGame ?? p.assists_per_game ?? 0, points: p.points, price: p.price,
+          ownership: p.ownership, form: p.form
+        })))
+        setDefensiveLeaders(defensiveLeaders.map((p: any) => ({
+          player: p.player, team: p.team, team_short: p.team_short, position: p.position,
+          points: p.points, ppg: p.ppg ?? p.points_per_game ?? 0, cleanSheets: p.cleanSheets ?? 0, csRate: p.csRate ?? p.clean_sheet_rate ?? 0, dfc: p.defensiveContributions ?? 0,
+          tackles: p.tackles ?? 0, price: p.price, form: p.form
+        })))
+        setSeasonPerformers(seasonPerformers.map((p: any) => ({
+          player: p.player, team: p.team, team_short: p.team_short, position: p.position,
+          points: p.points, ppg: p.ppg ?? p.points_per_game ?? 0, price: p.price, ownership: p.ownership, form: p.form
+        })))
+        setHiddenGems(hiddenGems.map((p: any) => ({
+          player: p.player, team: p.team, team_short: p.team_short, position: p.position,
+          points: p.points, ownership: p.ownership, price: p.price, xG: p.xG ?? p.xg ?? 0,
+          xA: p.xA ?? p.xa ?? 0, xCS: p.xCS ?? 0, potentialScore: p.potentialScore ?? p.points_per_game ?? 0, form: p.form
+        })))
+        setValuePlayers(valuePlayers.map((p: any) => ({
+          player: p.player, team: p.team, team_short: p.team_short, position: p.position,
+          pointsPerMillion: p.pointsPerMillion ?? p.points_per_million ?? 0, totalPoints: p.totalPoints ?? p.points ?? 0, price: p.price, form: p.form
+        })))
+        setOverperformers(overperformers.map((p: any) => ({
+          player: p.player, team: p.team, team_short: p.team_short, goals: p.goals ?? 0,
+          xG: p.xG ?? p.xg ?? 0, overperformance: p.overperformance ?? 0, sustainable: p.sustainable ?? false, form: p.form, overperformance_per_90: p.overperformance_per_90 ?? 0
+        })))
+        setUnderperformers(underperformers.map((p: any) => ({
+          player: p.player, team: p.team, team_short: p.team_short, goals: p.goals ?? 0,
+          xG: p.xG ?? p.xg ?? 0, overperformance: p.overperformance ?? 0, sustainable: p.sustainable ?? false, form: p.form, overperformance_per_90: p.overperformance_per_90 ?? 0
+        })))
+        setSustainableScorers(sustainableScorers.map((p: any) => ({
+          player: p.player, team: p.team, team_short: p.team_short, goals: p.goals ?? 0,
+          xG: p.xG ?? p.xg ?? 0, overperformance: p.overperformance ?? 0, sustainable: p.sustainable ?? false, form: p.form, overperformance_per_90: p.overperformance_per_90 ?? 0
+        })))
 
-        if (Object.keys(newErrors).length > 0) {
-          setErrors(newErrors);
-        }
+        setErrors(newErrors);
       } catch (err) {
         setErrors({ general: `Unexpected error: ${err.message}` });
       } finally {

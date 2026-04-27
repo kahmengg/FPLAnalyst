@@ -5,10 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { TrendingUp, TrendingDown, Star, ArrowUp, ArrowDown, RefreshCw } from "lucide-react"
 import TeamPicksModal from "@/components/team-picks-modal"
-
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL || "https://fplanalyst.onrender.com")
-  .replace(/\/+$/, "")
-  .replace(/\/api$/, "")
+import { getQuickPicks, getTeamFixtureSummary } from "@/lib/supabase"
 
 // Team color mapping
 const teamColors = {
@@ -78,39 +75,15 @@ export default function TransferTargetsPage() {
       setLoading(true)
       setError(null)
       try {
-        const [summaryRes, attackingPicksRes, defensivePicksRes] = await Promise.all([
-          fetch(`${API_BASE_URL}/api/team_fixtures`, { cache: 'no-store' }),
-          fetch(`${API_BASE_URL}/api/top-attacking_qp`, { cache: 'no-store' }),
-          fetch(`${API_BASE_URL}/api/top-defensive_qp`, { cache: 'no-store' })
+        const [summaryData, attackingData, defensiveData] = await Promise.all([
+          getTeamFixtureSummary(),
+          getQuickPicks("attacking"),
+          getQuickPicks("defensive"),
         ])
 
-        if (!summaryRes.ok) throw new Error('Failed to fetch team fixtures')
-
-        const dataSummary = await summaryRes.json()
-        const transformedSummary = dataSummary.map((t: any) => ({
-          team: t.team,
-          nearTermHomeFixtures: t.near_term_home_fixtures,
-          mediumTermHomeFixtures: t.medium_term_home_fixtures,
-          nearTermRating: t.near_term_rating,
-          mediumTermRating: t.medium_term_rating,
-          fixtureSwing: t.fixture_swing,
-          swingCategory: t.swing_category,
-          swingEmoji: t.swing_emoji,
-          formContext: t.form_context,
-          avgAttackDiff: t.avg_attack_difficulty,
-          avgDefenseDiff: t.avg_defense_difficulty,
-        }))
-        setTeamFixtureSummary(transformedSummary)
-
-        // Quick Picks data
-        if (attackingPicksRes.ok) {
-          const attackingData = await attackingPicksRes.json()
-          setAttackingPicks(attackingData)
-        }
-        if (defensivePicksRes.ok) {
-          const defensiveData = await defensivePicksRes.json()
-          setDefensivePicks(defensiveData)
-        }
+        setTeamFixtureSummary(summaryData)
+        setAttackingPicks(attackingData)
+        setDefensivePicks(defensiveData)
       } catch (err: any) {
         setError(err.message)
       } finally {
