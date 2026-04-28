@@ -209,6 +209,225 @@ async function getTeamRankMap() {
   return new Map((data || []).map((row: any) => [row.team_id, row]))
 }
 
+function normalizeSeasonStatsRow(row: any) {
+  const playerObj = Array.isArray(row?.players) ? row.players[0] : row?.players || {}
+  const teamObj = Array.isArray(playerObj?.teams) ? playerObj.teams[0] : playerObj?.teams || {}
+  const team = normalizeTeam({ team_name: teamObj?.name, team_short: teamObj?.short_name, team: teamObj?.name })
+  const pos = normalizePosition(playerObj?.position)
+  const games = Math.max(safeNumber(row?.gameweeks_played, 0), 1)
+  const points = safeNumber(row?.total_points, 0)
+  const goals = safeNumber(row?.goals, 0)
+  const assists = safeNumber(row?.assists, 0)
+  const xg = safeNumber(row?.xg, 0)
+  const xa = safeNumber(row?.xa, 0)
+  const form = safeNumber(row?.form, 0)
+  const ownership = safeNumber(playerObj?.ownership, 0)
+  const cost = safeNumber(playerObj?.cost, 0)
+  const pointsPerGame = points / games
+  const goalsPerGame = goals / games
+  const assistsPerGame = assists / games
+  const cleanSheets = safeNumber(row?.clean_sheets, 0)
+  const cleanSheetRate = cleanSheets / games
+  const defensiveContribution = safeNumber(row?.defensive_contribution, 0)
+  const pvsxpTotal = safeNumber(row?.pvsxp_total, 0)
+  const overPerfPer90 = safeNumber(row?.total_minutes, 0) > 0 ? (pvsxpTotal / (safeNumber(row?.total_minutes, 0) / 90)) : pvsxpTotal
+  const attackerScore = goalsPerGame * 2 + assistsPerGame * 1.5 + pointsPerGame * 0.4 + form * 0.2
+  const defenderScore = cleanSheetRate * 4 + defensiveContribution * 0.05 + pointsPerGame * 0.35 + form * 0.2
+  const sustainableGap = Math.abs(goals - xg)
+  const sustainable = goals > 0 && sustainableGap <= Math.max(2, goals * 0.35)
+  const potentialScore = pointsPerGame * 0.6 + safeNumber(row?.xgi_per90, 0) * 12 + Math.max(0, 20 - ownership) * 0.2
+
+  return {
+    season_key: row?.season_key,
+    player: firstString(playerObj?.web_name, playerObj?.player_name),
+    player_name: firstString(playerObj?.player_name, playerObj?.web_name),
+    web_name: firstString(playerObj?.web_name, playerObj?.player_name),
+    team: team.team,
+    team_name: team.team_name,
+    team_short: team.team_short,
+    position: pos.label,
+    position_name: pos.label,
+    points,
+    totalPoints: points,
+    ppg: pointsPerGame,
+    points_per_game: pointsPerGame,
+    goals,
+    goalsPerGame: goalsPerGame,
+    goals_per_game: goalsPerGame,
+    assists,
+    assistsPerGame: assistsPerGame,
+    assists_per_game: assistsPerGame,
+    xG: xg,
+    xg,
+    xA: xa,
+    xa,
+    xCS: cleanSheets,
+    cleanSheets,
+    clean_sheet_rate: cleanSheetRate,
+    csRate: cleanSheetRate,
+    tackles: safeNumber(row?.tackles, 0),
+    dfc: defensiveContribution,
+    defensiveContributions: defensiveContribution,
+    defensive_contribution: defensiveContribution,
+    price: cost,
+    cost,
+    ownership,
+    selected_by_percent: ownership,
+    pointsPerMillion: safeNumber(row?.points_per_million, cost > 0 ? points / cost : 0),
+    points_per_million: safeNumber(row?.points_per_million, cost > 0 ? points / cost : 0),
+    overperformance: pvsxpTotal,
+    overperformance_per_90: overPerfPer90,
+    sustainable,
+    potentialScore,
+    form,
+    attacker_score: attackerScore,
+    defender_score: defenderScore,
+  }
+}
+
+function rankRows(rows: any[], key: string, desc = true) {
+  const sorted = [...rows].sort((a, b) => {
+    const delta = safeNumber(a?.[key], 0) - safeNumber(b?.[key], 0)
+    return desc ? -delta : delta
+  })
+
+  return sorted.map((row, idx) => ({ ...row, rank: idx + 1 }))
+}
+
+async function buildInsightsFallback(insightType: string, limit: number) {
+  if (!supabase) return []
+
+  const season = await getSeason()
+  const { data, error } = await supabase
+    .from('player_season_stats')
+    .select('season_key, player_id, gameweeks_played, total_minutes, total_points, goals, assists, xg, xa, xgi, shots, clean_sheets, defensive_contribution, tackles, points_per_million, pvsxp_total, form, xgi_per90, players!inner(player_name, web_name, position, cost, ownership, teams!left(name, short_name))')
+    .eq('season_key', season)
+
+  if (error) {
+    console.error(`Fallback insight query failed (${insightType}):`, error)
+    return []
+  }
+
+  const base = (data || [])
+    .map(normalizeSeasonStatsRow)
+    .filter((row) => row.player && row.team)
+
+  let selected: any[] = []
+  switch (insightType) {
+    case 'goal_scorers':
+      selected = rankRows(base.filter((r) => r.goals > 0), 'goals', true)
+      break
+    case 'assist_providers':
+      selected = rankRows(base.filter((r) => r.assists > 0), 'assists', true)
+      break
+    case 'defensive_leaders':
+      selected = rankRows(base.filter((r) => r.position === 'Goalkeeper' || r.position === 'Defender'), 'defender_score', true)
+      break
+    case 'value_players':
+      selected = rankRows(base.filter((r) => r.pointsPerMillion > 0), 'pointsPerMillion', true)
+      break
+    case 'hidden_gems':
+      selected = rankRows(base.filter((r) => r.ownership <= 20), 'potentialScore', true)
+      break
+    case 'overperformers':
+      selected = rankRows(base.filter((r) => r.overperformance > 0), 'overperformance', true)
+      break
+    case 'underperformers':
+      selected = rankRows(base.filter((r) => r.overperformance < 0), 'overperformance', false)
+      break
+    case 'sustainable_scorers':
+      selected = rankRows(base.filter((r) => r.goals >= 3), 'sustainable', true)
+      break
+    case 'season_performers':
+    default:
+      selected = rankRows(base, 'points', true)
+      break
+  }
+
+  return selected.slice(0, limit)
+}
+
+async function buildTeamFixtureSummaryFallback() {
+  if (!supabase) return []
+
+  const season = await getSeason()
+  const [fixturesRes, teamsRes] = await Promise.all([
+    supabase
+      .from('fixtures')
+      .select('season_key, gameweek, home_team_id, away_team_id, home_attack_fdr, home_defense_fdr, away_attack_fdr, away_defense_fdr, home_attacking_favorability, home_defensive_favorability, away_attacking_favorability, away_defensive_favorability')
+      .eq('season_key', season)
+      .order('gameweek'),
+    supabase.from('teams').select('id, name, short_name'),
+  ])
+
+  if (fixturesRes.error) {
+    console.error('Fallback fixture summary query failed:', fixturesRes.error)
+    return []
+  }
+
+  const teamMap = new Map((teamsRes.data || []).map((t: any) => [t.id, t]))
+  const byTeam = new Map<string, any[]>()
+
+  for (const f of fixturesRes.data || []) {
+    const homeEntries = byTeam.get(f.home_team_id) || []
+    homeEntries.push({
+      gw: safeInt(f.gameweek, 0),
+      isHome: true,
+      attackDiff: safeNumber(f.home_attack_fdr, safeNumber(f.home_attacking_favorability, 0)),
+      defenseDiff: safeNumber(f.home_defense_fdr, safeNumber(f.home_defensive_favorability, 0)),
+      favorability: (safeNumber(f.home_attacking_favorability, 0) + safeNumber(f.home_defensive_favorability, 0)) / 2,
+    })
+    byTeam.set(f.home_team_id, homeEntries)
+
+    const awayEntries = byTeam.get(f.away_team_id) || []
+    awayEntries.push({
+      gw: safeInt(f.gameweek, 0),
+      isHome: false,
+      attackDiff: safeNumber(f.away_attack_fdr, safeNumber(f.away_attacking_favorability, 0)),
+      defenseDiff: safeNumber(f.away_defense_fdr, safeNumber(f.away_defensive_favorability, 0)),
+      favorability: (safeNumber(f.away_attacking_favorability, 0) + safeNumber(f.away_defensive_favorability, 0)) / 2,
+    })
+    byTeam.set(f.away_team_id, awayEntries)
+  }
+
+  const avg = (rows: any[], key: string) => (rows.length > 0 ? rows.reduce((sum, r) => sum + safeNumber(r[key], 0), 0) / rows.length : 0)
+
+  return Array.from(byTeam.entries()).map(([teamId, fixtures]) => {
+    const ordered = [...fixtures].sort((a, b) => a.gw - b.gw)
+    const nearTerm = ordered.slice(0, 5)
+    const mediumTerm = ordered.slice(5, 10)
+    const nearRating = avg(nearTerm, 'favorability')
+    const mediumRating = mediumTerm.length > 0 ? avg(mediumTerm, 'favorability') : nearRating
+    const fixtureSwing = mediumRating - nearRating
+    const teamObj = teamMap.get(teamId) || { name: '', short_name: '' }
+    const avgAttack = avg(ordered, 'attackDiff')
+    const avgDefense = avg(ordered, 'defenseDiff')
+
+    return {
+      team_id: teamId,
+      team: teamObj.name,
+      team_name: teamObj.name,
+      team_short: teamObj.short_name,
+      att: avgAttack,
+      def: avgDefense,
+      overall: (avgAttack + avgDefense) / 2,
+      fixtures: ordered.filter((f) => (f.attackDiff + f.defenseDiff) / 2 <= 3).length,
+      nearTermHomeFixtures: nearTerm.filter((f) => f.isHome).length,
+      mediumTermHomeFixtures: mediumTerm.filter((f) => f.isHome).length,
+      nearTermRating: nearRating,
+      mediumTermRating: mediumRating,
+      fixtureSwing,
+      swingCategory: fixtureSwing > 0.25 ? 'Improving' : fixtureSwing < -0.25 ? 'Declining' : 'Stable',
+      swingEmoji: fixtureSwing > 0.25 ? '📈' : fixtureSwing < -0.25 ? '📉' : '➡️',
+      formContext: 'Derived from upcoming fixtures',
+      avg_attack_difficulty: avgAttack,
+      avg_defense_difficulty: avgDefense,
+      overall_difficulty: (avgAttack + avgDefense) / 2,
+      num_favorable_fixtures: ordered.filter((f) => (f.attackDiff + f.defenseDiff) / 2 <= 3).length,
+    }
+  })
+}
+
 /**
  * Query player insights by type.
  */
@@ -226,8 +445,16 @@ export async function getPlayerInsights(insightType: string, limit = 100) {
       .limit(Math.max(limit * 5, limit))
 
     if (error) {
+      if (String(error.message || '').toLowerCase().includes('could not find the table')) {
+        return await buildInsightsFallback(insightType, limit)
+      }
+
       console.error(`Error fetching ${insightType}:`, error)
       return []
+    }
+
+    if (!data || data.length === 0) {
+      return await buildInsightsFallback(insightType, limit)
     }
 
     const normalized = (data || []).map(normalizeInsightRow)
@@ -642,8 +869,16 @@ export async function getTeamFixtureSummary() {
     ])
 
     if (summaryRes.error) {
+      if (String(summaryRes.error.message || '').toLowerCase().includes('could not find the table')) {
+        return await buildTeamFixtureSummaryFallback()
+      }
+
       console.error('Error fetching team fixture summary:', summaryRes.error)
       return []
+    }
+
+    if (!summaryRes.data || summaryRes.data.length === 0) {
+      return await buildTeamFixtureSummaryFallback()
     }
 
     const teamMap = new Map((teamsRes.data || []).map((team: any) => [team.id, team]))
