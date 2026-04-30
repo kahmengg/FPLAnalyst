@@ -2,18 +2,16 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, TrendingUp, Trophy, Calendar, Gem, Target, Menu, X, Clock, Activity } from "lucide-react"
+import { Home, Trophy, Calendar, Menu, X, Clock, Users } from "lucide-react"
 import { useState, useEffect } from "react"
 import { ThemeToggle } from "./theme-toggle"
 import { getDashboardSummary } from "@/lib/supabase"
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home, color: "text-emerald-500", bgColor: "bg-emerald-500/10", hoverColor: "hover:bg-emerald-500/20" },
-  { name: "Top Performers", href: "/top-performers", icon: TrendingUp, color: "text-blue-500", bgColor: "bg-blue-500/10", hoverColor: "hover:bg-blue-500/20" },
-  { name: "Team Rankings", href: "/team-rankings", icon: Trophy, color: "text-amber-500", bgColor: "bg-amber-500/10", hoverColor: "hover:bg-amber-500/20" },
-  { name: "Fixture Analysis", href: "/fixture-analysis", icon: Calendar, color: "text-purple-500", bgColor: "bg-purple-500/10", hoverColor: "hover:bg-purple-500/20" },
-  { name: "Player Trends", href: "/player-trends", icon: Activity, color: "text-cyan-500", bgColor: "bg-cyan-500/10", hoverColor: "hover:bg-cyan-500/20" },
-  { name: "Quick Picks", href: "/quick-picks", icon: Target, color: "text-indigo-500", bgColor: "bg-indigo-500/10", hoverColor: "hover:bg-indigo-500/20" },
+  { name: "Players", href: "/players", icon: Users, color: "text-blue-500", bgColor: "bg-blue-500/10", hoverColor: "hover:bg-blue-500/20" },
+  { name: "Teams", href: "/teams", icon: Trophy, color: "text-amber-500", bgColor: "bg-amber-500/10", hoverColor: "hover:bg-amber-500/20" },
+  { name: "Fixtures", href: "/fixtures", icon: Calendar, color: "text-purple-500", bgColor: "bg-purple-500/10", hoverColor: "hover:bg-purple-500/20" },
 ]
 
 export function Sidebar() {
