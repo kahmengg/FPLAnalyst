@@ -2,24 +2,22 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, TrendingUp, Trophy, Calendar, Gem, Target, Menu, X, Clock, Activity } from "lucide-react"
+import { Home, Users, Trophy, Calendar, Menu, X, Clock } from "lucide-react"
 import { useState, useEffect } from "react"
 import { ThemeToggle } from "./theme-toggle"
-import { getDashboardSummary } from "@/lib/supabase"
+import { formatLastUpdated, getHealth } from "@/lib/api"
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: Home, color: "text-emerald-500", bgColor: "bg-emerald-500/10", hoverColor: "hover:bg-emerald-500/20" },
-  { name: "Top Performers", href: "/top-performers", icon: TrendingUp, color: "text-blue-500", bgColor: "bg-blue-500/10", hoverColor: "hover:bg-blue-500/20" },
-  { name: "Team Rankings", href: "/team-rankings", icon: Trophy, color: "text-amber-500", bgColor: "bg-amber-500/10", hoverColor: "hover:bg-amber-500/20" },
-  { name: "Fixture Analysis", href: "/fixture-analysis", icon: Calendar, color: "text-purple-500", bgColor: "bg-purple-500/10", hoverColor: "hover:bg-purple-500/20" },
-  { name: "Player Trends", href: "/player-trends", icon: Activity, color: "text-cyan-500", bgColor: "bg-cyan-500/10", hoverColor: "hover:bg-cyan-500/20" },
-  { name: "Quick Picks", href: "/quick-picks", icon: Target, color: "text-indigo-500", bgColor: "bg-indigo-500/10", hoverColor: "hover:bg-indigo-500/20" },
+  { name: "Dashboard", href: "/", icon: Home },
+  { name: "Players", href: "/players", icon: Users },
+  { name: "Teams", href: "/teams", icon: Trophy },
+  { name: "Fixtures", href: "/fixtures", icon: Calendar },
 ]
 
 export function Sidebar() {
   const pathname = usePathname()
   const [isMobileOpen, setIsMobileOpen] = useState(false)
-  const [gameweek, setGameWeek] = useState(15) // Default gameweek
+  const [gameweek, setGameWeek] = useState(0)
   const [lastSyncedAt, setLastSyncedAt] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -29,13 +27,13 @@ export function Sidebar() {
       setLoading(true)
       setError(null)
       try {
-        const summary = await getDashboardSummary()
-        setGameWeek(summary.total_gameweeks)
-        setLastSyncedAt(summary.last_synced_at)
+        const summary = await getHealth()
+        setGameWeek(summary.latest_gameweek)
+        setLastSyncedAt(summary.last_updated)
       } catch (err: unknown) {
         const message = err instanceof Error ? err.message : "Unknown error"
         setError(`Failed to fetch gameweek: ${message}`)
-        setGameWeek(15) // Fallback to default
+        setGameWeek(0)
       } finally {
         setLoading(false)
       }
@@ -98,7 +96,7 @@ export function Sidebar() {
                 <div className="flex items-center gap-2">
                   <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
                   <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                    GW {gameweek} • 2025/26 • Live
+                    GW {gameweek || "-"} • Live
                   </p>
                 </div>
               </div>
@@ -122,8 +120,8 @@ export function Sidebar() {
                       group relative flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-300
                       animate-in fade-in slide-in-from-left-4
                       ${isActive
-                        ? `${item.bgColor} ${item.color} shadow-lg shadow-${item.color.split('-')[1]}-500/20`
-                        : `text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white ${item.hoverColor}`
+                        ? "bg-slate-100 text-slate-950 dark:bg-slate-800 dark:text-white shadow-lg"
+                        : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white"
                       }
                     `}
                     style={{ 
@@ -133,36 +131,25 @@ export function Sidebar() {
                   >
                     {/* Active indicator */}
                     {isActive && (
-                      <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 ${item.color.replace('text-', 'bg-')} rounded-r-full`}></div>
+                        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-emerald-500 rounded-r-full"></div>
                     )}
                     
                     {/* Icon with enhanced styling */}
                     <div className={`
                       relative flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-300
                       ${isActive 
-                        ? `${item.bgColor.replace('/10', '/20')} ${item.color}` 
+                        ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' 
                         : 'group-hover:bg-slate-100 dark:group-hover:bg-slate-700/50'
                       }
                       group-hover:scale-110
                     `}>
                       <item.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-                      
-                      {/* Subtle glow for active state */}
-                      {isActive && (
-                        <div className={`absolute inset-0 rounded-lg ${item.bgColor.replace('/10', '/30')} blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                      )}
                     </div>
                     
                     <span className="flex-1 transition-all duration-300 group-hover:translate-x-1">
                       {item.name}
                     </span>
                     
-                    {/* Hover arrow indicator */}
-                    <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
                   </Link>
                 )
               })}
@@ -181,16 +168,7 @@ export function Sidebar() {
                 <Clock className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
                 <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">Last Synced</p>
               </div>
-              <p className="text-sm font-mono text-slate-700 dark:text-slate-300">
-                {lastSyncedAt
-                  ? new Date(lastSyncedAt).toLocaleString("en-GB", {
-                      day: "numeric",
-                      month: "short",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })
-                  : "Unknown"}
-              </p>
+              <p className="text-sm font-mono text-slate-700 dark:text-slate-300">{formatLastUpdated(lastSyncedAt)}</p>
               <div className="flex items-center gap-2 mt-2">
                 <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
                 <p className="text-xs text-emerald-600 dark:text-emerald-400">Data refreshed from sync</p>
