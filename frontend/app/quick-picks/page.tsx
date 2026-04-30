@@ -51,35 +51,35 @@ const getRecommendation = (player: any) => {
       // Attackers: 2.2+ (top tier like Gravenberch 2.43)
       // Defenders: 3.0+ (top tier from range 3.67-1.1)
       condition: (isAttacker && score >= 2.2) || (!isAttacker && score >= 3.0) || (points_per_game >= 6.0 && form >= 5.0),
-      label: "Γ¡É Top Pick",
+      label: "⭐ Top Pick",
       className: "text-green-800 dark:text-green-200 font-medium",
     },
     {
       // Strong differentials - good score but low ownership
       // Attackers: 1.6+ | Defenders: 2.3+
       condition: ((isAttacker && score >= 1.6) || (!isAttacker && score >= 2.3)) && selected_by_percent < 15,
-      label: "≡ƒÄ» Differential",
+      label: "🎯 Differential",
       className: "text-purple-800 dark:text-purple-200 font-medium",
     },
     {
       // Solid options - above average
       // Attackers: 1.5+ | Defenders: 2.0+
       condition: (isAttacker && score >= 1.5) || (!isAttacker && score >= 2.0),
-      label: "≡ƒôè Solid Choice",
+      label: "📊 Solid Choice",
       className: "text-blue-800 dark:text-blue-200 font-medium",
     },
     {
       // Average - needs monitoring
       // Attackers: 1.0+ | Defenders: 1.5+
       condition: (isAttacker && score >= 1.0) || (!isAttacker && score >= 1.5),
-      label: "≡ƒöì Monitor",
+      label: "🔍 Monitor",
       className: "text-orange-800 dark:text-orange-200 font-medium",
     },
     {
       // Below average - risky pick
       // Attackers: <1.0 | Defenders: <1.5
       condition: (isAttacker && score < 1.0) || (!isAttacker && score < 1.5),
-      label: "ΓÜá∩╕Å Risky",
+      label: "⚠️ Risky",
       className: "text-yellow-800 dark:text-yellow-200 font-medium",
     },
   ];
@@ -92,27 +92,27 @@ const getOwnershipCategory = (ownership: number) => {
   const categories = [
     {
       condition: ownership < 10,
-      label: "≡ƒÄ» Differential",
+      label: "🎯 Differential",
       className: "text-purple-800 dark:text-purple-200",
     },
     {
       condition: ownership >= 10 && ownership < 30,
-      label: "≡ƒö╣ Low Owned",
+      label: "🔹 Low Owned",
       className: "text-blue-800 dark:text-blue-200",
     },
     {
       condition: ownership >= 30 && ownership < 60,
-      label: "ΓÜû∩╕Å Moderate",
+      label: "⚖️ Moderate",
       className: "text-gray-800 dark:text-gray-200",
     },
     {
       condition: ownership >= 60 && ownership < 80,
-      label: "≡ƒôê Popular",
+      label: "📈 Popular",
       className: "text-orange-800 dark:text-orange-200",
     },
     {
       condition: ownership >= 80,
-      label: "≡ƒÅå Template",
+      label: "🏆 Template",
       className: "text-green-800 dark:text-green-200",
     },
   ];
@@ -276,7 +276,7 @@ export default function QuickPicksPage() {
             <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl">
               <CardHeader className="pb-4">
                 <CardTitle className="text-foreground flex items-center gap-2">
-                  ΓÜö∩╕Å Attacking Picks by Team Strength
+                  💪 Attacking Picks by Team Strength
                   <Badge variant="secondary" className="ml-auto">
                     Top Attack Rankings
                   </Badge>
@@ -300,7 +300,7 @@ export default function QuickPicksPage() {
                         <div>
                           <h3 className="text-xl font-bold text-foreground">{teamData.team}</h3>
                           <p className="text-sm text-muted-foreground">
-                            Attack Strength: <span className="font-mono font-medium">{teamData.attackStrength?.toFixed(3) || 'N/A'}</span>
+                            Attack Strength: <span className="font-mono font-medium">{teamData.attack_strength?.toFixed(3) || 'N/A'}</span>
                           </p>
                         </div>
                       </div>
@@ -330,27 +330,27 @@ export default function QuickPicksPage() {
                             <CardContent className="p-4">
                               <div className="mb-3">
                                 <div className="flex items-center justify-between mb-2">
-                                  <h4 className="font-semibold text-foreground">{player.name}</h4>
-                                  <div className="flex items-center gap-1 bg-green-500/10 px-2 py-1 rounded-md">
-                                    <DollarSign className="h-3.5 w-3.5 text-green-600 dark:text-green-400" />
-                                    <span className="font-mono text-sm font-bold text-green-600 dark:text-green-400">
-                                      {player.price}m
+                                  <h4 className="font-semibold text-foreground">{player.web_name}</h4>
+                                  <div className="flex items-center gap-1 bg-blue-500/10 px-2 py-1 rounded-md">
+                                    <DollarSign className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
+                                    <span className="font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
+                                      {player.now_cost}m
                                     </span>
                                   </div>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  <PositionBadge position={player.position} />
+                                  <PositionBadge position={player.position_name} />
                                 </div>
                               </div>
 
                               <div className="space-y-2 text-sm">
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Goals/Game:</span>
-                                  <span className="font-mono font-medium text-red-600">{player.goals_pg?.toFixed(2) || '0.00'}</span>
+                                  <span className="font-mono font-medium text-red-600">{player.goals_per_game?.toFixed(2) || '0.00'}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Points/Game:</span>
-                                  <span className="font-mono font-bold text-red-600">{player.points_pg?.toFixed(2) || '0.00'}</span>
+                                  <span className="font-mono font-bold text-red-600">{player.points_per_game?.toFixed(2) || '0.00'}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Attack Score:</span>
@@ -363,7 +363,7 @@ export default function QuickPicksPage() {
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Ownership:</span>
                                   <span className={`font-mono font-medium ${ownershipCat.className}`}>
-                                    {player.ownership}%
+                                    {player.selected_by_percent}%
                                   </span>
                                 </div>
                               </div>
@@ -447,7 +447,7 @@ export default function QuickPicksPage() {
             <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl">
               <CardHeader className="pb-4">
                 <CardTitle className="text-foreground flex items-center gap-2">
-                  ≡ƒ¢í∩╕Å Defensive Picks by Team Strength
+                  🛡️ Defensive Picks by Team Strength
                   <Badge variant="secondary" className="ml-auto">
                     Top Defense Rankings
                   </Badge>
@@ -468,7 +468,7 @@ export default function QuickPicksPage() {
                         <div>
                           <h3 className="text-xl font-bold text-foreground">{teamData.team}</h3>
                           <p className="text-sm text-muted-foreground">
-                            Defense Strength: <span className="font-mono font-medium">{teamData.defenseStrength?.toFixed(3) || 'N/A'}</span>
+                            Defense Strength: <span className="font-mono font-medium">{teamData.defense_strength?.toFixed(3) || 'N/A'}</span>
                           </p>
                         </div>
                       </div>
@@ -498,27 +498,27 @@ export default function QuickPicksPage() {
                             <CardContent className="p-4">
                               <div className="mb-3">
                                 <div className="flex items-center justify-between mb-2">
-                                  <h4 className="font-semibold text-foreground">{player.name}</h4>
+                                  <h4 className="font-semibold text-foreground">{player.web_name}</h4>
                                   <div className="flex items-center gap-1 bg-green-500/10 px-2 py-1 rounded-md">
                                     <DollarSign className="h-3.5 w-3.5 text-green-600" />
                                     <span className="font-mono text-sm font-bold text-green-600">
-                                      {player.price}m
+                                      {player.now_cost}m
                                     </span>
                                   </div>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  <PositionBadge position={player.position} />
+                                  <PositionBadge position={player.position_name} />
                                 </div>
                               </div>
 
                               <div className="space-y-2 text-sm">
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Clean Sheet Rate:</span>
-                                  <span className="font-mono font-medium text-blue-600">{(player.cs_rate * 100).toFixed(2)}%</span>
+                                  <span className="font-mono font-medium text-blue-600">{(player.clean_sheet_rate * 100).toFixed(2)}%</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Points/Game:</span>
-                                  <span className="font-mono font-bold text-blue-600">{player.points_pg?.toFixed(2) || '0.00'}</span>
+                                  <span className="font-mono font-bold text-blue-600">{player.points_per_game?.toFixed(2) || '0.00'}</span>
                                 </div>
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Defender Score:</span>
@@ -531,7 +531,7 @@ export default function QuickPicksPage() {
                                 <div className="flex justify-between">
                                   <span className="text-muted-foreground">Ownership:</span>
                                   <span className={`font-mono font-medium ${ownershipCat.className}`}>
-                                    {player.ownership}%
+                                    {player.selected_by_percent}%
                                   </span>
                                 </div>
                               </div>
@@ -563,7 +563,7 @@ export default function QuickPicksPage() {
         {/* Strategic Insights Footer */}
         <Card className="mt-8 border-border bg-card/50 backdrop-blur">
           <CardHeader>
-            <CardTitle className="text-foreground flex items-center gap-2">≡ƒÆí Strategic Insights</CardTitle>
+            <CardTitle className="text-foreground flex items-center gap-2">💡 Strategic Insights</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

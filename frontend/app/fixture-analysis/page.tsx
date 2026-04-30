@@ -146,10 +146,10 @@ const colorConfig = {
   },
   difficulty: {
     ranges: [
-      { min: 3, classes: "text-purple-600 dark:text-purple-400", emoji: "≡ƒƒú" },
-      { min: 1, classes: "text-blue-600 dark:text-blue-400", emoji: "≡ƒö╡" },
-      { min: -1, classes: "text-slate-600 dark:text-slate-400", emoji: "ΓÜ¬" },
-      { min: -Infinity, classes: "text-slate-700 dark:text-slate-500", emoji: "ΓÜ½" },
+      { min: 3, classes: "text-purple-600 dark:text-purple-400", emoji: "✅" },
+      { min: 1, classes: "text-blue-600 dark:text-blue-400", emoji: "🟢" },
+      { min: -1, classes: "text-slate-600 dark:text-slate-400", emoji: "⚖️" },
+      { min: -Infinity, classes: "text-slate-700 dark:text-slate-500", emoji: "🔴" },
     ],
   },
 };
@@ -162,7 +162,7 @@ const getColorStyles = (
   returnType: "classes" | "emoji" = "classes"
 ) => {
   const config = colorConfig[metricType] as any;
-  if (!config) return returnType === "classes" ? "text-gray-600 dark:text-gray-400" : "≡ƒö┤";
+  if (!config) return returnType === "classes" ? "text-gray-600 dark:text-gray-400" : "❌";
 
   if (metricType === "difficulty") {
     const range = config.ranges.find((r: any) => (value as number) >= r.min);
@@ -175,7 +175,7 @@ const getColorStyles = (
     const range = config.ranges.find((r: any) => (value as number) <= r.max);
     return range?.classes || config.ranges[config.ranges.length - 1].classes;
   }
-  return returnType === "classes" ? "text-gray-600 dark:text-gray-400" : "≡ƒö┤";
+  return returnType === "classes" ? "text-gray-600 dark:text-gray-400" : "❌";
 };
 
 // Helper function to get rating color and description
@@ -187,7 +187,7 @@ const getRatingDisplay = (rating: number) => {
       borderColor: "border-purple-300 dark:border-purple-700",
       textColor: "text-purple-800 dark:text-purple-200",
       label: "Excellent",
-      emoji: "≡ƒöÑ"
+      emoji: "⭐"
     };
   } else if (rating >= 65) {
     return {
@@ -196,7 +196,7 @@ const getRatingDisplay = (rating: number) => {
       borderColor: "border-blue-300 dark:border-blue-700",
       textColor: "text-blue-800 dark:text-blue-200",
       label: "Good",
-      emoji: "Γ£à"
+      emoji: "👍"
     };
   } else if (rating >= 45) {
     return {
@@ -205,7 +205,7 @@ const getRatingDisplay = (rating: number) => {
       borderColor: "border-slate-300 dark:border-slate-700",
       textColor: "text-slate-800 dark:text-slate-200",
       label: "Neutral",
-      emoji: "Γ₧û"
+      emoji: "⚖️"
     };
   } else if (rating >= 25) {
     return {
@@ -214,7 +214,7 @@ const getRatingDisplay = (rating: number) => {
       borderColor: "border-indigo-300 dark:border-indigo-700",
       textColor: "text-indigo-800 dark:text-indigo-200",
       label: "Difficult",
-      emoji: "ΓÜá∩╕Å"
+      emoji: "⚠️"
     };
   } else {
     return {
@@ -223,7 +223,7 @@ const getRatingDisplay = (rating: number) => {
       borderColor: "border-slate-300 dark:border-slate-700",
       textColor: "text-red-800 dark:text-red-200",
       label: "Very Difficult",
-      emoji: "Γ¥î"
+      emoji: "🔴"
     };
   }
 };
@@ -335,7 +335,7 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
                       : "bg-secondary text-muted-foreground hover:bg-secondary/80"
                   }`}
                 >
-                  ≡ƒôè Overall
+                  📊 Overall
                 </button>
                 <button
                   onClick={() => setFdrType("attack")}
@@ -345,7 +345,7 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
                       : "bg-secondary text-muted-foreground hover:bg-secondary/80"
                   }`}
                 >
-                  ΓÜö∩╕Å Attack
+                  💪 Attack
                 </button>
                 <button
                   onClick={() => setFdrType("defense")}
@@ -355,7 +355,7 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
                       : "bg-secondary text-muted-foreground hover:bg-secondary/80"
                   }`}
                 >
-                  ≡ƒ¢í∩╕Å Defense
+                  🛡️ Defense
                 </button>
               </div>
             </div>
@@ -369,8 +369,8 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
                 <div className="h-6 flex-1 bg-red-600 dark:bg-red-700 rounded-r"></div>
               </div>
               <div className="flex items-center gap-2 text-xs flex-shrink-0">
-                <span className="text-muted-foreground">Γ£à Easy</span>
-                <span className="text-muted-foreground">ΓÜá∩╕Å Hard</span>
+                <span className="text-muted-foreground">✅ Easy</span>
+                <span className="text-muted-foreground">🔴 Hard</span>
               </div>
             </div>
           </div>
@@ -438,7 +438,7 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
       {filteredTeams.length === 0 && (
         <Card className="border-dashed border-2">
           <CardContent className="p-12 text-center text-muted-foreground">
-            <span className="text-4xl mb-4 block">≡ƒöì</span>
+            <span className="text-4xl mb-4 block">📋</span>
             <p className="text-lg font-medium mb-2">No teams found</p>
             <p className="text-sm">Try adjusting your search query</p>
           </CardContent>
@@ -488,10 +488,46 @@ export default function FixtureAnalysisPage() {
           getFixtures(),
           getTeamFixtureSummary(),
         ])
-        const gameweeks = dataFixtures.map((f: any) => f.gameweek).filter((gw: any) => typeof gw === "number" && !isNaN(gw));
+        
+        // Transform fixture data to match expected structure
+        const transformedFixtures = dataFixtures.map((f: any) => {
+          // Convert FDR ratings (typically 2.1-7.4) to percentages (0-100)
+          // Inverse scale: lower FDR = easier = higher percentage
+          const fdrToPercent = (fdr: number) => Math.max(0, Math.min(100, Math.round((1 - (fdr - 2.0) / 6.0) * 100)));
+          
+          return {
+            ...f,
+            teams: {
+              home: {
+                team: f.home_team.name,
+                short_name: f.home_team.short_name,
+                rank: {
+                  attack: f.home_team.rank || 20,
+                  defense: f.home_team.rank || 20,
+                },
+                attackRating: fdrToPercent(f.home_team.attacking_fixture_rating),
+                defenseRating: fdrToPercent(f.home_team.defensive_fixture_rating),
+                fdr: f.home_team.fdr,
+              },
+              away: {
+                team: f.away_team.name,
+                short_name: f.away_team.short_name,
+                rank: {
+                  attack: f.away_team.rank || 20,
+                  defense: f.away_team.rank || 20,
+                },
+                attackRating: fdrToPercent(f.away_team.attacking_fixture_rating),
+                defenseRating: fdrToPercent(f.away_team.defensive_fixture_rating),
+                fdr: f.away_team.fdr,
+              }
+            }
+          };
+        });
+        
+        const gameweeks = transformedFixtures.map((f: any) => f.gameweek).filter((gw: any) => typeof gw === "number" && !isNaN(gw));
         const minGameweek = gameweeks.length > 0 ? Math.min(...gameweeks) : 1;
         setGameweek(minGameweek);
-        setFixtures(dataFixtures);
+        setFixtures(transformedFixtures);
 
         // Note: fixtures_opportunity endpoint not yet implemented in backend
         // Opportunities data temporarily disabled
@@ -561,7 +597,7 @@ export default function FixtureAnalysisPage() {
       <Card className="max-w-md">
         <CardContent className="p-8 text-center">
           <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-950 flex items-center justify-center mx-auto mb-4">
-            <span className="text-3xl">ΓÜá∩╕Å</span>
+            <span className="text-3xl">⚠️</span>
           </div>
           <h3 className="text-lg font-semibold text-foreground mb-2">Failed to load fixtures</h3>
           <p className="text-sm text-muted-foreground mb-4">{error}</p>
@@ -621,11 +657,11 @@ export default function FixtureAnalysisPage() {
                       <Target className="h-5 w-5 text-purple-600 dark:text-purple-400" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-sm font-bold text-foreground mb-1">≡ƒÄ» Top Fixture Opportunity</h3>
+                      <h3 className="text-sm font-bold text-foreground mb-1">🎯 Top Fixture Opportunity</h3>
                       <p className="text-xs text-muted-foreground">
                         Best fixture: <span className="font-bold text-foreground">{displayFixtures[0].fixture}</span> (GW {displayFixtures[0].gw})
                         {displayFixtures[0].favorability !== "Neutral" && (
-                          <span className="ml-2 text-purple-600 dark:text-purple-400 font-semibold">Γ¡É {displayFixtures[0].favorability} favored</span>
+                          <span className="ml-2 text-purple-600 dark:text-purple-400 font-semibold">⭐ {displayFixtures[0].favorability} favored</span>
                         )}
                       </p>
                     </div>
@@ -680,7 +716,7 @@ export default function FixtureAnalysisPage() {
                           className="text-xs bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200 hover:scale-105 transition-transform duration-200"
                           title="Team favored to win based on attack and defense scores"
                         >
-                          Γ¡É {fixture.favorability} Favoured
+                          ⭐ {fixture.favorability} Favoured
                         </Badge>
                       ) : (
                         <Badge
@@ -718,7 +754,7 @@ export default function FixtureAnalysisPage() {
                             </Badge>
                           </div>
                           <div className="text-center">
-                            <p className="text-xs text-muted-foreground mb-1">≡ƒÄ» Attacking Threat</p>
+                            <p className="text-xs text-muted-foreground mb-1">💪 Attacking Threat</p>
                             <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.attackRating).color}`}>
                               {fixture.teams.home.attackRating}%
                             </p>
@@ -741,7 +777,7 @@ export default function FixtureAnalysisPage() {
                             </Badge>
                           </div>
                           <div className="text-center">
-                            <p className="text-xs text-muted-foreground mb-1">≡ƒ¢í∩╕Å Defensive Odds</p>
+                            <p className="text-xs text-muted-foreground mb-1">🛡️ Defensive Odds</p>
                             <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.defenseRating).color}`}>
                               {fixture.teams.home.defenseRating}%
                             </p>
@@ -777,7 +813,7 @@ export default function FixtureAnalysisPage() {
                             </Badge>
                           </div>
                           <div className="text-center">
-                            <p className="text-xs text-muted-foreground mb-1">≡ƒÄ» Attacking Threat</p>
+                            <p className="text-xs text-muted-foreground mb-1">💪 Attacking Threat</p>
                             <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.attackRating).color}`}>
                               {fixture.teams.away.attackRating}%
                             </p>
@@ -800,7 +836,7 @@ export default function FixtureAnalysisPage() {
                             </Badge>
                           </div>
                           <div className="text-center">
-                            <p className="text-xs text-muted-foreground mb-1">≡ƒ¢í∩╕Å Defensive Odds</p>
+                            <p className="text-xs text-muted-foreground mb-1">🛡️ Defensive Odds</p>
                             <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.defenseRating).color}`}>
                               {fixture.teams.away.defenseRating}%
                             </p>
