@@ -489,13 +489,14 @@ export default function FixtureAnalysisPage() {
           getTeamFixtureSummary(),
         ])
         
-        // Determine current gameweek dynamically from fixtures
-        // Find the first future gameweek from available data
-        const allGameweeks = dataFixtures.map((f: any) => f.gameweek).filter((gw: any) => typeof gw === "number" && !isNaN(gw));
-        const currentGW = allGameweeks.length > 0 ? Math.min(...allGameweeks) : 15;
+        // Determine the current gameweek from season context (GW 34 as of May 1, 2026)
+        // Only show upcoming/future gameweeks, filter out past ones
+        const currentSeasonGW = 34; // Current gameweek in 2025/26 season
+        const nextGW = currentSeasonGW + 1; // Next gameweek to show
         
-        // Filter to only upcoming gameweeks (current onwards, not past)
-        const upcomingFixtures = dataFixtures.filter((f: any) => f.gameweek >= currentGW);
+        // Filter to ONLY upcoming gameweeks (next gameweek onwards)
+        // User should NOT see past gameweeks
+        const upcomingFixtures = dataFixtures.filter((f: any) => f.gameweek >= nextGW);
         
         // Transform fixture data to match expected structure
         // NOTE: getFixtures() already returns percentages (20-100%), NOT FDR ratings
@@ -532,8 +533,10 @@ export default function FixtureAnalysisPage() {
           };
         });
         
-        // Set initial gameweek to the first upcoming one
-        setGameweek(currentGW);
+        // Set initial gameweek to the first upcoming one (next gameweek)
+        const gameweeksFromUpcoming = upcomingFixtures.map((f: any) => f.gameweek).filter((gw: any) => typeof gw === "number" && !isNaN(gw));
+        const firstUpcomingGW = gameweeksFromUpcoming.length > 0 ? Math.min(...gameweeksFromUpcoming) : nextGW;
+        setGameweek(firstUpcomingGW);
         setFixtures(transformedFixtures);
 
         // Note: fixtures_opportunity endpoint not yet implemented in backend
