@@ -174,6 +174,7 @@ create table if not exists team_rankings (
   season_key  text     not null,
   team_id     uuid     not null references teams(id) on delete cascade,
 
+  -- season-level rankings
   overall_rank    smallint,
   attack_rank     smallint,
   defense_rank    smallint,
@@ -199,12 +200,32 @@ create table if not exists team_rankings (
   home_clean_sheet_rate    numeric(5,3),
   away_clean_sheet_rate    numeric(5,3),
 
+  -- ===== FORM-BASED RANKINGS (Last 5 GWs) =====
+  last_5_goals             numeric(6,2),     -- total goals in last 5 GWs
+  last_5_assists           numeric(6,2),     -- total assists in last 5 GWs
+  last_5_clean_sheets      smallint,         -- clean sheets in last 5 GWs
+  last_5_goals_conceded    smallint,         -- goals conceded in last 5 GWs
+  attack_rank_5            smallint,         -- ranking 1-20 based on last 5 GWs (1=best)
+  defense_rank_5           smallint,         -- ranking 1-20 based on last 5 GWs (1=best)
+  attack_score_5           numeric(8,4),     -- calculated attack strength for last 5 GWs
+  defense_score_5          numeric(8,4),     -- calculated defense strength for last 5 GWs
+
+  -- ===== HOME/AWAY STRENGTH (Last 10 GWs) =====
+  last_10_home_goals       numeric(6,2),     -- goals at home in last 10 GWs
+  last_10_away_goals       numeric(6,2),     -- goals away in last 10 GWs
+  last_10_home_clean_sheets smallint,        -- clean sheets at home in last 10 GWs
+  last_10_away_clean_sheets smallint,        -- clean sheets away in last 10 GWs
+  home_strength_10         numeric(7,2),     -- home advantage modifier (-50 to +50)
+  away_strength_10         numeric(7,2),     -- away weakness modifier (-50 to +50)
+
   updated_at timestamptz not null default now(),
   unique (season_key, team_id)
 );
 
 create index if not exists idx_tr_season on team_rankings(season_key);
 create index if not exists idx_tr_team   on team_rankings(team_id);
+create index if not exists idx_team_rankings_attack_rank_5 on team_rankings(attack_rank_5);
+create index if not exists idx_team_rankings_defense_rank_5 on team_rankings(defense_rank_5);
 
 -- ============================================================
 -- FIXTURES: Match schedule + difficulty ratings
@@ -323,7 +344,7 @@ from player_gameweeks pg
 where pg.season_key = '2025_26'
 order by pg.gameweek desc;
 
--- Teams page: rankings with home/away context
+-- Teams page: rankings with home/away context and form-based metrics
 create or replace view team_overview as
 select
   t.id,
@@ -342,7 +363,17 @@ select
   r.home_goals_per_game,
   r.away_goals_per_game,
   r.home_clean_sheet_rate,
-  r.away_clean_sheet_rate
+  r.away_clean_sheet_rate,
+  -- form-based rankings (last 5 GWs)
+  r.attack_rank_5,
+  r.defense_rank_5,
+  r.last_5_goals,
+  r.last_5_assists,
+  r.last_5_clean_sheets,
+  r.last_5_goals_conceded,
+  -- home/away strength (last 10 GWs)
+  r.home_strength_10,
+  r.away_strength_10
 from teams t
 left join team_rankings r on r.team_id = t.id and r.season_key = '2025_26';
 

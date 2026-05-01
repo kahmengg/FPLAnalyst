@@ -733,13 +733,13 @@ export async function getFixtures(gameweek?: number) {
     const [fixturesRes, teamsRes, ranksRes] = await Promise.all([
       supabase
         .from('fixtures')
-        .select('id, season_key, gameweek, home_team_id, away_team_id, home_attack_fdr, home_defense_fdr, away_attack_fdr, away_defense_fdr, home_attacking_favorability, home_defensive_favorability, away_attacking_favorability, away_defensive_favorability')
+        .select('id, season_key, gameweek, home_team_id, away_team_id')
         .eq('season_key', season)
         .order('gameweek'),
       supabase.from('teams').select('id, name, short_name'),
       supabase
         .from('team_rankings')
-        .select('team_id, overall_rank, attack_rank_5, defense_rank_5, home_strength_10, away_strength_10')
+        .select('team_id, overall_rank, attack_score_5, defense_score_5, home_strength_10, away_strength_10')
         .eq('season_key', season),
     ])
 
@@ -751,36 +751,61 @@ export async function getFixtures(gameweek?: number) {
     const teamMap = new Map((teamsRes.data || []).map((team: any) => [team.id, team]))
     const rankMap = new Map((ranksRes.data || []).map((row: any) => [row.team_id, row]))
 
+    // Calculate min/max of actual strength scores across all teams for normalization
+    const allTeamsData = Array.from(rankMap.values())
+    const attackScores = allTeamsData.map((r: any) => safeNumber(r.attack_score_5, 0))
+    const defenseScores = allTeamsData.map((r: any) => safeNumber(r.defense_score_5, 0))
+    
+    const minAttack = Math.min(...attackScores, 0)
+    const maxAttack = Math.max(...attackScores, 1)
+    const minDefense = Math.min(...defenseScores, 0)
+    const maxDefense = Math.max(...defenseScores, 1)
+
+    // Utility function to normalize strength scores to 20-100% range
+    const normalizeAttack = (score: number) => {
+      const normalized = (safeNumber(score, 0) - minAttack) / (maxAttack - minAttack || 1) * 80 + 20
+      return Math.max(20, Math.min(100, normalized))
+    }
+    const normalizeDefense = (score: number) => {
+      const normalized = (safeNumber(score, 0) - minDefense) / (maxDefense - minDefense || 1) * 80 + 20
+      return Math.max(20, Math.min(100, normalized))
+    }
+
     return (fixturesRes.data || [])
       .filter((row: any) => !gameweek || safeInt(row.gameweek, 0) === gameweek)
       .map((row: any) => {
         const homeTeam = teamMap.get(row.home_team_id) || {}
         const awayTeam = teamMap.get(row.away_team_id) || {}
         
-        // Get form-based rankings and modifiers
-        const homeRank = rankMap.get(row.home_team_id) || {}
-        const awayRank = rankMap.get(row.away_team_id) || {}
+        // Get form-based strength scores and home/away modifiers
+        const homeStats = rankMap.get(row.home_team_id) || {}
+        const awayStats = rankMap.get(row.away_team_id) || {}
         
-        // Convert form ranks to attacking/defending percentages (1 best, 20 worst)
-        // 1-5 = strong (80-100%), 6-10 = good (60-80%), 11-15 = moderate (40-60%), 16-20 = weak (20-40%)
-        const homeAttackPct = Math.max(20, Math.min(100, 120 - homeRank.attack_rank_5 * 5))
-        const homeDefensePct = Math.max(20, Math.min(100, 120 - homeRank.defense_rank_5 * 5))
-        const awayAttackPct = Math.max(20, Math.min(100, 120 - awayRank.attack_rank_5 * 5))
-        const awayDefensePct = Math.max(20, Math.min(100, 120 - awayRank.defense_rank_5 * 5))
+        // Normalize actual strength scores to 20-100% range
+        const homeAttackPct = normalizeAttack(homeStats.attack_score_5)
+        const homeDefensePct = normalizeDefense(homeStats.defense_score_5)
+        const awayAttackPct = normalizeAttack(awayStats.attack_score_5)
+        const awayDefensePct = normalizeDefense(awayStats.defense_score_5)
         
-        // Apply home/away strength modifiers (±50 scale converted to ±20 percentage points)
-        const homeStrengthMod = safeNumber(homeRank.home_strength_10, 0) / 2.5 // Convert -50:50 to -20:20
-        const awayStrengthMod = safeNumber(awayRank.away_strength_10, 0) / 2.5
+        // Apply home/away strength modifiers (±50 scale converted to ±10% adjustment)
+        const homeStrengthMod = safeNumber(homeStats.home_strength_10, 0) / 5 // -50:50 → -10:10%
+        const awayStrengthMod = safeNumber(awayStats.away_strength_10, 0) / 5
         
-        const homeAttackFinal = Math.max(20, Math.min(100, homeAttackPct + homeStrengthMod))
-        const awayAttackFinal = Math.max(20, Math.min(100, awayAttackPct + awayStrengthMod))
+        // ATTACKING THREAT: Blend own attack strength (50%) with opponent weakness (50%)
+        // Opponent weakness = inverse of opponent's defensive strength
+        const homeAttackThreat = (homeAttackPct * 0.5 + (100 - awayDefensePct) * 0.5) + homeStrengthMod
+        const awayAttackThreat = (awayAttackPct * 0.5 + (100 - homeDefensePct) * 0.5) + awayStrengthMod
         
-        // DEFENSIVE ODDS: Inverse of opponent's attacking threat
-        // If opponent has high attack %, you have low chance to keep clean sheet
-        // Home defense = opposite of away team's attacking threat
-        // Away defense = opposite of home team's attacking threat
-        const homeDefenseFinal = Math.max(20, Math.min(100, 120 - awayAttackFinal))
-        const awayDefenseFinal = Math.max(20, Math.min(100, 120 - homeAttackFinal))
+        // DEFENSIVE ODDS: Blend own defense strength (50%) with opponent weakness (50%)
+        // Opponent weakness = inverse of opponent's attacking strength
+        const homeDefensiveOdds = (homeDefensePct * 0.5 + (100 - awayAttackPct) * 0.5) - homeStrengthMod
+        const awayDefensiveOdds = (awayDefensePct * 0.5 + (100 - homeAttackPct) * 0.5) - awayStrengthMod
+        
+        // Clamp to 20-100% range
+        const homeAttackFinal = Math.max(20, Math.min(100, homeAttackThreat))
+        const homeDefenseFinal = Math.max(20, Math.min(100, homeDefensiveOdds))
+        const awayAttackFinal = Math.max(20, Math.min(100, awayAttackThreat))
+        const awayDefenseFinal = Math.max(20, Math.min(100, awayDefensiveOdds))
 
         return {
           gw: safeInt(row.gameweek, 0),
