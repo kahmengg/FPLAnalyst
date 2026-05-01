@@ -101,9 +101,9 @@ const RankMedal = ({ rank }: { rank: number }) => {
   if (rank > 3) return null;
   
   const medals = {
-    1: { emoji: "≡ƒÑç", color: "from-yellow-400 to-yellow-600", glow: "shadow-yellow-500/50" },
-    2: { emoji: "≡ƒÑê", color: "from-gray-300 to-gray-500", glow: "shadow-gray-500/50" },
-    3: { emoji: "≡ƒÑë", color: "from-orange-400 to-orange-600", glow: "shadow-orange-500/50" }
+    1: { emoji: "🥇", color: "from-yellow-400 to-yellow-600", glow: "shadow-yellow-500/50" },
+    2: { emoji: "🥈", color: "from-gray-300 to-gray-500", glow: "shadow-gray-500/50" },
+    3: { emoji: "🥉", color: "from-orange-400 to-orange-600", glow: "shadow-orange-500/50" }
   };
   
   const medal = medals[rank];
@@ -529,9 +529,9 @@ export default function TopPerformersPage() {
                   className="px-4 py-2.5 rounded-lg bg-secondary/50 text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all cursor-pointer"
                 >
                   <option value="all">All Prices</option>
-                  <option value="budget">Budget (&lt; ┬ú6.0m)</option>
-                  <option value="mid">Mid-Range (┬ú6.0-9.0m)</option>
-                  <option value="premium">Premium (&gt; ┬ú9.0m)</option>
+                  <option value="budget">Budget (&lt; £6.0m)</option>
+                  <option value="mid">Mid-Range (£6.0-9.0m)</option>
+                  <option value="premium">Premium (&gt; £9.0m)</option>
                 </select>
               </div>
 
@@ -569,7 +569,7 @@ export default function TopPerformersPage() {
                 )}
                 {priceFilter !== "all" && (
                   <Badge variant="secondary">
-                    Price: {priceFilter === "budget" ? "< ┬ú6.0m" : priceFilter === "mid" ? "┬ú6.0-9.0m" : "> ┬ú9.0m"}
+                    Price: {priceFilter === "budget" ? "< £6.0m" : priceFilter === "mid" ? "£6.0-9.0m" : "> £9.0m"}
                   </Badge>
                 )}
               </div>
@@ -672,7 +672,7 @@ export default function TopPerformersPage() {
               >
                 <Gem className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span className="hidden sm:inline">Gems</span>
-                <span className="sm:hidden">≡ƒÆÄ</span>
+                <span className="sm:hidden">📊</span>
               </TabsTrigger>
             </TabsList>
           </div>
@@ -681,7 +681,7 @@ export default function TopPerformersPage() {
             <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="pb-4">
                 <CardTitle className="text-foreground flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                  <span className="flex items-center gap-2">Γ¡É Top 10 Season Performers</span>
+                  <span className="flex items-center gap-2">⭐ Top 10 Season Performers</span>
                   <Badge variant="secondary" className="w-fit">
                     Most Reliable
                   </Badge>
@@ -737,7 +737,7 @@ export default function TopPerformersPage() {
                         </div>
                         <div>
                           <span className="text-muted-foreground block text-xs">Price</span>
-                          <span className="font-mono text-green-600 font-semibold">┬ú{player.price}m</span>
+                          <span className="font-mono text-green-600 font-semibold">£{player.price}m</span>
                         </div>
                         <div className="col-span-2">
                           <span className="text-muted-foreground block text-xs">Ownership</span>
@@ -864,7 +864,7 @@ export default function TopPerformersPage() {
               <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
                 <CardHeader className="pb-4">
                   <CardTitle className="text-foreground flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                    <span className="flex items-center gap-2">≡ƒÑà Top Goal Scorers</span>
+                    <span className="flex items-center gap-2">⚽ Top Goal Scorers</span>
                     <Badge variant="secondary" className="w-fit">
                       Season Leaders
                     </Badge>
@@ -904,7 +904,7 @@ export default function TopPerformersPage() {
 
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-sm mb-3">
                           <div className="flex items-center gap-3 sm:gap-4">
-                            <span className="font-medium">┬ú{player.price}m</span>
+                            <span className="font-medium">£{player.price}m</span>
                             <span className="text-muted-foreground">{(player.goalsPerGame ?? 0).toFixed(2)} goals/game</span>
                             <span className="text-accent font-medium">{player.points} pts</span>
                           </div>
@@ -939,7 +939,7 @@ export default function TopPerformersPage() {
               <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
                 <CardHeader className="pb-4">
                   <CardTitle className="text-foreground flex items-center gap-2 text-base sm:text-lg">
-                    ≡ƒôê Sustainability Analysis
+                    📈 Sustainability Analysis
                   </CardTitle>
                   <CardDescription className="text-sm sm:text-base">
                     Goal performance compared to expected goals (xG)
@@ -950,7 +950,7 @@ export default function TopPerformersPage() {
                     {/* Overperformers Section */}
                     <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-950/10 border border-purple-200 dark:border-purple-800/50 hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-right" style={{ animationDelay: '100ms' }}>
                       <h4 className="font-semibold text-purple-800 dark:text-purple-200 mb-3 flex items-center gap-2">
-                        ΓÜá∩╕Å Potential Regression Risk
+                        ⚠️ Potential Regression Risk
                       </h4>
                       <div className="overflow-x-auto">
                         <table className="w-full text-sm">
@@ -1039,7 +1039,7 @@ export default function TopPerformersPage() {
                     {/* Sustainable Scorers Section */}
                     <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-950/10 border border-blue-200 dark:border-blue-800/50 hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-right" style={{ animationDelay: '200ms' }}>
                       <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-3 flex items-center gap-2">
-                        Γ£à Sustainable Performers
+                        ✓ Sustainable Performers
                       </h4>
                       <div className="overflow-x-auto">
                         <table className="w-full text-sm">
@@ -1128,7 +1128,7 @@ export default function TopPerformersPage() {
                     {/* Underperformers Section */}
                     <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-indigo-950/30 dark:to-indigo-950/10 border border-indigo-200 dark:border-indigo-800/50 hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-right" style={{ animationDelay: '300ms' }}>
                       <h4 className="font-semibold text-indigo-800 dark:text-indigo-200 mb-3 flex items-center gap-2">
-                        ≡ƒöÑ Potential Breakout Candidates
+                        🚀 Potential Breakout Candidates
                       </h4>
                       <div className="overflow-x-auto">
                         <table className="w-full text-sm">
@@ -1223,7 +1223,7 @@ export default function TopPerformersPage() {
             <Card className="border-border bg-card/50 backdrop-blur">
               <CardHeader>
                 <CardTitle className="text-foreground flex items-center gap-2">
-                  ≡ƒÄ» Top Assist Providers
+                  🎯 Top Assist Providers
                   <Badge variant="secondary" className="ml-auto">
                     Creativity Leaders
                   </Badge>

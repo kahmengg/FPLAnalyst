@@ -266,7 +266,7 @@ export default function TransferTargetsPage() {
           <CardHeader className="pb-4 border-b border-border/50 bg-gradient-to-r from-purple-500/10 to-transparent">
             <CardTitle className="text-base text-foreground flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
-                ≡ƒôè
+                📊
               </div>
               Fixture Difficulty by Period
               <Badge variant="secondary" className="ml-auto text-xs bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
@@ -283,7 +283,7 @@ export default function TransferTargetsPage() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-sm sm:text-base font-bold text-foreground flex items-center gap-2 animate-in fade-in slide-in-from-left duration-500">
-                    ≡ƒöÑ Next 3 Gameweeks
+                    ⭐ Next 3 Gameweeks
                     <span className="text-[10px] sm:text-xs text-muted-foreground font-normal">(Immediate Priority)</span>
                   </h3>
                 </div>
@@ -311,7 +311,7 @@ export default function TransferTargetsPage() {
                           </div>
                           <div className="flex items-center justify-between gap-3">
                             <div className="flex items-center gap-2 text-xs flex-wrap">
-                              <span className="text-muted-foreground px-2 py-1 bg-secondary/50 rounded-md">≡ƒÅá {team.nearTermHomeFixtures} home</span>
+                              <span className="text-muted-foreground px-2 py-1 bg-secondary/50 rounded-md">🎪 {team.nearTermHomeFixtures} home</span>
                               <span className={`font-semibold px-2 py-1 rounded-md transition-all duration-200 hover:scale-105 ${
                                 team.avgAttackDiff > 2 
                                   ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
@@ -348,7 +348,7 @@ export default function TransferTargetsPage() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-sm sm:text-base font-bold text-foreground flex items-center gap-2">
-                    ≡ƒôà Following 3 Gameweeks
+                    📊 Following 3 Gameweeks
                     <span className="text-[10px] sm:text-xs text-muted-foreground font-normal">(Plan Ahead)</span>
                   </h3>
                 </div>
@@ -366,10 +366,10 @@ export default function TransferTargetsPage() {
                               <span className="text-xs font-bold text-muted-foreground w-6">#{index + 1}</span>
                               <span className="font-semibold text-sm text-foreground truncate">{team.team}</span>
                               {team.fixtureSwing > 0 && (
-                                <span className="text-green-600 dark:text-green-400 text-lg font-bold" title="Fixtures improving">Γåæ</span>
+                                <span className="text-green-600 dark:text-green-400 text-lg font-bold" title="Fixtures improving">✅</span>
                               )}
                               {team.fixtureSwing < 0 && (
-                                <span className="text-red-600 dark:text-red-400 text-lg font-bold" title="Fixtures declining">Γåô</span>
+                                <span className="text-red-600 dark:text-red-400 text-lg font-bold" title="Fixtures declining">❌</span>
                               )}
                             </div>
                             <span className={`font-bold text-lg ${getTeamColor(team.team)}`}>
@@ -378,16 +378,16 @@ export default function TransferTargetsPage() {
                           </div>
                           <div className="flex items-center justify-between gap-3">
                             <div className="flex items-center gap-2 text-xs">
-                              <span className="text-muted-foreground">≡ƒÅá {team.mediumTermHomeFixtures} home</span>
-                              <span className="text-muted-foreground">ΓÇó</span>
+                              <span className="text-muted-foreground">🎪 {team.mediumTermHomeFixtures} home</span>
+                              <span className="text-muted-foreground">•</span>
                               <span className={`font-semibold ${team.avgAttackDiff > 2 ? 'text-green-600 dark:text-green-400' : team.avgAttackDiff < -2 ? 'text-red-600 dark:text-red-400' : 'text-yellow-600 dark:text-yellow-400'}`}>
-                                ΓÜö∩╕Å {team.avgAttackDiff > 0 ? '+' : ''}{team.avgAttackDiff?.toFixed(1)}
+                                ⚔️ {team.avgAttackDiff > 0 ? '+' : ''}{team.avgAttackDiff?.toFixed(1)}
                               </span>
-                              <span className="text-muted-foreground">ΓÇó</span>
+                              <span className="text-muted-foreground">•</span>
                               <span className={`font-semibold ${team.avgDefenseDiff > 2 ? 'text-green-600 dark:text-green-400' : team.avgDefenseDiff < -2 ? 'text-red-600 dark:text-red-400' : 'text-yellow-600 dark:text-yellow-400'}`}>
-                                ≡ƒ¢í∩╕Å {team.avgDefenseDiff > 0 ? '+' : ''}{team.avgDefenseDiff?.toFixed(1)}
+                                🛡️ {team.avgDefenseDiff > 0 ? '+' : ''}{team.avgDefenseDiff?.toFixed(1)}
                               </span>
-                              <span className="text-muted-foreground">ΓÇó</span>
+                              <span className="text-muted-foreground">•</span>
                               <span className={team.fixtureSwing > 0 ? 'text-green-600 dark:text-green-400 font-semibold' : team.fixtureSwing < 0 ? 'text-red-600 dark:text-red-400 font-semibold' : 'text-muted-foreground'}>
                                 {team.swingEmoji} {team.fixtureSwing > 0 ? '+' : ''}{team.fixtureSwing}%
                               </span>
@@ -413,7 +413,7 @@ export default function TransferTargetsPage() {
           <CardHeader className="pb-4 border-b border-border/50">
             <CardTitle className="text-base text-foreground flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center">
-                ≡ƒöä
+                📄
               </div>
               Biggest Fixture Swings
               <Badge variant="secondary" className="ml-auto text-xs">
@@ -465,7 +465,7 @@ export default function TransferTargetsPage() {
                       </div>
                       <div className="flex items-center justify-between">
                         <p className="text-xs text-muted-foreground">
-                          {isImproving ? '≡ƒôê BUY: Fixtures easing' : '≡ƒôë SELL: Fixtures toughening'}
+                          {isImproving ? '📊 BUY: Fixtures easing' : '💸 SELL: Fixtures toughening'}
                         </p>
                         <button
                           onClick={() => handleViewPicks(team.team)}

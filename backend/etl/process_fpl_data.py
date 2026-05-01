@@ -36,8 +36,12 @@ TEAM_SHORT = {
     "Ipswich": "IPS", "Southampton": "SOU",
 }
 
-CHUNK    = 500
-FORM_GWS = 5   # number of recent GWs used to calculate form
+CHUNK       = 500
+FORM_GWS    = 5   # number of recent GWs used to calculate form
+LAST_5_GWS  = 5   # rolling window for form-based attack/defense rankings
+LAST_10_GWS = 10  # rolling window for home/away strength modifiers
+LAST_5_GWS = 5  # recent gameweeks for form-based rankings
+LAST_10_GWS = 10 # recent gameweeks for home/away strength
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
@@ -446,7 +450,7 @@ def upsert_season_stats(df: pd.DataFrame, player_map: dict[int, str], season: st
 
 def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str):
     """
-    Compute team-level metrics from the CSV.
+    Compute team-level metrics from the CSV with form-based rankings.
 
     Key insight: the CSV has ONE ROW PER PLAYER PER GW, not one row per match.
     To get team-level per-game stats we must first reduce to one row per
@@ -462,15 +466,18 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
 
     And sum the PLAYER-LEVEL attacking stats only for outfield starters
     (minutes > 0) to approximate team attacking output per match.
+    
+    NEW: Calculate form-based rankings (last 5 GWs) and home/away strength
+    (last 10 GWs) for fixture difficulty prediction.
     """
-    print("\n🏆 Team rankings...")
+    print("\n🏆 Team rankings (including form-based rankings)...")
 
     df = df.copy()
     num_cols = [
         "expected_goals", "goals", "total_shots",
         "expected_goals_conceded", "goals_conceded",
         "clean_sheet", "was_home", "minutes",
-        "expected_goal_involvements",
+        "expected_goal_involvements", "assists",
     ]
     for c in num_cols:
         if c in df.columns:
@@ -480,9 +487,12 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     df = df.dropna(subset=["gameweek"])
     df["gameweek"] = df["gameweek"].astype(int)
 
+    # Get latest gameweek for form calculations
+    latest_gw = int(df["gameweek"].max())
+    form_5_start = max(1, latest_gw - LAST_5_GWS + 1)
+    form_10_start = max(1, latest_gw - LAST_10_GWS + 1)
+
     # ── Step 1: Match-level defensive stats (one row per team+GW) ──
-    # These columns are identical for every player in the same team+GW,
-    # so just take the first occurrence.
     match_level = (
         df.drop_duplicates(subset=["team_name", "gameweek"])
         [["team_name", "gameweek", "was_home",
@@ -498,14 +508,16 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
             team_xg    = ("expected_goals",            "sum"),
             team_goals = ("goals",                     "sum"),
             team_shots = ("total_shots",               "sum"),
+            team_assists = ("assists",                 "sum"),
         )
         .reset_index()
     )
 
-    # ── Step 3: Merge and aggregate to season level ──
+    # ── Step 3: Merge match data ──
     match_df = match_level.merge(attack_per_match, on=["team_name", "gameweek"], how="left")
     match_df = match_df.fillna(0)
 
+    # ── OVERALL SEASON AGGREGATION ──
     overall = match_df.groupby("team_name").agg(
         n_matches  = ("gameweek",                "nunique"),
         total_xg   = ("team_xg",                 "sum"),
@@ -516,6 +528,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
         total_cs   = ("clean_sheet",             "sum"),
     ).reset_index()
 
+    # ── HOME/AWAY SPLITS (SEASON) ──
     home_agg = (
         match_df[match_df["was_home"] == 1]
         .groupby("team_name")
@@ -541,6 +554,50 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     agg = agg.merge(away_agg,    on="team_name", how="left")
     agg = agg.fillna(0)
 
+    # ── LAST 5 GAMEWEEKS (FORM-BASED RANKINGS) ──
+    match_df_5 = match_df[match_df["gameweek"] >= form_5_start]
+    form_5_agg = match_df_5.groupby("team_name").agg(
+        n_matches_5   = ("gameweek",                "nunique"),
+        total_goals_5 = ("team_goals",              "sum"),
+        total_assists_5 = ("team_assists",          "sum"),
+        total_gc_5    = ("goals_conceded",          "sum"),
+        total_cs_5    = ("clean_sheet",             "sum"),
+    ).reset_index()
+    agg = agg.merge(form_5_agg, on="team_name", how="left")
+    for col in ["n_matches_5", "total_goals_5", "total_assists_5", "total_gc_5", "total_cs_5"]:
+        agg[col] = agg[col].fillna(0)
+
+    # ── LAST 10 GAMEWEEKS (HOME/AWAY STRENGTH) ──
+    match_df_10 = match_df[match_df["gameweek"] >= form_10_start]
+    
+    # Home splits for last 10
+    home_10_agg = (
+        match_df_10[match_df_10["was_home"] == 1]
+        .groupby("team_name")
+        .agg(
+            home_m_10     = ("gameweek",    "nunique"),
+            home_goals_10 = ("team_goals", "sum"),
+            home_cs_10    = ("clean_sheet","sum"),
+        ).reset_index()
+    )
+    
+    # Away splits for last 10
+    away_10_agg = (
+        match_df_10[match_df_10["was_home"] == 0]
+        .groupby("team_name")
+        .agg(
+            away_m_10     = ("gameweek",    "nunique"),
+            away_goals_10 = ("team_goals", "sum"),
+            away_cs_10    = ("clean_sheet","sum"),
+        ).reset_index()
+    )
+    
+    agg = agg.merge(home_10_agg, on="team_name", how="left")
+    agg = agg.merge(away_10_agg, on="team_name", how="left")
+    for col in ["home_m_10", "home_goals_10", "home_cs_10", "away_m_10", "away_goals_10", "away_cs_10"]:
+        agg[col] = agg[col].fillna(0)
+
+    # ── SEASON-LEVEL CALCULATIONS ──
     m  = agg["n_matches"].clip(lower=1)
     hm = agg["home_m"].clip(lower=1)
     am = agg["away_m"].clip(lower=1)
@@ -575,6 +632,53 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     agg["defense_rank"] = agg["defense_strength"].rank(ascending=False, method="min").astype(int)
     agg["overall_rank"] = agg["overall_strength"].rank(ascending=False, method="min").astype(int)
 
+    # ── FORM-BASED RANKINGS (LAST 5 GWS) ──
+    # Attack form: weighted combination of goals and assists from starters
+    m_5 = agg["n_matches_5"].clip(lower=1)
+    agg["goals_pg_5"] = agg["total_goals_5"] / m_5
+    agg["assists_pg_5"] = agg["total_assists_5"] / m_5
+    
+    # Attack rank 5: weighted by goals (60%) and assists (40%)
+    agg["attack_score_5"] = (
+        agg["goals_pg_5"] * 0.6 +
+        agg["assists_pg_5"] * 0.4
+    ).round(4)
+    
+    # Defense rank 5: clean sheet rate and goals conceded
+    agg["cs_rate_5"] = agg["total_cs_5"] / m_5
+    agg["gc_pg_5"] = agg["total_gc_5"] / m_5
+    agg["defense_score_5"] = (
+        agg["cs_rate_5"] * 0.6 +
+        (1 / (agg["gc_pg_5"] + 0.1)) * 0.4
+    ).round(4)
+    
+    agg["attack_rank_5"] = agg["attack_score_5"].rank(ascending=False, method="min").astype(int)
+    agg["defense_rank_5"] = agg["defense_score_5"].rank(ascending=False, method="min").astype(int)
+
+    # ── HOME/AWAY STRENGTH (LAST 10 GWS) ──
+    # This is a 0-100 modifier: positive if team stronger at home, negative if weaker
+    hm_10 = agg["home_m_10"].clip(lower=1)
+    am_10 = agg["away_m_10"].clip(lower=1)
+    
+    agg["home_goals_pg_10"] = agg["home_goals_10"] / hm_10
+    agg["away_goals_pg_10"] = agg["away_goals_10"] / am_10
+    agg["home_cs_rate_10"] = agg["home_cs_10"] / hm_10
+    agg["away_cs_rate_10"] = agg["away_cs_10"] / am_10
+    
+    # Home strength: positive if home is better, ranges -100 to +100
+    # Attack modifier: if home goals > away goals, boost attacking rating at home
+    agg["home_strength_10"] = (
+        ((agg["home_goals_pg_10"] - agg["away_goals_pg_10"]) / 
+         (agg["home_goals_pg_10"] + agg["away_goals_pg_10"] + 0.1) * 50)
+        .clip(lower=-50, upper=50)
+        .round(2)
+    )
+    
+    # Away strength: if away is stronger, this is positive; if weaker, negative
+    # This becomes a penalty to away-team attacking/defending
+    agg["away_strength_10"] = -agg["home_strength_10"]
+
+    # Build records with all new fields
     rows = []
     for _, r in agg.iterrows():
         team_id = team_map.get(short(r["team_name"]))
@@ -585,6 +689,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
             "season_key":   season,
             "team_id":      team_id,
 
+            # Overall season rankings
             "overall_rank":  int(r["overall_rank"]),
             "attack_rank":   int(r["attack_rank"]),
             "defense_rank":  int(r["defense_rank"]),
@@ -593,6 +698,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
             "attack_strength":   float(r["attack_strength"]),
             "defense_strength":  float(r["defense_strength"]),
 
+            # Season-level per-game stats
             "goals_per_game":          round(float(r["goals_pg"]),  3),
             "xg_per_game":             round(float(r["xg_pg"]),     3),
             "shots_per_game":          round(float(r["shots_pg"]),  3),
@@ -601,6 +707,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
             "clean_sheet_rate":        round(float(r["cs_rate"]),   3),
             "defensive_contribution":  round(float(r["total_cs"]),  3),
 
+            # Season home/away splits
             "home_goals_per_game":   round(float(r["home_goals_pg"]), 3),
             "away_goals_per_game":   round(float(r["away_goals_pg"]), 3),
             "home_xg_per_game":      round(float(r["home_xg_pg"]),    3),
@@ -608,11 +715,30 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
             "home_clean_sheet_rate": round(float(r["home_cs_rate"]),  3),
             "away_clean_sheet_rate": round(float(r["away_cs_rate"]),  3),
 
+            # NEW: Form-based rankings (last 5 gameweeks)
+            "last_5_goals":         round(float(r["total_goals_5"]), 2),
+            "last_5_assists":       round(float(r["total_assists_5"]), 2),
+            "last_5_clean_sheets":  int(r["total_cs_5"]),
+            "last_5_goals_conceded": int(r["total_gc_5"]),
+            "attack_rank_5":        int(r["attack_rank_5"]),
+            "defense_rank_5":       int(r["defense_rank_5"]),
+            "attack_score_5":       float(r["attack_score_5"]),
+            "defense_score_5":      float(r["defense_score_5"]),
+
+            # NEW: Home/Away strength (last 10 gameweeks) - 0-100 modifier
+            "last_10_home_goals":   round(float(r["home_goals_10"]), 2),
+            "last_10_away_goals":   round(float(r["away_goals_10"]), 2),
+            "last_10_home_clean_sheets": int(r["home_cs_10"]),
+            "last_10_away_clean_sheets": int(r["away_cs_10"]),
+            "home_strength_10":     float(r["home_strength_10"]),  # -50 to +50
+            "away_strength_10":     float(r["away_strength_10"]),  # -50 to +50
+
             "updated_at": datetime.utcnow().isoformat(),
         })
 
     upsert("team_rankings", rows, "season_key,team_id")
-    print(f"   {len(rows)} team ranking records")
+    print(f"   {len(rows)} team ranking records (with form-based & home/away strength)")
+
 
 
 # ── Stage 7: Fixtures ────────────────────────────────────────────────────────

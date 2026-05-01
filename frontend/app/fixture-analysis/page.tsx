@@ -489,8 +489,13 @@ export default function FixtureAnalysisPage() {
           getTeamFixtureSummary(),
         ])
         
+        // Filter to only upcoming gameweeks (current onwards, not past)
+        // Assuming current gameweek is GW 15 based on page title
+        const upcomingGW = 15; // Can be made dynamic based on current season data
+        const upcomingFixtures = dataFixtures.filter((f: any) => f.gameweek >= upcomingGW);
+        
         // Transform fixture data to match expected structure
-        const transformedFixtures = dataFixtures.map((f: any) => {
+        const transformedFixtures = upcomingFixtures.map((f: any) => {
           // Convert FDR ratings (typically 2.1-7.4) to percentages (0-100)
           // Inverse scale: lower FDR = easier = higher percentage
           const fdrToPercent = (fdr: number) => Math.max(0, Math.min(100, Math.round((1 - (fdr - 2.0) / 6.0) * 100)));
@@ -525,7 +530,7 @@ export default function FixtureAnalysisPage() {
         });
         
         const gameweeks = transformedFixtures.map((f: any) => f.gameweek).filter((gw: any) => typeof gw === "number" && !isNaN(gw));
-        const minGameweek = gameweeks.length > 0 ? Math.min(...gameweeks) : 1;
+        const minGameweek = gameweeks.length > 0 ? Math.min(...gameweeks) : upcomingGW;
         setGameweek(minGameweek);
         setFixtures(transformedFixtures);
 
@@ -570,7 +575,7 @@ export default function FixtureAnalysisPage() {
 
   const { minGameweek, maxGameweek } = useMemo(() => {
     const gameweeks = fixtures.map((f) => f.gw).filter((gw) => typeof gw === "number" && !isNaN(gw));
-    const minGw = gameweeks.length > 0 ? Math.min(...gameweeks) + 1 : 2; // Current gameweek + 1
+    const minGw = gameweeks.length > 0 ? Math.min(...gameweeks) : 15; // Only upcoming gameweeks
     return {
       minGameweek: minGw,
       maxGameweek: gameweeks.length > 0 ? Math.max(...gameweeks) : 38

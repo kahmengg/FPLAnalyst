@@ -232,7 +232,7 @@ export default function PlayerTrendsPage() {
         <Card className="max-w-md w-full">
           <CardContent className="p-8 text-center">
             <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-950 flex items-center justify-center mx-auto mb-4">
-              <span className="text-3xl">ΓÜá∩╕Å</span>
+              <span className="text-3xl">⚠️</span>
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-2">Failed to load player data</h3>
             <p className="text-sm text-muted-foreground mb-4">{error}</p>
@@ -257,7 +257,7 @@ export default function PlayerTrendsPage() {
             Player Performance Database
           </h1>
           <p className="text-sm sm:text-lg text-muted-foreground animate-in fade-in slide-in-from-top duration-700" style={{ animationDelay: '200ms' }}>
-            Advanced gameweek-by-gameweek analysis ΓÇó Compare multiple players with xG/xA insights
+            Advanced gameweek-by-gameweek analysis • Compare multiple players with xG/xA insights
           </p>
         </div>
 
@@ -272,7 +272,7 @@ export default function PlayerTrendsPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <input
                 type="text"
-                placeholder="≡ƒöì Search by player name or team..."
+                placeholder="🔍 Search by player name or team..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
@@ -283,10 +283,10 @@ export default function PlayerTrendsPage() {
                 className="px-4 py-2.5 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
               >
                 <option value="all">All Positions</option>
-                <option value="1">≡ƒºñ Goalkeepers</option>
-                <option value="2">≡ƒ¢í∩╕Å Defenders</option>
-                <option value="3">ΓÜÖ∩╕Å Midfielders</option>
-                <option value="4">ΓÜö∩╕Å Forwards</option>
+                <option value="1">🥅 Goalkeepers</option>
+                <option value="2">🛡️ Defenders</option>
+                <option value="3">🎯 Midfielders</option>
+                <option value="4">⚡ Forwards</option>
               </select>
               <select
                 value={teamFilter}
@@ -295,7 +295,7 @@ export default function PlayerTrendsPage() {
               >
                 <option value="all">All Teams</option>
                 {[...new Set(allPlayers.map(p => p.team))].sort().map(team => (
-                  <option key={team} value={team}>ΓÜ╜ {team}</option>
+                  <option key={team} value={team}>⚽ {team}</option>
                 ))}
               </select>
             </div>
@@ -315,7 +315,7 @@ export default function PlayerTrendsPage() {
                       className={`${getColorForPlayer(index).bg} text-white cursor-pointer hover:opacity-80 px-3 py-1.5`}
                       onClick={() => togglePlayer(player)}
                     >
-                      {posInfo.label} {player} Γ£ò
+                      {posInfo.label} {player} ✓
                     </Badge>
                   )
                 })}
@@ -359,11 +359,11 @@ export default function PlayerTrendsPage() {
                             </div>
                             <div className="text-[10px] text-muted-foreground mt-0.5 flex items-center gap-2">
                               <span>{player.team}</span>
-                              <span>ΓÇó</span>
-                              <span>┬ú{player.cost}m</span>
+                              <span>•</span>
+                              <span>£{player.cost}m</span>
                               {player.ownership > 0 && (
                                 <>
-                                  <span>ΓÇó</span>
+                                  <span>•</span>
                                   <span>{player.ownership}%</span>
                                 </>
                               )}
@@ -592,7 +592,7 @@ export default function PlayerTrendsPage() {
                             {typedData.player_name}
                           </CardTitle>
                           <p className="text-muted-foreground">
-                            {typedData.team} ΓÇó ┬ú{typedData.cost}m ΓÇó {typedData.ownership}% owned
+                            {typedData.team} • £{typedData.cost}m • {typedData.ownership}% owned
                           </p>
                         </div>
                       </div>

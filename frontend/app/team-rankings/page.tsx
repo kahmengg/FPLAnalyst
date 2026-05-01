@@ -13,9 +13,9 @@ const RankMedal = ({ rank }: { rank: number }) => {
   if (rank > 3) return null;
   
   const medals = {
-    1: { emoji: "≡ƒÑç", color: "from-yellow-400 to-yellow-600", glow: "shadow-yellow-500/50" },
-    2: { emoji: "≡ƒÑê", color: "from-gray-300 to-gray-500", glow: "shadow-gray-500/50" },
-    3: { emoji: "≡ƒÑë", color: "from-orange-400 to-orange-600", glow: "shadow-orange-500/50" }
+    1: { emoji: "🥇", color: "from-yellow-400 to-yellow-600", glow: "shadow-yellow-500/50" },
+    2: { emoji: "🥈", color: "from-gray-300 to-gray-500", glow: "shadow-gray-500/50" },
+    3: { emoji: "🥉", color: "from-orange-400 to-orange-600", glow: "shadow-orange-500/50" }
   };
   
   const medal = medals[rank as keyof typeof medals];
@@ -401,7 +401,7 @@ export default function TeamRankingsPage() {
                     : "bg-transparent text-muted-foreground active:bg-white/20"
                     }`}
                 >
-                  <span className="text-lg">≡ƒôè</span>
+                  <span className="text-lg">📊</span>
                   <span>Overall</span>
                 </button>
                 <button
@@ -411,7 +411,7 @@ export default function TeamRankingsPage() {
                     : "bg-transparent text-muted-foreground active:bg-blue-100"
                     }`}
                 >
-                  <span className="text-lg">ΓÜ╜</span>
+                  <span className="text-lg">⚔️</span>
                   <span>Attack</span>
                 </button>
                 <button
@@ -421,7 +421,7 @@ export default function TeamRankingsPage() {
                     : "bg-transparent text-muted-foreground active:bg-indigo-100"
                     }`}
                 >
-                  <span className="text-lg">≡ƒ¢í∩╕Å</span>
+                  <span className="text-lg">🛡️</span>
                   <span>Defense</span>
                 </button>
               </div>
@@ -437,7 +437,7 @@ export default function TeamRankingsPage() {
                 : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-white/10 active:bg-white/20"
                 }`}
             >
-              <span className="relative z-10">≡ƒôè Overall Rankings</span>
+              <span className="relative z-10">📊 Overall Rankings</span>
               {view === "combined" && (
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-purple-400/10 rounded-lg blur-sm" />
               )}
@@ -449,7 +449,7 @@ export default function TeamRankingsPage() {
                 : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-blue-50 hover:text-blue-600 active:bg-blue-100"
                 }`}
             >
-              <span className="relative z-10">ΓÜ╜ Attack Rankings</span>
+              <span className="relative z-10">⚔️ Attack Rankings</span>
               {view === "attack" && (
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-blue-400/10 rounded-lg blur-sm" />
               )}
@@ -461,7 +461,7 @@ export default function TeamRankingsPage() {
                 : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100"
                 }`}
             >
-              <span className="relative z-10">≡ƒ¢í∩╕Å Defense Rankings</span>
+              <span className="relative z-10">🛡️ Defense Rankings</span>
               {view === "defense" && (
                 <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 to-indigo-400/10 rounded-lg blur-sm" />
               )}
