@@ -488,15 +488,22 @@ export default function FixtureAnalysisPage() {
           getFixtures(),
           getTeamFixtureSummary(),
         ])
-        
-        // Determine the current gameweek from season context (GW 34 as of May 1, 2026)
-        // Only show upcoming/future gameweeks, filter out past ones
-        const currentSeasonGW = 34; // Current gameweek in 2025/26 season
-        const nextGW = currentSeasonGW + 1; // Next gameweek to show
-        
-        // Filter to ONLY upcoming gameweeks (next gameweek onwards)
-        // User should NOT see past gameweeks
-        const upcomingFixtures = dataFixtures.filter((f: any) => f.gameweek >= nextGW);
+
+        const allGameweeks = Array.from(
+          new Set(
+            dataFixtures
+              .map((f: any) => Number(f.gameweek))
+              .filter((gw: number) => Number.isFinite(gw))
+          )
+        ).sort((a, b) => a - b);
+
+        // Show only future fixtures, starting from the first available GW at or after 35.
+        // If GW 35 is missing from the dataset, fall back to the latest available GW
+        // so the page still renders useful content instead of an empty screen.
+        const futureGameweeks = allGameweeks.filter((gw: number) => gw >= 35);
+        const selectedGameweek = futureGameweeks[0] ?? allGameweeks[allGameweeks.length - 1] ?? 35;
+
+        const upcomingFixtures = dataFixtures.filter((f: any) => Number(f.gameweek) >= selectedGameweek);
         
         // Transform fixture data to match expected structure
         // NOTE: getFixtures() already returns percentages (20-100%), NOT FDR ratings
@@ -533,9 +540,9 @@ export default function FixtureAnalysisPage() {
           };
         });
         
-        // Set initial gameweek to the first upcoming one (next gameweek)
+        // Set initial gameweek to the first available future one
         const gameweeksFromUpcoming = upcomingFixtures.map((f: any) => f.gameweek).filter((gw: any) => typeof gw === "number" && !isNaN(gw));
-        const firstUpcomingGW = gameweeksFromUpcoming.length > 0 ? Math.min(...gameweeksFromUpcoming) : nextGW;
+        const firstUpcomingGW = gameweeksFromUpcoming.length > 0 ? Math.min(...gameweeksFromUpcoming) : selectedGameweek;
         setGameweek(firstUpcomingGW);
         setFixtures(transformedFixtures);
 
@@ -709,7 +716,16 @@ export default function FixtureAnalysisPage() {
 
             {/* Fixtures Grid */}
             <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {displayFixtures.map((fixture, index) => (
+              {displayFixtures.length === 0 ? (
+                <Card className="md:col-span-2 xl:col-span-3 border-dashed border-2 bg-secondary/20">
+                  <CardContent className="p-10 text-center">
+                    <p className="text-lg font-semibold text-foreground">No upcoming fixtures available for this gameweek.</p>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Try the arrow buttons to move to another future gameweek.
+                    </p>
+                  </CardContent>
+                </Card>
+              ) : displayFixtures.map((fixture, index) => (
                 <Card
                   key={index}
                   style={{ animationDelay: `${index * 50}ms` }}
