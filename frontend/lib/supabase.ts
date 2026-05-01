@@ -775,8 +775,12 @@ export async function getFixtures(gameweek?: number) {
         const homeAttackFinal = Math.max(20, Math.min(100, homeAttackPct + homeStrengthMod))
         const awayAttackFinal = Math.max(20, Math.min(100, awayAttackPct + awayStrengthMod))
         
-        const homeAvg = (homeAttackFinal + homeDefensePct) / 2
-        const awayAvg = (awayAttackFinal + awayDefensePct) / 2
+        // DEFENSIVE ODDS: Inverse of opponent's attacking threat
+        // If opponent has high attack %, you have low chance to keep clean sheet
+        // Home defense = opposite of away team's attacking threat
+        // Away defense = opposite of home team's attacking threat
+        const homeDefenseFinal = Math.max(20, Math.min(100, 120 - awayAttackFinal))
+        const awayDefenseFinal = Math.max(20, Math.min(100, 120 - homeAttackFinal))
 
         return {
           gw: safeInt(row.gameweek, 0),
@@ -786,28 +790,28 @@ export async function getFixtures(gameweek?: number) {
             name: homeTeam.name || '',
             short_name: homeTeam.short_name || '',
             attacking_fixture_rating: Math.round(homeAttackFinal),
-            defensive_fixture_rating: Math.round(homeDefensePct),
+            defensive_fixture_rating: Math.round(homeDefenseFinal),
             rank: rankMap.get(row.home_team_id)?.overall_rank ?? null,
             fdr: {
-              overall: Math.round(homeAvg),
+              overall: Math.round((homeAttackFinal + homeDefenseFinal) / 2),
               attack: Math.round(homeAttackFinal),
-              defense: Math.round(homeDefensePct),
+              defense: Math.round(homeDefenseFinal),
             },
           },
           away_team: {
             name: awayTeam.name || '',
             short_name: awayTeam.short_name || '',
             attacking_fixture_rating: Math.round(awayAttackFinal),
-            defensive_fixture_rating: Math.round(awayDefensePct),
+            defensive_fixture_rating: Math.round(awayDefenseFinal),
             rank: rankMap.get(row.away_team_id)?.overall_rank ?? null,
             fdr: {
-              overall: Math.round(awayAvg),
+              overall: Math.round((awayAttackFinal + awayDefenseFinal) / 2),
               attack: Math.round(awayAttackFinal),
-              defense: Math.round(awayDefensePct),
+              defense: Math.round(awayDefenseFinal),
             },
           },
-          favorability: homeAvg > awayAvg + 5 ? (homeTeam.name || 'Home') : awayAvg > homeAvg + 5 ? (awayTeam.name || 'Away') : 'Neutral',
-          maxOpportunityRating: Math.max(homeAttackFinal, homeDefensePct, awayAttackFinal, awayDefensePct),
+          favorability: homeAttackFinal - awayDefenseFinal > 5 ? (homeTeam.name || 'Home') : awayAttackFinal - homeDefenseFinal > 5 ? (awayTeam.name || 'Away') : 'Neutral',
+          maxOpportunityRating: Math.max(homeAttackFinal, homeDefenseFinal, awayAttackFinal, awayDefenseFinal),
         }
       })
   } catch (err) {

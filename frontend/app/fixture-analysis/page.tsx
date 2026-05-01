@@ -577,13 +577,17 @@ export default function FixtureAnalysisPage() {
     }
   };
   
-  // Filter and display fixtures
+  // Filter and display fixtures - SHOW ALL UPCOMING GAMEWEEKS, not just selected one
   const displayFixtures = useMemo(() => {
-    let filtered = fixtures.filter((f) => f.gw === gameweek);
+    // Don't filter by gameweek - show all upcoming fixtures grouped by gameweek
+    let filtered = fixtures;
     
-    // Sort by best opportunities (highest max rating)
-    return filtered.sort((a, b) => b.maxOpportunityRating - a.maxOpportunityRating);
-  }, [fixtures, gameweek]);
+    // Sort by gameweek first, then by best opportunities within each week
+    return filtered.sort((a, b) => {
+      if (a.gw !== b.gw) return a.gw - b.gw; // Sort by gameweek ascending
+      return b.maxOpportunityRating - a.maxOpportunityRating; // Then by opportunity
+    });
+  }, [fixtures]);
 
   const { minGameweek, maxGameweek } = useMemo(() => {
     const gameweeks = fixtures.map((f) => f.gw).filter((gw) => typeof gw === "number" && !isNaN(gw));
@@ -687,45 +691,40 @@ export default function FixtureAnalysisPage() {
               </Card>
             )}
 
-            {/* Gameweek Selector - Mobile Optimized */}
+            {/* Gameweek Selector - Now just for reference, not filtering */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto">
-                <Button
-                  onClick={() => setGameweek(Math.max(minGameweek - 1, currentGameweek - 1))}
-                  variant="ghost"
-                  size="icon"
-                  className="h-12 w-12 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition-all active:scale-90 active:bg-muted/80"
-                  aria-label="Previous gameweek"
-                >
-                  <ChevronLeft className="h-6 w-6 sm:h-5 sm:w-5" />
-                </Button>
-                <div className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-secondary/70 to-secondary/50 backdrop-blur font-semibold text-xl sm:text-xl shadow-lg border border-border/50 min-w-[160px] text-center">
-                  Gameweek {currentGameweek}
-                </div>
-                <Button
-                  onClick={() => setGameweek(Math.min(maxGameweek, currentGameweek + 1))}
-                  variant="ghost"
-                  size="icon"
-                  className="h-12 w-12 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition-all active:scale-90 active:bg-muted/80"
-                  aria-label="Next gameweek"
-                >
-                  <ChevronRight className="h-6 w-6 sm:h-5 sm:w-5" />
-                </Button>
+              <div className="text-center">
+                <p className="text-sm text-muted-foreground mb-1">Showing all upcoming gameweeks</p>
+                <p className="text-xs text-muted-foreground">Scroll down to see GW {minGameweek} through GW {maxGameweek}</p>
               </div>
             </div>
 
-            {/* Fixtures Grid */}
-            <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {displayFixtures.length === 0 ? (
-                <Card className="md:col-span-2 xl:col-span-3 border-dashed border-2 bg-secondary/20">
-                  <CardContent className="p-10 text-center">
-                    <p className="text-lg font-semibold text-foreground">No upcoming fixtures available for this gameweek.</p>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      Try the arrow buttons to move to another future gameweek.
-                    </p>
-                  </CardContent>
-                </Card>
-              ) : displayFixtures.map((fixture, index) => (
+            {/* Fixtures Grid - Grouped by Gameweek */}
+            {displayFixtures.length === 0 ? (
+              <Card className="border-dashed border-2 bg-secondary/20">
+                <CardContent className="p-10 text-center">
+                  <p className="text-lg font-semibold text-foreground">No upcoming fixtures available.</p>
+                </CardContent>
+              </Card>
+            ) : (
+              <>
+                {Array.from(
+                  displayFixtures.reduce((acc: Map<number, any[]>, fixture: any) => {
+                    if (!acc.has(fixture.gw)) acc.set(fixture.gw, []);
+                    acc.get(fixture.gw)!.push(fixture);
+                    return acc;
+                  }, new Map<number, any[]>()).entries()
+                ).map(([gw, gwFixtures]: [number, any[]]) => (
+                  <div key={`gw-${gw}`} className="space-y-4">
+                    {/* Gameweek Header */}
+                    <div className="flex items-center gap-3 px-2 py-2">
+                      <h2 className="text-xl font-bold text-foreground">Gameweek {gw}</h2>
+                      <div className="flex-1 h-px bg-gradient-to-r from-purple-500/30 to-transparent"></div>
+                    </div>
+                    
+                    {/* Fixtures for this gameweek */}
+                    <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
+                      {gwFixtures.map((fixture, index) => (
                 <Card
                   key={index}
                   style={{ animationDelay: `${index * 50}ms` }}
@@ -875,8 +874,12 @@ export default function FixtureAnalysisPage() {
                     </div>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
           </TabsContent>
 
           <TabsContent value="opportunities" className="space-y-4 sm:space-y-6">
