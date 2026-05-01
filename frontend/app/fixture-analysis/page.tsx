@@ -489,17 +489,18 @@ export default function FixtureAnalysisPage() {
           getTeamFixtureSummary(),
         ])
         
+        // Determine current gameweek dynamically from fixtures
+        // Find the first future gameweek from available data
+        const allGameweeks = dataFixtures.map((f: any) => f.gameweek).filter((gw: any) => typeof gw === "number" && !isNaN(gw));
+        const currentGW = allGameweeks.length > 0 ? Math.min(...allGameweeks) : 15;
+        
         // Filter to only upcoming gameweeks (current onwards, not past)
-        // Assuming current gameweek is GW 15 based on page title
-        const upcomingGW = 15; // Can be made dynamic based on current season data
-        const upcomingFixtures = dataFixtures.filter((f: any) => f.gameweek >= upcomingGW);
+        const upcomingFixtures = dataFixtures.filter((f: any) => f.gameweek >= currentGW);
         
         // Transform fixture data to match expected structure
+        // NOTE: getFixtures() already returns percentages (20-100%), NOT FDR ratings
+        // So we use the values directly without conversion
         const transformedFixtures = upcomingFixtures.map((f: any) => {
-          // Convert FDR ratings (typically 2.1-7.4) to percentages (0-100)
-          // Inverse scale: lower FDR = easier = higher percentage
-          const fdrToPercent = (fdr: number) => Math.max(0, Math.min(100, Math.round((1 - (fdr - 2.0) / 6.0) * 100)));
-          
           return {
             ...f,
             teams: {
@@ -510,8 +511,9 @@ export default function FixtureAnalysisPage() {
                   attack: f.home_team.rank || 20,
                   defense: f.home_team.rank || 20,
                 },
-                attackRating: fdrToPercent(f.home_team.attacking_fixture_rating),
-                defenseRating: fdrToPercent(f.home_team.defensive_fixture_rating),
+                // Values already 0-100%, use directly
+                attackRating: Math.round(f.home_team.attacking_fixture_rating ?? 50),
+                defenseRating: Math.round(f.home_team.defensive_fixture_rating ?? 50),
                 fdr: f.home_team.fdr,
               },
               away: {
@@ -521,17 +523,17 @@ export default function FixtureAnalysisPage() {
                   attack: f.away_team.rank || 20,
                   defense: f.away_team.rank || 20,
                 },
-                attackRating: fdrToPercent(f.away_team.attacking_fixture_rating),
-                defenseRating: fdrToPercent(f.away_team.defensive_fixture_rating),
+                // Values already 0-100%, use directly
+                attackRating: Math.round(f.away_team.attacking_fixture_rating ?? 50),
+                defenseRating: Math.round(f.away_team.defensive_fixture_rating ?? 50),
                 fdr: f.away_team.fdr,
               }
             }
           };
         });
         
-        const gameweeks = transformedFixtures.map((f: any) => f.gameweek).filter((gw: any) => typeof gw === "number" && !isNaN(gw));
-        const minGameweek = gameweeks.length > 0 ? Math.min(...gameweeks) : upcomingGW;
-        setGameweek(minGameweek);
+        // Set initial gameweek to the first upcoming one
+        setGameweek(currentGW);
         setFixtures(transformedFixtures);
 
         // Note: fixtures_opportunity endpoint not yet implemented in backend

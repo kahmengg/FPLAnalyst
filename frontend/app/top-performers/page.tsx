@@ -1488,7 +1488,7 @@ export default function TopPerformersPage() {
                 </CardTitle>
                 <CardDescription>
                   Players offering the best return for their cost.
-                  Points per million calculated as total points divided by price (┬úm).
+                  Points per million calculated as total points divided by price (£m).
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -1534,7 +1534,7 @@ export default function TopPerformersPage() {
                           onClick={() => handleSort('price', 'value')}
                         >
                           <div className="flex items-center gap-1">
-                            Price (┬úm) {getSortIcon('price', 'value')}
+                            Price (£m) {getSortIcon('price', 'value')}
                           </div>
                         </th>
                         <th
@@ -1574,7 +1574,7 @@ export default function TopPerformersPage() {
                             {player.totalPoints}
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200">
-                            ┬ú{player.price?.toFixed(1) ?? '0.0'}m
+                            £{player.price?.toFixed(1) ?? '0.0'}m
                           </td>
                           <td className="py-4 font-mono text-sm text-green-600 group-hover:text-green-500 transition-colors duration-200">
                             {player.pointsPerMillion?.toFixed(2) ?? '0.00'}
@@ -1619,7 +1619,7 @@ export default function TopPerformersPage() {
                         <h3 className="font-medium text-foreground">{player.player}</h3>
                         <div className="flex items-center gap-2 mt-1">
                           <PositionBadge position={player.position} />
-                          <span className="text-sm text-muted-foreground">┬ú{player.price}m</span>
+                          <span className="text-sm text-muted-foreground">£{player.price}m</span>
                           <span className="ml-2"><FormBadge value={player.form} /></span>
                         </div>
                       </div>
