@@ -495,7 +495,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     # ── Step 1: Match-level defensive stats (one row per team+GW) ──
     match_level = (
         df.drop_duplicates(subset=["team_name", "gameweek"])
-        [["team_name", "gameweek", "was_home",
+        [["team_name", "gameweek", "was_home", "opponent_team_name",
           "expected_goals_conceded", "goals_conceded", "clean_sheet"]]
         .copy()
     )
@@ -558,20 +558,96 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
 
     # ── LAST 5 GAMEWEEKS (FORM-BASED RANKINGS) ──
     match_df_5 = match_df[match_df["gameweek"] >= form_5_start]
-    form_5_agg = match_df_5.groupby("team_name").agg(
-        n_matches_5   = ("gameweek",                "nunique"),
-        total_goals_5 = ("team_goals",              "sum"),
-        total_assists_5 = ("team_assists",          "sum"),
-        total_gc_5    = ("goals_conceded",          "sum"),
-        total_cs_5    = ("clean_sheet",             "sum"),
+    # Ensure match_df_10 is available for rolling-10 opponent computations
+    match_df_10 = match_df[match_df["gameweek"] >= form_10_start]
+    # --- Compute rolling-10 opponent ranks (non-recursive one-pass)
+    # Aggregate match-level stats over the last 10 GWs to build opponent quality
+    team_10 = (
+        match_df_10
+        .groupby("team_name")
+        .agg(
+            n_m_10 = ("gameweek", "nunique"),
+            tot_goals_10 = ("team_goals", "sum"),
+            tot_xg_10 = ("team_xg", "sum"),
+            tot_shots_10 = ("team_shots", "sum"),
+            tot_points_10 = ("team_points", "sum"),
+            tot_gc_10 = ("goals_conceded", "sum"),
+            tot_cs_10 = ("clean_sheet", "sum"),
+        )
+        .reset_index()
+    )
+    if not team_10.empty:
+        tm = team_10["n_m_10"].clip(lower=1)
+        team_10["goals_pg_10"] = team_10["tot_goals_10"] / tm
+        team_10["xg_pg_10"] = team_10["tot_xg_10"] / tm
+        team_10["shots_pg_10"] = team_10["tot_shots_10"] / tm
+        team_10["points_pg_10"] = team_10["tot_points_10"] / tm
+        team_10["gc_pg_10"] = team_10["tot_gc_10"] / tm
+        team_10["cs_rate_10"] = team_10["tot_cs_10"] / tm
+
+        team_10["attack_strength_10"] = (
+            team_10["xg_pg_10"] * 0.25 +
+            team_10["goals_pg_10"] * 0.50 +
+            team_10["shots_pg_10"] * 0.15 +
+            team_10["points_pg_10"] * 0.10
+        )
+        team_10["defense_strength_10"] = (
+            team_10["cs_rate_10"] * 0.50 +
+            (1 / (team_10["gc_pg_10"] + 0.1)) * 0.35 +
+            (1 / (team_10["xg_pg_10"] + 0.1)) * 0.15
+        )
+        team_10["attack_rank_10"] = team_10["attack_strength_10"].rank(ascending=False, method="min").astype(int)
+        team_10["defense_rank_10"] = team_10["defense_strength_10"].rank(ascending=False, method="min").astype(int)
+    else:
+        team_10["attack_rank_10"] = pd.Series(dtype=int)
+        team_10["defense_rank_10"] = pd.Series(dtype=int)
+
+    # Build quick lookup maps for opponent ranks
+    max_rank_10 = int(team_10["attack_rank_10"].max()) if ("attack_rank_10" in team_10 and not team_10.empty) else max(len(team_map), 20)
+    opp_def_rank_map = {r["team_name"]: int(r["defense_rank_10"]) for r in team_10.to_dict(orient="records")} if not team_10.empty else {}
+    opp_att_rank_map = {r["team_name"]: int(r["attack_rank_10"]) for r in team_10.to_dict(orient="records")} if not team_10.empty else {}
+
+    # Enrich last-5 match rows with opponent ranks and compute opponent-adjusted contributions
+    md5 = match_df_5.copy()
+    md5["opponent_team_name"] = md5.get("opponent_team_name")
+    # Map opponent ranks; fallback to middle rank if missing
+    fallback_rank = max_rank_10 // 2 if max_rank_10 > 0 else 10
+    md5["opp_def_rank_10"] = md5["opponent_team_name"].map(opp_def_rank_map).fillna(fallback_rank).astype(int)
+    md5["opp_att_rank_10"] = md5["opponent_team_name"].map(opp_att_rank_map).fillna(fallback_rank).astype(int)
+
+    # Convert ranks to multipliers where stronger opponents (rank 1) -> multiplier ~1.0
+    md5["opp_def_multiplier"] = (max_rank_10 - md5["opp_def_rank_10"] + 1) / max_rank_10
+    md5["opp_att_multiplier"] = (max_rank_10 - md5["opp_att_rank_10"] + 1) / max_rank_10
+
+    # Adjust attacking contributions by opponent defensive quality
+    md5["adj_team_goals"] = md5["team_goals"] * md5["opp_def_multiplier"]
+    md5["adj_team_assists"] = md5["team_assists"] * md5["opp_def_multiplier"]
+
+    # Adjust defensive contributions by opponent attacking quality
+    md5["adj_goals_conceded"] = md5["goals_conceded"] * md5["opp_att_multiplier"]
+    md5["adj_clean_sheet"] = md5["clean_sheet"] * md5["opp_att_multiplier"]
+
+    # Aggregate adjusted last-5 stats per team
+    form_5_agg = md5.groupby("team_name").agg(
+        n_matches_5 = ("gameweek", "nunique"),
+        total_goals_5 = ("team_goals", "sum"),
+        total_assists_5 = ("team_assists", "sum"),
+        total_gc_5 = ("goals_conceded", "sum"),
+        total_cs_5 = ("clean_sheet", "sum"),
+        total_adj_goals_5 = ("adj_team_goals", "sum"),
+        total_adj_assists_5 = ("adj_team_assists", "sum"),
+        total_adj_gc_5 = ("adj_goals_conceded", "sum"),
+        total_adj_cs_5 = ("adj_clean_sheet", "sum"),
     ).reset_index()
     agg = agg.merge(form_5_agg, on="team_name", how="left")
-    for col in ["n_matches_5", "total_goals_5", "total_assists_5", "total_gc_5", "total_cs_5"]:
-        agg[col] = agg[col].fillna(0)
+    for col in [
+        "n_matches_5", "total_goals_5", "total_assists_5", "total_gc_5", "total_cs_5",
+        "total_adj_goals_5", "total_adj_assists_5", "total_adj_gc_5", "total_adj_cs_5",
+    ]:
+        if col in agg.columns:
+            agg[col] = agg[col].fillna(0)
 
     # ── LAST 10 GAMEWEEKS (HOME/AWAY STRENGTH) ──
-    match_df_10 = match_df[match_df["gameweek"] >= form_10_start]
-    
     # Home splits for last 10
     home_10_agg = (
         match_df_10[match_df_10["was_home"] == 1]
@@ -640,18 +716,27 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     # ── FORM-BASED RANKINGS (LAST 5 GWS) ──
     # Attack form: results-only last 5 GWs, no xG weighting
     m_5 = agg["n_matches_5"].clip(lower=1)
-    agg["goals_pg_5"] = agg["total_goals_5"] / m_5
-    agg["assists_pg_5"] = agg["total_assists_5"] / m_5
-    
-    # Attack rank 5: results-based form
+    # Use opponent-adjusted sums when available (total_adj_*), fall back to raw totals
+    agg["goals_pg_5"] = (
+        agg.get("total_adj_goals_5", agg.get("total_goals_5", 0)) / m_5
+    )
+    agg["assists_pg_5"] = (
+        agg.get("total_adj_assists_5", agg.get("total_assists_5", 0)) / m_5
+    )
+
+    # Attack rank 5: results-based form (opponent-adjusted)
     agg["attack_score_5"] = (
         agg["goals_pg_5"] * 0.6 +
         agg["assists_pg_5"] * 0.4
     ).round(4)
-    
-    # Defense rank 5: results-based form
-    agg["cs_rate_5"] = agg["total_cs_5"] / m_5
-    agg["gc_pg_5"] = agg["total_gc_5"] / m_5
+
+    # Defense rank 5: results-based form (opponent-adjusted)
+    agg["cs_rate_5"] = (
+        agg.get("total_adj_cs_5", agg.get("total_cs_5", 0)) / m_5
+    )
+    agg["gc_pg_5"] = (
+        agg.get("total_adj_gc_5", agg.get("total_gc_5", 0)) / m_5
+    )
     agg["defense_score_5"] = (
         agg["cs_rate_5"] * 0.6 +
         (1 / (agg["gc_pg_5"] + 0.1)) * 0.4
