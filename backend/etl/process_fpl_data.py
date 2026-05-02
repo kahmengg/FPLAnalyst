@@ -474,7 +474,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
 
     df = df.copy()
     num_cols = [
-        "expected_goals", "goals", "total_shots",
+        "expected_goals", "goals", "total_shots", "total_points",
         "expected_goals_conceded", "goals_conceded",
         "clean_sheet", "was_home", "minutes",
         "expected_goal_involvements", "assists",
@@ -509,6 +509,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
             team_goals = ("goals",                     "sum"),
             team_shots = ("total_shots",               "sum"),
             team_assists = ("assists",                 "sum"),
+            team_points = ("total_points",             "sum"),
         )
         .reset_index()
     )
@@ -520,6 +521,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     # ── OVERALL SEASON AGGREGATION ──
     overall = match_df.groupby("team_name").agg(
         n_matches  = ("gameweek",                "nunique"),
+        total_points = ("team_points",           "sum"),
         total_xg   = ("team_xg",                 "sum"),
         total_goals= ("team_goals",              "sum"),
         total_shots= ("team_shots",              "sum"),
@@ -605,6 +607,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     agg["goals_pg"]      = agg["total_goals"] / m
     agg["xg_pg"]         = agg["total_xg"]    / m
     agg["shots_pg"]      = agg["total_shots"] / m
+    agg["points_pg"]     = agg["total_points"] / m
     agg["gc_pg"]         = agg["total_gc"]    / m
     agg["xgc_pg"]        = agg["total_xgc"]   / m
     agg["cs_rate"]       = agg["total_cs"]    / m
@@ -616,13 +619,15 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     agg["away_cs_rate"]  = agg["away_cs"]     / am
 
     agg["attack_strength"] = (
-        agg["xg_pg"]    * 0.4 +
-        agg["goals_pg"] * 0.3 +
-        agg["shots_pg"] * 0.3
+        agg["xg_pg"]     * 0.25 +
+        agg["goals_pg"]  * 0.50 +
+        agg["shots_pg"]  * 0.15 +
+        agg["points_pg"] * 0.10
     ).round(4)
     agg["defense_strength"] = (
-        agg["cs_rate"] * 0.4 +
-        (1 / (agg["xgc_pg"] + 0.1)) * 0.6
+        agg["cs_rate"] * 0.50 +
+        (1 / (agg["gc_pg"] + 0.1)) * 0.35 +
+        (1 / (agg["xgc_pg"] + 0.1)) * 0.15
     ).round(4)
     agg["overall_strength"] = (
         (agg["attack_strength"] + agg["defense_strength"]) / 2
@@ -633,18 +638,18 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     agg["overall_rank"] = agg["overall_strength"].rank(ascending=False, method="min").astype(int)
 
     # ── FORM-BASED RANKINGS (LAST 5 GWS) ──
-    # Attack form: weighted combination of goals and assists from starters
+    # Attack form: results-only last 5 GWs, no xG weighting
     m_5 = agg["n_matches_5"].clip(lower=1)
     agg["goals_pg_5"] = agg["total_goals_5"] / m_5
     agg["assists_pg_5"] = agg["total_assists_5"] / m_5
     
-    # Attack rank 5: weighted by goals (60%) and assists (40%)
+    # Attack rank 5: results-based form
     agg["attack_score_5"] = (
         agg["goals_pg_5"] * 0.6 +
         agg["assists_pg_5"] * 0.4
     ).round(4)
     
-    # Defense rank 5: clean sheet rate and goals conceded
+    # Defense rank 5: results-based form
     agg["cs_rate_5"] = agg["total_cs_5"] / m_5
     agg["gc_pg_5"] = agg["total_gc_5"] / m_5
     agg["defense_score_5"] = (

@@ -17,15 +17,20 @@ const teamShortCodes: Record<string, string> = {
   "Sunderland": "SUN", "Spurs": "TOT", "West Ham": "WHU", "Wolves": "WOL"
 }
 
-// Get difficulty color based on rating (2.1-7.4 observed range, lower is easier)
-// 6-tier system optimized for actual data distribution
+// Get difficulty color based on 1-10 difficulty rating, lower is easier
 const getDifficultyColor = (rating: number) => {
-  if (rating <= 3.5) return "bg-green-500 dark:bg-green-600 text-white border-green-600 dark:border-green-500"  // Very Easy: 2.1-3.5
-  if (rating <= 4.5) return "bg-green-300 dark:bg-green-700 text-green-900 dark:text-green-100 border-green-400 dark:border-green-600"  // Easy: 3.6-4.5
-  if (rating <= 5.3) return "bg-yellow-300 dark:bg-yellow-600 text-yellow-900 dark:text-yellow-100 border-yellow-400 dark:border-yellow-500"  // Moderate-Easy: 4.6-5.3
-  if (rating <= 6.2) return "bg-orange-400 dark:bg-orange-600 text-white border-orange-500 dark:border-orange-500"  // Moderate-Hard: 5.4-6.2
-  if (rating <= 7.0) return "bg-red-400 dark:bg-red-600 text-white border-red-500 dark:border-red-500"  // Hard: 6.3-7.0
-  return "bg-red-600 dark:bg-red-700 text-white border-red-700 dark:border-red-600"  // Very Hard: 7.0+
+  if (rating <= 2.5) return "bg-green-500 dark:bg-green-600 text-white border-green-600 dark:border-green-500"
+  if (rating <= 4.0) return "bg-green-300 dark:bg-green-700 text-green-900 dark:text-green-100 border-green-400 dark:border-green-600"
+  if (rating <= 5.5) return "bg-yellow-300 dark:bg-yellow-600 text-yellow-900 dark:text-yellow-100 border-yellow-400 dark:border-yellow-500"
+  if (rating <= 7.0) return "bg-orange-400 dark:bg-orange-600 text-white border-orange-500 dark:border-orange-500"
+  if (rating <= 8.5) return "bg-red-400 dark:bg-red-600 text-white border-red-500 dark:border-red-500"
+  return "bg-red-600 dark:bg-red-700 text-white border-red-700 dark:border-red-600"
+}
+
+const percentToDifficulty = (rating: number) => {
+  const clamped = Math.max(20, Math.min(100, rating))
+  const difficulty = 10 - ((clamped - 20) / 80) * 9
+  return Math.max(1, Math.min(10, difficulty))
 }
 
 const teamColors = {
@@ -242,6 +247,7 @@ interface TeamFixtures {
     opponent: string
     isHome: boolean
     difficulty: number
+    fixtureStrength: number
   }[]
   avgDifficulty?: number
 }
@@ -249,16 +255,10 @@ interface TeamFixtures {
 function FDRGrid({ fixtures }: { fixtures: any[] }) {
   const [searchQuery, setSearchQuery] = useState("")
   const [sortBy, setSortBy] = useState<"team" | "difficulty">("difficulty")
-  const [currentGW, setCurrentGW] = useState(1)
   const [fdrType, setFdrType] = useState<"attack" | "defense" | "overall">("overall")
 
   // Process fixtures into team-based view
   const teamFixtures = useMemo((): TeamFixtures[] => {
-    // Find current GW
-    const gameweeks = fixtures.map(f => f.gw)
-    const minGW = gameweeks.length > 0 ? Math.min(...gameweeks) : 1
-    if (currentGW === 1) setCurrentGW(minGW)
-
     const teams = new Set<string>()
     fixtures.forEach(f => {
       teams.add(f.teams.home.team)
@@ -267,21 +267,20 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
 
     const result: TeamFixtures[] = Array.from(teams).map(team => {
       const teamFix = fixtures
-        .filter(f => (f.teams.home.team === team || f.teams.away.team === team) && f.gw >= (currentGW || minGW))
+        .filter(f => f.teams.home.team === team || f.teams.away.team === team)
         .sort((a, b) => a.gw - b.gw)
-        .slice(0, 8)
         .map(f => {
           const isHome = f.teams.home.team === team
-          // Use team-specific FDR rating (1-10 scale, lower = easier)
-          // Select attack or defense FDR based on fdrType
-          const difficulty = isHome 
-            ? (f.teams?.home?.fdr?.[fdrType] || 5)
-            : (f.teams?.away?.fdr?.[fdrType] || 5)
+          const fixtureStrength = isHome
+            ? Number(f.teams?.home?.fdr?.[fdrType] ?? 50)
+            : Number(f.teams?.away?.fdr?.[fdrType] ?? 50)
+          const difficulty = percentToDifficulty(fixtureStrength)
           return {
             gameweek: f.gw,
             opponent: isHome ? f.teams.away.team : f.teams.home.team,
             isHome,
-            difficulty: Math.max(1, Math.min(10, difficulty))
+            difficulty,
+            fixtureStrength,
           }
         })
 
@@ -293,7 +292,11 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
     })
 
     return result
-  }, [fixtures, currentGW, fdrType])
+  }, [fixtures, fdrType])
+
+  const upcomingGameweeks = useMemo(() => {
+    return Array.from(new Set(fixtures.map(f => f.gw))).sort((a, b) => a - b)
+  }, [fixtures])
 
   // Filter and sort teams
   const filteredTeams = useMemo(() => {
@@ -374,6 +377,9 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
               </div>
             </div>
           </div>
+          <div className="mt-3 text-xs text-muted-foreground">
+            Showing {upcomingGameweeks.length} upcoming gameweeks: {upcomingGameweeks.length > 0 ? `GW ${upcomingGameweeks[0]} to GW ${upcomingGameweeks[upcomingGameweeks.length - 1]}` : "no fixtures available"}
+          </div>
         </CardContent>
       </Card>
 
@@ -421,6 +427,9 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
                         </div>
                         <div className="text-xs font-bold truncate">
                           {teamShortCodes[fixture.opponent] || fixture.opponent.substring(0, 3).toUpperCase()}
+                        </div>
+                        <div className="text-[10px] opacity-70 mt-1">
+                          {Math.round(fixture.fixtureStrength)}%
                         </div>
                         <div className="text-[10px] opacity-70 mt-1">
                           {fixture.difficulty.toFixed(1)}
@@ -577,18 +586,7 @@ export default function FixtureAnalysisPage() {
     }
   };
   
-  // Filter and display fixtures - SHOW ALL UPCOMING GAMEWEEKS, not just selected one
-  const displayFixtures = useMemo(() => {
-    // Don't filter by gameweek - show all upcoming fixtures grouped by gameweek
-    let filtered = fixtures;
-    
-    // Sort by gameweek first, then by best opportunities within each week
-    return filtered.sort((a, b) => {
-      if (a.gw !== b.gw) return a.gw - b.gw; // Sort by gameweek ascending
-      return b.maxOpportunityRating - a.maxOpportunityRating; // Then by opportunity
-    });
-  }, [fixtures]);
-
+  // Calculate min/max gameweeks
   const { minGameweek, maxGameweek } = useMemo(() => {
     const gameweeks = fixtures.map((f) => f.gw).filter((gw) => typeof gw === "number" && !isNaN(gw));
     const minGw = gameweeks.length > 0 ? Math.min(...gameweeks) : 15; // Only upcoming gameweeks
@@ -597,6 +595,16 @@ export default function FixtureAnalysisPage() {
       maxGameweek: gameweeks.length > 0 ? Math.max(...gameweeks) : 38
     };
   }, [fixtures]);
+
+  // Filter and display fixtures - Show selected gameweek only
+  const displayFixtures = useMemo(() => {
+    // Filter by selected gameweek
+    const selectedGw = gameweek ?? minGameweek;
+    let filtered = fixtures.filter((f) => f.gw === selectedGw);
+    
+    // Sort by best opportunities within the selected week
+    return filtered.sort((a, b) => b.maxOpportunityRating - a.maxOpportunityRating);
+  }, [fixtures, gameweek, minGameweek]);
 
   const getSortIcon = (column: string) => {
     if (sortBy !== column) return <ArrowUpDown className="h-3 w-3" />;
@@ -669,216 +677,204 @@ export default function FixtureAnalysisPage() {
           </TabsList>
 
           <TabsContent value="fixtures" className="space-y-4 sm:space-y-6">
-            {/* Best Fixtures Highlight */}
+            {/* Gameweek Selector with Navigation */}
             {displayFixtures.length > 0 && (
-              <Card className="border-purple-500/30 bg-gradient-to-r from-purple-500/10 to-blue-500/10 backdrop-blur-md shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.01] animate-in fade-in slide-in-from-bottom" style={{ animationDelay: '400ms' }}>
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500/20 group-hover:scale-110 transition-transform duration-300">
-                      <Target className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-sm font-bold text-foreground mb-1">🎯 Top Fixture Opportunity</h3>
-                      <p className="text-xs text-muted-foreground">
-                        Best fixture: <span className="font-bold text-foreground">{displayFixtures[0].fixture}</span> (GW {displayFixtures[0].gw})
-                        {displayFixtures[0].favorability !== "Neutral" && (
-                          <span className="ml-2 text-purple-600 dark:text-purple-400 font-semibold">⭐ {displayFixtures[0].favorability} favored</span>
-                        )}
-                      </p>
-                    </div>
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="flex items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto">
+                  <Button
+                    onClick={() => {
+                      const prevGW = Math.max(minGameweek, (gameweek || minGameweek) - 1);
+                      setGameweek(prevGW);
+                    }}
+                    disabled={gameweek === minGameweek}
+                    variant="ghost"
+                    size="icon"
+                    className="h-12 w-12 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition-all active:scale-90 active:bg-muted/80 disabled:opacity-50 disabled:cursor-not-allowed"
+                    aria-label="Previous gameweek"
+                  >
+                    <ChevronLeft className="h-6 w-6 sm:h-5 sm:w-5" />
+                  </Button>
+                  <div className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-secondary/70 to-secondary/50 backdrop-blur font-semibold text-xl sm:text-xl shadow-lg border border-border/50 min-w-[160px] text-center">
+                    Gameweek {gameweek || minGameweek}
                   </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Gameweek Selector - Now just for reference, not filtering */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground mb-1">Showing all upcoming gameweeks</p>
-                <p className="text-xs text-muted-foreground">Scroll down to see GW {minGameweek} through GW {maxGameweek}</p>
+                  <Button
+                    onClick={() => {
+                      const nextGW = Math.min(maxGameweek, (gameweek || minGameweek) + 1);
+                      setGameweek(nextGW);
+                    }}
+                    disabled={gameweek === maxGameweek}
+                    variant="ghost"
+                    size="icon"
+                    className="h-12 w-12 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition-all active:scale-90 active:bg-muted/80 disabled:opacity-50 disabled:cursor-not-allowed"
+                    aria-label="Next gameweek"
+                  >
+                    <ChevronRight className="h-6 w-6 sm:h-5 sm:w-5" />
+                  </Button>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Fixtures Grid - Grouped by Gameweek */}
             {displayFixtures.length === 0 ? (
               <Card className="border-dashed border-2 bg-secondary/20">
                 <CardContent className="p-10 text-center">
-                  <p className="text-lg font-semibold text-foreground">No upcoming fixtures available.</p>
+                  <p className="text-lg font-semibold text-foreground">No fixtures available for this gameweek.</p>
                 </CardContent>
               </Card>
             ) : (
-              <>
-                {Array.from(
-                  displayFixtures.reduce((acc: Map<number, any[]>, fixture: any) => {
-                    if (!acc.has(fixture.gw)) acc.set(fixture.gw, []);
-                    acc.get(fixture.gw)!.push(fixture);
-                    return acc;
-                  }, new Map<number, any[]>()).entries()
-                ).map(([gw, gwFixtures]: [number, any[]]) => (
-                  <div key={`gw-${gw}`} className="space-y-4">
-                    {/* Gameweek Header */}
-                    <div className="flex items-center gap-3 px-2 py-2">
-                      <h2 className="text-xl font-bold text-foreground">Gameweek {gw}</h2>
-                      <div className="flex-1 h-px bg-gradient-to-r from-purple-500/30 to-transparent"></div>
-                    </div>
-                    
-                    {/* Fixtures for this gameweek */}
-                    <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
-                      {gwFixtures.map((fixture, index) => (
-                <Card
-                  key={index}
-                  style={{ animationDelay: `${index * 50}ms` }}
-                  className="overflow-hidden border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] animate-in fade-in slide-in-from-bottom group"
-                >
-                  <CardHeader className="p-3 sm:p-4 bg-gradient-to-r from-purple-500/10 to-blue-500/10 group-hover:from-purple-500/20 group-hover:to-blue-500/20 transition-all duration-300">
-                    <div className="flex items-center justify-between gap-2">
-                      <CardTitle className="text-base sm:text-lg font-bold text-foreground truncate group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-200">
-                        {fixture.fixture}
-                      </CardTitle>
-                      {fixture.favorability !== "Neutral" ? (
-                        <Badge
-                          variant="secondary"
-                          className="text-xs bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200 hover:scale-105 transition-transform duration-200"
-                          title="Team favored to win based on attack and defense scores"
-                        >
-                          ⭐ {fixture.favorability} Favoured
-                        </Badge>
-                      ) : (
-                        <Badge
-                          variant="secondary"
-                          className="text-xs bg-slate-100 text-slate-800 dark:bg-slate-800/30 dark:text-slate-200"
-                          title="No clear favorite based on attack and defense scores"
-                        >
-                          Neutral
-                        </Badge>
-                      )}
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-3 sm:p-4 space-y-3 sm:space-y-4">
-                    {/* Home Team */}
-                    <div
-                      className={`p-3 sm:p-4 rounded-xl border transition-all duration-300 hover:scale-[1.01] ${getTeamBackgroundColor(fixture.teams.home.team)} ${getTeamBorderColor(fixture.teams.home.team)}`}
-                    >
-                      <div className="flex items-center justify-between mb-2 sm:mb-3">
-                        <h3 className="font-semibold text-sm sm:text-base text-foreground truncate">
-                          {fixture.teams.home.team} (H)
-                        </h3>
+              <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {displayFixtures.map((fixture, index) => (
+                  <Card
+                    key={index}
+                    style={{ animationDelay: `${index * 50}ms` }}
+                    className="overflow-hidden border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] animate-in fade-in slide-in-from-bottom group"
+                  >
+                    <CardHeader className="p-3 sm:p-4 bg-gradient-to-r from-purple-500/10 to-blue-500/10 group-hover:from-purple-500/20 group-hover:to-blue-500/20 transition-all duration-300">
+                      <div className="flex items-center justify-between gap-2">
+                        <CardTitle className="text-base sm:text-lg font-bold text-foreground truncate group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-200">
+                          {fixture.fixture}
+                        </CardTitle>
+                        {fixture.favorability !== "Neutral" ? (
+                          <Badge
+                            variant="secondary"
+                            className="text-xs bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200 hover:scale-105 transition-transform duration-200"
+                            title="Team favored to win based on attack and defense scores"
+                          >
+                            ⭐ {fixture.favorability} Favoured
+                          </Badge>
+                        ) : (
+                          <Badge
+                            variant="secondary"
+                            className="text-xs bg-slate-100 text-slate-800 dark:bg-slate-800/30 dark:text-slate-200"
+                            title="No clear favorite based on attack and defense scores"
+                          >
+                            Neutral
+                          </Badge>
+                        )}
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Target className="h-4 w-4" />
-                            <Badge
-                              aria-label={`Attack Rank ${fixture.teams.home.rank.attack}`}
-                              className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
-                                "rank",
-                                fixture.teams.home.rank.attack
-                              )}`}
-                            >
-                              #{fixture.teams.home.rank.attack} Attack
-                            </Badge>
-                          </div>
-                          <div className="text-center">
-                            <p className="text-xs text-muted-foreground mb-1">💪 Attacking Threat</p>
-                            <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.attackRating).color}`}>
-                              {fixture.teams.home.attackRating}%
-                            </p>
-                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.home.attackRating).bgColor} ${getRatingDisplay(fixture.teams.home.attackRating).borderColor} ${getRatingDisplay(fixture.teams.home.attackRating).textColor}`}>
-                              {getRatingDisplay(fixture.teams.home.attackRating).emoji} {getRatingDisplay(fixture.teams.home.attackRating).label}
-                            </Badge>
-                          </div>
+                    </CardHeader>
+                    <CardContent className="p-3 sm:p-4 space-y-3 sm:space-y-4">
+                      {/* Home Team */}
+                      <div
+                        className={`p-3 sm:p-4 rounded-xl border transition-all duration-300 hover:scale-[1.01] ${getTeamBackgroundColor(fixture.teams.home.team)} ${getTeamBorderColor(fixture.teams.home.team)}`}
+                      >
+                        <div className="flex items-center justify-between mb-2 sm:mb-3">
+                          <h3 className="font-semibold text-sm sm:text-base text-foreground truncate">
+                            {fixture.teams.home.team} (H)
+                          </h3>
                         </div>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Shield className="h-4 w-4" />
-                            <Badge
-                              aria-label={`Defense Rank ${fixture.teams.home.rank.defense}`}
-                              className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
-                                "rank",
-                                fixture.teams.home.rank.defense
-                              )}`}
-                            >
-                              #{fixture.teams.home.rank.defense} Defense
-                            </Badge>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Target className="h-4 w-4" />
+                              <Badge
+                                aria-label={`Attack Rank ${fixture.teams.home.rank.attack}`}
+                                className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
+                                  "rank",
+                                  fixture.teams.home.rank.attack
+                                )}`}
+                              >
+                                #{fixture.teams.home.rank.attack} Attack
+                              </Badge>
+                            </div>
+                            <div className="text-center">
+                              <p className="text-xs text-muted-foreground mb-1">💪 Attacking Threat</p>
+                              <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.attackRating).color}`}>
+                                {fixture.teams.home.attackRating}%
+                              </p>
+                              <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.home.attackRating).bgColor} ${getRatingDisplay(fixture.teams.home.attackRating).borderColor} ${getRatingDisplay(fixture.teams.home.attackRating).textColor}`}>
+                                {getRatingDisplay(fixture.teams.home.attackRating).emoji} {getRatingDisplay(fixture.teams.home.attackRating).label}
+                              </Badge>
+                            </div>
                           </div>
-                          <div className="text-center">
-                            <p className="text-xs text-muted-foreground mb-1">🛡️ Defensive Odds</p>
-                            <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.defenseRating).color}`}>
-                              {fixture.teams.home.defenseRating}%
-                            </p>
-                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.home.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.home.defenseRating).borderColor} ${getRatingDisplay(fixture.teams.home.defenseRating).textColor}`}>
-                              {getRatingDisplay(fixture.teams.home.defenseRating).emoji} {getRatingDisplay(fixture.teams.home.defenseRating).label}
-                            </Badge>
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Shield className="h-4 w-4" />
+                              <Badge
+                                aria-label={`Defense Rank ${fixture.teams.home.rank.defense}`}
+                                className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
+                                  "rank",
+                                  fixture.teams.home.rank.defense
+                                )}`}
+                              >
+                                #{fixture.teams.home.rank.defense} Defense
+                              </Badge>
+                            </div>
+                            <div className="text-center">
+                              <p className="text-xs text-muted-foreground mb-1">🛡️ Defensive Odds</p>
+                              <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.defenseRating).color}`}>
+                                {fixture.teams.home.defenseRating}%
+                              </p>
+                              <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.home.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.home.defenseRating).borderColor} ${getRatingDisplay(fixture.teams.home.defenseRating).textColor}`}>
+                                {getRatingDisplay(fixture.teams.home.defenseRating).emoji} {getRatingDisplay(fixture.teams.home.defenseRating).label}
+                              </Badge>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Away Team */}
-                    <div
-                      className={`p-3 sm:p-4 rounded-xl border transition-all duration-300 hover:scale-[1.01] ${getTeamBackgroundColor(fixture.teams.away.team)} ${getTeamBorderColor(fixture.teams.away.team)}`}
-                    >
-                      <div className="flex items-center justify-between mb-2 sm:mb-3">
-                        <h3 className="font-semibold text-sm sm:text-base text-foreground truncate">
-                          {fixture.teams.away.team} (A)
-                        </h3>
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Target className="h-4 w-4" />
-                            <Badge
-                              aria-label={`Attack Rank ${fixture.teams.away.rank.attack}`}
-                              className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
-                                "rank",
-                                fixture.teams.away.rank.attack
-                              )}`}
-                            >
-                              #{fixture.teams.away.rank.attack} Attack
-                            </Badge>
+                      {/* Away Team */}
+                      <div
+                        className={`p-3 sm:p-4 rounded-xl border transition-all duration-300 hover:scale-[1.01] ${getTeamBackgroundColor(fixture.teams.away.team)} ${getTeamBorderColor(fixture.teams.away.team)}`}
+                      >
+                        <div className="flex items-center justify-between mb-2 sm:mb-3">
+                          <h3 className="font-semibold text-sm sm:text-base text-foreground truncate">
+                            {fixture.teams.away.team} (A)
+                          </h3>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Target className="h-4 w-4" />
+                              <Badge
+                                aria-label={`Attack Rank ${fixture.teams.away.rank.attack}`}
+                                className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
+                                  "rank",
+                                  fixture.teams.away.rank.attack
+                                )}`}
+                              >
+                                #{fixture.teams.away.rank.attack} Attack
+                              </Badge>
+                            </div>
+                            <div className="text-center">
+                              <p className="text-xs text-muted-foreground mb-1">💪 Attacking Threat</p>
+                              <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.attackRating).color}`}>
+                                {fixture.teams.away.attackRating}%
+                              </p>
+                              <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.away.attackRating).bgColor} ${getRatingDisplay(fixture.teams.away.attackRating).borderColor} ${getRatingDisplay(fixture.teams.away.attackRating).textColor}`}>
+                                {getRatingDisplay(fixture.teams.away.attackRating).emoji} {getRatingDisplay(fixture.teams.away.attackRating).label}
+                              </Badge>
+                            </div>
                           </div>
-                          <div className="text-center">
-                            <p className="text-xs text-muted-foreground mb-1">💪 Attacking Threat</p>
-                            <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.attackRating).color}`}>
-                              {fixture.teams.away.attackRating}%
-                            </p>
-                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.away.attackRating).bgColor} ${getRatingDisplay(fixture.teams.away.attackRating).borderColor} ${getRatingDisplay(fixture.teams.away.attackRating).textColor}`}>
-                              {getRatingDisplay(fixture.teams.away.attackRating).emoji} {getRatingDisplay(fixture.teams.away.attackRating).label}
-                            </Badge>
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Shield className="h-4 w-4" />
+                              <Badge
+                                aria-label={`Defense Rank ${fixture.teams.away.rank.defense}`}
+                                className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
+                                  "rank",
+                                  fixture.teams.away.rank.defense
+                                )}`}
+                              >
+                                #{fixture.teams.away.rank.defense} Defense
+                              </Badge>
+                            </div>
+                            <div className="text-center">
+                              <p className="text-xs text-muted-foreground mb-1">🛡️ Defensive Odds</p>
+                              <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.defenseRating).color}`}>
+                                {fixture.teams.away.defenseRating}%
+                              </p>
+                              <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.away.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.away.defenseRating).borderColor} ${getRatingDisplay(fixture.teams.away.defenseRating).textColor}`}>
+                                {getRatingDisplay(fixture.teams.away.defenseRating).emoji} {getRatingDisplay(fixture.teams.away.defenseRating).label}
+                              </Badge>
+                            </div>
                           </div>
                         </div>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Shield className="h-4 w-4" />
-                            <Badge
-                              aria-label={`Defense Rank ${fixture.teams.away.rank.defense}`}
-                              className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
-                                "rank",
-                                fixture.teams.away.rank.defense
-                              )}`}
-                            >
-                              #{fixture.teams.away.rank.defense} Defense
-                            </Badge>
-                          </div>
-                          <div className="text-center">
-                            <p className="text-xs text-muted-foreground mb-1">🛡️ Defensive Odds</p>
-                            <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.defenseRating).color}`}>
-                              {fixture.teams.away.defenseRating}%
-                            </p>
-                            <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.away.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.away.defenseRating).borderColor} ${getRatingDisplay(fixture.teams.away.defenseRating).textColor}`}>
-                              {getRatingDisplay(fixture.teams.away.defenseRating).emoji} {getRatingDisplay(fixture.teams.away.defenseRating).label}
-                            </Badge>
-                          </div>
-                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-                      ))}
-                    </div>
-                  </div>
+                    </CardContent>
+                  </Card>
                 ))}
-              </>
+              </div>
             )}
           </TabsContent>
 
