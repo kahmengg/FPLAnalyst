@@ -6,6 +6,7 @@ import { Home, TrendingUp, Trophy, Calendar, Gem, Target, Menu, X, Clock, Activi
 import { useState, useEffect } from "react"
 import { ThemeToggle } from "./theme-toggle"
 import { getDashboardSummary } from "@/lib/supabase"
+import { DATA_SEASON } from "@/lib/season"
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home, color: "text-emerald-500", bgColor: "bg-emerald-500/10", hoverColor: "hover:bg-emerald-500/20" },
@@ -19,7 +20,7 @@ const navigation = [
 export function Sidebar() {
   const pathname = usePathname()
   const [isMobileOpen, setIsMobileOpen] = useState(false)
-  const [gameweek, setGameWeek] = useState(15) // Default gameweek
+  const [gameweek, setGameWeek] = useState(38) // Completed season fallback
   const [lastSyncedAt, setLastSyncedAt] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -35,7 +36,7 @@ export function Sidebar() {
       } catch (err: unknown) {
         const message = err instanceof Error ? err.message : "Unknown error"
         setError(`Failed to fetch gameweek: ${message}`)
-        setGameWeek(15) // Fallback to default
+        setGameWeek(38) // The archived dataset ended at GW38
       } finally {
         setLoading(false)
       }
@@ -96,9 +97,9 @@ export function Sidebar() {
                   FPL Analyst
                 </h1>
                 <div className="flex items-center gap-2">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                  <p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                    GW {gameweek} • 2025/26 • Live
+                  <div className="h-1.5 w-1.5 rounded-full bg-amber-500"></div>
+                  <p className="text-xs text-amber-700 dark:text-amber-400 font-medium">
+                    GW {gameweek} • {DATA_SEASON.label} • Final
                   </p>
                 </div>
               </div>
@@ -192,8 +193,8 @@ export function Sidebar() {
                   : "Unknown"}
               </p>
               <div className="flex items-center gap-2 mt-2">
-                <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                <p className="text-xs text-emerald-600 dark:text-emerald-400">Data refreshed from sync</p>
+                <div className="h-2 w-2 rounded-full bg-amber-500"></div>
+                <p className="text-xs text-amber-700 dark:text-amber-400">Archived season dataset</p>
               </div>
             </div>
           </div>

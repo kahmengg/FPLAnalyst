@@ -6,8 +6,14 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim() || ''
 export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
 
 const DEFAULT_SEASON = '2025_26'
+const CONFIGURED_SEASON = process.env.NEXT_PUBLIC_FPL_SEASON_KEY?.trim() || ''
 let cachedSeason: string | null = null
+let seasonPromise: Promise<string> | null = null
 let cachedPlayers: any[] | null = null
+let cachedSeasonStats: { season: string; rows: any[] } | null = null
+let seasonStatsPromise: Promise<any[]> | null = null
+let cachedFixtureBase: { season: string; fixtures: any[]; teams: any[]; ranks: any[] } | null = null
+let fixtureBasePromise: Promise<{ season: string; fixtures: any[]; teams: any[]; ranks: any[] }> | null = null
 
 function safeNumber(value: any, fallback = 0) {
   const parsed = typeof value === 'number' ? value : parseFloat(String(value ?? ''))
@@ -90,84 +96,38 @@ function normalizePlayerRow(row: any) {
   }
 }
 
-function normalizeInsightRow(row: any) {
-  const payload = row?.payload && typeof row.payload === 'object' ? row.payload : {}
-  const team = normalizeTeam({ ...row, ...payload })
-  const position = firstString(row?.position, payload?.position, payload?.position_name)
-  const playerName = firstString(row?.player_name, row?.web_name, payload?.player, payload?.name)
-  const webName = firstString(row?.web_name, payload?.web_name, playerName)
-
-  return {
-    ...payload,
-    ...row,
-    ...team,
-    player: firstString(row?.player, payload?.player, playerName, webName),
-    player_name: playerName || webName,
-    web_name: webName || playerName,
-    name: webName || playerName,
-    position,
-    position_name: firstString(payload?.position_name, row?.position_name, position),
-    price: safeNumber(row?.price ?? payload?.price ?? row?.cost, 0),
-    ownership: safeNumber(row?.ownership ?? payload?.ownership ?? row?.selected_by_percent, 0),
-    points_per_game: safeNumber(payload?.points_per_game ?? row?.points_per_game, 0),
-    goals_per_game: safeNumber(payload?.goals_per_game ?? row?.goals_per_game, 0),
-    assists_per_game: safeNumber(payload?.assists_per_game ?? row?.assists_per_game, 0),
-    clean_sheet_rate: safeNumber(payload?.clean_sheet_rate ?? row?.clean_sheet_rate, 0),
-    selected_by_percent: safeNumber(payload?.selected_by_percent ?? row?.selected_by_percent ?? row?.ownership, 0),
-    form: safeNumber(payload?.form ?? row?.form, 0),
-    attacker_score: safeNumber(payload?.attacker_score ?? row?.attacker_score, 0),
-    defender_score: safeNumber(payload?.defender_score ?? row?.defender_score, 0),
-    points: safeNumber(row?.points ?? payload?.points, 0),
-    team: team.team,
-    team_name: team.team_name,
-    team_short: team.team_short,
-  }
-}
-
-function dedupeInsights(rows: any[]) {
-  const seen = new Map<string, any>()
-
-  for (const row of rows) {
-    const key = [row.insight_type || '', row.player_name || row.web_name || row.player || '', row.team_short || row.team || ''].join('|')
-    const existing = seen.get(key)
-
-    if (!existing) {
-      seen.set(key, row)
-      continue
-    }
-
-    const existingCreated = String(existing.created_at || '')
-    const candidateCreated = String(row.created_at || '')
-    if (candidateCreated >= existingCreated) {
-      seen.set(key, row)
-    }
-  }
-
-  return Array.from(seen.values())
-}
-
 async function getSeason() {
+  // A configured season avoids an extra network round trip on every fresh page load.
+  if (CONFIGURED_SEASON) {
+    return CONFIGURED_SEASON
+  }
+
   if (cachedSeason) {
     return cachedSeason
   }
 
-  if (!supabase) {
-    cachedSeason = DEFAULT_SEASON
+  // Several page queries start together, so share one season lookup between them.
+  if (!seasonPromise) {
+    seasonPromise = (async () => {
+      if (!supabase) return DEFAULT_SEASON
+
+      const sources = ['team_rankings', 'fixtures', 'player_season_stats', 'player_gameweeks']
+      for (const table of sources) {
+        const { data } = await supabase.from(table).select('season_key').order('season_key', { ascending: false }).limit(1)
+        const season = data?.[0]?.season_key
+        if (season) return season
+      }
+
+      return DEFAULT_SEASON
+    })()
+  }
+
+  try {
+    cachedSeason = await seasonPromise
     return cachedSeason
+  } finally {
+    seasonPromise = null
   }
-
-  const sources = ['team_rankings', 'fixtures', 'player_season_stats', 'player_gameweeks', 'player_insights']
-  for (const table of sources) {
-    const { data } = await supabase.from(table).select('season_key').order('season_key', { ascending: false }).limit(1)
-    const season = data?.[0]?.season_key
-    if (season) {
-      cachedSeason = season
-      return season
-    }
-  }
-
-  cachedSeason = DEFAULT_SEASON
-  return cachedSeason
 }
 
 async function getAllPlayersCached(limit = 1000) {
@@ -294,23 +254,41 @@ function rankRows(rows: any[], key: string, desc = true) {
   return sorted.map((row, idx) => ({ ...row, rank: idx + 1 }))
 }
 
-async function buildInsightsFallback(insightType: string, limit: number) {
+async function getSeasonStatsBase() {
   if (!supabase) return []
 
   const season = await getSeason()
-  const { data, error } = await supabase
-    .from('player_season_stats')
-    .select('season_key, player_id, gameweeks_played, total_minutes, total_points, goals, assists, xg, xa, xgi, shots, clean_sheets, defensive_contribution, tackles, points_per_million, pvsxp_total, form, xgi_per90, players!inner(player_name, web_name, position, cost, ownership, teams!left(name, short_name))')
-    .eq('season_key', season)
+  if (cachedSeasonStats?.season === season) return cachedSeasonStats.rows
 
-  if (error) {
-    console.error(`Fallback insight query failed (${insightType}):`, error)
-    return []
+  // All insight tabs are derived from the same season rows; fetch them only once.
+  if (!seasonStatsPromise) {
+    seasonStatsPromise = (async () => {
+      const { data, error } = await supabase
+        .from('player_season_stats')
+        .select('season_key, player_id, gameweeks_played, total_minutes, total_points, goals, assists, xg, xa, xgi, shots, clean_sheets, defensive_contribution, tackles, points_per_million, pvsxp_total, form, xgi_per90, players!inner(player_name, web_name, position, cost, ownership, teams!left(name, short_name))')
+        .eq('season_key', season)
+
+      if (error) {
+        throw new Error(`Failed to load player season stats: ${error.message}`)
+      }
+
+      return (data || [])
+        .map(normalizeSeasonStatsRow)
+        .filter((row) => row.player && row.team)
+    })()
   }
 
-  const base = (data || [])
-    .map(normalizeSeasonStatsRow)
-    .filter((row) => row.player && row.team)
+  try {
+    const rows = await seasonStatsPromise
+    cachedSeasonStats = { season, rows }
+    return rows
+  } finally {
+    seasonStatsPromise = null
+  }
+}
+
+async function buildInsightsFallback(insightType: string, limit: number) {
+  const base = await getSeasonStatsBase()
 
   let selected: any[] = []
   switch (insightType) {
@@ -347,28 +325,60 @@ async function buildInsightsFallback(insightType: string, limit: number) {
   return selected.slice(0, limit)
 }
 
+async function getFixtureBase() {
+  if (!supabase) {
+    return { season: DEFAULT_SEASON, fixtures: [], teams: [], ranks: [] }
+  }
+
+  const season = await getSeason()
+  if (cachedFixtureBase?.season === season) return cachedFixtureBase
+
+  // Fixture screens need the same three datasets in different shapes. Sharing
+  // this request prevents duplicate reads and browser connection starvation.
+  if (!fixtureBasePromise) {
+    fixtureBasePromise = (async () => {
+      const [fixturesRes, teamsRes, ranksRes] = await Promise.all([
+        supabase
+          .from('fixtures')
+          .select('id, season_key, gameweek, home_team_id, away_team_id, home_attack_fdr, home_defense_fdr, away_attack_fdr, away_defense_fdr, home_attacking_favorability, home_defensive_favorability, away_attacking_favorability, away_defensive_favorability')
+          .eq('season_key', season)
+          .order('gameweek'),
+        supabase.from('teams').select('id, name, short_name'),
+        supabase
+          .from('team_rankings')
+          .select('team_id, overall_rank, attack_score_5, defense_score_5, home_strength_10, away_strength_10')
+          .eq('season_key', season),
+      ])
+
+      const error = fixturesRes.error || teamsRes.error || ranksRes.error
+      if (error) throw new Error(`Failed to load fixture data: ${error.message}`)
+
+      return {
+        season,
+        fixtures: fixturesRes.data || [],
+        teams: teamsRes.data || [],
+        ranks: ranksRes.data || [],
+      }
+    })()
+  }
+
+  try {
+    const base = await fixtureBasePromise
+    cachedFixtureBase = base
+    return base
+  } finally {
+    fixtureBasePromise = null
+  }
+}
+
 async function buildTeamFixtureSummaryFallback() {
   if (!supabase) return []
 
-  const season = await getSeason()
-  const [fixturesRes, teamsRes] = await Promise.all([
-    supabase
-      .from('fixtures')
-      .select('season_key, gameweek, home_team_id, away_team_id, home_attack_fdr, home_defense_fdr, away_attack_fdr, away_defense_fdr, home_attacking_favorability, home_defensive_favorability, away_attacking_favorability, away_defensive_favorability')
-      .eq('season_key', season)
-      .order('gameweek'),
-    supabase.from('teams').select('id, name, short_name'),
-  ])
-
-  if (fixturesRes.error) {
-    console.error('Fallback fixture summary query failed:', fixturesRes.error)
-    return []
-  }
-
-  const teamMap = new Map((teamsRes.data || []).map((t: any) => [t.id, t]))
+  const { fixtures: fixtureRows, teams } = await getFixtureBase()
+  const teamMap = new Map(teams.map((t: any) => [t.id, t]))
   const byTeam = new Map<string, any[]>()
 
-  for (const f of fixturesRes.data || []) {
+  for (const f of fixtureRows) {
     const homeEntries = byTeam.get(f.home_team_id) || []
     homeEntries.push({
       gw: safeInt(f.gameweek, 0),
@@ -435,32 +445,9 @@ export async function getPlayerInsights(insightType: string, limit = 100) {
   try {
     if (!supabase) return []
 
-    const season = await getSeason()
-    const { data, error } = await supabase
-      .from('player_insights')
-      .select('*')
-      .eq('season_key', season)
-      .eq('insight_type', insightType)
-      .order('rank')
-      .limit(Math.max(limit * 5, limit))
-
-    if (error) {
-      if (String(error.message || '').toLowerCase().includes('could not find the table')) {
-        return await buildInsightsFallback(insightType, limit)
-      }
-
-      console.error(`Error fetching ${insightType}:`, error)
-      return []
-    }
-
-    if (!data || data.length === 0) {
-      return await buildInsightsFallback(insightType, limit)
-    }
-
-    const normalized = (data || []).map(normalizeInsightRow)
-    const deduped = dedupeInsights(normalized)
-    deduped.sort((a, b) => safeInt(a.rank, 9999) - safeInt(b.rank, 9999) || safeNumber(b.points, 0) - safeNumber(a.points, 0))
-    return deduped.slice(0, limit)
+    // player_insights is not part of supabase_schema.sql; derive insights from
+    // player_season_stats instead of waiting for a guaranteed 404 first.
+    return await buildInsightsFallback(insightType, limit)
   } catch (err) {
     console.error(`Error in getPlayerInsights(${insightType}):`, err)
     return []
@@ -729,27 +716,9 @@ export async function getFixtures(gameweek?: number) {
   try {
     if (!supabase) return []
 
-    const season = await getSeason()
-    const [fixturesRes, teamsRes, ranksRes] = await Promise.all([
-      supabase
-        .from('fixtures')
-        .select('id, season_key, gameweek, home_team_id, away_team_id')
-        .eq('season_key', season)
-        .order('gameweek'),
-      supabase.from('teams').select('id, name, short_name'),
-      supabase
-        .from('team_rankings')
-        .select('team_id, overall_rank, attack_score_5, defense_score_5, home_strength_10, away_strength_10')
-        .eq('season_key', season),
-    ])
-
-    if (fixturesRes.error) {
-      console.error('Error fetching fixtures:', fixturesRes.error)
-      return []
-    }
-
-    const teamMap = new Map((teamsRes.data || []).map((team: any) => [team.id, team]))
-    const rankMap = new Map((ranksRes.data || []).map((row: any) => [row.team_id, row]))
+    const { fixtures: fixtureRows, teams, ranks } = await getFixtureBase()
+    const teamMap = new Map(teams.map((team: any) => [team.id, team]))
+    const rankMap = new Map(ranks.map((row: any) => [row.team_id, row]))
 
     // Calculate min/max of actual strength scores across all teams for normalization
     const allTeamsData = Array.from(rankMap.values())
@@ -771,7 +740,7 @@ export async function getFixtures(gameweek?: number) {
       return Math.max(20, Math.min(100, normalized))
     }
 
-    return (fixturesRes.data || [])
+    return fixtureRows
       .filter((row: any) => !gameweek || safeInt(row.gameweek, 0) === gameweek)
       .map((row: any) => {
         const homeTeam = teamMap.get(row.home_team_id) || {}
@@ -841,7 +810,7 @@ export async function getFixtures(gameweek?: number) {
       })
   } catch (err) {
     console.error('Error in getFixtures:', err)
-    return []
+    throw err
   }
 }
 
@@ -909,59 +878,12 @@ export async function getTeamFixtureSummary() {
   try {
     if (!supabase) return []
 
-    const season = await getSeason()
-    const [summaryRes, teamsRes] = await Promise.all([
-      supabase.from('team_fixture_summary').select('*').eq('season_key', season),
-      supabase.from('teams').select('id, name, short_name'),
-    ])
-
-    if (summaryRes.error) {
-      if (String(summaryRes.error.message || '').toLowerCase().includes('could not find the table')) {
-        return await buildTeamFixtureSummaryFallback()
-      }
-
-      console.error('Error fetching team fixture summary:', summaryRes.error)
-      return []
-    }
-
-    if (!summaryRes.data || summaryRes.data.length === 0) {
-      return await buildTeamFixtureSummaryFallback()
-    }
-
-    const teamMap = new Map((teamsRes.data || []).map((team: any) => [team.id, team]))
-
-    return (summaryRes.data || []).map((row: any) => {
-      const team = teamMap.get(row.team_id) || {}
-      const normalized = mergeTeamJoin({
-        ...row,
-        team: row.team || team.name || '',
-        team_name: row.team_name || team.name || '',
-        team_short: row.team_short || team.short_name || '',
-      })
-
-      return {
-        ...normalized,
-        att: safeNumber(row.avg_attack_difficulty ?? row.att ?? row.attack_avg ?? 0, 0),
-        def: safeNumber(row.avg_defense_difficulty ?? row.def ?? row.defense_avg ?? 0, 0),
-        overall: safeNumber(row.overall_difficulty ?? row.overall ?? 0, 0),
-        fixtures: safeNumber(row.num_favorable_fixtures ?? row.fixtures ?? 0, 0),
-        nearTermHomeFixtures: safeInt(row.near_term_home_fixtures ?? row.nearTermHomeFixtures, 0),
-        mediumTermHomeFixtures: safeInt(row.medium_term_home_fixtures ?? row.mediumTermHomeFixtures, 0),
-        nearTermRating: safeNumber(row.near_term_rating ?? row.nearTermRating ?? 0, 0),
-        mediumTermRating: safeNumber(row.medium_term_rating ?? row.mediumTermRating ?? 0, 0),
-        fixtureSwing: safeNumber(row.fixture_swing ?? row.fixtureSwing ?? 0, 0),
-        swingCategory: firstString(row.swing_category, row.swingCategory),
-        swingEmoji: firstString(row.swing_emoji, row.swingEmoji),
-        formContext: firstString(row.form_context, row.formContext),
-        avg_attack_difficulty: safeNumber(row.avg_attack_difficulty ?? row.att ?? 0, 0),
-        avg_defense_difficulty: safeNumber(row.avg_defense_difficulty ?? row.def ?? 0, 0),
-        overall_difficulty: safeNumber(row.overall_difficulty ?? row.overall ?? 0, 0),
-        num_favorable_fixtures: safeNumber(row.num_favorable_fixtures ?? row.fixtures ?? 0, 0),
-      }
-    })
+    // team_fixture_summary is also absent from the schema, so build the same
+    // presentation model directly from fixtures and teams.
+    return await buildTeamFixtureSummaryFallback()
   } catch (err) {
     console.error('Error in getTeamFixtureSummary:', err)
-    return []
+    throw err
   }
 }
 

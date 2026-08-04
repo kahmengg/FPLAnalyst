@@ -103,10 +103,10 @@ export default function TeamRankingsPage() {
   }
   // END: Added fetchData
 
-  // CHANGED: Added view dependency
   useEffect(() => {
     fetchData()
-  }, [view])
+    // The view is computed from the same rows and does not need a refetch.
+  }, [])
 
   // Handler to open Quick Picks modal for a team
   const handleViewPicks = (team: any) => {
