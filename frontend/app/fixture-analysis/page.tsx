@@ -567,7 +567,8 @@ export default function FixtureAnalysisPage() {
       }
     }
     fetchData();
-  }, [activeTab]);
+  // Tab changes only switch the presentation; the underlying data is shared.
+  }, []);
 
   const sortedTeamData = useMemo(() => {
     return [...teamFixtureSummary].sort((a: any, b: any) => {
@@ -617,7 +618,7 @@ export default function FixtureAnalysisPage() {
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-        <p className="mt-2 text-muted-foreground">Loading performers...</p>
+        <p className="mt-2 text-muted-foreground">Loading fixture analysis...</p>
       </div>
     </div>
   )

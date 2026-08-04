@@ -439,7 +439,8 @@ export default function TopPerformersPage() {
       }
     }
     fetchData()
-  }, [activeTab])
+  // All tab datasets are loaded together, so switching tabs should not refetch.
+  }, [])
   
   if (!mounted || loading) return (
     <div className="min-h-screen flex items-center justify-center">

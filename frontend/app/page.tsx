@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Users, Trophy, Calendar, Clock, ArrowRight } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useState, useEffect } from "react"
-import { getDashboardSummary, getAllPlayers } from "@/lib/supabase"
+import { getDashboardSummary, getPlayerInsights } from "@/lib/supabase"
 
 function formatLastSynced(value: string | null) {
   if (!value) return "Unknown"
@@ -27,7 +27,7 @@ const navigationCards = [
   {
     title: "Players",
     description: "Browse all players with advanced filters and sorting",
-    href: "/players",
+    href: "/top-performers",
     icon: Users,
     color: "from-blue-500/20 to-blue-600/20",
     borderColor: "border-blue-500/30",
@@ -35,7 +35,7 @@ const navigationCards = [
   {
     title: "Teams",
     description: "View team strength and squad details",
-    href: "/teams",
+    href: "/team-rankings",
     icon: Trophy,
     color: "from-amber-500/20 to-amber-600/20",
     borderColor: "border-amber-500/30",
@@ -43,7 +43,7 @@ const navigationCards = [
   {
     title: "Fixtures",
     description: "Analyze upcoming fixtures and difficulty ratings",
-    href: "/fixtures",
+    href: "/fixture-analysis",
     icon: Calendar,
     color: "from-purple-500/20 to-purple-600/20",
     borderColor: "border-purple-500/30",
@@ -61,12 +61,15 @@ export default function HomePage() {
       setLoading(true)
       setError(null)
       try {
-        const dashboardData = await getDashboardSummary()
+        // These requests are independent, so load the dashboard in one round.
+        const [dashboardData, seasonPerformers] = await Promise.all([
+          getDashboardSummary(),
+          getPlayerInsights("season_performers", 100),
+        ])
         setSummary(dashboardData)
 
-        // Get top 3 form players
-        const allPlayers = await getAllPlayers(1000)
-        const formPlayers = allPlayers
+        // Form lives in player_season_stats, not in the players table.
+        const formPlayers = seasonPerformers
           .filter((p: any) => p.form && p.form > 0)
           .sort((a: any, b: any) => (b.form || 0) - (a.form || 0))
           .slice(0, 3)
@@ -79,6 +82,10 @@ export default function HomePage() {
           }))
 
         setTopFormPlayers(formPlayers)
+
+        if (!dashboardData.total_players && formPlayers.length === 0) {
+          throw new Error("Supabase returned no FPL data. Check the season key, schema, ETL sync, and read policies.")
+        }
       } catch (err: unknown) {
         const message = err instanceof Error ? err.message : "Unknown error"
         setError(`Failed to fetch data: ${message}`)
@@ -96,6 +103,25 @@ export default function HomePage() {
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto"></div>
           <p className="mt-2 text-slate-600 dark:text-slate-400">Loading dashboard...</p>
         </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <Card className="max-w-lg">
+          <CardContent className="p-8 text-center">
+            <h2 className="text-xl font-semibold mb-2">Dashboard data could not be loaded</h2>
+            <p className="text-sm text-muted-foreground mb-4">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700"
+            >
+              Retry
+            </button>
+          </CardContent>
+        </Card>
       </div>
     )
   }

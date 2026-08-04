@@ -1,6 +1,7 @@
 import type React from "react"
 import '@/app/globals.css';
 import { Sidebar } from "@/components/sidebar"
+import { SeasonStatusBanner } from "@/components/season-status-banner"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Inter, JetBrains_Mono } from "next/font/google"
 
@@ -36,7 +37,10 @@ export default function RootLayout({
         >
           <div className="flex min-h-screen">
             <Sidebar />
-            <main className="flex-1">{children}</main>
+            <main className="min-w-0 flex-1">
+              <SeasonStatusBanner />
+              {children}
+            </main>
           </div>
         </ThemeProvider>
       </body>

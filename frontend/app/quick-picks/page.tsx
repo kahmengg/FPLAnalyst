@@ -150,7 +150,12 @@ export default function QuickPicksPage() {
   // CHANGED: Added activeTab dependency
   useEffect(() => {
     fetchData()
-    setSelectedTeams([]) // Clear filters when switching tabs
+    // Both datasets are loaded together; tab changes do not need another fetch.
+  }, [])
+
+  useEffect(() => {
+    // Team filters are specific to the visible attacking/defensive list.
+    setSelectedTeams([])
   }, [activeTab])
 
   // Filter picks based on selected teams
