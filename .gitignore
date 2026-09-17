@@ -1,0 +1,23 @@
+# Local Python environments and caches
+venv/
+.venv/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local secrets
+.env
+backend/.env
+frontend/.env.local
+
+# Frontend dependencies and generated output
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/next-env.d.ts
+frontend/*.tsbuildinfo
+
+# Editor and operating-system noise
+.DS_Store
+Thumbs.db
+

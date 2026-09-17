@@ -10,7 +10,7 @@ services:
     envVars:
       - key: SUPABASE_URL
         value: ${SUPABASE_URL}
-      - key: SUPABASE_ANON_KEY
-        value: ${SUPABASE_ANON_KEY}
+      - key: SUPABASE_PUBLISHABLE_KEY
+        value: ${SUPABASE_PUBLISHABLE_KEY}
       - key: FPL_DATA_SEASON
         value: "2026_27"

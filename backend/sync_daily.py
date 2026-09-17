@@ -228,6 +228,17 @@ def main() -> None:
         print(f"✅ Fixtures valid: {fixtures}")
         return
 
+    if not args.fixtures_only:
+        try:
+            # Check database connectivity before replacing either source CSV.
+            from utils.supabase_client import validate_supabase_connection
+
+            validate_supabase_connection()
+            print("✅ Supabase connection and schema are ready")
+        except Exception as error:
+            print(f"❌ Supabase preflight failed: {error}")
+            sys.exit(1)
+
     try:
         fixture_content = fetch_fixture_csv()
         fixture_summary = validate_fixture_csv(fixture_content)

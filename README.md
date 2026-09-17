@@ -18,6 +18,7 @@ Official FPL bootstrap + fixtures API ┘      └─> backend/etl/process_fpl_d
 ## Project structure
 
 ```text
+run_pipeline.ps1           One-command environment setup and complete pipeline
 backend/
   app.py                    Optional Flask read API
   sync_daily.py             Download, validate, and atomically replace both CSVs
@@ -43,22 +44,26 @@ render.yaml                 Render backend service configuration
 
 ## Setup
 
-Apply `supabase_schema.sql` in the Supabase SQL editor, then create `backend/.env`:
+Apply `supabase_schema.sql` in the Supabase SQL editor, then copy `backend/.env.example` to `backend/.env` and replace the placeholders:
+
+```powershell
+Copy-Item backend\.env.example backend\.env
+```
 
 ```env
 SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_ANON_KEY=your-public-anon-key
-SUPABASE_SERVICE_KEY=your-secret-service-role-key
+SUPABASE_PUBLISHABLE_KEY=sb_publishable_your-key
+SUPABASE_SECRET_KEY=sb_secret_your-key
 FPL_DATA_SEASON=2026_27
 ```
 
-The service-role key is required for ETL writes. Keep it server-side and never expose it through a `NEXT_PUBLIC_*` variable. The anon key is used for public reads only.
+The URL, publishable key, and secret key must all come from the same Supabase project. The secret key is required for ETL writes; keep it server-side and never expose it through a `NEXT_PUBLIC_*` variable. Legacy `anon` and `service_role` environment variables remain supported while migrating.
 
 Create `frontend/.env.local`:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-public-anon-key
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_your-key
 NEXT_PUBLIC_FPL_SEASON_KEY=2026_27
 NEXT_PUBLIC_FPL_SEASON_COMPLETE=false
 ```
@@ -74,6 +79,19 @@ npm install
 ## Updating data
 
 From the repository root:
+
+```powershell
+# Recommended: set up dependencies, refresh both inputs, and update Supabase.
+.\run_pipeline.ps1
+
+# Optional: select a season or skip the dependency check.
+.\run_pipeline.ps1 -Season 2026_27
+.\run_pipeline.ps1 -SkipInstall
+```
+
+The launcher checks DNS, credentials, and the required Supabase schema before replacing either CSV. On a new database, run `supabase_schema.sql` once in the Supabase SQL Editor first.
+
+Individual operations remain available:
 
 ```bash
 # Validate the checked-in inputs without changing them.

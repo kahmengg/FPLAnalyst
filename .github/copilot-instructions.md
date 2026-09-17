@@ -16,7 +16,7 @@ The supported pipeline is CSV -> Python ETL -> Supabase -> Next.js. Do not add r
 - Keep official-to-project team aliases in `backend/sync_daily.py` synchronized with the player export.
 - Validate a new source payload before replacing a checked-in CSV.
 - Use the anon Supabase client for reads and `get_admin_client()` for ETL writes.
-- Never expose `SUPABASE_SERVICE_KEY` to the frontend or place it in a `NEXT_PUBLIC_*` variable.
+- Never expose `SUPABASE_SECRET_KEY` to the frontend or place it in a `NEXT_PUBLIC_*` variable.
 - Public RLS is SELECT-only. Do not add anonymous write policies.
 - Keep `FPL_DATA_SEASON` and `NEXT_PUBLIC_FPL_SEASON_KEY` aligned.
 

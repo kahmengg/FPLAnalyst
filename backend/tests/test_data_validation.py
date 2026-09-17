@@ -1,10 +1,13 @@
 import unittest
+import sys
 from pathlib import Path
 
-from backend.sync_daily import validate_fixture_csv, validate_stats_csv
-
-
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+# Support test discovery from either the repository root or backend directory.
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from backend.sync_daily import validate_fixture_csv, validate_stats_csv
 
 
 class DataValidationTests(unittest.TestCase):

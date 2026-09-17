@@ -1,9 +1,11 @@
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() || ''
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim() || ''
+const supabasePublicKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim()
+  || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim()
+  || ''
 
-export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
+export const supabase = supabaseUrl && supabasePublicKey ? createClient(supabaseUrl, supabasePublicKey) : null
 
 const DEFAULT_SEASON = '2026_27'
 const CONFIGURED_SEASON = process.env.NEXT_PUBLIC_FPL_SEASON_KEY?.trim() || ''
