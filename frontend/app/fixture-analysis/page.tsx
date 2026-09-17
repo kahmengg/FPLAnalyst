@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useMemo, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -388,7 +388,7 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
         {filteredTeams.map((team, index) => (
           <Card
             key={team.team}
-            className={`border-2 ${getTeamBorderColor(team.team)} ${getTeamBackgroundColor(team.team)} hover:shadow-xl transition-all duration-300`}
+            className={`border-2 ${getTeamBorderColor(team.team)} ${getTeamBackgroundColor(team.team)} hover:shadow-md transition-all duration-300`}
           >
             <CardContent className="p-4">
               <div className="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -415,7 +415,7 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
                     team.fixtures.map((fixture, idx) => (
                       <div
                         key={idx}
-                        className={`p-2 rounded-lg border-2 transition-all duration-200 hover:scale-105 hover:shadow-md ${getDifficultyColor(fixture.difficulty)}`}
+                        className={`p-2 rounded-lg border-2 transition-all duration-200  hover:shadow-md ${getDifficultyColor(fixture.difficulty)}`}
                       >
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-[10px] font-bold opacity-70">GW{fixture.gameweek}</span>
@@ -459,18 +459,18 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
 
 function LoadingSkeleton() {
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <div className="h-10 w-72 bg-secondary/50 rounded-lg animate-pulse mb-2"></div>
-          <div className="h-6 w-96 bg-secondary/30 rounded-lg animate-pulse"></div>
+          <div className="h-10 w-72 bg-secondary/50 rounded-lg mb-2"></div>
+          <div className="h-6 w-96 bg-secondary/30 rounded-lg"></div>
         </div>
         <div className="mb-6">
-          <div className="h-16 bg-secondary/30 rounded-xl animate-pulse"></div>
+          <div className="h-16 bg-secondary/30 rounded-xl"></div>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[1, 2, 3, 4].map((item) => (
-            <div key={item} className="h-40 bg-secondary/30 rounded-xl animate-pulse"></div>
+            <div key={item} className="h-40 bg-secondary/30 rounded-xl"></div>
           ))}
         </div>
       </div>
@@ -630,7 +630,7 @@ export default function FixtureAnalysisPage() {
           <p className="text-sm text-muted-foreground mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-200 active:scale-95"
+            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-200 "
           >
             Retry
           </button>
@@ -640,34 +640,34 @@ export default function FixtureAnalysisPage() {
   )
 
   return (
-    <div className="min-h-screen p-2 sm:p-4 lg:p-6 bg-gradient-to-br from-background via-secondary/5 to-secondary/10">
+    <div className="min-h-screen p-2 sm:p-4 lg:p-6 bg-background">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-6 sm:mb-8 animate-in fade-in slide-in-from-top duration-700">
+        <div className="mb-6 sm:mb-8">
           <h1 className="mb-2 text-2xl sm:text-4xl font-bold text-foreground flex items-center gap-2 sm:gap-3">
-            <CalendarIcon className="h-6 w-6 sm:h-8 sm:w-8 text-purple-500 animate-pulse" />
+            <CalendarIcon className="h-6 w-6 sm:h-8 sm:w-8 text-purple-500" />
             <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
               <span className="hidden sm:inline">Fixture Analysis</span>
               <span className="sm:hidden">Fixtures</span>
             </span>
           </h1>
-          <p className="text-sm sm:text-lg text-muted-foreground animate-in fade-in slide-in-from-left duration-700" style={{ animationDelay: '200ms' }}>
+          <p className="text-sm sm:text-lg text-muted-foreground">
             Comprehensive gameweek analysis with strategic opportunities
             and team fixture difficulty insights to optimize your fantasy lineup.
           </p>
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="bg-secondary/50 p-1 rounded-lg border w-full grid grid-cols-2 gap-1 text-background animate-in fade-in slide-in-from-bottom duration-500" style={{ animationDelay: '300ms' }}>
+          <TabsList className="bg-secondary/50 p-1 rounded-lg border w-full grid grid-cols-2 gap-1 text-background">
             <TabsTrigger
               value="fixtures"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-blue-600 data-[state=active]:text-white"
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-blue-600 data-[state=active]:text-white"
             >
               <CalendarIcon className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden sm:inline">Fixtures</span>
             </TabsTrigger>
             <TabsTrigger
               value="opportunities"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-600 data-[state=active]:to-purple-600 data-[state=active]:text-white"
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-600 data-[state=active]:to-purple-600 data-[state=active]:text-white"
             >
               <Target className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden sm:inline">FDR</span>
@@ -692,7 +692,7 @@ export default function FixtureAnalysisPage() {
                   >
                     <ChevronLeft className="h-6 w-6 sm:h-5 sm:w-5" />
                   </Button>
-                  <div className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-secondary/70 to-secondary/50 backdrop-blur font-semibold text-xl sm:text-xl shadow-lg border border-border/50 min-w-[160px] text-center">
+                  <div className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-secondary/70 to-secondary/50 backdrop-blur font-semibold text-xl sm:text-xl shadow-sm border border-border/50 min-w-[160px] text-center">
                     Gameweek {gameweek || minGameweek}
                   </div>
                   <Button
@@ -725,7 +725,7 @@ export default function FixtureAnalysisPage() {
                   <Card
                     key={index}
                     style={{ animationDelay: `${index * 50}ms` }}
-                    className="overflow-hidden border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] animate-in fade-in slide-in-from-bottom group"
+                    className="overflow-hidden border-border bg-card/50  shadow-md hover:shadow-md transition-all duration-300  group"
                   >
                     <CardHeader className="p-3 sm:p-4 bg-gradient-to-r from-purple-500/10 to-blue-500/10 group-hover:from-purple-500/20 group-hover:to-blue-500/20 transition-all duration-300">
                       <div className="flex items-center justify-between gap-2">
@@ -735,7 +735,7 @@ export default function FixtureAnalysisPage() {
                         {fixture.favorability !== "Neutral" ? (
                           <Badge
                             variant="secondary"
-                            className="text-xs bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200 hover:scale-105 transition-transform duration-200"
+                            className="text-xs bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200  transition-transform duration-200"
                             title="Team favored to win based on attack and defense scores"
                           >
                             ⭐ {fixture.favorability} Favoured
@@ -754,7 +754,7 @@ export default function FixtureAnalysisPage() {
                     <CardContent className="p-3 sm:p-4 space-y-3 sm:space-y-4">
                       {/* Home Team */}
                       <div
-                        className={`p-3 sm:p-4 rounded-xl border transition-all duration-300 hover:scale-[1.01] ${getTeamBackgroundColor(fixture.teams.home.team)} ${getTeamBorderColor(fixture.teams.home.team)}`}
+                        className={`p-3 sm:p-4 rounded-xl border transition-all duration-300  ${getTeamBackgroundColor(fixture.teams.home.team)} ${getTeamBorderColor(fixture.teams.home.team)}`}
                       >
                         <div className="flex items-center justify-between mb-2 sm:mb-3">
                           <h3 className="font-semibold text-sm sm:text-base text-foreground truncate">
@@ -813,7 +813,7 @@ export default function FixtureAnalysisPage() {
 
                       {/* Away Team */}
                       <div
-                        className={`p-3 sm:p-4 rounded-xl border transition-all duration-300 hover:scale-[1.01] ${getTeamBackgroundColor(fixture.teams.away.team)} ${getTeamBorderColor(fixture.teams.away.team)}`}
+                        className={`p-3 sm:p-4 rounded-xl border transition-all duration-300  ${getTeamBackgroundColor(fixture.teams.away.team)} ${getTeamBorderColor(fixture.teams.away.team)}`}
                       >
                         <div className="flex items-center justify-between mb-2 sm:mb-3">
                           <h3 className="font-semibold text-sm sm:text-base text-foreground truncate">

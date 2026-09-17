@@ -2,19 +2,19 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, TrendingUp, Trophy, Calendar, Gem, Target, Menu, X, Clock, Activity } from "lucide-react"
-import { useState, useEffect } from "react"
+import { Home, TrendingUp, Trophy, Calendar, Target, Menu, X, Clock, Activity } from "lucide-react"
+import { useEffect, useState } from "react"
 import { ThemeToggle } from "./theme-toggle"
 import { getDashboardSummary } from "@/lib/supabase"
 import { DATA_SEASON } from "@/lib/season"
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: Home, color: "text-emerald-500", bgColor: "bg-emerald-500/10", hoverColor: "hover:bg-emerald-500/20" },
-  { name: "Top Performers", href: "/top-performers", icon: TrendingUp, color: "text-blue-500", bgColor: "bg-blue-500/10", hoverColor: "hover:bg-blue-500/20" },
-  { name: "Team Rankings", href: "/team-rankings", icon: Trophy, color: "text-amber-500", bgColor: "bg-amber-500/10", hoverColor: "hover:bg-amber-500/20" },
-  { name: "Fixture Analysis", href: "/fixture-analysis", icon: Calendar, color: "text-purple-500", bgColor: "bg-purple-500/10", hoverColor: "hover:bg-purple-500/20" },
-  { name: "Player Trends", href: "/player-trends", icon: Activity, color: "text-cyan-500", bgColor: "bg-cyan-500/10", hoverColor: "hover:bg-cyan-500/20" },
-  { name: "Quick Picks", href: "/quick-picks", icon: Target, color: "text-indigo-500", bgColor: "bg-indigo-500/10", hoverColor: "hover:bg-indigo-500/20" },
+  { name: "Dashboard", href: "/", icon: Home },
+  { name: "Top Performers", href: "/top-performers", icon: TrendingUp },
+  { name: "Team Rankings", href: "/team-rankings", icon: Trophy },
+  { name: "Fixture Analysis", href: "/fixture-analysis", icon: Calendar },
+  { name: "Player Trends", href: "/player-trends", icon: Activity },
+  { name: "Quick Picks", href: "/quick-picks", icon: Target },
 ]
 
 export function Sidebar() {
@@ -26,15 +26,12 @@ export function Sidebar() {
 
   useEffect(() => {
     async function fetchData() {
-      setError(null)
       try {
         const summary = await getDashboardSummary()
         setGameWeek(summary.total_gameweeks)
         setLastSyncedAt(summary.last_synced_at)
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : "Unknown error"
-        setError(`Failed to fetch gameweek: ${message}`)
-        setGameWeek(0)
+        setError(err instanceof Error ? err.message : "Unable to load sync status")
       }
     }
     fetchData()
@@ -42,167 +39,75 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Mobile Menu Button */}
       <button
         aria-label="Open navigation menu"
         onClick={() => setIsMobileOpen(true)}
-        className="fixed top-4 left-4 z-50 lg:hidden rounded-lg bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm p-2 shadow-lg border border-slate-200 dark:border-slate-700 transition-all duration-300 hover:scale-105"
+        className="fixed left-4 top-4 z-50 grid h-10 w-10 place-items-center rounded-xl bg-card text-foreground shadow-sm ring-1 ring-border/70 lg:hidden"
       >
-        <Menu aria-hidden="true" className="h-5 w-5 text-slate-700 dark:text-slate-300" />
+        <Menu className="h-5 w-5" />
       </button>
 
-      {/* Mobile Overlay */}
       {isMobileOpen && (
-        <div 
-          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden transition-opacity duration-300"
+        <button
+          aria-label="Close navigation overlay"
+          className="fixed inset-0 z-40 bg-slate-950/35 lg:hidden"
           onClick={() => setIsMobileOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
-      <aside className={`
-        fixed left-0 top-0 h-screen w-72 z-50 transform transition-all duration-300 ease-in-out
-        lg:translate-x-0 lg:z-30
-        ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-        bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl
-        border-r border-slate-200/50 dark:border-slate-700/50
-        shadow-xl lg:shadow-lg
-      `}>
+      <aside className={`fixed inset-y-0 left-0 z-50 w-72 border-r border-sidebar-border bg-sidebar transition-transform duration-200 lg:z-30 lg:translate-x-0 ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex h-full flex-col">
-          {/* Enhanced Logo Section */}
-          <div className="relative flex h-20 items-center border-b border-slate-200/50 dark:border-slate-700/50 px-6 bg-gradient-to-r from-emerald-500/5 to-blue-500/5">
-            {/* Mobile Close Button */}
-            <button
-              aria-label="Close navigation menu"
-              onClick={() => setIsMobileOpen(false)}
-              className="absolute right-4 top-6 lg:hidden rounded-lg p-1 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors"
-            >
-              <X aria-hidden="true" className="h-5 w-5" />
-            </button>
-
-            <div className="flex items-center gap-3">
-              {/* Enhanced Logo Icon */}
-              <div className="relative">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 shadow-lg">
-                  <Trophy className="h-6 w-6 text-white" />
-                </div>
-                {/* Subtle glow effect */}
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 opacity-20 blur-lg"></div>
-              </div>
-              
-              <div className="flex-1">
-                <h1 className="text-lg font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-200 bg-clip-text text-transparent">
-                  FPL Analyst
-                </h1>
-                <div className="flex items-center gap-2">
-                  <div className={`h-1.5 w-1.5 rounded-full ${error ? "bg-red-500" : DATA_SEASON.isComplete ? "bg-amber-500" : "bg-emerald-500"}`}></div>
-                  <p className={`text-xs font-medium ${error ? "text-red-700 dark:text-red-400" : DATA_SEASON.isComplete ? "text-amber-700 dark:text-amber-400" : "text-emerald-700 dark:text-emerald-400"}`}>
-                    GW {gameweek || "—"} • {DATA_SEASON.label} • {DATA_SEASON.isComplete ? "Final" : "Current"}
-                  </p>
-                </div>
+          <div className="flex h-20 items-center gap-3 px-5">
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary text-primary-foreground">
+              <Trophy className="h-5 w-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="text-base font-semibold text-sidebar-foreground">FPL Analyst</div>
+              <div className="mt-0.5 flex items-center gap-2 text-xs text-muted-foreground">
+                <span className={`h-1.5 w-1.5 rounded-full ${error ? "bg-red-500" : DATA_SEASON.isComplete ? "bg-amber-500" : "bg-emerald-500"}`} />
+                <span className="truncate">GW {gameweek || "—"} · {DATA_SEASON.label}</span>
               </div>
             </div>
+            <button aria-label="Close navigation menu" onClick={() => setIsMobileOpen(false)} className="grid h-9 w-9 place-items-center rounded-lg text-muted-foreground hover:bg-secondary lg:hidden">
+              <X className="h-5 w-5" />
+            </button>
           </div>
 
-          {/* Enhanced Navigation */}
-          <nav className="flex-1 space-y-2 px-4 py-6 overflow-y-auto">
-            <div className="mb-6">
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-3 mb-3">
-                Analytics
-              </p>
-              {navigation.map((item, index) => {
-                const isActive = pathname === item.href
+          <nav className="flex-1 overflow-y-auto px-3 py-4">
+            <div className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Analytics</div>
+            <div className="space-y-1">
+              {navigation.map((item) => {
+                const active = pathname === item.href
                 return (
                   <Link
-                    key={item.name}
+                    key={item.href}
                     href={item.href}
                     onClick={() => setIsMobileOpen(false)}
-                    className={`
-                      group relative flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-300
-                      animate-in fade-in slide-in-from-left-4
-                      ${isActive
-                        ? `${item.bgColor} ${item.color} shadow-lg shadow-${item.color.split('-')[1]}-500/20`
-                        : `text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white ${item.hoverColor}`
-                      }
-                    `}
-                    style={{ 
-                      animationDelay: `${index * 75}ms`,
-                      animationFillMode: 'both'
-                    }}
+                    className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${active ? "bg-primary/10 text-primary" : "text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-sidebar-foreground"}`}
                   >
-                    {/* Active indicator */}
-                    {isActive && (
-                      <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 ${item.color.replace('text-', 'bg-')} rounded-r-full`}></div>
-                    )}
-                    
-                    {/* Icon with enhanced styling */}
-                    <div className={`
-                      relative flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-300
-                      ${isActive 
-                        ? `${item.bgColor.replace('/10', '/20')} ${item.color}` 
-                        : 'group-hover:bg-slate-100 dark:group-hover:bg-slate-700/50'
-                      }
-                      group-hover:scale-110
-                    `}>
-                      <item.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-                      
-                      {/* Subtle glow for active state */}
-                      {isActive && (
-                        <div className={`absolute inset-0 rounded-lg ${item.bgColor.replace('/10', '/30')} blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                      )}
-                    </div>
-                    
-                    <span className="flex-1 transition-all duration-300 group-hover:translate-x-1">
-                      {item.name}
-                    </span>
-                    
-                    {/* Hover arrow indicator */}
-                    <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
+                    <item.icon className="h-[18px] w-[18px]" />
+                    <span>{item.name}</span>
                   </Link>
                 )
               })}
             </div>
-
           </nav>
 
-          {/* Enhanced Footer with more info */}
-          <div className="border-t border-slate-200/50 dark:border-slate-700/50 p-4 space-y-3">
-            {/* Theme Toggle */}
+          <div className="border-t border-sidebar-border p-3">
             <ThemeToggle />
-            
-            {/* Status Card */}
-            <div className="rounded-xl bg-gradient-to-r from-emerald-500/10 to-blue-500/10 p-4 border border-emerald-500/20">
-              <div className="flex items-center gap-2 mb-2">
-                <Clock className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">Last Synced</p>
+            <div className="mt-2 rounded-xl bg-secondary/65 p-3">
+              <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                <Clock className="h-3.5 w-3.5" />
+                Last synced
               </div>
-              <p className="text-sm font-mono text-slate-700 dark:text-slate-300">
-                {lastSyncedAt
-                  ? new Date(lastSyncedAt).toLocaleString("en-GB", {
-                      day: "numeric",
-                      month: "short",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })
-                  : "Unknown"}
-              </p>
-              <div className="flex items-center gap-2 mt-2">
-                <div className={`h-2 w-2 rounded-full ${error ? "bg-red-500" : DATA_SEASON.isComplete ? "bg-amber-500" : "bg-emerald-500"}`}></div>
-                <p className={`text-xs ${error ? "text-red-700 dark:text-red-400" : DATA_SEASON.isComplete ? "text-amber-700 dark:text-amber-400" : "text-emerald-700 dark:text-emerald-400"}`}>
-                  {error ? "Sync status unavailable" : DATA_SEASON.isComplete ? "Archived season dataset" : "Current season dataset"}
-                </p>
+              <div className="mt-1 text-sm font-medium text-sidebar-foreground">
+                {lastSyncedAt ? new Date(lastSyncedAt).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "Unknown"}
               </div>
             </div>
           </div>
         </div>
       </aside>
-
-      {/* Content Spacer for Desktop */}
-      <div className="hidden lg:block w-72 flex-shrink-0"></div>
+      <div className="hidden w-72 shrink-0 lg:block" />
     </>
   )
 }

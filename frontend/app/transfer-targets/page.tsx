@@ -19,7 +19,9 @@ const teamColors = {
   "Newcastle": "text-slate-800 dark:text-slate-200",
   "Brighton": "text-blue-500 dark:text-blue-300",
   "Aston Villa": "text-purple-700 dark:text-purple-400",
+  "West Ham": "text-amber-700 dark:text-amber-500",
   "Everton": "text-blue-700 dark:text-blue-500",
+  "Wolves": "text-orange-600 dark:text-orange-400",
   "Crystal Palace": "text-blue-600 dark:text-blue-400",
   "Brentford": "text-red-600 dark:text-red-400",
   "Fulham": "text-slate-800 dark:text-slate-300",
@@ -27,6 +29,7 @@ const teamColors = {
   "Ipswich": "text-blue-700 dark:text-blue-400",
   "Bournemouth": "text-red-700 dark:text-red-500",
   "Nott'm Forest": "text-red-800 dark:text-red-600",
+  "Burnley": "text-purple-900 dark:text-purple-400",
   "Leeds": "text-blue-600 dark:text-blue-400",
   "Sunderland": "text-red-700 dark:text-red-500",
 }
@@ -47,7 +50,9 @@ const getTeamBackgroundColor = (teamName: string) => {
     "Newcastle": "bg-slate-200 dark:bg-slate-900",
     "Brighton": "bg-blue-50 dark:bg-blue-950",
     "Aston Villa": "bg-purple-100 dark:bg-purple-950",
+    "West Ham": "bg-amber-100 dark:bg-amber-950",
     "Everton": "bg-blue-200 dark:bg-blue-950",
+    "Wolves": "bg-orange-100 dark:bg-orange-950",
     "Crystal Palace": "bg-blue-100 dark:bg-blue-950",
     "Brentford": "bg-red-100 dark:bg-red-950",
     "Fulham": "bg-slate-100 dark:bg-slate-900",
@@ -55,6 +60,7 @@ const getTeamBackgroundColor = (teamName: string) => {
     "Ipswich": "bg-blue-100 dark:bg-blue-950",
     "Bournemouth": "bg-red-200 dark:bg-red-950",
     "Nott'm Forest": "bg-red-300 dark:bg-red-950",
+    "Burnley": "bg-purple-200 dark:bg-purple-950",
     "Leeds": "bg-blue-100 dark:bg-blue-950",
     "Sunderland": "bg-red-200 dark:bg-red-950",
   }
@@ -84,8 +90,8 @@ export default function TransferTargetsPage() {
         setTeamFixtureSummary(summaryData)
         setAttackingPicks(attackingData)
         setDefensivePicks(defensiveData)
-      } catch (err: unknown) {
-        setError(err instanceof Error ? err.message : 'Failed to load transfer targets')
+      } catch (err: any) {
+        setError(err.message)
       } finally {
         setLoading(false)
       }
@@ -142,17 +148,17 @@ export default function TransferTargetsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
+      <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
-            <div className="h-10 w-72 bg-secondary/50 rounded-lg animate-pulse mb-2"></div>
-            <div className="h-6 w-96 bg-secondary/30 rounded-lg animate-pulse"></div>
+            <div className="h-10 w-72 bg-secondary/50 rounded-lg mb-2"></div>
+            <div className="h-6 w-96 bg-secondary/30 rounded-lg"></div>
           </div>
           <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3].map((i) => (
               <Card key={i} className="border-border/50">
                 <CardContent className="p-6">
-                  <div className="h-24 bg-secondary/30 rounded-lg animate-pulse"></div>
+                  <div className="h-24 bg-secondary/30 rounded-lg"></div>
                 </CardContent>
               </Card>
             ))}
@@ -160,12 +166,12 @@ export default function TransferTargetsPage() {
           <Card className="border-border/50 mb-8">
             <CardContent className="p-6">
               <div className="space-y-4">
-                <div className="h-8 bg-secondary/30 rounded-lg animate-pulse w-64"></div>
+                <div className="h-8 bg-secondary/30 rounded-lg w-64"></div>
                 <div className="grid gap-4 lg:grid-cols-2">
                   {[1, 2].map((i) => (
                     <div key={i} className="space-y-2">
                       {[1, 2, 3, 4, 5].map((j) => (
-                        <div key={j} className="h-20 bg-secondary/20 rounded-lg animate-pulse"></div>
+                        <div key={j} className="h-20 bg-secondary/20 rounded-lg"></div>
                       ))}
                     </div>
                   ))}
@@ -193,27 +199,27 @@ export default function TransferTargetsPage() {
   }
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-background">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8 animate-in fade-in slide-in-from-top duration-700">
+        <div className="mb-8">
           <h1 className="mb-2 text-4xl font-bold text-foreground flex items-center gap-3">
             <RefreshCw className="h-8 w-8 text-green-500 animate-spin" style={{ animationDuration: '3s' }} />
             <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent">
               Transfer Targets
             </span>
           </h1>
-          <p className="text-lg text-muted-foreground animate-in fade-in slide-in-from-left duration-700" style={{ animationDelay: '200ms' }}>
+          <p className="text-lg text-muted-foreground">
             Strategic fixture analysis across two periods to identify optimal transfer targets
           </p>
         </div>
 
         {/* Key Insights */}
         <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <Card className="border-green-500/50 bg-gradient-to-br from-green-500/10 to-card hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 animate-in fade-in slide-in-from-left">
+          <Card className="border-green-500/50 bg-card hover:shadow-md  transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <div className="p-3 bg-green-500/20 rounded-full group-hover:scale-110 transition-transform duration-300">
-                  <TrendingUp className="h-8 w-8 text-green-500 animate-pulse" />
+                <div className="p-3 bg-green-500/20 rounded-full  transition-transform duration-300">
+                  <TrendingUp className="h-8 w-8 text-green-500" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Best Improvement</p>
@@ -227,11 +233,11 @@ export default function TransferTargetsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-red-500/50 bg-gradient-to-br from-red-500/10 to-card hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 animate-in fade-in slide-in-from-bottom" style={{ animationDelay: '100ms' }}>
+          <Card className="border-red-500/50 bg-card hover:shadow-md  transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <div className="p-3 bg-red-500/20 rounded-full group-hover:scale-110 transition-transform duration-300">
-                  <TrendingDown className="h-8 w-8 text-red-500 animate-pulse" style={{ animationDelay: '500ms' }} />
+                <div className="p-3 bg-red-500/20 rounded-full  transition-transform duration-300">
+                  <TrendingDown className="h-8 w-8 text-red-500" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Biggest Decline</p>
@@ -245,11 +251,11 @@ export default function TransferTargetsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-blue-500/50 bg-gradient-to-br from-blue-500/10 to-card hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 animate-in fade-in slide-in-from-right" style={{ animationDelay: '200ms' }}>
+          <Card className="border-blue-500/50 bg-card hover:shadow-md  transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <div className="p-3 bg-blue-500/20 rounded-full group-hover:scale-110 transition-transform duration-300">
-                  <Star className="h-8 w-8 text-blue-500 animate-pulse" style={{ animationDelay: '1000ms' }} />
+                <div className="p-3 bg-blue-500/20 rounded-full  transition-transform duration-300">
+                  <Star className="h-8 w-8 text-blue-500" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Teams Analyzed</p>
@@ -262,7 +268,7 @@ export default function TransferTargetsPage() {
         </div>
 
         {/* Fixture Period Comparison */}
-        <Card className="border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-card backdrop-blur-md shadow-xl mb-8">
+        <Card className="border-purple-500/20 bg-card  shadow-md mb-8">
           <CardHeader className="pb-4 border-b border-border/50 bg-gradient-to-r from-purple-500/10 to-transparent">
             <CardTitle className="text-base text-foreground flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
@@ -282,7 +288,7 @@ export default function TransferTargetsPage() {
               {/* Near-term: Next 3 Gameweeks */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-sm sm:text-base font-bold text-foreground flex items-center gap-2 animate-in fade-in slide-in-from-left duration-500">
+                  <h3 className="text-sm sm:text-base font-bold text-foreground flex items-center gap-2">
                     ⭐ Next 3 Gameweeks
                     <span className="text-[10px] sm:text-xs text-muted-foreground font-normal">(Immediate Priority)</span>
                   </h3>
@@ -296,44 +302,44 @@ export default function TransferTargetsPage() {
                           key={index}
                           style={{ animationDelay: `${index * 50}ms` }}
                           className={`p-3 rounded-lg border-2 border-slate-300 dark:border-slate-700 ${getTeamBackgroundColor(team.team)} 
-                            hover:scale-[1.02] hover:shadow-xl hover:border-purple-400 dark:hover:border-purple-600
-                            transition-all duration-300 ease-out animate-in fade-in slide-in-from-bottom
+                             hover:shadow-md hover:border-purple-400 dark:hover:border-purple-600
+                            transition-all duration-300 ease-out
                             group cursor-pointer`}
                         >
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-3 flex-1 min-w-0">
-                              <span className="text-xs font-bold text-muted-foreground w-6 group-hover:scale-110 transition-transform duration-200">#{index + 1}</span>
+                              <span className="text-xs font-bold text-muted-foreground w-6  transition-transform duration-200">#{index + 1}</span>
                               <span className="font-semibold text-sm text-foreground truncate group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-200">{team.team}</span>
                             </div>
-                            <span className={`font-bold text-lg ${getTeamColor(team.team)} group-hover:scale-110 transition-transform duration-200`}>
+                            <span className={`font-bold text-lg ${getTeamColor(team.team)}  transition-transform duration-200`}>
                               {team.nearTermRating}%
                             </span>
                           </div>
                           <div className="flex items-center justify-between gap-3">
                             <div className="flex items-center gap-2 text-xs flex-wrap">
                               <span className="text-muted-foreground px-2 py-1 bg-secondary/50 rounded-md">🎪 {team.nearTermHomeFixtures} home</span>
-                              <span className={`font-semibold px-2 py-1 rounded-md transition-all duration-200 hover:scale-105 ${
+                              <span className={`font-semibold px-2 py-1 rounded-md transition-all duration-200  ${
                                 team.avgAttackDiff > 2 
                                   ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
                                   : team.avgAttackDiff < -2 
                                   ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400' 
                                   : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'
                               }`} title="Attack Difficulty">
-                                ΓÜö∩╕Å {team.avgAttackDiff > 0 ? '+' : ''}{team.avgAttackDiff?.toFixed(1)}
+                                ⚔️ {team.avgAttackDiff > 0 ? '+' : ''}{team.avgAttackDiff?.toFixed(1)}
                               </span>
-                              <span className={`font-semibold px-2 py-1 rounded-md transition-all duration-200 hover:scale-105 ${
+                              <span className={`font-semibold px-2 py-1 rounded-md transition-all duration-200  ${
                                 team.avgDefenseDiff > 2 
                                   ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
                                   : team.avgDefenseDiff < -2 
                                   ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400' 
                                   : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'
                               }`} title="Defense Difficulty">
-                                ≡ƒ¢í∩╕Å {team.avgDefenseDiff > 0 ? '+' : ''}{team.avgDefenseDiff?.toFixed(1)}
+                                🛡️ {team.avgDefenseDiff > 0 ? '+' : ''}{team.avgDefenseDiff?.toFixed(1)}
                               </span>
                             </div>
                             <button
                               onClick={() => handleViewPicks(team.team)}
-                              className="px-3 py-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white text-[11px] font-semibold rounded-md transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 whitespace-nowrap"
+                              className="px-3 py-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white text-[11px] font-semibold rounded-md transition-all duration-200 hover:shadow-sm   whitespace-nowrap"
                             >
                               View Players
                             </button>
@@ -359,7 +365,7 @@ export default function TransferTargetsPage() {
                       return (
                         <div
                           key={index}
-                          className={`p-3 rounded-lg border-2 border-slate-300 dark:border-slate-700 ${getTeamBackgroundColor(team.team)} hover:scale-[1.01] transition-all`}
+                          className={`p-3 rounded-lg border-2 border-slate-300 dark:border-slate-700 ${getTeamBackgroundColor(team.team)}  transition-all`}
                         >
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -394,7 +400,7 @@ export default function TransferTargetsPage() {
                             </div>
                             <button
                               onClick={() => handleViewPicks(team.team)}
-                              className="px-3 py-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white text-[11px] font-semibold rounded-md transition-all duration-200 hover:shadow-lg active:scale-95 whitespace-nowrap"
+                              className="px-3 py-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white text-[11px] font-semibold rounded-md transition-all duration-200 hover:shadow-sm  whitespace-nowrap"
                             >
                               View Player Picks
                             </button>
@@ -409,7 +415,7 @@ export default function TransferTargetsPage() {
         </Card>
 
         {/* Biggest Movers */}
-        <Card className="border-border/50 bg-card backdrop-blur-md shadow-lg">
+        <Card className="border-border/50 bg-card  shadow-sm">
           <CardHeader className="pb-4 border-b border-border/50">
             <CardTitle className="text-base text-foreground flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center">
@@ -434,7 +440,7 @@ export default function TransferTargetsPage() {
                   return (
                     <div
                       key={index}
-                      className={`p-4 rounded-lg border transition-all hover:scale-[1.02] ${
+                      className={`p-4 rounded-lg border transition-all  ${
                         isImproving
                           ? 'bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-green-500/20 hover:border-green-500/40'
                           : 'bg-gradient-to-r from-red-500/10 to-orange-500/10 border-red-500/20 hover:border-red-500/40'
@@ -469,7 +475,7 @@ export default function TransferTargetsPage() {
                         </p>
                         <button
                           onClick={() => handleViewPicks(team.team)}
-                          className="py-1 px-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white text-[11px] font-semibold rounded-md transition-all duration-200 hover:shadow-lg active:scale-95 whitespace-nowrap"
+                          className="py-1 px-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white text-[11px] font-semibold rounded-md transition-all duration-200 hover:shadow-sm  whitespace-nowrap"
                         >
                           View Player Picks
                         </button>

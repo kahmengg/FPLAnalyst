@@ -17,7 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata = {
   title: "FPL Analyst - Your Strategic Advantage",
-  description: "Comprehensive Fantasy Premier League analytics and insights"
+  description: "Comprehensive Fantasy Premier League analytics and insights",
 }
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} antialiased`} suppressHydrationWarning>
-      <body className="font-sans">
+      <body className="font-sans overflow-x-hidden">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

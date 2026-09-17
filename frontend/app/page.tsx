@@ -7,9 +7,7 @@ import { getDashboardSummary, getPlayerInsights } from "@/lib/supabase"
 
 function formatLastSynced(value: string | null) {
   if (!value) return "Unknown"
-  const date = new Date(value)
-  if (Number.isNaN(date.getTime())) return "Unknown"
-  return date.toLocaleString("en-GB", {
+  return new Date(value).toLocaleString("en-GB", {
     day: "numeric",
     month: "short",
     hour: "2-digit",
@@ -135,12 +133,12 @@ export default function HomePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-background p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
-        <div className="mb-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
+        <div className="mb-12 text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500/10 to-blue-500/10 px-4 py-2 mb-6 border border-emerald-500/20">
-            <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
+            <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
             <span className="text-sm font-medium text-emerald-600 dark:text-emerald-400">FPL Analytics</span>
           </div>
 
@@ -161,7 +159,7 @@ export default function HomePage() {
             {quickStats.map((stat, index) => (
               <Card
                 key={stat.label}
-                className="group relative overflow-hidden border-0 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 animate-in fade-in slide-in-from-bottom-8"
+                className="group relative overflow-hidden border-0 bg-white/70 dark:bg-slate-800/70  shadow-sm hover:shadow-md transition-all duration-300 "
                 style={{
                   animationDelay: `${index * 150}ms`,
                   animationFillMode: "both",
@@ -170,7 +168,7 @@ export default function HomePage() {
                 <div className={`absolute inset-0 ${stat.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
 
                 <CardContent className="relative flex items-center gap-4 p-6">
-                  <div className={`rounded-xl ${stat.bgColor} p-3 transition-transform duration-300 group-hover:scale-110`}>
+                  <div className={`rounded-xl ${stat.bgColor} p-3 transition-transform duration-300 `}>
                     <stat.icon className={`h-6 w-6 ${stat.color}`} />
                   </div>
                   <div className="flex-1">
@@ -186,7 +184,7 @@ export default function HomePage() {
         {/* Top Form Players */}
         {topFormPlayers.length > 0 && (
           <div className="mb-12">
-            <Card className="border-0 bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm shadow-lg">
+            <Card className="border-0 bg-white/70 dark:bg-slate-800/70  shadow-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <span className="text-2xl">⭐</span>
@@ -197,7 +195,7 @@ export default function HomePage() {
               <CardContent>
                 <div className="grid gap-4 sm:grid-cols-3">
                   {topFormPlayers.map((player, idx) => (
-                    <div key={`${player.name}-${player.team_short}`} className="p-4 rounded-lg border border-slate-200/50 dark:border-slate-700/50 hover:shadow-md transition-shadow">
+                    <div key={idx} className="p-4 rounded-lg border border-slate-200/50 dark:border-slate-700/50 hover:shadow-md transition-shadow">
                       <div className="flex items-center justify-between mb-2">
                         <div className="font-semibold text-foreground">{player.name}</div>
                         <span className={`text-xs font-bold px-2 py-1 rounded-full ${
@@ -233,7 +231,7 @@ export default function HomePage() {
             {navigationCards.map((card, index) => (
               <Link key={card.title} href={card.href} className="group block">
                 <Card
-                  className={`relative overflow-hidden border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 active:scale-[0.98] active:shadow-md h-full animate-in fade-in slide-in-from-bottom-8 ${card.borderColor}`}
+                  className={`relative overflow-hidden border-0 bg-white/80 dark:bg-slate-800/80  shadow-sm hover:shadow-md transition-all duration-500    active:shadow-md h-full ${card.borderColor}`}
                   style={{
                     animationDelay: `${(index * 100) + 500}ms`,
                     animationFillMode: "both",
@@ -255,7 +253,7 @@ export default function HomePage() {
 
                     <div className="flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all">
                       <span>Explore</span>
-                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="h-4 w-4  transition-transform" />
                     </div>
                   </CardContent>
                 </Card>

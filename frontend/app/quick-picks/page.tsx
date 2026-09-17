@@ -1,4 +1,4 @@
-﻿// @ts-nocheck
+// @ts-nocheck
 "use client"
 
 import { useState, useEffect, useMemo } from "react"
@@ -194,7 +194,7 @@ export default function QuickPicksPage() {
   )
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="mb-2 text-4xl font-bold text-foreground flex items-center gap-3">
@@ -211,14 +211,14 @@ export default function QuickPicksPage() {
           <TabsList className="w-full grid grid-cols-2 gap-3 bg-transparent p-0 sm:gap-2">
             <TabsTrigger
               value="attacking"
-              className="flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-4 sm:py-3 rounded-xl transition-all duration-300 active:scale-95 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white border-2 data-[state=active]:border-red-400 data-[state=inactive]:border-border data-[state=inactive]:bg-card/50"
+              className="flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-4 sm:py-3 rounded-xl transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white border-2 data-[state=active]:border-red-400 data-[state=inactive]:border-border data-[state=inactive]:bg-card/50"
             >
               <Target className="h-5 w-5 sm:h-4 sm:w-4" />
               <span className="font-semibold">Attacking</span>
             </TabsTrigger>
             <TabsTrigger
               value="defensive"
-              className="flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-4 sm:py-3 rounded-xl transition-all duration-300 active:scale-95 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white border-2 data-[state=active]:border-blue-400 data-[state=inactive]:border-border data-[state=inactive]:bg-card/50"
+              className="flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-4 sm:py-3 rounded-xl transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white border-2 data-[state=active]:border-blue-400 data-[state=inactive]:border-border data-[state=inactive]:bg-card/50"
             >
               <Shield className="h-5 w-5 sm:h-4 sm:w-4" />
               <span className="font-semibold">Defensive</span>
@@ -228,7 +228,7 @@ export default function QuickPicksPage() {
           <TabsContent value="attacking" className="space-y-6">
             {/* Team Filter */}
             {allTeams.length > 0 && (
-              <Card className="border-red-500/20 bg-gradient-to-br from-red-500/5 to-card shadow-lg">
+              <Card className="border-red-500/20 bg-card shadow-sm">
                 <CardContent className="p-5">
                   <div className="flex flex-col gap-4">
                     <div className="flex items-center justify-between">
@@ -253,8 +253,8 @@ export default function QuickPicksPage() {
                           onClick={() => toggleTeamFilter(team)}
                           className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                             selectedTeams.includes(team)
-                              ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/30 scale-105'
-                              : 'bg-secondary/50 text-foreground hover:bg-secondary hover:scale-105 border border-border'
+                              ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-sm shadow-red-500/30 scale-105'
+                              : 'bg-secondary/50 text-foreground hover:bg-secondary  border border-border'
                           }`}
                         >
                           <span className="flex items-center gap-1.5">
@@ -278,7 +278,7 @@ export default function QuickPicksPage() {
             )}
 
             {/* Overview Card */}
-            <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl">
+            <Card className="border-border bg-card/50  shadow-md">
               <CardHeader className="pb-4">
                 <CardTitle className="text-foreground flex items-center gap-2">
                   💪 Attacking Picks by Team Strength
@@ -321,7 +321,7 @@ export default function QuickPicksPage() {
                         return (
                           <Card
                             key={`${player.web_name}-${playerIndex}`}
-                            className={`relative border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer overflow-hidden ${
+                            className={`relative border transition-all duration-300 hover:shadow-md  cursor-pointer overflow-hidden ${
                               isTopPick
                                 ? 'border-yellow-500/50 bg-gradient-to-br from-yellow-500/5 via-card to-card'
                                 : 'border-border/50 hover:border-red-400/50 bg-gradient-to-br from-card to-secondary/10'
@@ -399,7 +399,7 @@ export default function QuickPicksPage() {
           <TabsContent value="defensive" className="space-y-6">
             {/* Team Filter */}
             {allTeams.length > 0 && (
-              <Card className="border-blue-500/20 bg-gradient-to-br from-blue-500/5 to-card shadow-lg">
+              <Card className="border-blue-500/20 bg-card shadow-sm">
                 <CardContent className="p-5">
                   <div className="flex flex-col gap-4">
                     <div className="flex items-center justify-between">
@@ -424,8 +424,8 @@ export default function QuickPicksPage() {
                           onClick={() => toggleTeamFilter(team)}
                           className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                             selectedTeams.includes(team)
-                              ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/30 scale-105'
-                              : 'bg-secondary/50 text-foreground hover:bg-secondary hover:scale-105 border border-border'
+                              ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-sm shadow-blue-500/30 scale-105'
+                              : 'bg-secondary/50 text-foreground hover:bg-secondary  border border-border'
                           }`}
                         >
                           <span className="flex items-center gap-1.5">
@@ -449,7 +449,7 @@ export default function QuickPicksPage() {
             )}
 
             {/* Overview Card */}
-            <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl">
+            <Card className="border-border bg-card/50  shadow-md">
               <CardHeader className="pb-4">
                 <CardTitle className="text-foreground flex items-center gap-2">
                   🛡️ Defensive Picks by Team Strength
@@ -489,7 +489,7 @@ export default function QuickPicksPage() {
                         return (
                           <Card
                             key={`${player.name}-${playerIndex}`}
-                            className={`relative border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer overflow-hidden ${
+                            className={`relative border transition-all duration-300 hover:shadow-md  cursor-pointer overflow-hidden ${
                               isTopPick
                                 ? 'border-yellow-500/50 bg-gradient-to-br from-yellow-500/5 via-card to-card'
                                 : 'border-border/50 hover:border-red-400/50 bg-gradient-to-br from-card to-secondary/10'

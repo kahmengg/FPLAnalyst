@@ -112,7 +112,7 @@ const RankMedal = ({ rank }: { rank: number }) => {
   const medal = medals[rank];
   
   return (
-    <div className={`flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br ${medal.color} ${medal.glow} shadow-lg text-lg animate-pulse`}>
+    <div className={`flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br ${medal.color} ${medal.glow} shadow-sm text-lg`}>
       {medal.emoji}
     </div>
   );
@@ -133,7 +133,7 @@ export default function TopPerformersPage() {
   const [overperformers, setOverperformers] = useState([]);
   const [sustainableScorers, setSustainableScorers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState({});
 
   // New: Filter states
   const [searchQuery, setSearchQuery] = useState("");
@@ -378,7 +378,7 @@ export default function TopPerformersPage() {
     async function fetchData() {
       setLoading(true)
       setErrors({})
-      const newErrors: Record<string, string> = {};
+      const newErrors = {};
 
       try {
         const [goalScorers, assistProviders, defensiveLeaders, seasonPerformers, hiddenGems, valuePlayers, overperformers, underperformers, sustainableScorers] = await Promise.all([
@@ -394,12 +394,12 @@ export default function TopPerformersPage() {
         ])
 
         setGoalScorers(goalScorers.map((p: any) => ({
-          player: p.player, team: p.team, team_short: p.team_short, goals: p.goals ?? 0,
+          player: p.player, team: p.team, team_short: p.team_short, goals: p.goals ?? p.points ?? 0,
           goalsPerGame: p.goalsPerGame ?? p.goals_per_game ?? 0, points: p.points, price: p.price,
           ownership: p.ownership, form: p.form
         })))
         setAssistProviders(assistProviders.map((p: any) => ({
-          player: p.player, team: p.team, team_short: p.team_short, assists: p.assists ?? 0,
+          player: p.player, team: p.team, team_short: p.team_short, assists: p.assists ?? p.points ?? 0,
           assistsPerGame: p.assistsPerGame ?? p.assists_per_game ?? 0, points: p.points, price: p.price,
           ownership: p.ownership, form: p.form
         })))
@@ -435,9 +435,8 @@ export default function TopPerformersPage() {
         })))
 
         setErrors(newErrors);
-      } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Failed to load performer data'
-        setErrors({ general: `Unexpected error: ${message}` });
+      } catch (err) {
+        setErrors({ general: `Unexpected error: ${err.message}` });
       } finally {
         setLoading(false)
       }
@@ -473,20 +472,20 @@ export default function TopPerformersPage() {
     </div>
   );
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-background">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8 animate-in fade-in slide-in-from-top duration-700">
+        <div className="mb-8">
           <h1 className="mb-2 text-4xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent flex items-center gap-3">
-            <Trophy className="h-8 w-8 text-yellow-600 animate-pulse" style={{ animationDuration: '2s' }} />
+            <Trophy className="h-8 w-8 text-yellow-600" style={{ animationDuration: '2s' }} />
             FPL Key Insights & Recommendations
           </h1>
-          <p className="text-lg text-muted-foreground animate-in fade-in slide-in-from-top duration-700" style={{ animationDelay: '200ms' }}>
+          <p className="text-lg text-muted-foreground">
             Comprehensive analysis based on actual season data through gameweeks
           </p>
         </div>
 
         {/* Filter Controls */}
-        <Card className="mb-6 sticky top-0 z-20 shadow-lg border-2">
+        <Card className="mb-6 sticky top-0 z-20 shadow-sm border-2">
           <CardContent className="p-4">
             <div className="flex flex-col lg:flex-row gap-4">
               {/* Search Bar */}
@@ -548,7 +547,7 @@ export default function TopPerformersPage() {
                     setPositionFilter("all");
                     setPriceFilter("all");
                   }}
-                  className="px-4 py-2.5 rounded-lg border-2 border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground transition-all duration-200 font-medium active:scale-95"
+                  className="px-4 py-2.5 rounded-lg border-2 border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground transition-all duration-200 font-medium "
                 >
                   Clear Filters
                 </button>
@@ -584,47 +583,47 @@ export default function TopPerformersPage() {
 
         <Tabs defaultValue="season" className="space-y-6 sm:space-y-8">
           {/* Mobile: Horizontal Scrollable Tabs */}
-          <div className="sm:hidden sticky top-4 z-10 -mx-4 px-4 py-2 backdrop-blur-sm bg-background/95 border-b">
+          <div className="sm:hidden sticky top-4 z-10 -mx-4 px-4 py-2  bg-background/95 border-b">
             <div className="overflow-x-auto scrollbar-hide">
               <TabsList className="bg-secondary/50 p-2 rounded-xl inline-flex gap-2 w-max">
                 <TabsTrigger
                   value="season"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300  data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white data-[state=active]:shadow-sm whitespace-nowrap"
                 >
                   <Star className="h-4 w-4" />
                   Season
                 </TabsTrigger>
                 <TabsTrigger
                   value="goals"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300  data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-sm whitespace-nowrap"
                 >
                   <Target className="h-4 w-4" />
                   Goals
                 </TabsTrigger>
                 <TabsTrigger
                   value="assists"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300  data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white data-[state=active]:shadow-sm whitespace-nowrap"
                 >
                   <TrendingUp className="h-4 w-4" />
                   Assists
                 </TabsTrigger>
                 <TabsTrigger
                   value="defense"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300  data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-sm whitespace-nowrap"
                 >
                   <Shield className="h-4 w-4" />
                   Defense
                 </TabsTrigger>
                 <TabsTrigger
                   value="value"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300  data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white data-[state=active]:shadow-sm whitespace-nowrap"
                 >
                   <DollarSign className="h-4 w-4" />
                   Value
                 </TabsTrigger>
                 <TabsTrigger
                   value="gems"
-                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 active:scale-95 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white data-[state=active]:shadow-lg whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300  data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white data-[state=active]:shadow-sm whitespace-nowrap"
                 >
                   <Gem className="h-4 w-4" />
                   Gems
@@ -634,46 +633,46 @@ export default function TopPerformersPage() {
           </div>
 
           {/* Desktop: Grid Layout Tabs */}
-          <div className="hidden sm:block sticky top-4 z-10 backdrop-blur-sm bg-background/80 p-2 rounded-xl shadow-lg">
+          <div className="hidden sm:block sticky top-4 z-10  bg-background/80 p-2 rounded-xl shadow-sm">
             <TabsList className="bg-secondary/50 p-1 rounded-lg w-full grid grid-cols-3 lg:grid-cols-6 gap-1">
               <TabsTrigger
                 value="season"
-                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white"
+                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white"
               >
                 <Star className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Season</span>
               </TabsTrigger>
               <TabsTrigger
                 value="goals"
-                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white"
+                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white"
               >
                 <Target className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Goals</span>
               </TabsTrigger>
               <TabsTrigger
                 value="assists"
-                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white"
+                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white"
               >
                 <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Assists</span>
               </TabsTrigger>
               <TabsTrigger
                 value="defense"
-                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-600 data-[state=active]:text-white"
+                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-600 data-[state=active]:text-white"
               >
                 <Shield className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Defense</span>
               </TabsTrigger>
               <TabsTrigger
                 value="value"
-                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white"
+                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white"
               >
                 <DollarSign className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span>Value</span>
               </TabsTrigger>
               <TabsTrigger
                 value="gems"
-                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300 hover:scale-105 data-[state=active]:shadow-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white"
+                className="flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white"
               >
                 <Gem className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span className="hidden sm:inline">Gems</span>
@@ -682,8 +681,8 @@ export default function TopPerformersPage() {
             </TabsList>
           </div>
 
-          <TabsContent value="season" className="space-y-4 animate-in fade-in-50 slide-in-from-bottom-4 duration-500">
-            <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+          <TabsContent value="season" className="space-y-4-50 duration-500">
+            <Card className="border-border bg-card/50  shadow-md hover:shadow-md transition-all duration-300 ">
               <CardHeader className="pb-4">
                 <CardTitle className="text-foreground flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                   <span className="flex items-center gap-2">⭐ Top 10 Season Performers</span>
@@ -701,7 +700,7 @@ export default function TopPerformersPage() {
                   {sortedSeasonPerformers.map((player, index) => (
                     <div
                       key={player.player}
-                      className="p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-purple-400/50 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] animate-in fade-in slide-in-from-bottom-4"
+                      className="p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-purple-400/50 transition-all duration-300 hover:shadow-sm "
                       style={{ animationDelay: `${index * 50}ms` }}
                     >
                       <div className="flex items-start justify-between mb-3">
@@ -816,7 +815,7 @@ export default function TopPerformersPage() {
                       {sortedSeasonPerformers.map((player, index) => (
                         <tr
                           key={player.player}
-                          className="group border-b border-border/50 transition-all duration-300 hover:bg-purple-500/10 hover:shadow-sm cursor-pointer animate-in fade-in slide-in-from-left"
+                          className="group border-b border-border/50 transition-all duration-300 hover:bg-purple-500/10 hover:shadow-sm cursor-pointer"
                           style={{ animationDelay: `${index * 30}ms` }}
                         >
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
@@ -850,7 +849,7 @@ export default function TopPerformersPage() {
                             {player.ppg?.toFixed(1) ?? '0.0'}
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200 hidden lg:table-cell">
-                            ┬ú{player.price}m
+                            £{player.price}m
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden lg:table-cell">
                             {player.ownership}%
@@ -864,9 +863,9 @@ export default function TopPerformersPage() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="goals" className="space-y-4 animate-in fade-in-50 slide-in-from-bottom-4 duration-500">
+          <TabsContent value="goals" className="space-y-4-50 duration-500">
             <div className="grid gap-4 lg:grid-cols-2">
-              <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <Card className="border-border bg-card/50  shadow-md hover:shadow-md transition-all duration-300 ">
                 <CardHeader className="pb-4">
                   <CardTitle className="text-foreground flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
                     <span className="flex items-center gap-2">⚽ Top Goal Scorers</span>
@@ -881,7 +880,7 @@ export default function TopPerformersPage() {
                     {goalScorers.map((player, index) => (
                       <div
                         key={player.player}
-                        className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-blue-400/50 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] animate-in fade-in slide-in-from-left"
+                        className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-secondary/30 to-secondary/10 border border-border/50 hover:border-blue-400/50 transition-all duration-300 hover:shadow-sm "
                         style={{ animationDelay: `${index * 50}ms` }}
                       >
                         <div className="flex items-center justify-between mb-3">
@@ -941,7 +940,7 @@ export default function TopPerformersPage() {
                 </CardContent>
               </Card>
 
-              <Card className="border-border bg-card/50 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <Card className="border-border bg-card/50  shadow-md hover:shadow-md transition-all duration-300 ">
                 <CardHeader className="pb-4">
                   <CardTitle className="text-foreground flex items-center gap-2 text-base sm:text-lg">
                     📈 Sustainability Analysis
@@ -953,7 +952,7 @@ export default function TopPerformersPage() {
                 <CardContent className="p-3 sm:p-6">
                   <div className="space-y-6">
                     {/* Overperformers Section */}
-                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-950/10 border border-purple-200 dark:border-purple-800/50 hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-right" style={{ animationDelay: '100ms' }}>
+                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-950/10 border border-purple-200 dark:border-purple-800/50 hover:shadow-sm transition-all duration-300">
                       <h4 className="font-semibold text-purple-800 dark:text-purple-200 mb-3 flex items-center gap-2">
                         ⚠️ Potential Regression Risk
                       </h4>
@@ -1042,7 +1041,7 @@ export default function TopPerformersPage() {
                     </div>
 
                     {/* Sustainable Scorers Section */}
-                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-950/10 border border-blue-200 dark:border-blue-800/50 hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-right" style={{ animationDelay: '200ms' }}>
+                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-950/30 dark:to-blue-950/10 border border-blue-200 dark:border-blue-800/50 hover:shadow-sm transition-all duration-300">
                       <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-3 flex items-center gap-2">
                         ✓ Sustainable Performers
                       </h4>
@@ -1131,7 +1130,7 @@ export default function TopPerformersPage() {
                     </div>
 
                     {/* Underperformers Section */}
-                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-indigo-950/30 dark:to-indigo-950/10 border border-indigo-200 dark:border-indigo-800/50 hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-right" style={{ animationDelay: '300ms' }}>
+                    <div className="p-3 sm:p-4 rounded-xl bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-indigo-950/30 dark:to-indigo-950/10 border border-indigo-200 dark:border-indigo-800/50 hover:shadow-sm transition-all duration-300">
                       <h4 className="font-semibold text-indigo-800 dark:text-indigo-200 mb-3 flex items-center gap-2">
                         🚀 Potential Breakout Candidates
                       </h4>
@@ -1297,7 +1296,7 @@ export default function TopPerformersPage() {
                       {sortedAssistProviders.map((player, index) => (
                         <tr
                           key={player.player}
-                          className="group border-b border-border/50 transition-all duration-300 hover:bg-indigo-500/10 hover:shadow-sm cursor-pointer animate-in fade-in slide-in-from-left"
+                          className="group border-b border-border/50 transition-all duration-300 hover:bg-indigo-500/10 hover:shadow-sm cursor-pointer"
                           style={{ animationDelay: `${index * 30}ms` }}
                         >
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
@@ -1326,7 +1325,7 @@ export default function TopPerformersPage() {
                             <FormBadge value={player.form} />
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200 hidden lg:table-cell">
-                            ┬ú{player.price}m
+                            £{player.price}m
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200 hidden lg:table-cell">
                             {player.ownership}%
@@ -1344,7 +1343,7 @@ export default function TopPerformersPage() {
             <Card className="border-border bg-card/50 backdrop-blur">
               <CardHeader>
                 <CardTitle className="text-foreground flex items-center gap-2">
-                  ≡ƒ¢í∩╕Å Best Defensive Performers
+                  🛡️ Best Defensive Performers
                   <Badge variant="secondary" className="ml-auto">
                     Comprehensive Scoring
                   </Badge>
@@ -1430,7 +1429,7 @@ export default function TopPerformersPage() {
                       {sortedDefensiveLeaders.map((player, index) => (
                         <tr
                           key={player.player}
-                          className="group border-b border-border/50 transition-all duration-300 hover:bg-purple-500/10 hover:shadow-sm cursor-pointer animate-in fade-in slide-in-from-left"
+                          className="group border-b border-border/50 transition-all duration-300 hover:bg-purple-500/10 hover:shadow-sm cursor-pointer"
                           style={{ animationDelay: `${index * 30}ms` }}
                         >
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
@@ -1471,7 +1470,7 @@ export default function TopPerformersPage() {
                             {player.tackles}
                           </td>
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-green-600 transition-colors duration-200 hidden lg:table-cell">
-                            ┬ú{player.price}m
+                            £{player.price}m
                           </td>
                         </tr>
                       ))}
@@ -1486,7 +1485,7 @@ export default function TopPerformersPage() {
             <Card className="border-border bg-card/50 backdrop-blur">
               <CardHeader>
                 <CardTitle className="text-foreground flex items-center gap-2">
-                  ≡ƒÆ░ Best Value Players
+                  💰 Best Value Players
                   <Badge variant="secondary" className="ml-auto">
                     High Points per Million
                   </Badge>
@@ -1556,7 +1555,7 @@ export default function TopPerformersPage() {
                       {sortedValuePlayers.map((player, index) => (
                         <tr
                           key={player.player}
-                          className="group border-b border-border/50 transition-all duration-300 hover:bg-blue-500/10 hover:shadow-sm cursor-pointer animate-in fade-in slide-in-from-left"
+                          className="group border-b border-border/50 transition-all duration-300 hover:bg-blue-500/10 hover:shadow-sm cursor-pointer"
                           style={{ animationDelay: `${index * 30}ms` }}
                         >
                           <td className="py-4 font-mono text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
@@ -1597,13 +1596,13 @@ export default function TopPerformersPage() {
             <Card className="border-border bg-card/50 backdrop-blur">
               <CardHeader>
                 <CardTitle className="text-foreground flex items-center gap-2">
-                  ≡ƒÆÄ Hidden Gems
+                  💎 Hidden Gems
                   <Badge variant="secondary" className="ml-auto">
                     Low Ownership + High Potential
                   </Badge>
                 </CardTitle>
                 <CardDescription>
-                  Undervalued players with above-average stats (Potential Score: 0ΓÇô10).
+                  Undervalued players with above-average stats (Potential Score: 0–10).
                   Score calculated from weighted stats like xG, xA, form, and points per game, tailored by position.
                 </CardDescription>
               </CardHeader>
@@ -1612,7 +1611,7 @@ export default function TopPerformersPage() {
                   {hiddenGems.map((player, index) => (
                     <div
                       key={player.player}
-                      className="p-4 rounded-lg bg-gradient-to-br from-secondary/30 to-secondary/10 border transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-purple-400/50 animate-in fade-in slide-in-from-bottom-4"
+                      className="p-4 rounded-lg bg-gradient-to-br from-secondary/30 to-secondary/10 border transition-all duration-300  hover:shadow-sm hover:border-purple-400/50"
                       style={{ animationDelay: `${index * 50}ms` }}
                     >
                       <div className="flex items-center justify-between mb-3">
@@ -1665,26 +1664,26 @@ export default function TopPerformersPage() {
         </Tabs>
 
         {/* Key Insights Footer */}
-        <Card className="mt-8 border-border bg-card/50 backdrop-blur animate-in fade-in slide-in-from-bottom duration-700">
+        <Card className="mt-8 border-border bg-card/50 backdrop-blur">
           <CardHeader>
-            <CardTitle className="text-foreground flex items-center gap-2">≡ƒÆí Key Interpretations</CardTitle>
+            <CardTitle className="text-foreground flex items-center gap-2">💡 Key Interpretations</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <div className="p-3 rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 hover:shadow-lg transition-all duration-300 animate-in fade-in" style={{ animationDelay: '100ms' }}>
-                <h4 className="font-medium text-purple-800 dark:text-purple-200 mb-2">ΓÜá∩╕Å Overperformers</h4>
+              <div className="p-3 rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 hover:shadow-sm transition-all duration-300">
+                <h4 className="font-medium text-purple-800 dark:text-purple-200 mb-2">⚠️ Overperformers</h4>
                 <p className="text-sm text-purple-700 dark:text-purple-300">
                   May see point drops as they regress to expected stats
                 </p>
               </div>
-              <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 hover:shadow-lg transition-all duration-300 animate-in fade-in" style={{ animationDelay: '200ms' }}>
-                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Γ£à Sustainable Picks</h4>
+              <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 hover:shadow-sm transition-all duration-300">
+                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">✅ Sustainable Picks</h4>
                 <p className="text-sm text-blue-700 dark:text-blue-300">
                   Reliable long-term performers for your team
                 </p>
               </div>
-              <div className="p-3 rounded-lg bg-indigo-50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800 hover:shadow-lg transition-all duration-300 animate-in fade-in" style={{ animationDelay: '300ms' }}>
-                <h4 className="font-medium text-indigo-800 dark:text-indigo-200 mb-2">≡ƒÆ░ Strategy</h4>
+              <div className="p-3 rounded-lg bg-indigo-50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800 hover:shadow-sm transition-all duration-300">
+                <h4 className="font-medium text-indigo-800 dark:text-indigo-200 mb-2">💰 Strategy</h4>
                 <p className="text-sm text-indigo-700 dark:text-indigo-300">
                   Consider selling overperformers at peak value
                 </p>

@@ -126,7 +126,7 @@ async function getSeason() {
 
       const sources = ['team_rankings', 'fixtures', 'player_season_stats', 'player_gameweeks']
       for (const table of sources) {
-        const { data } = await supabase.from(table).select('season_key').order('season_key', { ascending: false }).limit(1)
+        const { data } = await requireSupabase().from(table).select('season_key').order('season_key', { ascending: false }).limit(1)
         const season = data?.[0]?.season_key
         if (season) return season
       }
@@ -156,7 +156,7 @@ async function getAllPlayersCached(limit = 1000) {
 async function getTeamMap() {
   requireSupabase()
 
-  const { data, error } = await supabase.from('teams').select('id, name, short_name')
+  const { data, error } = await requireSupabase().from('teams').select('id, name, short_name')
   if (error) {
     console.error('Error fetching teams:', error)
     return new Map<string, any>()
@@ -259,7 +259,7 @@ async function getSeasonStatsBase() {
   // All insight tabs are derived from the same season rows; fetch them only once.
   if (!seasonStatsPromise) {
     seasonStatsPromise = (async () => {
-      const { data, error } = await supabase
+      const { data, error } = await requireSupabase()
         .from('player_season_stats')
         .select('season_key, player_id, gameweeks_played, total_minutes, total_points, goals, assists, xg, xa, xgi, shots, clean_sheets, defensive_contribution, tackles, points_per_million, pvsxp_total, form, xgi_per90, players!inner(player_name, web_name, position, cost, ownership, teams!left(name, short_name))')
         .eq('season_key', season)
@@ -332,17 +332,17 @@ async function getFixtureBase() {
   if (!fixtureBasePromise) {
     fixtureBasePromise = (async () => {
       const [fixturesRes, teamsRes, ranksRes, latestGameweekRes] = await Promise.all([
-        supabase
+        requireSupabase()
           .from('fixtures')
           .select('id, season_key, gameweek, home_team_id, away_team_id, home_attack_fdr, home_defense_fdr, away_attack_fdr, away_defense_fdr, home_attacking_favorability, home_defensive_favorability, away_attacking_favorability, away_defensive_favorability')
           .eq('season_key', season)
           .order('gameweek'),
-        supabase.from('teams').select('id, name, short_name'),
-        supabase
+        requireSupabase().from('teams').select('id, name, short_name'),
+        requireSupabase()
           .from('team_rankings')
           .select('team_id, overall_rank, attack_rank, defense_rank, attack_score_5, defense_score_5, home_strength_10, away_strength_10')
           .eq('season_key', season),
-        supabase
+        requireSupabase()
           .from('player_gameweeks')
           .select('gameweek')
           .eq('season_key', season)
@@ -467,7 +467,7 @@ export async function getAllPlayers(limit = 1000) {
   try {
     requireSupabase()
 
-    const { data, error } = await supabase
+    const { data, error } = await requireSupabase()
       .from('players')
       .select('id, fpl_id, player_name, web_name, team_id, position, cost, ownership, is_active, teams!left(name, short_name)')
       .eq('is_active', true)
@@ -511,10 +511,10 @@ export async function getPlayerGameweeks(playerName: string, limitGws?: number) 
     if (!search) return []
 
     const [exactWeb, exactName, fuzzyWeb, fuzzyName] = await Promise.all([
-      supabase.from('players').select('id, player_name, web_name').ilike('web_name', search).limit(1),
-      supabase.from('players').select('id, player_name, web_name').ilike('player_name', search).limit(1),
-      supabase.from('players').select('id, player_name, web_name').ilike('web_name', `%${search}%`).limit(1),
-      supabase.from('players').select('id, player_name, web_name').ilike('player_name', `%${search}%`).limit(1),
+      requireSupabase().from('players').select('id, player_name, web_name').ilike('web_name', search).limit(1),
+      requireSupabase().from('players').select('id, player_name, web_name').ilike('player_name', search).limit(1),
+      requireSupabase().from('players').select('id, player_name, web_name').ilike('web_name', `%${search}%`).limit(1),
+      requireSupabase().from('players').select('id, player_name, web_name').ilike('player_name', `%${search}%`).limit(1),
     ])
 
     const playerRow = exactWeb.data?.[0] || exactName.data?.[0] || fuzzyWeb.data?.[0] || fuzzyName.data?.[0]
@@ -524,7 +524,7 @@ export async function getPlayerGameweeks(playerName: string, limitGws?: number) 
     }
 
     const season = await getSeason()
-    const { data, error } = await supabase
+    const { data, error } = await requireSupabase()
       .from('player_gameweeks')
       .select('*')
       .eq('season_key', season)
@@ -600,8 +600,8 @@ export async function getPlayerTrends(playerNames: string[], limitGws?: number) 
     const playerIds = normalizedPlayers.map((player: any) => player.id)
 
     const [seasonStatsRes, gameweeksRes] = await Promise.all([
-      supabase.from('player_season_stats').select('*').eq('season_key', season).in('player_id', playerIds),
-      supabase.from('player_gameweeks').select('*').eq('season_key', season).in('player_id', playerIds).order('gameweek'),
+      requireSupabase().from('player_season_stats').select('*').eq('season_key', season).in('player_id', playerIds),
+      requireSupabase().from('player_gameweeks').select('*').eq('season_key', season).in('player_id', playerIds).order('gameweek'),
     ])
 
     if (seasonStatsRes.error) {
@@ -703,7 +703,7 @@ export async function getPlayerTrends(playerNames: string[], limitGws?: number) 
           xA_per_90: safeNumber(seasonStats.xa_per90 ?? seasonStats.xa_per_90, 0),
           xGI_per_90: safeNumber(seasonStats.xgi_per90 ?? seasonStats.xgi_per_90, 0),
           shots_per_90: safeNumber(seasonStats.shots_per90 ?? seasonStats.shots_per_90, 0),
-          key_passes_per_90: safeNumber(seasonStats.key_passes_per_90 ?? seasonStats.chances_created_per_90, 0),
+          key_passes_per_90: safeNumber(seasonStats.key_passes_per_90 ?? seasonStats.chances_created_per_90 ?? (minutesPer90 > 0 ? totalKeyPasses / minutesPer90 : 0), 0),
         },
         gameweeks,
       }
@@ -839,11 +839,11 @@ async function getTeamRankingsBase() {
   if (!teamRankingsPromise) {
     teamRankingsPromise = (async () => {
       const [rankingsRes, teamsRes] = await Promise.all([
-        supabase
+        requireSupabase()
           .from('team_rankings')
           .select('team_id, overall_rank, attack_rank, defense_rank, overall_strength, attack_strength, defense_strength, goals_per_game, xg_per_game, goals_conceded_per_game, clean_sheet_rate, home_goals_per_game, away_goals_per_game, home_clean_sheet_rate, away_clean_sheet_rate')
           .eq('season_key', season),
-        supabase.from('teams').select('id, name, short_name'),
+        requireSupabase().from('teams').select('id, name, short_name'),
       ])
 
       const error = rankingsRes.error || teamsRes.error
@@ -990,7 +990,7 @@ export async function getDashboardSummary() {
   try {
     requireSupabase()
 
-    const { data, error } = await supabase
+    const { data, error } = await requireSupabase()
       .from('dashboard_summary')
       .select('*')
       .limit(1)
@@ -1010,6 +1010,55 @@ export async function getDashboardSummary() {
     }
   } catch (err) {
     console.error('Error in getDashboardSummary:', err)
+    throw err
+  }
+}
+
+
+/**
+ * Lightweight player pool for the comparison page.
+ * Only returns active players who have actually recorded minutes in the current season.
+ */
+export async function getComparisonPlayers() {
+  try {
+    const [players, season] = await Promise.all([getAllPlayersCached(5000), getSeason()])
+    if (!players.length) return []
+
+    const playerIds = players.map((player: any) => player.id).filter(Boolean)
+    const { data, error } = await requireSupabase()
+      .from('player_season_stats')
+      .select('player_id, total_minutes, total_points, gameweeks_played, form, xgi_per90, xg_per90, xa_per90, shots_per90')
+      .eq('season_key', season)
+      .in('player_id', playerIds)
+
+    if (error) {
+      throw new Error(`Failed to load comparison player pool: ${error.message}`)
+    }
+
+    const statsByPlayer = new Map((data || []).map((row: any) => [row.player_id, row]))
+
+    return players
+      .map((player: any) => {
+        const stats: any = statsByPlayer.get(player.id) || {}
+        return {
+          ...player,
+          total_minutes: safeInt(stats.total_minutes, 0),
+          total_points: safeInt(stats.total_points, 0),
+          gameweeks_played: safeInt(stats.gameweeks_played, 0),
+          form: safeNumber(stats.form, 0),
+          xgi_per90: safeNumber(stats.xgi_per90, 0),
+          xg_per90: safeNumber(stats.xg_per90, 0),
+          xa_per90: safeNumber(stats.xa_per90, 0),
+          shots_per90: safeNumber(stats.shots_per90, 0),
+        }
+      })
+      .filter((player: any) => player.total_minutes > 0)
+      .sort((a: any, b: any) => {
+        if (b.total_minutes !== a.total_minutes) return b.total_minutes - a.total_minutes
+        return b.total_points - a.total_points
+      })
+  } catch (err) {
+    console.error('Error in getComparisonPlayers:', err)
     throw err
   }
 }

@@ -1,25 +1,57 @@
 "use client"
 
-import React, { useState, useEffect, useMemo } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { TrendingUp, User, Target, Activity, BarChart3, Award } from "lucide-react"
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts'
-import { getAllPlayers, getPlayerTrends } from "@/lib/supabase"
+import React, { useEffect, useMemo, useState } from "react"
+import {
+  Activity,
+  Check,
+  ChevronDown,
+  Search,
+  Shield,
+  Sparkles,
+  Target,
+  Users,
+  X,
+} from "lucide-react"
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts"
 
-interface Player {
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { getComparisonPlayers, getPlayerTrends } from "@/lib/supabase"
+
+type Position = 1 | 2 | 3 | 4
+type CompareMode = "output" | "underlying" | "security"
+
+type Player = {
   id: string
   player_name: string
   web_name: string
   team: string
   team_short?: string
-  position: number
+  position: Position
   cost: number
   ownership: number
+  total_minutes: number
+  total_points: number
+  gameweeks_played: number
+  form: number
+  xgi_per90: number
+  xg_per90: number
+  xa_per90: number
+  shots_per90: number
 }
 
-interface GameweekData {
+type GameweekData = {
   gameweek: number
   opponent: string
   was_home: boolean | null
@@ -37,16 +69,16 @@ interface GameweekData {
   key_passes: number
   touches: number
   penalty_area_touches: number
-  carries_final_third: number
   defensive_contribution: number
   xGC: number
   goals_conceded: number
 }
 
-interface PlayerTrendData {
+type PlayerTrendData = {
   player_name: string
   team: string
-  position: number
+  team_short?: string
+  position: Position
   web_name: string
   cost: number
   ownership: number
@@ -81,659 +113,573 @@ interface PlayerTrendData {
   gameweeks: GameweekData[]
 }
 
-interface ChartDataPoint {
-  gameweek: number
-  [key: string]: number | null
+const POSITION_META: Record<Position, { label: string; short: string }> = {
+  1: { label: "Goalkeepers", short: "GK" },
+  2: { label: "Defenders", short: "DEF" },
+  3: { label: "Midfielders", short: "MID" },
+  4: { label: "Forwards", short: "FWD" },
 }
 
-const POSITION_COLORS = {
-  "1": { color: "#f59e0b", label: "GK", gradient: "from-amber-500/20" },
-  "2": { color: "#3b82f6", label: "DEF", gradient: "from-blue-500/20" },
-  "3": { color: "#22c55e", label: "MID", gradient: "from-green-500/20" },
-  "4": { color: "#ef4444", label: "FWD", gradient: "from-red-500/20" }
+const SERIES = ["#2563eb", "#16a34a", "#9333ea", "#ea580c"]
+const MAX_PLAYERS = 4
+
+const MODE_META: Record<CompareMode, { label: string; description: string }> = {
+  output: {
+    label: "FPL Output",
+    description: "What has actually returned points: recent form, points rate and end product.",
+  },
+  underlying: {
+    label: "Underlying Attack",
+    description: "Chance quality and involvement before FPL returns: xG, xA, xGI, shots and key passes.",
+  },
+  security: {
+    label: "Minutes / Security",
+    description: "How safe the minutes look: recent playing time, 60+ minute appearances and season workload.",
+  },
+}
+
+function fmt(value: number, digits = 1) {
+  if (!Number.isFinite(value)) return "0"
+  return value.toFixed(digits).replace(/\.0$/, "")
+}
+
+function lastN(gws: GameweekData[], n = 5) {
+  return [...gws].sort((a, b) => a.gameweek - b.gameweek).slice(-n)
+}
+
+function avg(values: number[]) {
+  return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : 0
 }
 
 export default function PlayerTrendsPage() {
-  const [allPlayers, setAllPlayers] = useState<Player[]>([])
-  const [selectedPlayers, setSelectedPlayers] = useState<string[]>([])
-  const [playerData, setPlayerData] = useState<Record<string, PlayerTrendData>>({})
-  const [searchQuery, setSearchQuery] = useState<string>("") 
-  const [positionFilter, setPositionFilter] = useState<string>("all")
-  const [teamFilter, setTeamFilter] = useState<string>("all")
-  const [loading, setLoading] = useState<boolean>(true)
+  const [players, setPlayers] = useState<Player[]>([])
+  const [selectedNames, setSelectedNames] = useState<string[]>([])
+  const [trendData, setTrendData] = useState<Record<string, PlayerTrendData>>({})
+  const [position, setPosition] = useState<Position | null>(null)
+  const [query, setQuery] = useState("")
+  const [team, setTeam] = useState("all")
+  const [loading, setLoading] = useState(true)
+  const [loadingTrends, setLoadingTrends] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [mode, setMode] = useState<CompareMode>("output")
 
   useEffect(() => {
-    fetchAllPlayers()
+    ;(async () => {
+      try {
+        setLoading(true)
+        setPlayers((await getComparisonPlayers()) as Player[])
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load players")
+      } finally {
+        setLoading(false)
+      }
+    })()
   }, [])
 
   useEffect(() => {
-    if (selectedPlayers.length > 0) {
-      fetchPlayerTrends(selectedPlayers)
-    } else {
-      setPlayerData({})
-    }
-  }, [selectedPlayers])
-
-  const fetchAllPlayers = async () => {
-    try {
-      setLoading(true)
-      setError(null)
-      const data = await getAllPlayers(1000)
-      setAllPlayers(data || [])
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const fetchPlayerTrends = async (players: string[]) => {
-    try {
-      setError(null)
-      const data = await getPlayerTrends(players, 10)
-      setPlayerData(data)
-    } catch (err) {
-      console.error("Error fetching player trends:", err)
-      setError(err instanceof Error ? err.message : 'Failed to fetch player trends')
-    }
-  }
-
-  const filteredPlayers = useMemo(() => {
-    let filtered = allPlayers
-
-    if (positionFilter !== "all") {
-      filtered = filtered.filter((p: Player) => p.position === parseInt(positionFilter))
+    if (!selectedNames.length) {
+      setTrendData({})
+      return
     }
 
-    if (teamFilter !== "all") {
-      filtered = filtered.filter((p: Player) => p.team === teamFilter)
-    }
+    ;(async () => {
+      try {
+        setLoadingTrends(true)
+        setError(null)
+        setTrendData((await getPlayerTrends(selectedNames, 10)) as Record<string, PlayerTrendData>)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load comparison")
+      } finally {
+        setLoadingTrends(false)
+      }
+    })()
+  }, [selectedNames])
 
-    if (searchQuery) {
-      filtered = filtered.filter((player: Player) => 
-        (player.web_name || player.player_name || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
-        player.team.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    }
+  const teams = useMemo(() => {
+    const base = position ? players.filter((player) => player.position === position) : players
+    return [...new Set(base.map((player) => player.team).filter(Boolean))].sort()
+  }, [players, position])
 
-    return filtered.slice(0, 100)
-  }, [searchQuery, allPlayers, positionFilter, teamFilter])
+  const eligiblePlayers = useMemo(() => {
+    if (!position) return []
+    const normalizedQuery = query.trim().toLowerCase()
 
-  const togglePlayer = (playerName: string) => {
-    if (selectedPlayers.includes(playerName)) {
-      setSelectedPlayers(selectedPlayers.filter((p: string) => p !== playerName))
-    } else {
-      setSelectedPlayers([...selectedPlayers, playerName])
-    }
-  }
-
-  const getColorForPlayer = (index: number) => {
-    const colors = [
-      { line: "#3b82f6", bg: "bg-blue-500", text: "text-blue-600 dark:text-blue-400" },
-      { line: "#22c55e", bg: "bg-green-500", text: "text-green-600 dark:text-green-400" },
-      { line: "#a855f7", bg: "bg-purple-500", text: "text-purple-600 dark:text-purple-400" },
-      { line: "#f59e0b", bg: "bg-amber-500", text: "text-amber-600 dark:text-amber-400" },
-      { line: "#ef4444", bg: "bg-red-500", text: "text-red-600 dark:text-red-400" },
-      { line: "#06b6d4", bg: "bg-cyan-500", text: "text-cyan-600 dark:text-cyan-400" },
-      { line: "#8b5cf6", bg: "bg-violet-500", text: "text-violet-600 dark:text-violet-400" },
-      { line: "#ec4899", bg: "bg-pink-500", text: "text-pink-600 dark:text-pink-400" },
-      { line: "#10b981", bg: "bg-emerald-500", text: "text-emerald-600 dark:text-emerald-400" },
-      { line: "#f97316", bg: "bg-orange-500", text: "text-orange-600 dark:text-orange-400" }
-    ]
-    return colors[index % colors.length]
-  }
-
-  const comparisonChartData = useMemo((): ChartDataPoint[] => {
-    if (Object.keys(playerData).length === 0) return []
-    
-    const allGameweeks = new Set<number>()
-    Object.values(playerData).forEach((player) => {
-      const typedPlayer = player as PlayerTrendData
-      typedPlayer.gameweeks.forEach((gw: GameweekData) => allGameweeks.add(gw.gameweek))
-    })
-    
-    return Array.from(allGameweeks).sort((a: number, b: number) => a - b).map((gw: number) => {
-      const point: ChartDataPoint = { gameweek: gw }
-      Object.entries(playerData).forEach(([name, player]) => {
-        const typedPlayer = player as PlayerTrendData
-        const gwData = typedPlayer.gameweeks.find((g: GameweekData) => g.gameweek === gw)
-        point[`${name}_points`] = gwData ? gwData.total_points : null
-        point[`${name}_xG`] = gwData ? gwData.xG : null
-        point[`${name}_xA`] = gwData ? gwData.xA : null
-        point[`${name}_xGI`] = gwData ? gwData.xGI : null
-        point[`${name}_minutes`] = gwData ? gwData.minutes : null
+    return players
+      .filter((player) => player.position === position)
+      .filter((player) => team === "all" || player.team === team)
+      .filter((player) => {
+        if (!normalizedQuery) return true
+        return `${player.web_name} ${player.player_name} ${player.team}`.toLowerCase().includes(normalizedQuery)
       })
-      return point
+      .sort((a, b) => {
+        if (b.total_minutes !== a.total_minutes) return b.total_minutes - a.total_minutes
+        return b.form - a.form
+      })
+      .slice(0, query.trim() ? 16 : 10)
+  }, [players, position, query, team])
+
+  const selectedPlayers = useMemo(
+    () =>
+      selectedNames
+        .map((name) => players.find((player) => (player.web_name || player.player_name) === name))
+        .filter(Boolean) as Player[],
+    [players, selectedNames]
+  )
+
+  const selectPosition = (next: Position) => {
+    if (position === next) return
+    setPosition(next)
+    setSelectedNames([])
+    setTrendData({})
+    setQuery("")
+    setTeam("all")
+  }
+
+  const togglePlayer = (player: Player) => {
+    const name = player.web_name || player.player_name
+    if (selectedNames.includes(name)) {
+      setSelectedNames((current) => current.filter((item) => item !== name))
+      return
+    }
+    if (selectedNames.length >= MAX_PLAYERS) return
+    setSelectedNames((current) => [...current, name])
+  }
+
+  const metrics = useMemo(() => {
+    return selectedNames.map((name) => {
+      const data = trendData[name]
+      if (!data) return null
+      const recent = lastN(data.gameweeks, 5)
+      return {
+        name,
+        data,
+        recentPoints: avg(recent.map((gw) => gw.total_points)),
+        recentMinutes: avg(recent.map((gw) => gw.minutes)),
+        recentXGI: avg(recent.map((gw) => gw.xGI)),
+        recentDefCon: avg(recent.map((gw) => gw.defensive_contribution)),
+        recentCS: recent.length ? recent.filter((gw) => gw.clean_sheets > 0).length / recent.length : 0,
+      }
+    }).filter(Boolean) as Array<{
+      name: string
+      data: PlayerTrendData
+      recentPoints: number
+      recentMinutes: number
+      recentXGI: number
+      recentDefCon: number
+      recentCS: number
+    }>
+  }, [selectedNames, trendData])
+
+  const chartData = useMemo(() => {
+    const gameweeks = new Set<number>()
+    metrics.forEach(({ data }) => data.gameweeks.forEach((gw) => gameweeks.add(gw.gameweek)))
+
+    return [...gameweeks].sort((a, b) => a - b).map((gw) => {
+      const row: Record<string, number | string | null> = { gameweek: `GW${gw}` }
+      metrics.forEach(({ name, data }) => {
+        const current = data.gameweeks.find((entry) => entry.gameweek === gw)
+        row[`${name}:points`] = current?.total_points ?? null
+        row[`${name}:xgi`] = current?.xGI ?? null
+        row[`${name}:minutes`] = current?.minutes ?? null
+      })
+      return row
     })
-  }, [playerData])
+  }, [metrics])
+
+  const metricRows = useMemo(() => {
+    if (mode === "security") {
+      return [
+        { label: "Last 5 avg minutes", key: "recentMinutes", values: metrics.map((item) => item.recentMinutes), digits: 0 },
+        {
+          label: "Last 5: 60+ mins",
+          key: "recent60",
+          values: metrics.map((item) => {
+            const recent = lastN(item.data.gameweeks, 5)
+            return recent.length ? (recent.filter((gw) => gw.minutes >= 60).length / recent.length) * 100 : 0
+          }),
+          suffix: "%",
+          digits: 0,
+        },
+        {
+          label: "Season avg minutes",
+          key: "seasonAvgMinutes",
+          values: metrics.map((item) => item.data.total_stats.games_played ? item.data.total_stats.total_minutes / item.data.total_stats.games_played : 0),
+          digits: 0,
+        },
+        { label: "Games played", key: "gamesPlayed", values: metrics.map((item) => item.data.total_stats.games_played), digits: 0 },
+        { label: "Total minutes", key: "totalMinutes", values: metrics.map((item) => item.data.total_stats.total_minutes), digits: 0 },
+      ]
+    }
+
+    if (mode === "underlying") {
+      return [
+        { label: "xGI / 90", key: "xgi90", values: metrics.map((item) => item.data.per90_stats.xGI_per_90) },
+        { label: "xG / 90", key: "xg90", values: metrics.map((item) => item.data.per90_stats.xG_per_90) },
+        { label: "xA / 90", key: "xa90", values: metrics.map((item) => item.data.per90_stats.xA_per_90) },
+        { label: "Shots / 90", key: "shots90", values: metrics.map((item) => item.data.per90_stats.shots_per_90) },
+        { label: "Key passes / 90", key: "kp90", values: metrics.map((item) => item.data.per90_stats.key_passes_per_90) },
+        { label: "Last 5 avg xGI", key: "recentXGI", values: metrics.map((item) => item.recentXGI) },
+      ]
+    }
+
+    if (position === 1 || position === 2) {
+      return [
+        { label: "Last 5 avg pts", key: "recentPoints", values: metrics.map((item) => item.recentPoints) },
+        { label: "Points / 90", key: "points90", values: metrics.map((item) => item.data.per90_stats.points_per_90) },
+        { label: "Total points", key: "totalPoints", values: metrics.map((item) => item.data.total_stats.total_points), digits: 0 },
+        { label: "Last 5 clean sheet %", key: "recentCS", values: metrics.map((item) => item.recentCS * 100), suffix: "%", digits: 0 },
+        { label: "Last 5 def. contrib.", key: "recentDefCon", values: metrics.map((item) => item.recentDefCon) },
+      ]
+    }
+
+    return [
+      { label: "Last 5 avg pts", key: "recentPoints", values: metrics.map((item) => item.recentPoints) },
+      { label: "Points / 90", key: "points90", values: metrics.map((item) => item.data.per90_stats.points_per_90) },
+      { label: "Total points", key: "totalPoints", values: metrics.map((item) => item.data.total_stats.total_points), digits: 0 },
+      { label: "Goals", key: "goals", values: metrics.map((item) => item.data.total_stats.total_goals), digits: 0 },
+      { label: "Assists", key: "assists", values: metrics.map((item) => item.data.total_stats.total_assists), digits: 0 },
+    ]
+  }, [metrics, mode, position])
 
   if (loading) {
-    return (
-      <div className="min-h-screen p-2 sm:p-4 lg:p-6 bg-gradient-to-br from-background via-secondary/5 to-secondary/10">
-        <div className="max-w-[1600px] mx-auto">
-          <div className="mb-6 sm:mb-8">
-            <div className="h-10 w-80 bg-secondary/50 rounded-lg animate-pulse mb-2"></div>
-            <div className="h-6 w-96 bg-secondary/30 rounded-lg animate-pulse"></div>
-          </div>
-          <div className="mb-6">
-            <div className="h-64 bg-secondary/30 rounded-xl animate-pulse"></div>
-          </div>
-          <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
-            <div className="h-96 bg-secondary/30 rounded-xl animate-pulse"></div>
-            <div className="h-96 bg-secondary/30 rounded-xl animate-pulse"></div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <Card className="max-w-md w-full">
-          <CardContent className="p-8 text-center">
-            <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-950 flex items-center justify-center mx-auto mb-4">
-              <span className="text-3xl">⚠️</span>
-            </div>
-            <h3 className="text-lg font-semibold text-foreground mb-2">Failed to load player data</h3>
-            <p className="text-sm text-muted-foreground mb-4">{error}</p>
-            <button
-              onClick={() => window.location.reload()}
-              className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-200 active:scale-95"
-            >
-              Retry
-            </button>
-          </CardContent>
-        </Card>
-      </div>
-    )
+    return <div className="p-6 text-sm text-muted-foreground">Loading comparison data…</div>
   }
 
   return (
-    <div className="min-h-screen p-2 sm:p-4 lg:p-6 bg-gradient-to-br from-background via-secondary/5 to-secondary/10">
-      <div className="max-w-[1600px] mx-auto">
-        <div className="mb-6 sm:mb-8 animate-in fade-in slide-in-from-top duration-700">
-          <h1 className="mb-2 text-2xl sm:text-4xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent flex items-center gap-2 sm:gap-3">
-            <Activity className="w-6 h-6 sm:w-10 sm:h-10 text-purple-500 animate-pulse" style={{ animationDuration: '2s' }} />
-            Player Performance Database
-          </h1>
-          <p className="text-sm sm:text-lg text-muted-foreground animate-in fade-in slide-in-from-top duration-700" style={{ animationDelay: '200ms' }}>
-            Advanced gameweek-by-gameweek analysis • Compare multiple players with xG/xA insights
+    <div className="min-h-screen bg-background p-3 sm:p-5 lg:p-7">
+      <div className="mx-auto max-w-[1500px] space-y-6">
+        <header className="space-y-2">
+          <div className="flex items-center gap-2 text-sm font-medium text-primary">
+            <Activity className="h-4 w-4" />
+            Player comparison
+          </div>
+          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Compare players who actually play the same role</h1>
+          <p className="max-w-3xl text-sm text-muted-foreground sm:text-base">
+            Pick a position first, then compare up to four active players with current-season minutes. The list is deliberately filtered so retired, transferred-out and zero-minute players do not clutter the selector.
           </p>
-        </div>
+        </header>
 
-        <Card className="mb-6 border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-card shadow-lg animate-in fade-in slide-in-from-top duration-500" style={{ animationDelay: '300ms' }}>
-          <CardHeader className="border-b border-border/50">
-            <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-              <User className="w-5 h-5 text-purple-500" />
-              Player Search & Selection ({selectedPlayers.length} selected)
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-4 space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <input
-                type="text"
-                placeholder="🔍 Search by player name or team..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
-              />
-              <select
-                value={positionFilter}
-                onChange={(e) => setPositionFilter(e.target.value)}
-                className="px-4 py-2.5 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
-              >
-                <option value="all">All Positions</option>
-                <option value="1">🥅 Goalkeepers</option>
-                <option value="2">🛡️ Defenders</option>
-                <option value="3">🎯 Midfielders</option>
-                <option value="4">⚡ Forwards</option>
-              </select>
-              <select
-                value={teamFilter}
-                onChange={(e) => setTeamFilter(e.target.value)}
-                className="px-4 py-2.5 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-200"
-              >
-                <option value="all">All Teams</option>
-                {[...new Set(allPlayers.map(p => p.team))].sort().map(team => (
-                  <option key={team} value={team}>⚽ {team}</option>
-                ))}
-              </select>
-            </div>
+        {error && (
+          <div className="rounded-xl border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive">
+            {error}
+          </div>
+        )}
 
-            {selectedPlayers.length > 0 && (
-              <div className="flex flex-wrap gap-2 p-3 bg-secondary/30 rounded-lg border border-border/50">
-                <span className="text-xs text-muted-foreground self-center mr-2">Selected:</span>
-                {selectedPlayers.map((player, index) => {
-                  const playerInfo = allPlayers.find(
-                    p => (p.web_name || p.player_name) === player
-                  )
-                  const positionKey = (playerInfo?.position ?? 0).toString() as keyof typeof POSITION_COLORS
-                  const posInfo = POSITION_COLORS[positionKey] || {}
+        <Card>
+          <CardContent className="space-y-5 p-4 sm:p-5">
+            <div className="space-y-2">
+              <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">1. Choose a position</div>
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                {([1, 2, 3, 4] as Position[]).map((value) => {
+                  const meta = POSITION_META[value]
+                  const active = position === value
                   return (
-                    <Badge
-                      key={player}
-                      className={`${getColorForPlayer(index).bg} text-white cursor-pointer hover:opacity-80 px-3 py-1.5`}
-                      onClick={() => togglePlayer(player)}
+                    <Button
+                      key={value}
+                      type="button"
+                      variant={active ? "default" : "outline"}
+                      className="h-auto justify-start gap-3 px-3 py-3"
+                      onClick={() => selectPosition(value)}
                     >
-                      {posInfo.label} {player} ✓
-                    </Badge>
+                      <span className="rounded-md bg-background/20 px-2 py-1 text-xs font-semibold">{meta.short}</span>
+                      <span className="truncate">{meta.label}</span>
+                    </Button>
                   )
                 })}
               </div>
-            )}
-
-            <div className="max-h-80 overflow-y-auto border border-border rounded-lg">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 p-2">
-                {filteredPlayers.length === 0 ? (
-                  <div className="col-span-full text-center py-8 text-muted-foreground">
-                    No players found. Try adjusting your filters.
-                  </div>
-                ) : (
-                  filteredPlayers.map((player) => {
-                    const playerKey = player.web_name || player.player_name
-                    const isSelected = selectedPlayers.includes(playerKey)
-                    const positionKey = player.position.toString() as keyof typeof POSITION_COLORS
-                    const posInfo = POSITION_COLORS[positionKey] || {}
-                    
-                    return (
-                      <button
-                        key={player.id}
-                        onClick={() => togglePlayer(playerKey)}
-                        className={`px-3 py-2.5 text-xs sm:text-sm rounded-lg border transition-all duration-200 text-left hover:scale-[1.02] ${
-                          isSelected
-                            ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500 shadow-md ring-2 ring-purple-500/20'
-                            : 'bg-card hover:bg-secondary/50 border-border hover:border-purple-400/50'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between gap-2">
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-1.5">
-                              <Badge 
-                                variant="secondary" 
-                                className="text-[10px] px-1.5 py-0" 
-                                style={{ backgroundColor: posInfo.color + '20', color: posInfo.color }}
-                              >
-                                {posInfo.label}
-                              </Badge>
-                              <span className="font-medium truncate">{player.web_name || player.player_name}</span>
-                            </div>
-                            <div className="text-[10px] text-muted-foreground mt-0.5 flex items-center gap-2">
-                              <span>{player.team}</span>
-                              <span>•</span>
-                              <span>£{player.cost}m</span>
-                              {player.ownership > 0 && (
-                                <>
-                                  <span>•</span>
-                                  <span>{player.ownership}%</span>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </button>
-                    )
-                  })
-                )}
-              </div>
             </div>
 
-            <p className="text-xs text-muted-foreground text-center">
-              Showing {filteredPlayers.length} of {allPlayers.length} players
-            </p>
+            {position && (
+              <div className="space-y-3">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">2. Add players</div>
+                    <p className="mt-1 text-sm text-muted-foreground">Showing active {POSITION_META[position].label.toLowerCase()} with minutes this season.</p>
+                  </div>
+                  <span className="text-xs text-muted-foreground">{selectedNames.length}/{MAX_PLAYERS} selected</span>
+                </div>
+
+                <div className="grid gap-2 md:grid-cols-[minmax(0,1fr)_220px]">
+                  <label className="relative block">
+                    <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <input
+                      value={query}
+                      onChange={(event) => setQuery(event.target.value)}
+                      placeholder={`Search ${POSITION_META[position].short} by name or club…`}
+                      className="h-11 w-full rounded-lg border border-border bg-background pl-10 pr-3 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15"
+                    />
+                  </label>
+                  <label className="relative block">
+                    <select
+                      value={team}
+                      onChange={(event) => setTeam(event.target.value)}
+                      className="h-11 w-full appearance-none rounded-lg border border-border bg-background px-3 pr-9 text-sm outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15"
+                    >
+                      <option value="all">All clubs</option>
+                      {teams.map((club) => <option key={club} value={club}>{club}</option>)}
+                    </select>
+                    <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  </label>
+                </div>
+
+                {selectedPlayers.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {selectedPlayers.map((player, index) => (
+                      <button
+                        key={player.id}
+                        type="button"
+                        onClick={() => togglePlayer(player)}
+                        className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/40 px-3 py-1.5 text-sm"
+                      >
+                        <span className="h-2 w-2 rounded-full" style={{ backgroundColor: SERIES[index] }} />
+                        <span className="font-medium">{player.web_name}</span>
+                        <span className="text-muted-foreground">{player.team_short || player.team}</span>
+                        <X className="h-3.5 w-3.5 text-muted-foreground" />
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                <div className="overflow-hidden rounded-xl border border-border/70">
+                  <div className="grid grid-cols-[minmax(0,1fr)_80px_80px_72px] gap-2 border-b border-border/60 bg-secondary/25 px-3 py-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                    <span>Player</span><span className="text-right">Minutes</span><span className="text-right">Form</span><span className="text-right">Price</span>
+                  </div>
+                  <div className="divide-y divide-border/50">
+                    {eligiblePlayers.length === 0 ? (
+                      <div className="px-4 py-8 text-center text-sm text-muted-foreground">No eligible players match your filters.</div>
+                    ) : eligiblePlayers.map((player) => {
+                      const name = player.web_name || player.player_name
+                      const selected = selectedNames.includes(name)
+                      const disabled = !selected && selectedNames.length >= MAX_PLAYERS
+                      return (
+                        <button
+                          key={player.id}
+                          type="button"
+                          disabled={disabled}
+                          onClick={() => togglePlayer(player)}
+                          className="grid w-full grid-cols-[minmax(0,1fr)_80px_80px_72px] items-center gap-2 px-3 py-3 text-left text-sm transition hover:bg-secondary/35 disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          <span className="flex min-w-0 items-center gap-3">
+                            <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${selected ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}>
+                              {selected ? <Check className="h-4 w-4" /> : <Users className="h-4 w-4" />}
+                            </span>
+                            <span className="min-w-0">
+                              <span className="block truncate font-medium">{player.web_name || player.player_name}</span>
+                              <span className="block truncate text-xs text-muted-foreground">{player.team}</span>
+                            </span>
+                          </span>
+                          <span className="text-right tabular-nums">{player.total_minutes}</span>
+                          <span className="text-right tabular-nums">{fmt(player.form)}</span>
+                          <span className="text-right tabular-nums">£{fmt(player.cost)}m</span>
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
           </CardContent>
         </Card>
 
-        {selectedPlayers.length === 0 ? (
-          <Card className="border-dashed border-2 animate-in fade-in duration-500">
-            <CardContent className="p-12 text-center text-muted-foreground">
-              <Target className="w-16 h-16 mx-auto mb-4 opacity-30 animate-pulse" style={{ animationDuration: '3s' }} />
-              <p className="text-lg font-medium mb-2">No Players Selected</p>
-              <p className="text-sm">Search and select players above to view detailed performance analysis</p>
+        {!position ? (
+          <Card className="border-dashed">
+            <CardContent className="flex flex-col items-center gap-3 px-6 py-12 text-center">
+              <Target className="h-8 w-8 text-muted-foreground" />
+              <div>
+                <p className="font-medium">Start with a position</p>
+                <p className="mt-1 text-sm text-muted-foreground">This keeps every comparison meaningful.</p>
+              </div>
             </CardContent>
           </Card>
+        ) : selectedNames.length < 2 ? (
+          <Card className="border-dashed">
+            <CardContent className="flex flex-col items-center gap-3 px-6 py-12 text-center">
+              <Sparkles className="h-8 w-8 text-muted-foreground" />
+              <div>
+                <p className="font-medium">Pick at least two {POSITION_META[position].short}s</p>
+                <p className="mt-1 text-sm text-muted-foreground">You can compare up to four players at once.</p>
+              </div>
+            </CardContent>
+          </Card>
+        ) : loadingTrends ? (
+          <div className="rounded-xl border border-border/60 px-5 py-10 text-center text-sm text-muted-foreground">Building comparison…</div>
         ) : (
-          <div className="space-y-6">
-            {selectedPlayers.length > 0 && comparisonChartData.length > 0 && (
-              <Card className="border-purple-500/20 bg-gradient-to-br from-purple-500/5 to-card shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <CardHeader className="border-b border-border/50">
-                  <CardTitle className="flex items-center gap-2">
-                    <BarChart3 className="w-5 h-5 text-purple-500" />
-                    Player Comparison Charts
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-4">
-                  <Tabs defaultValue="points" className="w-full">
-                    <TabsList className="grid w-full grid-cols-4 bg-secondary/50">
-                      <TabsTrigger value="points" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-purple-600 data-[state=active]:text-white">Points</TabsTrigger>
-                      <TabsTrigger value="xgi" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white">xGI</TabsTrigger>
-                      <TabsTrigger value="minutes" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-indigo-600 data-[state=active]:text-white">Minutes</TabsTrigger>
-                      <TabsTrigger value="attacking" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-600 data-[state=active]:text-white">xG vs xA</TabsTrigger>
-                    </TabsList>
-                    
-                    <TabsContent value="points" className="mt-4">
-                      <ResponsiveContainer width="100%" height={300}>
-                        <LineChart data={comparisonChartData} margin={{ top: 5, right: 30, left: 20, bottom: 60 }}>
-                          <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
-                          <XAxis 
-                            dataKey="gameweek" 
-                            label={{ value: 'Gameweek', position: 'insideBottom', offset: -10, textAnchor: 'middle' }}
-                            tick={{ fontSize: 12 }}
-                            height={60}
-                          />
-                          <YAxis label={{ value: 'FPL Points', angle: -90, position: 'insideLeft' }} />
-                          <Tooltip 
-                            contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid #333', borderRadius: '8px' }}
-                            labelStyle={{ color: '#fff' }}
-                          />
-                          <Legend />
-                          {selectedPlayers.map((player, index) => (
-                            <Line 
-                              key={player}
-                              type="monotone" 
-                              dataKey={`${player}_points`} 
-                              name={player}
-                              stroke={getColorForPlayer(index).line}
-                              strokeWidth={2}
-                              dot={{ r: 4 }}
-                              connectNulls
-                            />
-                          ))}
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </TabsContent>
+          <>
+            <Card>
+              <CardHeader className="gap-4 pb-3">
+                <div>
+                  <CardTitle className="text-lg">At a glance</CardTitle>
+                  <p className="mt-1 text-sm text-muted-foreground">{MODE_META[mode].description}</p>
+                </div>
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+                  {(Object.keys(MODE_META) as CompareMode[]).map((value) => {
+                    const active = mode === value
+                    const Icon = value === "output" ? Sparkles : value === "underlying" ? Target : Shield
+                    return (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => setMode(value)}
+                        className={`flex min-h-11 items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition ${
+                          active
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-secondary/45 text-foreground hover:bg-secondary/70"
+                        }`}
+                      >
+                        <Icon className="h-4 w-4 shrink-0" />
+                        <span className="font-medium">{MODE_META[value].label}</span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </CardHeader>
+              <CardContent className="overflow-x-auto p-0">
+                <table className="w-full min-w-[720px] border-collapse text-sm">
+                  <thead>
+                    <tr className="border-y border-border/60 bg-secondary/20">
+                      <th className="px-4 py-3 text-left font-medium text-muted-foreground">Metric</th>
+                      {metrics.map((item, index) => (
+                        <th key={item.name} className="px-4 py-3 text-right font-medium">
+                          <span className="inline-flex items-center gap-2">
+                            <span className="h-2 w-2 rounded-full" style={{ backgroundColor: SERIES[index] }} />
+                            {item.data.web_name || item.data.player_name}
+                          </span>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-border/50">
+                      <td className="px-4 py-3 text-muted-foreground">Price</td>
+                      {metrics.map((item) => <td key={item.name} className="px-4 py-3 text-right tabular-nums">£{fmt(item.data.cost)}m</td>)}
+                    </tr>
+                    <tr className="border-b border-border/50">
+                      <td className="px-4 py-3 text-muted-foreground">Ownership</td>
+                      {metrics.map((item) => <td key={item.name} className="px-4 py-3 text-right tabular-nums">{fmt(item.data.ownership)}%</td>)}
+                    </tr>
+                    <tr className="border-b border-border/50">
+                      <td className="px-4 py-3 text-muted-foreground">Minutes</td>
+                      {metrics.map((item) => <td key={item.name} className="px-4 py-3 text-right tabular-nums">{item.data.total_stats.total_minutes}</td>)}
+                    </tr>
+                    {metricRows.map((row) => {
+                      const max = Math.max(...row.values)
+                      return (
+                        <tr key={row.key} className="border-b border-border/50 last:border-0">
+                          <td className="px-4 py-3 text-muted-foreground">{row.label}</td>
+                          {row.values.map((value, index) => {
+                            const best = metrics.length > 1 && value === max && max > 0
+                            return (
+                              <td key={`${row.key}-${metrics[index].name}`} className="px-4 py-3 text-right tabular-nums">
+                                <span className={best ? "rounded-md bg-primary/10 px-2 py-1 font-semibold text-primary" : ""}>
+                                  {fmt(value, row.digits ?? 2)}{row.suffix || ""}
+                                </span>
+                              </td>
+                            )
+                          })}
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </CardContent>
+            </Card>
 
-                    <TabsContent value="xgi" className="mt-4">
-                      <ResponsiveContainer width="100%" height={300}>
-                        <LineChart data={comparisonChartData} margin={{ top: 5, right: 30, left: 20, bottom: 60 }}>
-                          <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
-                          <XAxis 
-                            dataKey="gameweek" 
-                            label={{ value: 'Gameweek', position: 'insideBottom', offset: -10, textAnchor: 'middle' }}
-                            tick={{ fontSize: 12 }}
-                            height={60}
-                          />
-                          <YAxis label={{ value: 'xGI', angle: -90, position: 'insideLeft' }} />
-                          <Tooltip 
-                            contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid #333', borderRadius: '8px' }}
-                            labelStyle={{ color: '#fff' }}
-                          />
-                          <Legend />
-                          {selectedPlayers.map((player, index) => (
-                            <Line 
-                              key={player}
-                              type="monotone" 
-                              dataKey={`${player}_xGI`} 
-                              name={player}
-                              stroke={getColorForPlayer(index).line}
-                              strokeWidth={2}
-                              dot={{ r: 4 }}
-                              connectNulls
-                            />
-                          ))}
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </TabsContent>
-
-                    <TabsContent value="minutes" className="mt-4">
-                      <ResponsiveContainer width="100%" height={300}>
-                        <BarChart data={comparisonChartData} margin={{ top: 5, right: 30, left: 20, bottom: 60 }}>
-                          <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
-                          <XAxis 
-                            dataKey="gameweek" 
-                            label={{ value: 'Gameweek', position: 'insideBottom', offset: -10, textAnchor: 'middle' }}
-                            tick={{ fontSize: 12 }}
-                            height={60}
-                          />
-                          <YAxis label={{ value: 'Minutes', angle: -90, position: 'insideLeft' }} />
-                          <Tooltip 
-                            contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid #333', borderRadius: '8px' }}
-                          />
-                          <Legend />
-                          <ReferenceLine y={90} stroke="#666" strokeDasharray="3 3" label="Full Game" />
-                          {selectedPlayers.map((player, index) => (
-                            <Bar 
-                              key={player}
-                              dataKey={`${player}_minutes`} 
-                              name={player}
-                              fill={getColorForPlayer(index).line}
-                              opacity={0.8}
-                            />
-                          ))}
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </TabsContent>
-
-                    <TabsContent value="attacking" className="mt-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <h4 className="text-sm font-semibold mb-2 text-center">Expected Goals (xG)</h4>
-                          <ResponsiveContainer width="100%" height={250}>
-                            <LineChart data={comparisonChartData} margin={{ top: 5, right: 30, left: 20, bottom: 50 }}>
-                              <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
-                              <XAxis 
-                                dataKey="gameweek" 
-                                tick={{ fontSize: 11 }}
-                                height={50}
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg">Recent trend</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Tabs defaultValue="points">
+                  <TabsList className="grid w-full max-w-md grid-cols-3">
+                    <TabsTrigger value="points">Points</TabsTrigger>
+                    <TabsTrigger value="xgi">xGI</TabsTrigger>
+                    <TabsTrigger value="minutes">Minutes</TabsTrigger>
+                  </TabsList>
+                  {(["points", "xgi", "minutes"] as const).map((metric) => (
+                    <TabsContent key={metric} value={metric} className="mt-5">
+                      <div className="h-[320px] w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <LineChart data={chartData} margin={{ top: 6, right: 12, left: -10, bottom: 0 }}>
+                            <CartesianGrid strokeDasharray="3 3" opacity={0.12} vertical={false} />
+                            <XAxis dataKey="gameweek" tick={{ fontSize: 12 }} tickLine={false} axisLine={false} />
+                            <YAxis tick={{ fontSize: 12 }} tickLine={false} axisLine={false} />
+                            <Tooltip />
+                            <Legend />
+                            {metrics.map((item, index) => (
+                              <Line
+                                key={`${item.name}-${metric}`}
+                                type="monotone"
+                                dataKey={`${item.name}:${metric}`}
+                                name={item.data.web_name || item.data.player_name}
+                                stroke={SERIES[index]}
+                                strokeWidth={2.5}
+                                dot={{ r: 3 }}
+                                activeDot={{ r: 5 }}
+                                connectNulls={false}
                               />
-                              <YAxis />
-                              <Tooltip contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid #333', borderRadius: '8px' }} />
-                              <Legend />
-                              {selectedPlayers.map((player, index) => (
-                                <Line 
-                                  key={player}
-                                  type="monotone" 
-                                  dataKey={`${player}_xG`} 
-                                  name={player}
-                                  stroke={getColorForPlayer(index).line}
-                                  strokeWidth={2}
-                                  dot={{ r: 3 }}
-                                  connectNulls
-                                />
-                              ))}
-                            </LineChart>
-                          </ResponsiveContainer>
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-semibold mb-2 text-center">Expected Assists (xA)</h4>
-                          <ResponsiveContainer width="100%" height={250}>
-                            <LineChart data={comparisonChartData} margin={{ top: 5, right: 30, left: 20, bottom: 50 }}>
-                              <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
-                              <XAxis 
-                                dataKey="gameweek" 
-                                tick={{ fontSize: 11 }}
-                                height={50}
-                              />
-                              <YAxis />
-                              <Tooltip contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid #333', borderRadius: '8px' }} />
-                              <Legend />
-                              {selectedPlayers.map((player, index) => (
-                                <Line 
-                                  key={player}
-                                  type="monotone" 
-                                  dataKey={`${player}_xA`} 
-                                  name={player}
-                                  stroke={getColorForPlayer(index).line}
-                                  strokeWidth={2}
-                                  dot={{ r: 3 }}
-                                  connectNulls
-                                />
-                              ))}
-                            </LineChart>
-                          </ResponsiveContainer>
-                        </div>
+                            ))}
+                          </LineChart>
+                        </ResponsiveContainer>
                       </div>
                     </TabsContent>
-                  </Tabs>
-                </CardContent>
-              </Card>
-            )}
+                  ))}
+                </Tabs>
+              </CardContent>
+            </Card>
 
-            {/* Individual Player Stats Cards */}
-            {Object.entries(playerData).map(([playerName, data], index) => {
-              const typedData = data as PlayerTrendData
-              const colorInfo = getColorForPlayer(index)
-              const posInfo = POSITION_COLORS[typedData.position.toString() as keyof typeof POSITION_COLORS] || {}
-              
-              return (
-                <Card key={playerName} className="border-l-4 hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-bottom-4" style={{ borderLeftColor: colorInfo.line, animationDelay: `${index * 100}ms` }}>
-                  <CardHeader className="pb-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
-                             style={{ backgroundColor: colorInfo.line }}>
-                          {playerName.split(' ').map(n => n[0]).join('')}
+            <div className="grid gap-4 xl:grid-cols-2">
+              {metrics.map((item, index) => {
+                const recent = lastN(item.data.gameweeks, 5).reverse()
+                return (
+                  <Card key={item.name}>
+                    <CardHeader className="pb-3">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: SERIES[index] }} />
+                            <CardTitle className="truncate text-lg">{item.data.web_name || item.data.player_name}</CardTitle>
+                          </div>
+                          <p className="mt-1 text-sm text-muted-foreground">{item.data.team} · £{fmt(item.data.cost)}m · {fmt(item.data.ownership)}% owned</p>
                         </div>
-                        <div>
-                          <CardTitle className="text-xl flex items-center gap-2">
-                            <Badge variant="secondary" className="text-xs px-2 py-1"
-                                   style={{ backgroundColor: posInfo.color + '20', color: posInfo.color }}>
-                              {posInfo.label}
-                            </Badge>
-                            {typedData.player_name}
-                          </CardTitle>
-                          <p className="text-muted-foreground">
-                            {typedData.team} • £{typedData.cost}m • {typedData.ownership}% owned
-                          </p>
-                        </div>
+                        <Badge variant="secondary">{POSITION_META[item.data.position].short}</Badge>
                       </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                          {typedData.form.avg_points}
-                        </div>
-                        <div className="text-xs text-muted-foreground">avg points</div>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="rounded-lg bg-secondary/35 p-3"><div className="text-xs text-muted-foreground">Last 5 pts</div><div className="mt-1 text-lg font-semibold">{fmt(item.recentPoints, 1)}</div></div>
+                        <div className="rounded-lg bg-secondary/35 p-3"><div className="text-xs text-muted-foreground">xGI / 90</div><div className="mt-1 text-lg font-semibold">{fmt(item.data.per90_stats.xGI_per_90, 2)}</div></div>
+                        <div className="rounded-lg bg-secondary/35 p-3"><div className="text-xs text-muted-foreground">Avg mins</div><div className="mt-1 text-lg font-semibold">{fmt(item.recentMinutes, 0)}</div></div>
                       </div>
-                    </div>
-                  </CardHeader>
-                  
-                  <CardContent className="space-y-6">
-                    {/* Key Stats Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                      <div className="text-center p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg hover:shadow-md transition-all duration-300">
-                        <div className="text-lg font-bold text-purple-600 dark:text-purple-400">{typedData.total_stats.total_points}</div>
-                        <div className="text-xs text-muted-foreground">Total Points</div>
-                      </div>
-                      <div className="text-center p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg hover:shadow-md transition-all duration-300">
-                        <div className="text-lg font-bold text-blue-600 dark:text-blue-400">{typedData.total_stats.total_goals}</div>
-                        <div className="text-xs text-muted-foreground">Goals</div>
-                      </div>
-                      <div className="text-center p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg hover:shadow-md transition-all duration-300">
-                        <div className="text-lg font-bold text-indigo-600 dark:text-indigo-400">{typedData.total_stats.total_assists}</div>
-                        <div className="text-xs text-muted-foreground">Assists</div>
-                      </div>
-                      <div className="text-center p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg hover:shadow-md transition-all duration-300">
-                        <div className="text-lg font-bold text-purple-600 dark:text-purple-400">{typedData.per90_stats.points_per_90}</div>
-                        <div className="text-xs text-muted-foreground">Pts/90</div>
-                      </div>
-                    </div>
 
-                    {/* Expected Stats */}
-                    <div>
-                      <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
-                        <TrendingUp className="w-4 h-4" />
-                        Expected Performance (Per 90)
-                      </h4>
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                        <div className="text-center p-2 bg-card border rounded">
-                          <div className="font-medium text-sm">{typedData.per90_stats.xG_per_90}</div>
-                          <div className="text-xs text-muted-foreground">xG/90</div>
-                        </div>
-                        <div className="text-center p-2 bg-card border rounded">
-                          <div className="font-medium text-sm">{typedData.per90_stats.xA_per_90}</div>
-                          <div className="text-xs text-muted-foreground">xA/90</div>
-                        </div>
-                        <div className="text-center p-2 bg-card border rounded">
-                          <div className="font-medium text-sm">{typedData.per90_stats.xGI_per_90}</div>
-                          <div className="text-xs text-muted-foreground">xGI/90</div>
-                        </div>
-                        <div className="text-center p-2 bg-card border rounded">
-                          <div className="font-medium text-sm">{typedData.per90_stats.shots_per_90}</div>
-                          <div className="text-xs text-muted-foreground">Shots/90</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Form & Playing Time */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <h4 className="text-sm font-semibold mb-2">Recent Form (Last 5 GWs)</h4>
-                        <div className="space-y-2">
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Average Points:</span>
-                            <span className="font-medium">{typedData.form.avg_points}</span>
+                      <div className="space-y-2">
+                        <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Recent gameweeks</div>
+                        <div className="overflow-hidden rounded-lg border border-border/60">
+                          <div className="grid grid-cols-[52px_minmax(0,1fr)_46px_46px_54px] bg-secondary/25 px-3 py-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                            <span>GW</span><span>Opponent</span><span className="text-right">Pts</span><span className="text-right">Min</span><span className="text-right">xGI</span>
                           </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Average Minutes:</span>
-                            <span className="font-medium">{typedData.form.avg_minutes}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Games Played:</span>
-                            <span className="font-medium">{typedData.form.games_played}</span>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <h4 className="text-sm font-semibold mb-2">Season Totals</h4>
-                        <div className="space-y-2">
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Games:</span>
-                            <span className="font-medium">{typedData.total_stats.games_played}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Minutes:</span>
-                            <span className="font-medium">{typedData.total_stats.total_minutes}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-sm text-muted-foreground">Total xGI:</span>
-                            <span className="font-medium">{typedData.total_stats.total_xGI}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Recent Gameweeks Table */}
-                    <div>
-                      <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
-                        <Award className="w-4 h-4" />
-                        Recent Gameweeks (Last 10)
-                      </h4>
-                      <div className="overflow-x-auto">
-                        <div className="grid grid-cols-8 gap-2 text-xs font-medium text-muted-foreground mb-2 px-2">
-                          <div>GW</div>
-                          <div>Opp</div>
-                          <div>Pts</div>
-                          <div>Min</div>
-                          <div>G</div>
-                          <div>A</div>
-                          <div>xG</div>
-                          <div>xA</div>
-                        </div>
-                        <div className="space-y-1 max-h-64 overflow-y-auto">
-                          {typedData.gameweeks.slice(-10).reverse().map((gw: GameweekData) => (
-                            <div key={gw.gameweek} className="grid grid-cols-8 gap-2 text-xs px-2 py-2 bg-secondary/20 rounded">
-                              <div className="font-medium">{gw.gameweek}</div>
-                              <div className="text-muted-foreground">{gw.was_home ? 'vs' : '@'} {gw.opponent}</div>
-                              <div className={`font-medium ${gw.total_points >= 6 ? 'text-green-600' : gw.total_points >= 2 ? 'text-blue-600' : 'text-gray-600'}`}>
-                                {gw.total_points}
-                              </div>
-                              <div className="text-muted-foreground">{gw.minutes}</div>
-                              <div className={gw.goals > 0 ? 'text-green-600 font-medium' : 'text-muted-foreground'}>{gw.goals}</div>
-                              <div className={gw.assists > 0 ? 'text-blue-600 font-medium' : 'text-muted-foreground'}>{gw.assists}</div>
-                              <div className="text-muted-foreground">{gw.xG}</div>
-                              <div className="text-muted-foreground">{gw.xA}</div>
+                          {recent.map((gw) => (
+                            <div key={gw.gameweek} className="grid grid-cols-[52px_minmax(0,1fr)_46px_46px_54px] items-center border-t border-border/50 px-3 py-2 text-sm first:border-t-0">
+                              <span className="tabular-nums">{gw.gameweek}</span>
+                              <span className="truncate text-muted-foreground">{gw.was_home ? "vs" : "@"} {gw.opponent || "—"}</span>
+                              <span className="text-right font-medium tabular-nums">{gw.total_points}</span>
+                              <span className="text-right tabular-nums">{gw.minutes}</span>
+                              <span className="text-right tabular-nums">{fmt(gw.xGI, 2)}</span>
                             </div>
                           ))}
                         </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              )
-            })}
-          </div>
+                    </CardContent>
+                  </Card>
+                )
+              })}
+            </div>
+          </>
         )}
+
+        <div className="flex items-start gap-2 rounded-xl bg-secondary/25 px-4 py-3 text-xs text-muted-foreground">
+          <Shield className="mt-0.5 h-4 w-4 shrink-0" />
+          Per-90 metrics are most useful once a player has meaningful minutes. Use the recent-minute trend alongside underlying numbers before comparing a regular starter with a substitute.
+        </div>
       </div>
     </div>
   )

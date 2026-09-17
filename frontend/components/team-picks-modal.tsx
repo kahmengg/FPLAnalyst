@@ -219,7 +219,7 @@ export default function TeamPicksModal({
                       return (
                         <Card
                           key={`${player.name}-${index}`}
-                          className={`relative border transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
+                          className={`relative border transition-all duration-300 hover:shadow-sm  ${
                             isTopPick
                               ? 'border-yellow-500/50 bg-gradient-to-br from-yellow-500/5 via-card to-card'
                               : 'border-border/50 hover:border-red-400/50 bg-gradient-to-br from-card to-secondary/10'
@@ -298,7 +298,7 @@ export default function TeamPicksModal({
                       return (
                         <Card
                           key={`${player.name}-${index}`}
-                          className={`relative border transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
+                          className={`relative border transition-all duration-300 hover:shadow-sm  ${
                             isTopPick
                               ? 'border-yellow-500/50 bg-gradient-to-br from-yellow-500/5 via-card to-card'
                               : 'border-border/50 hover:border-blue-400/50 bg-gradient-to-br from-card to-secondary/10'

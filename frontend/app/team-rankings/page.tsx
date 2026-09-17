@@ -21,16 +21,11 @@ const RankMedal = ({ rank }: { rank: number }) => {
   const medal = medals[rank as keyof typeof medals];
   
   return (
-    <div className={`flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br ${medal.color} ${medal.glow} shadow-lg text-base`}>
+    <div className={`flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br ${medal.color} ${medal.glow} shadow-sm text-base`}>
       {medal.emoji}
     </div>
   );
 };
-
-const scalePercent = (value: number, max: number) => {
-  if (!Number.isFinite(value) || !Number.isFinite(max) || max <= 0) return 0
-  return Math.max(0, Math.min(100, (value / max) * 100))
-}
 
 export default function TeamRankingsPage() {
   const [view, setView] = useState<"attack" | "defense" | "combined">("combined")
@@ -91,17 +86,17 @@ export default function TeamRankingsPage() {
           attackStrength: a.attack_strength || 0,
           defenseStrength: d.defense_strength || 0,
           // Scale attack and defense strength as percentages of their respective maxes
-          attackStrengthPct: scalePercent(a.attack_strength || 0, maxAttackStrength),
-          defenseStrengthPct: scalePercent(d.defense_strength || 0, maxDefenseStrength),
-          attackScore: Math.round(scalePercent(o.goals_per_game || 0, maxGoalsPerGame)),
-          defenseScore: Math.round(scalePercent((o.clean_sheet_rate || 0) * 100, maxCleanSheetPct)),
-          overallStrength: Math.round(scalePercent(o.overall_strength || 0, maxOverallStrength))
+          attackStrengthPct: ((a.attack_strength || 0) / maxAttackStrength) * 100,
+          defenseStrengthPct: ((d.defense_strength || 0) / maxDefenseStrength) * 100,
+          attackScore: Math.round((o.goals_per_game / maxGoalsPerGame) * 100),
+          defenseScore: Math.round((o.clean_sheet_rate * 100) / maxCleanSheetPct * 100),
+          overallStrength: Math.round((o.overall_strength / maxOverallStrength) * 100)
         }
       })
 
       setTeams(mergedTeams)
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Failed to load team rankings')
+    } catch (err) {
+      setError(err.message)
     } finally {
       setLoading(false)
     }
@@ -262,22 +257,22 @@ export default function TeamRankingsPage() {
   )
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-background">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-8 animate-in fade-in slide-in-from-top duration-700">
+        <div className="mb-8">
           <h1 className="mb-2 text-4xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent flex items-center gap-3">
-            <TrophyIcon className="h-8 w-8 text-yellow-500 animate-pulse" style={{ animationDuration: '2s' }} />
+            <TrophyIcon className="h-8 w-8 text-yellow-500" style={{ animationDuration: '2s' }} />
             Team Rankings
           </h1>
-          <p className="text-lg text-muted-foreground animate-in fade-in slide-in-from-top duration-700" style={{ animationDelay: '200ms' }}>Attack and defense strength analysis for all 20 teams</p>
+          <p className="text-lg text-muted-foreground">Attack and defense strength analysis for all 20 teams</p>
         </div>
 
         {/* Key Insights */}
         <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <Card className="border-purple-500/50 bg-card hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-left" style={{ animationDelay: '100ms' }}>
+          <Card className="border-purple-500/50 bg-card hover:shadow-sm transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <TrendingUp className="h-8 w-8 text-purple-500 animate-pulse" style={{ animationDuration: '2s', animationDelay: '0ms' }} />
+                <TrendingUp className="h-8 w-8 text-purple-500" style={{ animationDuration: '2s', animationDelay: '0ms' }} />
                 <div>
                   <p className="text-sm text-muted-foreground">Strongest Attack</p>
                   <p className="text-xl font-bold text-foreground">{strongestAttack}</p>
@@ -285,10 +280,10 @@ export default function TeamRankingsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-blue-500/50 bg-card hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-left" style={{ animationDelay: '200ms' }}>
+          <Card className="border-blue-500/50 bg-card hover:shadow-sm transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <Shield className="h-8 w-8 text-blue-500 animate-pulse" style={{ animationDuration: '2s', animationDelay: '200ms' }} />
+                <Shield className="h-8 w-8 text-blue-500" style={{ animationDuration: '2s', animationDelay: '200ms' }} />
                 <div>
                   <p className="text-sm text-muted-foreground">Best Defense</p>
                   <p className="text-xl font-bold text-foreground">{bestDefense}</p>
@@ -296,10 +291,10 @@ export default function TeamRankingsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-indigo-500/50 bg-card hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-left" style={{ animationDelay: '300ms' }}>
+          <Card className="border-indigo-500/50 bg-card hover:shadow-sm transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <TrendingDown className="h-8 w-8 text-indigo-500 animate-pulse" style={{ animationDuration: '2s', animationDelay: '400ms' }} />
+                <TrendingDown className="h-8 w-8 text-indigo-500" style={{ animationDuration: '2s', animationDelay: '400ms' }} />
                 <div>
                   <p className="text-sm text-muted-foreground">Weakest Attack</p>
                   <p className="text-xl font-bold text-foreground">{weakestAttack}</p>
@@ -307,10 +302,10 @@ export default function TeamRankingsPage() {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-slate-500/50 bg-card hover:shadow-lg transition-all duration-300 animate-in fade-in slide-in-from-left" style={{ animationDelay: '400ms' }}>
+          <Card className="border-slate-500/50 bg-card hover:shadow-sm transition-all duration-300">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
-                <TrendingDown className="h-8 w-8 text-slate-500 animate-pulse" style={{ animationDuration: '2s', animationDelay: '600ms' }} />
+                <TrendingDown className="h-8 w-8 text-slate-500" style={{ animationDuration: '2s', animationDelay: '600ms' }} />
                 <div>
                   <p className="text-sm text-muted-foreground">Weakest Defense</p>
                   <p className="text-xl font-bold text-foreground">{weakestDefense}</p>
@@ -321,7 +316,7 @@ export default function TeamRankingsPage() {
         </div>
 
         {/* Search and Filter Controls */}
-        <Card className="mb-6 shadow-lg">
+        <Card className="mb-6 shadow-sm">
           <CardContent className="p-4">
             <div className="flex flex-col lg:flex-row gap-4">
               {/* Search Bar */}
@@ -382,7 +377,7 @@ export default function TeamRankingsPage() {
                     setFilterMode("all");
                     setSortBy("rank");
                   }}
-                  className="px-4 py-2.5 rounded-lg border-2 border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground transition-all duration-200 font-medium active:scale-95 whitespace-nowrap"
+                  className="px-4 py-2.5 rounded-lg border-2 border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground transition-all duration-200 font-medium  whitespace-nowrap"
                 >
                   Clear Filters
                 </button>
@@ -404,8 +399,8 @@ export default function TeamRankingsPage() {
               <div className="inline-flex gap-3 p-2 bg-secondary/50 rounded-xl min-w-max">
                 <button
                   onClick={() => setView("combined")}
-                  className={`flex items-center gap-2 rounded-lg px-5 py-4 text-sm font-semibold transition-all duration-300 active:scale-95 whitespace-nowrap ${view === "combined"
-                    ? "bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg shadow-purple-500/25 border border-purple-500/20"
+                  className={`flex items-center gap-2 rounded-lg px-5 py-4 text-sm font-semibold transition-all duration-300  whitespace-nowrap ${view === "combined"
+                    ? "bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-sm shadow-purple-500/25 border border-purple-500/20"
                     : "bg-transparent text-muted-foreground active:bg-white/20"
                     }`}
                 >
@@ -414,8 +409,8 @@ export default function TeamRankingsPage() {
                 </button>
                 <button
                   onClick={() => setView("attack")}
-                  className={`flex items-center gap-2 rounded-lg px-5 py-4 text-sm font-semibold transition-all duration-300 active:scale-95 whitespace-nowrap ${view === "attack"
-                    ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 border border-blue-500/20"
+                  className={`flex items-center gap-2 rounded-lg px-5 py-4 text-sm font-semibold transition-all duration-300  whitespace-nowrap ${view === "attack"
+                    ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-sm shadow-blue-500/25 border border-blue-500/20"
                     : "bg-transparent text-muted-foreground active:bg-blue-100"
                     }`}
                 >
@@ -424,8 +419,8 @@ export default function TeamRankingsPage() {
                 </button>
                 <button
                   onClick={() => setView("defense")}
-                  className={`flex items-center gap-2 rounded-lg px-5 py-4 text-sm font-semibold transition-all duration-300 active:scale-95 whitespace-nowrap ${view === "defense"
-                    ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/25 border border-indigo-500/20"
+                  className={`flex items-center gap-2 rounded-lg px-5 py-4 text-sm font-semibold transition-all duration-300  whitespace-nowrap ${view === "defense"
+                    ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-sm shadow-indigo-500/25 border border-indigo-500/20"
                     : "bg-transparent text-muted-foreground active:bg-indigo-100"
                     }`}
                 >
@@ -440,8 +435,8 @@ export default function TeamRankingsPage() {
           <div className="hidden sm:flex flex-wrap gap-2 p-1 bg-secondary/50 rounded-xl">
             <button
               onClick={() => setView("combined")}
-              className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "combined"
-                ? "bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg shadow-purple-500/25 border border-purple-500/20"
+              className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform   ${view === "combined"
+                ? "bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-sm shadow-purple-500/25 border border-purple-500/20"
                 : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-white/10 active:bg-white/20"
                 }`}
             >
@@ -452,8 +447,8 @@ export default function TeamRankingsPage() {
             </button>
             <button
               onClick={() => setView("attack")}
-              className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "attack"
-                ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 border border-blue-500/20"
+              className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform   ${view === "attack"
+                ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-sm shadow-blue-500/25 border border-blue-500/20"
                 : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-blue-50 hover:text-blue-600 active:bg-blue-100"
                 }`}
             >
@@ -464,8 +459,8 @@ export default function TeamRankingsPage() {
             </button>
             <button
               onClick={() => setView("defense")}
-              className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${view === "defense"
-                ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/25 border border-indigo-500/20"
+              className={`relative rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 transform   ${view === "defense"
+                ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-sm shadow-indigo-500/25 border border-indigo-500/20"
                 : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100"
                 }`}
             >
@@ -506,14 +501,14 @@ export default function TeamRankingsPage() {
             return (
               <Card
                 key={team.code}
-                className={`group border-border bg-card transition-all duration-300 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-500/10 hover:-translate-y-1 cursor-pointer animate-in fade-in slide-in-from-bottom-4 ${teamColors[team.code] || "ring-2 ring-gray-500/20 bg-gradient-to-br from-gray-50/50 to-card"}`}
+                className={`group border-border bg-card transition-all duration-300 hover:border-purple-400/50 hover:shadow-sm hover:shadow-purple-500/10  cursor-pointer ${teamColors[team.code] || "ring-2 ring-gray-500/20 bg-gradient-to-br from-gray-50/50 to-card"}`}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <CardContent className="p-6 sm:p-8">
                   <div className="mb-4 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div
-                        className={`flex h-12 w-12 items-center justify-center rounded-lg transition-all duration-300 group-hover:scale-110 ${teamColors[team.code]?.split(" ")[0]} text-white shadow-lg`}
+                        className={`flex h-12 w-12 items-center justify-center rounded-lg transition-all duration-300  ${teamColors[team.code]?.split(" ")[0]} text-white shadow-sm`}
                       >
                         <TeamBadge team={team.code} />
                       </div>
@@ -669,7 +664,7 @@ export default function TeamRankingsPage() {
                         e.stopPropagation()
                         handleViewPicks(team)
                       }}
-                      className="w-full py-2.5 px-4 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-95"
+                      className="w-full py-2.5 px-4 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-lg font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md "
                     >
                       <Star className="h-4 w-4" />
                       View Quick Picks
