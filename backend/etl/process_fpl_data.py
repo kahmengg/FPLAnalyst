@@ -132,6 +132,32 @@ def load_csv() -> Optional[pd.DataFrame]:
     # Replace empty strings with NaN so downstream helpers work uniformly
     df.replace("", np.nan, inplace=True)
 
+    # Remove byte-for-byte duplicate source rows, but do not silently choose
+    # between conflicting rows for the same player/gameweek. Those would make
+    # the gameweek and season aggregates disagree.
+    before = len(df)
+    df = df.drop_duplicates().copy()
+    exact_dupes = before - len(df)
+
+    key_df = df.copy()
+    key_df["_id_num"] = pd.to_numeric(key_df["id"], errors="coerce")
+    key_df["_gw_num"] = pd.to_numeric(key_df["gameweek"], errors="coerce")
+    valid_keys = key_df["_id_num"].notna() & key_df["_gw_num"].notna()
+    conflicting = valid_keys & key_df.duplicated(["_id_num", "_gw_num"], keep=False)
+    if conflicting.any():
+        sample = (
+            key_df.loc[conflicting, ["id", "web_name", "gameweek", "team_name"]]
+            .head(10)
+            .to_dict(orient="records")
+        )
+        raise ValueError(
+            "Conflicting duplicate player/gameweek rows found in the source CSV. "
+            f"Sample: {sample}"
+        )
+
+    if exact_dupes:
+        print(f"ℹ️  Removed {exact_dupes} exact duplicate source rows")
+
     return df
 
 
@@ -327,19 +353,18 @@ def upsert_gameweek_stats(df: pd.DataFrame, player_map: dict[int, str], season: 
             "pvsxp": r3(r.get("PvsxP")),
         })
 
-    # Deduplicate within batch — same player+GW can appear multiple times in CSV
-    seen: dict = {}
-    for record in rows:
-        key = (record["season_key"], record["player_id"], record["gameweek"])
-        seen[key] = record
-    deduped = list(seen.values())
+    keys = [(r["season_key"], r["player_id"], r["gameweek"]) for r in rows]
+    if len(keys) != len(set(keys)):
+        raise ValueError(
+            "Duplicate player/gameweek records reached the ETL after source validation"
+        )
 
-    for chunk in chunks(deduped):
+    for chunk in chunks(rows):
         supabase.table("player_gameweeks").upsert(
             chunk, on_conflict="season_key,player_id,gameweek"
         ).execute()
 
-    print(f"   {len(deduped)} records  ({skipped} skipped, {len(rows) - len(deduped)} dupes dropped)")
+    print(f"   {len(rows)} records  ({skipped} skipped)")
 
 
 # ── Stage 5: Season stats ────────────────────────────────────────────────────
@@ -389,8 +414,10 @@ def upsert_season_stats(df: pd.DataFrame, player_map: dict[int, str], season: st
     # which previously classified every appearance as away.
     df["was_home"] = df["was_home"].map(lambda value: int(safe_bool(value)))
 
-    # One row per player per GW (deduplicate)
-    df = df.drop_duplicates(subset=["_pid", "gameweek"])
+    if df.duplicated(subset=["_pid", "gameweek"]).any():
+        raise ValueError(
+            "Duplicate player/gameweek rows reached season aggregation after source validation"
+        )
 
     latest_gw = int(df["gameweek"].max())
 
@@ -549,8 +576,8 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
         - clean_sheet
         - was_home
 
-    And sum the PLAYER-LEVEL attacking stats only for outfield starters
-    (minutes > 0) to approximate team attacking output per match.
+    And sum the PLAYER-LEVEL attacking stats for players who recorded minutes
+    to approximate team attacking output per match.
     
     NEW: Calculate form-based rankings (last 5 GWs) and home/away strength
     (last 10 GWs) for fixture difficulty prediction.
@@ -581,14 +608,34 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     form_10_start = max(1, latest_gw - LAST_10_GWS + 1)
 
     # ── Step 1: Match-level defensive stats (one row per team+GW) ──
+    # FPL defensive fields are player-level and can differ for substitutes because
+    # they only cover the minutes that player was on the pitch.  Using an arbitrary
+    # player row can therefore produce the wrong team GC/xGC/clean-sheet values.
+    # Select the player with the most minutes for each team+GW instead; in normal
+    # matches this is a full-match player and represents the whole match.
     match_level = (
-        df.drop_duplicates(subset=["team_name", "gameweek"])
+        df.sort_values(
+            ["team_name", "gameweek", "minutes"],
+            ascending=[True, True, False],
+        )
+        .drop_duplicates(subset=["team_name", "gameweek"], keep="first")
         [["team_name", "gameweek", "was_home", "opponent_team_name",
-          "expected_goals_conceded", "goals_conceded", "clean_sheet"]]
+          "expected_goals_conceded", "goals_conceded", "clean_sheet", "minutes"]]
         .copy()
     )
 
-    # ── Step 2: Player-level attacking stats (sum per team+GW, starters only) ──
+    low_coverage = match_level[match_level["minutes"] < 80]
+    if not low_coverage.empty:
+        print(
+            f"   ⚠️  {len(low_coverage)} team-match rows have no player with "
+            "80+ minutes; defensive match stats may be less reliable"
+        )
+    # Clean sheet is a team-match outcome: derive it from full-match goals conceded
+    # rather than trusting a player-specific clean_sheet flag.
+    match_level["clean_sheet"] = (match_level["goals_conceded"] == 0).astype(int)
+    match_level.drop(columns=["minutes"], inplace=True)
+
+    # ── Step 2: Player-level attacking stats (sum per team+GW, players with minutes) ──
     starters = df[df["minutes"] > 0].copy()
     attack_per_match = (
         starters.groupby(["team_name", "gameweek"])
@@ -606,6 +653,11 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     # ── Step 3: Merge match data ──
     match_df = match_level.merge(attack_per_match, on=["team_name", "gameweek"], how="left")
     match_df = match_df.fillna(0)
+
+    print(
+        f"   Latest GW: {latest_gw} | Teams: {match_df['team_name'].nunique()} | "
+        f"Team-match rows: {len(match_df)}"
+    )
 
     # ── OVERALL SEASON AGGREGATION ──
     overall = match_df.groupby("team_name").agg(
@@ -662,6 +714,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
             tot_shots_10 = ("team_shots", "sum"),
             tot_points_10 = ("team_points", "sum"),
             tot_gc_10 = ("goals_conceded", "sum"),
+            tot_xgc_10 = ("expected_goals_conceded", "sum"),
             tot_cs_10 = ("clean_sheet", "sum"),
         )
         .reset_index()
@@ -673,18 +726,20 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
         team_10["shots_pg_10"] = team_10["tot_shots_10"] / tm
         team_10["points_pg_10"] = team_10["tot_points_10"] / tm
         team_10["gc_pg_10"] = team_10["tot_gc_10"] / tm
+        team_10["xgc_pg_10"] = team_10["tot_xgc_10"] / tm
         team_10["cs_rate_10"] = team_10["tot_cs_10"] / tm
 
+        # Attack strength should use attacking outputs only. FPL points include
+        # defensive/appearance/bonus scoring, so do not mix them into attack.
         team_10["attack_strength_10"] = (
-            team_10["xg_pg_10"] * 0.25 +
+            team_10["xg_pg_10"] * 0.30 +
             team_10["goals_pg_10"] * 0.50 +
-            team_10["shots_pg_10"] * 0.15 +
-            team_10["points_pg_10"] * 0.10
+            team_10["shots_pg_10"] * 0.20
         )
         team_10["defense_strength_10"] = (
             team_10["cs_rate_10"] * 0.50 +
             (1 / (team_10["gc_pg_10"] + 0.1)) * 0.35 +
-            (1 / (team_10["xg_pg_10"] + 0.1)) * 0.15
+            (1 / (team_10["xgc_pg_10"] + 0.1)) * 0.15
         )
         team_10["attack_rank_10"] = team_10["attack_strength_10"].rank(ascending=False, method="min").astype(int)
         team_10["defense_rank_10"] = team_10["defense_strength_10"].rank(ascending=False, method="min").astype(int)
@@ -785,11 +840,12 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     agg["home_cs_rate"]  = agg["home_cs"]     / hm
     agg["away_cs_rate"]  = agg["away_cs"]     / am
 
+    # Attack strength uses attacking outputs only. FPL points are deliberately
+    # excluded because they also include clean sheets, saves, appearance and bonus.
     agg["attack_strength"] = (
-        agg["xg_pg"]     * 0.25 +
+        agg["xg_pg"]     * 0.30 +
         agg["goals_pg"]  * 0.50 +
-        agg["shots_pg"]  * 0.15 +
-        agg["points_pg"] * 0.10
+        agg["shots_pg"]  * 0.20
     ).round(4)
     agg["defense_strength"] = (
         agg["cs_rate"] * 0.50 +

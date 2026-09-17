@@ -7,7 +7,9 @@ import { getDashboardSummary, getPlayerInsights } from "@/lib/supabase"
 
 function formatLastSynced(value: string | null) {
   if (!value) return "Unknown"
-  return new Date(value).toLocaleString("en-GB", {
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return "Unknown"
+  return date.toLocaleString("en-GB", {
     day: "numeric",
     month: "short",
     hour: "2-digit",
@@ -195,7 +197,7 @@ export default function HomePage() {
               <CardContent>
                 <div className="grid gap-4 sm:grid-cols-3">
                   {topFormPlayers.map((player, idx) => (
-                    <div key={idx} className="p-4 rounded-lg border border-slate-200/50 dark:border-slate-700/50 hover:shadow-md transition-shadow">
+                    <div key={`${player.name}-${player.team_short}`} className="p-4 rounded-lg border border-slate-200/50 dark:border-slate-700/50 hover:shadow-md transition-shadow">
                       <div className="flex items-center justify-between mb-2">
                         <div className="font-semibold text-foreground">{player.name}</div>
                         <span className={`text-xs font-bold px-2 py-1 rounded-full ${

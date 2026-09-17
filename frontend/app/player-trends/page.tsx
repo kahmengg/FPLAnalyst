@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import React, { useState, useEffect, useMemo } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -118,6 +118,7 @@ export default function PlayerTrendsPage() {
   const fetchAllPlayers = async () => {
     try {
       setLoading(true)
+      setError(null)
       const data = await getAllPlayers(1000)
       setAllPlayers(data || [])
     } catch (err) {
@@ -129,6 +130,7 @@ export default function PlayerTrendsPage() {
 
   const fetchPlayerTrends = async (players: string[]) => {
     try {
+      setError(null)
       const data = await getPlayerTrends(players, 10)
       setPlayerData(data)
     } catch (err) {

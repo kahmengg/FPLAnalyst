@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -19,9 +19,7 @@ const teamColors = {
   "Newcastle": "text-slate-800 dark:text-slate-200",
   "Brighton": "text-blue-500 dark:text-blue-300",
   "Aston Villa": "text-purple-700 dark:text-purple-400",
-  "West Ham": "text-amber-700 dark:text-amber-500",
   "Everton": "text-blue-700 dark:text-blue-500",
-  "Wolves": "text-orange-600 dark:text-orange-400",
   "Crystal Palace": "text-blue-600 dark:text-blue-400",
   "Brentford": "text-red-600 dark:text-red-400",
   "Fulham": "text-slate-800 dark:text-slate-300",
@@ -29,7 +27,6 @@ const teamColors = {
   "Ipswich": "text-blue-700 dark:text-blue-400",
   "Bournemouth": "text-red-700 dark:text-red-500",
   "Nott'm Forest": "text-red-800 dark:text-red-600",
-  "Burnley": "text-purple-900 dark:text-purple-400",
   "Leeds": "text-blue-600 dark:text-blue-400",
   "Sunderland": "text-red-700 dark:text-red-500",
 }
@@ -50,9 +47,7 @@ const getTeamBackgroundColor = (teamName: string) => {
     "Newcastle": "bg-slate-200 dark:bg-slate-900",
     "Brighton": "bg-blue-50 dark:bg-blue-950",
     "Aston Villa": "bg-purple-100 dark:bg-purple-950",
-    "West Ham": "bg-amber-100 dark:bg-amber-950",
     "Everton": "bg-blue-200 dark:bg-blue-950",
-    "Wolves": "bg-orange-100 dark:bg-orange-950",
     "Crystal Palace": "bg-blue-100 dark:bg-blue-950",
     "Brentford": "bg-red-100 dark:bg-red-950",
     "Fulham": "bg-slate-100 dark:bg-slate-900",
@@ -60,7 +55,6 @@ const getTeamBackgroundColor = (teamName: string) => {
     "Ipswich": "bg-blue-100 dark:bg-blue-950",
     "Bournemouth": "bg-red-200 dark:bg-red-950",
     "Nott'm Forest": "bg-red-300 dark:bg-red-950",
-    "Burnley": "bg-purple-200 dark:bg-purple-950",
     "Leeds": "bg-blue-100 dark:bg-blue-950",
     "Sunderland": "bg-red-200 dark:bg-red-950",
   }
@@ -90,8 +84,8 @@ export default function TransferTargetsPage() {
         setTeamFixtureSummary(summaryData)
         setAttackingPicks(attackingData)
         setDefensivePicks(defensiveData)
-      } catch (err: any) {
-        setError(err.message)
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : 'Failed to load transfer targets')
       } finally {
         setLoading(false)
       }

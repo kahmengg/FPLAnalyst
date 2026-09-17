@@ -1,4 +1,4 @@
-﻿// @ts-nocheck
+// @ts-nocheck
 "use client"
 
 import { useState, useEffect, useMemo } from "react"
@@ -26,6 +26,11 @@ const RankMedal = ({ rank }: { rank: number }) => {
     </div>
   );
 };
+
+const scalePercent = (value: number, max: number) => {
+  if (!Number.isFinite(value) || !Number.isFinite(max) || max <= 0) return 0
+  return Math.max(0, Math.min(100, (value / max) * 100))
+}
 
 export default function TeamRankingsPage() {
   const [view, setView] = useState<"attack" | "defense" | "combined">("combined")
@@ -86,17 +91,17 @@ export default function TeamRankingsPage() {
           attackStrength: a.attack_strength || 0,
           defenseStrength: d.defense_strength || 0,
           // Scale attack and defense strength as percentages of their respective maxes
-          attackStrengthPct: ((a.attack_strength || 0) / maxAttackStrength) * 100,
-          defenseStrengthPct: ((d.defense_strength || 0) / maxDefenseStrength) * 100,
-          attackScore: Math.round((o.goals_per_game / maxGoalsPerGame) * 100),
-          defenseScore: Math.round((o.clean_sheet_rate * 100) / maxCleanSheetPct * 100),
-          overallStrength: Math.round((o.overall_strength / maxOverallStrength) * 100)
+          attackStrengthPct: scalePercent(a.attack_strength || 0, maxAttackStrength),
+          defenseStrengthPct: scalePercent(d.defense_strength || 0, maxDefenseStrength),
+          attackScore: Math.round(scalePercent(o.goals_per_game || 0, maxGoalsPerGame)),
+          defenseScore: Math.round(scalePercent((o.clean_sheet_rate || 0) * 100, maxCleanSheetPct)),
+          overallStrength: Math.round(scalePercent(o.overall_strength || 0, maxOverallStrength))
         }
       })
 
       setTeams(mergedTeams)
-    } catch (err) {
-      setError(err.message)
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to load team rankings')
     } finally {
       setLoading(false)
     }

@@ -1,4 +1,4 @@
-﻿// @ts-nocheck
+// @ts-nocheck
 "use client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -133,7 +133,7 @@ export default function TopPerformersPage() {
   const [overperformers, setOverperformers] = useState([]);
   const [sustainableScorers, setSustainableScorers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   // New: Filter states
   const [searchQuery, setSearchQuery] = useState("");
@@ -378,7 +378,7 @@ export default function TopPerformersPage() {
     async function fetchData() {
       setLoading(true)
       setErrors({})
-      const newErrors = {};
+      const newErrors: Record<string, string> = {};
 
       try {
         const [goalScorers, assistProviders, defensiveLeaders, seasonPerformers, hiddenGems, valuePlayers, overperformers, underperformers, sustainableScorers] = await Promise.all([
@@ -394,12 +394,12 @@ export default function TopPerformersPage() {
         ])
 
         setGoalScorers(goalScorers.map((p: any) => ({
-          player: p.player, team: p.team, team_short: p.team_short, goals: p.goals ?? p.points ?? 0,
+          player: p.player, team: p.team, team_short: p.team_short, goals: p.goals ?? 0,
           goalsPerGame: p.goalsPerGame ?? p.goals_per_game ?? 0, points: p.points, price: p.price,
           ownership: p.ownership, form: p.form
         })))
         setAssistProviders(assistProviders.map((p: any) => ({
-          player: p.player, team: p.team, team_short: p.team_short, assists: p.assists ?? p.points ?? 0,
+          player: p.player, team: p.team, team_short: p.team_short, assists: p.assists ?? 0,
           assistsPerGame: p.assistsPerGame ?? p.assists_per_game ?? 0, points: p.points, price: p.price,
           ownership: p.ownership, form: p.form
         })))
@@ -435,8 +435,9 @@ export default function TopPerformersPage() {
         })))
 
         setErrors(newErrors);
-      } catch (err) {
-        setErrors({ general: `Unexpected error: ${err.message}` });
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : 'Failed to load performer data'
+        setErrors({ general: `Unexpected error: ${message}` });
       } finally {
         setLoading(false)
       }

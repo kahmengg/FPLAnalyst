@@ -7,6 +7,15 @@ const supabasePublicKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim
 
 export const supabase = supabaseUrl && supabasePublicKey ? createClient(supabaseUrl, supabasePublicKey) : null
 
+function requireSupabase() {
+  if (!supabase) {
+    throw new Error(
+      'Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY (or NEXT_PUBLIC_SUPABASE_ANON_KEY), then redeploy.'
+    )
+  }
+  return supabase
+}
+
 const DEFAULT_SEASON = '2026_27'
 const CONFIGURED_SEASON = process.env.NEXT_PUBLIC_FPL_SEASON_KEY?.trim() || ''
 let cachedSeason: string | null = null
@@ -113,7 +122,7 @@ async function getSeason() {
   // Several page queries start together, so share one season lookup between them.
   if (!seasonPromise) {
     seasonPromise = (async () => {
-      if (!supabase) return DEFAULT_SEASON
+      requireSupabase()
 
       const sources = ['team_rankings', 'fixtures', 'player_season_stats', 'player_gameweeks']
       for (const table of sources) {
@@ -145,7 +154,7 @@ async function getAllPlayersCached(limit = 1000) {
 }
 
 async function getTeamMap() {
-  if (!supabase) return new Map<string, any>()
+  requireSupabase()
 
   const { data, error } = await supabase.from('teams').select('id, name, short_name')
   if (error) {
@@ -242,7 +251,7 @@ function rankRows(rows: any[], key: string, desc = true) {
 }
 
 async function getSeasonStatsBase() {
-  if (!supabase) return []
+  requireSupabase()
 
   const season = await getSeason()
   if (cachedSeasonStats?.season === season) return cachedSeasonStats.rows
@@ -313,9 +322,7 @@ async function buildInsightsFallback(insightType: string, limit: number) {
 }
 
 async function getFixtureBase() {
-  if (!supabase) {
-    return { season: DEFAULT_SEASON, fixtures: [], teams: [], ranks: [], currentGameweek: 0 }
-  }
+  requireSupabase()
 
   const season = await getSeason()
   if (cachedFixtureBase?.season === season) return cachedFixtureBase
@@ -366,7 +373,7 @@ async function getFixtureBase() {
 }
 
 async function buildTeamFixtureSummaryFallback() {
-  if (!supabase) return []
+  requireSupabase()
 
   const { fixtures: fixtureRows, teams, currentGameweek } = await getFixtureBase()
   const teamMap = new Map(teams.map((t: any) => [t.id, t]))
@@ -442,14 +449,14 @@ async function buildTeamFixtureSummaryFallback() {
  */
 export async function getPlayerInsights(insightType: string, limit = 100) {
   try {
-    if (!supabase) return []
+    requireSupabase()
 
     // player_insights is not part of supabase_schema.sql; derive insights from
     // player_season_stats instead of waiting for a guaranteed 404 first.
     return await buildInsightsFallback(insightType, limit)
   } catch (err) {
     console.error(`Error in getPlayerInsights(${insightType}):`, err)
-    return []
+    throw err
   }
 }
 
@@ -458,7 +465,7 @@ export async function getPlayerInsights(insightType: string, limit = 100) {
  */
 export async function getAllPlayers(limit = 1000) {
   try {
-    if (!supabase) return []
+    requireSupabase()
 
     const { data, error } = await supabase
       .from('players')
@@ -468,8 +475,7 @@ export async function getAllPlayers(limit = 1000) {
       .limit(limit)
 
     if (error) {
-      console.error('Error fetching players:', error)
-      return []
+      throw new Error(`Failed to load players: ${error.message}`)
     }
 
     const seen = new Set<string>()
@@ -490,7 +496,7 @@ export async function getAllPlayers(limit = 1000) {
       })
   } catch (err) {
     console.error('Error in getAllPlayers:', err)
-    return []
+    throw err
   }
 }
 
@@ -499,7 +505,7 @@ export async function getAllPlayers(limit = 1000) {
  */
 export async function getPlayerGameweeks(playerName: string, limitGws?: number) {
   try {
-    if (!supabase) return []
+    requireSupabase()
 
     const search = playerName.trim()
     if (!search) return []
@@ -526,8 +532,7 @@ export async function getPlayerGameweeks(playerName: string, limitGws?: number) 
       .order('gameweek')
 
     if (error) {
-      console.error(`Error fetching gameweeks for ${playerName}:`, error)
-      return []
+      throw new Error(`Failed to load gameweeks for ${playerName}: ${error.message}`)
     }
 
     let result = (data || []).map((row: any) => ({
@@ -548,7 +553,8 @@ export async function getPlayerGameweeks(playerName: string, limitGws?: number) 
       key_passes: safeNumber(row.chances_created, 0),
       touches: safeNumber(row.touches, 0),
       penalty_area_touches: safeNumber(row.touches_opp_box, 0),
-      carries_final_third: safeNumber(row.non_penalty_goals, 0),
+      // The current schema has no carries-final-third metric; do not mislabel non-penalty goals as carries.
+      carries_final_third: 0,
       defensive_contribution: safeNumber(row.defensive_contribution, 0),
       xGC: safeNumber(row.xgc, 0),
       goals_conceded: safeNumber(row.goals_conceded, 0),
@@ -561,7 +567,7 @@ export async function getPlayerGameweeks(playerName: string, limitGws?: number) 
     return result
   } catch (err) {
     console.error(`Error in getPlayerGameweeks(${playerName}):`, err)
-    return []
+    throw err
   }
 }
 
@@ -570,7 +576,8 @@ export async function getPlayerGameweeks(playerName: string, limitGws?: number) 
  */
 export async function getPlayerTrends(playerNames: string[], limitGws?: number) {
   try {
-    if (!supabase || playerNames.length === 0) return {}
+    if (playerNames.length === 0) return {}
+    requireSupabase()
 
     const players = await getAllPlayersCached(5000)
     const normalizedPlayers = playerNames
@@ -598,10 +605,10 @@ export async function getPlayerTrends(playerNames: string[], limitGws?: number) 
     ])
 
     if (seasonStatsRes.error) {
-      console.error('Error fetching player season stats:', seasonStatsRes.error)
+      throw new Error(`Failed to load player season stats: ${seasonStatsRes.error.message}`)
     }
     if (gameweeksRes.error) {
-      console.error('Error fetching player gameweeks:', gameweeksRes.error)
+      throw new Error(`Failed to load player gameweeks: ${gameweeksRes.error.message}`)
     }
 
     const seasonStatsMap = new Map((seasonStatsRes.data || []).map((row: any) => [row.player_id, row]))
@@ -635,7 +642,8 @@ export async function getPlayerTrends(playerNames: string[], limitGws?: number) 
         key_passes: safeNumber(row.chances_created, 0),
         touches: safeNumber(row.touches, 0),
         penalty_area_touches: safeNumber(row.touches_opp_box, 0),
-        carries_final_third: safeNumber(row.non_penalty_goals, 0),
+        // The current schema has no carries-final-third metric; do not mislabel non-penalty goals as carries.
+        carries_final_third: 0,
         defensive_contribution: safeNumber(row.defensive_contribution, 0),
         xGC: safeNumber(row.xgc, 0),
         goals_conceded: safeNumber(row.goals_conceded, 0),
@@ -704,7 +712,7 @@ export async function getPlayerTrends(playerNames: string[], limitGws?: number) 
     return result
   } catch (err) {
     console.error('Error in getPlayerTrends:', err)
-    return {}
+    throw err
   }
 }
 
@@ -713,7 +721,7 @@ export async function getPlayerTrends(playerNames: string[], limitGws?: number) 
  */
 export async function getFixtures(gameweek?: number) {
   try {
-    if (!supabase) return []
+    requireSupabase()
 
     const { fixtures: fixtureRows, teams, ranks } = await getFixtureBase()
     const teamMap = new Map(teams.map((team: any) => [team.id, team]))
@@ -822,7 +830,7 @@ export async function getFixtures(gameweek?: number) {
  * Query team rankings.
  */
 async function getTeamRankingsBase() {
-  if (!supabase) return []
+  requireSupabase()
 
   const season = await getSeason()
   if (cachedTeamRankings?.season === season) return cachedTeamRankings.rows
@@ -887,7 +895,7 @@ export async function getTeamRankings(rankingType: string = 'overall') {
     return [...rows].sort((a: any, b: any) => safeInt(a[sortColumn], 999) - safeInt(b[sortColumn], 999))
   } catch (err) {
     console.error(`Error in getTeamRankings(${rankingType}):`, err)
-    return []
+    throw err
   }
 }
 
@@ -896,7 +904,7 @@ export async function getTeamRankings(rankingType: string = 'overall') {
  */
 export async function getTeamFixtureSummary() {
   try {
-    if (!supabase) return []
+    requireSupabase()
 
     // team_fixture_summary is also absent from the schema, so build the same
     // presentation model directly from fixtures and teams.
@@ -971,7 +979,7 @@ export async function getQuickPicks(kind: 'attacking' | 'defensive') {
       })
   } catch (err) {
     console.error(`Error in getQuickPicks(${kind}):`, err)
-    return []
+    throw err
   }
 }
 
@@ -980,15 +988,7 @@ export async function getQuickPicks(kind: 'attacking' | 'defensive') {
  */
 export async function getDashboardSummary() {
   try {
-    if (!supabase) {
-      return {
-        total_players: 0,
-        total_teams: 0,
-        total_gameweeks: 0,
-        last_synced_at: null,
-        generated_at: new Date().toISOString(),
-      }
-    }
+    requireSupabase()
 
     const { data, error } = await supabase
       .from('dashboard_summary')
@@ -1010,12 +1010,6 @@ export async function getDashboardSummary() {
     }
   } catch (err) {
     console.error('Error in getDashboardSummary:', err)
-    return {
-      total_players: 0,
-      total_teams: 0,
-      total_gameweeks: 0,
-      last_synced_at: null,
-      generated_at: new Date().toISOString(),
-    }
+    throw err
   }
 }
