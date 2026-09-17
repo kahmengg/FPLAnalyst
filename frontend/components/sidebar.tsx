@@ -20,14 +20,12 @@ const navigation = [
 export function Sidebar() {
   const pathname = usePathname()
   const [isMobileOpen, setIsMobileOpen] = useState(false)
-  const [gameweek, setGameWeek] = useState(38) // Completed season fallback
+  const [gameweek, setGameWeek] = useState(0)
   const [lastSyncedAt, setLastSyncedAt] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     async function fetchData() {
-      setLoading(true)
       setError(null)
       try {
         const summary = await getDashboardSummary()
@@ -36,9 +34,7 @@ export function Sidebar() {
       } catch (err: unknown) {
         const message = err instanceof Error ? err.message : "Unknown error"
         setError(`Failed to fetch gameweek: ${message}`)
-        setGameWeek(38) // The archived dataset ended at GW38
-      } finally {
-        setLoading(false)
+        setGameWeek(0)
       }
     }
     fetchData()
@@ -48,10 +44,11 @@ export function Sidebar() {
     <>
       {/* Mobile Menu Button */}
       <button
+        aria-label="Open navigation menu"
         onClick={() => setIsMobileOpen(true)}
         className="fixed top-4 left-4 z-50 lg:hidden rounded-lg bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm p-2 shadow-lg border border-slate-200 dark:border-slate-700 transition-all duration-300 hover:scale-105"
       >
-        <Menu className="h-5 w-5 text-slate-700 dark:text-slate-300" />
+        <Menu aria-hidden="true" className="h-5 w-5 text-slate-700 dark:text-slate-300" />
       </button>
 
       {/* Mobile Overlay */}
@@ -76,10 +73,11 @@ export function Sidebar() {
           <div className="relative flex h-20 items-center border-b border-slate-200/50 dark:border-slate-700/50 px-6 bg-gradient-to-r from-emerald-500/5 to-blue-500/5">
             {/* Mobile Close Button */}
             <button
+              aria-label="Close navigation menu"
               onClick={() => setIsMobileOpen(false)}
               className="absolute right-4 top-6 lg:hidden rounded-lg p-1 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors"
             >
-              <X className="h-5 w-5" />
+              <X aria-hidden="true" className="h-5 w-5" />
             </button>
 
             <div className="flex items-center gap-3">
@@ -97,9 +95,9 @@ export function Sidebar() {
                   FPL Analyst
                 </h1>
                 <div className="flex items-center gap-2">
-                  <div className="h-1.5 w-1.5 rounded-full bg-amber-500"></div>
-                  <p className="text-xs text-amber-700 dark:text-amber-400 font-medium">
-                    GW {gameweek} • {DATA_SEASON.label} • Final
+                  <div className={`h-1.5 w-1.5 rounded-full ${error ? "bg-red-500" : DATA_SEASON.isComplete ? "bg-amber-500" : "bg-emerald-500"}`}></div>
+                  <p className={`text-xs font-medium ${error ? "text-red-700 dark:text-red-400" : DATA_SEASON.isComplete ? "text-amber-700 dark:text-amber-400" : "text-emerald-700 dark:text-emerald-400"}`}>
+                    GW {gameweek || "—"} • {DATA_SEASON.label} • {DATA_SEASON.isComplete ? "Final" : "Current"}
                   </p>
                 </div>
               </div>
@@ -193,8 +191,10 @@ export function Sidebar() {
                   : "Unknown"}
               </p>
               <div className="flex items-center gap-2 mt-2">
-                <div className="h-2 w-2 rounded-full bg-amber-500"></div>
-                <p className="text-xs text-amber-700 dark:text-amber-400">Archived season dataset</p>
+                <div className={`h-2 w-2 rounded-full ${error ? "bg-red-500" : DATA_SEASON.isComplete ? "bg-amber-500" : "bg-emerald-500"}`}></div>
+                <p className={`text-xs ${error ? "text-red-700 dark:text-red-400" : DATA_SEASON.isComplete ? "text-amber-700 dark:text-amber-400" : "text-emerald-700 dark:text-emerald-400"}`}>
+                  {error ? "Sync status unavailable" : DATA_SEASON.isComplete ? "Archived season dataset" : "Current season dataset"}
+                </p>
               </div>
             </div>
           </div>

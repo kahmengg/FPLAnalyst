@@ -6,15 +6,15 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { CalendarIcon, Home, Plane, Search, X, Filter, Target, Shield, TrendingUp, ChevronLeft, ChevronRight, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
-import { getFixtures, getTeamFixtureSummary } from "@/lib/supabase"
+import { getDashboardSummary, getFixtures, getTeamFixtureSummary } from "@/lib/supabase"
 
 // Team short codes mapping for FDR
 const teamShortCodes: Record<string, string> = {
   "Arsenal": "ARS", "Aston Villa": "AVL", "Bournemouth": "BOU", "Brentford": "BRE",
-  "Brighton": "BHA", "Burnley": "BUR", "Chelsea": "CHE", "Crystal Palace": "CRY",
-  "Everton": "EVE", "Fulham": "FUL", "Leeds": "LEE", "Liverpool": "LIV",
+  "Brighton": "BHA", "Chelsea": "CHE", "Coventry": "COV", "Crystal Palace": "CRY",
+  "Everton": "EVE", "Fulham": "FUL", "Hull": "HUL", "Ipswich": "IPS", "Leeds": "LEE", "Liverpool": "LIV",
   "Man City": "MCI", "Man Utd": "MUN", "Newcastle": "NEW", "Nott'm Forest": "NFO",
-  "Sunderland": "SUN", "Spurs": "TOT", "West Ham": "WHU", "Wolves": "WOL"
+  "Sunderland": "SUN", "Spurs": "TOT"
 }
 
 // Get difficulty color based on 1-10 difficulty rating, lower is easier
@@ -43,15 +43,15 @@ const teamColors = {
   "Newcastle": "text-slate-800 dark:text-slate-200",
   "Brighton": "text-blue-500 dark:text-blue-300",
   "Aston Villa": "text-purple-700 dark:text-purple-400",
-  "West Ham": "text-amber-700 dark:text-amber-500",
+  "Coventry": "text-sky-700 dark:text-sky-400",
   "Everton": "text-blue-700 dark:text-blue-500",
-  "Wolves": "text-orange-600 dark:text-orange-400",
+  "Hull": "text-amber-700 dark:text-amber-400",
+  "Ipswich": "text-blue-700 dark:text-blue-400",
   "Crystal Palace": "text-blue-600 dark:text-blue-400",
   "Brentford": "text-red-600 dark:text-red-400",
   "Fulham": "text-slate-800 dark:text-slate-300",
   "Bournemouth": "text-red-700 dark:text-red-500",
   "Nott'm Forest": "text-red-800 dark:text-red-600",
-  "Burnley": "text-purple-900 dark:text-purple-400",
   "Leeds": "text-blue-600 dark:text-blue-400",
   "Sunderland": "text-red-700 dark:text-red-500",
 };
@@ -71,15 +71,15 @@ const getTeamBorderColor = (teamName: string) => {
     "Newcastle": "border-slate-800 dark:border-slate-200",
     "Brighton": "border-blue-500 dark:border-blue-300",
     "Aston Villa": "border-purple-700 dark:border-purple-400",
-    "West Ham": "border-amber-700 dark:border-amber-500",
+    "Coventry": "border-sky-700 dark:border-sky-400",
     "Everton": "border-blue-700 dark:border-blue-500",
-    "Wolves": "border-orange-600 dark:border-orange-400",
+    "Hull": "border-amber-700 dark:border-amber-400",
+    "Ipswich": "border-blue-700 dark:border-blue-400",
     "Crystal Palace": "border-blue-600 dark:border-blue-400",
     "Brentford": "border-red-600 dark:border-red-400",
     "Fulham": "border-slate-800 dark:border-slate-300",
     "Bournemouth": "border-red-700 dark:border-red-500",
     "Nott'm Forest": "border-red-800 dark:border-red-600",
-    "Burnley": "border-purple-900 dark:border-purple-400",
     "Leeds": "border-blue-600 dark:border-blue-400",
     "Sunderland": "border-red-700 dark:border-red-500",
   };
@@ -97,15 +97,15 @@ const getTeamBackgroundColor = (teamName: string) => {
     "Newcastle": "bg-slate-200 dark:bg-slate-900",
     "Brighton": "bg-blue-50 dark:bg-blue-950",
     "Aston Villa": "bg-purple-100 dark:bg-purple-950",
-    "West Ham": "bg-amber-100 dark:bg-amber-950",
+    "Coventry": "bg-sky-100 dark:bg-sky-950",
     "Everton": "bg-blue-200 dark:bg-blue-950",
-    "Wolves": "bg-orange-100 dark:bg-orange-950",
+    "Hull": "bg-amber-100 dark:bg-amber-950",
+    "Ipswich": "bg-blue-100 dark:bg-blue-950",
     "Crystal Palace": "bg-blue-100 dark:bg-blue-950",
     "Brentford": "bg-red-100 dark:bg-red-950",
     "Fulham": "bg-slate-100 dark:bg-slate-900",
     "Bournemouth": "bg-red-200 dark:bg-red-950",
     "Nott'm Forest": "bg-red-300 dark:bg-red-950",
-    "Burnley": "bg-purple-200 dark:bg-purple-950",
     "Leeds": "bg-blue-100 dark:bg-blue-950",
     "Sunderland": "bg-red-200 dark:bg-red-950",
   };
@@ -457,19 +457,8 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
   )
 }
 
-export default function FixtureAnalysisPage() {
-  const [gameweek, setGameweek] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState("fixtures");
-  const [sortBy, setSortBy] = useState("overall");
-  const [sortOrder, setSortOrder] = useState("desc");
-  const [fixtures, setFixtures] = useState<any[]>([]);
-  const [fixtureOpportunities, setFixtureOpportunities] = useState<{ attack: any[]; defense: any[] }>({ attack: [], defense: [] });
-  const [teamFixtureSummary, setTeamFixtureSummary] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // Loading skeleton component
-  const LoadingSkeleton = () => (
+function LoadingSkeleton() {
+  return (
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-background via-secondary/10 to-secondary/20">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
@@ -480,22 +469,34 @@ export default function FixtureAnalysisPage() {
           <div className="h-16 bg-secondary/30 rounded-xl animate-pulse"></div>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="h-40 bg-secondary/30 rounded-xl animate-pulse"></div>
+          {[1, 2, 3, 4].map((item) => (
+            <div key={item} className="h-40 bg-secondary/30 rounded-xl animate-pulse"></div>
           ))}
         </div>
       </div>
     </div>
-  );
+  )
+}
+
+export default function FixtureAnalysisPage() {
+  const [gameweek, setGameweek] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState("fixtures");
+  const [sortBy, setSortBy] = useState("overall");
+  const [sortOrder, setSortOrder] = useState("desc");
+  const [fixtures, setFixtures] = useState<any[]>([]);
+  const [teamFixtureSummary, setTeamFixtureSummary] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
       setError(null);
       try {
-        const [dataFixtures, dataSummary] = await Promise.all([
+        const [dataFixtures, dataSummary, dashboardSummary] = await Promise.all([
           getFixtures(),
           getTeamFixtureSummary(),
+          getDashboardSummary(),
         ])
 
         const allGameweeks = Array.from(
@@ -506,11 +507,11 @@ export default function FixtureAnalysisPage() {
           )
         ).sort((a, b) => a - b);
 
-        // Show only future fixtures, starting from the first available GW at or after 35.
-        // If GW 35 is missing from the dataset, fall back to the latest available GW
-        // so the page still renders useful content instead of an empty screen.
-        const futureGameweeks = allGameweeks.filter((gw: number) => gw >= 35);
-        const selectedGameweek = futureGameweeks[0] ?? allGameweeks[allGameweeks.length - 1] ?? 35;
+        // Start after the latest gameweek present in the stats feed. This keeps
+        // fixture analysis current across seasons without a hardcoded cutoff.
+        const nextGameweek = Math.max(1, Number(dashboardSummary.total_gameweeks || 0) + 1);
+        const futureGameweeks = allGameweeks.filter((gw: number) => gw >= nextGameweek);
+        const selectedGameweek = futureGameweeks[0] ?? allGameweeks[allGameweeks.length - 1] ?? nextGameweek;
 
         const upcomingFixtures = dataFixtures.filter((f: any) => Number(f.gameweek) >= selectedGameweek);
         
@@ -525,8 +526,8 @@ export default function FixtureAnalysisPage() {
                 team: f.home_team.name,
                 short_name: f.home_team.short_name,
                 rank: {
-                  attack: f.home_team.rank || 20,
-                  defense: f.home_team.rank || 20,
+                  attack: f.home_team.attack_rank || 20,
+                  defense: f.home_team.defense_rank || 20,
                 },
                 // Values already 0-100%, use directly
                 attackRating: Math.round(f.home_team.attacking_fixture_rating ?? 50),
@@ -537,8 +538,8 @@ export default function FixtureAnalysisPage() {
                 team: f.away_team.name,
                 short_name: f.away_team.short_name,
                 rank: {
-                  attack: f.away_team.rank || 20,
-                  defense: f.away_team.rank || 20,
+                  attack: f.away_team.attack_rank || 20,
+                  defense: f.away_team.defense_rank || 20,
                 },
                 // Values already 0-100%, use directly
                 attackRating: Math.round(f.away_team.attacking_fixture_rating ?? 50),
@@ -554,10 +555,6 @@ export default function FixtureAnalysisPage() {
         const firstUpcomingGW = gameweeksFromUpcoming.length > 0 ? Math.min(...gameweeksFromUpcoming) : selectedGameweek;
         setGameweek(firstUpcomingGW);
         setFixtures(transformedFixtures);
-
-        // Note: fixtures_opportunity endpoint not yet implemented in backend
-        // Opportunities data temporarily disabled
-        setFixtureOpportunities({ attack: [], defense: [] });
 
         setTeamFixtureSummary(dataSummary);
       } catch (err: unknown) {
@@ -590,7 +587,7 @@ export default function FixtureAnalysisPage() {
   // Calculate min/max gameweeks
   const { minGameweek, maxGameweek } = useMemo(() => {
     const gameweeks = fixtures.map((f) => f.gw).filter((gw) => typeof gw === "number" && !isNaN(gw));
-    const minGw = gameweeks.length > 0 ? Math.min(...gameweeks) : 15; // Only upcoming gameweeks
+    const minGw = gameweeks.length > 0 ? Math.min(...gameweeks) : 1;
     return {
       minGameweek: minGw,
       maxGameweek: gameweeks.length > 0 ? Math.max(...gameweeks) : 38

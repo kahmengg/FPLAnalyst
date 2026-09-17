@@ -1,9 +1,7 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, current_app, jsonify, request
 from utils.supabase_client import supabase
 
 players_bp = Blueprint("players", __name__)
-
-SEASON = "2025_26"
 
 # Columns the frontend is allowed to sort by
 SORTABLE = {
@@ -39,6 +37,10 @@ def get_players():
     limit    = request.args.get("limit",    default=200, type=int)
     offset   = request.args.get("offset",  default=0,   type=int)
 
+    # Bound public queries so one request cannot pull an unbounded result set.
+    limit = max(1, min(limit, 1000))
+    offset = max(0, offset)
+
     if sort_col not in SORTABLE:
         sort_col = "total_points"
     descending = order != "asc"
@@ -56,8 +58,9 @@ def get_players():
         q = q.order(sort_col, desc=descending).range(offset, offset + limit - 1)
         res = q.execute()
         return jsonify({"players": res.data or [], "count": len(res.data or [])})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        current_app.logger.exception("Failed to query players")
+        return jsonify({"error": "Failed to load players"}), 500
 
 
 @players_bp.route("/players/<player_id>/gameweeks")
@@ -71,6 +74,7 @@ def player_gameweeks(player_id: str):
         last = int   how many recent GWs to return (default: 8)
     """
     last = request.args.get("last", default=8, type=int)
+    last = max(1, min(last, 38))
     try:
         res = (
             supabase.table("player_gw_history")
@@ -83,5 +87,6 @@ def player_gameweeks(player_id: str):
         # Reverse so the chart renders oldest → newest left to right
         rows = list(reversed(res.data or []))
         return jsonify({"gameweeks": rows, "player_id": player_id})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        current_app.logger.exception("Failed to query player gameweeks")
+        return jsonify({"error": "Failed to load player gameweeks"}), 500

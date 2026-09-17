@@ -4,7 +4,7 @@ FPL ETL Pipeline
 CSV → Supabase (teams / players / player_gameweeks / player_season_stats / team_rankings / fixtures)
 
 Usage:
-    python -m backend.etl.process_fpl_data --season 2025_26
+    python -m backend.etl.process_fpl_data --season 2026_27
 """
 
 import argparse
@@ -21,15 +21,20 @@ if BACKEND_DIR not in sys.path:
 import numpy as np
 import pandas as pd
 from config.config import Config
-from utils.supabase_client import supabase
+from utils.supabase_client import get_admin_client
+
+# Keep CLI output portable on Windows terminals that otherwise default to CP-1252.
+for stream in (sys.stdout, sys.stderr):
+    if hasattr(stream, "reconfigure"):
+        stream.reconfigure(encoding="utf-8")
 
 # ── Constants ────────────────────────────────────────────────────────────────
 
 TEAM_SHORT = {
     "Arsenal": "ARS", "Aston Villa": "AVL", "Bournemouth": "BOU",
     "Brentford": "BRE", "Brighton": "BHA", "Burnley": "BUR",
-    "Chelsea": "CHE", "Crystal Palace": "CRY", "Everton": "EVE",
-    "Fulham": "FUL", "Leeds": "LEE", "Leicester": "LEI",
+    "Chelsea": "CHE", "Coventry": "COV", "Crystal Palace": "CRY", "Everton": "EVE",
+    "Fulham": "FUL", "Hull": "HUL", "Leeds": "LEE", "Leicester": "LEI",
     "Liverpool": "LIV", "Man City": "MCI", "Man Utd": "MUN",
     "Newcastle": "NEW", "Nott'm Forest": "NFO", "Sunderland": "SUN",
     "Spurs": "TOT", "West Ham": "WHU", "Wolves": "WOL",
@@ -40,8 +45,11 @@ CHUNK       = 500
 FORM_GWS    = 5   # number of recent GWs used to calculate form
 LAST_5_GWS  = 5   # rolling window for form-based attack/defense rankings
 LAST_10_GWS = 10  # rolling window for home/away strength modifiers
-LAST_5_GWS = 5  # recent gameweeks for form-based rankings
-LAST_10_GWS = 10 # recent gameweeks for home/away strength
+DEFAULT_SEASON = os.getenv("FPL_DATA_SEASON", "2026_27")
+
+# Initialized in main() so importing validation helpers never opens a write
+# client. All ETL writes require the Supabase service-role key.
+supabase = None
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
@@ -93,6 +101,8 @@ def r3(v) -> Optional[float]:
 def upsert(table: str, records: list, conflict: str):
     if not records:
         return
+    if supabase is None:
+        raise RuntimeError("Supabase admin client has not been initialized")
     for chunk in chunks(records):
         supabase.table(table).upsert(chunk, on_conflict=conflict).execute()
 
@@ -107,15 +117,73 @@ def load_csv() -> Optional[pd.DataFrame]:
 
     df = pd.read_csv(path, dtype=str)   # load everything as str first
     df.columns = [c.strip() for c in df.columns]
+    required = {
+        "id", "element_type", "web_name", "team_name",
+        "opponent_team_name", "was_home", "gameweek",
+    }
+    missing = sorted(required - set(df.columns))
+    if missing:
+        raise ValueError(f"FPL CSV is missing required columns: {', '.join(missing)}")
     print(f"✅ Loaded {len(df):,} rows, {len(df.columns)} columns")
 
     # Strip whitespace from all string cells
-    df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+    df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
 
     # Replace empty strings with NaN so downstream helpers work uniformly
     df.replace("", np.nan, inplace=True)
 
     return df
+
+
+def load_fixture_csv() -> pd.DataFrame:
+    """Load and validate the full-season fixture schedule."""
+    path = Config.FIXTURE_TEMPLATE_CSV
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"Fixture CSV not found: {path}")
+
+    fixtures = pd.read_csv(path, dtype=str)
+    fixtures.columns = [c.strip() for c in fixtures.columns]
+    expected = ["gameweek", "home_team", "away_team"]
+    if list(fixtures.columns) != expected:
+        raise ValueError(
+            f"Fixture CSV columns must be {expected}; got {list(fixtures.columns)}"
+        )
+
+    fixtures = fixtures.map(lambda x: x.strip() if isinstance(x, str) else x)
+    fixtures["gameweek"] = pd.to_numeric(fixtures["gameweek"], errors="coerce")
+    if fixtures[expected].isna().any().any():
+        raise ValueError("Fixture CSV contains blank or invalid required values")
+    fixtures["gameweek"] = fixtures["gameweek"].astype(int)
+
+    if fixtures.duplicated(expected).any():
+        raise ValueError("Fixture CSV contains duplicate fixture rows")
+    if len(fixtures) != 380:
+        raise ValueError(f"Expected 380 Premier League fixtures; found {len(fixtures)}")
+    if not fixtures["gameweek"].between(1, 38).all():
+        raise ValueError("Fixture gameweeks must be between 1 and 38")
+
+    teams = set(fixtures["home_team"]) | set(fixtures["away_team"])
+    if len(teams) != 20:
+        raise ValueError(f"Expected 20 fixture teams; found {len(teams)}")
+
+    appearances = pd.concat([fixtures["home_team"], fixtures["away_team"]]).value_counts()
+    if not (appearances == 38).all():
+        bad = appearances[appearances != 38].to_dict()
+        raise ValueError(f"Every team must have 38 fixtures; invalid counts: {bad}")
+    if set(fixtures["gameweek"]) != set(range(1, 39)):
+        raise ValueError("Fixture CSV must contain gameweeks 1 through 38")
+    if not fixtures.groupby("gameweek").size().eq(10).all():
+        raise ValueError("Each fixture gameweek must contain exactly 10 matches")
+
+    per_gameweek = pd.concat([
+        fixtures[["gameweek", "home_team"]].rename(columns={"home_team": "team"}),
+        fixtures[["gameweek", "away_team"]].rename(columns={"away_team": "team"}),
+    ])
+    if per_gameweek.duplicated(["gameweek", "team"]).any():
+        raise ValueError("A team appears more than once in a fixture gameweek")
+
+    print(f"✅ Loaded {len(fixtures)} fixtures for {len(teams)} teams")
+    return fixtures.sort_values(["gameweek", "home_team", "away_team"]).reset_index(drop=True)
 
 
 # ── Stage 2: Teams ───────────────────────────────────────────────────────────
@@ -167,6 +235,20 @@ def upsert_players(df: pd.DataFrame, team_map: dict) -> dict[int, str]:
         })
 
     upsert("players", rows, "fpl_id")
+
+    # Players absent from the current source must not remain visible as active
+    # after a season rollover or transfer out of the league.
+    current_fpl_ids = {row["fpl_id"] for row in rows}
+    existing = supabase.table("players").select("fpl_id").eq("is_active", True).execute()
+    stale_ids = [
+        int(row["fpl_id"])
+        for row in (existing.data or [])
+        if row.get("fpl_id") is not None and int(row["fpl_id"]) not in current_fpl_ids
+    ]
+    for stale_chunk in chunks(stale_ids):
+        supabase.table("players").update({"is_active": False}).in_(
+            "fpl_id", stale_chunk
+        ).execute()
 
     res = supabase.table("players").select("id, fpl_id").execute()
     mapping = {
@@ -298,11 +380,14 @@ def upsert_season_stats(df: pd.DataFrame, player_map: dict[int, str], season: st
         "expected_points":                       "float",
         "PvsxP":                                 "float",
         "now_cost":                              "float",
-        "was_home":                              "float",   # 0/1 for split sums
     }
     for col, _ in num.items():
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
+
+    # The source uses True/False strings. Numeric coercion turns both into NaN,
+    # which previously classified every appearance as away.
+    df["was_home"] = df["was_home"].map(lambda value: int(safe_bool(value)))
 
     # One row per player per GW (deduplicate)
     df = df.drop_duplicates(subset=["_pid", "gameweek"])
@@ -476,12 +561,15 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     num_cols = [
         "expected_goals", "goals", "total_shots", "total_points",
         "expected_goals_conceded", "goals_conceded",
-        "clean_sheet", "was_home", "minutes",
-        "expected_goal_involvements", "assists",
+        "clean_sheet", "minutes",
+        "expected_goal_involvements", "assists", "defensive_contribution",
     ]
     for c in num_cols:
         if c in df.columns:
             df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0)
+
+    # Preserve the boolean home/away signal instead of coercing text to zero.
+    df["was_home"] = df["was_home"].map(lambda value: int(safe_bool(value)))
 
     df["gameweek"] = pd.to_numeric(df["gameweek"], errors="coerce")
     df = df.dropna(subset=["gameweek"])
@@ -510,6 +598,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
             team_shots = ("total_shots",               "sum"),
             team_assists = ("assists",                 "sum"),
             team_points = ("total_points",             "sum"),
+            team_defensive_contribution = ("defensive_contribution", "sum"),
         )
         .reset_index()
     )
@@ -528,6 +617,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
         total_xgc  = ("expected_goals_conceded", "sum"),
         total_gc   = ("goals_conceded",          "sum"),
         total_cs   = ("clean_sheet",             "sum"),
+        total_defensive_contribution = ("team_defensive_contribution", "sum"),
     ).reset_index()
 
     # ── HOME/AWAY SPLITS (SEASON) ──
@@ -623,8 +713,9 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
     md5["adj_team_goals"] = md5["team_goals"] * md5["opp_def_multiplier"]
     md5["adj_team_assists"] = md5["team_assists"] * md5["opp_def_multiplier"]
 
-    # Adjust defensive contributions by opponent attacking quality
-    md5["adj_goals_conceded"] = md5["goals_conceded"] * md5["opp_att_multiplier"]
+    # Conceding to a weak attack should be penalized more, while a clean sheet
+    # against a strong attack should receive more credit.
+    md5["adj_goals_conceded"] = md5["goals_conceded"] * (2 - md5["opp_att_multiplier"])
     md5["adj_clean_sheet"] = md5["clean_sheet"] * md5["opp_att_multiplier"]
 
     # Aggregate adjusted last-5 stats per team
@@ -795,7 +886,7 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
             "goals_conceded_per_game": round(float(r["gc_pg"]),     3),
             "xgc_per_game":            round(float(r["xgc_pg"]),    3),
             "clean_sheet_rate":        round(float(r["cs_rate"]),   3),
-            "defensive_contribution":  round(float(r["total_cs"]),  3),
+            "defensive_contribution":  round(float(r["total_defensive_contribution"]), 3),
 
             # Season home/away splits
             "home_goals_per_game":   round(float(r["home_goals_pg"]), 3),
@@ -833,10 +924,12 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
 
 # ── Stage 7: Fixtures ────────────────────────────────────────────────────────
 
-def upsert_fixtures(df: pd.DataFrame, team_map: dict[str, str], season: str):
+def upsert_fixtures(fixtures: pd.DataFrame, team_map: dict[str, str], season: str):
     """
-    Derive fixtures from the CSV (home team rows only).
-    FDR is computed from team rankings already written to Supabase.
+    Load the complete fixture schedule and compute FDR from current rankings.
+
+    The player-stat CSV only contains played gameweeks, so deriving fixtures
+    from it made future fixture analysis impossible.
     """
     print("\n🎯 Fixtures...")
 
@@ -856,26 +949,18 @@ def upsert_fixtures(df: pd.DataFrame, team_map: dict[str, str], season: str):
         name_to_id[t["name"]]       = t["id"]
         name_to_id[t["short_name"]] = t["id"]
 
-    df = df.copy()
-    df["gameweek"] = pd.to_numeric(df["gameweek"], errors="coerce")
-    df["was_home"] = df["was_home"].apply(safe_bool)
-    df = df.dropna(subset=["gameweek"])
-    df["gameweek"] = df["gameweek"].astype(int)
-
-    # One row per fixture — use home team's perspective
-    home_rows = (
-        df[df["was_home"] == True]
-        [["gameweek", "team_name", "opponent_team_name"]]
-        .drop_duplicates()
-    )
-
     n_teams = max(len(team_map), 20)
 
     rows = []
-    for _, r in home_rows.iterrows():
-        home_id = name_to_id.get(r["team_name"])
-        away_id = name_to_id.get(r["opponent_team_name"])
+    missing_teams = set()
+    for _, r in fixtures.iterrows():
+        home_id = name_to_id.get(r["home_team"])
+        away_id = name_to_id.get(r["away_team"])
         if not home_id or not away_id:
+            if not home_id:
+                missing_teams.add(r["home_team"])
+            if not away_id:
+                missing_teams.add(r["away_team"])
             continue
 
         h = rank_by_tid.get(home_id, {})
@@ -914,22 +999,38 @@ def upsert_fixtures(df: pd.DataFrame, team_map: dict[str, str], season: str):
             "away_defensive_favorability": away_def_fav,
         })
 
-    upsert("fixtures", rows, "season_key,gameweek,home_team_id,away_team_id")
+    if missing_teams:
+        raise ValueError(
+            "Fixture teams are missing from the stats/team table: "
+            + ", ".join(sorted(missing_teams))
+        )
+    if len(rows) != len(fixtures):
+        raise ValueError(f"Prepared {len(rows)} of {len(fixtures)} fixture rows")
+
+    # A home/away pairing occurs once per league season. Using that stable key
+    # lets a rescheduled fixture update its gameweek instead of leaving a stale row.
+    upsert("fixtures", rows, "season_key,home_team_id,away_team_id")
     print(f"   {len(rows)} fixture records")
 
 
 # ── Main ─────────────────────────────────────────────────────────────────────
 
-def main(season: str = "2025_26") -> bool:
+def main(season: str = DEFAULT_SEASON) -> bool:
+    global supabase
+
     print("\n" + "=" * 60)
     print("🚀 FPL ETL PIPELINE")
     print("=" * 60)
     t0 = datetime.now()
 
+    # ETL writes bypass read-only public RLS with the server-side service role.
+    supabase = get_admin_client()
+
     df = load_csv()
     if df is None or df.empty:
         print("❌ No data — aborting.")
         return False
+    fixtures = load_fixture_csv()
 
     team_map   = upsert_teams(df)
     player_map = upsert_players(df, team_map)
@@ -937,7 +1038,7 @@ def main(season: str = "2025_26") -> bool:
     upsert_gameweek_stats(df, player_map, season)
     upsert_season_stats(df, player_map, season)
     upsert_team_rankings(df, team_map, season)
-    upsert_fixtures(df, team_map, season)
+    upsert_fixtures(fixtures, team_map, season)
 
     elapsed = (datetime.now() - t0).total_seconds()
     print(f"\n✅ Done in {elapsed:.1f}s\n" + "=" * 60)
@@ -946,6 +1047,6 @@ def main(season: str = "2025_26") -> bool:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--season", default="2025_26")
+    parser.add_argument("--season", default=DEFAULT_SEASON)
     args = parser.parse_args()
     sys.exit(0 if main(args.season) else 1)

@@ -1,11 +1,8 @@
 from collections import defaultdict
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, current_app, jsonify, request
 from utils.supabase_client import supabase
 
 fixtures_bp = Blueprint("fixtures", __name__)
-
-SEASON = "2025_26"
-
 
 @fixtures_bp.route("/fixtures")
 def get_fixtures():
@@ -33,11 +30,15 @@ def get_fixtures():
         # Supabase SDK doesn't support OR across two different columns cleanly
         if team:
             t = team.upper()
-            rows = [r for r in rows if r["home_short"] == t or r["away_short"] == t]
+            rows = [
+                r for r in rows
+                if r.get("home_short") == t or r.get("away_short") == t
+            ]
 
         return jsonify({"fixtures": rows, "count": len(rows)})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        current_app.logger.exception("Failed to query fixtures")
+        return jsonify({"error": "Failed to load fixtures"}), 500
 
 
 @fixtures_bp.route("/fixtures/grid")
@@ -93,5 +94,6 @@ def fixtures_grid():
             }
 
         return jsonify({"gameweeks": gameweeks, "teams": dict(teams)})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        current_app.logger.exception("Failed to build fixture grid")
+        return jsonify({"error": "Failed to load fixture grid"}), 500

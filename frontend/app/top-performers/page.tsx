@@ -52,9 +52,12 @@ const TeamBadge = ({ team }) => {
     BHA: "bg-[#0057B8] text-white border-[#003F87]",       // Brighton - blue & white
     BUR: "bg-[#6C1D45] text-[#8BB8E8] border-[#4A1230]",   // Burnley - claret & sky blue
     CHE: "bg-[#034694] text-white border-[#003087]",       // Chelsea - royal blue
+    COV: "bg-[#69B3E7] text-[#0B2239] border-[#4C93C2]",   // Coventry - sky blue
     CRY: "bg-[#1B458F] text-[#C81E2E] border-[#143A6F]",   // Crystal Palace - blue & red
     EVE: "bg-[#003399] text-white border-[#002875]",       // Everton - royal blue
     FUL: "bg-white text-black border-[#000000]",           // Fulham - white & black
+    HUL: "bg-[#F5A12D] text-black border-[#D88916]",        // Hull - amber & black
+    IPS: "bg-[#0044AA] text-white border-[#003580]",        // Ipswich - blue
     LEE: "bg-white text-[#1D3D7B] border-[#FFCC00]",        // Leeds - white, blue & yellow
     LIV: "bg-[#C8102E] text-white border-[#A00D24]",       // Liverpool - deep red
     MCI: "bg-[#6CABDD] text-white border-[#4A90C0]",       // Man City - sky blue

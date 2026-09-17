@@ -5,15 +5,17 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim() || ''
 
 export const supabase = supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
 
-const DEFAULT_SEASON = '2025_26'
+const DEFAULT_SEASON = '2026_27'
 const CONFIGURED_SEASON = process.env.NEXT_PUBLIC_FPL_SEASON_KEY?.trim() || ''
 let cachedSeason: string | null = null
 let seasonPromise: Promise<string> | null = null
 let cachedPlayers: any[] | null = null
 let cachedSeasonStats: { season: string; rows: any[] } | null = null
 let seasonStatsPromise: Promise<any[]> | null = null
-let cachedFixtureBase: { season: string; fixtures: any[]; teams: any[]; ranks: any[] } | null = null
-let fixtureBasePromise: Promise<{ season: string; fixtures: any[]; teams: any[]; ranks: any[] }> | null = null
+let cachedFixtureBase: { season: string; fixtures: any[]; teams: any[]; ranks: any[]; currentGameweek: number } | null = null
+let fixtureBasePromise: Promise<{ season: string; fixtures: any[]; teams: any[]; ranks: any[]; currentGameweek: number }> | null = null
+let cachedTeamRankings: { season: string; rows: any[] } | null = null
+let teamRankingsPromise: Promise<any[]> | null = null
 
 function safeNumber(value: any, fallback = 0) {
   const parsed = typeof value === 'number' ? value : parseFloat(String(value ?? ''))
@@ -150,23 +152,6 @@ async function getTeamMap() {
   }
 
   return new Map((data || []).map((team: any) => [team.id, team]))
-}
-
-async function getTeamRankMap() {
-  if (!supabase) return new Map<string, any>()
-
-  const season = await getSeason()
-  const { data, error } = await supabase
-    .from('team_rankings')
-    .select('team_id, overall_rank, attack_rank, defense_rank, overall_strength, attack_strength, defense_strength, goals_per_game, xg_per_game, goals_conceded_per_game, clean_sheet_rate, home_goals_per_game, away_goals_per_game, home_clean_sheet_rate, away_clean_sheet_rate, season_key')
-    .eq('season_key', season)
-
-  if (error) {
-    console.error('Error fetching team rankings for map:', error)
-    return new Map<string, any>()
-  }
-
-  return new Map((data || []).map((row: any) => [row.team_id, row]))
 }
 
 function normalizeSeasonStatsRow(row: any) {
@@ -327,7 +312,7 @@ async function buildInsightsFallback(insightType: string, limit: number) {
 
 async function getFixtureBase() {
   if (!supabase) {
-    return { season: DEFAULT_SEASON, fixtures: [], teams: [], ranks: [] }
+    return { season: DEFAULT_SEASON, fixtures: [], teams: [], ranks: [], currentGameweek: 0 }
   }
 
   const season = await getSeason()
@@ -337,7 +322,7 @@ async function getFixtureBase() {
   // this request prevents duplicate reads and browser connection starvation.
   if (!fixtureBasePromise) {
     fixtureBasePromise = (async () => {
-      const [fixturesRes, teamsRes, ranksRes] = await Promise.all([
+      const [fixturesRes, teamsRes, ranksRes, latestGameweekRes] = await Promise.all([
         supabase
           .from('fixtures')
           .select('id, season_key, gameweek, home_team_id, away_team_id, home_attack_fdr, home_defense_fdr, away_attack_fdr, away_defense_fdr, home_attacking_favorability, home_defensive_favorability, away_attacking_favorability, away_defensive_favorability')
@@ -346,11 +331,17 @@ async function getFixtureBase() {
         supabase.from('teams').select('id, name, short_name'),
         supabase
           .from('team_rankings')
-          .select('team_id, overall_rank, attack_score_5, defense_score_5, home_strength_10, away_strength_10')
+          .select('team_id, overall_rank, attack_rank, defense_rank, attack_score_5, defense_score_5, home_strength_10, away_strength_10')
           .eq('season_key', season),
+        supabase
+          .from('player_gameweeks')
+          .select('gameweek')
+          .eq('season_key', season)
+          .order('gameweek', { ascending: false })
+          .limit(1),
       ])
 
-      const error = fixturesRes.error || teamsRes.error || ranksRes.error
+      const error = fixturesRes.error || teamsRes.error || ranksRes.error || latestGameweekRes.error
       if (error) throw new Error(`Failed to load fixture data: ${error.message}`)
 
       return {
@@ -358,6 +349,7 @@ async function getFixtureBase() {
         fixtures: fixturesRes.data || [],
         teams: teamsRes.data || [],
         ranks: ranksRes.data || [],
+        currentGameweek: safeInt(latestGameweekRes.data?.[0]?.gameweek, 0),
       }
     })()
   }
@@ -374,11 +366,16 @@ async function getFixtureBase() {
 async function buildTeamFixtureSummaryFallback() {
   if (!supabase) return []
 
-  const { fixtures: fixtureRows, teams } = await getFixtureBase()
+  const { fixtures: fixtureRows, teams, currentGameweek } = await getFixtureBase()
   const teamMap = new Map(teams.map((t: any) => [t.id, t]))
   const byTeam = new Map<string, any[]>()
 
-  for (const f of fixtureRows) {
+  // Transfer planning should start after the latest gameweek in the stats feed,
+  // not at GW1. Fall back to all fixtures for an empty/pre-season dataset.
+  const futureRows = fixtureRows.filter((fixture: any) => safeInt(fixture.gameweek, 0) > currentGameweek)
+  const summaryRows = futureRows.length > 0 ? futureRows : fixtureRows
+
+  for (const f of summaryRows) {
     const homeEntries = byTeam.get(f.home_team_id) || []
     homeEntries.push({
       gw: safeInt(f.gameweek, 0),
@@ -765,10 +762,11 @@ export async function getFixtures(gameweek?: number) {
         const homeAttackThreat = (homeAttackPct * 0.5 + (100 - awayDefensePct) * 0.5) + homeStrengthMod
         const awayAttackThreat = (awayAttackPct * 0.5 + (100 - homeDefensePct) * 0.5) + awayStrengthMod
         
-        // DEFENSIVE ODDS: Blend own defense strength (50%) with opponent weakness (50%)
-        // Opponent weakness = inverse of opponent's attacking strength
-        const homeDefensiveOdds = (homeDefensePct * 0.5 + (100 - awayAttackPct) * 0.5) - homeStrengthMod
-        const awayDefensiveOdds = (awayDefensePct * 0.5 + (100 - homeAttackPct) * 0.5) - awayStrengthMod
+        // DEFENSIVE ODDS: Blend own defense strength (50%) with opponent weakness (50%).
+        // The home/away modifier is goal-scoring based, so applying it here would
+        // incorrectly reduce a home team's defensive rating.
+        const homeDefensiveOdds = homeDefensePct * 0.5 + (100 - awayAttackPct) * 0.5
+        const awayDefensiveOdds = awayDefensePct * 0.5 + (100 - homeAttackPct) * 0.5
         
         // Clamp to 20-100% range
         const homeAttackFinal = Math.max(20, Math.min(100, homeAttackThreat))
@@ -786,6 +784,8 @@ export async function getFixtures(gameweek?: number) {
             attacking_fixture_rating: Math.round(homeAttackFinal),
             defensive_fixture_rating: Math.round(homeDefenseFinal),
             rank: rankMap.get(row.home_team_id)?.overall_rank ?? null,
+            attack_rank: rankMap.get(row.home_team_id)?.attack_rank ?? null,
+            defense_rank: rankMap.get(row.home_team_id)?.defense_rank ?? null,
             fdr: {
               overall: Math.round((homeAttackFinal + homeDefenseFinal) / 2),
               attack: Math.round(homeAttackFinal),
@@ -798,6 +798,8 @@ export async function getFixtures(gameweek?: number) {
             attacking_fixture_rating: Math.round(awayAttackFinal),
             defensive_fixture_rating: Math.round(awayDefenseFinal),
             rank: rankMap.get(row.away_team_id)?.overall_rank ?? null,
+            attack_rank: rankMap.get(row.away_team_id)?.attack_rank ?? null,
+            defense_rank: rankMap.get(row.away_team_id)?.defense_rank ?? null,
             fdr: {
               overall: Math.round((awayAttackFinal + awayDefenseFinal) / 2),
               attack: Math.round(awayAttackFinal),
@@ -817,54 +819,70 @@ export async function getFixtures(gameweek?: number) {
 /**
  * Query team rankings.
  */
+async function getTeamRankingsBase() {
+  if (!supabase) return []
+
+  const season = await getSeason()
+  if (cachedTeamRankings?.season === season) return cachedTeamRankings.rows
+
+  // Ranking, quick-pick, and modal views all reuse the same team dataset.
+  if (!teamRankingsPromise) {
+    teamRankingsPromise = (async () => {
+      const [rankingsRes, teamsRes] = await Promise.all([
+        supabase
+          .from('team_rankings')
+          .select('team_id, overall_rank, attack_rank, defense_rank, overall_strength, attack_strength, defense_strength, goals_per_game, xg_per_game, goals_conceded_per_game, clean_sheet_rate, home_goals_per_game, away_goals_per_game, home_clean_sheet_rate, away_clean_sheet_rate')
+          .eq('season_key', season),
+        supabase.from('teams').select('id, name, short_name'),
+      ])
+
+      const error = rankingsRes.error || teamsRes.error
+      if (error) throw new Error(`Failed to load team rankings: ${error.message}`)
+
+      const teamMap = new Map((teamsRes.data || []).map((team: any) => [team.id, team]))
+      return (rankingsRes.data || [])
+        .map((row: any) => {
+          const team: any = teamMap.get(row.team_id) || {}
+          const normalized = mergeTeamJoin({
+            ...row,
+            team: team.name || '',
+            team_name: team.name || '',
+            team_short: team.short_name || '',
+          })
+
+          return {
+            ...normalized,
+            expected_goals_per_game: safeNumber(row.xg_per_game, 0),
+            xg_per_game: safeNumber(row.xg_per_game, 0),
+            goals_conceded_per_game: safeNumber(row.goals_conceded_per_game, 0),
+            clean_sheet_rate: safeNumber(row.clean_sheet_rate, 0),
+            overall_rank: safeInt(row.overall_rank, 0),
+            attack_rank: safeInt(row.attack_rank, 0),
+            defense_rank: safeInt(row.defense_rank, 0),
+            overall_strength: safeNumber(row.overall_strength, 0),
+            attack_strength: safeNumber(row.attack_strength, 0),
+            defense_strength: safeNumber(row.defense_strength, 0),
+          }
+        })
+        .filter((row: any) => row.team)
+    })()
+  }
+
+  try {
+    const rows = await teamRankingsPromise
+    cachedTeamRankings = { season, rows }
+    return rows
+  } finally {
+    teamRankingsPromise = null
+  }
+}
+
 export async function getTeamRankings(rankingType: string = 'overall') {
   try {
-    if (!supabase) return []
-
-    const season = await getSeason()
-    const [rankingsRes, teamsRes] = await Promise.all([
-      supabase
-        .from('team_rankings')
-        .select('team_id, overall_rank, attack_rank, defense_rank, overall_strength, attack_strength, defense_strength, goals_per_game, xg_per_game, goals_conceded_per_game, clean_sheet_rate, home_goals_per_game, away_goals_per_game, home_clean_sheet_rate, away_clean_sheet_rate')
-        .eq('season_key', season),
-      supabase.from('teams').select('id, name, short_name'),
-    ])
-
-    if (rankingsRes.error) {
-      console.error(`Error fetching ${rankingType} rankings:`, rankingsRes.error)
-      return []
-    }
-
-    const teamMap = new Map((teamsRes.data || []).map((team: any) => [team.id, team]))
-
-    const rows = (rankingsRes.data || [])
-      .map((row: any) => {
-        const team = teamMap.get(row.team_id) || {}
-        const normalized = mergeTeamJoin({
-          ...row,
-          team: team.name || '',
-          team_name: team.name || '',
-          team_short: team.short_name || '',
-        })
-
-        return {
-          ...normalized,
-          expected_goals_per_game: safeNumber(row.xg_per_game, 0),
-          xg_per_game: safeNumber(row.xg_per_game, 0),
-          goals_conceded_per_game: safeNumber(row.goals_conceded_per_game, 0),
-          clean_sheet_rate: safeNumber(row.clean_sheet_rate, 0),
-          overall_rank: safeInt(row.overall_rank, 0),
-          attack_rank: safeInt(row.attack_rank, 0),
-          defense_rank: safeInt(row.defense_rank, 0),
-          overall_strength: safeNumber(row.overall_strength, 0),
-          attack_strength: safeNumber(row.attack_strength, 0),
-          defense_strength: safeNumber(row.defense_strength, 0),
-        }
-      })
-      .filter((row: any) => row.team)
+    const rows = await getTeamRankingsBase()
 
     const sortColumn = rankingType === 'attack' ? 'attack_rank' : rankingType === 'defense' ? 'defense_rank' : 'overall_rank'
-    return rows.sort((a: any, b: any) => safeInt(a[sortColumn], 999) - safeInt(b[sortColumn], 999))
+    return [...rows].sort((a: any, b: any) => safeInt(a[sortColumn], 999) - safeInt(b[sortColumn], 999))
   } catch (err) {
     console.error(`Error in getTeamRankings(${rankingType}):`, err)
     return []

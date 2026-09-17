@@ -1,115 +1,47 @@
-# FPL Analyst - Copilot Instructions
+# FPL Analyst contributor instructions
 
-## Project Overview
-FPL Analyst is a **Fantasy Premier League analytics platform** with a Python Flask backend and Next.js (React + TypeScript) frontend. The system processes FPL CSV data through Jupyter notebooks and serves insights via REST API to a modern web dashboard.
+## Runtime architecture
 
-## Architecture & Data Flow
+The supported pipeline is CSV -> Python ETL -> Supabase -> Next.js. Do not add runtime dependencies on generated JSON files.
 
-### Critical Flow Pattern
-1. **Data Source**: Raw FPL data in `fpl-data-stats.csv` and `fixture_template.csv` (at project root)
-2. **Processing**: Jupyter notebooks (`fpl.ipynb`, `fpl_analysis_v2.ipynb`) analyze data and export JSON
-3. **Storage**: Processed data lands in `backend/data/` subdirectories (e.g., `top_performers/`, `rankings/`)
-4. **API**: Flask backend serves JSON files via RESTful endpoints
-5. **Frontend**: Next.js fetches from API and renders with client-side components
+1. `backend/sync_daily.py` fetches player/gameweek data from fpl-data.co.uk and the season schedule from the official FPL APIs.
+2. The sync validates both payloads and atomically replaces `fpl-data-stats.csv` and `fixture_template.csv`.
+3. `backend/etl/process_fpl_data.py` aggregates and upserts tables through the Supabase service role.
+4. The Next.js frontend reads Supabase directly through `frontend/lib/supabase.ts`.
+5. Flask routes in `backend/routes/` are optional public read endpoints over the same Supabase views.
 
-### Backend Structure (`backend/`)
-- **`app.py`**: Main Flask application that registers blueprint routes
-- **`routes/`**: Blueprint modules (e.g., `top_performers.py`, `fixtures.py`) - each route corresponds to a data analysis category
-- **`utils/data_loader.py`**: Central JSON loader with error handling - **always use this** instead of raw file reads
-- **`config/config.py`**: Path configuration (DATA_DIR, PROJECT_ROOT, CSV paths) - reference these instead of hardcoding paths
-- **`data/`**: JSON files organized by analysis type (do not commit generated data to git)
+## Data and security rules
 
-### Frontend Structure (`frontend/`)
-- **Next.js 15** with App Router (`app/` directory structure)
-- **Pages pattern**: Each route (e.g., `/top-performers`) has a `page.tsx` in `app/[route-name]/`
-- **API calls**: Use `NEXT_PUBLIC_API_BASE_URL` environment variable (defaults to `http://localhost:5000`)
-- **Retry logic**: Implement `fetchWithRetry` for all API calls (3 retries with 1s delay) - see `app/page.tsx` for reference implementation
-- **Components**: Reusable UI in `components/` (cards, badges, tabs) using shadcn/ui and Radix UI
-- **Styling**: TailwindCSS v4 with custom component variants
+- Preserve the fixture schema exactly: `gameweek,home_team,away_team`.
+- Keep official-to-project team aliases in `backend/sync_daily.py` synchronized with the player export.
+- Validate a new source payload before replacing a checked-in CSV.
+- Use the anon Supabase client for reads and `get_admin_client()` for ETL writes.
+- Never expose `SUPABASE_SERVICE_KEY` to the frontend or place it in a `NEXT_PUBLIC_*` variable.
+- Public RLS is SELECT-only. Do not add anonymous write policies.
+- Keep `FPL_DATA_SEASON` and `NEXT_PUBLIC_FPL_SEASON_KEY` aligned.
 
-## Key Conventions
+## Commands
 
-### Route Naming Pattern
-Backend routes use **hyphenated URLs** that map to **snake_case filenames**:
-- Route: `/api/goal_scorer-picks` → File: `top_performers/goal_scorers.json`
-- Route: `/api/assist-gems` → File: `top_performers/assist_providers.json`
-
-### Position & Team Badge System
-Frontend uses standardized badge components (see `app/top-performers/page.tsx`):
-- **`PositionBadge`**: Maps full names to abbreviations (e.g., "Goalkeeper" → "GK")
-- **`TeamBadge`**: 3-letter team codes with brand-specific colors (e.g., "MCI" → sky blue)
-- **`FormBadge`**: Color-coded form scores (≥7 green, 5-7 amber, <5 red)
-
-### Data Schema Standards
-All player JSON files follow this structure:
-```json
-{
-  "player": "string",
-  "team": "string",
-  "team_short": "string",  // 3-letter code (ARS, MCI, etc.)
-  "points": number,
-  "price": number,
-  "ownership": number,     // Percentage
-  "form": number,          // Last 5 gameweeks score
-  "position": "string"     // Full name or abbreviation
-}
-```
-
-## Development Workflows
-
-### Starting the Application
-**Backend**:
 ```bash
-cd backend
-python app.py
-# Runs on http://localhost:5000
-```
+python backend/sync_daily.py --validate-only
+python backend/sync_daily.py --fixtures-only
+python backend/sync_daily.py --season 2026_27
+python -m unittest discover -s backend/tests
+python -m compileall -q backend
 
-**Frontend**:
-```bash
 cd frontend
-npm run dev
-# Runs on http://localhost:3000
+npm run build
+npm audit
 ```
 
-### Regenerating Data
-1. Open `fpl_analysis_v2.ipynb` or `fpl.ipynb` in VS Code
-2. Run all cells sequentially
-3. Export cells write JSON files to `backend/data/`
-4. Backend automatically serves updated data (no restart needed)
+## Frontend conventions
 
-### Adding New API Endpoints
-1. Create JSON file in appropriate `backend/data/` subdirectory
-2. Add route to relevant blueprint in `backend/routes/` using `load_json_data()`
-3. Register blueprint in `app.py` if new module
-4. Add corresponding frontend page in `frontend/app/[route-name]/page.tsx`
+- Next.js App Router pages live in `frontend/app/`.
+- Shared Supabase queries and row mapping belong in `frontend/lib/supabase.ts`.
+- Treat browser queries as public and untrusted; privileged operations belong on the server.
+- Prefer a shared cached query over repeated per-component or per-row requests.
+- Preserve loading, empty, and error states when changing data flows.
 
-### CORS Configuration
-CORS is configured for:
-- Production: `https://fpelly.vercel.app`
-- Local: `http://localhost:3000`
+## Known data-model constraint
 
-Update in `backend/app.py` if deploying to new domain.
-
-## Common Pitfalls
-
-1. **Path References**: Never hardcode paths - use `Config.DATA_DIR` and `Config.PROJECT_ROOT`
-2. **CSV Location**: CSV files are at **project root**, not in `backend/`
-3. **JSON Loading**: Always use `utils/data_loader.py`, not `open()` or `json.load()` directly
-4. **API Resilience**: Frontend must handle missing data gracefully (backend returns `{"error": "..."}` on failures)
-5. **Position Normalization**: Frontend must handle both full names and abbreviations for positions
-6. **Next.js Hydration**: Use `suppressHydrationWarning` on `<html>` for theme provider compatibility
-
-## Deployment Notes
-
-- **Backend**: Deployed with Gunicorn/Uvicorn (see `requirements.txt`)
-- **Frontend**: Vercel deployment (see `frontend/package.json` scripts)
-- **Data Updates**: Use `/api/admin/upload` endpoint to upload new CSV data and trigger reprocessing
-- **Environment Variables**: Set `NEXT_PUBLIC_API_BASE_URL` for production API URL
-
-## Testing Strategy
-
-- Backend: Test endpoints with `curl` or browser at `http://localhost:5000/api/[endpoint]`
-- Health check: `http://localhost:5000/api/health` shows data status
-- Frontend: Check browser console for API errors and retry attempts
-- Data validation: Use admin routes to verify JSON integrity after notebook runs
+The player export is one row per player/gameweek. Do not claim fixture-level accuracy for player stats in double gameweeks unless the source and schema are extended to include a fixture identifier.

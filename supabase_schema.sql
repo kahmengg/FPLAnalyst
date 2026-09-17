@@ -258,6 +258,9 @@ create table if not exists fixtures (
 create index if not exists idx_fix_gw        on fixtures(season_key, gameweek);
 create index if not exists idx_fix_home_team on fixtures(home_team_id);
 create index if not exists idx_fix_away_team on fixtures(away_team_id);
+-- A home/away pairing is stable even when a fixture moves gameweek.
+create unique index if not exists idx_fix_season_pair
+  on fixtures(season_key, home_team_id, away_team_id);
 
 -- ============================================================
 -- VIEWS: Used directly by the frontend API
@@ -267,10 +270,11 @@ create index if not exists idx_fix_away_team on fixtures(away_team_id);
 create or replace view dashboard_summary as
 select
   (select count(*)::int  from players  where is_active = true)  as total_players,
-  (select count(*)::int  from teams)                             as total_teams,
+  (select count(distinct team_id)::int from team_rankings
+   where season_key = (select max(season_key) from team_rankings)) as total_teams,
   coalesce(
     (select max(gameweek)::int from player_gameweeks
-     where season_key = '2025_26'), 0
+     where season_key = (select max(season_key) from player_gameweeks)), 0
   )                                                               as latest_gameweek,
   (select updated_at from player_season_stats
    order by updated_at desc limit 1)                             as last_updated;
@@ -311,7 +315,8 @@ select
   s.away_xg
 from players p
 left join teams t              on t.id = p.team_id
-left join player_season_stats s on s.player_id = p.id and s.season_key = '2025_26'
+left join player_season_stats s on s.player_id = p.id
+  and s.season_key = (select max(season_key) from player_season_stats)
 where p.is_active = true;
 
 -- GW history popup: last N gameweeks for a player
@@ -341,7 +346,7 @@ select
   pg.now_cost,
   pg.selected_by_percent
 from player_gameweeks pg
-where pg.season_key = '2025_26'
+where pg.season_key = (select max(season_key) from player_gameweeks)
 order by pg.gameweek desc;
 
 -- Teams page: rankings with home/away context and form-based metrics
@@ -375,7 +380,8 @@ select
   r.home_strength_10,
   r.away_strength_10
 from teams t
-left join team_rankings r on r.team_id = t.id and r.season_key = '2025_26';
+left join team_rankings r on r.team_id = t.id
+  and r.season_key = (select max(season_key) from team_rankings);
 
 -- Fixture grid: what the Fixture Analysis page needs
 create or replace view fixture_grid as
@@ -396,7 +402,7 @@ select
 from fixtures f
 join teams ht on ht.id = f.home_team_id
 join teams at on at.id = f.away_team_id
-where f.season_key = '2025_26'
+where f.season_key = (select max(season_key) from fixtures)
 order by f.gameweek, ht.name;
 
 -- ============================================================
@@ -413,33 +419,27 @@ alter table fixtures             enable row level security;
 do $$
 declare
   tbl text;
-  pol text;
+  read_policy text;
 begin
   foreach tbl in array array[
     'teams','players','player_gameweeks',
     'player_season_stats','team_rankings','fixtures'
   ] loop
-    pol := 'public read ' || tbl;
+    -- Remove legacy anonymous write policies. ETL writes use the service role,
+    -- which bypasses RLS and must never be exposed to the browser.
+    execute format('drop policy if exists %I on %I', 'public insert ' || tbl, tbl);
+    execute format('drop policy if exists %I on %I', 'public update ' || tbl, tbl);
+    execute format('drop policy if exists %I on %I', 'public delete ' || tbl, tbl);
+
+    read_policy := 'public read ' || tbl;
     if not exists (
       select 1 from pg_policies
       where schemaname = 'public'
-        and tablename   = tbl
-        and policyname  = pol
+        and tablename = tbl
+        and policyname = read_policy
     ) then
       execute format(
-        'create policy %I on %I for select using (true)', pol, tbl
-      );
-      execute format(
-        'create policy %I on %I for insert with check (true)',
-        'public insert ' || tbl, tbl
-      );
-      execute format(
-        'create policy %I on %I for update using (true) with check (true)',
-        'public update ' || tbl, tbl
-      );
-      execute format(
-        'create policy %I on %I for delete using (true)',
-        'public delete ' || tbl, tbl
+        'create policy %I on %I for select using (true)', read_policy, tbl
       );
     end if;
   end loop;

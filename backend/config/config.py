@@ -1,10 +1,8 @@
 # config/config.py
 import os
 
+
 class Config:
-    # Data directories
-    DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
-    
     # Project root directory (where CSV files are located)
     PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
     
