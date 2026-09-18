@@ -47,6 +47,13 @@ LAST_5_GWS  = 5   # rolling window for form-based attack/defense rankings
 LAST_10_GWS = 10  # rolling window for home/away strength modifiers
 DEFAULT_SEASON = os.getenv("FPL_DATA_SEASON", "2026_27")
 
+# Analytical model configuration. Composite strengths are stored on a 0-100
+# scale so unlike raw xG/goals/shots they can be weighted meaningfully.
+ATTACK_WEIGHTS = {"xg": 0.40, "goals": 0.30, "shots": 0.15, "chances": 0.15}
+DEFENSE_WEIGHTS = {"xgc": 0.55, "gc": 0.35, "cs": 0.10}
+OPPONENT_ADJUSTMENT_MIN = 0.85
+OPPONENT_ADJUSTMENT_MAX = 1.15
+
 # Initialized in main() so importing validation helpers never opens a write
 # client. All ETL writes require the Supabase service-role key.
 supabase = None
@@ -105,6 +112,63 @@ def upsert(table: str, records: list, conflict: str):
         raise RuntimeError("Supabase admin client has not been initialized")
     for chunk in chunks(records):
         supabase.table(table).upsert(chunk, on_conflict=conflict).execute()
+
+
+def normalized_score(series: pd.Series, higher_is_better: bool = True) -> pd.Series:
+    """Standardize a league-wide metric to a stable 0-100 strength score.
+
+    A clipped z-score preserves meaningful gaps between teams while preventing a
+    single outlier from dominating the composite. 50 is league average; roughly
+    +/- 1 standard deviation maps to 70/30.
+    """
+    values = pd.to_numeric(series, errors="coerce").astype(float)
+    if values.empty:
+        return values
+    mean = values.mean()
+    std = values.std(ddof=0)
+    if not np.isfinite(std) or std < 1e-9:
+        score = pd.Series(50.0, index=values.index)
+    else:
+        z = ((values - mean) / std).clip(-2.5, 2.5)
+        score = 50.0 + 20.0 * z
+    if not higher_is_better:
+        score = 100.0 - score
+    return score.clip(0.0, 100.0)
+
+
+def weighted_strength(frame: pd.DataFrame, specs: list[tuple[str, float, bool]]) -> pd.Series:
+    """Combine normalized metrics; specs are (column, weight, higher_is_better)."""
+    total = pd.Series(0.0, index=frame.index)
+    weight_sum = 0.0
+    for column, weight, higher_is_better in specs:
+        if column not in frame.columns or weight <= 0:
+            continue
+        total += normalized_score(frame[column], higher_is_better) * weight
+        weight_sum += weight
+    if weight_sum <= 0:
+        return pd.Series(50.0, index=frame.index)
+    return (total / weight_sum).clip(0.0, 100.0)
+
+
+def recent_weight(latest_gw: int) -> float:
+    """How much rolling form should influence current strength.
+
+    Through GW5 the recent window is identical to the season sample, so adding a
+    separate form weight would double-count the same matches.
+    """
+    if latest_gw <= 5:
+        return 0.0
+    if latest_gw <= 9:
+        return 0.25
+    return 0.35
+
+
+def opponent_multiplier(strength_0_100: pd.Series) -> pd.Series:
+    """Mild schedule adjustment: weak opponent 0.85x, elite opponent 1.15x."""
+    s = pd.to_numeric(strength_0_100, errors="coerce").fillna(50.0).clip(0, 100)
+    return OPPONENT_ADJUSTMENT_MIN + (
+        (OPPONENT_ADJUSTMENT_MAX - OPPONENT_ADJUSTMENT_MIN) * (s / 100.0)
+    )
 
 
 # ── Stage 1: Load & clean CSV ────────────────────────────────────────────────
@@ -464,7 +528,8 @@ def upsert_season_stats(df: pd.DataFrame, player_map: dict[int, str], season: st
     ).round(3)
 
     # ── Form: avg pts over last FORM_GWS gameweeks ──
-    form_start = max(1, latest_gw - FORM_GWS + 1)
+    form_window = min(FORM_GWS, latest_gw)
+    form_start = max(1, latest_gw - form_window + 1)
     form_df = (
         df[df["gameweek"] >= form_start]
         .groupby("_pid")["total_points"]
@@ -561,361 +626,287 @@ def upsert_season_stats(df: pd.DataFrame, player_map: dict[int, str], season: st
 # ── Stage 6: Team rankings ───────────────────────────────────────────────────
 
 def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str):
+    """Build reliable 0-100 team strengths from match-level data.
+
+    Principles:
+      * reduce player rows to one team-match before any team aggregation;
+      * normalize metrics before weighting so 40% really means 40%;
+      * favour underlying xG/xGC over noisy finishing/clean-sheet outcomes;
+      * use only a mild (+/-15%) opponent adjustment for recent form;
+      * suppress home/away effects until both splits have enough matches.
     """
-    Compute team-level metrics from the CSV with form-based rankings.
-
-    Key insight: the CSV has ONE ROW PER PLAYER PER GW, not one row per match.
-    To get team-level per-game stats we must first reduce to one row per
-    (team, gameweek) before aggregating — otherwise every stat gets multiplied
-    by squad size (~15 players per team per GW).
-
-    We take the MATCH-LEVEL values that are the same for every player in a
-    team in a given GW:
-        - expected_goals_conceded  (same for all players on same team/GW)
-        - goals_conceded
-        - clean_sheet
-        - was_home
-
-    And sum the PLAYER-LEVEL attacking stats for players who recorded minutes
-    to approximate team attacking output per match.
-    
-    NEW: Calculate form-based rankings (last 5 GWs) and home/away strength
-    (last 10 GWs) for fixture difficulty prediction.
-    """
-    print("\n🏆 Team rankings (including form-based rankings)...")
+    print("\n🏆 Team rankings (normalized model)...")
 
     df = df.copy()
     num_cols = [
-        "expected_goals", "goals", "total_shots", "total_points",
-        "expected_goals_conceded", "goals_conceded",
-        "clean_sheet", "minutes",
+        "expected_goals", "goals", "total_shots", "chances_created", "total_points",
+        "expected_goals_conceded", "goals_conceded", "clean_sheet", "minutes",
         "expected_goal_involvements", "assists", "defensive_contribution",
     ]
     for c in num_cols:
-        if c in df.columns:
-            df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0)
+        if c not in df.columns:
+            df[c] = 0.0
+        df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0.0)
 
-    # Preserve the boolean home/away signal instead of coercing text to zero.
     df["was_home"] = df["was_home"].map(lambda value: int(safe_bool(value)))
-
     df["gameweek"] = pd.to_numeric(df["gameweek"], errors="coerce")
-    df = df.dropna(subset=["gameweek"])
+    df = df.dropna(subset=["gameweek", "team_name", "opponent_team_name"]).copy()
     df["gameweek"] = df["gameweek"].astype(int)
 
-    # Get latest gameweek for form calculations
     latest_gw = int(df["gameweek"].max())
-    form_5_start = max(1, latest_gw - LAST_5_GWS + 1)
+    form_window = min(LAST_5_GWS, latest_gw)
+    form_5_start = max(1, latest_gw - form_window + 1)
     form_10_start = max(1, latest_gw - LAST_10_GWS + 1)
 
-    # ── Step 1: Match-level defensive stats (one row per team+GW) ──
-    # FPL defensive fields are player-level and can differ for substitutes because
-    # they only cover the minutes that player was on the pitch.  Using an arbitrary
-    # player row can therefore produce the wrong team GC/xGC/clean-sheet values.
-    # Select the player with the most minutes for each team+GW instead; in normal
-    # matches this is a full-match player and represents the whole match.
-    match_level = (
-        df.sort_values(
-            ["team_name", "gameweek", "minutes"],
-            ascending=[True, True, False],
-        )
-        .drop_duplicates(subset=["team_name", "gameweek"], keep="first")
+    # Context/defensive source: prefer a full-match player because the upstream
+    # xGC/GC fields are player-level and substitutes may only cover part of a game.
+    context = (
+        df.sort_values(["team_name", "gameweek", "minutes"], ascending=[True, True, False])
+        .drop_duplicates(["team_name", "gameweek"], keep="first")
         [["team_name", "gameweek", "was_home", "opponent_team_name",
-          "expected_goals_conceded", "goals_conceded", "clean_sheet", "minutes"]]
+          "expected_goals_conceded", "goals_conceded", "minutes"]]
+        .rename(columns={
+            "expected_goals_conceded": "source_xgc",
+            "goals_conceded": "source_gc",
+            "minutes": "context_minutes",
+        })
         .copy()
     )
 
-    low_coverage = match_level[match_level["minutes"] < 80]
-    if not low_coverage.empty:
-        print(
-            f"   ⚠️  {len(low_coverage)} team-match rows have no player with "
-            "80+ minutes; defensive match stats may be less reliable"
-        )
-    # Clean sheet is a team-match outcome: derive it from full-match goals conceded
-    # rather than trusting a player-specific clean_sheet flag.
-    match_level["clean_sheet"] = (match_level["goals_conceded"] == 0).astype(int)
-    match_level.drop(columns=["minutes"], inplace=True)
-
-    # ── Step 2: Player-level attacking stats (sum per team+GW, players with minutes) ──
-    starters = df[df["minutes"] > 0].copy()
-    attack_per_match = (
-        starters.groupby(["team_name", "gameweek"])
+    # Team attacking totals come from summing only players who actually played.
+    played = df[df["minutes"] > 0].copy()
+    attack = (
+        played.groupby(["team_name", "gameweek"], as_index=False)
         .agg(
-            team_xg    = ("expected_goals",            "sum"),
-            team_goals = ("goals",                     "sum"),
-            team_shots = ("total_shots",               "sum"),
-            team_assists = ("assists",                 "sum"),
-            team_points = ("total_points",             "sum"),
-            team_defensive_contribution = ("defensive_contribution", "sum"),
+            team_xg=("expected_goals", "sum"),
+            team_goals=("goals", "sum"),
+            team_shots=("total_shots", "sum"),
+            team_chances=("chances_created", "sum"),
+            team_assists=("assists", "sum"),
+            team_points=("total_points", "sum"),
+            team_defensive_contribution=("defensive_contribution", "sum"),
         )
-        .reset_index()
     )
 
-    # ── Step 3: Merge match data ──
-    match_df = match_level.merge(attack_per_match, on=["team_name", "gameweek"], how="left")
-    match_df = match_df.fillna(0)
+    match_df = context.merge(attack, on=["team_name", "gameweek"], how="left").fillna(0)
+
+    # Cross-check defensive data against the opponent's attacking totals. For a
+    # normal match the best-minute player provides authoritative full-match GC/xGC;
+    # if coverage is poor, the opponent aggregates are a safer fallback.
+    opponent_attack = attack.rename(columns={
+        "team_name": "opponent_team_name",
+        "team_goals": "opp_team_goals",
+        "team_xg": "opp_team_xg",
+        "team_shots": "opp_team_shots",
+        "team_chances": "opp_team_chances",
+    })[["opponent_team_name", "gameweek", "opp_team_goals", "opp_team_xg",
+        "opp_team_shots", "opp_team_chances"]]
+    match_df = match_df.merge(opponent_attack, on=["opponent_team_name", "gameweek"], how="left")
+
+    full_context = match_df["context_minutes"] >= 80
+    match_df["goals_conceded"] = np.where(
+        full_context,
+        match_df["source_gc"],
+        match_df["opp_team_goals"].fillna(match_df["source_gc"]),
+    )
+    match_df["expected_goals_conceded"] = np.where(
+        full_context,
+        match_df["source_xgc"],
+        match_df["opp_team_xg"].fillna(match_df["source_xgc"]),
+    )
+    match_df["clean_sheet"] = (match_df["goals_conceded"] == 0).astype(int)
+
+    low_coverage = int((~full_context).sum())
+    if low_coverage:
+        print(f"   ⚠️  {low_coverage} team-match rows used opponent-derived defensive fallback")
+
+    # Diagnostic only: own goals or source differences can explain occasional GC
+    # mismatches, so report rather than overwrite authoritative full-match values.
+    comparable = full_context & match_df["opp_team_goals"].notna()
+    gc_mismatches = int((
+        match_df.loc[comparable, "source_gc"].round(3)
+        != match_df.loc[comparable, "opp_team_goals"].round(3)
+    ).sum())
+    if gc_mismatches:
+        print(f"   ℹ️  {gc_mismatches} GC rows differ from summed opponent player goals (possible own goals/source nuance)")
 
     print(
-        f"   Latest GW: {latest_gw} | Teams: {match_df['team_name'].nunique()} | "
-        f"Team-match rows: {len(match_df)}"
+        f"   Latest GW: {latest_gw} | recent window: {form_window} | "
+        f"teams: {match_df['team_name'].nunique()} | team-match rows: {len(match_df)}"
     )
 
-    # ── OVERALL SEASON AGGREGATION ──
-    overall = match_df.groupby("team_name").agg(
-        n_matches  = ("gameweek",                "nunique"),
-        total_points = ("team_points",           "sum"),
-        total_xg   = ("team_xg",                 "sum"),
-        total_goals= ("team_goals",              "sum"),
-        total_shots= ("team_shots",              "sum"),
-        total_xgc  = ("expected_goals_conceded", "sum"),
-        total_gc   = ("goals_conceded",          "sum"),
-        total_cs   = ("clean_sheet",             "sum"),
-        total_defensive_contribution = ("team_defensive_contribution", "sum"),
-    ).reset_index()
-
-    # ── HOME/AWAY SPLITS (SEASON) ──
-    home_agg = (
-        match_df[match_df["was_home"] == 1]
-        .groupby("team_name")
-        .agg(
-            home_m     = ("gameweek",    "nunique"),
-            home_xg    = ("team_xg",    "sum"),
-            home_goals = ("team_goals", "sum"),
-            home_cs    = ("clean_sheet","sum"),
-        ).reset_index()
-    )
-    away_agg = (
-        match_df[match_df["was_home"] == 0]
-        .groupby("team_name")
-        .agg(
-            away_m     = ("gameweek",    "nunique"),
-            away_xg    = ("team_xg",    "sum"),
-            away_goals = ("team_goals", "sum"),
-            away_cs    = ("clean_sheet","sum"),
-        ).reset_index()
-    )
-
-    agg = overall.merge(home_agg, on="team_name", how="left")
-    agg = agg.merge(away_agg,    on="team_name", how="left")
-    agg = agg.fillna(0)
-
-    # ── LAST 5 GAMEWEEKS (FORM-BASED RANKINGS) ──
-    match_df_5 = match_df[match_df["gameweek"] >= form_5_start]
-    # Ensure match_df_10 is available for rolling-10 opponent computations
-    match_df_10 = match_df[match_df["gameweek"] >= form_10_start]
-    # --- Compute rolling-10 opponent ranks (non-recursive one-pass)
-    # Aggregate match-level stats over the last 10 GWs to build opponent quality
-    team_10 = (
-        match_df_10
-        .groupby("team_name")
-        .agg(
-            n_m_10 = ("gameweek", "nunique"),
-            tot_goals_10 = ("team_goals", "sum"),
-            tot_xg_10 = ("team_xg", "sum"),
-            tot_shots_10 = ("team_shots", "sum"),
-            tot_points_10 = ("team_points", "sum"),
-            tot_gc_10 = ("goals_conceded", "sum"),
-            tot_xgc_10 = ("expected_goals_conceded", "sum"),
-            tot_cs_10 = ("clean_sheet", "sum"),
+    def aggregate_matches(data: pd.DataFrame, suffix: str = "") -> pd.DataFrame:
+        out = (
+            data.groupby("team_name", as_index=False)
+            .agg(
+                n_matches=("gameweek", "nunique"),
+                total_points=("team_points", "sum"),
+                total_xg=("team_xg", "sum"),
+                total_goals=("team_goals", "sum"),
+                total_shots=("team_shots", "sum"),
+                total_chances=("team_chances", "sum"),
+                total_xgc=("expected_goals_conceded", "sum"),
+                total_gc=("goals_conceded", "sum"),
+                total_cs=("clean_sheet", "sum"),
+                total_defensive_contribution=("team_defensive_contribution", "sum"),
+            )
         )
-        .reset_index()
-    )
-    if not team_10.empty:
-        tm = team_10["n_m_10"].clip(lower=1)
-        team_10["goals_pg_10"] = team_10["tot_goals_10"] / tm
-        team_10["xg_pg_10"] = team_10["tot_xg_10"] / tm
-        team_10["shots_pg_10"] = team_10["tot_shots_10"] / tm
-        team_10["points_pg_10"] = team_10["tot_points_10"] / tm
-        team_10["gc_pg_10"] = team_10["tot_gc_10"] / tm
-        team_10["xgc_pg_10"] = team_10["tot_xgc_10"] / tm
-        team_10["cs_rate_10"] = team_10["tot_cs_10"] / tm
+        n = out["n_matches"].clip(lower=1)
+        out["xg_pg"] = out["total_xg"] / n
+        out["goals_pg"] = out["total_goals"] / n
+        out["shots_pg"] = out["total_shots"] / n
+        out["chances_pg"] = out["total_chances"] / n
+        out["xgc_pg"] = out["total_xgc"] / n
+        out["gc_pg"] = out["total_gc"] / n
+        out["cs_rate"] = out["total_cs"] / n
+        if suffix:
+            out = out.rename(columns={c: f"{c}{suffix}" for c in out.columns if c != "team_name"})
+        return out
 
-        # Attack strength should use attacking outputs only. FPL points include
-        # defensive/appearance/bonus scoring, so do not mix them into attack.
-        team_10["attack_strength_10"] = (
-            team_10["xg_pg_10"] * 0.30 +
-            team_10["goals_pg_10"] * 0.50 +
-            team_10["shots_pg_10"] * 0.20
-        )
-        team_10["defense_strength_10"] = (
-            team_10["cs_rate_10"] * 0.50 +
-            (1 / (team_10["gc_pg_10"] + 0.1)) * 0.35 +
-            (1 / (team_10["xgc_pg_10"] + 0.1)) * 0.15
-        )
-        team_10["attack_rank_10"] = team_10["attack_strength_10"].rank(ascending=False, method="min").astype(int)
-        team_10["defense_rank_10"] = team_10["defense_strength_10"].rank(ascending=False, method="min").astype(int)
-    else:
-        team_10["attack_rank_10"] = pd.Series(dtype=int)
-        team_10["defense_rank_10"] = pd.Series(dtype=int)
-
-    # Build quick lookup maps for opponent ranks
-    max_rank_10 = int(team_10["attack_rank_10"].max()) if ("attack_rank_10" in team_10 and not team_10.empty) else max(len(team_map), 20)
-    opp_def_rank_map = {r["team_name"]: int(r["defense_rank_10"]) for r in team_10.to_dict(orient="records")} if not team_10.empty else {}
-    opp_att_rank_map = {r["team_name"]: int(r["attack_rank_10"]) for r in team_10.to_dict(orient="records")} if not team_10.empty else {}
-
-    # Enrich last-5 match rows with opponent ranks and compute opponent-adjusted contributions
-    md5 = match_df_5.copy()
-    md5["opponent_team_name"] = md5.get("opponent_team_name")
-    # Map opponent ranks; fallback to middle rank if missing
-    fallback_rank = max_rank_10 // 2 if max_rank_10 > 0 else 10
-    md5["opp_def_rank_10"] = md5["opponent_team_name"].map(opp_def_rank_map).fillna(fallback_rank).astype(int)
-    md5["opp_att_rank_10"] = md5["opponent_team_name"].map(opp_att_rank_map).fillna(fallback_rank).astype(int)
-
-    # Convert ranks to multipliers where stronger opponents (rank 1) -> multiplier ~1.0
-    md5["opp_def_multiplier"] = (max_rank_10 - md5["opp_def_rank_10"] + 1) / max_rank_10
-    md5["opp_att_multiplier"] = (max_rank_10 - md5["opp_att_rank_10"] + 1) / max_rank_10
-
-    # Adjust attacking contributions by opponent defensive quality
-    md5["adj_team_goals"] = md5["team_goals"] * md5["opp_def_multiplier"]
-    md5["adj_team_assists"] = md5["team_assists"] * md5["opp_def_multiplier"]
-
-    # Conceding to a weak attack should be penalized more, while a clean sheet
-    # against a strong attack should receive more credit.
-    md5["adj_goals_conceded"] = md5["goals_conceded"] * (2 - md5["opp_att_multiplier"])
-    md5["adj_clean_sheet"] = md5["clean_sheet"] * md5["opp_att_multiplier"]
-
-    # Aggregate adjusted last-5 stats per team
-    form_5_agg = md5.groupby("team_name").agg(
-        n_matches_5 = ("gameweek", "nunique"),
-        total_goals_5 = ("team_goals", "sum"),
-        total_assists_5 = ("team_assists", "sum"),
-        total_gc_5 = ("goals_conceded", "sum"),
-        total_cs_5 = ("clean_sheet", "sum"),
-        total_adj_goals_5 = ("adj_team_goals", "sum"),
-        total_adj_assists_5 = ("adj_team_assists", "sum"),
-        total_adj_gc_5 = ("adj_goals_conceded", "sum"),
-        total_adj_cs_5 = ("adj_clean_sheet", "sum"),
-    ).reset_index()
-    agg = agg.merge(form_5_agg, on="team_name", how="left")
-    for col in [
-        "n_matches_5", "total_goals_5", "total_assists_5", "total_gc_5", "total_cs_5",
-        "total_adj_goals_5", "total_adj_assists_5", "total_adj_gc_5", "total_adj_cs_5",
-    ]:
-        if col in agg.columns:
-            agg[col] = agg[col].fillna(0)
-
-    # ── LAST 10 GAMEWEEKS (HOME/AWAY STRENGTH) ──
-    # Home splits for last 10
-    home_10_agg = (
-        match_df_10[match_df_10["was_home"] == 1]
-        .groupby("team_name")
-        .agg(
-            home_m_10     = ("gameweek",    "nunique"),
-            home_goals_10 = ("team_goals", "sum"),
-            home_cs_10    = ("clean_sheet","sum"),
-        ).reset_index()
-    )
-    
-    # Away splits for last 10
-    away_10_agg = (
-        match_df_10[match_df_10["was_home"] == 0]
-        .groupby("team_name")
-        .agg(
-            away_m_10     = ("gameweek",    "nunique"),
-            away_goals_10 = ("team_goals", "sum"),
-            away_cs_10    = ("clean_sheet","sum"),
-        ).reset_index()
-    )
-    
-    agg = agg.merge(home_10_agg, on="team_name", how="left")
-    agg = agg.merge(away_10_agg, on="team_name", how="left")
-    for col in ["home_m_10", "home_goals_10", "home_cs_10", "away_m_10", "away_goals_10", "away_cs_10"]:
-        agg[col] = agg[col].fillna(0)
-
-    # ── SEASON-LEVEL CALCULATIONS ──
-    m  = agg["n_matches"].clip(lower=1)
-    hm = agg["home_m"].clip(lower=1)
-    am = agg["away_m"].clip(lower=1)
-
-    agg["goals_pg"]      = agg["total_goals"] / m
-    agg["xg_pg"]         = agg["total_xg"]    / m
-    agg["shots_pg"]      = agg["total_shots"] / m
-    agg["points_pg"]     = agg["total_points"] / m
-    agg["gc_pg"]         = agg["total_gc"]    / m
-    agg["xgc_pg"]        = agg["total_xgc"]   / m
-    agg["cs_rate"]       = agg["total_cs"]    / m
-    agg["home_goals_pg"] = agg["home_goals"]  / hm
-    agg["away_goals_pg"] = agg["away_goals"]  / am
-    agg["home_xg_pg"]    = agg["home_xg"]     / hm
-    agg["away_xg_pg"]    = agg["away_xg"]     / am
-    agg["home_cs_rate"]  = agg["home_cs"]     / hm
-    agg["away_cs_rate"]  = agg["away_cs"]     / am
-
-    # Attack strength uses attacking outputs only. FPL points are deliberately
-    # excluded because they also include clean sheets, saves, appearance and bonus.
-    agg["attack_strength"] = (
-        agg["xg_pg"]     * 0.30 +
-        agg["goals_pg"]  * 0.50 +
-        agg["shots_pg"]  * 0.20
-    ).round(4)
-    agg["defense_strength"] = (
-        agg["cs_rate"] * 0.50 +
-        (1 / (agg["gc_pg"] + 0.1)) * 0.35 +
-        (1 / (agg["xgc_pg"] + 0.1)) * 0.15
-    ).round(4)
+    # Season metrics and normalized strengths.
+    agg = aggregate_matches(match_df)
+    agg["attack_strength"] = weighted_strength(agg, [
+        ("xg_pg", ATTACK_WEIGHTS["xg"], True),
+        ("goals_pg", ATTACK_WEIGHTS["goals"], True),
+        ("shots_pg", ATTACK_WEIGHTS["shots"], True),
+        ("chances_pg", ATTACK_WEIGHTS["chances"], True),
+    ]).round(3)
+    agg["defense_strength"] = weighted_strength(agg, [
+        ("xgc_pg", DEFENSE_WEIGHTS["xgc"], False),
+        ("gc_pg", DEFENSE_WEIGHTS["gc"], False),
+        ("cs_rate", DEFENSE_WEIGHTS["cs"], True),
+    ]).round(3)
     agg["overall_strength"] = (
-        (agg["attack_strength"] + agg["defense_strength"]) / 2
-    ).round(4)
-
-    agg["attack_rank"]  = agg["attack_strength"].rank(ascending=False, method="min").astype(int)
+        agg["attack_strength"] * 0.50 + agg["defense_strength"] * 0.50
+    ).round(3)
+    agg["attack_rank"] = agg["attack_strength"].rank(ascending=False, method="min").astype(int)
     agg["defense_rank"] = agg["defense_strength"].rank(ascending=False, method="min").astype(int)
     agg["overall_rank"] = agg["overall_strength"].rank(ascending=False, method="min").astype(int)
 
-    # ── FORM-BASED RANKINGS (LAST 5 GWS) ──
-    # Attack form: results-only last 5 GWs, no xG weighting
-    m_5 = agg["n_matches_5"].clip(lower=1)
-    # Use opponent-adjusted sums when available (total_adj_*), fall back to raw totals
-    agg["goals_pg_5"] = (
-        agg.get("total_adj_goals_5", agg.get("total_goals_5", 0)) / m_5
-    )
-    agg["assists_pg_5"] = (
-        agg.get("total_adj_assists_5", agg.get("total_assists_5", 0)) / m_5
-    )
+    # Build unadjusted recent opponent quality from the same rolling window.
+    recent = match_df[match_df["gameweek"] >= form_5_start].copy()
+    recent_raw = aggregate_matches(recent)
+    recent_raw["raw_attack"] = weighted_strength(recent_raw, [
+        ("xg_pg", ATTACK_WEIGHTS["xg"], True),
+        ("goals_pg", ATTACK_WEIGHTS["goals"], True),
+        ("shots_pg", ATTACK_WEIGHTS["shots"], True),
+        ("chances_pg", ATTACK_WEIGHTS["chances"], True),
+    ])
+    recent_raw["raw_defense"] = weighted_strength(recent_raw, [
+        ("xgc_pg", DEFENSE_WEIGHTS["xgc"], False),
+        ("gc_pg", DEFENSE_WEIGHTS["gc"], False),
+        ("cs_rate", DEFENSE_WEIGHTS["cs"], True),
+    ])
+    raw_att_map = recent_raw.set_index("team_name")["raw_attack"].to_dict()
+    raw_def_map = recent_raw.set_index("team_name")["raw_defense"].to_dict()
 
-    # Attack rank 5: results-based form (opponent-adjusted)
-    agg["attack_score_5"] = (
-        agg["goals_pg_5"] * 0.6 +
-        agg["assists_pg_5"] * 0.4
-    ).round(4)
+    recent["opp_attack_strength"] = recent["opponent_team_name"].map(raw_att_map).fillna(50.0)
+    recent["opp_defense_strength"] = recent["opponent_team_name"].map(raw_def_map).fillna(50.0)
+    attack_mult = opponent_multiplier(recent["opp_defense_strength"])
+    defense_mult = opponent_multiplier(recent["opp_attack_strength"])
 
-    # Defense rank 5: results-based form (opponent-adjusted)
-    agg["cs_rate_5"] = (
-        agg.get("total_adj_cs_5", agg.get("total_cs_5", 0)) / m_5
-    )
-    agg["gc_pg_5"] = (
-        agg.get("total_adj_gc_5", agg.get("total_gc_5", 0)) / m_5
-    )
-    agg["defense_score_5"] = (
-        agg["cs_rate_5"] * 0.6 +
-        (1 / (agg["gc_pg_5"] + 0.1)) * 0.4
-    ).round(4)
-    
-    agg["attack_rank_5"] = agg["attack_score_5"].rank(ascending=False, method="min").astype(int)
-    agg["defense_rank_5"] = agg["defense_score_5"].rank(ascending=False, method="min").astype(int)
+    # Better attacking performance against a strong defense gets up to +15%; a
+    # weak defense discounts it by at most 15%. Defense uses the inverse for GC/xGC.
+    recent["adj_xg"] = recent["team_xg"] * attack_mult
+    recent["adj_goals"] = recent["team_goals"] * attack_mult
+    recent["adj_shots"] = recent["team_shots"] * attack_mult
+    recent["adj_chances"] = recent["team_chances"] * attack_mult
+    recent["adj_xgc"] = recent["expected_goals_conceded"] / defense_mult
+    recent["adj_gc"] = recent["goals_conceded"] / defense_mult
+    recent["adj_cs"] = recent["clean_sheet"] * defense_mult
 
-    # ── HOME/AWAY STRENGTH (LAST 10 GWS) ──
-    # This is a 0-100 modifier: positive if team stronger at home, negative if weaker
-    hm_10 = agg["home_m_10"].clip(lower=1)
-    am_10 = agg["away_m_10"].clip(lower=1)
-    
-    agg["home_goals_pg_10"] = agg["home_goals_10"] / hm_10
-    agg["away_goals_pg_10"] = agg["away_goals_10"] / am_10
-    agg["home_cs_rate_10"] = agg["home_cs_10"] / hm_10
-    agg["away_cs_rate_10"] = agg["away_cs_10"] / am_10
-    
-    # Home strength: positive if home is better, ranges -100 to +100
-    # Attack modifier: if home goals > away goals, boost attacking rating at home
-    agg["home_strength_10"] = (
-        ((agg["home_goals_pg_10"] - agg["away_goals_pg_10"]) / 
-         (agg["home_goals_pg_10"] + agg["away_goals_pg_10"] + 0.1) * 50)
-        .clip(lower=-50, upper=50)
-        .round(2)
+    recent_agg = (
+        recent.groupby("team_name", as_index=False)
+        .agg(
+            n_matches_5=("gameweek", "nunique"),
+            total_goals_5=("team_goals", "sum"),
+            total_assists_5=("team_assists", "sum"),
+            total_gc_5=("goals_conceded", "sum"),
+            total_cs_5=("clean_sheet", "sum"),
+            adj_xg=("adj_xg", "sum"),
+            adj_goals=("adj_goals", "sum"),
+            adj_shots=("adj_shots", "sum"),
+            adj_chances=("adj_chances", "sum"),
+            adj_xgc=("adj_xgc", "sum"),
+            adj_gc=("adj_gc", "sum"),
+            adj_cs=("adj_cs", "sum"),
+        )
     )
-    
-    # Away strength: if away is stronger, this is positive; if weaker, negative
-    # This becomes a penalty to away-team attacking/defending
-    agg["away_strength_10"] = -agg["home_strength_10"]
+    n5 = recent_agg["n_matches_5"].clip(lower=1)
+    recent_agg["adj_xg_pg"] = recent_agg["adj_xg"] / n5
+    recent_agg["adj_goals_pg"] = recent_agg["adj_goals"] / n5
+    recent_agg["adj_shots_pg"] = recent_agg["adj_shots"] / n5
+    recent_agg["adj_chances_pg"] = recent_agg["adj_chances"] / n5
+    recent_agg["adj_xgc_pg"] = recent_agg["adj_xgc"] / n5
+    recent_agg["adj_gc_pg"] = recent_agg["adj_gc"] / n5
+    recent_agg["adj_cs_rate"] = recent_agg["adj_cs"] / n5
+    recent_agg["attack_score_5"] = weighted_strength(recent_agg, [
+        ("adj_xg_pg", ATTACK_WEIGHTS["xg"], True),
+        ("adj_goals_pg", ATTACK_WEIGHTS["goals"], True),
+        ("adj_shots_pg", ATTACK_WEIGHTS["shots"], True),
+        ("adj_chances_pg", ATTACK_WEIGHTS["chances"], True),
+    ]).round(3)
+    recent_agg["defense_score_5"] = weighted_strength(recent_agg, [
+        ("adj_xgc_pg", DEFENSE_WEIGHTS["xgc"], False),
+        ("adj_gc_pg", DEFENSE_WEIGHTS["gc"], False),
+        ("adj_cs_rate", DEFENSE_WEIGHTS["cs"], True),
+    ]).round(3)
+    recent_agg["attack_rank_5"] = recent_agg["attack_score_5"].rank(ascending=False, method="min").astype(int)
+    recent_agg["defense_rank_5"] = recent_agg["defense_score_5"].rank(ascending=False, method="min").astype(int)
+    agg = agg.merge(recent_agg, on="team_name", how="left")
 
-    # Build records with all new fields
+    # Season home/away splits used by the UI.
+    def split_agg(home_value: int, prefix: str) -> pd.DataFrame:
+        split = match_df[match_df["was_home"] == home_value]
+        out = (
+            split.groupby("team_name", as_index=False)
+            .agg(
+                matches=("gameweek", "nunique"),
+                goals=("team_goals", "sum"),
+                xg=("team_xg", "sum"),
+                cs=("clean_sheet", "sum"),
+            )
+        )
+        n = out["matches"].clip(lower=1)
+        out[f"{prefix}_goals_pg"] = out["goals"] / n
+        out[f"{prefix}_xg_pg"] = out["xg"] / n
+        out[f"{prefix}_cs_rate"] = out["cs"] / n
+        return out[["team_name", f"{prefix}_goals_pg", f"{prefix}_xg_pg", f"{prefix}_cs_rate"]]
+
+    agg = agg.merge(split_agg(1, "home"), on="team_name", how="left")
+    agg = agg.merge(split_agg(0, "away"), on="team_name", how="left")
+
+    # Rolling home/away effect. Do not trust it until each split has >=3 matches;
+    # then shrink progressively until >=6 home and >=6 away matches.
+    rolling10 = match_df[match_df["gameweek"] >= form_10_start].copy()
+    home10 = (
+        rolling10[rolling10["was_home"] == 1].groupby("team_name", as_index=False)
+        .agg(home_m_10=("gameweek", "nunique"), home_goals_10=("team_goals", "sum"),
+             home_xg_10=("team_xg", "sum"), home_cs_10=("clean_sheet", "sum"))
+    )
+    away10 = (
+        rolling10[rolling10["was_home"] == 0].groupby("team_name", as_index=False)
+        .agg(away_m_10=("gameweek", "nunique"), away_goals_10=("team_goals", "sum"),
+             away_xg_10=("team_xg", "sum"), away_cs_10=("clean_sheet", "sum"))
+    )
+    agg = agg.merge(home10, on="team_name", how="left").merge(away10, on="team_name", how="left")
+    for col in ["home_m_10", "away_m_10", "home_goals_10", "away_goals_10",
+                "home_xg_10", "away_xg_10", "home_cs_10", "away_cs_10"]:
+        agg[col] = pd.to_numeric(agg.get(col, 0), errors="coerce").fillna(0)
+
+    hm10 = agg["home_m_10"].clip(lower=1)
+    am10 = agg["away_m_10"].clip(lower=1)
+    home_attack_rate = 0.60 * (agg["home_xg_10"] / hm10) + 0.40 * (agg["home_goals_10"] / hm10)
+    away_attack_rate = 0.60 * (agg["away_xg_10"] / am10) + 0.40 * (agg["away_goals_10"] / am10)
+    raw_home = ((home_attack_rate - away_attack_rate) / (home_attack_rate + away_attack_rate + 0.1) * 50).clip(-50, 50)
+    split_sample = np.minimum(agg["home_m_10"], agg["away_m_10"])
+    reliability = ((split_sample - 2) / 4).clip(0, 1)
+    agg["home_strength_10"] = (raw_home * reliability).round(2)
+    agg["away_strength_10"] = (-agg["home_strength_10"]).round(2)
+
+    # Fill any missing numeric outputs before persistence.
+    agg = agg.replace([np.inf, -np.inf], np.nan).fillna(0)
+
     rows = []
     for _, r in agg.iterrows():
         team_id = team_map.get(short(r["team_name"]))
@@ -923,89 +914,92 @@ def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str
             print(f"   ⚠️  No team_id for '{r['team_name']}' — skipping")
             continue
         rows.append({
-            "season_key":   season,
-            "team_id":      team_id,
-
-            # Overall season rankings
-            "overall_rank":  int(r["overall_rank"]),
-            "attack_rank":   int(r["attack_rank"]),
-            "defense_rank":  int(r["defense_rank"]),
-
-            "overall_strength":  float(r["overall_strength"]),
-            "attack_strength":   float(r["attack_strength"]),
-            "defense_strength":  float(r["defense_strength"]),
-
-            # Season-level per-game stats
-            "goals_per_game":          round(float(r["goals_pg"]),  3),
-            "xg_per_game":             round(float(r["xg_pg"]),     3),
-            "shots_per_game":          round(float(r["shots_pg"]),  3),
-            "goals_conceded_per_game": round(float(r["gc_pg"]),     3),
-            "xgc_per_game":            round(float(r["xgc_pg"]),    3),
-            "clean_sheet_rate":        round(float(r["cs_rate"]),   3),
-            "defensive_contribution":  round(float(r["total_defensive_contribution"]), 3),
-
-            # Season home/away splits
-            "home_goals_per_game":   round(float(r["home_goals_pg"]), 3),
-            "away_goals_per_game":   round(float(r["away_goals_pg"]), 3),
-            "home_xg_per_game":      round(float(r["home_xg_pg"]),    3),
-            "away_xg_per_game":      round(float(r["away_xg_pg"]),    3),
-            "home_clean_sheet_rate": round(float(r["home_cs_rate"]),  3),
-            "away_clean_sheet_rate": round(float(r["away_cs_rate"]),  3),
-
-            # NEW: Form-based rankings (last 5 gameweeks)
-            "last_5_goals":         round(float(r["total_goals_5"]), 2),
-            "last_5_assists":       round(float(r["total_assists_5"]), 2),
-            "last_5_clean_sheets":  int(r["total_cs_5"]),
-            "last_5_goals_conceded": int(r["total_gc_5"]),
-            "attack_rank_5":        int(r["attack_rank_5"]),
-            "defense_rank_5":       int(r["defense_rank_5"]),
-            "attack_score_5":       float(r["attack_score_5"]),
-            "defense_score_5":      float(r["defense_score_5"]),
-
-            # NEW: Home/Away strength (last 10 gameweeks) - 0-100 modifier
-            "last_10_home_goals":   round(float(r["home_goals_10"]), 2),
-            "last_10_away_goals":   round(float(r["away_goals_10"]), 2),
+            "season_key": season,
+            "team_id": team_id,
+            "overall_rank": int(r["overall_rank"]),
+            "attack_rank": int(r["attack_rank"]),
+            "defense_rank": int(r["defense_rank"]),
+            "overall_strength": float(r["overall_strength"]),
+            "attack_strength": float(r["attack_strength"]),
+            "defense_strength": float(r["defense_strength"]),
+            "goals_per_game": round(float(r["goals_pg"]), 3),
+            "xg_per_game": round(float(r["xg_pg"]), 3),
+            "shots_per_game": round(float(r["shots_pg"]), 3),
+            "goals_conceded_per_game": round(float(r["gc_pg"]), 3),
+            "xgc_per_game": round(float(r["xgc_pg"]), 3),
+            "clean_sheet_rate": round(float(r["cs_rate"]), 3),
+            "defensive_contribution": round(float(r["total_defensive_contribution"]), 3),
+            "home_goals_per_game": round(float(r["home_goals_pg"]), 3),
+            "away_goals_per_game": round(float(r["away_goals_pg"]), 3),
+            "home_xg_per_game": round(float(r["home_xg_pg"]), 3),
+            "away_xg_per_game": round(float(r["away_xg_pg"]), 3),
+            "home_clean_sheet_rate": round(float(r["home_cs_rate"]), 3),
+            "away_clean_sheet_rate": round(float(r["away_cs_rate"]), 3),
+            # Existing schema names retained for compatibility. Until GW5 these
+            # fields represent all available GWs rather than literally five.
+            "last_5_goals": round(float(r["total_goals_5"]), 2),
+            "last_5_assists": round(float(r["total_assists_5"]), 2),
+            "last_5_clean_sheets": int(r["total_cs_5"]),
+            "last_5_goals_conceded": int(round(float(r["total_gc_5"]))),
+            "attack_rank_5": int(r["attack_rank_5"]),
+            "defense_rank_5": int(r["defense_rank_5"]),
+            "attack_score_5": float(r["attack_score_5"]),
+            "defense_score_5": float(r["defense_score_5"]),
+            "last_10_home_goals": round(float(r["home_goals_10"]), 2),
+            "last_10_away_goals": round(float(r["away_goals_10"]), 2),
             "last_10_home_clean_sheets": int(r["home_cs_10"]),
             "last_10_away_clean_sheets": int(r["away_cs_10"]),
-            "home_strength_10":     float(r["home_strength_10"]),  # -50 to +50
-            "away_strength_10":     float(r["away_strength_10"]),  # -50 to +50
-
+            "home_strength_10": float(r["home_strength_10"]),
+            "away_strength_10": float(r["away_strength_10"]),
             "updated_at": datetime.utcnow().isoformat(),
         })
 
     upsert("team_rankings", rows, "season_key,team_id")
-    print(f"   {len(rows)} team ranking records (with form-based & home/away strength)")
+    print(
+        f"   {len(rows)} team ranking records | strengths normalized 0-100 | "
+        f"recent form uses {form_window} GW(s)"
+    )
 
 
-
-# ── Stage 7: Fixtures ────────────────────────────────────────────────────────
-
-def upsert_fixtures(fixtures: pd.DataFrame, team_map: dict[str, str], season: str):
-    """
-    Load the complete fixture schedule and compute FDR from current rankings.
-
-    The player-stat CSV only contains played gameweeks, so deriving fixtures
-    from it made future fixture analysis impossible.
-    """
+def upsert_fixtures(
+    fixtures: pd.DataFrame,
+    team_map: dict[str, str],
+    season: str,
+    latest_gw: Optional[int] = None,
+):
+    """Compute fixture difficulty from strength differences, not rank gaps."""
     print("\n🎯 Fixtures...")
 
-    # Fetch rankings
     res = (
         supabase.table("team_rankings")
-        .select("team_id, attack_rank, defense_rank")
+        .select(
+            "team_id, attack_strength, defense_strength, attack_score_5, "
+            "defense_score_5, home_strength_10, away_strength_10"
+        )
         .eq("season_key", season)
         .execute()
     )
     rank_by_tid = {r["team_id"]: r for r in (res.data or [])}
 
-    # team name → uuid
     teams_res = supabase.table("teams").select("id, name, short_name").execute()
     name_to_id = {}
     for t in (teams_res.data or []):
-        name_to_id[t["name"]]       = t["id"]
+        name_to_id[t["name"]] = t["id"]
         name_to_id[t["short_name"]] = t["id"]
 
-    n_teams = max(len(team_map), 20)
+    if latest_gw is None:
+        latest_gw = 0
+    rw = recent_weight(int(latest_gw))
+
+    def current_strength(row: dict, kind: str) -> float:
+        season_value = float(row.get(f"{kind}_strength") or 50.0)
+        recent_value = float(row.get(f"{kind}_score_5") or season_value)
+        return season_value * (1.0 - rw) + recent_value * rw
+
+    def fdr_from_difference(diff: float) -> float:
+        # Strength difference is [-100,+100]. Map +100 (very favourable) to 1,
+        # equal teams to 3, and -100 to 5.
+        return round(float(np.clip(3.0 - diff / 50.0, 1.0, 5.0)), 2)
 
     rows = []
     missing_teams = set()
@@ -1021,34 +1015,40 @@ def upsert_fixtures(fixtures: pd.DataFrame, team_map: dict[str, str], season: st
 
         h = rank_by_tid.get(home_id, {})
         a = rank_by_tid.get(away_id, {})
+        h_att = current_strength(h, "attack")
+        h_def = current_strength(h, "defense")
+        a_att = current_strength(a, "attack")
+        a_def = current_strength(a, "defense")
 
-        h_att = h.get("attack_rank",  10)
-        h_def = h.get("defense_rank", 10)
-        a_att = a.get("attack_rank",  10)
-        a_def = a.get("defense_rank", 10)
+        # Home/away is deliberately a small modifier and remains zero early in
+        # the season until the rolling split has enough observations.
+        home_mod = float(h.get("home_strength_10") or 0.0) * 0.15
+        away_mod = float(a.get("away_strength_10") or 0.0) * 0.15
+        h_att = float(np.clip(h_att + home_mod, 0, 100))
+        h_def = float(np.clip(h_def + home_mod * 0.5, 0, 100))
+        a_att = float(np.clip(a_att + away_mod, 0, 100))
+        a_def = float(np.clip(a_def + away_mod * 0.5, 0, 100))
 
-        # +ve = easier for attacking team
-        home_att_fav = round((a_def - h_att) / n_teams * 10, 3)
-        home_def_fav = round((a_att - h_def) / n_teams * 10, 3)
-        away_att_fav = round((h_def - a_att) / n_teams * 10, 3)
-        away_def_fav = round((h_att - a_def) / n_teams * 10, 3)
+        home_att_diff = h_att - a_def
+        home_def_diff = h_def - a_att
+        away_att_diff = a_att - h_def
+        away_def_diff = a_def - h_att
 
-        def to_fdr(fav: float) -> float:
-            # map [-10,10] → [1,5] inverted (higher fav = lower/easier FDR)
-            clamped = max(-10.0, min(10.0, fav))
-            return round(5 - ((clamped + 10) / 20 * 4), 2)
+        # Keep historical favorability field scale (-10..10) for frontend compatibility.
+        home_att_fav = round(home_att_diff / 10.0, 3)
+        home_def_fav = round(home_def_diff / 10.0, 3)
+        away_att_fav = round(away_att_diff / 10.0, 3)
+        away_def_fav = round(away_def_diff / 10.0, 3)
 
         rows.append({
-            "season_key":   season,
-            "gameweek":     int(r["gameweek"]),
+            "season_key": season,
+            "gameweek": int(r["gameweek"]),
             "home_team_id": home_id,
             "away_team_id": away_id,
-
-            "home_attack_fdr":  to_fdr(home_att_fav),
-            "home_defense_fdr": to_fdr(home_def_fav),
-            "away_attack_fdr":  to_fdr(away_att_fav),
-            "away_defense_fdr": to_fdr(away_def_fav),
-
+            "home_attack_fdr": fdr_from_difference(home_att_diff),
+            "home_defense_fdr": fdr_from_difference(home_def_diff),
+            "away_attack_fdr": fdr_from_difference(away_att_diff),
+            "away_defense_fdr": fdr_from_difference(away_def_diff),
             "home_attacking_favorability": home_att_fav,
             "home_defensive_favorability": home_def_fav,
             "away_attacking_favorability": away_att_fav,
@@ -1063,10 +1063,8 @@ def upsert_fixtures(fixtures: pd.DataFrame, team_map: dict[str, str], season: st
     if len(rows) != len(fixtures):
         raise ValueError(f"Prepared {len(rows)} of {len(fixtures)} fixture rows")
 
-    # A home/away pairing occurs once per league season. Using that stable key
-    # lets a rescheduled fixture update its gameweek instead of leaving a stale row.
     upsert("fixtures", rows, "season_key,home_team_id,away_team_id")
-    print(f"   {len(rows)} fixture records")
+    print(f"   {len(rows)} fixture records | recent blend weight: {rw:.0%}")
 
 
 # ── Main ─────────────────────────────────────────────────────────────────────
@@ -1094,7 +1092,8 @@ def main(season: str = DEFAULT_SEASON) -> bool:
     upsert_gameweek_stats(df, player_map, season)
     upsert_season_stats(df, player_map, season)
     upsert_team_rankings(df, team_map, season)
-    upsert_fixtures(fixtures, team_map, season)
+    latest_gw = int(pd.to_numeric(df["gameweek"], errors="coerce").max())
+    upsert_fixtures(fixtures, team_map, season, latest_gw=latest_gw)
 
     elapsed = (datetime.now() - t0).total_seconds()
     print(f"\n✅ Done in {elapsed:.1f}s\n" + "=" * 60)
