@@ -355,7 +355,7 @@ export default function PlayerTrendsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-3 sm:p-5 lg:p-7">
+    <div className="min-h-screen bg-transparent p-3 sm:p-5 lg:p-7">
       <div className="mx-auto max-w-[1500px] space-y-6">
         <header className="space-y-2">
           <div className="flex items-center gap-2 text-sm font-medium text-primary">

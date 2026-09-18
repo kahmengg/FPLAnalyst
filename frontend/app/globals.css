@@ -4,80 +4,52 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #f7f8fa;
-  --foreground: #172033;
-  --card: #ffffff;
-  --card-foreground: #172033;
-  --popover: #ffffff;
-  --popover-foreground: #172033;
-  --primary: #172033;
-  --primary-foreground: #ffffff;
-  --secondary: #eef1f5;
-  --secondary-foreground: #283548;
-  --muted: #f1f3f6;
-  --muted-foreground: #667085;
-  --accent: #e9edf2;
-  --accent-foreground: #172033;
-  --success: #1f9d55;
-  --success-foreground: #ffffff;
-  --warning: #d98b16;
-  --warning-foreground: #ffffff;
-  --destructive: #dc3545;
-  --destructive-foreground: #ffffff;
-  --info: #3178c6;
-  --info-foreground: #ffffff;
-  --border: #e6e9ee;
-  --input: #dfe3e9;
-  --ring: #2563eb;
-  --chart-1: #2563eb;
-  --chart-2: #218a58;
-  --chart-3: #d97706;
-  --chart-4: #dc2626;
-  --chart-5: #64748b;
-  --difficulty-1: #dff5e7;
-  --difficulty-2: #e9f6da;
-  --difficulty-3: #fff3c4;
-  --difficulty-4: #ffe1bf;
-  --difficulty-5: #ffd2d2;
+  --background: #112024;
+  --foreground: #e7f1ee;
+  --card: #182c31;
+  --card-foreground: #e7f1ee;
+  --popover: #1b3036;
+  --popover-foreground: #edf6f3;
+  --primary: #70cbbb;
+  --primary-foreground: #0b2927;
+  --secondary: #20373d;
+  --secondary-foreground: #dceae6;
+  --muted: #1d3237;
+  --muted-foreground: #9fb8b2;
+  --accent: #29484d;
+  --accent-foreground: #edf6f3;
+  --success: #6bc68a;
+  --success-foreground: #0b2b1a;
+  --warning: #e5b567;
+  --warning-foreground: #302006;
+  --destructive: #e37a78;
+  --destructive-foreground: #32100f;
+  --info: #79acd8;
+  --info-foreground: #0b2235;
+  --border: #315058;
+  --input: #3a5c64;
+  --ring: #80d8c8;
+  --chart-1: #70cbbb;
+  --chart-2: #79acd8;
+  --chart-3: #e5b567;
+  --chart-4: #e37a78;
+  --chart-5: #a999d6;
+  --difficulty-1: #214c3b;
+  --difficulty-2: #31513b;
+  --difficulty-3: #5b5030;
+  --difficulty-4: #65422f;
+  --difficulty-5: #623437;
   --radius: 0.75rem;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #263244;
-  --sidebar-primary: #172033;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f2f5f7;
-  --sidebar-accent-foreground: #172033;
-  --sidebar-border: #e9ebef;
-  --sidebar-ring: #2563eb;
+  --sidebar: #0e1b1f;
+  --sidebar-foreground: #deebe7;
+  --sidebar-primary: #70cbbb;
+  --sidebar-primary-foreground: #0b2927;
+  --sidebar-accent: #1b3338;
+  --sidebar-accent-foreground: #eef7f4;
+  --sidebar-border: #29474e;
+  --sidebar-ring: #80d8c8;
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
-}
-
-.dark {
-  --background: #0e131b;
-  --foreground: #eef2f7;
-  --card: #151c26;
-  --card-foreground: #eef2f7;
-  --popover: #151c26;
-  --popover-foreground: #eef2f7;
-  --primary: #f1f5f9;
-  --primary-foreground: #111827;
-  --secondary: #1b2430;
-  --secondary-foreground: #e5eaf0;
-  --muted: #1b2430;
-  --muted-foreground: #9ba7b6;
-  --accent: #243041;
-  --accent-foreground: #eef2f7;
-  --border: #263241;
-  --input: #334052;
-  --ring: #60a5fa;
-  --sidebar: #111821;
-  --sidebar-foreground: #e8edf4;
-  --sidebar-accent: #1a2430;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #263241;
-  --sidebar-primary: #f1f5f9;
-  --sidebar-primary-foreground: #111827;
-  --sidebar-ring: #60a5fa;
 }
 
 @theme inline {
@@ -134,9 +106,13 @@
 
 @layer base {
   * { border-color: var(--border); }
-  html { scroll-behavior: smooth; background: var(--background); }
+  html { scroll-behavior: smooth; background: var(--background); color-scheme: dark; }
   body {
     @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(circle at 85% 5%, color-mix(in srgb, var(--primary) 8%, transparent), transparent 28rem),
+      radial-gradient(circle at 20% 90%, color-mix(in srgb, var(--info) 5%, transparent), transparent 32rem);
+    background-attachment: fixed;
     min-width: 320px;
   }
   h1, h2, h3, h4, h5, h6 { @apply font-semibold tracking-tight; }
@@ -162,15 +138,16 @@
 /* Cleaner page surface: depth comes from spacing and subtle elevation, not strong outlines. */
 [data-slot='card'] {
   border-color: color-mix(in srgb, var(--border) 72%, transparent);
+  background-image: linear-gradient(145deg, color-mix(in srgb, var(--primary) 3%, var(--card)), var(--card));
 }
 
 /* Keep active tabs neutral and readable even when a route supplies legacy
    gradient utility classes. */
 [data-slot='tabs-trigger'][data-state='active'] {
-  background-color: var(--card) !important;
+  background-color: color-mix(in srgb, var(--primary) 14%, var(--card)) !important;
   background-image: none !important;
-  border-color: var(--border) !important;
-  color: var(--foreground) !important;
+  border-color: color-mix(in srgb, var(--primary) 35%, var(--border)) !important;
+  color: var(--primary) !important;
 }
 
 @media (max-width: 640px) {

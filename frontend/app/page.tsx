@@ -133,7 +133,7 @@ export default function HomePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-background p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
         <div className="mb-12 text-center">

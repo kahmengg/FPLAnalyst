@@ -202,11 +202,11 @@ export default function TransferTargetsPage() {
   }
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-background">
+    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="mb-2 text-4xl font-bold text-foreground flex items-center gap-3">
-            <RefreshCw className="h-8 w-8 text-muted-foreground" aria-hidden="true" />
+            <RefreshCw className="h-8 w-8 text-primary" aria-hidden="true" />
             <span className="text-foreground">
               Transfer Targets
             </span>

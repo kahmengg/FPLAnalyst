@@ -640,11 +640,11 @@ export default function FixtureAnalysisPage() {
   )
 
   return (
-    <div className="min-h-screen p-2 sm:p-4 lg:p-6 bg-background">
+    <div className="min-h-screen bg-transparent p-2 sm:p-4 lg:p-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-6 sm:mb-8">
           <h1 className="mb-2 text-2xl sm:text-4xl font-bold text-foreground flex items-center gap-2 sm:gap-3">
-            <CalendarIcon className="h-6 w-6 text-muted-foreground sm:h-8 sm:w-8" aria-hidden="true" />
+            <CalendarIcon className="h-6 w-6 text-primary sm:h-8 sm:w-8" aria-hidden="true" />
             <span className="text-foreground">
               <span className="hidden sm:inline">Fixture Analysis</span>
               <span className="sm:hidden">Fixtures</span>

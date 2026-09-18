@@ -4,7 +4,6 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Home, TrendingUp, Trophy, Calendar, Target, Menu, X, Clock, Activity } from "lucide-react"
 import { useEffect, useState } from "react"
-import { ThemeToggle } from "./theme-toggle"
 import { getDashboardSummary } from "@/lib/supabase"
 import { DATA_SEASON } from "@/lib/season"
 
@@ -42,7 +41,7 @@ export function Sidebar() {
       <button
         aria-label="Open navigation menu"
         onClick={() => setIsMobileOpen(true)}
-        className="fixed left-4 top-4 z-50 grid h-10 w-10 place-items-center rounded-xl bg-card text-foreground shadow-sm ring-1 ring-border/70 lg:hidden"
+        className="fixed left-4 top-4 z-50 grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary shadow-sm ring-1 ring-primary/30 lg:hidden"
       >
         <Menu className="h-5 w-5" />
       </button>
@@ -50,7 +49,7 @@ export function Sidebar() {
       {isMobileOpen && (
         <button
           aria-label="Close navigation overlay"
-          className="fixed inset-0 z-40 bg-slate-950/35 lg:hidden"
+          className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden"
           onClick={() => setIsMobileOpen(false)}
         />
       )}
@@ -58,7 +57,7 @@ export function Sidebar() {
       <aside className={`fixed inset-y-0 left-0 z-50 w-72 border-r border-sidebar-border bg-sidebar transition-transform duration-200 lg:z-30 lg:translate-x-0 ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex h-full flex-col">
           <div className="flex h-20 items-center gap-3 px-5">
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary text-primary-foreground">
+            <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary shadow-[0_0_0_1px_color-mix(in_srgb,var(--primary)_30%,transparent),0_8px_24px_color-mix(in_srgb,var(--primary)_12%,transparent)]">
               <Trophy className="h-5 w-5" />
             </div>
             <div className="min-w-0 flex-1">
@@ -83,7 +82,7 @@ export function Sidebar() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsMobileOpen(false)}
-                    className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${active ? "bg-primary/10 text-primary" : "text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-sidebar-foreground"}`}
+                    className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${active ? "bg-primary/15 text-primary ring-1 ring-primary/20" : "text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-sidebar-foreground"}`}
                   >
                     <item.icon className="h-[18px] w-[18px]" />
                     <span>{item.name}</span>
@@ -94,8 +93,7 @@ export function Sidebar() {
           </nav>
 
           <div className="border-t border-sidebar-border p-3">
-            <ThemeToggle />
-            <div className="mt-2 rounded-xl bg-secondary/65 p-3">
+            <div className="rounded-xl bg-sidebar-accent/70 p-3 ring-1 ring-sidebar-border/70">
               <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                 <Clock className="h-3.5 w-3.5" />
                 Last synced

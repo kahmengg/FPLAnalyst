@@ -257,11 +257,11 @@ export default function TeamRankingsPage() {
   )
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-background">
+    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="mb-2 flex items-center gap-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            <TrophyIcon className="h-8 w-8 text-muted-foreground" aria-hidden="true" />
+            <TrophyIcon className="h-8 w-8 text-primary" aria-hidden="true" />
             Team Rankings
           </h1>
           <p className="text-lg text-muted-foreground">Attack and defense strength analysis for all 20 teams</p>
