@@ -30,7 +30,7 @@ const PositionBadge = ({ position }: { position: string }) => {
   return (
     <Badge
       variant="outline"
-      className={`text-xs font-mono font-bold rounded-full border ${colors[normalizedPosition] || "bg-teal-50 text-teal-700 border-teal-500 hover:border-teal-400 transition-colors duration-150"}`}
+      className="rounded-full border-border bg-muted font-mono text-xs font-bold text-foreground"
     >
       {normalizedPosition}
     </Badge>
@@ -590,12 +590,12 @@ export default function QuickPicksPage() {
                   Differential (&lt;10%), Low Owned (10-25%), Popular (25-40%), Template (40%+)
                 </p>
               </div>
-              <div className="p-4 rounded-lg bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800">
-                <h4 className="font-medium text-purple-800 dark:text-purple-200 mb-2 flex items-center gap-2">
+              <div className="rounded-lg border border-border bg-muted/45 p-4">
+                <h4 className="mb-2 flex items-center gap-2 font-medium text-foreground">
                   <Clock className="h-4 w-4" />
                   Quick vs Transfer Strategy
                 </h4>
-                <p className="text-sm text-purple-700 dark:text-purple-300">
+                <p className="text-sm text-muted-foreground">
                   Use for captaincy, bench decisions, and short-term picks. Combine with fixture analysis for transfer planning
                 </p>
               </div>

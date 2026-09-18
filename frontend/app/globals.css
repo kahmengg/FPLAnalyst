@@ -10,13 +10,13 @@
   --card-foreground: #172033;
   --popover: #ffffff;
   --popover-foreground: #172033;
-  --primary: #00a82d;
+  --primary: #172033;
   --primary-foreground: #ffffff;
   --secondary: #eef1f5;
   --secondary-foreground: #283548;
   --muted: #f1f3f6;
   --muted-foreground: #667085;
-  --accent: #eef7f0;
+  --accent: #e9edf2;
   --accent-foreground: #172033;
   --success: #1f9d55;
   --success-foreground: #ffffff;
@@ -28,12 +28,12 @@
   --info-foreground: #ffffff;
   --border: #e6e9ee;
   --input: #dfe3e9;
-  --ring: #00a82d;
-  --chart-1: #805ad5;
+  --ring: #2563eb;
+  --chart-1: #2563eb;
   --chart-2: #218a58;
-  --chart-3: #2d6cdf;
-  --chart-4: #d69e2e;
-  --chart-5: #d05270;
+  --chart-3: #d97706;
+  --chart-4: #dc2626;
+  --chart-5: #64748b;
   --difficulty-1: #dff5e7;
   --difficulty-2: #e9f6da;
   --difficulty-3: #fff3c4;
@@ -42,12 +42,12 @@
   --radius: 0.75rem;
   --sidebar: #ffffff;
   --sidebar-foreground: #263244;
-  --sidebar-primary: #00a82d;
+  --sidebar-primary: #172033;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #f2f5f7;
   --sidebar-accent-foreground: #172033;
   --sidebar-border: #e9ebef;
-  --sidebar-ring: #00a82d;
+  --sidebar-ring: #2563eb;
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
 }
@@ -59,22 +59,25 @@
   --card-foreground: #eef2f7;
   --popover: #151c26;
   --popover-foreground: #eef2f7;
-  --primary: #21c55d;
-  --primary-foreground: #07130b;
+  --primary: #f1f5f9;
+  --primary-foreground: #111827;
   --secondary: #1b2430;
   --secondary-foreground: #e5eaf0;
   --muted: #1b2430;
   --muted-foreground: #9ba7b6;
-  --accent: #182820;
+  --accent: #243041;
   --accent-foreground: #eef2f7;
   --border: #263241;
   --input: #334052;
-  --ring: #21c55d;
+  --ring: #60a5fa;
   --sidebar: #111821;
   --sidebar-foreground: #e8edf4;
   --sidebar-accent: #1a2430;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #263241;
+  --sidebar-primary: #f1f5f9;
+  --sidebar-primary-foreground: #111827;
+  --sidebar-ring: #60a5fa;
 }
 
 @theme inline {
@@ -159,6 +162,15 @@
 /* Cleaner page surface: depth comes from spacing and subtle elevation, not strong outlines. */
 [data-slot='card'] {
   border-color: color-mix(in srgb, var(--border) 72%, transparent);
+}
+
+/* Keep active tabs neutral and readable even when a route supplies legacy
+   gradient utility classes. */
+[data-slot='tabs-trigger'][data-state='active'] {
+  background-color: var(--card) !important;
+  background-image: none !important;
+  border-color: var(--border) !important;
+  color: var(--foreground) !important;
 }
 
 @media (max-width: 640px) {

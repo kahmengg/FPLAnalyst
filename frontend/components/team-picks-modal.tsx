@@ -26,7 +26,7 @@ const PositionBadge = ({ position }: { position: string }) => {
   return (
     <Badge
       variant="outline"
-      className={`text-xs font-mono font-bold rounded-full border ${colors[normalizedPosition as keyof typeof colors] || "bg-teal-50 text-teal-700 border-teal-500"}`}
+      className="rounded-full border-border bg-muted font-mono text-xs font-bold text-foreground"
     >
       {normalizedPosition}
     </Badge>
@@ -131,11 +131,14 @@ export default function TeamPicksModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/45 p-4 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-background rounded-xl shadow-2xl border border-border"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="team-picks-title"
+        className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-xl border border-border bg-background shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -146,13 +149,15 @@ export default function TeamPicksModal({
                 {teamCode}
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-foreground">{teamName}</h2>
+                <h2 id="team-picks-title" className="text-2xl font-bold text-foreground">{teamName}</h2>
                 <p className="text-sm text-muted-foreground">Quick Picks & Player Recommendations</p>
               </div>
             </div>
             <button
+              type="button"
+              aria-label="Close team picks"
               onClick={onClose}
-              className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-secondary transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-muted"
             >
               <X className="h-5 w-5" />
             </button>

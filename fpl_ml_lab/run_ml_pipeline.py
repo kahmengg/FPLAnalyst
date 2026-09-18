@@ -1,104 +1,148 @@
-\
 #!/usr/bin/env python3
 from __future__ import annotations
 
 import argparse
+from dataclasses import asdict
+import json
+import logging
 from pathlib import Path
 import sys
-import joblib
+
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from src.config import HISTORICAL, CURRENT, BACKTEST_DIR, PREDICTION_DIR, MODEL_DIR
-from src.data import load_stats, load_fixtures, build_team_matches
-from src.features import make_training_rows, make_future_fixture_rows
-from src.evaluate import walk_forward_backtest
-from src.predict import fit_best_model, predict_fixtures
+from src.config import BACKTEST_DIR, CURRENT, HISTORICAL, MODEL_DIR, PREDICTION_DIR, PRIOR_TABLE
+from src.data import (
+    build_fixture_matches, build_team_matches, derive_final_table, load_final_table,
+    load_fixtures, load_stats, validate_season,
+)
+from src.elo import EloConfig, predict_fixtures_from_ratings, run_elo_walk_forward
+from src.evaluate import (
+    build_baseline_predictions, confusion_rows, elo_vs_baseline_summary,
+    gameweek_accuracy, prediction_metrics,
+)
+
+LOGGER = logging.getLogger("fpl_elo_pipeline")
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Isolated FPL ML experiment pipeline")
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Leakage-safe FPL Elo forecasting")
     parser.add_argument("--historical-stats", type=Path, default=HISTORICAL.stats_csv)
     parser.add_argument("--historical-fixtures", type=Path, default=HISTORICAL.fixtures_csv)
     parser.add_argument("--current-stats", type=Path, default=CURRENT.stats_csv)
     parser.add_argument("--current-fixtures", type=Path, default=CURRENT.fixtures_csv)
-    parser.add_argument("--min-train-gw", type=int, default=8)
+    parser.add_argument("--prior-table", type=Path, default=PRIOR_TABLE)
+    parser.add_argument("--holdout-start-gw", type=int, default=20)
     parser.add_argument("--skip-current-predictions", action="store_true")
-    args = parser.parse_args()
+    return parser.parse_args()
 
-    BACKTEST_DIR.mkdir(parents=True, exist_ok=True)
-    PREDICTION_DIR.mkdir(parents=True, exist_ok=True)
-    MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
-    print("\n=== 1) Load historical season ===")
-    hist_stats = load_stats(args.historical_stats)
-    hist_fixtures = load_fixtures(args.historical_fixtures)
-    hist_matches = build_team_matches(hist_stats)
-    train_rows = make_training_rows(hist_matches)
+def _save(frame: pd.DataFrame, path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    frame.to_csv(path, index=False)
+    LOGGER.info("Saved %d rows: %s", len(frame), path)
 
-    # Exclude rows with no prior history.
-    train_rows = train_rows[train_rows["matches_prior"] >= 1].copy()
-    print(f"Historical team-match rows: {len(hist_matches)}")
-    print(f"Training rows: {len(train_rows)}")
-    print(f"Historical GW range: {hist_matches.gameweek.min()}-{hist_matches.gameweek.max()}")
 
-    print("\n=== 2) Walk-forward backtest ===")
-    metrics, preds = walk_forward_backtest(train_rows, min_train_gw=args.min_train_gw)
-    metrics_path = BACKTEST_DIR / "model_metrics.csv"
-    preds_path = BACKTEST_DIR / "walk_forward_predictions.csv"
-    metrics.to_csv(metrics_path, index=False)
-    preds.to_csv(preds_path, index=False)
+def _load_season(stats_path: Path, fixtures_path: Path, label: str, allow_rescheduled: bool):
+    stats = load_stats(stats_path)
+    schedule = load_fixtures(fixtures_path)
+    validate_season(stats, schedule, label, allow_rescheduled=allow_rescheduled)
+    completed = build_fixture_matches(build_team_matches(stats))
+    return schedule, completed
 
-    print(metrics.to_string(index=False, float_format=lambda x: f"{x:.4f}"))
-    print(f"\nSaved: {metrics_path}")
-    print(f"Saved: {preds_path}")
 
-    best = metrics.iloc[0]["model"]
-    if best == "baseline":
-        # We need a fitted model for future predictions; use best non-baseline model.
-        non_base = metrics[metrics["model"] != "baseline"]
-        best = non_base.iloc[0]["model"]
-    print(f"\nBest fitted ML model by MAE: {best}")
+def run(args: argparse.Namespace) -> None:
+    if not 2 <= args.holdout_start_gw <= 38:
+        raise ValueError("holdout-start-gw must be between 2 and 38")
+    for directory in [BACKTEST_DIR, MODEL_DIR, PREDICTION_DIR]:
+        directory.mkdir(parents=True, exist_ok=True)
+    config = EloConfig()
 
+    print("\n=== 1) Historical data and previous-season prior ===")
+    _, historical_fixtures = _load_season(
+        args.historical_stats, args.historical_fixtures,
+        "Historical season", allow_rescheduled=True,
+    )
+    prior_table = load_final_table(args.prior_table)
+    if len(historical_fixtures) != 380 or historical_fixtures["gameweek"].min() != 1:
+        raise ValueError("Historical evaluation must contain all 380 fixtures from GW1")
+
+    print("\n=== 2) Default Elo walk-forward evaluation ===")
+    elo_predictions, _ = run_elo_walk_forward(
+        historical_fixtures, prior_table, config, model_name="elo_default"
+    )
+    baseline_predictions = build_baseline_predictions(historical_fixtures)
+    all_predictions = pd.concat([baseline_predictions, elo_predictions], ignore_index=True)
+    holdout_window = f"headline_holdout_gw{args.holdout_start_gw}_38"
+    holdout = all_predictions[all_predictions["gameweek"] >= args.holdout_start_gw]
+    metrics = pd.concat([
+        prediction_metrics(all_predictions, window="full_season_gw1_38"),
+        prediction_metrics(holdout, window=holdout_window),
+    ], ignore_index=True)
+    summary = elo_vs_baseline_summary(metrics, holdout_window)
+
+    _save(elo_predictions, BACKTEST_DIR / "elo_predictions.csv")
+    _save(baseline_predictions, BACKTEST_DIR / "baseline_predictions.csv")
+    _save(metrics, BACKTEST_DIR / "model_metrics.csv")
+    _save(summary, BACKTEST_DIR / "improvement_summary.csv")
+    _save(gameweek_accuracy(all_predictions), BACKTEST_DIR / "gameweek_accuracy.csv")
+    _save(confusion_rows(holdout, holdout_window), BACKTEST_DIR / "confusion_matrix.csv")
+
+    headline = metrics[metrics["window"] == holdout_window].sort_values("log_loss")
+    print("\nHeadline results:")
+    print(headline.to_string(index=False, float_format=lambda value: f"{value:.4f}"))
+    print("\nDefault Elo improvement over the frequency baseline:")
+    print(summary.to_string(index=False, float_format=lambda value: f"{value:.4f}"))
+
+    model_path = MODEL_DIR / "elo_config.json"
+    model_path.write_text(json.dumps(asdict(config), indent=2), encoding="utf-8")
+    LOGGER.info("Saved Elo configuration: %s", model_path)
     if args.skip_current_predictions:
         return
 
-    print("\n=== 3) Load current season ===")
-    current_stats = load_stats(args.current_stats)
-    current_fixtures = load_fixtures(args.current_fixtures)
-    current_matches = build_team_matches(current_stats)
-    current_rows = make_training_rows(current_matches)
-    current_rows = current_rows[current_rows["matches_prior"] >= 1].copy()
+    print("\n=== 3) Current-season next-GW prediction ===")
+    current_schedule, current_completed = _load_season(
+        args.current_stats, args.current_fixtures,
+        "Current season", allow_rescheduled=False,
+    )
+    derived_table = derive_final_table(historical_fixtures)
+    if len(derived_table) != 20 or not derived_table["played"].eq(38).all():
+        raise ValueError("Cannot derive a complete 2025/26 prior table")
+    _save(derived_table, ROOT / "data" / "historical" / "2025_26" / "final_table.csv")
+    _, ratings = run_elo_walk_forward(
+        current_completed, derived_table, config, model_name="elo_default"
+    )
+    completed_keys = current_completed[["gameweek", "home_team", "away_team"]]
+    remaining = current_schedule.merge(
+        completed_keys.assign(completed=True),
+        on=["gameweek", "home_team", "away_team"], how="left",
+    )
+    remaining = remaining[remaining["completed"].isna()].drop(columns="completed")
+    if remaining.empty:
+        raise ValueError("Current schedule has no unplayed fixtures")
+    next_gw = int(remaining["gameweek"].min())
+    next_fixtures = remaining[remaining["gameweek"] == next_gw]
+    next_predictions = predict_fixtures_from_ratings(
+        next_fixtures, ratings, config, model_name="elo_default"
+    )
+    _save(next_predictions, PREDICTION_DIR / "next_gameweek_predictions.csv")
+    print(f"\nNext GW: {next_gw}; fixtures: {len(next_predictions)}")
+    print(next_predictions.to_string(index=False, float_format=lambda value: f"{value:.4f}"))
 
-    # Training pool = full historical season + completed current-season games.
-    combined = pd.concat([train_rows, current_rows], ignore_index=True, sort=False)
 
-    model, feature_cols = fit_best_model(combined, best)
-    model_path = MODEL_DIR / f"{best}.joblib"
-    joblib.dump({"model": model, "feature_cols": feature_cols}, model_path)
-
-    print("\n=== 4) Predict remaining current-season fixtures ===")
-    future_rows = make_future_fixture_rows(current_matches, current_fixtures)
-
-    # Align missing columns expected by training.
-    for c in feature_cols:
-        if c not in future_rows.columns:
-            future_rows[c] = 0
-
-    fixture_predictions = predict_fixtures(model, feature_cols, future_rows)
-    pred_path = PREDICTION_DIR / "current_fixture_predictions.csv"
-    fixture_predictions.to_csv(pred_path, index=False)
-
-    print(f"Predicted fixtures: {len(fixture_predictions)}")
-    print(f"Saved model: {model_path}")
-    print(f"Saved predictions: {pred_path}")
-    if not fixture_predictions.empty:
-        print("\nPreview:")
-        print(fixture_predictions.head(10).to_string(index=False))
+def main() -> int:
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s | %(message)s")
+    try:
+        run(parse_args())
+    except (FileNotFoundError, ValueError, RuntimeError) as exc:
+        LOGGER.error("Pipeline failed: %s", exc)
+        LOGGER.error("Fix the reported data/configuration issue and rerun the same command.")
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

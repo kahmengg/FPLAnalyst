@@ -1,0 +1,761 @@
+model,gameweek,home_team,away_team,actual_result,home_goals,away_goals,prob_home,prob_draw,prob_away,predicted_result,predicted_label,actual_label,correct
+always_home,1,Aston Villa,Newcastle,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,1,Brighton,Fulham,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,1,Chelsea,Crystal Palace,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,1,Leeds,Everton,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,1,Liverpool,Bournemouth,H,4,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,1,Man Utd,Arsenal,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,1,Nott'm Forest,Brentford,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,1,Spurs,Burnley,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,1,Sunderland,West Ham,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,1,Wolves,Man City,A,0,4,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,1,Aston Villa,Newcastle,D,0,0,0.44,0.27,0.29,H,Home Win,Draw,False
+league_frequency,1,Brighton,Fulham,D,1,1,0.44,0.27,0.29,H,Home Win,Draw,False
+league_frequency,1,Chelsea,Crystal Palace,D,0,0,0.44,0.27,0.29,H,Home Win,Draw,False
+league_frequency,1,Leeds,Everton,H,1,0,0.44,0.27,0.29,H,Home Win,Home Win,True
+league_frequency,1,Liverpool,Bournemouth,H,4,2,0.44,0.27,0.29,H,Home Win,Home Win,True
+league_frequency,1,Man Utd,Arsenal,A,0,1,0.44,0.27,0.29,H,Home Win,Away Win,False
+league_frequency,1,Nott'm Forest,Brentford,H,3,1,0.44,0.27,0.29,H,Home Win,Home Win,True
+league_frequency,1,Spurs,Burnley,H,3,0,0.44,0.27,0.29,H,Home Win,Home Win,True
+league_frequency,1,Sunderland,West Ham,H,3,0,0.44,0.27,0.29,H,Home Win,Home Win,True
+league_frequency,1,Wolves,Man City,A,0,4,0.44,0.27,0.29,H,Home Win,Away Win,False
+always_home,2,Arsenal,Leeds,H,5,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,2,Bournemouth,Wolves,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,2,Brentford,Aston Villa,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,2,Burnley,Sunderland,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,2,Crystal Palace,Nott'm Forest,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,2,Everton,Brighton,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,2,Fulham,Man Utd,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,2,Man City,Spurs,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,2,Newcastle,Liverpool,A,2,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,2,West Ham,Chelsea,A,1,5,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,2,Arsenal,Leeds,H,5,0,0.44545454545454544,0.2727272727272727,0.2818181818181818,H,Home Win,Home Win,True
+league_frequency,2,Bournemouth,Wolves,H,1,0,0.44545454545454544,0.2727272727272727,0.2818181818181818,H,Home Win,Home Win,True
+league_frequency,2,Brentford,Aston Villa,H,1,0,0.44545454545454544,0.2727272727272727,0.2818181818181818,H,Home Win,Home Win,True
+league_frequency,2,Burnley,Sunderland,H,2,0,0.44545454545454544,0.2727272727272727,0.2818181818181818,H,Home Win,Home Win,True
+league_frequency,2,Crystal Palace,Nott'm Forest,D,1,1,0.44545454545454544,0.2727272727272727,0.2818181818181818,H,Home Win,Draw,False
+league_frequency,2,Everton,Brighton,H,2,0,0.44545454545454544,0.2727272727272727,0.2818181818181818,H,Home Win,Home Win,True
+league_frequency,2,Fulham,Man Utd,H,1,0,0.44545454545454544,0.2727272727272727,0.2818181818181818,H,Home Win,Home Win,True
+league_frequency,2,Man City,Spurs,A,0,2,0.44545454545454544,0.2727272727272727,0.2818181818181818,H,Home Win,Away Win,False
+league_frequency,2,Newcastle,Liverpool,A,2,3,0.44545454545454544,0.2727272727272727,0.2818181818181818,H,Home Win,Away Win,False
+league_frequency,2,West Ham,Chelsea,A,1,5,0.44545454545454544,0.2727272727272727,0.2818181818181818,H,Home Win,Away Win,False
+always_home,3,Aston Villa,Crystal Palace,A,0,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,3,Brighton,Man City,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,3,Chelsea,Fulham,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,3,Leeds,Newcastle,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,3,Liverpool,Arsenal,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,3,Man Utd,Burnley,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,3,Nott'm Forest,West Ham,A,0,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,3,Spurs,Bournemouth,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,3,Sunderland,Brentford,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,3,Wolves,Everton,A,2,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,3,Aston Villa,Crystal Palace,A,0,3,0.4583333333333333,0.25833333333333336,0.2833333333333333,H,Home Win,Away Win,False
+league_frequency,3,Brighton,Man City,H,2,1,0.4583333333333333,0.25833333333333336,0.2833333333333333,H,Home Win,Home Win,True
+league_frequency,3,Chelsea,Fulham,H,2,0,0.4583333333333333,0.25833333333333336,0.2833333333333333,H,Home Win,Home Win,True
+league_frequency,3,Leeds,Newcastle,D,0,0,0.4583333333333333,0.25833333333333336,0.2833333333333333,H,Home Win,Draw,False
+league_frequency,3,Liverpool,Arsenal,H,1,0,0.4583333333333333,0.25833333333333336,0.2833333333333333,H,Home Win,Home Win,True
+league_frequency,3,Man Utd,Burnley,D,2,2,0.4583333333333333,0.25833333333333336,0.2833333333333333,H,Home Win,Draw,False
+league_frequency,3,Nott'm Forest,West Ham,A,0,3,0.4583333333333333,0.25833333333333336,0.2833333333333333,H,Home Win,Away Win,False
+league_frequency,3,Spurs,Bournemouth,A,0,1,0.4583333333333333,0.25833333333333336,0.2833333333333333,H,Home Win,Away Win,False
+league_frequency,3,Sunderland,Brentford,H,2,1,0.4583333333333333,0.25833333333333336,0.2833333333333333,H,Home Win,Home Win,True
+league_frequency,3,Wolves,Everton,A,2,3,0.4583333333333333,0.25833333333333336,0.2833333333333333,H,Home Win,Away Win,False
+always_home,4,Arsenal,Nott'm Forest,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,4,Bournemouth,Brighton,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,4,Brentford,Chelsea,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,4,Burnley,Liverpool,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,4,Crystal Palace,Sunderland,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,4,Everton,Aston Villa,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,4,Fulham,Leeds,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,4,Man City,Man Utd,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,4,Newcastle,Wolves,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,4,West Ham,Spurs,A,0,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,4,Arsenal,Nott'm Forest,H,3,0,0.45384615384615384,0.25384615384615383,0.2923076923076923,H,Home Win,Home Win,True
+league_frequency,4,Bournemouth,Brighton,H,2,1,0.45384615384615384,0.25384615384615383,0.2923076923076923,H,Home Win,Home Win,True
+league_frequency,4,Brentford,Chelsea,D,2,2,0.45384615384615384,0.25384615384615383,0.2923076923076923,H,Home Win,Draw,False
+league_frequency,4,Burnley,Liverpool,A,0,1,0.45384615384615384,0.25384615384615383,0.2923076923076923,H,Home Win,Away Win,False
+league_frequency,4,Crystal Palace,Sunderland,D,0,0,0.45384615384615384,0.25384615384615383,0.2923076923076923,H,Home Win,Draw,False
+league_frequency,4,Everton,Aston Villa,D,0,0,0.45384615384615384,0.25384615384615383,0.2923076923076923,H,Home Win,Draw,False
+league_frequency,4,Fulham,Leeds,D,0,0,0.45384615384615384,0.25384615384615383,0.2923076923076923,H,Home Win,Draw,False
+league_frequency,4,Man City,Man Utd,H,3,0,0.45384615384615384,0.25384615384615383,0.2923076923076923,H,Home Win,Home Win,True
+league_frequency,4,Newcastle,Wolves,H,1,0,0.45384615384615384,0.25384615384615383,0.2923076923076923,H,Home Win,Home Win,True
+league_frequency,4,West Ham,Spurs,A,0,3,0.45384615384615384,0.25384615384615383,0.2923076923076923,H,Home Win,Away Win,False
+always_home,5,Arsenal,Man City,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,5,Bournemouth,Newcastle,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,5,Brighton,Spurs,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,5,Burnley,Nott'm Forest,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,5,Fulham,Brentford,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,5,Liverpool,Everton,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,5,Man Utd,Chelsea,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,5,Sunderland,Aston Villa,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,5,West Ham,Crystal Palace,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,5,Wolves,Leeds,A,1,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,5,Arsenal,Man City,D,1,1,0.45,0.2642857142857143,0.2857142857142857,H,Home Win,Draw,False
+league_frequency,5,Bournemouth,Newcastle,D,0,0,0.45,0.2642857142857143,0.2857142857142857,H,Home Win,Draw,False
+league_frequency,5,Brighton,Spurs,H,2,1,0.45,0.2642857142857143,0.2857142857142857,H,Home Win,Home Win,True
+league_frequency,5,Burnley,Nott'm Forest,D,1,1,0.45,0.2642857142857143,0.2857142857142857,H,Home Win,Draw,False
+league_frequency,5,Fulham,Brentford,H,2,1,0.45,0.2642857142857143,0.2857142857142857,H,Home Win,Home Win,True
+league_frequency,5,Liverpool,Everton,H,2,1,0.45,0.2642857142857143,0.2857142857142857,H,Home Win,Home Win,True
+league_frequency,5,Man Utd,Chelsea,H,2,1,0.45,0.2642857142857143,0.2857142857142857,H,Home Win,Home Win,True
+league_frequency,5,Sunderland,Aston Villa,D,1,1,0.45,0.2642857142857143,0.2857142857142857,H,Home Win,Draw,False
+league_frequency,5,West Ham,Crystal Palace,A,1,2,0.45,0.2642857142857143,0.2857142857142857,H,Home Win,Away Win,False
+league_frequency,5,Wolves,Leeds,A,1,3,0.45,0.2642857142857143,0.2857142857142857,H,Home Win,Away Win,False
+always_home,6,Aston Villa,Fulham,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,6,Brentford,Man Utd,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,6,Chelsea,Brighton,A,1,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,6,Crystal Palace,Liverpool,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,6,Everton,West Ham,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,6,Leeds,Bournemouth,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,6,Man City,Burnley,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,6,Newcastle,Arsenal,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,6,Nott'm Forest,Sunderland,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,6,Spurs,Wolves,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+league_frequency,6,Aston Villa,Fulham,H,3,1,0.44666666666666666,0.2733333333333333,0.28,H,Home Win,Home Win,True
+league_frequency,6,Brentford,Man Utd,H,3,1,0.44666666666666666,0.2733333333333333,0.28,H,Home Win,Home Win,True
+league_frequency,6,Chelsea,Brighton,A,1,3,0.44666666666666666,0.2733333333333333,0.28,H,Home Win,Away Win,False
+league_frequency,6,Crystal Palace,Liverpool,H,2,1,0.44666666666666666,0.2733333333333333,0.28,H,Home Win,Home Win,True
+league_frequency,6,Everton,West Ham,D,1,1,0.44666666666666666,0.2733333333333333,0.28,H,Home Win,Draw,False
+league_frequency,6,Leeds,Bournemouth,D,2,2,0.44666666666666666,0.2733333333333333,0.28,H,Home Win,Draw,False
+league_frequency,6,Man City,Burnley,H,3,1,0.44666666666666666,0.2733333333333333,0.28,H,Home Win,Home Win,True
+league_frequency,6,Newcastle,Arsenal,A,1,2,0.44666666666666666,0.2733333333333333,0.28,H,Home Win,Away Win,False
+league_frequency,6,Nott'm Forest,Sunderland,A,0,1,0.44666666666666666,0.2733333333333333,0.28,H,Home Win,Away Win,False
+league_frequency,6,Spurs,Wolves,D,1,1,0.44666666666666666,0.2733333333333333,0.28,H,Home Win,Draw,False
+always_home,7,Arsenal,West Ham,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,7,Aston Villa,Burnley,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,7,Bournemouth,Fulham,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,7,Brentford,Man City,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,7,Chelsea,Liverpool,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,7,Everton,Crystal Palace,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,7,Leeds,Spurs,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,7,Man Utd,Sunderland,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,7,Newcastle,Nott'm Forest,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,7,Wolves,Brighton,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,7,Arsenal,West Ham,H,2,0,0.44375,0.275,0.28125,H,Home Win,Home Win,True
+league_frequency,7,Aston Villa,Burnley,H,2,1,0.44375,0.275,0.28125,H,Home Win,Home Win,True
+league_frequency,7,Bournemouth,Fulham,H,3,1,0.44375,0.275,0.28125,H,Home Win,Home Win,True
+league_frequency,7,Brentford,Man City,A,0,1,0.44375,0.275,0.28125,H,Home Win,Away Win,False
+league_frequency,7,Chelsea,Liverpool,H,2,1,0.44375,0.275,0.28125,H,Home Win,Home Win,True
+league_frequency,7,Everton,Crystal Palace,H,2,1,0.44375,0.275,0.28125,H,Home Win,Home Win,True
+league_frequency,7,Leeds,Spurs,A,1,2,0.44375,0.275,0.28125,H,Home Win,Away Win,False
+league_frequency,7,Man Utd,Sunderland,H,2,0,0.44375,0.275,0.28125,H,Home Win,Home Win,True
+league_frequency,7,Newcastle,Nott'm Forest,H,2,0,0.44375,0.275,0.28125,H,Home Win,Home Win,True
+league_frequency,7,Wolves,Brighton,A,0,1,0.44375,0.275,0.28125,H,Home Win,Away Win,False
+always_home,8,Brighton,Newcastle,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,8,Burnley,Leeds,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,8,Crystal Palace,Bournemouth,D,3,3,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,8,Fulham,Arsenal,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,8,Liverpool,Man Utd,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,8,Man City,Everton,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,8,Nott'm Forest,Chelsea,A,0,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,8,Spurs,Aston Villa,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,8,Sunderland,Wolves,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,8,West Ham,Brentford,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,8,Brighton,Newcastle,H,2,1,0.4588235294117647,0.25882352941176473,0.2823529411764706,H,Home Win,Home Win,True
+league_frequency,8,Burnley,Leeds,H,2,0,0.4588235294117647,0.25882352941176473,0.2823529411764706,H,Home Win,Home Win,True
+league_frequency,8,Crystal Palace,Bournemouth,D,3,3,0.4588235294117647,0.25882352941176473,0.2823529411764706,H,Home Win,Draw,False
+league_frequency,8,Fulham,Arsenal,A,0,1,0.4588235294117647,0.25882352941176473,0.2823529411764706,H,Home Win,Away Win,False
+league_frequency,8,Liverpool,Man Utd,A,1,2,0.4588235294117647,0.25882352941176473,0.2823529411764706,H,Home Win,Away Win,False
+league_frequency,8,Man City,Everton,H,2,0,0.4588235294117647,0.25882352941176473,0.2823529411764706,H,Home Win,Home Win,True
+league_frequency,8,Nott'm Forest,Chelsea,A,0,3,0.4588235294117647,0.25882352941176473,0.2823529411764706,H,Home Win,Away Win,False
+league_frequency,8,Spurs,Aston Villa,A,1,2,0.4588235294117647,0.25882352941176473,0.2823529411764706,H,Home Win,Away Win,False
+league_frequency,8,Sunderland,Wolves,H,1,0,0.4588235294117647,0.25882352941176473,0.2823529411764706,H,Home Win,Home Win,True
+league_frequency,8,West Ham,Brentford,A,0,2,0.4588235294117647,0.25882352941176473,0.2823529411764706,H,Home Win,Away Win,False
+always_home,9,Arsenal,Crystal Palace,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,9,Aston Villa,Man City,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,9,Bournemouth,Nott'm Forest,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,9,Brentford,Liverpool,H,3,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,9,Chelsea,Sunderland,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,9,Everton,Spurs,A,0,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,9,Leeds,West Ham,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,9,Man Utd,Brighton,H,4,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,9,Newcastle,Fulham,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,9,Wolves,Burnley,A,2,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,9,Arsenal,Crystal Palace,H,1,0,0.45555555555555555,0.25,0.29444444444444445,H,Home Win,Home Win,True
+league_frequency,9,Aston Villa,Man City,H,1,0,0.45555555555555555,0.25,0.29444444444444445,H,Home Win,Home Win,True
+league_frequency,9,Bournemouth,Nott'm Forest,H,2,0,0.45555555555555555,0.25,0.29444444444444445,H,Home Win,Home Win,True
+league_frequency,9,Brentford,Liverpool,H,3,2,0.45555555555555555,0.25,0.29444444444444445,H,Home Win,Home Win,True
+league_frequency,9,Chelsea,Sunderland,A,1,2,0.45555555555555555,0.25,0.29444444444444445,H,Home Win,Away Win,False
+league_frequency,9,Everton,Spurs,A,0,3,0.45555555555555555,0.25,0.29444444444444445,H,Home Win,Away Win,False
+league_frequency,9,Leeds,West Ham,H,2,1,0.45555555555555555,0.25,0.29444444444444445,H,Home Win,Home Win,True
+league_frequency,9,Man Utd,Brighton,H,4,2,0.45555555555555555,0.25,0.29444444444444445,H,Home Win,Home Win,True
+league_frequency,9,Newcastle,Fulham,H,2,1,0.45555555555555555,0.25,0.29444444444444445,H,Home Win,Home Win,True
+league_frequency,9,Wolves,Burnley,A,2,3,0.45555555555555555,0.25,0.29444444444444445,H,Home Win,Away Win,False
+always_home,10,Brighton,Leeds,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,10,Burnley,Arsenal,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,10,Crystal Palace,Brentford,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,10,Fulham,Wolves,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,10,Liverpool,Aston Villa,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,10,Man City,Bournemouth,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,10,Nott'm Forest,Man Utd,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,10,Spurs,Chelsea,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,10,Sunderland,Everton,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,10,West Ham,Newcastle,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+league_frequency,10,Brighton,Leeds,H,3,0,0.46842105263157896,0.23684210526315788,0.29473684210526313,H,Home Win,Home Win,True
+league_frequency,10,Burnley,Arsenal,A,0,2,0.46842105263157896,0.23684210526315788,0.29473684210526313,H,Home Win,Away Win,False
+league_frequency,10,Crystal Palace,Brentford,H,1,0,0.46842105263157896,0.23684210526315788,0.29473684210526313,H,Home Win,Home Win,True
+league_frequency,10,Fulham,Wolves,H,2,0,0.46842105263157896,0.23684210526315788,0.29473684210526313,H,Home Win,Home Win,True
+league_frequency,10,Liverpool,Aston Villa,H,2,0,0.46842105263157896,0.23684210526315788,0.29473684210526313,H,Home Win,Home Win,True
+league_frequency,10,Man City,Bournemouth,H,3,1,0.46842105263157896,0.23684210526315788,0.29473684210526313,H,Home Win,Home Win,True
+league_frequency,10,Nott'm Forest,Man Utd,D,2,2,0.46842105263157896,0.23684210526315788,0.29473684210526313,H,Home Win,Draw,False
+league_frequency,10,Spurs,Chelsea,A,0,1,0.46842105263157896,0.23684210526315788,0.29473684210526313,H,Home Win,Away Win,False
+league_frequency,10,Sunderland,Everton,D,1,1,0.46842105263157896,0.23684210526315788,0.29473684210526313,H,Home Win,Draw,False
+league_frequency,10,West Ham,Newcastle,H,2,1,0.46842105263157896,0.23684210526315788,0.29473684210526313,H,Home Win,Home Win,True
+always_home,11,Aston Villa,Bournemouth,H,4,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,11,Brentford,Newcastle,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,11,Chelsea,Wolves,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,11,Crystal Palace,Brighton,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,11,Everton,Fulham,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,11,Man City,Liverpool,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,11,Nott'm Forest,Leeds,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,11,Spurs,Man Utd,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,11,Sunderland,Arsenal,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,11,West Ham,Burnley,H,3,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+league_frequency,11,Aston Villa,Bournemouth,H,4,0,0.475,0.235,0.29,H,Home Win,Home Win,True
+league_frequency,11,Brentford,Newcastle,H,3,1,0.475,0.235,0.29,H,Home Win,Home Win,True
+league_frequency,11,Chelsea,Wolves,H,3,0,0.475,0.235,0.29,H,Home Win,Home Win,True
+league_frequency,11,Crystal Palace,Brighton,D,0,0,0.475,0.235,0.29,H,Home Win,Draw,False
+league_frequency,11,Everton,Fulham,H,2,0,0.475,0.235,0.29,H,Home Win,Home Win,True
+league_frequency,11,Man City,Liverpool,H,3,0,0.475,0.235,0.29,H,Home Win,Home Win,True
+league_frequency,11,Nott'm Forest,Leeds,H,3,1,0.475,0.235,0.29,H,Home Win,Home Win,True
+league_frequency,11,Spurs,Man Utd,D,2,2,0.475,0.235,0.29,H,Home Win,Draw,False
+league_frequency,11,Sunderland,Arsenal,D,2,2,0.475,0.235,0.29,H,Home Win,Draw,False
+league_frequency,11,West Ham,Burnley,H,3,2,0.475,0.235,0.29,H,Home Win,Home Win,True
+always_home,12,Arsenal,Spurs,H,4,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,12,Bournemouth,West Ham,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,12,Brighton,Brentford,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,12,Burnley,Chelsea,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,12,Fulham,Sunderland,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,12,Leeds,Aston Villa,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,12,Liverpool,Nott'm Forest,A,0,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,12,Man Utd,Everton,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,12,Newcastle,Man City,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,12,Wolves,Crystal Palace,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,12,Arsenal,Spurs,H,4,1,0.4857142857142857,0.23809523809523808,0.2761904761904762,H,Home Win,Home Win,True
+league_frequency,12,Bournemouth,West Ham,D,2,2,0.4857142857142857,0.23809523809523808,0.2761904761904762,H,Home Win,Draw,False
+league_frequency,12,Brighton,Brentford,H,2,1,0.4857142857142857,0.23809523809523808,0.2761904761904762,H,Home Win,Home Win,True
+league_frequency,12,Burnley,Chelsea,A,0,2,0.4857142857142857,0.23809523809523808,0.2761904761904762,H,Home Win,Away Win,False
+league_frequency,12,Fulham,Sunderland,H,1,0,0.4857142857142857,0.23809523809523808,0.2761904761904762,H,Home Win,Home Win,True
+league_frequency,12,Leeds,Aston Villa,A,1,2,0.4857142857142857,0.23809523809523808,0.2761904761904762,H,Home Win,Away Win,False
+league_frequency,12,Liverpool,Nott'm Forest,A,0,3,0.4857142857142857,0.23809523809523808,0.2761904761904762,H,Home Win,Away Win,False
+league_frequency,12,Man Utd,Everton,A,0,1,0.4857142857142857,0.23809523809523808,0.2761904761904762,H,Home Win,Away Win,False
+league_frequency,12,Newcastle,Man City,H,2,1,0.4857142857142857,0.23809523809523808,0.2761904761904762,H,Home Win,Home Win,True
+league_frequency,12,Wolves,Crystal Palace,A,0,2,0.4857142857142857,0.23809523809523808,0.2761904761904762,H,Home Win,Away Win,False
+always_home,13,Aston Villa,Wolves,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,13,Brentford,Burnley,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,13,Chelsea,Arsenal,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,13,Crystal Palace,Man Utd,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,13,Everton,Newcastle,A,1,4,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,13,Man City,Leeds,H,3,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,13,Nott'm Forest,Brighton,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,13,Spurs,Fulham,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,13,Sunderland,Bournemouth,H,3,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,13,West Ham,Liverpool,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,13,Aston Villa,Wolves,H,1,0,0.4818181818181818,0.2318181818181818,0.2863636363636364,H,Home Win,Home Win,True
+league_frequency,13,Brentford,Burnley,H,3,1,0.4818181818181818,0.2318181818181818,0.2863636363636364,H,Home Win,Home Win,True
+league_frequency,13,Chelsea,Arsenal,D,1,1,0.4818181818181818,0.2318181818181818,0.2863636363636364,H,Home Win,Draw,False
+league_frequency,13,Crystal Palace,Man Utd,A,1,2,0.4818181818181818,0.2318181818181818,0.2863636363636364,H,Home Win,Away Win,False
+league_frequency,13,Everton,Newcastle,A,1,4,0.4818181818181818,0.2318181818181818,0.2863636363636364,H,Home Win,Away Win,False
+league_frequency,13,Man City,Leeds,H,3,2,0.4818181818181818,0.2318181818181818,0.2863636363636364,H,Home Win,Home Win,True
+league_frequency,13,Nott'm Forest,Brighton,A,0,2,0.4818181818181818,0.2318181818181818,0.2863636363636364,H,Home Win,Away Win,False
+league_frequency,13,Spurs,Fulham,A,1,2,0.4818181818181818,0.2318181818181818,0.2863636363636364,H,Home Win,Away Win,False
+league_frequency,13,Sunderland,Bournemouth,H,3,2,0.4818181818181818,0.2318181818181818,0.2863636363636364,H,Home Win,Home Win,True
+league_frequency,13,West Ham,Liverpool,A,0,2,0.4818181818181818,0.2318181818181818,0.2863636363636364,H,Home Win,Away Win,False
+always_home,14,Arsenal,Brentford,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,14,Bournemouth,Everton,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,14,Brighton,Aston Villa,A,2,4,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,14,Burnley,Crystal Palace,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,14,Fulham,Man City,D,4,4,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,14,Leeds,Chelsea,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,14,Liverpool,Sunderland,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,14,Man Utd,West Ham,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,14,Newcastle,Spurs,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,14,Wolves,Nott'm Forest,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,14,Arsenal,Brentford,H,2,0,0.4782608695652174,0.22608695652173913,0.2956521739130435,H,Home Win,Home Win,True
+league_frequency,14,Bournemouth,Everton,A,0,1,0.4782608695652174,0.22608695652173913,0.2956521739130435,H,Home Win,Away Win,False
+league_frequency,14,Brighton,Aston Villa,A,2,4,0.4782608695652174,0.22608695652173913,0.2956521739130435,H,Home Win,Away Win,False
+league_frequency,14,Burnley,Crystal Palace,A,0,1,0.4782608695652174,0.22608695652173913,0.2956521739130435,H,Home Win,Away Win,False
+league_frequency,14,Fulham,Man City,D,4,4,0.4782608695652174,0.22608695652173913,0.2956521739130435,H,Home Win,Draw,False
+league_frequency,14,Leeds,Chelsea,H,3,1,0.4782608695652174,0.22608695652173913,0.2956521739130435,H,Home Win,Home Win,True
+league_frequency,14,Liverpool,Sunderland,A,0,1,0.4782608695652174,0.22608695652173913,0.2956521739130435,H,Home Win,Away Win,False
+league_frequency,14,Man Utd,West Ham,D,1,1,0.4782608695652174,0.22608695652173913,0.2956521739130435,H,Home Win,Draw,False
+league_frequency,14,Newcastle,Spurs,D,2,2,0.4782608695652174,0.22608695652173913,0.2956521739130435,H,Home Win,Draw,False
+league_frequency,14,Wolves,Nott'm Forest,A,0,1,0.4782608695652174,0.22608695652173913,0.2956521739130435,H,Home Win,Away Win,False
+always_home,15,Aston Villa,Arsenal,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,15,Bournemouth,Chelsea,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,15,Brighton,West Ham,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,15,Everton,Nott'm Forest,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,15,Fulham,Crystal Palace,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,15,Leeds,Liverpool,D,3,3,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,15,Man City,Sunderland,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,15,Newcastle,Burnley,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,15,Spurs,Brentford,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,15,Wolves,Man Utd,A,1,4,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,15,Aston Villa,Arsenal,H,2,1,0.4666666666666667,0.22916666666666666,0.30416666666666664,H,Home Win,Home Win,True
+league_frequency,15,Bournemouth,Chelsea,D,0,0,0.4666666666666667,0.22916666666666666,0.30416666666666664,H,Home Win,Draw,False
+league_frequency,15,Brighton,West Ham,D,1,1,0.4666666666666667,0.22916666666666666,0.30416666666666664,H,Home Win,Draw,False
+league_frequency,15,Everton,Nott'm Forest,H,2,0,0.4666666666666667,0.22916666666666666,0.30416666666666664,H,Home Win,Home Win,True
+league_frequency,15,Fulham,Crystal Palace,A,1,2,0.4666666666666667,0.22916666666666666,0.30416666666666664,H,Home Win,Away Win,False
+league_frequency,15,Leeds,Liverpool,D,3,3,0.4666666666666667,0.22916666666666666,0.30416666666666664,H,Home Win,Draw,False
+league_frequency,15,Man City,Sunderland,H,3,0,0.4666666666666667,0.22916666666666666,0.30416666666666664,H,Home Win,Home Win,True
+league_frequency,15,Newcastle,Burnley,H,2,1,0.4666666666666667,0.22916666666666666,0.30416666666666664,H,Home Win,Home Win,True
+league_frequency,15,Spurs,Brentford,H,2,0,0.4666666666666667,0.22916666666666666,0.30416666666666664,H,Home Win,Home Win,True
+league_frequency,15,Wolves,Man Utd,A,1,4,0.4666666666666667,0.22916666666666666,0.30416666666666664,H,Home Win,Away Win,False
+always_home,16,Arsenal,Wolves,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,16,Brentford,Leeds,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,16,Burnley,Fulham,A,2,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,16,Chelsea,Everton,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,16,Crystal Palace,Man City,A,0,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,16,Liverpool,Brighton,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,16,Man Utd,Bournemouth,D,4,4,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,16,Nott'm Forest,Spurs,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,16,Sunderland,Newcastle,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,16,West Ham,Aston Villa,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+league_frequency,16,Arsenal,Wolves,A,0,1,0.468,0.232,0.3,H,Home Win,Away Win,False
+league_frequency,16,Brentford,Leeds,D,1,1,0.468,0.232,0.3,H,Home Win,Draw,False
+league_frequency,16,Burnley,Fulham,A,2,3,0.468,0.232,0.3,H,Home Win,Away Win,False
+league_frequency,16,Chelsea,Everton,H,2,0,0.468,0.232,0.3,H,Home Win,Home Win,True
+league_frequency,16,Crystal Palace,Man City,A,0,3,0.468,0.232,0.3,H,Home Win,Away Win,False
+league_frequency,16,Liverpool,Brighton,H,2,0,0.468,0.232,0.3,H,Home Win,Home Win,True
+league_frequency,16,Man Utd,Bournemouth,D,4,4,0.468,0.232,0.3,H,Home Win,Draw,False
+league_frequency,16,Nott'm Forest,Spurs,H,3,0,0.468,0.232,0.3,H,Home Win,Home Win,True
+league_frequency,16,Sunderland,Newcastle,D,0,0,0.468,0.232,0.3,H,Home Win,Draw,False
+league_frequency,16,West Ham,Aston Villa,D,2,2,0.468,0.232,0.3,H,Home Win,Draw,False
+always_home,17,Aston Villa,Man Utd,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,17,Bournemouth,Burnley,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,17,Brighton,Sunderland,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,17,Everton,Arsenal,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,17,Fulham,Nott'm Forest,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,17,Leeds,Crystal Palace,H,4,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,17,Man City,West Ham,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,17,Newcastle,Chelsea,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,17,Spurs,Liverpool,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,17,Wolves,Brentford,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,17,Aston Villa,Man Utd,H,2,1,0.46153846153846156,0.23846153846153847,0.3,H,Home Win,Home Win,True
+league_frequency,17,Bournemouth,Burnley,D,1,1,0.46153846153846156,0.23846153846153847,0.3,H,Home Win,Draw,False
+league_frequency,17,Brighton,Sunderland,D,0,0,0.46153846153846156,0.23846153846153847,0.3,H,Home Win,Draw,False
+league_frequency,17,Everton,Arsenal,A,0,1,0.46153846153846156,0.23846153846153847,0.3,H,Home Win,Away Win,False
+league_frequency,17,Fulham,Nott'm Forest,H,1,0,0.46153846153846156,0.23846153846153847,0.3,H,Home Win,Home Win,True
+league_frequency,17,Leeds,Crystal Palace,H,4,1,0.46153846153846156,0.23846153846153847,0.3,H,Home Win,Home Win,True
+league_frequency,17,Man City,West Ham,H,3,0,0.46153846153846156,0.23846153846153847,0.3,H,Home Win,Home Win,True
+league_frequency,17,Newcastle,Chelsea,D,2,2,0.46153846153846156,0.23846153846153847,0.3,H,Home Win,Draw,False
+league_frequency,17,Spurs,Liverpool,A,1,2,0.46153846153846156,0.23846153846153847,0.3,H,Home Win,Away Win,False
+league_frequency,17,Wolves,Brentford,A,0,2,0.46153846153846156,0.23846153846153847,0.3,H,Home Win,Away Win,False
+always_home,18,Arsenal,Brighton,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,18,Brentford,Bournemouth,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,18,Burnley,Everton,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,18,Chelsea,Aston Villa,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,18,Crystal Palace,Spurs,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,18,Liverpool,Wolves,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,18,Man Utd,Newcastle,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,18,Nott'm Forest,Man City,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,18,Sunderland,Leeds,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,18,West Ham,Fulham,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,18,Arsenal,Brighton,D,1,1,0.45925925925925926,0.24074074074074073,0.3,H,Home Win,Draw,False
+league_frequency,18,Brentford,Bournemouth,H,3,1,0.45925925925925926,0.24074074074074073,0.3,H,Home Win,Home Win,True
+league_frequency,18,Burnley,Everton,D,0,0,0.45925925925925926,0.24074074074074073,0.3,H,Home Win,Draw,False
+league_frequency,18,Chelsea,Aston Villa,A,1,2,0.45925925925925926,0.24074074074074073,0.3,H,Home Win,Away Win,False
+league_frequency,18,Crystal Palace,Spurs,A,0,1,0.45925925925925926,0.24074074074074073,0.3,H,Home Win,Away Win,False
+league_frequency,18,Liverpool,Wolves,H,2,1,0.45925925925925926,0.24074074074074073,0.3,H,Home Win,Home Win,True
+league_frequency,18,Man Utd,Newcastle,H,1,0,0.45925925925925926,0.24074074074074073,0.3,H,Home Win,Home Win,True
+league_frequency,18,Nott'm Forest,Man City,A,1,2,0.45925925925925926,0.24074074074074073,0.3,H,Home Win,Away Win,False
+league_frequency,18,Sunderland,Leeds,D,1,1,0.45925925925925926,0.24074074074074073,0.3,H,Home Win,Draw,False
+league_frequency,18,West Ham,Fulham,A,0,1,0.45925925925925926,0.24074074074074073,0.3,H,Home Win,Away Win,False
+always_home,19,Arsenal,Aston Villa,H,4,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,19,Brentford,Spurs,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,19,Burnley,Newcastle,A,1,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,19,Chelsea,Bournemouth,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,19,Crystal Palace,Fulham,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,19,Liverpool,Leeds,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,19,Man Utd,Wolves,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,19,Nott'm Forest,Everton,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,19,Sunderland,Man City,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,19,West Ham,Brighton,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+league_frequency,19,Arsenal,Aston Villa,H,4,1,0.45357142857142857,0.24285714285714285,0.30357142857142855,H,Home Win,Home Win,True
+league_frequency,19,Brentford,Spurs,D,0,0,0.45357142857142857,0.24285714285714285,0.30357142857142855,H,Home Win,Draw,False
+league_frequency,19,Burnley,Newcastle,A,1,3,0.45357142857142857,0.24285714285714285,0.30357142857142855,H,Home Win,Away Win,False
+league_frequency,19,Chelsea,Bournemouth,D,2,2,0.45357142857142857,0.24285714285714285,0.30357142857142855,H,Home Win,Draw,False
+league_frequency,19,Crystal Palace,Fulham,D,1,1,0.45357142857142857,0.24285714285714285,0.30357142857142855,H,Home Win,Draw,False
+league_frequency,19,Liverpool,Leeds,D,0,0,0.45357142857142857,0.24285714285714285,0.30357142857142855,H,Home Win,Draw,False
+league_frequency,19,Man Utd,Wolves,D,1,1,0.45357142857142857,0.24285714285714285,0.30357142857142855,H,Home Win,Draw,False
+league_frequency,19,Nott'm Forest,Everton,A,0,2,0.45357142857142857,0.24285714285714285,0.30357142857142855,H,Home Win,Away Win,False
+league_frequency,19,Sunderland,Man City,D,0,0,0.45357142857142857,0.24285714285714285,0.30357142857142855,H,Home Win,Draw,False
+league_frequency,19,West Ham,Brighton,D,2,2,0.45357142857142857,0.24285714285714285,0.30357142857142855,H,Home Win,Draw,False
+always_home,20,Aston Villa,Nott'm Forest,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,20,Bournemouth,Arsenal,A,2,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,20,Brighton,Burnley,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,20,Everton,Brentford,A,2,4,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,20,Fulham,Liverpool,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,20,Leeds,Man Utd,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,20,Man City,Chelsea,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,20,Newcastle,Crystal Palace,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,20,Spurs,Sunderland,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,20,Wolves,West Ham,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+league_frequency,20,Aston Villa,Nott'm Forest,H,3,1,0.4413793103448276,0.25862068965517243,0.3,H,Home Win,Home Win,True
+league_frequency,20,Bournemouth,Arsenal,A,2,3,0.4413793103448276,0.25862068965517243,0.3,H,Home Win,Away Win,False
+league_frequency,20,Brighton,Burnley,H,2,0,0.4413793103448276,0.25862068965517243,0.3,H,Home Win,Home Win,True
+league_frequency,20,Everton,Brentford,A,2,4,0.4413793103448276,0.25862068965517243,0.3,H,Home Win,Away Win,False
+league_frequency,20,Fulham,Liverpool,D,2,2,0.4413793103448276,0.25862068965517243,0.3,H,Home Win,Draw,False
+league_frequency,20,Leeds,Man Utd,D,1,1,0.4413793103448276,0.25862068965517243,0.3,H,Home Win,Draw,False
+league_frequency,20,Man City,Chelsea,D,1,1,0.4413793103448276,0.25862068965517243,0.3,H,Home Win,Draw,False
+league_frequency,20,Newcastle,Crystal Palace,H,2,0,0.4413793103448276,0.25862068965517243,0.3,H,Home Win,Home Win,True
+league_frequency,20,Spurs,Sunderland,D,1,1,0.4413793103448276,0.25862068965517243,0.3,H,Home Win,Draw,False
+league_frequency,20,Wolves,West Ham,H,3,0,0.4413793103448276,0.25862068965517243,0.3,H,Home Win,Home Win,True
+always_home,21,Arsenal,Liverpool,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,21,Bournemouth,Spurs,H,3,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,21,Brentford,Sunderland,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,21,Burnley,Man Utd,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,21,Crystal Palace,Aston Villa,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,21,Everton,Wolves,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,21,Fulham,Chelsea,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,21,Man City,Brighton,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,21,Newcastle,Leeds,H,4,3,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,21,West Ham,Nott'm Forest,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,21,Arsenal,Liverpool,D,0,0,0.44,0.2633333333333333,0.2966666666666667,H,Home Win,Draw,False
+league_frequency,21,Bournemouth,Spurs,H,3,2,0.44,0.2633333333333333,0.2966666666666667,H,Home Win,Home Win,True
+league_frequency,21,Brentford,Sunderland,H,3,0,0.44,0.2633333333333333,0.2966666666666667,H,Home Win,Home Win,True
+league_frequency,21,Burnley,Man Utd,A,1,2,0.44,0.2633333333333333,0.2966666666666667,H,Home Win,Away Win,False
+league_frequency,21,Crystal Palace,Aston Villa,D,0,0,0.44,0.2633333333333333,0.2966666666666667,H,Home Win,Draw,False
+league_frequency,21,Everton,Wolves,D,1,1,0.44,0.2633333333333333,0.2966666666666667,H,Home Win,Draw,False
+league_frequency,21,Fulham,Chelsea,H,2,1,0.44,0.2633333333333333,0.2966666666666667,H,Home Win,Home Win,True
+league_frequency,21,Man City,Brighton,D,1,1,0.44,0.2633333333333333,0.2966666666666667,H,Home Win,Draw,False
+league_frequency,21,Newcastle,Leeds,H,4,3,0.44,0.2633333333333333,0.2966666666666667,H,Home Win,Home Win,True
+league_frequency,21,West Ham,Nott'm Forest,A,0,2,0.44,0.2633333333333333,0.2966666666666667,H,Home Win,Away Win,False
+always_home,22,Aston Villa,Everton,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,22,Brighton,Bournemouth,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,22,Chelsea,Brentford,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,22,Leeds,Fulham,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,22,Liverpool,Burnley,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,22,Man Utd,Man City,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,22,Nott'm Forest,Arsenal,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,22,Spurs,West Ham,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,22,Sunderland,Crystal Palace,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,22,Wolves,Newcastle,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+league_frequency,22,Aston Villa,Everton,A,0,1,0.43870967741935485,0.267741935483871,0.29354838709677417,H,Home Win,Away Win,False
+league_frequency,22,Brighton,Bournemouth,D,1,1,0.43870967741935485,0.267741935483871,0.29354838709677417,H,Home Win,Draw,False
+league_frequency,22,Chelsea,Brentford,H,2,0,0.43870967741935485,0.267741935483871,0.29354838709677417,H,Home Win,Home Win,True
+league_frequency,22,Leeds,Fulham,H,1,0,0.43870967741935485,0.267741935483871,0.29354838709677417,H,Home Win,Home Win,True
+league_frequency,22,Liverpool,Burnley,D,1,1,0.43870967741935485,0.267741935483871,0.29354838709677417,H,Home Win,Draw,False
+league_frequency,22,Man Utd,Man City,H,2,0,0.43870967741935485,0.267741935483871,0.29354838709677417,H,Home Win,Home Win,True
+league_frequency,22,Nott'm Forest,Arsenal,D,0,0,0.43870967741935485,0.267741935483871,0.29354838709677417,H,Home Win,Draw,False
+league_frequency,22,Spurs,West Ham,A,1,2,0.43870967741935485,0.267741935483871,0.29354838709677417,H,Home Win,Away Win,False
+league_frequency,22,Sunderland,Crystal Palace,H,2,1,0.43870967741935485,0.267741935483871,0.29354838709677417,H,Home Win,Home Win,True
+league_frequency,22,Wolves,Newcastle,D,0,0,0.43870967741935485,0.267741935483871,0.29354838709677417,H,Home Win,Draw,False
+always_home,23,Arsenal,Man Utd,A,1,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,23,Bournemouth,Liverpool,H,3,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,23,Brentford,Nott'm Forest,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,23,Burnley,Spurs,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,23,Crystal Palace,Chelsea,A,1,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,23,Everton,Leeds,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,23,Fulham,Brighton,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,23,Man City,Wolves,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,23,Newcastle,Aston Villa,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,23,West Ham,Sunderland,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+league_frequency,23,Arsenal,Man Utd,A,1,3,0.4375,0.271875,0.290625,H,Home Win,Away Win,False
+league_frequency,23,Bournemouth,Liverpool,H,3,2,0.4375,0.271875,0.290625,H,Home Win,Home Win,True
+league_frequency,23,Brentford,Nott'm Forest,A,0,2,0.4375,0.271875,0.290625,H,Home Win,Away Win,False
+league_frequency,23,Burnley,Spurs,D,2,2,0.4375,0.271875,0.290625,H,Home Win,Draw,False
+league_frequency,23,Crystal Palace,Chelsea,A,1,3,0.4375,0.271875,0.290625,H,Home Win,Away Win,False
+league_frequency,23,Everton,Leeds,D,1,1,0.4375,0.271875,0.290625,H,Home Win,Draw,False
+league_frequency,23,Fulham,Brighton,H,2,1,0.4375,0.271875,0.290625,H,Home Win,Home Win,True
+league_frequency,23,Man City,Wolves,H,2,0,0.4375,0.271875,0.290625,H,Home Win,Home Win,True
+league_frequency,23,Newcastle,Aston Villa,A,0,2,0.4375,0.271875,0.290625,H,Home Win,Away Win,False
+league_frequency,23,West Ham,Sunderland,H,3,1,0.4375,0.271875,0.290625,H,Home Win,Home Win,True
+always_home,24,Aston Villa,Brentford,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,24,Brighton,Everton,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,24,Chelsea,West Ham,H,3,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,24,Leeds,Arsenal,A,0,4,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,24,Liverpool,Newcastle,H,4,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,24,Man Utd,Fulham,H,3,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,24,Nott'm Forest,Crystal Palace,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,24,Spurs,Man City,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,24,Sunderland,Burnley,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,24,Wolves,Bournemouth,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,24,Aston Villa,Brentford,A,0,1,0.43636363636363634,0.2696969696969697,0.29393939393939394,H,Home Win,Away Win,False
+league_frequency,24,Brighton,Everton,D,1,1,0.43636363636363634,0.2696969696969697,0.29393939393939394,H,Home Win,Draw,False
+league_frequency,24,Chelsea,West Ham,H,3,2,0.43636363636363634,0.2696969696969697,0.29393939393939394,H,Home Win,Home Win,True
+league_frequency,24,Leeds,Arsenal,A,0,4,0.43636363636363634,0.2696969696969697,0.29393939393939394,H,Home Win,Away Win,False
+league_frequency,24,Liverpool,Newcastle,H,4,1,0.43636363636363634,0.2696969696969697,0.29393939393939394,H,Home Win,Home Win,True
+league_frequency,24,Man Utd,Fulham,H,3,2,0.43636363636363634,0.2696969696969697,0.29393939393939394,H,Home Win,Home Win,True
+league_frequency,24,Nott'm Forest,Crystal Palace,D,1,1,0.43636363636363634,0.2696969696969697,0.29393939393939394,H,Home Win,Draw,False
+league_frequency,24,Spurs,Man City,D,2,2,0.43636363636363634,0.2696969696969697,0.29393939393939394,H,Home Win,Draw,False
+league_frequency,24,Sunderland,Burnley,H,2,0,0.43636363636363634,0.2696969696969697,0.29393939393939394,H,Home Win,Home Win,True
+league_frequency,24,Wolves,Bournemouth,A,0,2,0.43636363636363634,0.2696969696969697,0.29393939393939394,H,Home Win,Away Win,False
+always_home,25,Arsenal,Sunderland,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,25,Bournemouth,Aston Villa,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,25,Brighton,Crystal Palace,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,25,Burnley,West Ham,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,25,Fulham,Everton,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,25,Leeds,Nott'm Forest,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,25,Liverpool,Man City,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,25,Man Utd,Spurs,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,25,Newcastle,Brentford,A,2,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,25,Wolves,Chelsea,A,1,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,25,Arsenal,Sunderland,H,3,0,0.43529411764705883,0.27058823529411763,0.29411764705882354,H,Home Win,Home Win,True
+league_frequency,25,Bournemouth,Aston Villa,D,1,1,0.43529411764705883,0.27058823529411763,0.29411764705882354,H,Home Win,Draw,False
+league_frequency,25,Brighton,Crystal Palace,A,0,1,0.43529411764705883,0.27058823529411763,0.29411764705882354,H,Home Win,Away Win,False
+league_frequency,25,Burnley,West Ham,A,0,2,0.43529411764705883,0.27058823529411763,0.29411764705882354,H,Home Win,Away Win,False
+league_frequency,25,Fulham,Everton,A,0,1,0.43529411764705883,0.27058823529411763,0.29411764705882354,H,Home Win,Away Win,False
+league_frequency,25,Leeds,Nott'm Forest,H,3,1,0.43529411764705883,0.27058823529411763,0.29411764705882354,H,Home Win,Home Win,True
+league_frequency,25,Liverpool,Man City,A,1,2,0.43529411764705883,0.27058823529411763,0.29411764705882354,H,Home Win,Away Win,False
+league_frequency,25,Man Utd,Spurs,H,2,0,0.43529411764705883,0.27058823529411763,0.29411764705882354,H,Home Win,Home Win,True
+league_frequency,25,Newcastle,Brentford,A,2,3,0.43529411764705883,0.27058823529411763,0.29411764705882354,H,Home Win,Away Win,False
+league_frequency,25,Wolves,Chelsea,A,1,3,0.43529411764705883,0.27058823529411763,0.29411764705882354,H,Home Win,Away Win,False
+always_home,26,Aston Villa,Brighton,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,26,Brentford,Arsenal,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,26,Chelsea,Leeds,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,26,Crystal Palace,Burnley,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,26,Everton,Bournemouth,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,26,Man City,Fulham,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,26,Nott'm Forest,Wolves,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,26,Spurs,Newcastle,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,26,Sunderland,Liverpool,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,26,West Ham,Man Utd,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,26,Wolves,Arsenal,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+league_frequency,26,Aston Villa,Brighton,D,0,0,0.43142857142857144,0.26571428571428574,0.3028571428571429,H,Home Win,Draw,False
+league_frequency,26,Brentford,Arsenal,D,1,1,0.43142857142857144,0.26571428571428574,0.3028571428571429,H,Home Win,Draw,False
+league_frequency,26,Chelsea,Leeds,D,2,2,0.43142857142857144,0.26571428571428574,0.3028571428571429,H,Home Win,Draw,False
+league_frequency,26,Crystal Palace,Burnley,D,2,2,0.43142857142857144,0.26571428571428574,0.3028571428571429,H,Home Win,Draw,False
+league_frequency,26,Everton,Bournemouth,A,1,2,0.43142857142857144,0.26571428571428574,0.3028571428571429,H,Home Win,Away Win,False
+league_frequency,26,Man City,Fulham,H,3,0,0.43142857142857144,0.26571428571428574,0.3028571428571429,H,Home Win,Home Win,True
+league_frequency,26,Nott'm Forest,Wolves,D,0,0,0.43142857142857144,0.26571428571428574,0.3028571428571429,H,Home Win,Draw,False
+league_frequency,26,Spurs,Newcastle,A,1,2,0.43142857142857144,0.26571428571428574,0.3028571428571429,H,Home Win,Away Win,False
+league_frequency,26,Sunderland,Liverpool,A,0,1,0.43142857142857144,0.26571428571428574,0.3028571428571429,H,Home Win,Away Win,False
+league_frequency,26,West Ham,Man Utd,D,1,1,0.43142857142857144,0.26571428571428574,0.3028571428571429,H,Home Win,Draw,False
+league_frequency,26,Wolves,Arsenal,D,2,2,0.43142857142857144,0.26571428571428574,0.3028571428571429,H,Home Win,Draw,False
+always_home,27,Aston Villa,Leeds,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,27,Brentford,Brighton,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,27,Chelsea,Burnley,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,27,Crystal Palace,Wolves,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,27,Everton,Man Utd,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,27,Man City,Newcastle,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,27,Nott'm Forest,Liverpool,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,27,Spurs,Arsenal,A,1,4,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,27,Sunderland,Fulham,A,1,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,27,West Ham,Bournemouth,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+league_frequency,27,Aston Villa,Leeds,D,1,1,0.42105263157894735,0.2770083102493075,0.30193905817174516,H,Home Win,Draw,False
+league_frequency,27,Brentford,Brighton,A,0,2,0.42105263157894735,0.2770083102493075,0.30193905817174516,H,Home Win,Away Win,False
+league_frequency,27,Chelsea,Burnley,D,1,1,0.42105263157894735,0.2770083102493075,0.30193905817174516,H,Home Win,Draw,False
+league_frequency,27,Crystal Palace,Wolves,H,1,0,0.42105263157894735,0.2770083102493075,0.30193905817174516,H,Home Win,Home Win,True
+league_frequency,27,Everton,Man Utd,A,0,1,0.42105263157894735,0.2770083102493075,0.30193905817174516,H,Home Win,Away Win,False
+league_frequency,27,Man City,Newcastle,H,2,1,0.42105263157894735,0.2770083102493075,0.30193905817174516,H,Home Win,Home Win,True
+league_frequency,27,Nott'm Forest,Liverpool,A,0,1,0.42105263157894735,0.2770083102493075,0.30193905817174516,H,Home Win,Away Win,False
+league_frequency,27,Spurs,Arsenal,A,1,4,0.42105263157894735,0.2770083102493075,0.30193905817174516,H,Home Win,Away Win,False
+league_frequency,27,Sunderland,Fulham,A,1,3,0.42105263157894735,0.2770083102493075,0.30193905817174516,H,Home Win,Away Win,False
+league_frequency,27,West Ham,Bournemouth,D,0,0,0.42105263157894735,0.2770083102493075,0.30193905817174516,H,Home Win,Draw,False
+always_home,28,Arsenal,Chelsea,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,28,Bournemouth,Sunderland,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,28,Brighton,Nott'm Forest,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,28,Burnley,Brentford,A,2,4,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,28,Fulham,Spurs,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,28,Leeds,Man City,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,28,Liverpool,West Ham,H,4,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,28,Man Utd,Crystal Palace,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,28,Newcastle,Everton,A,2,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,28,Wolves,Aston Villa,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+league_frequency,28,Arsenal,Chelsea,H,2,0,0.41509433962264153,0.2776280323450135,0.30727762803234504,H,Home Win,Home Win,True
+league_frequency,28,Bournemouth,Sunderland,D,1,1,0.41509433962264153,0.2776280323450135,0.30727762803234504,H,Home Win,Draw,False
+league_frequency,28,Brighton,Nott'm Forest,H,2,1,0.41509433962264153,0.2776280323450135,0.30727762803234504,H,Home Win,Home Win,True
+league_frequency,28,Burnley,Brentford,A,2,4,0.41509433962264153,0.2776280323450135,0.30727762803234504,H,Home Win,Away Win,False
+league_frequency,28,Fulham,Spurs,H,2,1,0.41509433962264153,0.2776280323450135,0.30727762803234504,H,Home Win,Home Win,True
+league_frequency,28,Leeds,Man City,A,0,1,0.41509433962264153,0.2776280323450135,0.30727762803234504,H,Home Win,Away Win,False
+league_frequency,28,Liverpool,West Ham,H,4,2,0.41509433962264153,0.2776280323450135,0.30727762803234504,H,Home Win,Home Win,True
+league_frequency,28,Man Utd,Crystal Palace,H,2,1,0.41509433962264153,0.2776280323450135,0.30727762803234504,H,Home Win,Home Win,True
+league_frequency,28,Newcastle,Everton,A,2,3,0.41509433962264153,0.2776280323450135,0.30727762803234504,H,Home Win,Away Win,False
+league_frequency,28,Wolves,Aston Villa,H,2,0,0.41509433962264153,0.2776280323450135,0.30727762803234504,H,Home Win,Home Win,True
+always_home,29,Aston Villa,Chelsea,A,1,4,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,29,Bournemouth,Brentford,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,29,Brighton,Arsenal,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,29,Everton,Burnley,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,29,Fulham,West Ham,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,29,Leeds,Sunderland,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,29,Man City,Nott'm Forest,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,29,Newcastle,Man Utd,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,29,Spurs,Crystal Palace,A,1,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,29,Wolves,Liverpool,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+league_frequency,29,Aston Villa,Chelsea,A,1,4,0.4199475065616798,0.27296587926509186,0.30708661417322836,H,Home Win,Away Win,False
+league_frequency,29,Bournemouth,Brentford,D,0,0,0.4199475065616798,0.27296587926509186,0.30708661417322836,H,Home Win,Draw,False
+league_frequency,29,Brighton,Arsenal,A,0,1,0.4199475065616798,0.27296587926509186,0.30708661417322836,H,Home Win,Away Win,False
+league_frequency,29,Everton,Burnley,H,2,0,0.4199475065616798,0.27296587926509186,0.30708661417322836,H,Home Win,Home Win,True
+league_frequency,29,Fulham,West Ham,A,0,1,0.4199475065616798,0.27296587926509186,0.30708661417322836,H,Home Win,Away Win,False
+league_frequency,29,Leeds,Sunderland,A,0,1,0.4199475065616798,0.27296587926509186,0.30708661417322836,H,Home Win,Away Win,False
+league_frequency,29,Man City,Nott'm Forest,D,2,2,0.4199475065616798,0.27296587926509186,0.30708661417322836,H,Home Win,Draw,False
+league_frequency,29,Newcastle,Man Utd,H,2,1,0.4199475065616798,0.27296587926509186,0.30708661417322836,H,Home Win,Home Win,True
+league_frequency,29,Spurs,Crystal Palace,A,1,3,0.4199475065616798,0.27296587926509186,0.30708661417322836,H,Home Win,Away Win,False
+league_frequency,29,Wolves,Liverpool,H,2,1,0.4199475065616798,0.27296587926509186,0.30708661417322836,H,Home Win,Home Win,True
+always_home,30,Arsenal,Everton,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,30,Brentford,Wolves,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,30,Burnley,Bournemouth,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,30,Chelsea,Newcastle,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,30,Crystal Palace,Leeds,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,30,Liverpool,Spurs,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,30,Man Utd,Aston Villa,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,30,Nott'm Forest,Fulham,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,30,Sunderland,Brighton,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,30,West Ham,Man City,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+league_frequency,30,Arsenal,Everton,H,2,0,0.41687979539641945,0.2710997442455243,0.31202046035805625,H,Home Win,Home Win,True
+league_frequency,30,Brentford,Wolves,D,2,2,0.41687979539641945,0.2710997442455243,0.31202046035805625,H,Home Win,Draw,False
+league_frequency,30,Burnley,Bournemouth,D,0,0,0.41687979539641945,0.2710997442455243,0.31202046035805625,H,Home Win,Draw,False
+league_frequency,30,Chelsea,Newcastle,A,0,1,0.41687979539641945,0.2710997442455243,0.31202046035805625,H,Home Win,Away Win,False
+league_frequency,30,Crystal Palace,Leeds,D,0,0,0.41687979539641945,0.2710997442455243,0.31202046035805625,H,Home Win,Draw,False
+league_frequency,30,Liverpool,Spurs,D,1,1,0.41687979539641945,0.2710997442455243,0.31202046035805625,H,Home Win,Draw,False
+league_frequency,30,Man Utd,Aston Villa,H,3,1,0.41687979539641945,0.2710997442455243,0.31202046035805625,H,Home Win,Home Win,True
+league_frequency,30,Nott'm Forest,Fulham,D,0,0,0.41687979539641945,0.2710997442455243,0.31202046035805625,H,Home Win,Draw,False
+league_frequency,30,Sunderland,Brighton,A,0,1,0.41687979539641945,0.2710997442455243,0.31202046035805625,H,Home Win,Away Win,False
+league_frequency,30,West Ham,Man City,D,1,1,0.41687979539641945,0.2710997442455243,0.31202046035805625,H,Home Win,Draw,False
+always_home,31,Aston Villa,West Ham,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,31,Bournemouth,Man Utd,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,31,Brighton,Liverpool,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,31,Everton,Chelsea,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,31,Fulham,Burnley,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,31,Leeds,Brentford,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,31,Newcastle,Sunderland,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,31,Spurs,Nott'm Forest,A,0,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,31,Aston Villa,West Ham,H,2,0,0.4114713216957606,0.2793017456359102,0.3092269326683292,H,Home Win,Home Win,True
+league_frequency,31,Bournemouth,Man Utd,H,2,1,0.4114713216957606,0.2793017456359102,0.3092269326683292,H,Home Win,Home Win,True
+league_frequency,31,Brighton,Liverpool,H,2,1,0.4114713216957606,0.2793017456359102,0.3092269326683292,H,Home Win,Home Win,True
+league_frequency,31,Everton,Chelsea,H,3,0,0.4114713216957606,0.2793017456359102,0.3092269326683292,H,Home Win,Home Win,True
+league_frequency,31,Fulham,Burnley,H,3,1,0.4114713216957606,0.2793017456359102,0.3092269326683292,H,Home Win,Home Win,True
+league_frequency,31,Leeds,Brentford,D,0,0,0.4114713216957606,0.2793017456359102,0.3092269326683292,H,Home Win,Draw,False
+league_frequency,31,Newcastle,Sunderland,A,1,2,0.4114713216957606,0.2793017456359102,0.3092269326683292,H,Home Win,Away Win,False
+league_frequency,31,Spurs,Nott'm Forest,A,0,3,0.4114713216957606,0.2793017456359102,0.3092269326683292,H,Home Win,Away Win,False
+always_home,32,Arsenal,Bournemouth,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,32,Brentford,Everton,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,32,Burnley,Brighton,A,0,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,32,Chelsea,Man City,A,0,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,32,Crystal Palace,Newcastle,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,32,Liverpool,Fulham,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,32,Man Utd,Leeds,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,32,Nott'm Forest,Aston Villa,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,32,Sunderland,Spurs,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,32,West Ham,Wolves,H,4,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+league_frequency,32,Arsenal,Bournemouth,A,1,2,0.4156479217603912,0.2762836185819071,0.3080684596577017,H,Home Win,Away Win,False
+league_frequency,32,Brentford,Everton,D,2,2,0.4156479217603912,0.2762836185819071,0.3080684596577017,H,Home Win,Draw,False
+league_frequency,32,Burnley,Brighton,A,0,2,0.4156479217603912,0.2762836185819071,0.3080684596577017,H,Home Win,Away Win,False
+league_frequency,32,Chelsea,Man City,A,0,3,0.4156479217603912,0.2762836185819071,0.3080684596577017,H,Home Win,Away Win,False
+league_frequency,32,Crystal Palace,Newcastle,H,2,1,0.4156479217603912,0.2762836185819071,0.3080684596577017,H,Home Win,Home Win,True
+league_frequency,32,Liverpool,Fulham,H,2,0,0.4156479217603912,0.2762836185819071,0.3080684596577017,H,Home Win,Home Win,True
+league_frequency,32,Man Utd,Leeds,A,1,2,0.4156479217603912,0.2762836185819071,0.3080684596577017,H,Home Win,Away Win,False
+league_frequency,32,Nott'm Forest,Aston Villa,H,1,0,0.4156479217603912,0.2762836185819071,0.3080684596577017,H,Home Win,Home Win,True
+league_frequency,32,Sunderland,Spurs,H,1,0,0.4156479217603912,0.2762836185819071,0.3080684596577017,H,Home Win,Home Win,True
+league_frequency,32,West Ham,Wolves,H,4,0,0.4156479217603912,0.2762836185819071,0.3080684596577017,H,Home Win,Home Win,True
+always_home,33,Aston Villa,Sunderland,H,4,3,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,33,Bournemouth,Leeds,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,33,Brentford,Fulham,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,33,Brighton,Chelsea,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,33,Burnley,Man City,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,33,Chelsea,Man Utd,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,33,Crystal Palace,West Ham,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,33,Everton,Liverpool,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,33,Leeds,Wolves,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,33,Man City,Arsenal,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,33,Newcastle,Bournemouth,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,33,Nott'm Forest,Burnley,H,4,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,33,Spurs,Brighton,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+league_frequency,33,Aston Villa,Sunderland,H,4,3,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Home Win,True
+league_frequency,33,Bournemouth,Leeds,H,2,1,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Home Win,True
+league_frequency,33,Brentford,Fulham,D,0,0,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Draw,False
+league_frequency,33,Brighton,Chelsea,H,3,0,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Home Win,True
+league_frequency,33,Burnley,Man City,A,0,1,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Away Win,False
+league_frequency,33,Chelsea,Man Utd,A,0,1,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Away Win,False
+league_frequency,33,Crystal Palace,West Ham,D,0,0,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Draw,False
+league_frequency,33,Everton,Liverpool,A,1,2,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Away Win,False
+league_frequency,33,Leeds,Wolves,H,3,0,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Home Win,True
+league_frequency,33,Man City,Arsenal,H,2,1,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Home Win,True
+league_frequency,33,Newcastle,Bournemouth,A,1,2,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Away Win,False
+league_frequency,33,Nott'm Forest,Burnley,H,4,1,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Home Win,True
+league_frequency,33,Spurs,Brighton,D,2,2,0.41766109785202865,0.2720763723150358,0.31026252983293556,H,Home Win,Draw,False
+always_home,34,Arsenal,Newcastle,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,34,Fulham,Aston Villa,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,34,Liverpool,Crystal Palace,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,34,Man Utd,Brentford,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,34,Sunderland,Nott'm Forest,A,0,4,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,34,West Ham,Everton,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,34,Wolves,Spurs,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,34,Arsenal,Newcastle,H,1,0,0.41898148148148145,0.2708333333333333,0.3101851851851852,H,Home Win,Home Win,True
+league_frequency,34,Fulham,Aston Villa,H,1,0,0.41898148148148145,0.2708333333333333,0.3101851851851852,H,Home Win,Home Win,True
+league_frequency,34,Liverpool,Crystal Palace,H,3,1,0.41898148148148145,0.2708333333333333,0.3101851851851852,H,Home Win,Home Win,True
+league_frequency,34,Man Utd,Brentford,H,2,1,0.41898148148148145,0.2708333333333333,0.3101851851851852,H,Home Win,Home Win,True
+league_frequency,34,Sunderland,Nott'm Forest,A,0,4,0.41898148148148145,0.2708333333333333,0.3101851851851852,H,Home Win,Away Win,False
+league_frequency,34,West Ham,Everton,H,2,1,0.41898148148148145,0.2708333333333333,0.3101851851851852,H,Home Win,Home Win,True
+league_frequency,34,Wolves,Spurs,A,0,1,0.41898148148148145,0.2708333333333333,0.3101851851851852,H,Home Win,Away Win,False
+always_home,35,Arsenal,Fulham,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,35,Aston Villa,Spurs,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,35,Bournemouth,Crystal Palace,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,35,Brentford,West Ham,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,35,Chelsea,Nott'm Forest,A,1,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,35,Everton,Man City,D,3,3,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,35,Leeds,Burnley,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,35,Man Utd,Liverpool,H,3,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,35,Newcastle,Brighton,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,35,Wolves,Sunderland,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+league_frequency,35,Arsenal,Fulham,H,3,0,0.42369020501138954,0.26651480637813213,0.3097949886104784,H,Home Win,Home Win,True
+league_frequency,35,Aston Villa,Spurs,A,1,2,0.42369020501138954,0.26651480637813213,0.3097949886104784,H,Home Win,Away Win,False
+league_frequency,35,Bournemouth,Crystal Palace,H,2,0,0.42369020501138954,0.26651480637813213,0.3097949886104784,H,Home Win,Home Win,True
+league_frequency,35,Brentford,West Ham,H,2,0,0.42369020501138954,0.26651480637813213,0.3097949886104784,H,Home Win,Home Win,True
+league_frequency,35,Chelsea,Nott'm Forest,A,1,3,0.42369020501138954,0.26651480637813213,0.3097949886104784,H,Home Win,Away Win,False
+league_frequency,35,Everton,Man City,D,3,3,0.42369020501138954,0.26651480637813213,0.3097949886104784,H,Home Win,Draw,False
+league_frequency,35,Leeds,Burnley,H,3,1,0.42369020501138954,0.26651480637813213,0.3097949886104784,H,Home Win,Home Win,True
+league_frequency,35,Man Utd,Liverpool,H,3,2,0.42369020501138954,0.26651480637813213,0.3097949886104784,H,Home Win,Home Win,True
+league_frequency,35,Newcastle,Brighton,H,3,1,0.42369020501138954,0.26651480637813213,0.3097949886104784,H,Home Win,Home Win,True
+league_frequency,35,Wolves,Sunderland,D,1,1,0.42369020501138954,0.26651480637813213,0.3097949886104784,H,Home Win,Draw,False
+always_home,36,Brighton,Wolves,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,36,Burnley,Aston Villa,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,36,Crystal Palace,Everton,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,36,Fulham,Bournemouth,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,36,Liverpool,Chelsea,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,36,Man City,Brentford,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,36,Man City,Crystal Palace,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,36,Nott'm Forest,Newcastle,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,36,Spurs,Leeds,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,36,Sunderland,Man Utd,D,0,0,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,36,West Ham,Arsenal,A,0,1,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+league_frequency,36,Brighton,Wolves,H,3,0,0.42761692650334077,0.2650334075723831,0.30734966592427615,H,Home Win,Home Win,True
+league_frequency,36,Burnley,Aston Villa,D,2,2,0.42761692650334077,0.2650334075723831,0.30734966592427615,H,Home Win,Draw,False
+league_frequency,36,Crystal Palace,Everton,D,2,2,0.42761692650334077,0.2650334075723831,0.30734966592427615,H,Home Win,Draw,False
+league_frequency,36,Fulham,Bournemouth,A,0,1,0.42761692650334077,0.2650334075723831,0.30734966592427615,H,Home Win,Away Win,False
+league_frequency,36,Liverpool,Chelsea,D,1,1,0.42761692650334077,0.2650334075723831,0.30734966592427615,H,Home Win,Draw,False
+league_frequency,36,Man City,Brentford,H,3,0,0.42761692650334077,0.2650334075723831,0.30734966592427615,H,Home Win,Home Win,True
+league_frequency,36,Man City,Crystal Palace,H,3,0,0.42761692650334077,0.2650334075723831,0.30734966592427615,H,Home Win,Home Win,True
+league_frequency,36,Nott'm Forest,Newcastle,D,1,1,0.42761692650334077,0.2650334075723831,0.30734966592427615,H,Home Win,Draw,False
+league_frequency,36,Spurs,Leeds,D,1,1,0.42761692650334077,0.2650334075723831,0.30734966592427615,H,Home Win,Draw,False
+league_frequency,36,Sunderland,Man Utd,D,0,0,0.42761692650334077,0.2650334075723831,0.30734966592427615,H,Home Win,Draw,False
+league_frequency,36,West Ham,Arsenal,A,0,1,0.42761692650334077,0.2650334075723831,0.30734966592427615,H,Home Win,Away Win,False
+always_home,37,Arsenal,Burnley,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,37,Aston Villa,Liverpool,H,4,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,37,Bournemouth,Man City,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,37,Brentford,Crystal Palace,D,2,2,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,37,Chelsea,Spurs,H,2,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,37,Everton,Sunderland,A,1,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,37,Leeds,Brighton,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,37,Man Utd,Nott'm Forest,H,3,2,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,37,Newcastle,West Ham,H,3,1,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,37,Wolves,Fulham,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+league_frequency,37,Arsenal,Burnley,H,1,0,0.42391304347826086,0.2717391304347826,0.30434782608695654,H,Home Win,Home Win,True
+league_frequency,37,Aston Villa,Liverpool,H,4,2,0.42391304347826086,0.2717391304347826,0.30434782608695654,H,Home Win,Home Win,True
+league_frequency,37,Bournemouth,Man City,D,1,1,0.42391304347826086,0.2717391304347826,0.30434782608695654,H,Home Win,Draw,False
+league_frequency,37,Brentford,Crystal Palace,D,2,2,0.42391304347826086,0.2717391304347826,0.30434782608695654,H,Home Win,Draw,False
+league_frequency,37,Chelsea,Spurs,H,2,1,0.42391304347826086,0.2717391304347826,0.30434782608695654,H,Home Win,Home Win,True
+league_frequency,37,Everton,Sunderland,A,1,3,0.42391304347826086,0.2717391304347826,0.30434782608695654,H,Home Win,Away Win,False
+league_frequency,37,Leeds,Brighton,H,1,0,0.42391304347826086,0.2717391304347826,0.30434782608695654,H,Home Win,Home Win,True
+league_frequency,37,Man Utd,Nott'm Forest,H,3,2,0.42391304347826086,0.2717391304347826,0.30434782608695654,H,Home Win,Home Win,True
+league_frequency,37,Newcastle,West Ham,H,3,1,0.42391304347826086,0.2717391304347826,0.30434782608695654,H,Home Win,Home Win,True
+league_frequency,37,Wolves,Fulham,D,1,1,0.42391304347826086,0.2717391304347826,0.30434782608695654,H,Home Win,Draw,False
+always_home,38,Brighton,Man Utd,A,0,3,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,38,Burnley,Wolves,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,38,Crystal Palace,Arsenal,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,38,Fulham,Newcastle,H,2,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,38,Liverpool,Brentford,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,38,Man City,Aston Villa,A,1,2,0.999,0.0005,0.0005,H,Home Win,Away Win,False
+always_home,38,Nott'm Forest,Bournemouth,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,38,Spurs,Everton,H,1,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+always_home,38,Sunderland,Chelsea,D,1,1,0.999,0.0005,0.0005,H,Home Win,Draw,False
+always_home,38,West Ham,Leeds,H,3,0,0.999,0.0005,0.0005,H,Home Win,Home Win,True
+league_frequency,38,Brighton,Man Utd,A,0,3,0.4276595744680851,0.2723404255319149,0.3,H,Home Win,Away Win,False
+league_frequency,38,Burnley,Wolves,D,1,1,0.4276595744680851,0.2723404255319149,0.3,H,Home Win,Draw,False
+league_frequency,38,Crystal Palace,Arsenal,A,1,2,0.4276595744680851,0.2723404255319149,0.3,H,Home Win,Away Win,False
+league_frequency,38,Fulham,Newcastle,H,2,0,0.4276595744680851,0.2723404255319149,0.3,H,Home Win,Home Win,True
+league_frequency,38,Liverpool,Brentford,D,1,1,0.4276595744680851,0.2723404255319149,0.3,H,Home Win,Draw,False
+league_frequency,38,Man City,Aston Villa,A,1,2,0.4276595744680851,0.2723404255319149,0.3,H,Home Win,Away Win,False
+league_frequency,38,Nott'm Forest,Bournemouth,D,1,1,0.4276595744680851,0.2723404255319149,0.3,H,Home Win,Draw,False
+league_frequency,38,Spurs,Everton,H,1,0,0.4276595744680851,0.2723404255319149,0.3,H,Home Win,Home Win,True
+league_frequency,38,Sunderland,Chelsea,D,1,1,0.4276595744680851,0.2723404255319149,0.3,H,Home Win,Draw,False
+league_frequency,38,West Ham,Leeds,H,3,0,0.4276595744680851,0.2723404255319149,0.3,H,Home Win,Home Win,True

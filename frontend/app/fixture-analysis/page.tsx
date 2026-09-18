@@ -334,7 +334,7 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
                   onClick={() => setFdrType("overall")}
                   className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
                     fdrType === "overall"
-                      ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md"
+                      ? "bg-primary text-primary-foreground shadow-sm"
                       : "bg-secondary text-muted-foreground hover:bg-secondary/80"
                   }`}
                 >
@@ -344,7 +344,7 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
                   onClick={() => setFdrType("attack")}
                   className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
                     fdrType === "attack"
-                      ? "bg-purple-600 text-white shadow-md"
+                      ? "bg-primary text-primary-foreground shadow-sm"
                       : "bg-secondary text-muted-foreground hover:bg-secondary/80"
                   }`}
                 >
@@ -354,7 +354,7 @@ function FDRGrid({ fixtures }: { fixtures: any[] }) {
                   onClick={() => setFdrType("defense")}
                   className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
                     fdrType === "defense"
-                      ? "bg-blue-600 text-white shadow-md"
+                      ? "bg-primary text-primary-foreground shadow-sm"
                       : "bg-secondary text-muted-foreground hover:bg-secondary/80"
                   }`}
                 >
@@ -630,7 +630,7 @@ export default function FixtureAnalysisPage() {
           <p className="text-sm text-muted-foreground mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-200 "
+            className="rounded-lg bg-primary px-4 py-2 text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Retry
           </button>
@@ -644,8 +644,8 @@ export default function FixtureAnalysisPage() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-6 sm:mb-8">
           <h1 className="mb-2 text-2xl sm:text-4xl font-bold text-foreground flex items-center gap-2 sm:gap-3">
-            <CalendarIcon className="h-6 w-6 sm:h-8 sm:w-8 text-purple-500" />
-            <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <CalendarIcon className="h-6 w-6 text-muted-foreground sm:h-8 sm:w-8" aria-hidden="true" />
+            <span className="text-foreground">
               <span className="hidden sm:inline">Fixture Analysis</span>
               <span className="sm:hidden">Fixtures</span>
             </span>
@@ -660,14 +660,14 @@ export default function FixtureAnalysisPage() {
           <TabsList className="bg-secondary/50 p-1 rounded-lg border w-full grid grid-cols-2 gap-1 text-background">
             <TabsTrigger
               value="fixtures"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-600 data-[state=active]:to-blue-600 data-[state=active]:text-white"
+              className="flex items-center justify-center gap-2 px-2 py-2 text-xs sm:text-sm"
             >
               <CalendarIcon className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden sm:inline">Fixtures</span>
             </TabsTrigger>
             <TabsTrigger
               value="opportunities"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm px-2 py-2 transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-600 data-[state=active]:to-purple-600 data-[state=active]:text-white"
+              className="flex items-center justify-center gap-2 px-2 py-2 text-xs sm:text-sm"
             >
               <Target className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden sm:inline">FDR</span>
@@ -727,15 +727,15 @@ export default function FixtureAnalysisPage() {
                     style={{ animationDelay: `${index * 50}ms` }}
                     className="overflow-hidden border-border bg-card/50  shadow-md hover:shadow-md transition-all duration-300  group"
                   >
-                    <CardHeader className="p-3 sm:p-4 bg-gradient-to-r from-purple-500/10 to-blue-500/10 group-hover:from-purple-500/20 group-hover:to-blue-500/20 transition-all duration-300">
+                    <CardHeader className="bg-muted/35 p-3 transition-colors group-hover:bg-muted/60 sm:p-4">
                       <div className="flex items-center justify-between gap-2">
-                        <CardTitle className="text-base sm:text-lg font-bold text-foreground truncate group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-200">
+                        <CardTitle className="truncate text-base font-bold text-foreground sm:text-lg">
                           {fixture.fixture}
                         </CardTitle>
                         {fixture.favorability !== "Neutral" ? (
                           <Badge
                             variant="secondary"
-                            className="text-xs bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200  transition-transform duration-200"
+                            className="border-border bg-muted text-xs text-foreground"
                             title="Team favored to win based on attack and defense scores"
                           >
                             ⭐ {fixture.favorability} Favoured

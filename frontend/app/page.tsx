@@ -127,9 +127,9 @@ export default function HomePage() {
   }
 
   const quickStats = [
-    { label: "Total Players", value: summary?.total_players || "0", icon: Users, color: "text-emerald-500", bgColor: "bg-emerald-500/10" },
-    { label: "Current Gameweek", value: `GW ${summary?.total_gameweeks || "0"}`, icon: Calendar, color: "text-purple-500", bgColor: "bg-purple-500/10" },
-    { label: "Last Synced", value: formatLastSynced(summary?.last_synced_at), icon: Clock, color: "text-orange-500", bgColor: "bg-orange-500/10" },
+    { label: "Total Players", value: summary?.total_players || "0", icon: Users },
+    { label: "Current Gameweek", value: `GW ${summary?.total_gameweeks || "0"}`, icon: Calendar },
+    { label: "Last Synced", value: formatLastSynced(summary?.last_synced_at), icon: Clock },
   ]
 
   return (
@@ -137,18 +137,18 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
         <div className="mb-12 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500/10 to-blue-500/10 px-4 py-2 mb-6 border border-emerald-500/20">
-            <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
-            <span className="text-sm font-medium text-emerald-600 dark:text-emerald-400">FPL Analytics</span>
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-muted px-4 py-2">
+            <div className="h-2 w-2 rounded-full bg-success"></div>
+            <span className="text-sm font-medium text-foreground">FPL Analytics</span>
           </div>
 
-          <h1 className="mb-4 text-5xl sm:text-6xl font-bold bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-200 dark:to-white bg-clip-text text-transparent leading-tight">
+          <h1 className="mb-4 text-5xl font-semibold leading-tight tracking-tight text-foreground sm:text-6xl">
             FPL Analyst
           </h1>
-          <p className="text-xl sm:text-2xl font-medium text-emerald-600 dark:text-emerald-400 mb-3">
+          <p className="mb-3 text-xl font-medium text-foreground sm:text-2xl">
             Your Strategic Advantage
           </p>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400">
+          <p className="text-base text-muted-foreground sm:text-lg">
             Comprehensive Fantasy Premier League analytics and insights
           </p>
         </div>
@@ -159,21 +159,19 @@ export default function HomePage() {
             {quickStats.map((stat, index) => (
               <Card
                 key={stat.label}
-                className="group relative overflow-hidden border-0 bg-white/70 dark:bg-slate-800/70  shadow-sm hover:shadow-md transition-all duration-300 "
+                className="group relative overflow-hidden bg-card transition-colors hover:bg-muted/35"
                 style={{
                   animationDelay: `${index * 150}ms`,
                   animationFillMode: "both",
                 }}
               >
-                <div className={`absolute inset-0 ${stat.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-
                 <CardContent className="relative flex items-center gap-4 p-6">
-                  <div className={`rounded-xl ${stat.bgColor} p-3 transition-transform duration-300 `}>
-                    <stat.icon className={`h-6 w-6 ${stat.color}`} />
+                  <div className="rounded-xl bg-muted p-3">
+                    <stat.icon className="h-6 w-6 text-muted-foreground" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">{stat.value}</p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">{stat.label}</p>
+                    <p className="text-2xl font-bold text-foreground sm:text-3xl">{stat.value}</p>
+                    <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -184,7 +182,7 @@ export default function HomePage() {
         {/* Top Form Players */}
         {topFormPlayers.length > 0 && (
           <div className="mb-12">
-            <Card className="border-0 bg-white/70 dark:bg-slate-800/70  shadow-sm">
+            <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <span className="text-2xl">⭐</span>
@@ -195,7 +193,7 @@ export default function HomePage() {
               <CardContent>
                 <div className="grid gap-4 sm:grid-cols-3">
                   {topFormPlayers.map((player, idx) => (
-                    <div key={idx} className="p-4 rounded-lg border border-slate-200/50 dark:border-slate-700/50 hover:shadow-md transition-shadow">
+                    <div key={idx} className="rounded-lg border border-border p-4 transition-colors hover:bg-muted/40">
                       <div className="flex items-center justify-between mb-2">
                         <div className="font-semibold text-foreground">{player.name}</div>
                         <span className={`text-xs font-bold px-2 py-1 rounded-full ${
@@ -221,24 +219,22 @@ export default function HomePage() {
         {/* Navigation Cards */}
         <div className="mb-12">
           <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-3">
+            <h2 className="mb-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               Explore Analytics
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 to-blue-500 mx-auto rounded-full"></div>
+            <div className="mx-auto h-px w-24 bg-border"></div>
           </div>
 
           <div className="grid gap-6 sm:gap-8 grid-cols-1 md:grid-cols-3">
             {navigationCards.map((card, index) => (
               <Link key={card.title} href={card.href} className="group block">
                 <Card
-                  className={`relative overflow-hidden border-0 bg-white/80 dark:bg-slate-800/80  shadow-sm hover:shadow-md transition-all duration-500    active:shadow-md h-full ${card.borderColor}`}
+                  className="relative h-full overflow-hidden bg-card transition-colors hover:bg-muted/35"
                   style={{
                     animationDelay: `${(index * 100) + 500}ms`,
                     animationFillMode: "both",
                   }}
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${card.color} opacity-0 group-hover:opacity-100 transition-all duration-500`}></div>
-
                   <CardContent className="relative p-6 sm:p-8 h-full flex flex-col">
                     <div className="mb-4 p-4 bg-secondary/50 rounded-xl w-fit">
                       <card.icon className="h-8 w-8" />

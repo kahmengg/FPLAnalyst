@@ -1,0 +1,2 @@
+window,elo_correct,baseline_correct,correct_improvement,elo_accuracy,baseline_accuracy,accuracy_improvement,elo_log_loss,baseline_log_loss,log_loss_improvement,elo_beats_baseline_accuracy,elo_beats_baseline_log_loss
+headline_holdout_gw20_38,87,76,11,0.45789473684210524,0.4,0.05789473684210522,1.0519585577216946,1.095009492799433,0.043050935077738384,True,True

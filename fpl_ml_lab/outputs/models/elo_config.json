@@ -1,0 +1,8 @@
+{
+  "k_factor": 20.0,
+  "home_advantage": 60.0,
+  "points_scale": 4.0,
+  "equal_team_draw_prob": 0.27,
+  "promoted_position": 17,
+  "margin_of_victory": false
+}

@@ -24,3 +24,4 @@ CURRENT = SeasonFiles(
 BACKTEST_DIR = ROOT / "outputs" / "backtests"
 PREDICTION_DIR = ROOT / "outputs" / "predictions"
 MODEL_DIR = ROOT / "outputs" / "models"
+PRIOR_TABLE = ROOT / "data" / "historical" / "2024_25" / "final_table.csv"

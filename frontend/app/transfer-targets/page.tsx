@@ -35,7 +35,7 @@ const teamColors = {
 }
 
 const getTeamColor = (teamName: string) => {
-  return teamColors[teamName as keyof typeof teamColors] || "text-foreground"
+  return "text-foreground"
 }
 
 const getTeamBackgroundColor = (teamName: string) => {
@@ -64,8 +64,11 @@ const getTeamBackgroundColor = (teamName: string) => {
     "Leeds": "bg-blue-100 dark:bg-blue-950",
     "Sunderland": "bg-red-200 dark:bg-red-950",
   }
-  return bgColors[teamName as keyof typeof bgColors] || "bg-secondary/20"
+  return "bg-muted/35"
 }
+
+// Avoid exposing floating-point artifacts such as 0.8000000000000003%.
+const formatSwing = (value: number) => Number(value || 0).toFixed(2).replace(/\.00$/, "").replace(/(\.\d)0$/, "$1")
 
 export default function TransferTargetsPage() {
   const [teamFixtureSummary, setTeamFixtureSummary] = useState<any[]>([])
@@ -203,8 +206,8 @@ export default function TransferTargetsPage() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="mb-2 text-4xl font-bold text-foreground flex items-center gap-3">
-            <RefreshCw className="h-8 w-8 text-green-500 animate-spin" style={{ animationDuration: '3s' }} />
-            <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent">
+            <RefreshCw className="h-8 w-8 text-muted-foreground" aria-hidden="true" />
+            <span className="text-foreground">
               Transfer Targets
             </span>
           </h1>
@@ -227,7 +230,7 @@ export default function TransferTargetsPage() {
                     {[...teamFixtureSummary].sort((a, b) => b.fixtureSwing - a.fixtureSwing)[0]?.team || 'N/A'}
                   </p>
                   <p className="text-xs text-green-600 dark:text-green-400 font-semibold">
-                    +{[...teamFixtureSummary].sort((a, b) => b.fixtureSwing - a.fixtureSwing)[0]?.fixtureSwing || 0}% easier
+                    +{formatSwing([...teamFixtureSummary].sort((a, b) => b.fixtureSwing - a.fixtureSwing)[0]?.fixtureSwing)}% easier
                   </p>
                 </div>
               </div>
@@ -245,7 +248,7 @@ export default function TransferTargetsPage() {
                     {[...teamFixtureSummary].sort((a, b) => a.fixtureSwing - b.fixtureSwing)[0]?.team || 'N/A'}
                   </p>
                   <p className="text-xs text-red-600 dark:text-red-400 font-semibold">
-                    {[...teamFixtureSummary].sort((a, b) => a.fixtureSwing - b.fixtureSwing)[0]?.fixtureSwing || 0}% harder
+                    {formatSwing([...teamFixtureSummary].sort((a, b) => a.fixtureSwing - b.fixtureSwing)[0]?.fixtureSwing)}% harder
                   </p>
                 </div>
               </div>
@@ -268,14 +271,14 @@ export default function TransferTargetsPage() {
         </div>
 
         {/* Fixture Period Comparison */}
-        <Card className="border-purple-500/20 bg-card  shadow-md mb-8">
-          <CardHeader className="pb-4 border-b border-border/50 bg-gradient-to-r from-purple-500/10 to-transparent">
+        <Card className="mb-8 bg-card">
+          <CardHeader className="border-b border-border/50 pb-4">
             <CardTitle className="text-base text-foreground flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted">
                 📊
               </div>
               Fixture Difficulty by Period
-              <Badge variant="secondary" className="ml-auto text-xs bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+              <Badge variant="secondary" className="ml-auto text-xs">
                 Next 6 GWs
               </Badge>
             </CardTitle>
@@ -286,9 +289,9 @@ export default function TransferTargetsPage() {
           <CardContent className="p-6">
             <div className="grid gap-4 lg:grid-cols-2">
               {/* Near-term: Next 3 Gameweeks */}
-              <div className="space-y-3">
+              <div className="min-w-0 space-y-3">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-sm sm:text-base font-bold text-foreground flex items-center gap-2">
+                  <h3 className="flex min-w-0 flex-wrap items-center gap-2 text-sm font-bold text-foreground sm:text-base">
                     ⭐ Next 3 Gameweeks
                     <span className="text-[10px] sm:text-xs text-muted-foreground font-normal">(Immediate Priority)</span>
                   </h3>
@@ -302,20 +305,20 @@ export default function TransferTargetsPage() {
                           key={index}
                           style={{ animationDelay: `${index * 50}ms` }}
                           className={`p-3 rounded-lg border-2 border-slate-300 dark:border-slate-700 ${getTeamBackgroundColor(team.team)} 
-                             hover:shadow-md hover:border-purple-400 dark:hover:border-purple-600
+                             hover:bg-muted/50 hover:border-border
                             transition-all duration-300 ease-out
                             group cursor-pointer`}
                         >
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-3 flex-1 min-w-0">
                               <span className="text-xs font-bold text-muted-foreground w-6  transition-transform duration-200">#{index + 1}</span>
-                              <span className="font-semibold text-sm text-foreground truncate group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-200">{team.team}</span>
+                              <span className="truncate text-sm font-semibold text-foreground">{team.team}</span>
                             </div>
                             <span className={`font-bold text-lg ${getTeamColor(team.team)}  transition-transform duration-200`}>
                               {team.nearTermRating}%
                             </span>
                           </div>
-                          <div className="flex items-center justify-between gap-3">
+                          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <div className="flex items-center gap-2 text-xs flex-wrap">
                               <span className="text-muted-foreground px-2 py-1 bg-secondary/50 rounded-md">🎪 {team.nearTermHomeFixtures} home</span>
                               <span className={`font-semibold px-2 py-1 rounded-md transition-all duration-200  ${
@@ -339,7 +342,7 @@ export default function TransferTargetsPage() {
                             </div>
                             <button
                               onClick={() => handleViewPicks(team.team)}
-                              className="px-3 py-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white text-[11px] font-semibold rounded-md transition-all duration-200 hover:shadow-sm   whitespace-nowrap"
+                              className="w-full whitespace-nowrap rounded-md bg-primary px-3 py-1 text-[11px] font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
                             >
                               View Players
                             </button>
@@ -351,9 +354,9 @@ export default function TransferTargetsPage() {
               </div>
 
               {/* Medium-term: Following 3 Gameweeks */}
-              <div className="space-y-3">
+              <div className="min-w-0 space-y-3">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-sm sm:text-base font-bold text-foreground flex items-center gap-2">
+                  <h3 className="flex min-w-0 flex-wrap items-center gap-2 text-sm font-bold text-foreground sm:text-base">
                     📊 Following 3 Gameweeks
                     <span className="text-[10px] sm:text-xs text-muted-foreground font-normal">(Plan Ahead)</span>
                   </h3>
@@ -382,8 +385,8 @@ export default function TransferTargetsPage() {
                               {team.mediumTermRating}%
                             </span>
                           </div>
-                          <div className="flex items-center justify-between gap-3">
-                            <div className="flex items-center gap-2 text-xs">
+                          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
+                            <div className="flex flex-wrap items-center gap-2 text-xs">
                               <span className="text-muted-foreground">🎪 {team.mediumTermHomeFixtures} home</span>
                               <span className="text-muted-foreground">•</span>
                               <span className={`font-semibold ${team.avgAttackDiff > 2 ? 'text-green-600 dark:text-green-400' : team.avgAttackDiff < -2 ? 'text-red-600 dark:text-red-400' : 'text-yellow-600 dark:text-yellow-400'}`}>
@@ -395,12 +398,12 @@ export default function TransferTargetsPage() {
                               </span>
                               <span className="text-muted-foreground">•</span>
                               <span className={team.fixtureSwing > 0 ? 'text-green-600 dark:text-green-400 font-semibold' : team.fixtureSwing < 0 ? 'text-red-600 dark:text-red-400 font-semibold' : 'text-muted-foreground'}>
-                                {team.swingEmoji} {team.fixtureSwing > 0 ? '+' : ''}{team.fixtureSwing}%
+                                {team.swingEmoji} {team.fixtureSwing > 0 ? '+' : ''}{formatSwing(team.fixtureSwing)}%
                               </span>
                             </div>
                             <button
                               onClick={() => handleViewPicks(team.team)}
-                              className="px-3 py-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white text-[11px] font-semibold rounded-md transition-all duration-200 hover:shadow-sm  whitespace-nowrap"
+                              className="w-full whitespace-nowrap rounded-md bg-primary px-3 py-1 text-[11px] font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
                             >
                               View Player Picks
                             </button>
@@ -452,7 +455,7 @@ export default function TransferTargetsPage() {
                           ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
                           : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
                         }>
-                          {team.swingEmoji} {team.fixtureSwing > 0 ? '+' : ''}{team.fixtureSwing}%
+                          {team.swingEmoji} {team.fixtureSwing > 0 ? '+' : ''}{formatSwing(team.fixtureSwing)}%
                         </Badge>
                       </div>
                       <div className="space-y-1.5 mb-3">
@@ -475,7 +478,7 @@ export default function TransferTargetsPage() {
                         </p>
                         <button
                           onClick={() => handleViewPicks(team.team)}
-                          className="py-1 px-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white text-[11px] font-semibold rounded-md transition-all duration-200 hover:shadow-sm  whitespace-nowrap"
+                          className="whitespace-nowrap rounded-md bg-primary px-3 py-1 text-[11px] font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
                         >
                           View Player Picks
                         </button>

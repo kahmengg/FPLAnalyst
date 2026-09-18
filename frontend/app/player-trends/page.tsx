@@ -120,7 +120,8 @@ const POSITION_META: Record<Position, { label: string; short: string }> = {
   4: { label: "Forwards", short: "FWD" },
 }
 
-const SERIES = ["#2563eb", "#16a34a", "#9333ea", "#ea580c"]
+// Distinct chart colors are intentionally limited to data visualization.
+const SERIES = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)"]
 const MAX_PLAYERS = 4
 
 const MODE_META: Record<CompareMode, { label: string; description: string }> = {
@@ -164,16 +165,20 @@ export default function PlayerTrendsPage() {
   const [mode, setMode] = useState<CompareMode>("output")
 
   useEffect(() => {
+    let active = true
     ;(async () => {
       try {
         setLoading(true)
-        setPlayers((await getComparisonPlayers()) as Player[])
+        const nextPlayers = (await getComparisonPlayers()) as Player[]
+        // Ignore a late response after navigation or a development remount.
+        if (active) setPlayers(nextPlayers)
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to load players")
+        if (active) setError(err instanceof Error ? err.message : "Failed to load players")
       } finally {
-        setLoading(false)
+        if (active) setLoading(false)
       }
     })()
+    return () => { active = false }
   }, [])
 
   useEffect(() => {
@@ -182,17 +187,21 @@ export default function PlayerTrendsPage() {
       return
     }
 
+    let active = true
     ;(async () => {
       try {
         setLoadingTrends(true)
         setError(null)
-        setTrendData((await getPlayerTrends(selectedNames, 10)) as Record<string, PlayerTrendData>)
+        const nextTrends = (await getPlayerTrends(selectedNames, 10)) as Record<string, PlayerTrendData>
+        // Selection can change while Supabase is responding; only render the latest request.
+        if (active) setTrendData(nextTrends)
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to load comparison")
+        if (active) setError(err instanceof Error ? err.message : "Failed to load comparison")
       } finally {
-        setLoadingTrends(false)
+        if (active) setLoadingTrends(false)
       }
     })()
+    return () => { active = false }
   }, [selectedNames])
 
   const teams = useMemo(() => {
@@ -401,6 +410,7 @@ export default function PlayerTrendsPage() {
 
                 <div className="grid gap-2 md:grid-cols-[minmax(0,1fr)_220px]">
                   <label className="relative block">
+                    <span className="sr-only">Search players</span>
                     <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <input
                       value={query}
@@ -410,6 +420,7 @@ export default function PlayerTrendsPage() {
                     />
                   </label>
                   <label className="relative block">
+                    <span className="sr-only">Filter by club</span>
                     <select
                       value={team}
                       onChange={(event) => setTeam(event.target.value)}
@@ -440,8 +451,8 @@ export default function PlayerTrendsPage() {
                   </div>
                 )}
 
-                <div className="overflow-hidden rounded-xl border border-border/70">
-                  <div className="grid grid-cols-[minmax(0,1fr)_80px_80px_72px] gap-2 border-b border-border/60 bg-secondary/25 px-3 py-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                <div className="overflow-x-auto rounded-xl border border-border/70">
+                  <div className="grid min-w-[560px] grid-cols-[minmax(0,1fr)_80px_80px_72px] gap-2 border-b border-border/60 bg-secondary/25 px-3 py-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
                     <span>Player</span><span className="text-right">Minutes</span><span className="text-right">Form</span><span className="text-right">Price</span>
                   </div>
                   <div className="divide-y divide-border/50">
@@ -457,7 +468,7 @@ export default function PlayerTrendsPage() {
                           type="button"
                           disabled={disabled}
                           onClick={() => togglePlayer(player)}
-                          className="grid w-full grid-cols-[minmax(0,1fr)_80px_80px_72px] items-center gap-2 px-3 py-3 text-left text-sm transition hover:bg-secondary/35 disabled:cursor-not-allowed disabled:opacity-40"
+                          className="grid min-w-[560px] w-full grid-cols-[minmax(0,1fr)_80px_80px_72px] items-center gap-2 px-3 py-3 text-left text-sm transition-colors hover:bg-muted focus-visible:bg-muted disabled:cursor-not-allowed disabled:opacity-40"
                         >
                           <span className="flex min-w-0 items-center gap-3">
                             <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${selected ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}>
@@ -503,6 +514,13 @@ export default function PlayerTrendsPage() {
           </Card>
         ) : loadingTrends ? (
           <div className="rounded-xl border border-border/60 px-5 py-10 text-center text-sm text-muted-foreground">Building comparison…</div>
+        ) : metrics.length < 2 ? (
+          <Card className="border-dashed">
+            <CardContent className="px-6 py-12 text-center">
+              <p className="font-medium">Comparison data is unavailable</p>
+              <p className="mt-1 text-sm text-muted-foreground">Try different players or reload the page. The selector remains available above.</p>
+            </CardContent>
+          </Card>
         ) : (
           <>
             <Card>
@@ -603,7 +621,15 @@ export default function PlayerTrendsPage() {
                             <CartesianGrid strokeDasharray="3 3" opacity={0.12} vertical={false} />
                             <XAxis dataKey="gameweek" tick={{ fontSize: 12 }} tickLine={false} axisLine={false} />
                             <YAxis tick={{ fontSize: 12 }} tickLine={false} axisLine={false} />
-                            <Tooltip />
+                            <Tooltip
+                              contentStyle={{
+                                backgroundColor: "var(--popover)",
+                                borderColor: "var(--border)",
+                                borderRadius: "0.75rem",
+                                color: "var(--popover-foreground)",
+                              }}
+                              labelStyle={{ color: "var(--popover-foreground)" }}
+                            />
                             <Legend />
                             {metrics.map((item, index) => (
                               <Line
@@ -653,12 +679,12 @@ export default function PlayerTrendsPage() {
 
                       <div className="space-y-2">
                         <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Recent gameweeks</div>
-                        <div className="overflow-hidden rounded-lg border border-border/60">
-                          <div className="grid grid-cols-[52px_minmax(0,1fr)_46px_46px_54px] bg-secondary/25 px-3 py-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                        <div className="overflow-x-auto rounded-lg border border-border/60">
+                          <div className="grid min-w-[430px] grid-cols-[52px_minmax(0,1fr)_46px_46px_54px] bg-secondary/25 px-3 py-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
                             <span>GW</span><span>Opponent</span><span className="text-right">Pts</span><span className="text-right">Min</span><span className="text-right">xGI</span>
                           </div>
                           {recent.map((gw) => (
-                            <div key={gw.gameweek} className="grid grid-cols-[52px_minmax(0,1fr)_46px_46px_54px] items-center border-t border-border/50 px-3 py-2 text-sm first:border-t-0">
+                            <div key={gw.gameweek} className="grid min-w-[430px] grid-cols-[52px_minmax(0,1fr)_46px_46px_54px] items-center border-t border-border/50 px-3 py-2 text-sm first:border-t-0">
                               <span className="tabular-nums">{gw.gameweek}</span>
                               <span className="truncate text-muted-foreground">{gw.was_home ? "vs" : "@"} {gw.opponent || "—"}</span>
                               <span className="text-right font-medium tabular-nums">{gw.total_points}</span>

@@ -1024,12 +1024,15 @@ export async function getComparisonPlayers() {
     const [players, season] = await Promise.all([getAllPlayersCached(5000), getSeason()])
     if (!players.length) return []
 
-    const playerIds = players.map((player: any) => player.id).filter(Boolean)
     const { data, error } = await requireSupabase()
       .from('player_season_stats')
       .select('player_id, total_minutes, total_points, gameweeks_played, form, xgi_per90, xg_per90, xa_per90, shots_per90')
       .eq('season_key', season)
-      .in('player_id', playerIds)
+
+    // Do not send every active player UUID through a PostgREST `in` filter.
+    // The active pool currently contains hundreds of players, which makes the
+    // generated GET URL large enough for the API gateway to reject with HTTP 400.
+    // Season stats are already scoped to one season and are cheap to join here.
 
     if (error) {
       throw new Error(`Failed to load comparison player pool: ${error.message}`)
