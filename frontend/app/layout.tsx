@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from "next"
 import '@/app/globals.css';
 import { Sidebar } from "@/components/sidebar"
 import { SeasonStatusBanner } from "@/components/season-status-banner"
-import { Inter, JetBrains_Mono } from "next/font/google"
+import { Inter, JetBrains_Mono, Newsreader } from "next/font/google"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,14 +15,19 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 })
 
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
+})
+
 export const metadata: Metadata = {
   title: "FPL Analyst - Your Strategic Advantage",
   description: "Comprehensive Fantasy Premier League analytics and insights",
 }
 
 export const viewport: Viewport = {
-  themeColor: "#112024",
-  colorScheme: "dark",
+  themeColor: "#F6F3EC",
+  colorScheme: "light",
 }
 
 export default function RootLayout({
@@ -31,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} ${newsreader.variable} antialiased`}>
       <body className="font-sans overflow-x-hidden">
         <div className="flex min-h-screen">
           <Sidebar />

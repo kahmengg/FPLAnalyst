@@ -2,14 +2,12 @@
 
 import React, { useEffect, useMemo, useState } from "react"
 import {
-  Activity,
   Check,
   ChevronDown,
   Search,
   Shield,
   Sparkles,
   Target,
-  Users,
   X,
 } from "lucide-react"
 import {
@@ -27,6 +25,9 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { PageSkeleton } from "@/components/data-state"
+import { PageHeader } from "@/components/page-header"
+import { TeamBadge } from "@/components/team-badge"
 import { getComparisonPlayers, getPlayerTrends } from "@/lib/supabase"
 
 type Position = 1 | 2 | 3 | 4
@@ -351,22 +352,17 @@ export default function PlayerTrendsPage() {
   }, [metrics, mode, position])
 
   if (loading) {
-    return <div className="p-6 text-sm text-muted-foreground">Loading comparison data…</div>
+    return <PageSkeleton label="Loading player comparison data" />
   }
 
   return (
-    <div className="min-h-screen bg-transparent p-3 sm:p-5 lg:p-7">
-      <div className="mx-auto max-w-[1500px] space-y-6">
-        <header className="space-y-2">
-          <div className="flex items-center gap-2 text-sm font-medium text-primary">
-            <Activity className="h-4 w-4" />
-            Player comparison
-          </div>
-          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Compare players who actually play the same role</h1>
-          <p className="max-w-3xl text-sm text-muted-foreground sm:text-base">
-            Pick a position first, then compare up to four active players with current-season minutes. The list is deliberately filtered so retired, transferred-out and zero-minute players do not clutter the selector.
-          </p>
-        </header>
+    <div className="min-h-screen px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+      <div className="mx-auto max-w-7xl space-y-6">
+        <PageHeader
+          eyebrow="Player comparison"
+          title="Compare players in the same role."
+          description="Choose a position, then compare up to four active players using current-season output, underlying threat, and minute security."
+        />
 
         {error && (
           <div className="rounded-xl border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive">
@@ -444,7 +440,7 @@ export default function PlayerTrendsPage() {
                       >
                         <span className="h-2 w-2 rounded-full" style={{ backgroundColor: SERIES[index] }} />
                         <span className="font-medium">{player.web_name}</span>
-                        <span className="text-muted-foreground">{player.team_short || player.team}</span>
+                        <TeamBadge code={player.team_short || player.team} className="h-6 min-w-9 px-1.5 text-[10px]" />
                         <X className="h-3.5 w-3.5 text-muted-foreground" />
                       </button>
                     ))}
@@ -471,9 +467,7 @@ export default function PlayerTrendsPage() {
                           className="grid min-w-[560px] w-full grid-cols-[minmax(0,1fr)_80px_80px_72px] items-center gap-2 px-3 py-3 text-left text-sm transition-colors hover:bg-muted focus-visible:bg-muted disabled:cursor-not-allowed disabled:opacity-40"
                         >
                           <span className="flex min-w-0 items-center gap-3">
-                            <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${selected ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground"}`}>
-                              {selected ? <Check className="h-4 w-4" /> : <Users className="h-4 w-4" />}
-                            </span>
+                            {selected ? <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"><Check className="h-4 w-4" /></span> : <TeamBadge code={player.team_short || player.team} className="h-8 min-w-10 px-1.5 text-[10px]" />}
                             <span className="min-w-0">
                               <span className="block truncate font-medium">{player.web_name || player.player_name}</span>
                               <span className="block truncate text-xs text-muted-foreground">{player.team}</span>
@@ -667,7 +661,7 @@ export default function PlayerTrendsPage() {
                           </div>
                           <p className="mt-1 text-sm text-muted-foreground">{item.data.team} · £{fmt(item.data.cost)}m · {fmt(item.data.ownership)}% owned</p>
                         </div>
-                        <Badge variant="secondary">{POSITION_META[item.data.position].short}</Badge>
+                        <div className="flex items-center gap-2"><TeamBadge code={item.data.team_short || item.data.team} className="h-7 min-w-10 px-1.5 text-[10px]" /><Badge variant="secondary">{POSITION_META[item.data.position].short}</Badge></div>
                       </div>
                     </CardHeader>
                     <CardContent className="space-y-4">

@@ -1,506 +1,161 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { TrendingUp, TrendingDown, Star, ArrowUp, ArrowDown, RefreshCw } from "lucide-react"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { ArrowDownRight, ArrowRight, ArrowUpRight, CalendarRange, Home, Sparkles, TrendingDown, TrendingUp } from "lucide-react"
+
+import { ErrorState, PageSkeleton } from "@/components/data-state"
+import { PageHeader } from "@/components/page-header"
+import { TeamBadge } from "@/components/team-badge"
 import TeamPicksModal from "@/components/team-picks-modal"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import { getQuickPicks, getTeamFixtureSummary } from "@/lib/supabase"
+import { cn } from "@/lib/utils"
 
-// Team color mapping
-const teamColors = {
-  "Arsenal": "text-red-600 dark:text-red-400",
-  "Liverpool": "text-red-700 dark:text-red-500",
-  "Man City": "text-sky-500 dark:text-sky-400",
-  "Chelsea": "text-blue-600 dark:text-blue-400",
-  "Coventry": "text-sky-700 dark:text-sky-400",
-  "Man Utd": "text-red-600 dark:text-red-400",
-  "Spurs": "text-slate-700 dark:text-slate-300",
-  "Newcastle": "text-slate-800 dark:text-slate-200",
-  "Brighton": "text-blue-500 dark:text-blue-300",
-  "Aston Villa": "text-purple-700 dark:text-purple-400",
-  "West Ham": "text-amber-700 dark:text-amber-500",
-  "Everton": "text-blue-700 dark:text-blue-500",
-  "Wolves": "text-orange-600 dark:text-orange-400",
-  "Crystal Palace": "text-blue-600 dark:text-blue-400",
-  "Brentford": "text-red-600 dark:text-red-400",
-  "Fulham": "text-slate-800 dark:text-slate-300",
-  "Hull": "text-amber-700 dark:text-amber-400",
-  "Ipswich": "text-blue-700 dark:text-blue-400",
-  "Bournemouth": "text-red-700 dark:text-red-500",
-  "Nott'm Forest": "text-red-800 dark:text-red-600",
-  "Burnley": "text-purple-900 dark:text-purple-400",
-  "Leeds": "text-blue-600 dark:text-blue-400",
-  "Sunderland": "text-red-700 dark:text-red-500",
+type TeamSummary = {
+  team: string
+  team_short: string
+  att: number
+  def: number
+  overall: number
+  fixtures: number
+  nearTermHomeFixtures: number
+  mediumTermHomeFixtures: number
+  nearTermRating: number
+  mediumTermRating: number
+  fixtureSwing: number
+  swingCategory: "Improving" | "Declining" | "Stable"
 }
 
-const getTeamColor = (teamName: string) => {
-  return "text-foreground"
+type PickPlayer = {
+  web_name: string
+  position_name: string
+  now_cost: number
+  goals_per_game?: number
+  assists_per_game?: number
+  points_per_game?: number
+  selected_by_percent?: number
+  attacker_score?: number
+  defender_score?: number
+  form?: number
+  clean_sheet_rate?: number
 }
 
-const getTeamBackgroundColor = (teamName: string) => {
-  const bgColors = {
-    "Arsenal": "bg-red-100 dark:bg-red-950",
-    "Liverpool": "bg-red-200 dark:bg-red-950",
-    "Man City": "bg-sky-100 dark:bg-sky-950",
-    "Chelsea": "bg-blue-100 dark:bg-blue-950",
-    "Coventry": "bg-sky-100 dark:bg-sky-950",
-    "Man Utd": "bg-red-100 dark:bg-red-950",
-    "Spurs": "bg-slate-100 dark:bg-slate-900",
-    "Newcastle": "bg-slate-200 dark:bg-slate-900",
-    "Brighton": "bg-blue-50 dark:bg-blue-950",
-    "Aston Villa": "bg-purple-100 dark:bg-purple-950",
-    "West Ham": "bg-amber-100 dark:bg-amber-950",
-    "Everton": "bg-blue-200 dark:bg-blue-950",
-    "Wolves": "bg-orange-100 dark:bg-orange-950",
-    "Crystal Palace": "bg-blue-100 dark:bg-blue-950",
-    "Brentford": "bg-red-100 dark:bg-red-950",
-    "Fulham": "bg-slate-100 dark:bg-slate-900",
-    "Hull": "bg-amber-100 dark:bg-amber-950",
-    "Ipswich": "bg-blue-100 dark:bg-blue-950",
-    "Bournemouth": "bg-red-200 dark:bg-red-950",
-    "Nott'm Forest": "bg-red-300 dark:bg-red-950",
-    "Burnley": "bg-purple-200 dark:bg-purple-950",
-    "Leeds": "bg-blue-100 dark:bg-blue-950",
-    "Sunderland": "bg-red-200 dark:bg-red-950",
-  }
-  return "bg-muted/35"
+type PickTeam = { team: string; players?: PickPlayer[] }
+
+type ModalPlayer = {
+  name: string
+  position: string
+  position_name: string
+  price: number
+  goals_pg?: number
+  assists_pg?: number
+  points_pg?: number
+  points_per_game?: number
+  ownership?: number
+  selected_by_percent?: number
+  attacker_score?: number
+  defender_score?: number
+  form?: number
+  cs_rate?: number
+  clean_sheet_rate?: number
 }
 
-// Avoid exposing floating-point artifacts such as 0.8000000000000003%.
-const formatSwing = (value: number) => Number(value || 0).toFixed(2).replace(/\.00$/, "").replace(/(\.\d)0$/, "$1")
+function score(value: number) {
+  return Number(value || 0).toFixed(2).replace(/\.00$/, "").replace(/(\.\d)0$/, "$1")
+}
+
+function SwingBadge({ value, category }: { value: number; category: TeamSummary["swingCategory"] }) {
+  const improving = category === "Improving"
+  const declining = category === "Declining"
+  const Icon = improving ? ArrowUpRight : declining ? ArrowDownRight : ArrowRight
+  return <Badge variant="outline" className={cn(improving && "border-success/30 bg-success/10 text-success", declining && "border-destructive/30 bg-destructive/10 text-destructive", !improving && !declining && "bg-secondary text-muted-foreground")}><Icon className="h-3 w-3" />{category} {value > 0 ? "+" : ""}{score(value)}</Badge>
+}
+
+function HorizonList({ title, description, rows, horizon, onViewPicks }: { title: string; description: string; rows: TeamSummary[]; horizon: "near" | "medium"; onViewPicks: (team: TeamSummary) => void }) {
+  return (
+    <section aria-labelledby={`${horizon}-title`} className="overflow-hidden rounded-xl border border-border bg-card">
+      <div className="border-b border-border p-5"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">{horizon === "near" ? "Immediate priority" : "Plan ahead"}</p><h2 id={`${horizon}-title`} className="mt-1 text-3xl font-medium">{title}</h2><p className="mt-2 text-sm leading-6 text-muted-foreground">{description}</p></div>
+      <div className="divide-y divide-border">
+        {rows.slice(0, 7).map((team, index) => {
+          const rating = horizon === "near" ? team.nearTermRating : team.mediumTermRating
+          const homes = horizon === "near" ? team.nearTermHomeFixtures : team.mediumTermHomeFixtures
+          return (
+            <article key={`${horizon}-${team.team}`} className="p-4 transition-colors hover:bg-secondary/25 sm:p-5">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-3"><span className="w-5 shrink-0 font-mono text-xs text-muted-foreground">{index + 1}</span><TeamBadge code={team.team_short || team.team} /><div className="min-w-0"><h3 className="truncate font-sans text-sm font-semibold">{team.team}</h3><p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground"><Home className="h-3 w-3" />{homes} home fixtures</p></div></div>
+                <div className="text-right"><p className="font-mono text-lg font-semibold tabular-nums">{score(rating)}</p><p className="text-[11px] text-muted-foreground">favorability</p></div>
+              </div>
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-3"><div className="flex items-center gap-2"><SwingBadge value={team.fixtureSwing} category={team.swingCategory} /><span className="text-xs text-muted-foreground">ATT {score(team.att)} · DEF {score(team.def)}</span></div><Button variant="ghost" size="sm" onClick={() => onViewPicks(team)}><Sparkles className="h-4 w-4" />Player picks</Button></div>
+            </article>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
 
 export default function TransferTargetsPage() {
-  const [teamFixtureSummary, setTeamFixtureSummary] = useState<any[]>([])
-  const [attackingPicks, setAttackingPicks] = useState<any[]>([])
-  const [defensivePicks, setDefensivePicks] = useState<any[]>([])
-  const [selectedTeam, setSelectedTeam] = useState<any>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [teams, setTeams] = useState<TeamSummary[]>([])
+  const [attackingPicks, setAttackingPicks] = useState<PickTeam[]>([])
+  const [defensivePicks, setDefensivePicks] = useState<PickTeam[]>([])
+  const [selectedTeam, setSelectedTeam] = useState<TeamSummary | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true)
-      setError(null)
-      try {
-        const [summaryData, attackingData, defensiveData] = await Promise.all([
-          getTeamFixtureSummary(),
-          getQuickPicks("attacking"),
-          getQuickPicks("defensive"),
-        ])
-
-        setTeamFixtureSummary(summaryData)
-        setAttackingPicks(attackingData)
-        setDefensivePicks(defensiveData)
-      } catch (err: any) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
-      }
+  const fetchData = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const [summary, attacking, defensive] = await Promise.all([getTeamFixtureSummary(), getQuickPicks("attacking"), getQuickPicks("defensive")])
+      setTeams(summary as TeamSummary[])
+      setAttackingPicks(attacking as PickTeam[])
+      setDefensivePicks(defensive as PickTeam[])
+    } catch (caughtError) {
+      setError(caughtError instanceof Error ? caughtError.message : "Unable to load transfer planning data")
+    } finally {
+      setLoading(false)
     }
-    fetchData()
   }, [])
 
-  // Handler to open Quick Picks modal for a team
-  const handleViewPicks = (teamName: string) => {
-    setSelectedTeam({ name: teamName })
-    setIsModalOpen(true)
-  }
+  useEffect(() => { void fetchData() }, [fetchData])
 
-  // Get Quick Picks data for selected team
-  const getTeamPicksData = (teamName: string) => {
-    const normalizedName = teamName.trim().toLowerCase()
-    const attackingTeam = attackingPicks.find((t: any) => t.team.trim().toLowerCase() === normalizedName)
-    const defensiveTeam = defensivePicks.find((t: any) => t.team.trim().toLowerCase() === normalizedName)
-    
+  const byNearTerm = useMemo(() => [...teams].sort((a, b) => b.nearTermRating - a.nearTermRating), [teams])
+  const byMediumTerm = useMemo(() => [...teams].sort((a, b) => b.mediumTermRating - a.mediumTermRating), [teams])
+  const bySwing = useMemo(() => [...teams].sort((a, b) => b.fixtureSwing - a.fixtureSwing), [teams])
+  const bestImprovement = bySwing[0]
+  const biggestDecline = bySwing.at(-1)
+
+  const modalPlayers = (teamName: string): { attackingPlayers: ModalPlayer[]; defensivePlayers: ModalPlayer[] } => {
+    const normalized = teamName.trim().toLowerCase()
+    const attacking = attackingPicks.find((team) => team.team.trim().toLowerCase() === normalized)
+    const defensive = defensivePicks.find((team) => team.team.trim().toLowerCase() === normalized)
+    const mapBase = (player: PickPlayer) => ({ name: player.web_name, position: player.position_name, position_name: player.position_name, price: player.now_cost, points_pg: player.points_per_game, points_per_game: player.points_per_game, ownership: player.selected_by_percent, selected_by_percent: player.selected_by_percent, form: player.form ?? 0 })
     return {
-      attackingPlayers: attackingTeam?.players?.map((p: any) => ({
-        name: p.web_name,
-        position: p.position_name,
-        position_name: p.position_name,
-        price: p.now_cost,
-        goals_pg: p.goals_per_game || 0,
-        assists_pg: p.assists_per_game || 0,
-        points_pg: p.points_per_game,
-        points_per_game: p.points_per_game,
-        ownership: p.selected_by_percent,
-        selected_by_percent: p.selected_by_percent,
-        attacker_score: p.attacker_score || 0,
-        defender_score: 0,
-        form: p.form ?? 5.0,
-        clean_sheet_rate: 0
-      })) || [],
-      defensivePlayers: defensiveTeam?.players?.map((p: any) => ({
-        name: p.web_name,
-        position: p.position_name,
-        position_name: p.position_name,
-        price: p.now_cost,
-        cs_rate: p.clean_sheet_rate,
-        clean_sheet_rate: p.clean_sheet_rate,
-        points_pg: p.points_per_game,
-        points_per_game: p.points_per_game,
-        ownership: p.selected_by_percent,
-        selected_by_percent: p.selected_by_percent,
-        defender_score: p.defender_score || 0,
-        attacker_score: 0,
-        form: p.form ?? 5.0
-      })) || []
+      attackingPlayers: (attacking?.players ?? []).map((player) => ({ ...mapBase(player), goals_pg: player.goals_per_game ?? 0, assists_pg: player.assists_per_game ?? 0, attacker_score: player.attacker_score ?? 0, defender_score: 0, clean_sheet_rate: 0 })),
+      defensivePlayers: (defensive?.players ?? []).map((player) => ({ ...mapBase(player), cs_rate: player.clean_sheet_rate ?? 0, clean_sheet_rate: player.clean_sheet_rate ?? 0, defender_score: player.defender_score ?? 0, attacker_score: 0 })),
     }
   }
 
-  if (loading) {
-    return (
-      <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-background">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <div className="h-10 w-72 bg-secondary/50 rounded-lg mb-2"></div>
-            <div className="h-6 w-96 bg-secondary/30 rounded-lg"></div>
-          </div>
-          <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <Card key={i} className="border-border/50">
-                <CardContent className="p-6">
-                  <div className="h-24 bg-secondary/30 rounded-lg"></div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <Card className="border-border/50 mb-8">
-            <CardContent className="p-6">
-              <div className="space-y-4">
-                <div className="h-8 bg-secondary/30 rounded-lg w-64"></div>
-                <div className="grid gap-4 lg:grid-cols-2">
-                  {[1, 2].map((i) => (
-                    <div key={i} className="space-y-2">
-                      {[1, 2, 3, 4, 5].map((j) => (
-                        <div key={j} className="h-20 bg-secondary/20 rounded-lg"></div>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    )
-  }
-  
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-red-500">
-        Error: {error}
-        <button
-          onClick={() => window.location.reload()}
-          className="ml-4 px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Retry
-        </button>
-      </div>
-    )
-  }
+  if (loading) return <PageSkeleton label="Loading transfer planner" />
+  if (error) return <ErrorState title="Transfer planner unavailable" description={error} onAction={() => void fetchData()} />
 
   return (
-    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h1 className="mb-2 text-4xl font-bold text-foreground flex items-center gap-3">
-            <RefreshCw className="h-8 w-8 text-primary" aria-hidden="true" />
-            <span className="text-foreground">
-              Transfer Targets
-            </span>
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Strategic fixture analysis across two periods to identify optimal transfer targets
-          </p>
-        </div>
+    <div className="min-h-screen px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12"><div className="mx-auto max-w-7xl">
+      <PageHeader eyebrow="Transfer planner" title="Plan the fixture swing, not just the next match." description="Compare immediate and medium-term schedules to identify clubs whose opportunity is improving before the market catches up." />
 
-        {/* Key Insights */}
-        <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <Card className="border-green-500/50 bg-card hover:shadow-md  transition-all duration-300">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-green-500/20 rounded-full  transition-transform duration-300">
-                  <TrendingUp className="h-8 w-8 text-green-500" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Best Improvement</p>
-                  <p className="text-xl font-bold text-foreground hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200">
-                    {[...teamFixtureSummary].sort((a, b) => b.fixtureSwing - a.fixtureSwing)[0]?.team || 'N/A'}
-                  </p>
-                  <p className="text-xs text-green-600 dark:text-green-400 font-semibold">
-                    +{formatSwing([...teamFixtureSummary].sort((a, b) => b.fixtureSwing - a.fixtureSwing)[0]?.fixtureSwing)}% easier
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-red-500/50 bg-card hover:shadow-md  transition-all duration-300">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-red-500/20 rounded-full  transition-transform duration-300">
-                  <TrendingDown className="h-8 w-8 text-red-500" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Biggest Decline</p>
-                  <p className="text-xl font-bold text-foreground hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200">
-                    {[...teamFixtureSummary].sort((a, b) => a.fixtureSwing - b.fixtureSwing)[0]?.team || 'N/A'}
-                  </p>
-                  <p className="text-xs text-red-600 dark:text-red-400 font-semibold">
-                    {formatSwing([...teamFixtureSummary].sort((a, b) => a.fixtureSwing - b.fixtureSwing)[0]?.fixtureSwing)}% harder
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-blue-500/50 bg-card hover:shadow-md  transition-all duration-300">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-blue-500/20 rounded-full  transition-transform duration-300">
-                  <Star className="h-8 w-8 text-blue-500" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Teams Analyzed</p>
-                  <p className="text-xl font-bold text-foreground hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">{teamFixtureSummary.length}</p>
-                  <p className="text-xs text-muted-foreground">Next 6 gameweeks</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+      <section aria-label="Transfer planning highlights" className="mb-8 grid gap-3 md:grid-cols-3">
+        <Card><CardContent className="flex items-center gap-4"><div className="grid h-10 w-10 place-items-center rounded-lg bg-success/10 text-success"><TrendingUp className="h-5 w-5" /></div><div className="min-w-0"><p className="text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground">Best swing</p><p className="mt-1 truncate font-semibold">{bestImprovement?.team ?? "—"}</p><p className="text-xs text-success">{bestImprovement ? `+${score(bestImprovement.fixtureSwing)}` : "—"}</p></div></CardContent></Card>
+        <Card><CardContent className="flex items-center gap-4"><div className="grid h-10 w-10 place-items-center rounded-lg bg-destructive/10 text-destructive"><TrendingDown className="h-5 w-5" /></div><div className="min-w-0"><p className="text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground">Toughest swing</p><p className="mt-1 truncate font-semibold">{biggestDecline?.team ?? "—"}</p><p className="text-xs text-destructive">{biggestDecline ? score(biggestDecline.fixtureSwing) : "—"}</p></div></CardContent></Card>
+        <Card><CardContent className="flex items-center gap-4"><div className="grid h-10 w-10 place-items-center rounded-lg bg-secondary text-muted-foreground"><CalendarRange className="h-5 w-5" /></div><div><p className="font-mono text-2xl font-semibold">{teams.length}</p><p className="text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground">Clubs modelled</p></div></CardContent></Card>
+      </section>
 
-        {/* Fixture Period Comparison */}
-        <Card className="mb-8 bg-card">
-          <CardHeader className="border-b border-border/50 pb-4">
-            <CardTitle className="text-base text-foreground flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted">
-                📊
-              </div>
-              Fixture Difficulty by Period
-              <Badge variant="secondary" className="ml-auto text-xs">
-                Next 6 GWs
-              </Badge>
-            </CardTitle>
-            <p className="text-sm text-muted-foreground mt-2">
-              Compare team fixture quality across two periods. Higher percentage = easier fixtures. Click "View Players" to see recommended players from each team.
-            </p>
-          </CardHeader>
-          <CardContent className="p-6">
-            <div className="grid gap-4 lg:grid-cols-2">
-              {/* Near-term: Next 3 Gameweeks */}
-              <div className="min-w-0 space-y-3">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="flex min-w-0 flex-wrap items-center gap-2 text-sm font-bold text-foreground sm:text-base">
-                    ⭐ Next 3 Gameweeks
-                    <span className="text-[10px] sm:text-xs text-muted-foreground font-normal">(Immediate Priority)</span>
-                  </h3>
-                </div>
-                <div className="space-y-2">
-                  {[...teamFixtureSummary]
-                    .sort((a, b) => b.nearTermRating - a.nearTermRating)
-                    .map((team, index) => {
-                      return (
-                        <div
-                          key={index}
-                          style={{ animationDelay: `${index * 50}ms` }}
-                          className={`p-3 rounded-lg border-2 border-slate-300 dark:border-slate-700 ${getTeamBackgroundColor(team.team)} 
-                             hover:bg-muted/50 hover:border-border
-                            transition-all duration-300 ease-out
-                            group cursor-pointer`}
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center gap-3 flex-1 min-w-0">
-                              <span className="text-xs font-bold text-muted-foreground w-6  transition-transform duration-200">#{index + 1}</span>
-                              <span className="truncate text-sm font-semibold text-foreground">{team.team}</span>
-                            </div>
-                            <span className={`font-bold text-lg ${getTeamColor(team.team)}  transition-transform duration-200`}>
-                              {team.nearTermRating}%
-                            </span>
-                          </div>
-                          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
-                            <div className="flex items-center gap-2 text-xs flex-wrap">
-                              <span className="text-muted-foreground px-2 py-1 bg-secondary/50 rounded-md">🎪 {team.nearTermHomeFixtures} home</span>
-                              <span className={`font-semibold px-2 py-1 rounded-md transition-all duration-200  ${
-                                team.avgAttackDiff > 2 
-                                  ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
-                                  : team.avgAttackDiff < -2 
-                                  ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400' 
-                                  : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'
-                              }`} title="Attack Difficulty">
-                                ⚔️ {team.avgAttackDiff > 0 ? '+' : ''}{team.avgAttackDiff?.toFixed(1)}
-                              </span>
-                              <span className={`font-semibold px-2 py-1 rounded-md transition-all duration-200  ${
-                                team.avgDefenseDiff > 2 
-                                  ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
-                                  : team.avgDefenseDiff < -2 
-                                  ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400' 
-                                  : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'
-                              }`} title="Defense Difficulty">
-                                🛡️ {team.avgDefenseDiff > 0 ? '+' : ''}{team.avgDefenseDiff?.toFixed(1)}
-                              </span>
-                            </div>
-                            <button
-                              onClick={() => handleViewPicks(team.team)}
-                              className="w-full whitespace-nowrap rounded-md bg-primary px-3 py-1 text-[11px] font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
-                            >
-                              View Players
-                            </button>
-                          </div>
-                        </div>
-                      )
-                    })}
-                </div>
-              </div>
+      <div className="grid gap-6 xl:grid-cols-2"><HorizonList title="Next five fixtures" description="Clubs with the strongest immediate schedule and useful home concentration." rows={byNearTerm} horizon="near" onViewPicks={setSelectedTeam} /><HorizonList title="Following five fixtures" description="Clubs whose medium-term schedule deserves an early watchlist place." rows={byMediumTerm} horizon="medium" onViewPicks={setSelectedTeam} /></div>
 
-              {/* Medium-term: Following 3 Gameweeks */}
-              <div className="min-w-0 space-y-3">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="flex min-w-0 flex-wrap items-center gap-2 text-sm font-bold text-foreground sm:text-base">
-                    📊 Following 3 Gameweeks
-                    <span className="text-[10px] sm:text-xs text-muted-foreground font-normal">(Plan Ahead)</span>
-                  </h3>
-                </div>
-                <div className="space-y-2">
-                  {[...teamFixtureSummary]
-                    .sort((a, b) => b.mediumTermRating - a.mediumTermRating)
-                    .map((team, index) => {
-                      return (
-                        <div
-                          key={index}
-                          className={`p-3 rounded-lg border-2 border-slate-300 dark:border-slate-700 ${getTeamBackgroundColor(team.team)}  transition-all`}
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex items-center gap-3 flex-1 min-w-0">
-                              <span className="text-xs font-bold text-muted-foreground w-6">#{index + 1}</span>
-                              <span className="font-semibold text-sm text-foreground truncate">{team.team}</span>
-                              {team.fixtureSwing > 0 && (
-                                <span className="text-green-600 dark:text-green-400 text-lg font-bold" title="Fixtures improving">✅</span>
-                              )}
-                              {team.fixtureSwing < 0 && (
-                                <span className="text-red-600 dark:text-red-400 text-lg font-bold" title="Fixtures declining">❌</span>
-                              )}
-                            </div>
-                            <span className={`font-bold text-lg ${getTeamColor(team.team)}`}>
-                              {team.mediumTermRating}%
-                            </span>
-                          </div>
-                          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between">
-                            <div className="flex flex-wrap items-center gap-2 text-xs">
-                              <span className="text-muted-foreground">🎪 {team.mediumTermHomeFixtures} home</span>
-                              <span className="text-muted-foreground">•</span>
-                              <span className={`font-semibold ${team.avgAttackDiff > 2 ? 'text-green-600 dark:text-green-400' : team.avgAttackDiff < -2 ? 'text-red-600 dark:text-red-400' : 'text-yellow-600 dark:text-yellow-400'}`}>
-                                ⚔️ {team.avgAttackDiff > 0 ? '+' : ''}{team.avgAttackDiff?.toFixed(1)}
-                              </span>
-                              <span className="text-muted-foreground">•</span>
-                              <span className={`font-semibold ${team.avgDefenseDiff > 2 ? 'text-green-600 dark:text-green-400' : team.avgDefenseDiff < -2 ? 'text-red-600 dark:text-red-400' : 'text-yellow-600 dark:text-yellow-400'}`}>
-                                🛡️ {team.avgDefenseDiff > 0 ? '+' : ''}{team.avgDefenseDiff?.toFixed(1)}
-                              </span>
-                              <span className="text-muted-foreground">•</span>
-                              <span className={team.fixtureSwing > 0 ? 'text-green-600 dark:text-green-400 font-semibold' : team.fixtureSwing < 0 ? 'text-red-600 dark:text-red-400 font-semibold' : 'text-muted-foreground'}>
-                                {team.swingEmoji} {team.fixtureSwing > 0 ? '+' : ''}{formatSwing(team.fixtureSwing)}%
-                              </span>
-                            </div>
-                            <button
-                              onClick={() => handleViewPicks(team.team)}
-                              className="w-full whitespace-nowrap rounded-md bg-primary px-3 py-1 text-[11px] font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
-                            >
-                              View Player Picks
-                            </button>
-                          </div>
-                        </div>
-                      )
-                    })}
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+      <section className="mt-8" aria-labelledby="swing-title"><div className="mb-4"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Market timing</p><h2 id="swing-title" className="mt-1 text-3xl font-medium">Fixture swing table</h2></div><div className="overflow-x-auto rounded-xl border border-border bg-card"><table className="w-full min-w-[720px] text-sm"><thead className="bg-secondary text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"><tr><th className="px-4 py-4 text-left">Club</th><th className="px-4 py-4 text-right">Next five</th><th className="px-4 py-4 text-right">Following five</th><th className="px-4 py-4 text-right">Swing</th><th className="px-4 py-4 text-right">Favourable fixtures</th></tr></thead><tbody className="divide-y divide-border">{bySwing.map((team) => <tr key={team.team} className="hover:bg-secondary/25"><th scope="row" className="px-4 py-3"><div className="flex items-center gap-3"><TeamBadge code={team.team_short || team.team} /><span>{team.team}</span></div></th><td className="px-4 py-3 text-right font-mono">{score(team.nearTermRating)}</td><td className="px-4 py-3 text-right font-mono">{score(team.mediumTermRating)}</td><td className="px-4 py-3 text-right"><SwingBadge value={team.fixtureSwing} category={team.swingCategory} /></td><td className="px-4 py-3 text-right font-mono">{team.fixtures}</td></tr>)}</tbody></table></div></section>
 
-        {/* Biggest Movers */}
-        <Card className="border-border/50 bg-card  shadow-sm">
-          <CardHeader className="pb-4 border-b border-border/50">
-            <CardTitle className="text-base text-foreground flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center">
-                📄
-              </div>
-              Biggest Fixture Swings
-              <Badge variant="secondary" className="ml-auto text-xs">
-                Priority Transfers
-              </Badge>
-            </CardTitle>
-            <p className="text-sm text-muted-foreground mt-2">
-              Teams with the largest fixture difficulty changes between periods. Green = Buy targets, Red = Sell candidates.
-            </p>
-          </CardHeader>
-          <CardContent className="p-6">
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {[...teamFixtureSummary]
-                .sort((a, b) => Math.abs(b.fixtureSwing) - Math.abs(a.fixtureSwing))
-                .slice(0, 12)
-                .map((team, index) => {
-                  const isImproving = team.fixtureSwing > 0
-                  return (
-                    <div
-                      key={index}
-                      className={`p-4 rounded-lg border transition-all  ${
-                        isImproving
-                          ? 'bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-green-500/20 hover:border-green-500/40'
-                          : 'bg-gradient-to-r from-red-500/10 to-orange-500/10 border-red-500/20 hover:border-red-500/40'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="font-semibold text-sm text-foreground">{team.team}</span>
-                        <Badge className={isImproving 
-                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                          : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
-                        }>
-                          {team.swingEmoji} {team.fixtureSwing > 0 ? '+' : ''}{formatSwing(team.fixtureSwing)}%
-                        </Badge>
-                      </div>
-                      <div className="space-y-1.5 mb-3">
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-muted-foreground">Next 3 GWs</span>
-                          <span className={`font-semibold ${getTeamColor(team.team)}`}>
-                            {team.nearTermRating}%
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-muted-foreground">Following 3 GWs</span>
-                          <span className={`font-semibold ${getTeamColor(team.team)}`}>
-                            {team.mediumTermRating}%
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <p className="text-xs text-muted-foreground">
-                          {isImproving ? '📊 BUY: Fixtures easing' : '💸 SELL: Fixtures toughening'}
-                        </p>
-                        <button
-                          onClick={() => handleViewPicks(team.team)}
-                          className="whitespace-nowrap rounded-md bg-primary px-3 py-1 text-[11px] font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-                        >
-                          View Player Picks
-                        </button>
-                      </div>
-                    </div>
-                  )
-                })}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Quick Picks Modal */}
-      {selectedTeam && (
-        <TeamPicksModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          teamName={selectedTeam.name}
-          teamCode={selectedTeam.name.substring(0, 3).toUpperCase()}
-          {...getTeamPicksData(selectedTeam.name)}
-        />
-      )}
-    </div>
+      {selectedTeam ? <TeamPicksModal isOpen={Boolean(selectedTeam)} onClose={() => setSelectedTeam(null)} teamName={selectedTeam.team} teamCode={selectedTeam.team_short || selectedTeam.team} {...modalPlayers(selectedTeam.team)} /> : null}
+    </div></div>
   )
 }

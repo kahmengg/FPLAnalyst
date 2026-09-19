@@ -1,607 +1,168 @@
-// @ts-nocheck
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { ChevronDown, Shield, Sparkles, Target, Users } from "lucide-react"
+
+import { EmptyState, ErrorState, PageSkeleton } from "@/components/data-state"
+import { PageHeader } from "@/components/page-header"
+import { PlayerSummaryCard } from "@/components/player-summary-card"
+import { TeamBadge } from "@/components/team-badge"
 import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { TrendingUp, Shield, Target, Star, Users, Award, DollarSign, Clock, X } from "lucide-react"
 import { getQuickPicks } from "@/lib/supabase"
 
-const PositionBadge = ({ position }: { position: string }) => {
-  // Map full position names to abbreviations
-  const positionMap: { [key: string]: string } = {
-    Goalkeeper: "GK",
-    Defender: "DEF",
-    Midfielder: "MID",
-    Forward: "FWD",
-  };
+type PickMode = "attacking" | "defensive"
 
-  // Get the abbreviated position, or use the original if not found
-  const normalizedPosition = positionMap[position] || position;
+type PickPlayer = {
+  web_name: string
+  position_name: string
+  now_cost: number
+  points_per_game: number
+  goals_per_game?: number
+  assists_per_game?: number
+  clean_sheet_rate?: number
+  selected_by_percent: number
+  attacker_score?: number
+  defender_score?: number
+  defensive_contributions?: number
+  form: number
+  status?: string
+}
 
-  const colors: { [key: string]: string } = {
-    GK: "bg-purple-100 text-purple-800 border-purple-200",
-    DEF: "bg-blue-100 text-blue-800 border-blue-200",
-    MID: "bg-green-100 text-green-800 border-green-200",
-    FWD: "bg-red-100 text-red-800 border-red-200",
-  };
+type TeamPicks = {
+  team: string
+  short_name: string
+  players: PickPlayer[]
+  attack_rank?: number
+  defense_rank?: number
+}
+
+function recommendation(player: PickPlayer, mode: PickMode) {
+  const score = mode === "attacking" ? player.attacker_score ?? 0 : player.defender_score ?? 0
+  const threshold = mode === "attacking" ? { elite: 2.2, strong: 1.5 } : { elite: 3, strong: 2 }
+  if (score >= threshold.elite || (player.points_per_game >= 6 && player.form >= 5)) return { label: "Top pick", tone: "border-success/30 bg-success/10 text-success" }
+  if (score >= threshold.strong && player.selected_by_percent < 15) return { label: "Differential", tone: "border-foreground/20 bg-secondary text-foreground" }
+  if (score >= threshold.strong) return { label: "Solid choice", tone: "border-foreground/20 bg-secondary text-foreground" }
+  if (score >= threshold.strong * 0.7) return { label: "Monitor", tone: "border-warning/30 bg-warning/10 text-warning" }
+  return { label: "Risky", tone: "border-destructive/30 bg-destructive/10 text-destructive" }
+}
+
+function PickCard({ player, team, mode, rank }: { player: PickPlayer; team: TeamPicks; mode: PickMode; rank: number }) {
+  const rec = recommendation(player, mode)
+  const score = mode === "attacking" ? player.attacker_score : player.defender_score
+  return (
+      <PlayerSummaryCard
+        rank={rank}
+        player={{
+          name: player.web_name,
+          teamCode: team.short_name || team.team,
+          teamName: team.team,
+          position: player.position_name,
+          price: player.now_cost,
+          totalPoints: player.points_per_game,
+          pointsLabel: "Points / match",
+          form: player.form,
+          ownership: player.selected_by_percent,
+          defensiveContribution: mode === "defensive" ? player.defensive_contributions : undefined,
+          status: player.status,
+        }}
+        footer={<><Badge variant="outline" className={rec.tone}>{rec.label}</Badge><span className="font-mono text-xs font-semibold text-muted-foreground" aria-label={`Model score ${score ?? 0}`}>Score {Number(score ?? 0).toFixed(2)}</span></>}
+      />
+  )
+}
+
+function PickCollection({ teams, mode, selectedTeam }: { teams: TeamPicks[]; mode: PickMode; selectedTeam: string }) {
+  const visibleTeams = selectedTeam === "all" ? teams : teams.filter((team) => team.short_name === selectedTeam)
+  if (!visibleTeams.length) return <EmptyState title="No recommendations found" description="Try another team or return to all clubs." />
 
   return (
-    <Badge
-      variant="outline"
-      className="rounded-full border-border bg-muted font-mono text-xs font-bold text-foreground"
-    >
-      {normalizedPosition}
-    </Badge>
-  );
-};
+    <div className="space-y-6">
+      {visibleTeams.map((team) => {
+        const sortedPlayers = [...(team.players ?? [])].sort((a, b) => {
+          const aScore = mode === "attacking" ? a.attacker_score ?? 0 : a.defender_score ?? 0
+          const bScore = mode === "attacking" ? b.attacker_score ?? 0 : b.defender_score ?? 0
+          return bScore - aScore
+        })
+        const teamRank = mode === "attacking" ? team.attack_rank : team.defense_rank
 
-
-// Define recommendation logic
-const getRecommendation = (player: any) => {
-  const { points_per_game, form, position_name, attacker_score = 0, defender_score = 0, selected_by_percent, clean_sheet_rate = 0 } = player;
-
-  const isAttacker = position_name === 'Midfielder' || position_name === 'Forward';
-  const score = isAttacker ? attacker_score : defender_score;
-
-  const categories = [
-    {
-      // Elite picks - only the very best
-      // Attackers: 2.2+ (top tier like Gravenberch 2.43)
-      // Defenders: 3.0+ (top tier from range 3.67-1.1)
-      condition: (isAttacker && score >= 2.2) || (!isAttacker && score >= 3.0) || (points_per_game >= 6.0 && form >= 5.0),
-      label: "⭐ Top Pick",
-      className: "text-green-800 dark:text-green-200 font-medium",
-    },
-    {
-      // Strong differentials - good score but low ownership
-      // Attackers: 1.6+ | Defenders: 2.3+
-      condition: ((isAttacker && score >= 1.6) || (!isAttacker && score >= 2.3)) && selected_by_percent < 15,
-      label: "🎯 Differential",
-      className: "text-purple-800 dark:text-purple-200 font-medium",
-    },
-    {
-      // Solid options - above average
-      // Attackers: 1.5+ | Defenders: 2.0+
-      condition: (isAttacker && score >= 1.5) || (!isAttacker && score >= 2.0),
-      label: "📊 Solid Choice",
-      className: "text-blue-800 dark:text-blue-200 font-medium",
-    },
-    {
-      // Average - needs monitoring
-      // Attackers: 1.0+ | Defenders: 1.5+
-      condition: (isAttacker && score >= 1.0) || (!isAttacker && score >= 1.5),
-      label: "🔍 Monitor",
-      className: "text-orange-800 dark:text-orange-200 font-medium",
-    },
-    {
-      // Below average - risky pick
-      // Attackers: <1.0 | Defenders: <1.5
-      condition: (isAttacker && score < 1.0) || (!isAttacker && score < 1.5),
-      label: "⚠️ Risky",
-      className: "text-yellow-800 dark:text-yellow-200 font-medium",
-    },
-  ];
-
-  return categories.find(cat => cat.condition) || categories[categories.length - 1];
-};
-
-// Ownership category logic
-const getOwnershipCategory = (ownership: number) => {
-  const categories = [
-    {
-      condition: ownership < 10,
-      label: "🎯 Differential",
-      className: "text-purple-800 dark:text-purple-200",
-    },
-    {
-      condition: ownership >= 10 && ownership < 30,
-      label: "🔹 Low Owned",
-      className: "text-blue-800 dark:text-blue-200",
-    },
-    {
-      condition: ownership >= 30 && ownership < 60,
-      label: "⚖️ Moderate",
-      className: "text-gray-800 dark:text-gray-200",
-    },
-    {
-      condition: ownership >= 60 && ownership < 80,
-      label: "📈 Popular",
-      className: "text-orange-800 dark:text-orange-200",
-    },
-    {
-      condition: ownership >= 80,
-      label: "🏆 Template",
-      className: "text-green-800 dark:text-green-200",
-    },
-  ];
-  return categories.find(cat => cat.condition) || categories[categories.length - 1];
-};
+        return (
+          <section key={`${mode}-${team.short_name || team.team}`} aria-labelledby={`${mode}-${team.short_name}`}>
+            <div className="mb-3 flex items-center justify-between gap-4">
+              <div className="flex min-w-0 items-center gap-3">
+                <TeamBadge code={team.short_name || team.team} />
+                <div className="min-w-0"><h2 id={`${mode}-${team.short_name}`} className="truncate font-sans text-lg font-semibold">{team.team}</h2><p className="text-xs text-muted-foreground">{sortedPlayers.length} recommended {sortedPlayers.length === 1 ? "player" : "players"}</p></div>
+              </div>
+              {teamRank ? <Badge variant="outline" className="bg-card">League rank #{teamRank}</Badge> : null}
+            </div>
+            <div className="grid gap-3 lg:grid-cols-2 xl:grid-cols-3">
+              {sortedPlayers.map((player, index) => <PickCard key={`${team.short_name}-${player.web_name}`} player={player} team={team} mode={mode} rank={index + 1} />)}
+            </div>
+          </section>
+        )
+      })}
+    </div>
+  )
+}
 
 export default function QuickPicksPage() {
-  const [activeTab, setActiveTab] = useState("attacking")
-  const [attackingPicks, setAttackingPicks] = useState<any[]>([])
-  const [defensivePicks, setDefensivePicks] = useState<any[]>([])
+  const [attackingTeams, setAttackingTeams] = useState<TeamPicks[]>([])
+  const [defensiveTeams, setDefensiveTeams] = useState<TeamPicks[]>([])
+  const [selectedTeam, setSelectedTeam] = useState("all")
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [selectedTeams, setSelectedTeams] = useState<string[]>([]) // Team filter state
 
-  // START: Added fetchData for reuse
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
-      const [attackingData, defensiveData] = await Promise.all([
-        getQuickPicks("attacking"),
-        getQuickPicks("defensive"),
-      ])
-
-      setAttackingPicks(attackingData)
-      setDefensivePicks(defensiveData)
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Failed to fetch quick picks")
+      const [attacking, defensive] = await Promise.all([getQuickPicks("attacking"), getQuickPicks("defensive")])
+      setAttackingTeams(attacking as TeamPicks[])
+      setDefensiveTeams(defensive as TeamPicks[])
+    } catch (caughtError) {
+      setError(caughtError instanceof Error ? caughtError.message : "Unable to load recommendations")
     } finally {
       setLoading(false)
     }
-  }
-  // END: Added fetchData
-
-  // CHANGED: Added activeTab dependency
-  useEffect(() => {
-    fetchData()
-    // Both datasets are loaded together; tab changes do not need another fetch.
   }, [])
 
-  useEffect(() => {
-    // Team filters are specific to the visible attacking/defensive list.
-    setSelectedTeams([])
-  }, [activeTab])
+  useEffect(() => { void fetchData() }, [fetchData])
 
-  // Filter picks based on selected teams
-  const filteredPicks = useMemo(() => {
-    const picks = activeTab === "attacking" ? attackingPicks : defensivePicks;
-    if (!picks || picks.length === 0) return [];
-    if (selectedTeams.length === 0) return picks;
-    return picks.filter(teamData => selectedTeams.includes(teamData.team));
-  }, [attackingPicks, defensivePicks, activeTab, selectedTeams]);
-
-  // Get all unique teams from current tab
   const allTeams = useMemo(() => {
-    const picks = activeTab === "attacking" ? attackingPicks : defensivePicks;
-    if (!picks || picks.length === 0) return [];
-    return picks.map(t => t.team).sort(); // Sort alphabetically
-  }, [attackingPicks, defensivePicks, activeTab]);
+    const byCode = new Map<string, TeamPicks>()
+    for (const team of [...attackingTeams, ...defensiveTeams]) byCode.set(team.short_name || team.team, team)
+    return [...byCode.values()].sort((a, b) => a.team.localeCompare(b.team))
+  }, [attackingTeams, defensiveTeams])
 
-  const toggleTeamFilter = (team: string) => {
-    setSelectedTeams(prev => 
-      prev.includes(team) ? prev.filter(t => t !== team) : [...prev, team]
-    );
-  };
+  const playerCount = new Set([...attackingTeams, ...defensiveTeams].flatMap((team) => team.players.map((player) => player.web_name))).size
 
-  // CHANGED: Added retry button to error state
-  if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>
-  if (error) return (
-    <div className="min-h-screen flex items-center justify-center text-red-500">
-      Error: {error}
-      <button
-        onClick={() => fetchData()}
-        className="ml-4 px-4 py-2 bg-blue-500 text-white rounded"
-      >
-        Retry
-      </button>
-    </div>
-  )
+  if (loading) return <PageSkeleton label="Loading recommendations" />
+  if (error) return <ErrorState title="Recommendations unavailable" description={error} onAction={() => void fetchData()} />
 
   return (
-    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h1 className="mb-2 text-4xl font-bold text-foreground flex items-center gap-3">
-            <Star className="h-8 w-8 text-yellow-500" />
-            Quick Picks & Player Strategy
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Team-by-team player recommendations based on attacking and defensive strength rankings
-          </p>
-        </div>
+    <div className="min-h-screen px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+      <div className="mx-auto max-w-7xl">
+        <PageHeader
+          eyebrow="Recommendations"
+          title="A sharper FPL shortlist."
+          description="Prioritised attacking and defensive options using current output, form, ownership and role-specific model scores."
+          actions={
+            <label className="relative block min-w-52"><span className="sr-only">Filter recommendations by club</span><select value={selectedTeam} onChange={(event) => setSelectedTeam(event.target.value)} className="h-11 w-full appearance-none rounded-lg border border-input bg-card pl-3 pr-9 text-sm font-medium outline-none focus:border-ring focus:ring-2 focus:ring-ring/20"><option value="all">All clubs</option>{allTeams.map((team) => <option key={team.short_name || team.team} value={team.short_name || team.team}>{team.team}</option>)}</select><ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /></label>
+          }
+        />
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          {/* Mobile Tabs with better touch targets */}
-          <TabsList className="w-full grid grid-cols-2 gap-3 bg-transparent p-0 sm:gap-2">
-            <TabsTrigger
-              value="attacking"
-              className="flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-4 sm:py-3 rounded-xl transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white border-2 data-[state=active]:border-red-400 data-[state=inactive]:border-border data-[state=inactive]:bg-card/50"
-            >
-              <Target className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="font-semibold">Attacking</span>
-            </TabsTrigger>
-            <TabsTrigger
-              value="defensive"
-              className="flex items-center justify-center gap-2 text-sm sm:text-base px-4 py-4 sm:py-3 rounded-xl transition-all duration-300  data-[state=active]:shadow-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white border-2 data-[state=active]:border-blue-400 data-[state=inactive]:border-border data-[state=inactive]:bg-card/50"
-            >
-              <Shield className="h-5 w-5 sm:h-4 sm:w-4" />
-              <span className="font-semibold">Defensive</span>
-            </TabsTrigger>
+        <section aria-label="Recommendation overview" className="mb-6 grid gap-3 sm:grid-cols-3">
+          {[{ label: "Clubs represented", value: allTeams.length, icon: Users }, { label: "Players shortlisted", value: playerCount, icon: Sparkles }, { label: "Recommendation models", value: 2, icon: Target }].map((item) => <Card key={item.label}><CardContent className="flex items-center gap-4"><div className="grid h-10 w-10 place-items-center rounded-lg bg-secondary text-muted-foreground"><item.icon className="h-5 w-5" /></div><div><p className="font-mono text-2xl font-semibold tabular-nums">{item.value}</p><p className="text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground">{item.label}</p></div></CardContent></Card>)}
+        </section>
+
+        <Tabs defaultValue="attacking">
+          <TabsList className="mb-6 grid w-full max-w-lg grid-cols-2 bg-secondary p-1">
+            <TabsTrigger value="attacking" className="gap-2"><Target className="h-4 w-4" />Attacking</TabsTrigger>
+            <TabsTrigger value="defensive" className="gap-2"><Shield className="h-4 w-4" />Defensive</TabsTrigger>
           </TabsList>
-
-          <TabsContent value="attacking" className="space-y-6">
-            {/* Team Filter */}
-            {allTeams.length > 0 && (
-              <Card className="border-red-500/20 bg-card shadow-sm">
-                <CardContent className="p-5">
-                  <div className="flex flex-col gap-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Target className="h-5 w-5 text-red-500" />
-                        <span className="text-sm font-semibold text-foreground">Filter by Team</span>
-                      </div>
-                      {selectedTeams.length > 0 && (
-                        <button
-                          onClick={() => setSelectedTeams([])}
-                          className="flex items-center gap-1 px-3 py-1 text-xs font-medium text-red-600 dark:text-red-400 hover:bg-red-500/10 rounded-md transition-colors"
-                        >
-                          <X className="h-3 w-3" />
-                          Clear all
-                        </button>
-                      )}
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {allTeams.map((team: any) => (
-                        <button
-                          key={team}
-                          onClick={() => toggleTeamFilter(team)}
-                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                            selectedTeams.includes(team)
-                              ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-sm shadow-red-500/30 scale-105'
-                              : 'bg-secondary/50 text-foreground hover:bg-secondary  border border-border'
-                          }`}
-                        >
-                          <span className="flex items-center gap-1.5">
-                            {team}
-                            {selectedTeams.includes(team) && (
-                              <X className="h-3.5 w-3.5" />
-                            )}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                    {selectedTeams.length > 0 && (
-                      <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground bg-secondary/30 px-3 py-2 rounded-md">
-                        <Shield className="h-3.5 w-3.5" />
-                        Showing {filteredPicks.length} of {allTeams.length} teams
-                      </div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Overview Card */}
-            <Card className="border-border bg-card/50  shadow-md">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-foreground flex items-center gap-2">
-                  💪 Attacking Picks by Team Strength
-                  <Badge variant="secondary" className="ml-auto">
-                    Top Attack Rankings
-                  </Badge>
-                </CardTitle>
-                <CardDescription>
-                  Player recommendations from teams with the strongest attacking metrics
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {filteredPicks.map((teamData, index) => (
-                  <div
-                    key={`${teamData.team}-${teamData.attack_rank}-${index}`} // Use composite key for uniqueness
-                    className="border-l-4 border-l-red-500 pl-6"
-                  >
-                    {/* Team Header */}
-                    <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-red-500/20 text-red-600 font-bold text-sm">
-                          #{teamData.attackRank}
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-bold text-foreground">{teamData.team}</h3>
-                          <p className="text-sm text-muted-foreground">
-                            Attack Strength: <span className="font-mono font-medium">{teamData.attack_strength?.toFixed(3) || 'N/A'}</span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Players Grid */}
-                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                      {teamData.players.map((player: any, playerIndex: number) => {
-                        const ownershipCat = getOwnershipCategory(player.ownership)
-                        const recommendation = getRecommendation(player)
-                        const isTopPick = recommendation.label.includes("Top Pick")
-                        
-                        return (
-                          <Card
-                            key={`${player.web_name}-${playerIndex}`}
-                            className={`relative border transition-all duration-300 hover:shadow-md  cursor-pointer overflow-hidden ${
-                              isTopPick
-                                ? 'border-yellow-500/50 bg-gradient-to-br from-yellow-500/5 via-card to-card'
-                                : 'border-border/50 hover:border-red-400/50 bg-gradient-to-br from-card to-secondary/10'
-                            }`}
-                          >
-                            {/* Top indicator bar */}
-                            {isTopPick && (
-                              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-500 to-amber-500" />
-                            )}
-                            
-                            <CardContent className="p-4">
-                              <div className="mb-3">
-                                <div className="flex items-center justify-between mb-2">
-                                  <h4 className="font-semibold text-foreground">{player.web_name}</h4>
-                                  <div className="flex items-center gap-1 bg-blue-500/10 px-2 py-1 rounded-md">
-                                    <DollarSign className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
-                                    <span className="font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
-                                      {player.now_cost}m
-                                    </span>
-                                  </div>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                  <PositionBadge position={player.position_name} />
-                                </div>
-                              </div>
-
-                              <div className="space-y-2 text-sm">
-                                <div className="flex justify-between">
-                                  <span className="text-muted-foreground">Goals/Game:</span>
-                                  <span className="font-mono font-medium text-red-600">{player.goals_per_game?.toFixed(2) || '0.00'}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-muted-foreground">Points/Game:</span>
-                                  <span className="font-mono font-bold text-red-600">{player.points_per_game?.toFixed(2) || '0.00'}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-muted-foreground">Attack Score:</span>
-                                  <span className="font-mono font-bold text-red-600">{player.attacker_score?.toFixed(2) || '0.00'}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-muted-foreground">Form:</span>
-                                  <span className="font-mono font-bold text-red-600">{player.form?.toFixed(2) || '0.00'}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-muted-foreground">Ownership:</span>
-                                  <span className={`font-mono font-medium ${ownershipCat.className}`}>
-                                    {player.selected_by_percent}%
-                                  </span>
-                                </div>
-                              </div>
-
-                              {/* Quick Action Indicator */}
-                              <div className="mt-3 pt-3 border-t border-border/50">
-                                <div className="flex items-center justify-between text-xs">
-                                  <span className="text-muted-foreground font-medium">Status:</span>
-                                  <Badge
-                                    aria-label={`Recommendation for ${player.web_name}: ${recommendation.label}`}
-                                    className={`${recommendation.className} font-semibold shadow-sm`}
-                                  >
-                                    {recommendation.label}
-                                  </Badge>
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        )
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="defensive" className="space-y-6">
-            {/* Team Filter */}
-            {allTeams.length > 0 && (
-              <Card className="border-blue-500/20 bg-card shadow-sm">
-                <CardContent className="p-5">
-                  <div className="flex flex-col gap-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Shield className="h-5 w-5 text-blue-500" />
-                        <span className="text-sm font-semibold text-foreground">Filter by Team</span>
-                      </div>
-                      {selectedTeams.length > 0 && (
-                        <button
-                          onClick={() => setSelectedTeams([])}
-                          className="flex items-center gap-1 px-3 py-1 text-xs font-medium text-blue-600 dark:text-blue-400 hover:bg-blue-500/10 rounded-md transition-colors"
-                        >
-                          <X className="h-3 w-3" />
-                          Clear all
-                        </button>
-                      )}
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {allTeams.map((team: any) => (
-                        <button
-                          key={team}
-                          onClick={() => toggleTeamFilter(team)}
-                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                            selectedTeams.includes(team)
-                              ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-sm shadow-blue-500/30 scale-105'
-                              : 'bg-secondary/50 text-foreground hover:bg-secondary  border border-border'
-                          }`}
-                        >
-                          <span className="flex items-center gap-1.5">
-                            {team}
-                            {selectedTeams.includes(team) && (
-                              <X className="h-3.5 w-3.5" />
-                            )}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                    {selectedTeams.length > 0 && (
-                      <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground bg-secondary/30 px-3 py-2 rounded-md">
-                        <Target className="h-3.5 w-3.5" />
-                        Showing {filteredPicks.length} of {allTeams.length} teams
-                      </div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Overview Card */}
-            <Card className="border-border bg-card/50  shadow-md">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-foreground flex items-center gap-2">
-                  🛡️ Defensive Picks by Team Strength
-                  <Badge variant="secondary" className="ml-auto">
-                    Top Defense Rankings
-                  </Badge>
-                </CardTitle>
-                <CardDescription>
-                  Goalkeeper and defender recommendations from teams with the strongest defensive metrics
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {filteredPicks.map((teamData, index) => (
-                  <div key={teamData.team_name_short} className="border-l-4 border-l-blue-500 pl-6">
-                    {/* Team Header */}
-                    <div className="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                      <div className="flex items-center gap-3">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/20 text-blue-600 font-bold text-sm">
-                          #{teamData.defenseRank}
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-bold text-foreground">{teamData.team}</h3>
-                          <p className="text-sm text-muted-foreground">
-                            Defense Strength: <span className="font-mono font-medium">{teamData.defense_strength?.toFixed(3) || 'N/A'}</span>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Players Grid */}
-                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                      {teamData.players.map((player: any, playerIndex: number) => {
-                        const ownershipCat = getOwnershipCategory(player.ownership)
-                        const recommendation = getRecommendation(player)
-                        const isTopPick = recommendation.label.includes("Top Pick")
-                        
-                        return (
-                          <Card
-                            key={`${player.name}-${playerIndex}`}
-                            className={`relative border transition-all duration-300 hover:shadow-md  cursor-pointer overflow-hidden ${
-                              isTopPick
-                                ? 'border-yellow-500/50 bg-gradient-to-br from-yellow-500/5 via-card to-card'
-                                : 'border-border/50 hover:border-red-400/50 bg-gradient-to-br from-card to-secondary/10'
-                            }`}
-                          >
-                            {/* Top indicator bar */}
-                            {isTopPick && (
-                              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-500 to-amber-500" />
-                            )}
-                            
-                            <CardContent className="p-4">
-                              <div className="mb-3">
-                                <div className="flex items-center justify-between mb-2">
-                                  <h4 className="font-semibold text-foreground">{player.web_name}</h4>
-                                  <div className="flex items-center gap-1 bg-green-500/10 px-2 py-1 rounded-md">
-                                    <DollarSign className="h-3.5 w-3.5 text-green-600" />
-                                    <span className="font-mono text-sm font-bold text-green-600">
-                                      {player.now_cost}m
-                                    </span>
-                                  </div>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                  <PositionBadge position={player.position_name} />
-                                </div>
-                              </div>
-
-                              <div className="space-y-2 text-sm">
-                                <div className="flex justify-between">
-                                  <span className="text-muted-foreground">Clean Sheet Rate:</span>
-                                  <span className="font-mono font-medium text-blue-600">{(player.clean_sheet_rate * 100).toFixed(2)}%</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-muted-foreground">Points/Game:</span>
-                                  <span className="font-mono font-bold text-blue-600">{player.points_per_game?.toFixed(2) || '0.00'}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-muted-foreground">Defender Score:</span>
-                                  <span className="font-mono font-bold text-red-600">{player.defender_score?.toFixed(2) || '0.00'}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-muted-foreground">Form:</span>
-                                  <span className="font-mono font-bold text-blue-600">{player.form?.toFixed(2) || '0.00'}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                  <span className="text-muted-foreground">Ownership:</span>
-                                  <span className={`font-mono font-medium ${ownershipCat.className}`}>
-                                    {player.selected_by_percent}%
-                                  </span>
-                                </div>
-                              </div>
-
-                              {/* Quick Action Indicator */}
-                              <div className="mt-3 pt-3 border-t border-border/50">
-                                <div className="flex items-center justify-between text-xs">
-                                  <span className="text-muted-foreground font-medium">Status:</span>
-                                  <Badge
-                                    aria-label={`Recommendation for ${player.web_name}: ${recommendation.label}`}
-                                    className={`${recommendation.className} font-semibold shadow-sm`}
-                                  >
-                                    {recommendation.label}
-                                  </Badge>
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        )
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </TabsContent>
+          <TabsContent value="attacking" className="mt-0"><PickCollection teams={attackingTeams} mode="attacking" selectedTeam={selectedTeam} /></TabsContent>
+          <TabsContent value="defensive" className="mt-0"><PickCollection teams={defensiveTeams} mode="defensive" selectedTeam={selectedTeam} /></TabsContent>
         </Tabs>
-
-        {/* Strategic Insights Footer */}
-        <Card className="mt-8 border-border bg-card/50 backdrop-blur">
-          <CardHeader>
-            <CardTitle className="text-foreground flex items-center gap-2">💡 Strategic Insights</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <div className="p-4 rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800">
-                <h4 className="font-medium text-green-800 dark:text-green-200 mb-2 flex items-center gap-2">
-                  <Award className="h-4 w-4" />
-                  Team Strength Rankings
-                </h4>
-                <p className="text-sm text-green-700 dark:text-green-300">
-                  Rankings based on comprehensive attacking/defensive metrics including xG, xA, clean sheets, and underlying stats
-                </p>
-              </div>
-              <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800">
-                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2 flex items-center gap-2">
-                  <Users className="h-4 w-4" />
-                  Ownership Categories
-                </h4>
-                <p className="text-sm text-blue-700 dark:text-blue-300">
-                  Differential (&lt;10%), Low Owned (10-25%), Popular (25-40%), Template (40%+)
-                </p>
-              </div>
-              <div className="rounded-lg border border-border bg-muted/45 p-4">
-                <h4 className="mb-2 flex items-center gap-2 font-medium text-foreground">
-                  <Clock className="h-4 w-4" />
-                  Quick vs Transfer Strategy
-                </h4>
-                <p className="text-sm text-muted-foreground">
-                  Use for captaincy, bench decisions, and short-term picks. Combine with fixture analysis for transfer planning
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   )

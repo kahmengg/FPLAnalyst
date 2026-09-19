@@ -1,888 +1,184 @@
 "use client"
 
-import { useState, useMemo, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { ArrowUpDown, CalendarDays, ChevronLeft, ChevronRight, Home, Plane, Search, Shield, Target, X } from "lucide-react"
+
+import { EmptyState, ErrorState, PageSkeleton } from "@/components/data-state"
+import { PageHeader } from "@/components/page-header"
+import { TeamBadge } from "@/components/team-badge"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { CalendarIcon, Home, Plane, Search, X, Filter, Target, Shield, TrendingUp, ChevronLeft, ChevronRight, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
-import { getDashboardSummary, getFixtures, getTeamFixtureSummary } from "@/lib/supabase"
+import { Card, CardContent } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { getDashboardSummary, getFixtures } from "@/lib/supabase"
+import { cn } from "@/lib/utils"
 
-// Team short codes mapping for FDR
-const teamShortCodes: Record<string, string> = {
-  "Arsenal": "ARS", "Aston Villa": "AVL", "Bournemouth": "BOU", "Brentford": "BRE",
-  "Brighton": "BHA", "Chelsea": "CHE", "Coventry": "COV", "Crystal Palace": "CRY",
-  "Everton": "EVE", "Fulham": "FUL", "Hull": "HUL", "Ipswich": "IPS", "Leeds": "LEE", "Liverpool": "LIV",
-  "Man City": "MCI", "Man Utd": "MUN", "Newcastle": "NEW", "Nott'm Forest": "NFO",
-  "Sunderland": "SUN", "Spurs": "TOT"
+type FdrMode = "overall" | "attack" | "defense"
+
+type FixtureTeam = {
+  name: string
+  short_name: string
+  attacking_fixture_rating: number
+  defensive_fixture_rating: number
+  rank: number | null
+  attack_rank: number | null
+  defense_rank: number | null
+  fdr: Record<FdrMode, number>
 }
 
-// Get difficulty color based on 1-10 difficulty rating, lower is easier
-const getDifficultyColor = (rating: number) => {
-  if (rating <= 2.5) return "bg-green-500 dark:bg-green-600 text-white border-green-600 dark:border-green-500"
-  if (rating <= 4.0) return "bg-green-300 dark:bg-green-700 text-green-900 dark:text-green-100 border-green-400 dark:border-green-600"
-  if (rating <= 5.5) return "bg-yellow-300 dark:bg-yellow-600 text-yellow-900 dark:text-yellow-100 border-yellow-400 dark:border-yellow-500"
-  if (rating <= 7.0) return "bg-orange-400 dark:bg-orange-600 text-white border-orange-500 dark:border-orange-500"
-  if (rating <= 8.5) return "bg-red-400 dark:bg-red-600 text-white border-red-500 dark:border-red-500"
-  return "bg-red-600 dark:bg-red-700 text-white border-red-700 dark:border-red-600"
-}
-
-const percentToDifficulty = (rating: number) => {
-  const clamped = Math.max(20, Math.min(100, rating))
-  const difficulty = 10 - ((clamped - 20) / 80) * 9
-  return Math.max(1, Math.min(10, difficulty))
-}
-
-const teamColors = {
-  "Arsenal": "text-red-600 dark:text-red-400",
-  "Liverpool": "text-red-700 dark:text-red-500",
-  "Man City": "text-sky-500 dark:text-sky-400",
-  "Chelsea": "text-blue-600 dark:text-blue-400",
-  "Man Utd": "text-red-600 dark:text-red-400",
-  "Spurs": "text-slate-700 dark:text-slate-300",
-  "Newcastle": "text-slate-800 dark:text-slate-200",
-  "Brighton": "text-blue-500 dark:text-blue-300",
-  "Aston Villa": "text-purple-700 dark:text-purple-400",
-  "Coventry": "text-sky-700 dark:text-sky-400",
-  "Everton": "text-blue-700 dark:text-blue-500",
-  "Hull": "text-amber-700 dark:text-amber-400",
-  "Ipswich": "text-blue-700 dark:text-blue-400",
-  "Crystal Palace": "text-blue-600 dark:text-blue-400",
-  "Brentford": "text-red-600 dark:text-red-400",
-  "Fulham": "text-slate-800 dark:text-slate-300",
-  "Bournemouth": "text-red-700 dark:text-red-500",
-  "Nott'm Forest": "text-red-800 dark:text-red-600",
-  "Leeds": "text-blue-600 dark:text-blue-400",
-  "Sunderland": "text-red-700 dark:text-red-500",
-};
-
-const getTeamColor = (teamName: string) => {
-  return teamColors[teamName as keyof typeof teamColors] || "text-foreground";
-};
-
-const getTeamBorderColor = (teamName: string) => {
-  const borderColors: { [key: string]: string } = {
-    "Arsenal": "border-red-600 dark:border-red-400",
-    "Liverpool": "border-red-700 dark:border-red-500",
-    "Man City": "border-sky-500 dark:border-sky-400",
-    "Chelsea": "border-blue-600 dark:border-blue-400",
-    "Man Utd": "border-red-600 dark:border-red-400",
-    "Spurs": "border-slate-700 dark:border-slate-300",
-    "Newcastle": "border-slate-800 dark:border-slate-200",
-    "Brighton": "border-blue-500 dark:border-blue-300",
-    "Aston Villa": "border-purple-700 dark:border-purple-400",
-    "Coventry": "border-sky-700 dark:border-sky-400",
-    "Everton": "border-blue-700 dark:border-blue-500",
-    "Hull": "border-amber-700 dark:border-amber-400",
-    "Ipswich": "border-blue-700 dark:border-blue-400",
-    "Crystal Palace": "border-blue-600 dark:border-blue-400",
-    "Brentford": "border-red-600 dark:border-red-400",
-    "Fulham": "border-slate-800 dark:border-slate-300",
-    "Bournemouth": "border-red-700 dark:border-red-500",
-    "Nott'm Forest": "border-red-800 dark:border-red-600",
-    "Leeds": "border-blue-600 dark:border-blue-400",
-    "Sunderland": "border-red-700 dark:border-red-500",
-  };
-  return borderColors[teamName] || "border-border";
-};
-
-const getTeamBackgroundColor = (teamName: string) => {
-  const bgColors: { [key: string]: string } = {
-    "Arsenal": "bg-red-100 dark:bg-red-950",
-    "Liverpool": "bg-red-200 dark:bg-red-950",
-    "Man City": "bg-sky-100 dark:bg-sky-950",
-    "Chelsea": "bg-blue-100 dark:bg-blue-950",
-    "Man Utd": "bg-red-100 dark:bg-red-950",
-    "Spurs": "bg-slate-100 dark:bg-slate-900",
-    "Newcastle": "bg-slate-200 dark:bg-slate-900",
-    "Brighton": "bg-blue-50 dark:bg-blue-950",
-    "Aston Villa": "bg-purple-100 dark:bg-purple-950",
-    "Coventry": "bg-sky-100 dark:bg-sky-950",
-    "Everton": "bg-blue-200 dark:bg-blue-950",
-    "Hull": "bg-amber-100 dark:bg-amber-950",
-    "Ipswich": "bg-blue-100 dark:bg-blue-950",
-    "Crystal Palace": "bg-blue-100 dark:bg-blue-950",
-    "Brentford": "bg-red-100 dark:bg-red-950",
-    "Fulham": "bg-slate-100 dark:bg-slate-900",
-    "Bournemouth": "bg-red-200 dark:bg-red-950",
-    "Nott'm Forest": "bg-red-300 dark:bg-red-950",
-    "Leeds": "bg-blue-100 dark:bg-blue-950",
-    "Sunderland": "bg-red-200 dark:bg-red-950",
-  };
-  return bgColors[teamName] || "bg-secondary/20";
-};
-
-// Color configuration for rankings and difficulty scores
-const colorConfig = {
-  favorability: {
-    match: (favorability: string, teamName: string) =>
-      favorability === teamName
-        ? "bg-green-500/20 border-green-500/50"
-        : "bg-red-500/20 border-red-500/50",
-  },
-  rank: {
-    ranges: [
-      {
-        max: 3,
-        classes:
-          "bg-purple-100 text-purple-800 border-purple-300 font-bold dark:bg-purple-900/30 dark:text-purple-200 dark:border-purple-700",
-      },
-      {
-        max: 6,
-        classes:
-          "bg-blue-100 text-blue-800 border-blue-300 font-semibold dark:bg-blue-900/30 dark:text-blue-200 dark:border-blue-600",
-      },
-      {
-        max: 10,
-        classes:
-          "bg-indigo-100 text-indigo-800 border-indigo-300 font-medium dark:bg-indigo-900/30 dark:text-indigo-200 dark:border-indigo-700",
-      },
-      {
-        max: 15,
-        classes:
-          "bg-slate-100 text-slate-800 border-slate-300 dark:bg-slate-800/30 dark:text-slate-200 dark:border-slate-600",
-      },
-      {
-        max: Infinity,
-        classes:
-          "bg-slate-100 text-slate-700 border-slate-300 dark:bg-slate-900/30 dark:text-slate-300 dark:border-slate-600",
-      },
-    ],
-  },
-  difficulty: {
-    ranges: [
-      { min: 3, classes: "text-purple-600 dark:text-purple-400", emoji: "✅" },
-      { min: 1, classes: "text-blue-600 dark:text-blue-400", emoji: "🟢" },
-      { min: -1, classes: "text-slate-600 dark:text-slate-400", emoji: "⚖️" },
-      { min: -Infinity, classes: "text-slate-700 dark:text-slate-500", emoji: "🔴" },
-    ],
-  },
-};
-
-// Helper function for styling rankings and difficulty
-const getColorStyles = (
-  metricType: "difficulty" | "favorability" | "rank",
-  value: number | string,
-  context: string | null = null,
-  returnType: "classes" | "emoji" = "classes"
-) => {
-  const config = colorConfig[metricType] as any;
-  if (!config) return returnType === "classes" ? "text-gray-600 dark:text-gray-400" : "❌";
-
-  if (metricType === "difficulty") {
-    const range = config.ranges.find((r: any) => (value as number) >= r.min);
-    return range ? range[returnType] : config.ranges[config.ranges.length - 1][returnType];
-  }
-  if (metricType === "favorability") {
-    return config.match(value as string, context);
-  }
-  if (metricType === "rank") {
-    const range = config.ranges.find((r: any) => (value as number) <= r.max);
-    return range?.classes || config.ranges[config.ranges.length - 1].classes;
-  }
-  return returnType === "classes" ? "text-gray-600 dark:text-gray-400" : "❌";
-};
-
-// Helper function to get rating color and description
-const getRatingDisplay = (rating: number) => {
-  if (rating >= 80) {
-    return {
-      color: "text-purple-600 dark:text-purple-400",
-      bgColor: "bg-purple-100 dark:bg-purple-900/30",
-      borderColor: "border-purple-300 dark:border-purple-700",
-      textColor: "text-purple-800 dark:text-purple-200",
-      label: "Excellent",
-      emoji: "⭐"
-    };
-  } else if (rating >= 65) {
-    return {
-      color: "text-blue-600 dark:text-blue-400",
-      bgColor: "bg-blue-100 dark:bg-blue-900/30",
-      borderColor: "border-blue-300 dark:border-blue-700",
-      textColor: "text-blue-800 dark:text-blue-200",
-      label: "Good",
-      emoji: "👍"
-    };
-  } else if (rating >= 45) {
-    return {
-      color: "text-slate-600 dark:text-slate-400",
-      bgColor: "bg-slate-100 dark:bg-slate-800/30",
-      borderColor: "border-slate-300 dark:border-slate-700",
-      textColor: "text-slate-800 dark:text-slate-200",
-      label: "Neutral",
-      emoji: "⚖️"
-    };
-  } else if (rating >= 25) {
-    return {
-      color: "text-indigo-600 dark:text-indigo-400",
-      bgColor: "bg-indigo-100 dark:bg-indigo-900/30",
-      borderColor: "border-indigo-300 dark:border-indigo-700",
-      textColor: "text-indigo-800 dark:text-indigo-200",
-      label: "Difficult",
-      emoji: "⚠️"
-    };
-  } else {
-    return {
-      color: "text-slate-600 dark:text-slate-400",
-      bgColor: "bg-slate-100 dark:bg-slate-900/30",
-      borderColor: "border-slate-300 dark:border-slate-700",
-      textColor: "text-red-800 dark:text-red-200",
-      label: "Very Difficult",
-      emoji: "🔴"
-    };
-  }
-};
-
-// FDR Grid Component
-interface Fixture {
+type Fixture = {
+  gw: number
   gameweek: number
-  home_team: string
-  away_team: string
+  fixture: string
+  home_team: FixtureTeam
+  away_team: FixtureTeam
+  favorability: string
+  maxOpportunityRating: number
 }
 
-interface TeamFixtures {
+type TeamSchedule = {
   team: string
-  fixtures: {
-    gameweek: number
-    opponent: string
-    isHome: boolean
-    difficulty: number
-    fixtureStrength: number
-  }[]
-  avgDifficulty?: number
+  code: string
+  average: number
+  fixtures: Array<{ gw: number; opponent: string; opponentCode: string; home: boolean; rating: number }>
 }
 
-function FDRGrid({ fixtures }: { fixtures: any[] }) {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [sortBy, setSortBy] = useState<"team" | "difficulty">("difficulty")
-  const [fdrType, setFdrType] = useState<"attack" | "defense" | "overall">("overall")
+function difficultyFromOpportunity(rating: number) {
+  const clamped = Math.max(20, Math.min(100, rating))
+  return Math.max(1, Math.min(5, 5 - ((clamped - 20) / 80) * 4))
+}
 
-  // Process fixtures into team-based view
-  const teamFixtures = useMemo((): TeamFixtures[] => {
-    const teams = new Set<string>()
-    fixtures.forEach(f => {
-      teams.add(f.teams.home.team)
-      teams.add(f.teams.away.team)
-    })
+function difficultyTone(difficulty: number) {
+  if (difficulty <= 1.8) return "border-success/30 bg-success/12 text-success"
+  if (difficulty <= 2.7) return "border-success/20 bg-success/5 text-foreground"
+  if (difficulty <= 3.5) return "border-warning/25 bg-warning/10 text-warning"
+  return "border-destructive/25 bg-destructive/10 text-destructive"
+}
 
-    const result: TeamFixtures[] = Array.from(teams).map(team => {
-      const teamFix = fixtures
-        .filter(f => f.teams.home.team === team || f.teams.away.team === team)
-        .sort((a, b) => a.gw - b.gw)
-        .map(f => {
-          const isHome = f.teams.home.team === team
-          const fixtureStrength = isHome
-            ? Number(f.teams?.home?.fdr?.[fdrType] ?? 50)
-            : Number(f.teams?.away?.fdr?.[fdrType] ?? 50)
-          const difficulty = percentToDifficulty(fixtureStrength)
-          return {
-            gameweek: f.gw,
-            opponent: isHome ? f.teams.away.team : f.teams.home.team,
-            isHome,
-            difficulty,
-            fixtureStrength,
-          }
-        })
+function ratingLabel(rating: number) {
+  if (rating >= 75) return "Excellent"
+  if (rating >= 60) return "Good"
+  if (rating >= 45) return "Balanced"
+  return "Difficult"
+}
 
-      const avgDifficulty = teamFix.length > 0
-        ? teamFix.reduce((sum, f) => sum + f.difficulty, 0) / teamFix.length
-        : 10
-
-      return { team, fixtures: teamFix, avgDifficulty }
-    })
-
-    return result
-  }, [fixtures, fdrType])
-
-  const upcomingGameweeks = useMemo(() => {
-    return Array.from(new Set(fixtures.map(f => f.gw))).sort((a, b) => a - b)
-  }, [fixtures])
-
-  // Filter and sort teams
-  const filteredTeams = useMemo(() => {
-    let filtered = teamFixtures
-
-    if (searchQuery) {
-      filtered = filtered.filter(t =>
-        t.team.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    }
-
-    if (sortBy === "difficulty") {
-      filtered = [...filtered].sort((a, b) => {
-        const aAvg = a.avgDifficulty || 10
-        const bAvg = b.avgDifficulty || 10
-        return aAvg - bAvg
-      })
-    } else {
-      filtered = [...filtered].sort((a, b) => a.team.localeCompare(b.team))
-    }
-
-    return filtered
-  }, [teamFixtures, searchQuery, sortBy])
-
+function RatingBar({ label, value, icon: Icon }: { label: string; value: number; icon: typeof Target }) {
   return (
-    <>
-      {/* FDR Type Selector with Scale */}
-      <Card className="mb-3 shadow-md">
-        <CardContent className="p-3">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <span className="text-sm font-medium text-muted-foreground">FDR:</span>
-              <div className="flex gap-1">
-                <button
-                  onClick={() => setFdrType("overall")}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
-                    fdrType === "overall"
-                      ? "bg-primary text-primary-foreground shadow-sm"
-                      : "bg-secondary text-muted-foreground hover:bg-secondary/80"
-                  }`}
-                >
-                  📊 Overall
-                </button>
-                <button
-                  onClick={() => setFdrType("attack")}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
-                    fdrType === "attack"
-                      ? "bg-primary text-primary-foreground shadow-sm"
-                      : "bg-secondary text-muted-foreground hover:bg-secondary/80"
-                  }`}
-                >
-                  💪 Attack
-                </button>
-                <button
-                  onClick={() => setFdrType("defense")}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
-                    fdrType === "defense"
-                      ? "bg-primary text-primary-foreground shadow-sm"
-                      : "bg-secondary text-muted-foreground hover:bg-secondary/80"
-                  }`}
-                >
-                  🛡️ Defense
-                </button>
-              </div>
-            </div>
-            <div className="flex-1 flex items-center gap-2">
-              <div className="flex-1 flex items-center gap-0.5">
-                <div className="h-6 flex-1 bg-green-500 dark:bg-green-600 rounded-l"></div>
-                <div className="h-6 flex-1 bg-green-300 dark:bg-green-700"></div>
-                <div className="h-6 flex-1 bg-yellow-300 dark:bg-yellow-600"></div>
-                <div className="h-6 flex-1 bg-orange-400 dark:bg-orange-600"></div>
-                <div className="h-6 flex-1 bg-red-400 dark:bg-red-600"></div>
-                <div className="h-6 flex-1 bg-red-600 dark:bg-red-700 rounded-r"></div>
-              </div>
-              <div className="flex items-center gap-2 text-xs flex-shrink-0">
-                <span className="text-muted-foreground">✅ Easy</span>
-                <span className="text-muted-foreground">🔴 Hard</span>
-              </div>
-            </div>
-          </div>
-          <div className="mt-3 text-xs text-muted-foreground">
-            Showing {upcomingGameweeks.length} upcoming gameweeks: {upcomingGameweeks.length > 0 ? `GW ${upcomingGameweeks[0]} to GW ${upcomingGameweeks[upcomingGameweeks.length - 1]}` : "no fixtures available"}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* FDR Grid */}
-      <div className="space-y-3">
-        {filteredTeams.map((team, index) => (
-          <Card
-            key={team.team}
-            className={`border-2 ${getTeamBorderColor(team.team)} ${getTeamBackgroundColor(team.team)} hover:shadow-md transition-all duration-300`}
-          >
-            <CardContent className="p-4">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                <div className="w-full sm:w-48 flex-shrink-0">
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline" className={`text-xs font-bold px-2 py-1 ${getTeamBorderColor(team.team)}`}>
-                      {teamShortCodes[team.team] || team.team.substring(0, 3).toUpperCase()}
-                    </Badge>
-                    <h3 className={`font-bold ${getTeamColor(team.team)}`}>{team.team}</h3>
-                  </div>
-                  {team.avgDifficulty && (
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Avg: {team.avgDifficulty.toFixed(1)}
-                    </p>
-                  )}
-                </div>
-
-                <div className="flex-1 grid grid-cols-4 sm:grid-cols-8 gap-2">
-                  {team.fixtures.length === 0 ? (
-                    <div className="col-span-4 sm:col-span-8 text-center text-sm text-muted-foreground py-2">
-                      No fixtures available
-                    </div>
-                  ) : (
-                    team.fixtures.map((fixture, idx) => (
-                      <div
-                        key={idx}
-                        className={`p-2 rounded-lg border-2 transition-all duration-200  hover:shadow-md ${getDifficultyColor(fixture.difficulty)}`}
-                      >
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-[10px] font-bold opacity-70">GW{fixture.gameweek}</span>
-                          {fixture.isHome ? (
-                            <Home className="h-3 w-3 opacity-70" />
-                          ) : (
-                            <Plane className="h-3 w-3 opacity-70" />
-                          )}
-                        </div>
-                        <div className="text-xs font-bold truncate">
-                          {teamShortCodes[fixture.opponent] || fixture.opponent.substring(0, 3).toUpperCase()}
-                        </div>
-                        <div className="text-[10px] opacity-70 mt-1">
-                          {Math.round(fixture.fixtureStrength)}%
-                        </div>
-                        <div className="text-[10px] opacity-70 mt-1">
-                          {fixture.difficulty.toFixed(1)}
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {filteredTeams.length === 0 && (
-        <Card className="border-dashed border-2">
-          <CardContent className="p-12 text-center text-muted-foreground">
-            <span className="text-4xl mb-4 block">📋</span>
-            <p className="text-lg font-medium mb-2">No teams found</p>
-            <p className="text-sm">Try adjusting your search query</p>
-          </CardContent>
-        </Card>
-      )}
-    </>
+    <div>
+      <div className="mb-2 flex items-center justify-between gap-3 text-xs"><span className="inline-flex items-center gap-1.5 text-muted-foreground"><Icon className="h-3.5 w-3.5" />{label}</span><span className="font-mono font-semibold tabular-nums">{Math.round(value)}%</span></div>
+      <div className="h-1.5 overflow-hidden rounded-full bg-secondary"><div className="h-full rounded-full bg-foreground/65" style={{ width: `${Math.max(0, Math.min(value, 100))}%` }} /></div>
+    </div>
   )
 }
 
-function LoadingSkeleton() {
+function FixtureTeamRow({ team, venue, favored }: { team: FixtureTeam; venue: "home" | "away"; favored: boolean }) {
+  const average = (team.attacking_fixture_rating + team.defensive_fixture_rating) / 2
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 bg-background">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <div className="h-10 w-72 bg-secondary/50 rounded-lg mb-2"></div>
-          <div className="h-6 w-96 bg-secondary/30 rounded-lg"></div>
-        </div>
-        <div className="mb-6">
-          <div className="h-16 bg-secondary/30 rounded-xl"></div>
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {[1, 2, 3, 4].map((item) => (
-            <div key={item} className="h-40 bg-secondary/30 rounded-xl"></div>
-          ))}
-        </div>
+    <div className={cn("rounded-lg border border-border bg-background p-4", favored && "ring-1 ring-foreground/15")}>
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-3"><TeamBadge code={team.short_name || team.name} /><div className="min-w-0"><h3 className="truncate font-sans text-sm font-semibold">{team.name}</h3><p className="mt-0.5 flex items-center gap-1 text-xs text-muted-foreground">{venue === "home" ? <Home className="h-3 w-3" /> : <Plane className="h-3 w-3" />}{venue === "home" ? "Home" : "Away"}</p></div></div>
+        <div className="text-right"><p className="font-mono text-lg font-semibold tabular-nums">{Math.round(average)}%</p><p className="text-[11px] text-muted-foreground">{ratingLabel(average)}</p></div>
       </div>
+      <div className="mt-4 grid gap-3 sm:grid-cols-2"><RatingBar label={`Attack #${team.attack_rank ?? "—"}`} value={team.attacking_fixture_rating} icon={Target} /><RatingBar label={`Defense #${team.defense_rank ?? "—"}`} value={team.defensive_fixture_rating} icon={Shield} /></div>
+    </div>
+  )
+}
+
+function FixtureCard({ fixture }: { fixture: Fixture }) {
+  return (
+    <Card className="overflow-hidden transition-colors hover:bg-secondary/15">
+      <CardContent className="space-y-3 p-4 sm:p-5">
+        <div className="flex items-center justify-between gap-3"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Gameweek {fixture.gw}</p>{fixture.favorability !== "Neutral" ? <Badge variant="outline" className="bg-secondary">Edge: {fixture.favorability}</Badge> : <Badge variant="outline">Even matchup</Badge>}</div>
+        <FixtureTeamRow team={fixture.home_team} venue="home" favored={fixture.favorability === fixture.home_team.name} />
+        <FixtureTeamRow team={fixture.away_team} venue="away" favored={fixture.favorability === fixture.away_team.name} />
+      </CardContent>
+    </Card>
+  )
+}
+
+function DifficultyGrid({ fixtures }: { fixtures: Fixture[] }) {
+  const [mode, setMode] = useState<FdrMode>("overall")
+  const [query, setQuery] = useState("")
+  const [sort, setSort] = useState<"difficulty" | "team">("difficulty")
+
+  const gameweeks = useMemo(() => [...new Set(fixtures.map((fixture) => fixture.gw))].sort((a, b) => a - b), [fixtures])
+  const schedules = useMemo(() => {
+    const map = new Map<string, TeamSchedule>()
+    for (const fixture of fixtures) {
+      for (const side of ["home", "away"] as const) {
+        const team = side === "home" ? fixture.home_team : fixture.away_team
+        const opponent = side === "home" ? fixture.away_team : fixture.home_team
+        const existing = map.get(team.name) ?? { team: team.name, code: team.short_name, average: 0, fixtures: [] }
+        existing.fixtures.push({ gw: fixture.gw, opponent: opponent.name, opponentCode: opponent.short_name, home: side === "home", rating: team.fdr?.[mode] ?? 50 })
+        map.set(team.name, existing)
+      }
+    }
+    return [...map.values()].map((team) => ({ ...team, fixtures: team.fixtures.sort((a, b) => a.gw - b.gw), average: team.fixtures.length ? team.fixtures.reduce((sum, fixture) => sum + fixture.rating, 0) / team.fixtures.length : 0 }))
+      .filter((team) => team.team.toLowerCase().includes(query.trim().toLowerCase()))
+      .sort((a, b) => sort === "team" ? a.team.localeCompare(b.team) : b.average - a.average)
+  }, [fixtures, mode, query, sort])
+
+  return (
+    <div>
+      <div className="mb-4 grid gap-3 rounded-xl border border-border bg-card p-3 sm:grid-cols-[auto_minmax(180px,1fr)_180px] sm:p-4">
+        <div className="grid grid-cols-3 rounded-lg bg-secondary p-1">{(["overall", "attack", "defense"] as FdrMode[]).map((value) => <button key={value} type="button" aria-pressed={mode === value} onClick={() => setMode(value)} className={cn("rounded-md px-3 py-2 text-sm capitalize text-muted-foreground", mode === value && "bg-card font-medium text-foreground shadow-sm")}>{value}</button>)}</div>
+        <label className="relative min-w-0"><span className="sr-only">Search clubs</span><Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search clubs" className="h-11 w-full rounded-lg border border-input bg-background pl-10 pr-10 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20" />{query ? <button type="button" aria-label="Clear club search" onClick={() => setQuery("")} className="absolute right-1.5 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-md text-muted-foreground hover:bg-secondary"><X className="h-4 w-4" /></button> : null}</label>
+        <Button variant="outline" className="h-11" onClick={() => setSort((value) => value === "team" ? "difficulty" : "team")}><ArrowUpDown className="h-4 w-4" />{sort === "team" ? "Team name" : "Best run"}</Button>
+      </div>
+
+      <div className="overflow-x-auto rounded-xl border border-border bg-card">
+        <table className="w-full min-w-[900px] border-collapse text-sm"><caption className="sr-only">Fixture difficulty by club and gameweek</caption><thead className="bg-secondary text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"><tr><th className="sticky left-0 z-10 min-w-52 bg-secondary px-4 py-4 text-left">Club</th><th className="w-24 px-3 py-4 text-center">Average</th>{gameweeks.map((gw) => <th key={gw} className="min-w-24 px-3 py-4 text-center">GW {gw}</th>)}</tr></thead><tbody className="divide-y divide-border">{schedules.map((team) => <tr key={team.team} className="hover:bg-secondary/20"><th scope="row" className="sticky left-0 z-[5] bg-card px-4 py-3"><div className="flex items-center gap-3"><TeamBadge code={team.code || team.team} /><span className="truncate font-semibold">{team.team}</span></div></th><td className="px-3 py-3 text-center"><Badge variant="outline" className={difficultyTone(difficultyFromOpportunity(team.average))}>{difficultyFromOpportunity(team.average).toFixed(1)}</Badge></td>{gameweeks.map((gw) => { const fixture = team.fixtures.find((item) => item.gw === gw); if (!fixture) return <td key={gw} className="px-3 py-3 text-center text-muted-foreground">—</td>; const difficulty = difficultyFromOpportunity(fixture.rating); return <td key={gw} className="px-3 py-3 text-center"><div className={cn("mx-auto w-20 rounded-lg border px-2 py-2", difficultyTone(difficulty))}><div className="flex items-center justify-center gap-1"><TeamBadge code={fixture.opponentCode || fixture.opponent} className="h-6 min-w-8 px-1 text-[9px]" /><span className="text-[10px] font-semibold">{fixture.home ? "H" : "A"}</span></div><p className="mt-1 font-mono text-xs font-semibold">{difficulty.toFixed(1)}</p></div></td>})}</tr>)}</tbody></table>
+      </div>
+      {!schedules.length ? <div className="mt-4"><EmptyState title="No clubs found" description="Try another team name or clear the search." actionLabel="Clear search" onAction={() => setQuery("")} /></div> : null}
     </div>
   )
 }
 
 export default function FixtureAnalysisPage() {
-  const [gameweek, setGameweek] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState("fixtures");
-  const [sortBy, setSortBy] = useState("overall");
-  const [sortOrder, setSortOrder] = useState("desc");
-  const [fixtures, setFixtures] = useState<any[]>([]);
-  const [teamFixtureSummary, setTeamFixtureSummary] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [fixtures, setFixtures] = useState<Fixture[]>([])
+  const [gameweek, setGameweek] = useState<number | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      setError(null);
-      try {
-        const [dataFixtures, dataSummary, dashboardSummary] = await Promise.all([
-          getFixtures(),
-          getTeamFixtureSummary(),
-          getDashboardSummary(),
-        ])
-
-        const allGameweeks = Array.from(
-          new Set(
-            dataFixtures
-              .map((f: any) => Number(f.gameweek))
-              .filter((gw: number) => Number.isFinite(gw))
-          )
-        ).sort((a, b) => a - b);
-
-        // Start after the latest gameweek present in the stats feed. This keeps
-        // fixture analysis current across seasons without a hardcoded cutoff.
-        const nextGameweek = Math.max(1, Number(dashboardSummary.total_gameweeks || 0) + 1);
-        const futureGameweeks = allGameweeks.filter((gw: number) => gw >= nextGameweek);
-        const selectedGameweek = futureGameweeks[0] ?? allGameweeks[allGameweeks.length - 1] ?? nextGameweek;
-
-        const upcomingFixtures = dataFixtures.filter((f: any) => Number(f.gameweek) >= selectedGameweek);
-        
-        // Transform fixture data to match expected structure
-        // NOTE: getFixtures() already returns percentages (20-100%), NOT FDR ratings
-        // So we use the values directly without conversion
-        const transformedFixtures = upcomingFixtures.map((f: any) => {
-          return {
-            ...f,
-            teams: {
-              home: {
-                team: f.home_team.name,
-                short_name: f.home_team.short_name,
-                rank: {
-                  attack: f.home_team.attack_rank || 20,
-                  defense: f.home_team.defense_rank || 20,
-                },
-                // Values already 0-100%, use directly
-                attackRating: Math.round(f.home_team.attacking_fixture_rating ?? 50),
-                defenseRating: Math.round(f.home_team.defensive_fixture_rating ?? 50),
-                fdr: f.home_team.fdr,
-              },
-              away: {
-                team: f.away_team.name,
-                short_name: f.away_team.short_name,
-                rank: {
-                  attack: f.away_team.attack_rank || 20,
-                  defense: f.away_team.defense_rank || 20,
-                },
-                // Values already 0-100%, use directly
-                attackRating: Math.round(f.away_team.attacking_fixture_rating ?? 50),
-                defenseRating: Math.round(f.away_team.defensive_fixture_rating ?? 50),
-                fdr: f.away_team.fdr,
-              }
-            }
-          };
-        });
-        
-        // Set initial gameweek to the first available future one
-        const gameweeksFromUpcoming = upcomingFixtures.map((f: any) => f.gameweek).filter((gw: any) => typeof gw === "number" && !isNaN(gw));
-        const firstUpcomingGW = gameweeksFromUpcoming.length > 0 ? Math.min(...gameweeksFromUpcoming) : selectedGameweek;
-        setGameweek(firstUpcomingGW);
-        setFixtures(transformedFixtures);
-
-        setTeamFixtureSummary(dataSummary);
-      } catch (err: unknown) {
-        setError(err instanceof Error ? err.message : "Failed to fetch fixture analysis data");
-      } finally {
-        setLoading(false);
-      }
+  const fetchData = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const [fixtureData, summary] = await Promise.all([getFixtures(), getDashboardSummary()])
+      const all = fixtureData as Fixture[]
+      const gameweeks = [...new Set(all.map((fixture) => fixture.gw))].sort((a, b) => a - b)
+      const nextGameweek = Number(summary.total_gameweeks || 0) + 1
+      const selected = gameweeks.find((value) => value >= nextGameweek) ?? gameweeks.at(-1) ?? nextGameweek
+      const upcoming = all.filter((fixture) => fixture.gw >= selected)
+      setFixtures(upcoming.length ? upcoming : all)
+      setGameweek(selected)
+    } catch (caughtError) {
+      setError(caughtError instanceof Error ? caughtError.message : "Unable to load fixture analysis")
+    } finally {
+      setLoading(false)
     }
-    fetchData();
-  // Tab changes only switch the presentation; the underlying data is shared.
-  }, []);
+  }, [])
 
-  const sortedTeamData = useMemo(() => {
-    return [...teamFixtureSummary].sort((a: any, b: any) => {
-      const aVal = a[sortBy];
-      const bVal = b[sortBy];
-      return sortOrder === "desc" ? bVal - aVal : aVal - bVal;
-    });
-  }, [sortBy, sortOrder, teamFixtureSummary]);
+  useEffect(() => { void fetchData() }, [fetchData])
 
-  const handleSort = (column: string) => {
-    if (sortBy === column) {
-      setSortOrder(sortOrder === "desc" ? "asc" : "desc");
-    } else {
-      setSortBy(column);
-      setSortOrder("desc");
-    }
-  };
-  
-  // Calculate min/max gameweeks
-  const { minGameweek, maxGameweek } = useMemo(() => {
-    const gameweeks = fixtures.map((f) => f.gw).filter((gw) => typeof gw === "number" && !isNaN(gw));
-    const minGw = gameweeks.length > 0 ? Math.min(...gameweeks) : 1;
-    return {
-      minGameweek: minGw,
-      maxGameweek: gameweeks.length > 0 ? Math.max(...gameweeks) : 38
-    };
-  }, [fixtures]);
+  const gameweeks = useMemo(() => [...new Set(fixtures.map((fixture) => fixture.gw))].sort((a, b) => a - b), [fixtures])
+  const selectedIndex = Math.max(0, gameweeks.indexOf(gameweek ?? gameweeks[0]))
+  const selectedFixtures = useMemo(() => fixtures.filter((fixture) => fixture.gw === gameweek).sort((a, b) => b.maxOpportunityRating - a.maxOpportunityRating), [fixtures, gameweek])
 
-  // Filter and display fixtures - Show selected gameweek only
-  const displayFixtures = useMemo(() => {
-    // Filter by selected gameweek
-    const selectedGw = gameweek ?? minGameweek;
-    let filtered = fixtures.filter((f) => f.gw === selectedGw);
-    
-    // Sort by best opportunities within the selected week
-    return filtered.sort((a, b) => b.maxOpportunityRating - a.maxOpportunityRating);
-  }, [fixtures, gameweek, minGameweek]);
-
-  const getSortIcon = (column: string) => {
-    if (sortBy !== column) return <ArrowUpDown className="h-3 w-3" />;
-    return sortOrder === "desc" ? <ArrowDown className="h-3 w-3" /> : <ArrowUp className="h-3 w-3" />;
-  };
-
-  const currentGameweek = gameweek ?? minGameweek;
-
-  if (loading) return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-        <p className="mt-2 text-muted-foreground">Loading fixture analysis...</p>
-      </div>
-    </div>
-  )
-  if (error) return (
-    <div className="min-h-screen flex items-center justify-center">
-      <Card className="max-w-md">
-        <CardContent className="p-8 text-center">
-          <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-950 flex items-center justify-center mx-auto mb-4">
-            <span className="text-3xl">⚠️</span>
-          </div>
-          <h3 className="text-lg font-semibold text-foreground mb-2">Failed to load fixtures</h3>
-          <p className="text-sm text-muted-foreground mb-4">{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="rounded-lg bg-primary px-4 py-2 text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Retry
-          </button>
-        </CardContent>
-      </Card>
-    </div>
-  )
+  if (loading) return <PageSkeleton label="Loading fixture analysis" />
+  if (error) return <ErrorState title="Fixtures unavailable" description={error} onAction={() => void fetchData()} />
 
   return (
-    <div className="min-h-screen bg-transparent p-2 sm:p-4 lg:p-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-6 sm:mb-8">
-          <h1 className="mb-2 text-2xl sm:text-4xl font-bold text-foreground flex items-center gap-2 sm:gap-3">
-            <CalendarIcon className="h-6 w-6 text-primary sm:h-8 sm:w-8" aria-hidden="true" />
-            <span className="text-foreground">
-              <span className="hidden sm:inline">Fixture Analysis</span>
-              <span className="sm:hidden">Fixtures</span>
-            </span>
-          </h1>
-          <p className="text-sm sm:text-lg text-muted-foreground">
-            Comprehensive gameweek analysis with strategic opportunities
-            and team fixture difficulty insights to optimize your fantasy lineup.
-          </p>
-        </div>
-
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="bg-secondary/50 p-1 rounded-lg border w-full grid grid-cols-2 gap-1 text-background">
-            <TabsTrigger
-              value="fixtures"
-              className="flex items-center justify-center gap-2 px-2 py-2 text-xs sm:text-sm"
-            >
-              <CalendarIcon className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="hidden sm:inline">Fixtures</span>
-            </TabsTrigger>
-            <TabsTrigger
-              value="opportunities"
-              className="flex items-center justify-center gap-2 px-2 py-2 text-xs sm:text-sm"
-            >
-              <Target className="h-3 w-3 sm:h-4 sm:w-4" />
-              <span className="hidden sm:inline">FDR</span>
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="fixtures" className="space-y-4 sm:space-y-6">
-            {/* Gameweek Selector with Navigation */}
-            {displayFixtures.length > 0 && (
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="flex items-center justify-center gap-4 sm:gap-6 w-full sm:w-auto">
-                  <Button
-                    onClick={() => {
-                      const prevGW = Math.max(minGameweek, (gameweek || minGameweek) - 1);
-                      setGameweek(prevGW);
-                    }}
-                    disabled={gameweek === minGameweek}
-                    variant="ghost"
-                    size="icon"
-                    className="h-12 w-12 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition-all active:scale-90 active:bg-muted/80 disabled:opacity-50 disabled:cursor-not-allowed"
-                    aria-label="Previous gameweek"
-                  >
-                    <ChevronLeft className="h-6 w-6 sm:h-5 sm:w-5" />
-                  </Button>
-                  <div className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-secondary/70 to-secondary/50 backdrop-blur font-semibold text-xl sm:text-xl shadow-sm border border-border/50 min-w-[160px] text-center">
-                    Gameweek {gameweek || minGameweek}
-                  </div>
-                  <Button
-                    onClick={() => {
-                      const nextGW = Math.min(maxGameweek, (gameweek || minGameweek) + 1);
-                      setGameweek(nextGW);
-                    }}
-                    disabled={gameweek === maxGameweek}
-                    variant="ghost"
-                    size="icon"
-                    className="h-12 w-12 sm:h-11 sm:w-11 rounded-full hover:bg-muted/60 transition-all active:scale-90 active:bg-muted/80 disabled:opacity-50 disabled:cursor-not-allowed"
-                    aria-label="Next gameweek"
-                  >
-                    <ChevronRight className="h-6 w-6 sm:h-5 sm:w-5" />
-                  </Button>
-                </div>
-              </div>
-            )}
-
-            {/* Fixtures Grid - Grouped by Gameweek */}
-            {displayFixtures.length === 0 ? (
-              <Card className="border-dashed border-2 bg-secondary/20">
-                <CardContent className="p-10 text-center">
-                  <p className="text-lg font-semibold text-foreground">No fixtures available for this gameweek.</p>
-                </CardContent>
-              </Card>
-            ) : (
-              <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {displayFixtures.map((fixture, index) => (
-                  <Card
-                    key={index}
-                    style={{ animationDelay: `${index * 50}ms` }}
-                    className="overflow-hidden border-border bg-card/50  shadow-md hover:shadow-md transition-all duration-300  group"
-                  >
-                    <CardHeader className="bg-muted/35 p-3 transition-colors group-hover:bg-muted/60 sm:p-4">
-                      <div className="flex items-center justify-between gap-2">
-                        <CardTitle className="truncate text-base font-bold text-foreground sm:text-lg">
-                          {fixture.fixture}
-                        </CardTitle>
-                        {fixture.favorability !== "Neutral" ? (
-                          <Badge
-                            variant="secondary"
-                            className="border-border bg-muted text-xs text-foreground"
-                            title="Team favored to win based on attack and defense scores"
-                          >
-                            ⭐ {fixture.favorability} Favoured
-                          </Badge>
-                        ) : (
-                          <Badge
-                            variant="secondary"
-                            className="text-xs bg-slate-100 text-slate-800 dark:bg-slate-800/30 dark:text-slate-200"
-                            title="No clear favorite based on attack and defense scores"
-                          >
-                            Neutral
-                          </Badge>
-                        )}
-                      </div>
-                    </CardHeader>
-                    <CardContent className="p-3 sm:p-4 space-y-3 sm:space-y-4">
-                      {/* Home Team */}
-                      <div
-                        className={`p-3 sm:p-4 rounded-xl border transition-all duration-300  ${getTeamBackgroundColor(fixture.teams.home.team)} ${getTeamBorderColor(fixture.teams.home.team)}`}
-                      >
-                        <div className="flex items-center justify-between mb-2 sm:mb-3">
-                          <h3 className="font-semibold text-sm sm:text-base text-foreground truncate">
-                            {fixture.teams.home.team} (H)
-                          </h3>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                          <div className="space-y-2">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <Target className="h-4 w-4" />
-                              <Badge
-                                aria-label={`Attack Rank ${fixture.teams.home.rank.attack}`}
-                                className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
-                                  "rank",
-                                  fixture.teams.home.rank.attack
-                                )}`}
-                              >
-                                #{fixture.teams.home.rank.attack} Attack
-                              </Badge>
-                            </div>
-                            <div className="text-center">
-                              <p className="text-xs text-muted-foreground mb-1">💪 Attacking Threat</p>
-                              <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.attackRating).color}`}>
-                                {fixture.teams.home.attackRating}%
-                              </p>
-                              <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.home.attackRating).bgColor} ${getRatingDisplay(fixture.teams.home.attackRating).borderColor} ${getRatingDisplay(fixture.teams.home.attackRating).textColor}`}>
-                                {getRatingDisplay(fixture.teams.home.attackRating).emoji} {getRatingDisplay(fixture.teams.home.attackRating).label}
-                              </Badge>
-                            </div>
-                          </div>
-                          <div className="space-y-2">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <Shield className="h-4 w-4" />
-                              <Badge
-                                aria-label={`Defense Rank ${fixture.teams.home.rank.defense}`}
-                                className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
-                                  "rank",
-                                  fixture.teams.home.rank.defense
-                                )}`}
-                              >
-                                #{fixture.teams.home.rank.defense} Defense
-                              </Badge>
-                            </div>
-                            <div className="text-center">
-                              <p className="text-xs text-muted-foreground mb-1">🛡️ Defensive Odds</p>
-                              <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.home.defenseRating).color}`}>
-                                {fixture.teams.home.defenseRating}%
-                              </p>
-                              <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.home.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.home.defenseRating).borderColor} ${getRatingDisplay(fixture.teams.home.defenseRating).textColor}`}>
-                                {getRatingDisplay(fixture.teams.home.defenseRating).emoji} {getRatingDisplay(fixture.teams.home.defenseRating).label}
-                              </Badge>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Away Team */}
-                      <div
-                        className={`p-3 sm:p-4 rounded-xl border transition-all duration-300  ${getTeamBackgroundColor(fixture.teams.away.team)} ${getTeamBorderColor(fixture.teams.away.team)}`}
-                      >
-                        <div className="flex items-center justify-between mb-2 sm:mb-3">
-                          <h3 className="font-semibold text-sm sm:text-base text-foreground truncate">
-                            {fixture.teams.away.team} (A)
-                          </h3>
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                          <div className="space-y-2">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <Target className="h-4 w-4" />
-                              <Badge
-                                aria-label={`Attack Rank ${fixture.teams.away.rank.attack}`}
-                                className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
-                                  "rank",
-                                  fixture.teams.away.rank.attack
-                                )}`}
-                              >
-                                #{fixture.teams.away.rank.attack} Attack
-                              </Badge>
-                            </div>
-                            <div className="text-center">
-                              <p className="text-xs text-muted-foreground mb-1">💪 Attacking Threat</p>
-                              <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.attackRating).color}`}>
-                                {fixture.teams.away.attackRating}%
-                              </p>
-                              <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.away.attackRating).bgColor} ${getRatingDisplay(fixture.teams.away.attackRating).borderColor} ${getRatingDisplay(fixture.teams.away.attackRating).textColor}`}>
-                                {getRatingDisplay(fixture.teams.away.attackRating).emoji} {getRatingDisplay(fixture.teams.away.attackRating).label}
-                              </Badge>
-                            </div>
-                          </div>
-                          <div className="space-y-2">
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <Shield className="h-4 w-4" />
-                              <Badge
-                                aria-label={`Defense Rank ${fixture.teams.away.rank.defense}`}
-                                className={`text-sm font-mono hover:bg-opacity-80 transition-all duration-200 ${getColorStyles(
-                                  "rank",
-                                  fixture.teams.away.rank.defense
-                                )}`}
-                              >
-                                #{fixture.teams.away.rank.defense} Defense
-                              </Badge>
-                            </div>
-                            <div className="text-center">
-                              <p className="text-xs text-muted-foreground mb-1">🛡️ Defensive Odds</p>
-                              <p className={`text-2xl font-bold ${getRatingDisplay(fixture.teams.away.defenseRating).color}`}>
-                                {fixture.teams.away.defenseRating}%
-                              </p>
-                              <Badge className={`text-xs mt-1 ${getRatingDisplay(fixture.teams.away.defenseRating).bgColor} ${getRatingDisplay(fixture.teams.away.defenseRating).borderColor} ${getRatingDisplay(fixture.teams.away.defenseRating).textColor}`}>
-                                {getRatingDisplay(fixture.teams.away.defenseRating).emoji} {getRatingDisplay(fixture.teams.away.defenseRating).label}
-                              </Badge>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="opportunities" className="space-y-4 sm:space-y-6">
-            {/* FDR Grid */}
-            <FDRGrid fixtures={fixtures} />
-          </TabsContent>
-
-        </Tabs>
-      </div>
-    </div>
-  );
+    <div className="min-h-screen px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12"><div className="mx-auto max-w-7xl">
+      <PageHeader eyebrow="Fixture intelligence" title="See the schedule before it moves the market." description="Compare upcoming matchups through attacking opportunity, defensive potential, venue, and role-specific fixture difficulty." />
+      <Tabs defaultValue="fixtures">
+        <TabsList className="mb-6 grid w-full max-w-md grid-cols-2 bg-secondary p-1"><TabsTrigger value="fixtures" className="gap-2"><CalendarDays className="h-4 w-4" />Matches</TabsTrigger><TabsTrigger value="difficulty" className="gap-2"><Target className="h-4 w-4" />Difficulty grid</TabsTrigger></TabsList>
+        <TabsContent value="fixtures" className="mt-0">
+          <div className="mb-5 flex items-center justify-between rounded-xl border border-border bg-card p-3 sm:p-4"><Button variant="ghost" size="icon" aria-label="Previous gameweek" disabled={selectedIndex <= 0} onClick={() => setGameweek(gameweeks[selectedIndex - 1])}><ChevronLeft className="h-5 w-5" /></Button><div className="text-center"><p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Selected round</p><p className="mt-1 font-mono text-xl font-semibold">Gameweek {gameweek ?? "—"}</p></div><Button variant="ghost" size="icon" aria-label="Next gameweek" disabled={selectedIndex >= gameweeks.length - 1} onClick={() => setGameweek(gameweeks[selectedIndex + 1])}><ChevronRight className="h-5 w-5" /></Button></div>
+          {selectedFixtures.length ? <div className="grid gap-4 xl:grid-cols-2">{selectedFixtures.map((fixture) => <FixtureCard key={`${fixture.gw}-${fixture.fixture}`} fixture={fixture} />)}</div> : <EmptyState title="No fixtures in this gameweek" description="Use the arrows to select another available gameweek." />}
+        </TabsContent>
+        <TabsContent value="difficulty" className="mt-0"><DifficultyGrid fixtures={fixtures} /></TabsContent>
+      </Tabs>
+    </div></div>
+  )
 }

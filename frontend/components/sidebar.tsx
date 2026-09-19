@@ -2,18 +2,19 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, TrendingUp, Trophy, Calendar, Target, Menu, X, Clock, Activity } from "lucide-react"
+import { Home, Users, Trophy, Calendar, Sparkles, Menu, X, Clock, GitCompareArrows, Repeat2 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { getDashboardSummary } from "@/lib/supabase"
 import { DATA_SEASON } from "@/lib/season"
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home },
-  { name: "Top Performers", href: "/top-performers", icon: TrendingUp },
-  { name: "Team Rankings", href: "/team-rankings", icon: Trophy },
-  { name: "Fixture Analysis", href: "/fixture-analysis", icon: Calendar },
-  { name: "Player Trends", href: "/player-trends", icon: Activity },
-  { name: "Quick Picks", href: "/quick-picks", icon: Target },
+  { name: "Top Players", href: "/top-performers", icon: Users },
+  { name: "Teams", href: "/team-rankings", icon: Trophy },
+  { name: "Fixtures", href: "/fixture-analysis", icon: Calendar },
+  { name: "Compare Players", href: "/player-trends", icon: GitCompareArrows },
+  { name: "Recommendations", href: "/quick-picks", icon: Sparkles },
+  { name: "Transfer Planner", href: "/transfer-targets", icon: Repeat2 },
 ]
 
 export function Sidebar() {
@@ -41,7 +42,7 @@ export function Sidebar() {
       <button
         aria-label="Open navigation menu"
         onClick={() => setIsMobileOpen(true)}
-        className="fixed left-4 top-4 z-50 grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary shadow-sm ring-1 ring-primary/30 lg:hidden"
+        className="fixed left-4 top-4 z-50 grid h-10 w-10 place-items-center rounded-lg border border-border bg-card text-foreground shadow-sm lg:hidden"
       >
         <Menu className="h-5 w-5" />
       </button>
@@ -49,7 +50,7 @@ export function Sidebar() {
       {isMobileOpen && (
         <button
           aria-label="Close navigation overlay"
-          className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-foreground/20 backdrop-blur-sm lg:hidden"
           onClick={() => setIsMobileOpen(false)}
         />
       )}
@@ -57,7 +58,7 @@ export function Sidebar() {
       <aside className={`fixed inset-y-0 left-0 z-50 w-72 border-r border-sidebar-border bg-sidebar transition-transform duration-200 lg:z-30 lg:translate-x-0 ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex h-full flex-col">
           <div className="flex h-20 items-center gap-3 px-5">
-            <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary shadow-[0_0_0_1px_color-mix(in_srgb,var(--primary)_30%,transparent),0_8px_24px_color-mix(in_srgb,var(--primary)_12%,transparent)]">
+            <div className="grid h-10 w-10 place-items-center rounded-lg border border-sidebar-border bg-card text-sidebar-foreground shadow-sm">
               <Trophy className="h-5 w-5" />
             </div>
             <div className="min-w-0 flex-1">
@@ -81,9 +82,11 @@ export function Sidebar() {
                   <Link
                     key={item.href}
                     href={item.href}
+                    aria-current={active ? "page" : undefined}
                     onClick={() => setIsMobileOpen(false)}
-                    className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${active ? "bg-primary/15 text-primary ring-1 ring-primary/20" : "text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-sidebar-foreground"}`}
+                    className={`relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${active ? "bg-card font-semibold text-sidebar-foreground shadow-sm" : "font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"}`}
                   >
+                    {active ? <span className="absolute inset-y-2 left-0 w-0.5 rounded-full bg-sidebar-primary" aria-hidden="true" /> : null}
                     <item.icon className="h-[18px] w-[18px]" />
                     <span>{item.name}</span>
                   </Link>
@@ -93,7 +96,7 @@ export function Sidebar() {
           </nav>
 
           <div className="border-t border-sidebar-border p-3">
-            <div className="rounded-xl bg-sidebar-accent/70 p-3 ring-1 ring-sidebar-border/70">
+            <div className="rounded-lg border border-sidebar-border bg-card/65 p-3">
               <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                 <Clock className="h-3.5 w-3.5" />
                 Last synced

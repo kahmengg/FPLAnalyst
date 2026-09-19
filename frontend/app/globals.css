@@ -4,57 +4,59 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #112024;
-  --foreground: #e7f1ee;
-  --card: #182c31;
-  --card-foreground: #e7f1ee;
-  --popover: #1b3036;
-  --popover-foreground: #edf6f3;
-  --primary: #70cbbb;
-  --primary-foreground: #0b2927;
-  --secondary: #20373d;
-  --secondary-foreground: #dceae6;
-  --muted: #1d3237;
-  --muted-foreground: #9fb8b2;
-  --accent: #29484d;
-  --accent-foreground: #edf6f3;
-  --success: #6bc68a;
-  --success-foreground: #0b2b1a;
-  --warning: #e5b567;
-  --warning-foreground: #302006;
-  --destructive: #e37a78;
-  --destructive-foreground: #32100f;
-  --info: #79acd8;
-  --info-foreground: #0b2235;
-  --border: #315058;
-  --input: #3a5c64;
-  --ring: #80d8c8;
-  --chart-1: #70cbbb;
-  --chart-2: #79acd8;
-  --chart-3: #e5b567;
-  --chart-4: #e37a78;
-  --chart-5: #a999d6;
-  --difficulty-1: #214c3b;
-  --difficulty-2: #31513b;
-  --difficulty-3: #5b5030;
-  --difficulty-4: #65422f;
-  --difficulty-5: #623437;
-  --radius: 0.75rem;
-  --sidebar: #0e1b1f;
-  --sidebar-foreground: #deebe7;
-  --sidebar-primary: #70cbbb;
-  --sidebar-primary-foreground: #0b2927;
-  --sidebar-accent: #1b3338;
-  --sidebar-accent-foreground: #eef7f4;
-  --sidebar-border: #29474e;
-  --sidebar-ring: #80d8c8;
+  --background: #f6f3ec;
+  --foreground: #20221f;
+  --card: #fffdf8;
+  --card-foreground: #20221f;
+  --popover: #fffdf8;
+  --popover-foreground: #20221f;
+  --primary: #2d302c;
+  --primary-foreground: #fffdf8;
+  --secondary: #eee9df;
+  --secondary-foreground: #2d302c;
+  --muted: #ece8df;
+  --muted-foreground: #666960;
+  --accent: #e5e0d6;
+  --accent-foreground: #20221f;
+  --success: #2f7d4a;
+  --success-foreground: #f4fbf6;
+  --warning: #9a6518;
+  --warning-foreground: #fff9ee;
+  --destructive: #b6413b;
+  --destructive-foreground: #fff8f7;
+  --info: #59636b;
+  --info-foreground: #fbfcfc;
+  --border: #d8d2c6;
+  --input: #c9c2b5;
+  --ring: #555951;
+  --chart-1: #2d302c;
+  --chart-2: #696d65;
+  --chart-3: #9a6518;
+  --chart-4: #2f7d4a;
+  --chart-5: #8b7360;
+  --difficulty-1: #dbeadf;
+  --difficulty-2: #e5ebd7;
+  --difficulty-3: #f0e5c8;
+  --difficulty-4: #efd5c4;
+  --difficulty-5: #e9c5c2;
+  --radius: 0.625rem;
+  --sidebar: #eee9df;
+  --sidebar-foreground: #2d302c;
+  --sidebar-primary: #2d302c;
+  --sidebar-primary-foreground: #fffdf8;
+  --sidebar-accent: #e2ddd3;
+  --sidebar-accent-foreground: #20221f;
+  --sidebar-border: #d4cec2;
+  --sidebar-ring: #555951;
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
+  --font-display: var(--font-newsreader);
 }
 
 @theme inline {
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
+  --font-display: var(--font-newsreader);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -106,16 +108,13 @@
 
 @layer base {
   * { border-color: var(--border); }
-  html { scroll-behavior: smooth; background: var(--background); color-scheme: dark; }
+  html { scroll-behavior: smooth; background: var(--background); color-scheme: light; }
   body {
     @apply bg-background text-foreground antialiased;
-    background-image:
-      radial-gradient(circle at 85% 5%, color-mix(in srgb, var(--primary) 8%, transparent), transparent 28rem),
-      radial-gradient(circle at 20% 90%, color-mix(in srgb, var(--info) 5%, transparent), transparent 32rem);
-    background-attachment: fixed;
     min-width: 320px;
   }
   h1, h2, h3, h4, h5, h6 { @apply font-semibold tracking-tight; }
+  h1, h2 { font-family: var(--font-display), Georgia, serif; }
   h1 { @apply text-3xl lg:text-4xl; }
   h2 { @apply text-2xl lg:text-3xl; }
   h3 { @apply text-xl lg:text-2xl; }
@@ -137,8 +136,8 @@
 
 /* Cleaner page surface: depth comes from spacing and subtle elevation, not strong outlines. */
 [data-slot='card'] {
-  border-color: color-mix(in srgb, var(--border) 72%, transparent);
-  background-image: linear-gradient(145deg, color-mix(in srgb, var(--primary) 3%, var(--card)), var(--card));
+  border-color: var(--border);
+  background-image: none;
 }
 
 /* Keep active tabs neutral and readable even when a route supplies legacy
