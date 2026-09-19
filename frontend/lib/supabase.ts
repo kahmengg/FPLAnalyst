@@ -25,8 +25,8 @@ let seasonPromise: Promise<string> | null = null
 let cachedPlayers: any[] | null = null
 let cachedSeasonStats: { season: string; rows: any[] } | null = null
 let seasonStatsPromise: Promise<any[]> | null = null
-let cachedFixtureBase: { season: string; fixtures: any[]; teams: any[]; ranks: any[]; currentGameweek: number } | null = null
-let fixtureBasePromise: Promise<{ season: string; fixtures: any[]; teams: any[]; ranks: any[]; currentGameweek: number }> | null = null
+let cachedFixtureBase: { season: string; fixtures: any[]; teams: any[]; ranks: any[] } | null = null
+let fixtureBasePromise: Promise<{ season: string; fixtures: any[]; teams: any[]; ranks: any[] }> | null = null
 let cachedTeamRankings: { season: string; rows: any[] } | null = null
 let teamRankingsPromise: Promise<any[]> | null = null
 let cachedRoleInsights: { season: string; rows: PlayerRoleInsight[] } | null = null
@@ -335,10 +335,10 @@ async function getFixtureBase() {
   // this request prevents duplicate reads and browser connection starvation.
   if (!fixtureBasePromise) {
     fixtureBasePromise = (async () => {
-      const [fixturesRes, teamsRes, ranksRes, latestGameweekRes] = await Promise.all([
+      const [fixturesRes, teamsRes, ranksRes] = await Promise.all([
         requireSupabase()
           .from('fixtures')
-          .select('id, season_key, gameweek, home_team_id, away_team_id, home_attack_fdr, home_defense_fdr, away_attack_fdr, away_defense_fdr, home_attacking_favorability, home_defensive_favorability, away_attacking_favorability, away_defensive_favorability')
+          .select('id, season_key, gameweek, home_team_id, away_team_id, home_attack_fdr, home_defense_fdr, away_attack_fdr, away_defense_fdr, home_attacking_favorability, home_defensive_favorability, away_attacking_favorability, away_defensive_favorability, finished')
           .eq('season_key', season)
           .order('gameweek'),
         requireSupabase().from('teams').select('id, name, short_name'),
@@ -346,15 +346,9 @@ async function getFixtureBase() {
           .from('team_rankings')
           .select('team_id, overall_rank, attack_rank, defense_rank, attack_score_5, defense_score_5, home_strength_10, away_strength_10')
           .eq('season_key', season),
-        requireSupabase()
-          .from('player_gameweeks')
-          .select('gameweek')
-          .eq('season_key', season)
-          .order('gameweek', { ascending: false })
-          .limit(1),
       ])
 
-      const error = fixturesRes.error || teamsRes.error || ranksRes.error || latestGameweekRes.error
+      const error = fixturesRes.error || teamsRes.error || ranksRes.error
       if (error) throw new Error(`Failed to load fixture data: ${error.message}`)
 
       return {
@@ -362,7 +356,6 @@ async function getFixtureBase() {
         fixtures: fixturesRes.data || [],
         teams: teamsRes.data || [],
         ranks: ranksRes.data || [],
-        currentGameweek: safeInt(latestGameweekRes.data?.[0]?.gameweek, 0),
       }
     })()
   }
@@ -379,13 +372,13 @@ async function getFixtureBase() {
 async function buildTeamFixtureSummaryFallback() {
   requireSupabase()
 
-  const { fixtures: fixtureRows, teams, currentGameweek } = await getFixtureBase()
+  const { fixtures: fixtureRows, teams } = await getFixtureBase()
   const teamMap = new Map(teams.map((t: any) => [t.id, t]))
   const byTeam = new Map<string, any[]>()
 
-  // Transfer planning should start after the latest gameweek in the stats feed,
-  // not at GW1. Fall back to all fixtures for an empty/pre-season dataset.
-  const futureRows = fixtureRows.filter((fixture: any) => safeInt(fixture.gameweek, 0) > currentGameweek)
+  // A daily sync can happen midway through a gameweek. Keep every unplayed
+  // fixture, including matches later in the current round, in transfer plans.
+  const futureRows = fixtureRows.filter((fixture: any) => fixture.finished !== true)
   const summaryRows = futureRows.length > 0 ? futureRows : fixtureRows
 
   for (const f of summaryRows) {
@@ -902,6 +895,7 @@ export async function getFixtures(gameweek?: number) {
         return {
           gw: safeInt(row.gameweek, 0),
           gameweek: safeInt(row.gameweek, 0),
+          finished: row.finished === true,
           fixture: `${homeTeam.name || 'Home'} vs ${awayTeam.name || 'Away'}`,
           home_team: {
             name: homeTeam.name || '',

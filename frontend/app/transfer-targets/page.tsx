@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useState } from "react"
-import { Home, Minus, Plus, Sparkles } from "lucide-react"
+import { Minus, Plus, Sparkles } from "lucide-react"
 
 import { ErrorState, PageSkeleton } from "@/components/data-state"
 import { PageHeader } from "@/components/page-header"
@@ -131,25 +131,6 @@ function FixtureHorizonControl({ value, maximum, onChange }: { value: number; ma
   )
 }
 
-function NextFixtureList({ rows, horizon, onViewPicks }: { rows: TeamSummary[]; horizon: number; onViewPicks: (team: TeamSummary) => void }) {
-  return (
-    <section aria-labelledby="next-fixtures-title" className="overflow-hidden rounded-xl border border-border bg-card">
-      <div className="border-b border-border p-5 sm:p-6"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Immediate priority</p><h2 id="next-fixtures-title" className="mt-1 text-3xl font-medium">Best {nextFixtureLabel(horizon)} schedules</h2><p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Clubs ranked by the model&apos;s average fixture favourability across their {nextFixtureLabel(horizon)}.</p></div>
-      <div className="divide-y divide-border">
-        {rows.slice(0, 7).map((team, index) => (
-            <article key={team.team} className="p-4 transition-colors hover:bg-secondary/25 sm:p-5">
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex min-w-0 items-center gap-3"><span className="w-5 shrink-0 font-mono text-xs text-muted-foreground">{index + 1}</span><TeamBadge code={team.team_short || team.team} /><div className="min-w-0"><h3 className="truncate font-sans text-sm font-semibold">{team.team}</h3><p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground"><Home className="h-3 w-3" />{team.nearTermHomeFixtures} home fixtures</p></div></div>
-                <div className="text-right"><p className="font-mono text-lg font-semibold tabular-nums">{score(team.nearTermRating)}</p><p className="text-[11px] text-muted-foreground">model rating</p></div>
-              </div>
-              <div className="mt-4 grid gap-3 border-t border-border pt-3 lg:grid-cols-[1fr_auto] lg:items-end"><div><p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">Fixtures</p><FixtureSequence fixtures={team.upcomingFixtures ?? []} horizon={horizon} /></div><Button variant="ghost" size="sm" onClick={() => onViewPicks(team)}><Sparkles className="h-4 w-4" />Player picks</Button></div>
-            </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 export default function TransferTargetsPage() {
   const [teams, setTeams] = useState<TeamSummary[]>([])
   const [attackingPicks, setAttackingPicks] = useState<PickTeam[]>([])
@@ -214,9 +195,7 @@ export default function TransferTargetsPage() {
 
       <div className="mb-5"><FixtureHorizonControl value={fixtureHorizon} maximum={maximumFixtureHorizon} onChange={setFixtureHorizon} /></div>
 
-      <NextFixtureList rows={rankedTeams} horizon={fixtureHorizon} onViewPicks={setSelectedTeam} />
-
-      <section className="mt-8" aria-labelledby="schedule-title"><div className="mb-4"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">All clubs</p><h2 id="schedule-title" className="mt-1 text-3xl font-medium">Next-{fixtureHorizon} schedule table</h2><p className="mt-2 text-sm text-muted-foreground">H and A indicate whether each fixture is at home or away. All metrics use the selected window.</p></div><div className="max-w-full overflow-x-auto rounded-xl border border-border bg-card"><table className="w-full min-w-[980px] text-sm"><thead className="bg-secondary text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"><tr><th className="px-4 py-4 text-left">Club</th><th className="px-4 py-4 text-left">Upcoming fixtures</th><th className="px-4 py-4 text-right">Model rating</th><th className="px-4 py-4 text-right">Home</th><th className="px-4 py-4 text-right">Favourable</th><th className="px-4 py-4 text-right"><span className="sr-only">Player picks</span></th></tr></thead><tbody className="divide-y divide-border">{rankedTeams.map((team) => <tr key={team.team} className="hover:bg-secondary/25"><th scope="row" className="px-4 py-3"><div className="flex items-center gap-3"><TeamBadge code={team.team_short || team.team} /><span>{team.team}</span></div></th><td className="px-4 py-3"><FixtureSequence fixtures={team.upcomingFixtures ?? []} horizon={fixtureHorizon} /></td><td className="px-4 py-3 text-right font-mono tabular-nums">{score(team.nearTermRating)}</td><td className="px-4 py-3 text-right font-mono tabular-nums">{team.nearTermHomeFixtures}</td><td className="px-4 py-3 text-right font-mono tabular-nums">{team.fixtures}</td><td className="px-4 py-3 text-right"><Button variant="ghost" size="sm" onClick={() => setSelectedTeam(team)}><Sparkles className="h-4 w-4" />Picks</Button></td></tr>)}</tbody></table></div></section>
+      <section aria-labelledby="schedule-title"><div className="mb-4"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Club comparison</p><h2 id="schedule-title" className="mt-1 text-3xl font-medium">Next-{fixtureHorizon} schedule</h2><p className="mt-2 text-sm text-muted-foreground">Clubs are ranked by average fixture favourability across the selected window. H and A indicate home and away.</p></div><div className="max-w-full overflow-x-auto rounded-xl border border-border bg-card"><table className="w-full min-w-[980px] text-sm"><thead className="bg-secondary text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground"><tr><th className="px-4 py-4 text-left">Club</th><th className="px-4 py-4 text-left">Upcoming fixtures</th><th className="px-4 py-4 text-right">Model rating</th><th className="px-4 py-4 text-right">Home</th><th className="px-4 py-4 text-right">Favourable</th><th className="px-4 py-4 text-right"><span className="sr-only">Player picks</span></th></tr></thead><tbody className="divide-y divide-border">{rankedTeams.map((team) => <tr key={team.team} className="hover:bg-secondary/25"><th scope="row" className="px-4 py-3"><div className="flex items-center gap-3"><TeamBadge code={team.team_short || team.team} /><span>{team.team}</span></div></th><td className="px-4 py-3"><FixtureSequence fixtures={team.upcomingFixtures ?? []} horizon={fixtureHorizon} /></td><td className="px-4 py-3 text-right font-mono tabular-nums">{score(team.nearTermRating)}</td><td className="px-4 py-3 text-right font-mono tabular-nums">{team.nearTermHomeFixtures}</td><td className="px-4 py-3 text-right font-mono tabular-nums">{team.fixtures}</td><td className="px-4 py-3 text-right"><Button variant="ghost" size="sm" onClick={() => setSelectedTeam(team)}><Sparkles className="h-4 w-4" />Picks</Button></td></tr>)}</tbody></table></div></section>
 
       {selectedTeam ? <TeamPicksModal isOpen={Boolean(selectedTeam)} onClose={() => setSelectedTeam(null)} teamName={selectedTeam.team} teamCode={selectedTeam.team_short || selectedTeam.team} {...modalPlayers(selectedTeam.team)} /> : null}
     </div></div>

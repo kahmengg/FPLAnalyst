@@ -2,12 +2,15 @@ import unittest
 import sys
 from pathlib import Path
 
+import pandas as pd
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 # Support test discovery from either the repository root or backend directory.
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from backend.sync_daily import validate_fixture_csv, validate_stats_csv
+from backend.etl.process_fpl_data import completed_gameweeks
 
 
 class DataValidationTests(unittest.TestCase):
@@ -65,6 +68,15 @@ class DataValidationTests(unittest.TestCase):
 
         with self.assertRaisesRegex(ValueError, "both home and away scores"):
             validate_fixture_csv("\n".join(expanded) + "\n")
+
+    def test_only_fully_finished_gameweeks_feed_model_aggregates(self):
+        fixtures = pd.DataFrame({
+            "gameweek": [1] * 10 + [2] * 10 + [3] * 10,
+            "finished": ["true"] * 10 + ["true"] + ["false"] * 9 + [True] * 10,
+        })
+
+        # A partial GW2 must stay out even if a later rescheduled round finishes.
+        self.assertEqual(completed_gameweeks(fixtures), {1, 3})
 
 
 if __name__ == "__main__":

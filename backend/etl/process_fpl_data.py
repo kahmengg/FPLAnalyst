@@ -287,6 +287,17 @@ def load_fixture_csv() -> pd.DataFrame:
     return fixtures.sort_values(["gameweek", "home_team", "away_team"]).reset_index(drop=True)
 
 
+def completed_gameweeks(fixtures: pd.DataFrame) -> set[int]:
+    """Return only rounds whose ten official fixtures have all finished."""
+    if "finished" not in fixtures.columns:
+        return set()
+
+    completion = fixtures.assign(
+        _finished=fixtures["finished"].map(safe_bool)
+    ).groupby("gameweek")["_finished"].all()
+    return {int(gameweek) for gameweek, finished in completion.items() if bool(finished)}
+
+
 # ── Stage 2: Teams ───────────────────────────────────────────────────────────
 
 def upsert_teams(df: pd.DataFrame) -> dict[str, str]:
@@ -1319,16 +1330,25 @@ def main(season: str = DEFAULT_SEASON) -> bool:
         print("❌ No data — aborting.")
         return False
     fixtures = load_fixture_csv()
+    complete_rounds = completed_gameweeks(fixtures)
+    gameweeks = pd.to_numeric(df["gameweek"], errors="coerce")
+    analysis_df = df[gameweeks.isin(complete_rounds)].copy()
 
     team_map   = upsert_teams(df)
     player_map = upsert_players(df, team_map)
 
+    # Preserve raw rows and match scores from the daily sync, but do not let a
+    # partially played round bias cross-team rankings or player model scores.
     upsert_gameweek_stats(df, player_map, season)
-    upsert_season_stats(df, player_map, season)
-    upsert_team_rankings(df, team_map, season)
-    upsert_player_role_insights(df, player_map, team_map, season)
-    latest_gw = int(pd.to_numeric(df["gameweek"], errors="coerce").max())
-    upsert_fixtures(fixtures, team_map, season, latest_gw=latest_gw)
+    if analysis_df.empty:
+        print("⚠️  No fully completed gameweeks yet; model aggregates were left unchanged.")
+    else:
+        upsert_season_stats(analysis_df, player_map, season)
+        upsert_team_rankings(analysis_df, team_map, season)
+        upsert_player_role_insights(analysis_df, player_map, team_map, season)
+
+    latest_completed_gw = max(complete_rounds, default=0)
+    upsert_fixtures(fixtures, team_map, season, latest_gw=latest_completed_gw)
 
     elapsed = (datetime.now() - t0).total_seconds()
     print(f"\n✅ Done in {elapsed:.1f}s\n" + "=" * 60)
