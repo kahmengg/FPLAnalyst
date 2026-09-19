@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { buildRoleInsightFallback, mapStoredRoleInsight, type PlayerRoleInsight } from '@/lib/player-role-insights'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() || ''
 const supabasePublicKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim()
@@ -18,6 +19,7 @@ function requireSupabase() {
 
 const DEFAULT_SEASON = '2026_27'
 const CONFIGURED_SEASON = process.env.NEXT_PUBLIC_FPL_SEASON_KEY?.trim() || ''
+const USE_PRECOMPUTED_ROLE_INSIGHTS = process.env.NEXT_PUBLIC_PLAYER_ROLE_INSIGHTS_PRECOMPUTED?.trim().toLowerCase() === 'true'
 let cachedSeason: string | null = null
 let seasonPromise: Promise<string> | null = null
 let cachedPlayers: any[] | null = null
@@ -27,6 +29,8 @@ let cachedFixtureBase: { season: string; fixtures: any[]; teams: any[]; ranks: a
 let fixtureBasePromise: Promise<{ season: string; fixtures: any[]; teams: any[]; ranks: any[]; currentGameweek: number }> | null = null
 let cachedTeamRankings: { season: string; rows: any[] } | null = null
 let teamRankingsPromise: Promise<any[]> | null = null
+let cachedRoleInsights: { season: string; rows: PlayerRoleInsight[] } | null = null
+let roleInsightsPromise: Promise<PlayerRoleInsight[]> | null = null
 
 function safeNumber(value: any, fallback = 0) {
   const parsed = typeof value === 'number' ? value : parseFloat(String(value ?? ''))
@@ -458,6 +462,77 @@ export async function getPlayerInsights(insightType: string, limit = 100) {
     console.error(`Error in getPlayerInsights(${insightType}):`, err)
     throw err
   }
+}
+
+/**
+ * Load the role-based player intelligence dataset in one request. During the
+ * schema rollout, derive the same model from existing gameweek rows so the page
+ * remains usable before the precomputed table is populated.
+ */
+export async function getPlayerRoleInsights(): Promise<PlayerRoleInsight[]> {
+  requireSupabase()
+  const season = await getSeason()
+  if (cachedRoleInsights?.season === season) return cachedRoleInsights.rows
+
+  if (!roleInsightsPromise) {
+    roleInsightsPromise = (async () => {
+      const teamRows = await getTeamRankingsBase()
+      const defenseByTeam = new Map<string, number>()
+      for (const team of teamRows) {
+        const strength = safeNumber(team.defense_strength, 50)
+        if (team.team_short) defenseByTeam.set(String(team.team_short).toUpperCase(), strength)
+        if (team.team) defenseByTeam.set(String(team.team).toUpperCase(), strength)
+      }
+
+      if (USE_PRECOMPUTED_ROLE_INSIGHTS) {
+        const stored = await requireSupabase()
+          .from('player_role_insights')
+          .select('*, players!inner(id, player_name, web_name, position, cost, ownership, is_active, teams!left(name, short_name))')
+          .eq('season_key', season)
+        if (stored.error) {
+          throw new Error(`Failed to load precomputed player role insights: ${stored.error.message}`)
+        }
+        if (stored.data?.length) return stored.data
+          .filter((row: any) => {
+            const player = Array.isArray(row.players) ? row.players[0] : row.players
+            return player?.is_active !== false
+          })
+          .map((row: any) => mapStoredRoleInsight(row, defenseByTeam))
+      }
+
+      const [players, gameweeks] = await Promise.all([
+        getAllPlayersCached(5000),
+        getAllRoleGameweeks(season),
+      ])
+      return buildRoleInsightFallback(players, gameweeks, defenseByTeam, season)
+    })()
+  }
+
+  try {
+    const rows = await roleInsightsPromise
+    cachedRoleInsights = { season, rows }
+    return rows
+  } finally {
+    roleInsightsPromise = null
+  }
+}
+
+async function getAllRoleGameweeks(season: string) {
+  const pageSize = 1000
+  const rows: any[] = []
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await requireSupabase()
+      .from('player_gameweeks')
+      .select('player_id, gameweek, minutes, total_points, goals, assists, clean_sheet, xg, xa, xgi, shots_in_box, shots_on_target, chances_created, touches_opp_box, defensive_contribution, xgc')
+      .eq('season_key', season)
+      .order('gameweek')
+      .order('player_id')
+      .range(from, from + pageSize - 1)
+    if (error) throw new Error(`Failed to load player role insights: ${error.message}`)
+    rows.push(...(data || []))
+    if (!data || data.length < pageSize) break
+  }
+  return rows
 }
 
 /**

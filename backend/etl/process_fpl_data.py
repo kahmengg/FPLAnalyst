@@ -53,6 +53,8 @@ ATTACK_WEIGHTS = {"xg": 0.40, "goals": 0.30, "shots": 0.15, "chances": 0.15}
 DEFENSE_WEIGHTS = {"xgc": 0.55, "gc": 0.35, "cs": 0.10}
 OPPONENT_ADJUSTMENT_MIN = 0.85
 OPPONENT_ADJUSTMENT_MAX = 1.15
+PLAYER_INSIGHT_SCORE_VERSION = "role-v1"
+POSITION_NAMES = {1: "Goalkeeper", 2: "Defender", 3: "Midfielder", 4: "Forward"}
 
 # Initialized in main() so importing validation helpers never opens a write
 # client. All ETL writes require the Supabase service-role key.
@@ -623,6 +625,224 @@ def upsert_season_stats(df: pd.DataFrame, player_map: dict[int, str], season: st
     print(f"   {len(rows)} player season records")
 
 
+# ── Stage 5b: Role-based player insights ───────────────────────────────────
+
+def _assign_composite_score(
+    frame: pd.DataFrame,
+    indexes: pd.Index,
+    target: str,
+    specs: list[tuple[str, float]],
+) -> None:
+    """Assign a position-relative 0-100 score to eligible rows only."""
+    eligible = [idx for idx in indexes if bool(frame.at[idx, "is_eligible"])]
+    if not eligible:
+        return
+    total = pd.Series(0.0, index=eligible, dtype=float)
+    weight_sum = 0.0
+    for column, weight in specs:
+        total += normalized_score(frame.loc[eligible, column]) * weight
+        weight_sum += weight
+    frame.loc[eligible, target] = (total / weight_sum).clip(0, 100).round(3)
+
+
+def build_player_role_insights(
+    df: pd.DataFrame,
+    player_map: dict[int, str],
+    season: str,
+    team_defense_scores: Optional[dict[str, float]] = None,
+) -> list[dict]:
+    """Build season and rolling-five player archetype metrics."""
+    source = df.copy()
+    source["_pid"] = source["id"].apply(lambda value: player_map.get(safe_int(value)))
+    source = source[source["_pid"].notna()].copy()
+    if source.empty:
+        return []
+
+    numeric_columns = [
+        "gameweek", "element_type", "minutes", "total_points", "goals", "assists",
+        "clean_sheet", "expected_goals", "expected_assists",
+        "expected_goal_involvements", "total_shots", "shots_in_box",
+        "shots_on_target", "chances_created", "touches_opp_box",
+        "defensive_contribution", "expected_goals_conceded",
+    ]
+    for column in numeric_columns:
+        if column not in source.columns:
+            source[column] = 0
+        source[column] = pd.to_numeric(source[column], errors="coerce").fillna(0)
+
+    available_gameweeks = sorted(source["gameweek"].astype(int).unique().tolist())
+    windows = {"season": available_gameweeks, "last_5": available_gameweeks[-LAST_5_GWS:]}
+    raw_rows: list[dict] = []
+
+    for window_key, gameweeks in windows.items():
+        window = source[source["gameweek"].astype(int).isin(gameweeks)]
+        minimum_minutes = min(450, max(90, 60 * len(gameweeks)))
+
+        for _, group in window.groupby("_pid"):
+            position_id = max(1, min(4, int(group["element_type"].iloc[-1] or 1)))
+            appearances = int((group["minutes"] > 0).sum())
+            sixty_rows = group[group["minutes"] >= 60]
+            sixty_appearances = int(len(sixty_rows))
+            total_minutes = int(group["minutes"].sum())
+            denominator_90 = max(total_minutes / 90, 1e-9)
+            threshold = 10 if position_id == 2 else 12 if position_id in (3, 4) else None
+            dc_returns = int((sixty_rows["defensive_contribution"] >= threshold).sum()) if threshold else 0
+            dc_points = int(((group["defensive_contribution"] >= threshold).sum()) * 2) if threshold else 0
+            clean_sheets = int(group["clean_sheet"].sum())
+            team_code = short(str(group["team_name"].iloc[-1]))
+
+            raw_rows.append({
+                "season_key": season,
+                "player_id": group["_pid"].iloc[0],
+                "window_key": window_key,
+                "window_gameweeks": len(gameweeks),
+                "score_version": PLAYER_INSIGHT_SCORE_VERSION,
+                "position": POSITION_NAMES[position_id],
+                "team_code": team_code,
+                "is_eligible": total_minutes >= minimum_minutes,
+                "appearances": appearances,
+                "sixty_minute_appearances": sixty_appearances,
+                "total_minutes": total_minutes,
+                "total_points": int(group["total_points"].sum()),
+                "goals": int(group["goals"].sum()),
+                "assists": int(group["assists"].sum()),
+                "clean_sheets": clean_sheets,
+                "xg": float(group["expected_goals"].sum()),
+                "xa": float(group["expected_assists"].sum()),
+                "xgi": float(group["expected_goal_involvements"].sum()),
+                "shots": int(group["total_shots"].sum()),
+                "shots_in_box": int(group["shots_in_box"].sum()),
+                "shots_on_target": int(group["shots_on_target"].sum()),
+                "chances_created": int(group["chances_created"].sum()),
+                "touches_opp_box": int(group["touches_opp_box"].sum()),
+                "defensive_contribution": float(group["defensive_contribution"].sum()),
+                "xgc": float(group["expected_goals_conceded"].sum()),
+                "points_per90": float(group["total_points"].sum()) / denominator_90,
+                "goals_per90": float(group["goals"].sum()) / denominator_90,
+                "assists_per90": float(group["assists"].sum()) / denominator_90,
+                "xg_per90": float(group["expected_goals"].sum()) / denominator_90,
+                "xa_per90": float(group["expected_assists"].sum()) / denominator_90,
+                "xgi_per90": float(group["expected_goal_involvements"].sum()) / denominator_90,
+                "shots_in_box_per90": float(group["shots_in_box"].sum()) / denominator_90,
+                "shots_on_target_per90": float(group["shots_on_target"].sum()) / denominator_90,
+                "chances_created_per90": float(group["chances_created"].sum()) / denominator_90,
+                "touches_opp_box_per90": float(group["touches_opp_box"].sum()) / denominator_90,
+                "defensive_contribution_per90": float(group["defensive_contribution"].sum()) / denominator_90,
+                "clean_sheet_rate": clean_sheets / max(sixty_appearances, 1),
+                "minute_security": sixty_appearances / max(appearances, 1),
+                "dc_opportunities": sixty_appearances if threshold else 0,
+                "dc_returns": dc_returns,
+                "dc_points": dc_points,
+                "dc_return_rate": dc_returns / max(sixty_appearances, 1) if threshold else 0,
+                "team_defense_strength": float((team_defense_scores or {}).get(team_code, 50)),
+                "goal_threat_score": np.nan,
+                "creation_score": np.nan,
+                "attack_score": np.nan,
+                "defensive_floor_score": np.nan,
+                "hybrid_score": np.nan,
+                "complete_score": np.nan,
+                "goalkeeper_score": np.nan,
+            })
+
+    insights = pd.DataFrame(raw_rows)
+    if insights.empty:
+        return []
+
+    for (_, position), indexes in insights.groupby(["window_key", "position"]).groups.items():
+        if position != "Goalkeeper":
+            _assign_composite_score(insights, indexes, "goal_threat_score", [
+                ("xg_per90", 0.40), ("shots_in_box_per90", 0.25),
+                ("shots_on_target_per90", 0.20), ("touches_opp_box_per90", 0.15),
+            ])
+            _assign_composite_score(insights, indexes, "creation_score", [
+                ("xa_per90", 0.50), ("chances_created_per90", 0.30),
+                ("assists_per90", 0.20),
+            ])
+            attack_weights = {
+                "Forward": (0.70, 0.30),
+                "Midfielder": (0.50, 0.50),
+                "Defender": (0.45, 0.55),
+            }[position]
+            eligible = [idx for idx in indexes if bool(insights.at[idx, "is_eligible"])]
+            insights.loc[eligible, "attack_score"] = (
+                insights.loc[eligible, "goal_threat_score"] * attack_weights[0]
+                + insights.loc[eligible, "creation_score"] * attack_weights[1]
+            ).round(3)
+            _assign_composite_score(insights, indexes, "defensive_floor_score", [
+                ("dc_return_rate", 0.60),
+                ("defensive_contribution_per90", 0.25),
+                ("minute_security", 0.15),
+            ])
+
+            if position == "Midfielder":
+                attack = insights.loc[eligible, "attack_score"]
+                floor = insights.loc[eligible, "defensive_floor_score"]
+                insights.loc[eligible, "hybrid_score"] = (
+                    2 * attack * floor / (attack + floor).replace(0, np.nan)
+                ).fillna(0).round(3)
+            elif position == "Defender":
+                insights.loc[eligible, "complete_score"] = (
+                    insights.loc[eligible, "attack_score"] * 0.40
+                    + insights.loc[eligible, "defensive_floor_score"] * 0.35
+                    + insights.loc[eligible, "team_defense_strength"] * 0.25
+                ).round(3)
+        else:
+            eligible = [idx for idx in indexes if bool(insights.at[idx, "is_eligible"])]
+            if eligible:
+                clean_score = normalized_score(insights.loc[eligible, "clean_sheet_rate"])
+                points_score = normalized_score(insights.loc[eligible, "points_per90"])
+                insights.loc[eligible, "goalkeeper_score"] = (
+                    insights.loc[eligible, "team_defense_strength"] * 0.50
+                    + clean_score * 0.25
+                    + points_score * 0.25
+                ).round(3)
+
+    persisted_columns = [
+        "season_key", "player_id", "window_key", "window_gameweeks", "score_version",
+        "is_eligible", "appearances", "sixty_minute_appearances", "total_minutes",
+        "total_points", "goals", "assists", "clean_sheets", "xg", "xa", "xgi",
+        "shots", "shots_in_box", "shots_on_target", "chances_created",
+        "touches_opp_box", "defensive_contribution", "xgc", "points_per90",
+        "goals_per90", "assists_per90", "xg_per90", "xa_per90", "xgi_per90",
+        "shots_in_box_per90", "shots_on_target_per90", "chances_created_per90",
+        "touches_opp_box_per90", "defensive_contribution_per90", "clean_sheet_rate",
+        "minute_security", "dc_opportunities", "dc_returns", "dc_points",
+        "dc_return_rate", "goal_threat_score", "creation_score", "attack_score",
+        "defensive_floor_score", "hybrid_score", "complete_score", "goalkeeper_score",
+    ]
+    insights["updated_at"] = datetime.utcnow().isoformat()
+    persisted_columns.append("updated_at")
+    clean = insights[persisted_columns].replace([np.inf, -np.inf], np.nan)
+    clean = clean.astype(object).where(pd.notna(clean), None)
+    return clean.to_dict(orient="records")
+
+
+def upsert_player_role_insights(
+    df: pd.DataFrame,
+    player_map: dict[int, str],
+    team_map: dict[str, str],
+    season: str,
+) -> None:
+    print("\n🧭 Player role insights...")
+    rankings = (
+        supabase.table("team_rankings")
+        .select("team_id, defense_strength")
+        .eq("season_key", season)
+        .execute()
+    )
+    by_team_id = {
+        row["team_id"]: float(row.get("defense_strength") or 50)
+        for row in (rankings.data or [])
+    }
+    defense_by_code = {
+        code: by_team_id.get(team_id, 50.0)
+        for code, team_id in team_map.items()
+    }
+    rows = build_player_role_insights(df, player_map, season, defense_by_code)
+    upsert("player_role_insights", rows, "season_key,player_id,window_key")
+    print(f"   {len(rows)} role insight records | score {PLAYER_INSIGHT_SCORE_VERSION}")
+
+
 # ── Stage 6: Team rankings ───────────────────────────────────────────────────
 
 def upsert_team_rankings(df: pd.DataFrame, team_map: dict[str, str], season: str):
@@ -1092,6 +1312,7 @@ def main(season: str = DEFAULT_SEASON) -> bool:
     upsert_gameweek_stats(df, player_map, season)
     upsert_season_stats(df, player_map, season)
     upsert_team_rankings(df, team_map, season)
+    upsert_player_role_insights(df, player_map, team_map, season)
     latest_gw = int(pd.to_numeric(df["gameweek"], errors="coerce").max())
     upsert_fixtures(fixtures, team_map, season, latest_gw=latest_gw)
 

@@ -166,6 +166,76 @@ create index if not exists idx_pss_form     on player_season_stats(season_key, f
 create index if not exists idx_pss_ppm      on player_season_stats(season_key, points_per_million desc);
 
 -- ============================================================
+-- ROLE INSIGHTS: Position-relative attacking and defensive profiles
+-- ============================================================
+
+create table if not exists player_role_insights (
+  id          uuid primary key default gen_random_uuid(),
+  season_key  text not null,
+  player_id   uuid not null references players(id) on delete cascade,
+  window_key  text not null check (window_key in ('season', 'last_5')),
+  window_gameweeks smallint not null,
+  score_version text not null,
+  is_eligible boolean not null default false,
+
+  appearances smallint not null default 0,
+  sixty_minute_appearances smallint not null default 0,
+  total_minutes integer not null default 0,
+  total_points integer not null default 0,
+  goals smallint not null default 0,
+  assists smallint not null default 0,
+  clean_sheets smallint not null default 0,
+
+  xg numeric(8,3) not null default 0,
+  xa numeric(8,3) not null default 0,
+  xgi numeric(8,3) not null default 0,
+  shots integer not null default 0,
+  shots_in_box integer not null default 0,
+  shots_on_target integer not null default 0,
+  chances_created integer not null default 0,
+  touches_opp_box integer not null default 0,
+  defensive_contribution numeric(9,3) not null default 0,
+  xgc numeric(8,3) not null default 0,
+
+  points_per90 numeric(7,3) not null default 0,
+  goals_per90 numeric(7,3) not null default 0,
+  assists_per90 numeric(7,3) not null default 0,
+  xg_per90 numeric(7,3) not null default 0,
+  xa_per90 numeric(7,3) not null default 0,
+  xgi_per90 numeric(7,3) not null default 0,
+  shots_in_box_per90 numeric(7,3) not null default 0,
+  shots_on_target_per90 numeric(7,3) not null default 0,
+  chances_created_per90 numeric(7,3) not null default 0,
+  touches_opp_box_per90 numeric(7,3) not null default 0,
+  defensive_contribution_per90 numeric(7,3) not null default 0,
+  clean_sheet_rate numeric(7,4) not null default 0,
+  minute_security numeric(7,4) not null default 0,
+
+  dc_opportunities smallint not null default 0,
+  dc_returns smallint not null default 0,
+  dc_points smallint not null default 0,
+  dc_return_rate numeric(7,4) not null default 0,
+
+  goal_threat_score numeric(7,3),
+  creation_score numeric(7,3),
+  attack_score numeric(7,3),
+  defensive_floor_score numeric(7,3),
+  hybrid_score numeric(7,3),
+  complete_score numeric(7,3),
+  goalkeeper_score numeric(7,3),
+
+  updated_at timestamptz not null default now(),
+  unique (season_key, player_id, window_key)
+);
+
+create index if not exists idx_pri_season_window_position
+  on player_role_insights(season_key, window_key, player_id);
+create index if not exists idx_pri_attack
+  on player_role_insights(season_key, window_key, attack_score desc nulls last);
+create index if not exists idx_pri_floor
+  on player_role_insights(season_key, window_key, defensive_floor_score desc nulls last);
+
+-- ============================================================
 -- TEAMS: Rankings (ETL-computed, no JSON dependency)
 -- ============================================================
 
@@ -413,6 +483,7 @@ alter table teams                enable row level security;
 alter table players              enable row level security;
 alter table player_gameweeks     enable row level security;
 alter table player_season_stats  enable row level security;
+alter table player_role_insights enable row level security;
 alter table team_rankings        enable row level security;
 alter table fixtures             enable row level security;
 
@@ -423,7 +494,7 @@ declare
 begin
   foreach tbl in array array[
     'teams','players','player_gameweeks',
-    'player_season_stats','team_rankings','fixtures'
+    'player_season_stats','player_role_insights','team_rankings','fixtures'
   ] loop
     -- Remove legacy anonymous write policies. ETL writes use the service role,
     -- which bypasses RLS and must never be exposed to the browser.

@@ -66,6 +66,8 @@ NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_your-key
 NEXT_PUBLIC_FPL_SEASON_KEY=2026_27
 NEXT_PUBLIC_FPL_SEASON_COMPLETE=false
+# Enable after player_role_insights has been created and populated by the ETL.
+NEXT_PUBLIC_PLAYER_ROLE_INSIGHTS_PRECOMPUTED=false
 ```
 
 Install dependencies:
@@ -108,6 +110,12 @@ python -m backend.etl.process_fpl_data --season 2026_27
 ```
 
 Run the schema before the first ETL or after schema changes. The SQL views select the newest loaded season automatically; the backend and frontend season variables determine which season the applications request.
+
+The role-based Top Players model is precomputed by the ETL in
+`player_role_insights`. For an existing deployment, apply the latest schema,
+run the ETL once, verify that both `season` and `last_5` rows exist, and then set
+`NEXT_PUBLIC_PLAYER_ROLE_INSIGHTS_PRECOMPUTED=true`. Until that flag is enabled,
+the frontend derives the same versioned scores from paginated gameweek rows.
 
 ## Running locally
 
