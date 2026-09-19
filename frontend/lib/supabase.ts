@@ -441,7 +441,9 @@ async function buildTeamFixtureSummaryFallback() {
       def: avgDefense,
       overall: (avgAttack + avgDefense) / 2,
       fixtures: favorableFixtures,
-      upcomingFixtures: nearTerm.map((fixture) => ({
+      // Keep the complete remaining run available to the transfer planner. The
+      // page can then recalculate its ranking for the user's chosen horizon.
+      upcomingFixtures: ordered.map((fixture) => ({
         gw: fixture.gw,
         opponent: fixture.opponent,
         opponentShort: fixture.opponentShort,

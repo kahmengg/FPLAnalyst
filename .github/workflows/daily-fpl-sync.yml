@@ -15,7 +15,9 @@ concurrency:
 
 jobs:
   sync:
-    runs-on: ubuntu-latest
+    # Pin the image so GitHub's upcoming ubuntu-latest migration cannot change
+    # pandas/SSL/system behavior underneath the ETL without review.
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
       FPL_DATA_SEASON: ${{ vars.FPL_DATA_SEASON || '2026_27' }}
@@ -24,10 +26,10 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.11"
           cache: pip

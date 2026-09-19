@@ -166,10 +166,10 @@ function recentColumns(position: Position): RecentColumn[] {
   ]
 
   if (position === 1) {
-    return [...common, { label: "CS", value: (gw) => gw.clean_sheets > 0 ? "Yes" : "—" }, { label: "GC", value: (gw) => gw.goals_conceded }, { label: "xGC", value: (gw) => fmt(gw.xGC, 2) }]
+    return [...common, { label: "CS", value: (gw) => gw.clean_sheets > 0 ? "Yes" : "No" }, { label: "GC", value: (gw) => gw.goals_conceded }, { label: "xGC", value: (gw) => fmt(gw.xGC, 2) }]
   }
   if (position === 2) {
-    return [...common, { label: "CS", value: (gw) => gw.clean_sheets > 0 ? "Yes" : "—" }, { label: "DC", value: (gw) => fmt(gw.defensive_contribution, 1) }, { label: "xGI", value: (gw) => fmt(gw.xGI, 2) }]
+    return [...common, { label: "CS", value: (gw) => gw.clean_sheets > 0 ? "Yes" : "No" }, { label: "DC", value: (gw) => fmt(gw.defensive_contribution, 1) }, { label: "xGI", value: (gw) => fmt(gw.xGI, 2) }]
   }
   if (position === 3) {
     return [...common, { label: "G", value: (gw) => gw.goals }, { label: "A", value: (gw) => gw.assists }, { label: "xGI", value: (gw) => fmt(gw.xGI, 2) }, { label: "DC", value: (gw) => fmt(gw.defensive_contribution, 1) }]
