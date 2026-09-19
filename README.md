@@ -109,6 +109,22 @@ python backend/sync_daily.py --season 2026_27
 python -m backend.etl.process_fpl_data --season 2026_27
 ```
 
+### Daily automation with GitHub Actions
+
+The repository includes `.github/workflows/daily-fpl-sync.yml`. It runs the same
+validated download-and-ETL command every day at 06:00 UTC (14:00 Singapore time)
+and can also be started manually from the Actions tab.
+
+Configure these GitHub repository settings before enabling it:
+
+- Actions secret `SUPABASE_URL`
+- Actions secret `SUPABASE_SECRET_KEY` (never use a public frontend key for ETL writes)
+- Optional Actions variable `FPL_DATA_SEASON`; it defaults to `2026_27`
+
+The workflow does not commit downloaded CSV files. It uses them only inside the
+temporary runner and writes the validated result to Supabase. Scheduled workflows
+run from the repository's default branch and use UTC cron times.
+
 Run the schema before the first ETL or after schema changes. The SQL views select the newest loaded season automatically; the backend and frontend season variables determine which season the applications request.
 
 The role-based Top Players model is precomputed by the ETL in

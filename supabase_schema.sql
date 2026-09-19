@@ -321,9 +321,20 @@ create table if not exists fixtures (
   away_attacking_favorability numeric(6,3),
   away_defensive_favorability numeric(6,3),
 
+  -- populated from the official FPL fixtures API after a match finishes
+  home_score smallint check (home_score >= 0),
+  away_score smallint check (away_score >= 0),
+  finished boolean not null default false,
+
   created_at timestamptz not null default now(),
   unique (season_key, gameweek, home_team_id, away_team_id)
 );
+
+-- Existing projects need additive migrations because CREATE TABLE IF NOT EXISTS
+-- does not add newly introduced columns.
+alter table fixtures add column if not exists home_score smallint check (home_score >= 0);
+alter table fixtures add column if not exists away_score smallint check (away_score >= 0);
+alter table fixtures add column if not exists finished boolean not null default false;
 
 create index if not exists idx_fix_gw        on fixtures(season_key, gameweek);
 create index if not exists idx_fix_home_team on fixtures(home_team_id);

@@ -39,7 +39,9 @@ STATS_REQUIRED_COLUMNS = {
     "id", "element_type", "web_name", "team_name",
     "opponent_team_name", "was_home", "gameweek",
 }
-FIXTURE_COLUMNS = ["gameweek", "home_team", "away_team"]
+FIXTURE_REQUIRED_COLUMNS = ["gameweek", "home_team", "away_team"]
+FIXTURE_RESULT_COLUMNS = ["home_score", "away_score", "finished"]
+FIXTURE_COLUMNS = FIXTURE_REQUIRED_COLUMNS + FIXTURE_RESULT_COLUMNS
 
 
 def fetch_stats_csv(season: str) -> str:
@@ -83,7 +85,7 @@ def fetch_json(url: str):
 
 
 def fetch_fixture_csv() -> str:
-    """Build the template's three-column CSV from the official FPL schedule."""
+    """Build the schedule and completed match scores from the official FPL API."""
     print("📥 Fetching the official FPL fixture schedule...")
     bootstrap = fetch_json(FPL_BOOTSTRAP_URL)
     fixtures = fetch_json(FPL_FIXTURES_URL)
@@ -100,7 +102,14 @@ def fetch_fixture_csv() -> str:
         away = team_names.get(int(fixture["team_a"]))
         if event is None or not home or not away:
             raise ValueError(f"Fixture {fixture.get('id')} is missing a gameweek or team")
-        rows.append((int(event), home, away))
+        rows.append((
+            int(event),
+            home,
+            away,
+            fixture.get("team_h_score"),
+            fixture.get("team_a_score"),
+            bool(fixture.get("finished")),
+        ))
 
     rows.sort(key=lambda row: (row[0], row[1], row[2]))
     output = io.StringIO(newline="")
@@ -128,11 +137,14 @@ def validate_stats_csv(content: str) -> dict:
 
 
 def validate_fixture_csv(content: str) -> dict:
-    """Validate league coverage while preserving the established CSV schema."""
+    """Validate league coverage and optional completed-match results."""
     reader = csv.DictReader(io.StringIO(content))
-    if reader.fieldnames != FIXTURE_COLUMNS:
+    # Continue accepting the legacy schedule during rollout; every fresh sync
+    # writes the expanded result-aware format before the ETL runs.
+    if reader.fieldnames not in (FIXTURE_REQUIRED_COLUMNS, FIXTURE_COLUMNS):
         raise ValueError(
-            f"Fixture columns must be {FIXTURE_COLUMNS}; got {reader.fieldnames}"
+            f"Fixture columns must be {FIXTURE_REQUIRED_COLUMNS} or {FIXTURE_COLUMNS}; "
+            f"got {reader.fieldnames}"
         )
 
     rows = list(reader)
@@ -181,6 +193,17 @@ def validate_fixture_csv(content: str) -> dict:
     repeated = [key for key, count in appearances.items() if count != 1]
     if repeated:
         raise ValueError(f"Teams appear multiple times in a gameweek: {repeated[:5]}")
+
+    if reader.fieldnames == FIXTURE_COLUMNS:
+        for row in rows:
+            home_score = row["home_score"].strip()
+            away_score = row["away_score"].strip()
+            if bool(home_score) != bool(away_score):
+                raise ValueError("Fixture result must contain both home and away scores")
+            if home_score and (int(home_score) < 0 or int(away_score) < 0):
+                raise ValueError("Fixture scores cannot be negative")
+            if row["finished"].strip().lower() not in {"true", "false"}:
+                raise ValueError("Fixture finished value must be true or false")
 
     return {"rows": len(rows), "teams": len(teams), "gameweeks": len(set(gameweeks))}
 

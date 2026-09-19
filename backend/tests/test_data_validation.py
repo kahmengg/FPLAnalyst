@@ -43,6 +43,29 @@ class DataValidationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Each gameweek must contain 10 fixtures"):
             validate_fixture_csv("\n".join(lines) + "\n")
 
+    def test_fixture_validator_accepts_complete_or_future_results(self):
+        content = (PROJECT_ROOT / "fixture_template.csv").read_text(encoding="utf-8-sig")
+        lines = content.splitlines()
+        expanded = ["gameweek,home_team,away_team,home_score,away_score,finished"]
+        for index, line in enumerate(lines[1:]):
+            suffix = ",2,1,true" if index == 0 else ",,,false"
+            schedule = ",".join(line.split(",")[:3])
+            expanded.append(f"{schedule}{suffix}")
+
+        summary = validate_fixture_csv("\n".join(expanded) + "\n")
+
+        self.assertEqual(summary, {"rows": 380, "teams": 20, "gameweeks": 38})
+
+    def test_fixture_validator_rejects_a_partial_score(self):
+        content = (PROJECT_ROOT / "fixture_template.csv").read_text(encoding="utf-8-sig")
+        lines = content.splitlines()
+        expanded = ["gameweek,home_team,away_team,home_score,away_score,finished"]
+        expanded.append(f"{','.join(lines[1].split(',')[:3])},2,,true")
+        expanded.extend(f"{','.join(line.split(',')[:3])},,,false" for line in lines[2:])
+
+        with self.assertRaisesRegex(ValueError, "both home and away scores"):
+            validate_fixture_csv("\n".join(expanded) + "\n")
+
 
 if __name__ == "__main__":
     unittest.main()

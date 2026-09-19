@@ -44,6 +44,7 @@ type GameweekData = {
   gameweek: number
   opponent: string
   was_home: boolean | null
+  match_score: string | null
   total_points: number
   minutes: number
   goals: number
@@ -159,6 +160,7 @@ type RecentColumn = {
 // Each role gets only the gameweek metrics that map to realistic FPL point routes.
 function recentColumns(position: Position): RecentColumn[] {
   const common: RecentColumn[] = [
+    { label: "Score", value: (gw) => gw.match_score || "—" },
     { label: "Pts", value: (gw) => gw.total_points, emphasize: true },
     { label: "Min", value: (gw) => gw.minutes },
   ]

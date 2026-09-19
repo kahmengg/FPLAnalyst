@@ -1,0 +1,40 @@
+name: Daily FPL data sync
+
+on:
+  schedule:
+    # GitHub cron uses UTC. This runs daily at 14:00 Singapore time.
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-fpl-data-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FPL_DATA_SEASON: ${{ vars.FPL_DATA_SEASON || '2026_27' }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install pipeline dependencies
+        run: python -m pip install --disable-pip-version-check -r backend/requirements.txt
+
+      - name: Download, validate, and update Supabase
+        run: python backend/sync_daily.py --season "$FPL_DATA_SEASON"

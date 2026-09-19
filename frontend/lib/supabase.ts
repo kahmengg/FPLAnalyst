@@ -691,9 +691,12 @@ export async function getPlayerTrends(playerNames: string[], limitGws?: number) 
     const season = await getSeason()
     const playerIds = normalizedPlayers.map((player: any) => player.id)
 
-    const [seasonStatsRes, gameweeksRes] = await Promise.all([
+    const [seasonStatsRes, gameweeksRes, fixturesRes] = await Promise.all([
       requireSupabase().from('player_season_stats').select('*').eq('season_key', season).in('player_id', playerIds),
       requireSupabase().from('player_gameweeks').select('*').eq('season_key', season).in('player_id', playerIds).order('gameweek'),
+      // Select all fixture fields so the frontend remains compatible while the
+      // additive score-column migration is being rolled out.
+      requireSupabase().from('fixtures').select('*').eq('season_key', season).order('gameweek'),
     ])
 
     if (seasonStatsRes.error) {
@@ -701,6 +704,9 @@ export async function getPlayerTrends(playerNames: string[], limitGws?: number) 
     }
     if (gameweeksRes.error) {
       throw new Error(`Failed to load player gameweeks: ${gameweeksRes.error.message}`)
+    }
+    if (fixturesRes.error) {
+      throw new Error(`Failed to load match results: ${fixturesRes.error.message}`)
     }
 
     const seasonStatsMap = new Map((seasonStatsRes.data || []).map((row: any) => [row.player_id, row]))
@@ -712,34 +718,49 @@ export async function getPlayerTrends(playerNames: string[], limitGws?: number) 
       gameweekMap.set(row.player_id, list)
     }
 
+    const resultByTeamAndGameweek = new Map<string, { teamScore: number; opponentScore: number }>()
+    for (const fixture of fixturesRes.data || []) {
+      if (fixture.home_score == null || fixture.away_score == null || fixture.finished === false) continue
+      const gameweek = safeInt(fixture.gameweek, 0)
+      const homeScore = safeInt(fixture.home_score, 0)
+      const awayScore = safeInt(fixture.away_score, 0)
+      resultByTeamAndGameweek.set(`${fixture.home_team_id}:${gameweek}`, { teamScore: homeScore, opponentScore: awayScore })
+      resultByTeamAndGameweek.set(`${fixture.away_team_id}:${gameweek}`, { teamScore: awayScore, opponentScore: homeScore })
+    }
+
     const result: Record<string, any> = {}
 
     normalizedPlayers.forEach((player: any) => {
       const seasonStats = seasonStatsMap.get(player.id) || {}
-      let gameweeks = (gameweekMap.get(player.id) || []).map((row: any) => ({
-        gameweek: safeInt(row.gameweek, 0),
-        opponent: row.opponent || '',
-        was_home: row.was_home ?? null,
-        total_points: safeNumber(row.total_points, 0),
-        minutes: safeNumber(row.minutes, 0),
-        goals: safeNumber(row.goals, 0),
-        assists: safeNumber(row.assists, 0),
-        clean_sheets: row.clean_sheets ?? (row.clean_sheet ? 1 : 0),
-        xG: safeNumber(row.xg, 0),
-        xA: safeNumber(row.xa, 0),
-        xGI: safeNumber(row.xgi, 0),
-        xP: safeNumber(row.xp, 0),
-        shots: safeNumber(row.shots, 0),
-        shots_on_target: safeNumber(row.shots_on_target, 0),
-        key_passes: safeNumber(row.chances_created, 0),
-        touches: safeNumber(row.touches, 0),
-        penalty_area_touches: safeNumber(row.touches_opp_box, 0),
-        // The current schema has no carries-final-third metric; do not mislabel non-penalty goals as carries.
-        carries_final_third: 0,
-        defensive_contribution: safeNumber(row.defensive_contribution, 0),
-        xGC: safeNumber(row.xgc, 0),
-        goals_conceded: safeNumber(row.goals_conceded, 0),
-      }))
+      let gameweeks = (gameweekMap.get(player.id) || []).map((row: any) => {
+        const gameweek = safeInt(row.gameweek, 0)
+        const matchResult = resultByTeamAndGameweek.get(`${player.team_id}:${gameweek}`)
+        return {
+          gameweek,
+          opponent: row.opponent || '',
+          was_home: row.was_home ?? null,
+          match_score: matchResult ? `${matchResult.teamScore}-${matchResult.opponentScore}` : null,
+          total_points: safeNumber(row.total_points, 0),
+          minutes: safeNumber(row.minutes, 0),
+          goals: safeNumber(row.goals, 0),
+          assists: safeNumber(row.assists, 0),
+          clean_sheets: row.clean_sheets ?? (row.clean_sheet ? 1 : 0),
+          xG: safeNumber(row.xg, 0),
+          xA: safeNumber(row.xa, 0),
+          xGI: safeNumber(row.xgi, 0),
+          xP: safeNumber(row.xp, 0),
+          shots: safeNumber(row.shots, 0),
+          shots_on_target: safeNumber(row.shots_on_target, 0),
+          key_passes: safeNumber(row.chances_created, 0),
+          touches: safeNumber(row.touches, 0),
+          penalty_area_touches: safeNumber(row.touches_opp_box, 0),
+          // The current schema has no carries-final-third metric; do not mislabel non-penalty goals as carries.
+          carries_final_third: 0,
+          defensive_contribution: safeNumber(row.defensive_contribution, 0),
+          xGC: safeNumber(row.xgc, 0),
+          goals_conceded: safeNumber(row.goals_conceded, 0),
+        }
+      })
 
       if (limitGws && gameweeks.length > limitGws) {
         gameweeks = gameweeks.slice(-limitGws)

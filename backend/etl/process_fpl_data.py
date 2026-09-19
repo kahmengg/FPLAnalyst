@@ -235,19 +235,28 @@ def load_fixture_csv() -> pd.DataFrame:
 
     fixtures = pd.read_csv(path, dtype=str)
     fixtures.columns = [c.strip() for c in fixtures.columns]
-    expected = ["gameweek", "home_team", "away_team"]
-    if list(fixtures.columns) != expected:
+    required = ["gameweek", "home_team", "away_team"]
+    result_columns = ["home_score", "away_score", "finished"]
+    valid_columns = [required, required + result_columns]
+    if list(fixtures.columns) not in valid_columns:
         raise ValueError(
-            f"Fixture CSV columns must be {expected}; got {list(fixtures.columns)}"
+            f"Fixture CSV columns must be {required} or {required + result_columns}; "
+            f"got {list(fixtures.columns)}"
         )
+
+    # Legacy checked-in schedules remain processable; the daily sync supplies
+    # these result fields before every production ETL run.
+    for column in result_columns:
+        if column not in fixtures.columns:
+            fixtures[column] = None
 
     fixtures = fixtures.map(lambda x: x.strip() if isinstance(x, str) else x)
     fixtures["gameweek"] = pd.to_numeric(fixtures["gameweek"], errors="coerce")
-    if fixtures[expected].isna().any().any():
+    if fixtures[required].isna().any().any():
         raise ValueError("Fixture CSV contains blank or invalid required values")
     fixtures["gameweek"] = fixtures["gameweek"].astype(int)
 
-    if fixtures.duplicated(expected).any():
+    if fixtures.duplicated(required).any():
         raise ValueError("Fixture CSV contains duplicate fixture rows")
     if len(fixtures) != 380:
         raise ValueError(f"Expected 380 Premier League fixtures; found {len(fixtures)}")
@@ -1273,6 +1282,11 @@ def upsert_fixtures(
             "home_defensive_favorability": home_def_fav,
             "away_attacking_favorability": away_att_fav,
             "away_defensive_favorability": away_def_fav,
+            # Scores remain null for future fixtures. Store both sides once so
+            # every player can see the result from their own team's perspective.
+            "home_score": safe_int(r.get("home_score")),
+            "away_score": safe_int(r.get("away_score")),
+            "finished": safe_bool(r.get("finished")),
         })
 
     if missing_teams:
