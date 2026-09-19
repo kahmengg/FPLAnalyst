@@ -8,7 +8,6 @@ import { EmptyState, ErrorState, PageSkeleton } from "@/components/data-state"
 import { PageHeader } from "@/components/page-header"
 import { TeamBadge } from "@/components/team-badge"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import type { InsightWindow, PlayerRoleInsight, RolePosition } from "@/lib/player-role-insights"
 import { getPlayerRoleInsights } from "@/lib/supabase"
 import { getTeamBrand } from "@/lib/team-branding"
@@ -163,8 +162,6 @@ export default function TopPerformersPage() {
     return values.length ? values[Math.floor(values.length / 2)] : 0
   }, [filtered])
   const selected = filtered.find((player) => player.id === selectedId) ?? null
-  const leader = filtered[0] ?? null
-  const scoreVersion = players.find((player) => player.window === window)?.scoreVersion ?? "role-v1"
   const chartData = useMemo(() => filtered.filter((player) => player.isEligible && player.attackScore !== null).slice(0, 100).map((player) => ({ ...player, x: player.attackScore ?? 0, y: player.position === "Forward" ? player.pointsPer90 : player.defensiveFloorScore ?? 0, selected: player.id === selectedId })), [filtered, selectedId])
 
   const toggleSort = (key: NumericKey) => {
@@ -196,8 +193,6 @@ export default function TopPerformersPage() {
 
     <div className="mb-5 flex gap-2 overflow-x-auto pb-1" aria-label={`${position} analysis lens`}>{positionLenses.map((lens) => <Button key={lens.value} type="button" variant={activeLens.value === lens.value ? "default" : "outline"} onClick={() => chooseLens(lens)} className="shrink-0">{lens.value === "floor" ? <Shield className="h-4 w-4" /> : lens.value === "attack" || lens.value === "goal" ? <Target className="h-4 w-4" /> : <Sparkles className="h-4 w-4" />}{lens.label}</Button>)}</div>
 
-    <section className="mb-6 grid gap-3 sm:grid-cols-3" aria-label="Current lens summary"><SummaryMetric label="Lens leader" value={leader?.name ?? "—"} detail={leader ? `${formatMetric(metric(leader, activeLens.scoreKey), { key: activeLens.scoreKey, label: "", digits: 0 })} score` : "No eligible player"} /><SummaryMetric label="Qualified sample" value={String(filtered.filter((player) => player.isEligible).length)} detail={`${position.toLowerCase()}s after filters`} /><SummaryMetric label="Model window" value={window === "last_5" ? `Last ${leader?.windowGameweeks ?? 5}` : "Season"} detail={scoreVersion.replace("-fallback", " · compatibility")} /></section>
-
     {filtered.length === 0 ? <EmptyState title="No players match" description="Change the filters or include low-minute samples to widen the shortlist." actionLabel="Clear filters" onAction={resetFilters} /> : <>
       {position !== "Goalkeeper" ? <section className="mb-6 overflow-hidden rounded-xl border border-border bg-card" aria-labelledby="archetype-map-title"><div className="border-b border-border px-4 py-4 sm:px-5"><div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Archetype map</p><h2 id="archetype-map-title" className="mt-1 font-sans text-xl font-semibold">{position === "Forward" ? "Underlying attack vs current returns" : "Attacking upside vs defensive floor"}</h2></div><p className="max-w-xl text-sm text-muted-foreground">{activeLens.description}</p></div></div><div className="grid lg:grid-cols-[minmax(0,1fr)_280px]">
         <div className="h-[390px] min-w-0 p-2 sm:p-4" role="img" aria-label={`${position} archetype scatter plot. The sortable table below contains the same players and metrics.`}><ResponsiveContainer width="100%" height="100%"><ScatterChart margin={{ top: 18, right: 22, bottom: 18, left: 4 }}><CartesianGrid stroke="var(--border)" strokeDasharray="3 5" /><XAxis type="number" dataKey="x" domain={[0, 100]} tickLine={false} axisLine={false} tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} label={{ value: "Attack score", position: "insideBottom", offset: -12, fill: "var(--muted-foreground)", fontSize: 11 }} /><YAxis type="number" dataKey="y" domain={position === "Forward" ? [0, "auto"] : [0, 100]} tickLine={false} axisLine={false} tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} label={{ value: position === "Forward" ? "Points / 90" : "DC floor", angle: -90, position: "insideLeft", fill: "var(--muted-foreground)", fontSize: 11 }} /><ReferenceLine x={50} stroke="var(--muted-foreground)" strokeDasharray="4 4" /><ReferenceLine y={position === "Forward" ? forwardMedian : 50} stroke="var(--muted-foreground)" strokeDasharray="4 4" /><ChartTooltip cursor={{ stroke: "var(--border)", strokeDasharray: "3 3" }} content={<ChartTooltipContent />} /><Scatter data={chartData} shape={<PlayerDot onSelect={selectPlayer} />} /></ScatterChart></ResponsiveContainer></div>
@@ -216,10 +211,6 @@ export default function TopPerformersPage() {
 
 function FilterSelect({ label, value, onChange, options }: { label: string; value: string; onChange: (value: string) => void; options: Array<[string, string]> }) {
   return <label className="relative"><span className="sr-only">{label}</span><select value={value} onChange={(event) => onChange(event.target.value)} className="h-11 w-full appearance-none rounded-lg border border-input bg-background px-3 pr-9 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20">{options.map(([optionValue, optionLabel]) => <option key={optionValue} value={optionValue}>{optionLabel}</option>)}</select><ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /></label>
-}
-
-function SummaryMetric({ label, value, detail }: { label: string; value: string; detail: string }) {
-  return <Card><CardContent className="py-4"><p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{label}</p><p className="mt-2 truncate font-sans text-lg font-semibold">{value}</p><p className="mt-1 truncate text-xs text-muted-foreground">{detail}</p></CardContent></Card>
 }
 
 function SelectedInsight({ player, forwardMedian, onClear }: { player: PlayerRoleInsight; forwardMedian: number; onClear: () => void }) {

@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Users, Trophy, Calendar, Sparkles, Menu, X, Clock, GitCompareArrows, Repeat2 } from "lucide-react"
+import { Home, Users, Trophy, Calendar, Menu, X, Clock, GitCompareArrows, Repeat2 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { getDashboardSummary } from "@/lib/supabase"
 import { DATA_SEASON } from "@/lib/season"
@@ -13,7 +13,6 @@ const navigation = [
   { name: "Teams", href: "/team-rankings", icon: Trophy },
   { name: "Fixtures", href: "/fixture-analysis", icon: Calendar },
   { name: "Compare Players", href: "/player-trends", icon: GitCompareArrows },
-  { name: "Recommendations", href: "/quick-picks", icon: Sparkles },
   { name: "Transfer Planner", href: "/transfer-targets", icon: Repeat2 },
 ]
 

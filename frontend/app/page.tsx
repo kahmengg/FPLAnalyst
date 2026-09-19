@@ -2,13 +2,12 @@
 
 import Link from "next/link"
 import { useCallback, useEffect, useState } from "react"
-import { ArrowRight, Calendar, Clock3, GitCompareArrows, Repeat2, Sparkles, Trophy, Users } from "lucide-react"
+import { ArrowRight, Calendar, Clock3, GitCompareArrows, Repeat2, Scale, ShieldCheck, Target, Trophy, Users } from "lucide-react"
 
 import { ErrorState, PageSkeleton } from "@/components/data-state"
 import { PageHeader } from "@/components/page-header"
-import { PlayerSummaryCard } from "@/components/player-summary-card"
 import { Button } from "@/components/ui/button"
-import { getDashboardSummary, getPlayerInsights } from "@/lib/supabase"
+import { getDashboardSummary } from "@/lib/supabase"
 
 type DashboardSummary = {
   total_players: number
@@ -17,24 +16,30 @@ type DashboardSummary = {
   last_synced_at: string | null
 }
 
-type TopFormPlayer = {
-  name: string
-  team: string
-  teamShort: string
-  position: string
-  form: number
-  price?: number
-  points?: number
-  ownership?: number
-}
-
 const modules = [
   { title: "Top players", description: "Form, value, goals, assists and defensive contribution.", href: "/top-performers", icon: Users },
   { title: "Team rankings", description: "Compare attacking and defensive strength across the league.", href: "/team-rankings", icon: Trophy },
   { title: "Fixtures", description: "Scan upcoming opponents, difficulty and projected opportunity.", href: "/fixture-analysis", icon: Calendar },
   { title: "Player comparison", description: "Compare same-position players using output and underlying data.", href: "/player-trends", icon: GitCompareArrows },
-  { title: "Recommendations", description: "Shortlists for attacking, defensive and differential picks.", href: "/quick-picks", icon: Sparkles },
-  { title: "Transfer planner", description: "Spot fixture swings and plan moves across two horizons.", href: "/transfer-targets", icon: Repeat2 },
+  { title: "Transfer planner", description: "Spot fixture swings, then open a club to inspect its strongest player picks.", href: "/transfer-targets", icon: Repeat2 },
+]
+
+const modelNotes = [
+  {
+    title: "Compared by role",
+    description: "Every eligible player is measured against players in the same position and time window. A score of 50 is roughly role average.",
+    icon: Scale,
+  },
+  {
+    title: "Process before points",
+    description: "Attack scores combine xG, xA, box activity, shooting and chance creation. They describe underlying involvement—not predicted FPL points.",
+    icon: Target,
+  },
+  {
+    title: "A repeatable floor",
+    description: "Defensive-floor scores combine contribution returns, actions per 90 and minute security to identify more dependable routes to points.",
+    icon: ShieldCheck,
+  },
 ]
 
 function formatLastSynced(value: string | null) {
@@ -44,7 +49,6 @@ function formatLastSynced(value: string | null) {
 
 export default function HomePage() {
   const [summary, setSummary] = useState<DashboardSummary | null>(null)
-  const [topFormPlayers, setTopFormPlayers] = useState<TopFormPlayer[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -52,29 +56,9 @@ export default function HomePage() {
     setLoading(true)
     setError(null)
     try {
-      // Dashboard facts and player insights are independent requests.
-      const [dashboardData, seasonPerformers] = await Promise.all([
-        getDashboardSummary(),
-        getPlayerInsights("season_performers", 100),
-      ])
-      const players = seasonPerformers
-        .filter((player: any) => Number(player.form) > 0)
-        .sort((a: any, b: any) => Number(b.form || 0) - Number(a.form || 0))
-        .slice(0, 3)
-        .map((player: any) => ({
-          name: player.web_name || player.player_name || player.player,
-          team: player.team,
-          teamShort: player.team_short || player.team,
-          position: player.position_name || player.position,
-          form: Number(player.form || 0),
-          price: Number(player.price ?? player.cost ?? 0),
-          points: Number(player.points ?? player.total_points ?? 0),
-          ownership: Number(player.ownership ?? player.selected_by_percent ?? 0),
-        }))
-
-      if (!dashboardData.total_players && players.length === 0) throw new Error("No FPL data was returned for the configured season.")
+      const dashboardData = await getDashboardSummary()
+      if (!dashboardData.total_players) throw new Error("No FPL data was returned for the configured season.")
       setSummary(dashboardData as DashboardSummary)
-      setTopFormPlayers(players)
     } catch (caughtError) {
       setError(caughtError instanceof Error ? caughtError.message : "Unable to load dashboard data")
     } finally {
@@ -101,7 +85,7 @@ export default function HomePage() {
           eyebrow="Decision workspace"
           title="Make the next gameweek count."
           description="A focused view of form, fixtures, team strength and transfer signals—built to turn FPL data into confident decisions."
-          actions={<Button asChild><Link href="/quick-picks">View recommendations<ArrowRight className="h-4 w-4" /></Link></Button>}
+          actions={<Button asChild><Link href="/transfer-targets">Plan transfers<ArrowRight className="h-4 w-4" /></Link></Button>}
         />
 
         <section aria-label="Dataset overview" className="mb-8 overflow-hidden rounded-xl border border-border bg-card">
@@ -116,15 +100,23 @@ export default function HomePage() {
         </section>
 
         <div className="grid gap-8 xl:grid-cols-[1.15fr_0.85fr]">
-          <section aria-labelledby="form-title">
+          <section aria-labelledby="model-title">
             <div className="mb-4 flex items-end justify-between gap-4">
-              <div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Current signal</p><h2 id="form-title" className="mt-1 text-3xl font-medium">Players in form</h2></div>
-              <Button asChild variant="ghost" size="sm"><Link href="/top-performers">All players<ArrowRight className="h-4 w-4" /></Link></Button>
+              <div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Model guide</p><h2 id="model-title" className="mt-1 text-3xl font-medium">What the scores mean</h2></div>
+              <Button asChild variant="ghost" size="sm"><Link href="/top-performers">Explore scores<ArrowRight className="h-4 w-4" /></Link></Button>
             </div>
-            <div className="grid gap-3">
-              {topFormPlayers.map((player, index) => (
-                <PlayerSummaryCard key={player.name} rank={index + 1} player={{ name: player.name, teamCode: player.teamShort, teamName: player.team, position: player.position, form: player.form, price: player.price, totalPoints: player.points, ownership: player.ownership }} />
-              ))}
+            <div className="overflow-hidden rounded-xl border border-border bg-card">
+              <div className="border-b border-border p-5 sm:p-6">
+                <p className="max-w-2xl text-sm leading-6 text-muted-foreground">The model converts different underlying statistics into position-relative 0–100 ratings. Use the ratings to understand how a player can score points, then use the raw metrics and fixtures to make the final decision.</p>
+              </div>
+              <div className="divide-y divide-border">
+                {modelNotes.map((note) => (
+                  <div key={note.title} className="flex gap-4 p-5 sm:p-6">
+                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-secondary text-muted-foreground"><note.icon className="h-5 w-5" aria-hidden="true" /></div>
+                    <div><h3 className="font-sans text-sm font-semibold text-foreground">{note.title}</h3><p className="mt-1 text-sm leading-6 text-muted-foreground">{note.description}</p></div>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 
