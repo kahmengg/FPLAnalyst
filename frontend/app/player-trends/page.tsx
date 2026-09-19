@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import {
   Check,
   ChevronDown,
@@ -10,21 +10,9 @@ import {
   Target,
   X,
 } from "lucide-react"
-import {
-  CartesianGrid,
-  Legend,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts"
-
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { PageSkeleton } from "@/components/data-state"
 import { PageHeader } from "@/components/page-header"
 import { TeamBadge } from "@/components/team-badge"
@@ -153,6 +141,77 @@ function avg(values: number[]) {
   return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : 0
 }
 
+type PlayerMetric = {
+  data: PlayerTrendData
+  recentPoints: number
+  recentMinutes: number
+  recentXGI: number
+  recentDefCon: number
+  recentCS: number
+}
+
+type RecentColumn = {
+  label: string
+  value: (gameweek: GameweekData) => string | number
+  emphasize?: boolean
+}
+
+// Each role gets only the gameweek metrics that map to realistic FPL point routes.
+function recentColumns(position: Position): RecentColumn[] {
+  const common: RecentColumn[] = [
+    { label: "Pts", value: (gw) => gw.total_points, emphasize: true },
+    { label: "Min", value: (gw) => gw.minutes },
+  ]
+
+  if (position === 1) {
+    return [...common, { label: "CS", value: (gw) => gw.clean_sheets > 0 ? "Yes" : "—" }, { label: "GC", value: (gw) => gw.goals_conceded }, { label: "xGC", value: (gw) => fmt(gw.xGC, 2) }]
+  }
+  if (position === 2) {
+    return [...common, { label: "CS", value: (gw) => gw.clean_sheets > 0 ? "Yes" : "—" }, { label: "DC", value: (gw) => fmt(gw.defensive_contribution, 1) }, { label: "xGI", value: (gw) => fmt(gw.xGI, 2) }]
+  }
+  if (position === 3) {
+    return [...common, { label: "G", value: (gw) => gw.goals }, { label: "A", value: (gw) => gw.assists }, { label: "xGI", value: (gw) => fmt(gw.xGI, 2) }, { label: "DC", value: (gw) => fmt(gw.defensive_contribution, 1) }]
+  }
+  return [...common, { label: "G", value: (gw) => gw.goals }, { label: "A", value: (gw) => gw.assists }, { label: "xGI", value: (gw) => fmt(gw.xGI, 2) }, { label: "Shots", value: (gw) => gw.shots }]
+}
+
+function summaryMetrics(item: PlayerMetric) {
+  const { data } = item
+  const recent = lastN(data.gameweeks, 5)
+  const xGCPerMatch = avg(recent.map((gw) => gw.xGC))
+
+  if (data.position === 1) {
+    return [
+      { label: "Last 5 pts", value: fmt(item.recentPoints, 1) },
+      { label: "Clean-sheet rate", value: `${fmt(item.recentCS * 100, 0)}%` },
+      { label: "xGC / match", value: fmt(xGCPerMatch, 2) },
+      { label: "Avg mins", value: fmt(item.recentMinutes, 0) },
+    ]
+  }
+  if (data.position === 2) {
+    return [
+      { label: "Last 5 pts", value: fmt(item.recentPoints, 1) },
+      { label: "Clean-sheet rate", value: `${fmt(item.recentCS * 100, 0)}%` },
+      { label: "Def. con / match", value: fmt(item.recentDefCon, 1) },
+      { label: "xGI / 90", value: fmt(data.per90_stats.xGI_per_90, 2) },
+    ]
+  }
+  if (data.position === 3) {
+    return [
+      { label: "Last 5 pts", value: fmt(item.recentPoints, 1) },
+      { label: "xGI / 90", value: fmt(data.per90_stats.xGI_per_90, 2) },
+      { label: "Def. con / match", value: fmt(item.recentDefCon, 1) },
+      { label: "Avg mins", value: fmt(item.recentMinutes, 0) },
+    ]
+  }
+  return [
+    { label: "Last 5 pts", value: fmt(item.recentPoints, 1) },
+    { label: "xGI / 90", value: fmt(data.per90_stats.xGI_per_90, 2) },
+    { label: "Shots / 90", value: fmt(data.per90_stats.shots_per_90, 2) },
+    { label: "Avg mins", value: fmt(item.recentMinutes, 0) },
+  ]
+}
+
 export default function PlayerTrendsPage() {
   const [players, setPlayers] = useState<Player[]>([])
   const [selectedNames, setSelectedNames] = useState<string[]>([])
@@ -279,22 +338,6 @@ export default function PlayerTrendsPage() {
       recentCS: number
     }>
   }, [selectedNames, trendData])
-
-  const chartData = useMemo(() => {
-    const gameweeks = new Set<number>()
-    metrics.forEach(({ data }) => data.gameweeks.forEach((gw) => gameweeks.add(gw.gameweek)))
-
-    return [...gameweeks].sort((a, b) => a - b).map((gw) => {
-      const row: Record<string, number | string | null> = { gameweek: `GW${gw}` }
-      metrics.forEach(({ name, data }) => {
-        const current = data.gameweeks.find((entry) => entry.gameweek === gw)
-        row[`${name}:points`] = current?.total_points ?? null
-        row[`${name}:xgi`] = current?.xGI ?? null
-        row[`${name}:minutes`] = current?.minutes ?? null
-      })
-      return row
-    })
-  }, [metrics])
 
   const metricRows = useMemo(() => {
     if (mode === "security") {
@@ -596,60 +639,11 @@ export default function PlayerTrendsPage() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg">Recent trend</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Tabs defaultValue="points">
-                  <TabsList className="grid w-full max-w-md grid-cols-3">
-                    <TabsTrigger value="points">Points</TabsTrigger>
-                    <TabsTrigger value="xgi">xGI</TabsTrigger>
-                    <TabsTrigger value="minutes">Minutes</TabsTrigger>
-                  </TabsList>
-                  {(["points", "xgi", "minutes"] as const).map((metric) => (
-                    <TabsContent key={metric} value={metric} className="mt-5">
-                      <div className="h-[320px] w-full">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <LineChart data={chartData} margin={{ top: 6, right: 12, left: -10, bottom: 0 }}>
-                            <CartesianGrid strokeDasharray="3 3" opacity={0.12} vertical={false} />
-                            <XAxis dataKey="gameweek" tick={{ fontSize: 12 }} tickLine={false} axisLine={false} />
-                            <YAxis tick={{ fontSize: 12 }} tickLine={false} axisLine={false} />
-                            <Tooltip
-                              contentStyle={{
-                                backgroundColor: "var(--popover)",
-                                borderColor: "var(--border)",
-                                borderRadius: "0.75rem",
-                                color: "var(--popover-foreground)",
-                              }}
-                              labelStyle={{ color: "var(--popover-foreground)" }}
-                            />
-                            <Legend />
-                            {metrics.map((item, index) => (
-                              <Line
-                                key={`${item.name}-${metric}`}
-                                type="monotone"
-                                dataKey={`${item.name}:${metric}`}
-                                name={item.data.web_name || item.data.player_name}
-                                stroke={SERIES[index]}
-                                strokeWidth={2.5}
-                                dot={{ r: 3 }}
-                                activeDot={{ r: 5 }}
-                                connectNulls={false}
-                              />
-                            ))}
-                          </LineChart>
-                        </ResponsiveContainer>
-                      </div>
-                    </TabsContent>
-                  ))}
-                </Tabs>
-              </CardContent>
-            </Card>
-
             <div className="grid gap-4 xl:grid-cols-2">
               {metrics.map((item, index) => {
                 const recent = lastN(item.data.gameweeks, 5).reverse()
+                const columns = recentColumns(item.data.position)
+                const summaries = summaryMetrics(item)
                 return (
                   <Card key={item.name}>
                     <CardHeader className="pb-3">
@@ -665,27 +659,19 @@ export default function PlayerTrendsPage() {
                       </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <div className="grid grid-cols-3 gap-2">
-                        <div className="rounded-lg bg-secondary/35 p-3"><div className="text-xs text-muted-foreground">Last 5 pts</div><div className="mt-1 text-lg font-semibold">{fmt(item.recentPoints, 1)}</div></div>
-                        <div className="rounded-lg bg-secondary/35 p-3"><div className="text-xs text-muted-foreground">xGI / 90</div><div className="mt-1 text-lg font-semibold">{fmt(item.data.per90_stats.xGI_per_90, 2)}</div></div>
-                        <div className="rounded-lg bg-secondary/35 p-3"><div className="text-xs text-muted-foreground">Avg mins</div><div className="mt-1 text-lg font-semibold">{fmt(item.recentMinutes, 0)}</div></div>
+                      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                        {summaries.map((summary) => <div key={summary.label} className="rounded-lg bg-secondary/35 p-3"><div className="text-xs text-muted-foreground">{summary.label}</div><div className="mt-1 font-mono text-lg font-semibold tabular-nums">{summary.value}</div></div>)}
                       </div>
 
                       <div className="space-y-2">
                         <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Recent gameweeks</div>
                         <div className="overflow-x-auto rounded-lg border border-border/60">
-                          <div className="grid min-w-[430px] grid-cols-[52px_minmax(0,1fr)_46px_46px_54px] bg-secondary/25 px-3 py-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-                            <span>GW</span><span>Opponent</span><span className="text-right">Pts</span><span className="text-right">Min</span><span className="text-right">xGI</span>
-                          </div>
-                          {recent.map((gw) => (
-                            <div key={gw.gameweek} className="grid min-w-[430px] grid-cols-[52px_minmax(0,1fr)_46px_46px_54px] items-center border-t border-border/50 px-3 py-2 text-sm first:border-t-0">
-                              <span className="tabular-nums">{gw.gameweek}</span>
-                              <span className="truncate text-muted-foreground">{gw.was_home ? "vs" : "@"} {gw.opponent || "—"}</span>
-                              <span className="text-right font-medium tabular-nums">{gw.total_points}</span>
-                              <span className="text-right tabular-nums">{gw.minutes}</span>
-                              <span className="text-right tabular-nums">{fmt(gw.xGI, 2)}</span>
-                            </div>
-                          ))}
+                          <table className="w-full min-w-[560px] border-collapse text-sm">
+                            <thead className="bg-secondary/25 text-[11px] font-medium uppercase tracking-wide text-muted-foreground"><tr><th className="px-3 py-2 text-left">GW</th><th className="px-3 py-2 text-left">Opponent</th>{columns.map((column) => <th key={column.label} className="px-3 py-2 text-right">{column.label}</th>)}</tr></thead>
+                            <tbody className="divide-y divide-border/50">
+                              {recent.map((gw) => <tr key={gw.gameweek}><td className="px-3 py-2 font-mono tabular-nums">{gw.gameweek}</td><td className="px-3 py-2 text-muted-foreground">{gw.was_home ? "vs" : "@"} {gw.opponent || "—"}</td>{columns.map((column) => <td key={column.label} className={`px-3 py-2 text-right font-mono tabular-nums ${column.emphasize ? "font-semibold text-foreground" : ""}`}>{column.value(gw)}</td>)}</tr>)}
+                            </tbody>
+                          </table>
                         </div>
                       </div>
                     </CardContent>
@@ -698,7 +684,7 @@ export default function PlayerTrendsPage() {
 
         <div className="flex items-start gap-2 rounded-xl bg-secondary/25 px-4 py-3 text-xs text-muted-foreground">
           <Shield className="mt-0.5 h-4 w-4 shrink-0" />
-          Per-90 metrics are most useful once a player has meaningful minutes. Use the recent-minute trend alongside underlying numbers before comparing a regular starter with a substitute.
+          Per-90 metrics are most useful once a player has meaningful minutes. Check recent minutes alongside the role-specific numbers before comparing a regular starter with a substitute.
         </div>
       </div>
     </div>

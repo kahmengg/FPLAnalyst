@@ -1,0 +1,443 @@
+<div id="fpl-map">
+  <style>
+    #fpl-map { color: var(--foreground); background: transparent; }
+    #fpl-map * { box-sizing: border-box; }
+    #fpl-map .topline { display:flex; justify-content:space-between; gap:16px; align-items:flex-end; flex-wrap:wrap; margin-bottom:16px; }
+    #fpl-map .topline p { margin:4px 0 0; color:var(--muted-foreground); }
+    #fpl-map .tabs { margin-bottom:18px; }
+    #fpl-map .panel[hidden] { display:none; }
+    #fpl-map .flow { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:8px; align-items:stretch; }
+    #fpl-map .flow.compact { grid-template-columns:repeat(5,minmax(0,1fr)); }
+    #fpl-map .node { padding:12px; border-radius:10px; background:color-mix(in srgb,var(--muted) 70%,transparent); min-width:0; }
+    #fpl-map .node.source { background:color-mix(in srgb,var(--viz-series-1) 13%,transparent); }
+    #fpl-map .node.compute { background:color-mix(in srgb,var(--viz-series-2) 13%,transparent); }
+    #fpl-map .node.store { background:color-mix(in srgb,var(--viz-series-3) 13%,transparent); }
+    #fpl-map .node.ui { background:color-mix(in srgb,var(--viz-series-4) 13%,transparent); }
+    #fpl-map .node.optional { background:color-mix(in srgb,var(--viz-series-5) 13%,transparent); }
+    #fpl-map .node strong { display:block; font-weight:500; }
+    #fpl-map .node span, #fpl-map .node li { color:var(--muted-foreground); }
+    #fpl-map .node ul { margin:8px 0 0; padding-left:17px; }
+    #fpl-map .node li + li { margin-top:4px; }
+    #fpl-map .arrow { display:grid; place-items:center; color:var(--muted-foreground); }
+    #fpl-map .arrow::after { content:"→"; }
+    #fpl-map .split { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+    #fpl-map .triple { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    #fpl-map .section { margin-top:20px; }
+    #fpl-map .section > h2 { margin-bottom:10px; }
+    #fpl-map .section > p { color:var(--muted-foreground); margin:0 0 12px; }
+    #fpl-map .formula-list { display:grid; gap:8px; }
+    #fpl-map .formula { display:grid; grid-template-columns:minmax(150px,0.34fr) minmax(0,1fr); gap:12px; align-items:start; padding:10px 0; border-bottom:1px solid var(--border); }
+    #fpl-map .formula:last-child { border-bottom:0; }
+    #fpl-map .formula strong { font-weight:500; }
+    #fpl-map .formula code { white-space:normal; overflow-wrap:anywhere; }
+    #fpl-map .schema { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    #fpl-map .table-box { padding:12px; background:color-mix(in srgb,var(--muted) 58%,transparent); border-radius:10px; }
+    #fpl-map .table-box strong { font-weight:500; display:block; }
+    #fpl-map .table-box code { display:block; margin-top:6px; color:var(--muted-foreground); white-space:normal; }
+    #fpl-map .edge { color:var(--muted-foreground); margin:12px 0; }
+    #fpl-map .route { display:grid; grid-template-columns:160px minmax(210px,0.7fr) minmax(0,1fr); gap:12px; padding:12px 0; border-bottom:1px solid var(--border); }
+    #fpl-map .route:last-child { border-bottom:0; }
+    #fpl-map .route > :first-child { font-weight:500; }
+    #fpl-map .route span { color:var(--muted-foreground); }
+    #fpl-map .legend { display:flex; flex-wrap:wrap; gap:14px; margin-top:14px; color:var(--muted-foreground); }
+    #fpl-map .legend span { display:inline-flex; align-items:center; gap:6px; }
+    #fpl-map .dot { width:10px; height:10px; border-radius:50%; background:var(--viz-series-1); }
+    #fpl-map .dot.d2 { background:var(--viz-series-2); }
+    #fpl-map .dot.d3 { background:var(--viz-series-3); }
+    #fpl-map .dot.d4 { background:var(--viz-series-4); }
+    #fpl-map .dot.d5 { background:var(--viz-series-5); }
+    #fpl-map .warning { border-left:3px solid var(--orange); padding:10px 12px; background:color-mix(in srgb,var(--orange) 8%,transparent); }
+    #fpl-map .ok { border-left:3px solid var(--green); padding:10px 12px; background:color-mix(in srgb,var(--green) 8%,transparent); }
+    #fpl-map .muted { color:var(--muted-foreground); }
+    #fpl-map table { width:100%; }
+    @media (max-width: 820px) {
+      #fpl-map .flow, #fpl-map .flow.compact { grid-template-columns:1fr; }
+      #fpl-map .arrow::after { content:"↓"; }
+      #fpl-map .split, #fpl-map .triple, #fpl-map .schema { grid-template-columns:1fr; }
+      #fpl-map .route { grid-template-columns:1fr; gap:4px; }
+      #fpl-map .formula { grid-template-columns:1fr; gap:5px; }
+    }
+  </style>
+
+  <div class="topline">
+    <div>
+      <h1>FPL Analyst: end-to-end system map</h1>
+      <p>Production application, data model, calculations, optional API, and isolated Elo lab.</p>
+    </div>
+    <span class="viz-badge">2026/27 · role-v1</span>
+  </div>
+
+  <div class="tabs nav nav-pills" role="tablist" aria-label="Architecture detail">
+    <button class="nav-link active" id="overview-tab" type="button" role="tab" aria-controls="overview-panel" aria-selected="true">Overview</button>
+    <button class="nav-link" id="pipeline-tab" type="button" role="tab" aria-controls="pipeline-panel" aria-selected="false">Pipeline</button>
+    <button class="nav-link" id="database-tab" type="button" role="tab" aria-controls="database-panel" aria-selected="false">Database</button>
+    <button class="nav-link" id="models-tab" type="button" role="tab" aria-controls="models-panel" aria-selected="false">Calculations</button>
+    <button class="nav-link" id="frontend-tab" type="button" role="tab" aria-controls="frontend-panel" aria-selected="false">Frontend</button>
+    <button class="nav-link" id="ops-tab" type="button" role="tab" aria-controls="ops-panel" aria-selected="false">API, Elo & ops</button>
+  </div>
+
+  <section id="overview-panel" role="tabpanel" aria-labelledby="overview-tab">
+    <div class="flow" aria-label="Primary production flow">
+      <div class="node source"><strong>1 · Upstream</strong><span>fpl-data.co.uk player/GW export<br>Official FPL bootstrap + fixtures</span></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="node compute"><strong>2 · Safe sync</strong><span>Download → validate both inputs → atomic local replacement</span></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="node compute"><strong>3 · ETL</strong><span>Clean → aggregate → normalize → score → service-role upsert</span></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="node store"><strong>4 · Supabase</strong><span>7 tables + 5 read views<br>Public SELECT only</span></div>
+    </div>
+    <div class="flow compact section" aria-label="Consumption flow">
+      <div class="node store"><strong>Supabase PostgREST</strong><span>Publishable key; season-scoped reads</span></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="node ui"><strong>Next.js query layer</strong><span>Normalize joins, cache shared reads, derive presentation data</span></div>
+      <div class="arrow" aria-hidden="true"></div>
+      <div class="node ui"><strong>Seven routes</strong><span>Dashboard, players, teams, fixtures, comparison, transfer planner, redirect</span></div>
+    </div>
+    <div class="split section">
+      <div>
+        <h2>Write path</h2>
+        <div class="formula-list">
+          <div class="formula"><strong>Credential</strong><code>SUPABASE_SECRET_KEY / legacy service role</code></div>
+          <div class="formula"><strong>Writer</strong><code>backend/etl/process_fpl_data.py</code></div>
+          <div class="formula"><strong>Behavior</strong><code>upsert in 500-row chunks; conflict keys preserve stable rows</code></div>
+          <div class="formula"><strong>Freshness</strong><code>run_pipeline.ps1 → sync_daily.py → ETL</code></div>
+        </div>
+      </div>
+      <div>
+        <h2>Read path</h2>
+        <div class="formula-list">
+          <div class="formula"><strong>Credential</strong><code>NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY</code></div>
+          <div class="formula"><strong>Reader</strong><code>frontend/lib/supabase.ts</code></div>
+          <div class="formula"><strong>Behavior</strong><code>browser → Supabase directly; Flask is not in the normal page path</code></div>
+          <div class="formula"><strong>Protection</strong><code>RLS enabled; anonymous insert/update/delete policies removed</code></div>
+        </div>
+      </div>
+    </div>
+    <div class="legend" aria-label="Color legend">
+      <span><i class="dot"></i>source</span><span><i class="dot d2"></i>processing</span><span><i class="dot d3"></i>storage</span><span><i class="dot d4"></i>frontend</span><span><i class="dot d5"></i>isolated/optional</span>
+    </div>
+  </section>
+
+  <section id="pipeline-panel" role="tabpanel" aria-labelledby="pipeline-tab" hidden>
+    <div class="section">
+      <h2>Input acquisition and validation</h2>
+      <div class="flow compact">
+        <div class="node source"><strong>fpl-data.co.uk</strong><span>Dash POST produces player/gameweek CSV for the selected season.</span></div>
+        <div class="arrow"></div>
+        <div class="node compute"><strong>Stats validation</strong><span>Required identity/context fields; non-empty rows; valid gameweeks.</span></div>
+        <div class="arrow"></div>
+        <div class="node store"><strong>fpl-data-stats.csv</strong><span>One current working input at repository root.</span></div>
+      </div>
+      <div class="flow compact section">
+        <div class="node source"><strong>Official FPL API</strong><span><code>bootstrap-static</code> maps team IDs; <code>fixtures</code> supplies schedule.</span></div>
+        <div class="arrow"></div>
+        <div class="node compute"><strong>Fixture validation</strong><span>380 fixtures; 20 clubs; GW1–38; 10/GW; 19 home + 19 away; one match/team/GW.</span></div>
+        <div class="arrow"></div>
+        <div class="node store"><strong>fixture_template.csv</strong><span><code>gameweek, home_team, away_team</code></span></div>
+      </div>
+      <div class="ok section"><strong>Atomicity boundary</strong><br><span class="muted">Full sync validates both downloads in memory before replacing either file. Each write goes to <code>.tmp</code>, then <code>os.replace</code>. A failed download cannot leave a half-refreshed pair.</span></div>
+    </div>
+
+    <div class="section">
+      <h2>ETL execution order and dependencies</h2>
+      <div class="flow" aria-label="ETL stage sequence">
+        <div class="node compute"><strong>Load</strong><span>Trim strings, empty→NaN, remove exact duplicates, reject conflicting player/GW keys.</span></div>
+        <div class="arrow"></div>
+        <div class="node compute"><strong>Teams</strong><span>Unique names → short codes → UUID map.</span></div>
+        <div class="arrow"></div>
+        <div class="node compute"><strong>Players</strong><span>Latest GW snapshot; cost, ownership, position, team; missing players become inactive.</span></div>
+        <div class="arrow"></div>
+        <div class="node compute"><strong>Gameweeks</strong><span>Raw context, output, attack, defense, xP and PvsxP.</span></div>
+      </div>
+      <div class="flow section" aria-label="ETL model sequence">
+        <div class="node compute"><strong>Season stats</strong><span>Player totals, per-90s, form, value, splits.</span></div>
+        <div class="arrow"></div>
+        <div class="node compute"><strong>Team rankings</strong><span>Team-match reduction → season/recent strengths → ranks.</span></div>
+        <div class="arrow"></div>
+        <div class="node compute"><strong>Role insights</strong><span>Needs team defense scores for DEF/GK composites.</span></div>
+        <div class="arrow"></div>
+        <div class="node compute"><strong>Fixtures</strong><span>Needs team strengths to generate FDR and favorability.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Upsert identity</h2>
+      <table class="table table-sm">
+        <thead><tr><th>Destination</th><th>Conflict key</th><th>Source grain</th></tr></thead>
+        <tbody>
+          <tr><td><code>teams</code></td><td><code>name</code></td><td>one row per club</td></tr>
+          <tr><td><code>players</code></td><td><code>fpl_id</code></td><td>latest snapshot per player</td></tr>
+          <tr><td><code>player_gameweeks</code></td><td><code>season_key, player_id, gameweek</code></td><td>one row per player/GW</td></tr>
+          <tr><td><code>player_season_stats</code></td><td><code>season_key, player_id</code></td><td>one player/season aggregate</td></tr>
+          <tr><td><code>team_rankings</code></td><td><code>season_key, team_id</code></td><td>one team/season model row</td></tr>
+          <tr><td><code>player_role_insights</code></td><td><code>season_key, player_id, window_key</code></td><td>player × season/last_5</td></tr>
+          <tr><td><code>fixtures</code></td><td><code>season_key, home_team_id, away_team_id</code></td><td>one scheduled pairing</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="database-panel" role="tabpanel" aria-labelledby="database-tab" hidden>
+    <div class="section">
+      <h2>Relational model</h2>
+      <div class="schema">
+        <div class="table-box"><strong>teams</strong><code>id PK · name UQ · short_name UQ</code></div>
+        <div class="table-box"><strong>players</strong><code>id PK · fpl_id UQ · team_id FK → teams · position · cost · ownership · is_active</code></div>
+        <div class="table-box"><strong>player_gameweeks</strong><code>player_id FK → players · season · GW · context · raw match stats · xP/PvsxP</code></div>
+        <div class="table-box"><strong>player_season_stats</strong><code>player_id FK → players · season totals · per90 · form · value · splits</code></div>
+        <div class="table-box"><strong>player_role_insights</strong><code>player_id FK → players · window · eligibility · raw/per90 · seven role scores</code></div>
+        <div class="table-box"><strong>team_rankings</strong><code>team_id FK → teams · season/recent strengths · ranks · venue splits</code></div>
+        <div class="table-box"><strong>fixtures</strong><code>home_team_id + away_team_id FK → teams · GW · four FDRs · four favorability values</code></div>
+      </div>
+      <p class="edge"><code>teams 1 ── * players 1 ── * player_gameweeks</code> · <code>players 1 ── * player_season_stats</code> · <code>players 1 ── * player_role_insights</code> · <code>teams 1 ── * team_rankings</code> · <code>teams 1 ── * fixtures (home and away)</code></p>
+    </div>
+
+    <div class="section">
+      <h2>Read views</h2>
+      <div class="route"><code>dashboard_summary</code><span>players + team_rankings + player_gameweeks + season stats</span><span>active player count, latest season team count, latest GW, latest update timestamp</span></div>
+      <div class="route"><code>player_overview</code><span>players → teams + latest player_season_stats</span><span>single flat player/season record for optional API</span></div>
+      <div class="route"><code>player_gw_history</code><span>latest-season player_gameweeks</span><span>ordered per-GW history for one player</span></div>
+      <div class="route"><code>team_overview</code><span>teams + latest team_rankings</span><span>ranks, strengths, form and home/away fields</span></div>
+      <div class="route"><code>fixture_grid</code><span>fixtures → teams twice</span><span>human-readable home/away club names plus FDR/favorability</span></div>
+    </div>
+
+    <div class="split section">
+      <div>
+        <h2>Deletion behavior</h2>
+        <div class="formula-list">
+          <div class="formula"><strong>Delete player</strong><code>CASCADE gameweeks, season stats, role insights</code></div>
+          <div class="formula"><strong>Delete team</strong><code>SET NULL on players; CASCADE rankings and fixtures</code></div>
+        </div>
+      </div>
+      <div>
+        <h2>Access boundary</h2>
+        <div class="formula-list">
+          <div class="formula"><strong>Browser / Flask</strong><code>publishable key → SELECT policies</code></div>
+          <div class="formula"><strong>ETL</strong><code>secret key → service role bypasses RLS</code></div>
+          <div class="formula"><strong>Anonymous writes</strong><code>explicit insert/update/delete policies removed</code></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="models-panel" role="tabpanel" aria-labelledby="models-tab" hidden>
+    <div class="section">
+      <h2>Shared normalization</h2>
+      <div class="formula-list">
+        <div class="formula"><strong>Metric score</strong><code>z = clip((x − league mean) / population SD, −2.5, +2.5)</code></div>
+        <div class="formula"><strong>0–100 mapping</strong><code>score = clip(50 + 20z, 0, 100); lower-is-better metrics use 100 − score</code></div>
+        <div class="formula"><strong>Meaning</strong><code>50 = comparison-group average; 70/30 ≈ ±1 SD; not a probability and not projected FPL points</code></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Player season aggregates</h2>
+      <div class="formula-list">
+        <div class="formula"><strong>Per 90</strong><code>metric_per90 = Σ metric / max(total_minutes, 1) × 90</code></div>
+        <div class="formula"><strong>Value</strong><code>points_per_million = total_points / max(latest_cost, 0.1)</code></div>
+        <div class="formula"><strong>Form</strong><code>mean(total_points) across the latest min(5, latest_GW) gameweeks</code></div>
+        <div class="formula"><strong>Last GW</strong><code>Σ total_points where gameweek = latest_GW</code></div>
+        <div class="formula"><strong>Splits</strong><code>home/away totals for points, goals and xG using parsed was_home</code></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Role-v1 player model</h2>
+      <div class="formula-list">
+        <div class="formula"><strong>Windows</strong><code>season = every available GW; last_5 = latest five available GWs</code></div>
+        <div class="formula"><strong>Eligibility</strong><code>total_minutes ≥ min(450, max(90, 60 × window_gameweeks))</code></div>
+        <div class="formula"><strong>Goal threat</strong><code>40% xG/90 + 25% box shots/90 + 20% shots on target/90 + 15% opponent-box touches/90</code></div>
+        <div class="formula"><strong>Creation</strong><code>50% xA/90 + 30% chances created/90 + 20% assists/90</code></div>
+        <div class="formula"><strong>Forward attack</strong><code>70% goal threat + 30% creation</code></div>
+        <div class="formula"><strong>Midfielder attack</strong><code>50% goal threat + 50% creation</code></div>
+        <div class="formula"><strong>Defender attack</strong><code>45% goal threat + 55% creation</code></div>
+        <div class="formula"><strong>DC eligibility</strong><code>60+ minute appearances only; DEF threshold 10 actions; MID/FWD threshold 12; each hit = 2 points</code></div>
+        <div class="formula"><strong>Defensive floor</strong><code>60% DC hit rate + 25% defensive contributions/90 + 15% minute security</code></div>
+        <div class="formula"><strong>MID hybrid</strong><code>2 × attack × floor / (attack + floor)</code></div>
+        <div class="formula"><strong>DEF complete</strong><code>40% attack + 35% defensive floor + 25% team defense strength</code></div>
+        <div class="formula"><strong>GK score</strong><code>50% team defense strength + 25% normalized clean-sheet rate + 25% normalized points/90</code></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Team-strength model</h2>
+      <div class="formula-list">
+        <div class="formula"><strong>Team-match attack</strong><code>sum xG, goals, shots, chances from players with minutes &gt; 0</code></div>
+        <div class="formula"><strong>Team-match defense</strong><code>xGC/GC from highest-minute player if ≥80 minutes; otherwise opponent attack aggregates</code></div>
+        <div class="formula"><strong>Season attack</strong><code>40% xG/match + 30% goals/match + 15% shots/match + 15% chances/match</code></div>
+        <div class="formula"><strong>Season defense</strong><code>55% inverse xGC/match + 35% inverse goals conceded/match + 10% clean-sheet rate</code></div>
+        <div class="formula"><strong>Overall</strong><code>50% attack strength + 50% defense strength</code></div>
+        <div class="formula"><strong>Opponent multiplier</strong><code>0.85 + 0.30 × opponent_strength/100</code></div>
+        <div class="formula"><strong>Recent form</strong><code>latest min(5, latest_GW) team matches, opponent-adjusted before normalization</code></div>
+        <div class="formula"><strong>Fixture recent weight</strong><code>GW≤5: 0%; GW6–9: 25%; GW≥10: 35%</code></div>
+        <div class="formula"><strong>Venue rate</strong><code>60% xG/match + 40% goals/match, home versus away</code></div>
+        <div class="formula"><strong>Venue modifier</strong><code>clip((home_rate − away_rate)/(home_rate + away_rate + 0.1) × 50, −50, 50) × reliability</code></div>
+        <div class="formula"><strong>Venue reliability</strong><code>clip((min(home_matches, away_matches) − 2)/4, 0, 1); zero until both splits have 3 matches</code></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Stored fixture model</h2>
+      <div class="formula-list">
+        <div class="formula"><strong>Current strength</strong><code>season_strength × (1 − recent_weight) + recent_score × recent_weight</code></div>
+        <div class="formula"><strong>Venue application</strong><code>attack += 15% of venue modifier; defense += 7.5% of venue modifier</code></div>
+        <div class="formula"><strong>Attack difference</strong><code>own attack − opponent defense</code></div>
+        <div class="formula"><strong>Defense difference</strong><code>own defense − opponent attack</code></div>
+        <div class="formula"><strong>FDR</strong><code>clip(3 − strength_difference/50, 1, 5); 1 easiest, 5 hardest</code></div>
+        <div class="formula"><strong>Favorability</strong><code>strength_difference / 10; positive is favorable</code></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Legacy quick-pick heuristic still used in club pick modals</h2>
+      <div class="formula-list">
+        <div class="formula"><strong>Attack score</strong><code>2 × goals/game + 1.5 × assists/game + 0.4 × points/game + 0.2 × form</code></div>
+        <div class="formula"><strong>Defense score</strong><code>4 × clean-sheet rate + 0.05 × cumulative defensive contributions + 0.35 × points/game + 0.2 × form</code></div>
+        <div class="formula"><strong>Top pick</strong><code>attack ≥2.2 OR defense ≥3.0 OR (points/game ≥6 AND form ≥5)</code></div>
+        <div class="formula"><strong>Differential</strong><code>(attack ≥1.6 OR defense ≥2.3) AND ownership &lt;15%</code></div>
+        <div class="formula"><strong>Solid / Monitor</strong><code>solid: attack ≥1.5 or defense ≥2.0; monitor: attack ≥1.0 or defense ≥1.5; else risky</code></div>
+      </div>
+      <div class="warning"><strong>Important distinction</strong><br><span class="muted">This unbounded legacy score is not Elo, not a probability, and not the role-v1 0–100 score used by Top Players.</span></div>
+    </div>
+  </section>
+
+  <section id="frontend-panel" role="tabpanel" aria-labelledby="frontend-tab" hidden>
+    <div class="section">
+      <h2>Frontend read layer</h2>
+      <div class="flow compact">
+        <div class="node store"><strong>Environment</strong><span>Supabase URL + publishable key + season key + precomputed feature flag.</span></div>
+        <div class="arrow"></div>
+        <div class="node ui"><strong>getSeason()</strong><span>Configured season first; otherwise latest key across rankings, fixtures, season stats, gameweeks.</span></div>
+        <div class="arrow"></div>
+        <div class="node ui"><strong>Shared caches</strong><span>players, season stats, fixtures, rankings, role insights; in-flight promises deduplicate parallel page requests.</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Route-to-data wiring</h2>
+      <div class="route"><code>/</code><span><code>getDashboardSummary()</code> → <code>dashboard_summary</code></span><span>Dataset counts, sync timestamp, model explanation, module links.</span></div>
+      <div class="route"><code>/top-performers</code><span><code>getPlayerRoleInsights()</code></span><span>Position/window/lens filters, role-relative leaderboard, archetype scatter, selected-player explanation.</span></div>
+      <div class="route"><code>/team-rankings</code><span><code>getTeamRankings()</code> ×3 + <code>getQuickPicks()</code> ×2</span><span>Attack/defense/overall views, team metrics, club-specific picks modal.</span></div>
+      <div class="route"><code>/fixture-analysis</code><span><code>getFixtures()</code> + dashboard summary</span><span>Upcoming match cards and difficulty grid; starts after latest completed GW.</span></div>
+      <div class="route"><code>/player-trends</code><span><code>getComparisonPlayers()</code> then <code>getPlayerTrends()</code></span><span>Same-position selector, 2–4 players, output/underlying/security tables, GW points/xGI/minutes lines.</span></div>
+      <div class="route"><code>/transfer-targets</code><span><code>getTeamFixtureSummary()</code> + attacking/defensive quick picks</span><span>Next-five vs following-five schedule, swing ranking, team Player Picks modal.</span></div>
+      <div class="route"><code>/quick-picks</code><span>Next.js server redirect</span><span><code>307 → /transfer-targets</code>; old bookmarks remain valid.</span></div>
+    </div>
+
+    <div class="section">
+      <h2>Top Players data branch</h2>
+      <div class="split">
+        <div class="node ui"><strong>Precomputed ON</strong><span><code>player_role_insights</code> joined to active <code>players → teams</code>; rows mapped to typed frontend records.</span></div>
+        <div class="node ui"><strong>Precomputed OFF</strong><span>Fetch all active players + paginated <code>player_gameweeks</code> (1,000/page) + team defense, then reproduce role-v1 in TypeScript.</span></div>
+      </div>
+      <p class="edge">Both branches feed the same <code>PlayerRoleInsight[]</code>, so the page layout does not know which path produced the score.</p>
+    </div>
+
+    <div class="section">
+      <h2>Frontend-only transformations</h2>
+      <div class="formula-list">
+        <div class="formula"><strong>Fixture display scale</strong><code>recent attack/defense scores min-max normalized to 20–100</code></div>
+        <div class="formula"><strong>Attacking opportunity</strong><code>50% own attack + 50% (100 − opponent defense) + venue_modifier/5</code></div>
+        <div class="formula"><strong>Defensive opportunity</strong><code>50% own defense + 50% (100 − opponent attack); no venue modifier</code></div>
+        <div class="formula"><strong>Transfer horizons</strong><code>future fixtures after latest stats GW → first 5 vs fixtures 6–10</code></div>
+        <div class="formula"><strong>Fixture swing</strong><code>following-five average favorability − next-five average favorability</code></div>
+        <div class="formula"><strong>Swing category</strong><code>&gt;0.25 improving; &lt;−0.25 declining; otherwise stable</code></div>
+        <div class="formula"><strong>Comparison pool</strong><code>active players with total_minutes &gt; 0; sorted minutes then points; 10 initial / 16 search results</code></div>
+        <div class="formula"><strong>Recent comparison</strong><code>last five of up to ten fetched GWs; averages for points, minutes, xGI, DC and clean-sheet rate</code></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Shared shell and presentation</h2>
+      <div class="triple">
+        <div class="node ui"><strong>Layout</strong><span>Sidebar + season status banner + route content; fixed bright color scheme.</span></div>
+        <div class="node ui"><strong>Typography</strong><span>Newsreader headings, Inter UI, JetBrains Mono statistics.</span></div>
+        <div class="node ui"><strong>Branding</strong><span>Neutral paper/ink shell; typed team registry supplies club badge colors only.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ops-panel" role="tabpanel" aria-labelledby="ops-tab" hidden>
+    <div class="section">
+      <h2>Optional Flask read API</h2>
+      <div class="flow compact">
+        <div class="node optional"><strong>Client/integration</strong><span>Not used by normal Next.js pages.</span></div>
+        <div class="arrow"></div>
+        <div class="node optional"><strong>Flask + CORS</strong><span><code>/api/*</code>; public cross-origin reads.</span></div>
+        <div class="arrow"></div>
+        <div class="node store"><strong>Supabase views</strong><span>Publishable read client.</span></div>
+      </div>
+      <div class="route"><code>GET /api/health</code><span><code>dashboard_summary</code></span><span>Liveness plus counts/latest update; failure returns 503.</span></div>
+      <div class="route"><code>GET /api/players</code><span><code>player_overview</code></span><span>Position/team/min-minutes filters; allowlisted sort; limit 1–1000; offset pagination.</span></div>
+      <div class="route"><code>GET /api/players/:id/gameweeks</code><span><code>player_gw_history</code></span><span>Last 1–38 rows, reversed to oldest→newest.</span></div>
+      <div class="route"><code>GET /api/fixtures</code><span><code>fixture_grid</code></span><span>Optional GW; team filtering performed in Flask after read.</span></div>
+      <div class="route"><code>GET /api/fixtures/grid</code><span><code>fixture_grid</code></span><span>Nested <code>team → GW → opponent/home/FDR/favorability</code>.</span></div>
+    </div>
+
+    <div class="section">
+      <h2>Isolated Elo forecasting lab</h2>
+      <div class="flow" aria-label="Elo lab flow">
+        <div class="node optional"><strong>Historical CSVs</strong><span>2024/25 final table + complete 2025/26 stats/schedule.</span></div>
+        <div class="arrow"></div>
+        <div class="node optional"><strong>Fixture reconstruction</strong><span>Player rows → team-match rows → completed fixtures with H/D/A target.</span></div>
+        <div class="arrow"></div>
+        <div class="node optional"><strong>Davidson Elo</strong><span>Draw-aware probabilities; frozen pre-GW state; batch updates after each GW.</span></div>
+        <div class="arrow"></div>
+        <div class="node optional"><strong>CSV outputs</strong><span>Backtests, metrics, confusion matrix, config, next-GW predictions.</span></div>
+      </div>
+      <div class="formula-list section">
+        <div class="formula"><strong>Initial rating</strong><code>1500 + 4 × (previous-season points − league mean); active league recentered to 1500</code></div>
+        <div class="formula"><strong>Promoted clubs</strong><code>inherit previous 17th-place rating</code></div>
+        <div class="formula"><strong>Home advantage</strong><code>+60 Elo before Davidson home/draw/away probabilities</code></div>
+        <div class="formula"><strong>Update</strong><code>Δhome = K20 × (actual score H=1/D=0.5/A=0 − expected home score)</code></div>
+        <div class="formula"><strong>Leakage control</strong><code>all fixtures in GW N use frozen ratings; all deltas batch-applied afterward</code></div>
+        <div class="formula"><strong>Evaluation</strong><code>accuracy, log loss, Brier, class recall; full season and locked GW20–38 holdout versus always-home and expanding-frequency baselines</code></div>
+      </div>
+      <div class="warning"><strong>Production boundary</strong><br><span class="muted">The Elo lab is CSV-only. No Elo output is written to Supabase, read by the Next.js app, or used in any production score.</span></div>
+    </div>
+
+    <div class="section">
+      <h2>Execution and deployment</h2>
+      <div class="route"><code>run_pipeline.ps1</code><span>Creates Python 3.11 venv, installs requirements, runs full sync for selected season.</span><span>Primary local update command.</span></div>
+      <div class="route"><code>sync_daily.py --validate-only</code><span>No network, no database writes.</span><span>Validates the two checked-in current inputs.</span></div>
+      <div class="route"><code>sync_daily.py --fixtures-only</code><span>Official FPL API only.</span><span>Validates and atomically replaces fixture schedule; no database secrets required.</span></div>
+      <div class="route"><code>process_fpl_data.py</code><span>Reprocess existing CSVs.</span><span>Requires service/secret key and schema.</span></div>
+      <div class="route"><code>Render</code><span>Gunicorn, four workers, 120s timeout, Oregon.</span><span>Hosts optional Flask API.</span></div>
+      <div class="route"><code>Vercel-compatible frontend</code><span>Next.js project rooted at <code>frontend/</code>.</span><span>Needs public Supabase variables and season variables.</span></div>
+    </div>
+
+    <div class="section">
+      <h2>Known boundaries</h2>
+      <div class="warning"><strong>Main ETL double-gameweek limitation</strong><br><span class="muted">The production schema key is player + gameweek, and the main validator rejects conflicting player/GW duplicates. Fixture-level player output cannot represent two matches in one GW. The isolated Elo lab uses opponent + venue in its key and can detect legitimate doubles.</span></div>
+      <div class="warning section"><strong>Two player scoring generations coexist</strong><br><span class="muted">Top Players uses role-v1 0–100 scoring; Player Picks still uses the older unbounded attacker/defender heuristic.</span></div>
+      <div class="warning section"><strong>Feature flag controls compute location</strong><br><span class="muted"><code>NEXT_PUBLIC_PLAYER_ROLE_INSIGHTS_PRECOMPUTED=true</code> reads stored role scores. Otherwise every client derives them from paginated gameweek rows.</span></div>
+      <div class="warning section"><strong>Latest-season views versus configured season</strong><br><span class="muted">SQL views choose <code>max(season_key)</code>; direct frontend table reads use the configured season. Keep season values aligned during rollover.</span></div>
+    </div>
+  </section>
+
+  <script>
+    (() => {
+      const root = document.getElementById('fpl-map');
+      const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+      const panels = Array.from(root.querySelectorAll('[role="tabpanel"]'));
+      const activate = (tab, persist = true) => {
+        tabs.forEach((item) => {
+          const selected = item === tab;
+          item.classList.toggle('active', selected);
+          item.setAttribute('aria-selected', String(selected));
+        });
+        panels.forEach((panel) => { panel.hidden = panel.id !== tab.getAttribute('aria-controls'); });
+        if (persist) window.openai?.setWidgetState?.({ modelContent: { section: tab.textContent.trim() }, privateContent: null }).catch(() => {});
+      };
+      tabs.forEach((tab) => tab.addEventListener('click', () => activate(tab)));
+      const saved = window.openai?.widgetState?.modelContent?.section;
+      const savedTab = tabs.find((tab) => tab.textContent.trim() === saved);
+      if (savedTab) activate(savedTab, false);
+      window.addEventListener('openai:set_globals', (event) => {
+        const section = event.detail?.globals?.widgetState?.modelContent?.section;
+        const match = tabs.find((tab) => tab.textContent.trim() === section);
+        if (match) activate(match, false);
+      });
+    })();
+  </script>
+</div>

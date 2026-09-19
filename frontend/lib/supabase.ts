@@ -389,10 +389,16 @@ async function buildTeamFixtureSummaryFallback() {
   const summaryRows = futureRows.length > 0 ? futureRows : fixtureRows
 
   for (const f of summaryRows) {
+    // Attach the opponent before grouping so the UI can show the real fixture run,
+    // rather than reducing each club to a single schedule score.
+    const homeTeam = teamMap.get(f.home_team_id) || { name: '', short_name: '' }
+    const awayTeam = teamMap.get(f.away_team_id) || { name: '', short_name: '' }
     const homeEntries = byTeam.get(f.home_team_id) || []
     homeEntries.push({
       gw: safeInt(f.gameweek, 0),
       isHome: true,
+      opponent: awayTeam.name,
+      opponentShort: awayTeam.short_name,
       attackDiff: safeNumber(f.home_attack_fdr, safeNumber(f.home_attacking_favorability, 0)),
       defenseDiff: safeNumber(f.home_defense_fdr, safeNumber(f.home_defensive_favorability, 0)),
       favorability: (safeNumber(f.home_attacking_favorability, 0) + safeNumber(f.home_defensive_favorability, 0)) / 2,
@@ -403,6 +409,8 @@ async function buildTeamFixtureSummaryFallback() {
     awayEntries.push({
       gw: safeInt(f.gameweek, 0),
       isHome: false,
+      opponent: homeTeam.name,
+      opponentShort: homeTeam.short_name,
       attackDiff: safeNumber(f.away_attack_fdr, safeNumber(f.away_attacking_favorability, 0)),
       defenseDiff: safeNumber(f.away_defense_fdr, safeNumber(f.away_defensive_favorability, 0)),
       favorability: (safeNumber(f.away_attacking_favorability, 0) + safeNumber(f.away_defensive_favorability, 0)) / 2,
@@ -420,8 +428,9 @@ async function buildTeamFixtureSummaryFallback() {
     const mediumRating = mediumTerm.length > 0 ? avg(mediumTerm, 'favorability') : nearRating
     const fixtureSwing = mediumRating - nearRating
     const teamObj = teamMap.get(teamId) || { name: '', short_name: '' }
-    const avgAttack = avg(ordered, 'attackDiff')
-    const avgDefense = avg(ordered, 'defenseDiff')
+    const avgAttack = avg(nearTerm, 'attackDiff')
+    const avgDefense = avg(nearTerm, 'defenseDiff')
+    const favorableFixtures = nearTerm.filter((f) => (f.attackDiff + f.defenseDiff) / 2 <= 3).length
 
     return {
       team_id: teamId,
@@ -431,7 +440,15 @@ async function buildTeamFixtureSummaryFallback() {
       att: avgAttack,
       def: avgDefense,
       overall: (avgAttack + avgDefense) / 2,
-      fixtures: ordered.filter((f) => (f.attackDiff + f.defenseDiff) / 2 <= 3).length,
+      fixtures: favorableFixtures,
+      upcomingFixtures: nearTerm.map((fixture) => ({
+        gw: fixture.gw,
+        opponent: fixture.opponent,
+        opponentShort: fixture.opponentShort,
+        isHome: fixture.isHome,
+        difficulty: (fixture.attackDiff + fixture.defenseDiff) / 2,
+        favorability: fixture.favorability,
+      })),
       nearTermHomeFixtures: nearTerm.filter((f) => f.isHome).length,
       mediumTermHomeFixtures: mediumTerm.filter((f) => f.isHome).length,
       nearTermRating: nearRating,
@@ -443,7 +460,7 @@ async function buildTeamFixtureSummaryFallback() {
       avg_attack_difficulty: avgAttack,
       avg_defense_difficulty: avgDefense,
       overall_difficulty: (avgAttack + avgDefense) / 2,
-      num_favorable_fixtures: ordered.filter((f) => (f.attackDiff + f.defenseDiff) / 2 <= 3).length,
+      num_favorable_fixtures: favorableFixtures,
     }
   })
 }
