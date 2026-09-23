@@ -2,10 +2,9 @@
 
 import Link from "next/link"
 import { useCallback, useEffect, useState } from "react"
-import { ArrowRight, Calendar, Clock3, GitCompareArrows, Repeat2, Scale, ShieldCheck, Target, Trophy, Users } from "lucide-react"
+import { ArrowRight, CalendarDays, Clock3, GitCompareArrows, Repeat2, Scale, ShieldCheck, Target, Trophy, Users } from "lucide-react"
 
 import { ErrorState, PageSkeleton } from "@/components/data-state"
-import { PageHeader } from "@/components/page-header"
 import { Button } from "@/components/ui/button"
 import { getDashboardSummary } from "@/lib/supabase"
 
@@ -13,15 +12,16 @@ type DashboardSummary = {
   total_players: number
   total_teams: number
   total_gameweeks: number
+  latest_data_gameweek: number
   last_synced_at: string | null
 }
 
 const modules = [
-  { title: "Top players", description: "Form, value, goals, assists and defensive contribution.", href: "/top-performers", icon: Users },
-  { title: "Team rankings", description: "Compare attacking and defensive strength across the league.", href: "/team-rankings", icon: Trophy },
-  { title: "Fixtures", description: "Scan upcoming opponents, difficulty and projected opportunity.", href: "/fixture-analysis", icon: Calendar },
-  { title: "Player comparison", description: "Compare same-position players using output and underlying data.", href: "/player-trends", icon: GitCompareArrows },
-  { title: "Transfer planner", description: "Spot fixture swings, then open a club to inspect its strongest player picks.", href: "/transfer-targets", icon: Repeat2 },
+  { index: "01", title: "Top players", description: "Find role-specific attacking upside and dependable defensive floors.", href: "/top-performers", icon: Users },
+  { index: "02", title: "Team rankings", description: "Separate genuine team strength from short-term results.", href: "/team-rankings", icon: Trophy },
+  { index: "03", title: "Fixtures", description: "Read the next round and scan longer fixture runs.", href: "/fixture-analysis", icon: CalendarDays },
+  { index: "04", title: "Compare players", description: "Put same-position options side by side before committing.", href: "/player-trends", icon: GitCompareArrows },
+  { index: "05", title: "Transfer planner", description: "Choose a planning window, compare clubs and open player picks.", href: "/transfer-targets", icon: Repeat2, featured: true },
 ]
 
 const modelNotes = [
@@ -71,49 +71,66 @@ export default function HomePage() {
   if (loading) return <PageSkeleton label="Loading dashboard" />
   if (error) return <ErrorState title="Dashboard unavailable" description={error} onAction={() => void fetchData()} />
 
-  const stats = [
-    { label: "Tracked players", value: summary?.total_players.toLocaleString() ?? "0", icon: Users },
-    { label: "League teams", value: summary?.total_teams.toString() ?? "0", icon: Trophy },
-    { label: "Latest gameweek", value: `GW ${summary?.total_gameweeks ?? 0}`, icon: Calendar },
-    { label: "Last synced", value: formatLastSynced(summary?.last_synced_at ?? null), icon: Clock3 },
-  ]
-
   return (
-    <div className="min-h-screen px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+    <div className="min-h-screen px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
       <div className="mx-auto max-w-7xl">
-        <PageHeader
-          eyebrow="Decision workspace"
-          title="Make the next gameweek count."
-          description="A focused view of form, fixtures, team strength and transfer signals—built to turn FPL data into confident decisions."
-          actions={<Button asChild><Link href="/transfer-targets">Plan transfers<ArrowRight className="h-4 w-4" /></Link></Button>}
-        />
-
-        <section aria-label="Dataset overview" className="mb-8 overflow-hidden rounded-xl border border-border bg-card">
-          <div className="grid sm:grid-cols-2 xl:grid-cols-4">
-            {stats.map((stat, index) => (
-              <div key={stat.label} className={`flex min-h-28 items-center gap-4 p-5 sm:p-6 ${index ? "border-t border-border sm:border-l sm:border-t-0" : ""} ${index === 2 ? "sm:border-l-0 sm:border-t xl:border-l xl:border-t-0" : ""}`}>
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-secondary text-muted-foreground"><stat.icon className="h-5 w-5" aria-hidden="true" /></div>
-                <div className="min-w-0"><p className="truncate font-mono text-xl font-semibold tabular-nums text-foreground">{stat.value}</p><p className="mt-1 text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground">{stat.label}</p></div>
+        <section className="relative mb-10 overflow-hidden rounded-3xl border border-primary bg-primary text-primary-foreground shadow-[0_22px_60px_-42px_rgba(32,34,31,0.8)]" aria-labelledby="dashboard-title">
+          <div className="grid lg:grid-cols-[1.45fr_0.55fr]">
+            <div className="p-6 sm:p-9 lg:p-12">
+              <div className="mb-8 flex items-center gap-3">
+                <span className="h-px w-10 bg-brand-soft/70" aria-hidden="true" />
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-soft">Gameweek decision room</p>
               </div>
-            ))}
+              <h1 id="dashboard-title" className="max-w-3xl text-4xl font-medium leading-[0.98] text-primary-foreground sm:text-5xl lg:text-6xl">Build a smarter<br className="hidden sm:block" /> gameweek.</h1>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-primary-foreground/70 sm:text-lg">Move from signal to decision with role-aware player scores, team strength and the fixture window that matters to you.</p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button asChild className="bg-card text-card-foreground shadow-none hover:bg-card/90"><Link href="/transfer-targets">Plan transfers<ArrowRight className="h-4 w-4" /></Link></Button>
+                <Button asChild variant="outline" className="border-primary-foreground/25 bg-transparent text-primary-foreground shadow-none hover:bg-primary-foreground/10 hover:text-primary-foreground"><Link href="/fixture-analysis">View fixtures</Link></Button>
+              </div>
+            </div>
+
+            <div className="flex min-h-64 flex-col justify-between border-t border-primary-foreground/15 bg-brand p-6 sm:p-8 lg:border-l lg:border-t-0 lg:p-10">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-foreground/70">Round focus</p>
+                <p className="mt-3 font-mono text-6xl font-semibold tracking-[-0.08em] text-brand-foreground sm:text-7xl">GW {summary?.total_gameweeks ?? 0}</p>
+              </div>
+              <div className="mt-8 border-t border-brand-foreground/20 pt-5">
+                <div className="flex items-center justify-between gap-4 text-sm"><span className="text-brand-foreground/70">Model data</span><span className="font-mono font-semibold tabular-nums text-brand-foreground">through GW {summary?.latest_data_gameweek ?? 0}</span></div>
+                <div className="mt-3 flex items-center justify-between gap-4 text-sm"><span className="text-brand-foreground/70">Last synced</span><span className="font-mono text-xs font-semibold tabular-nums text-brand-foreground">{formatLastSynced(summary?.last_synced_at ?? null)}</span></div>
+              </div>
+            </div>
+          </div>
+          <div className="grid border-t border-primary-foreground/15 sm:grid-cols-3">
+            <div className="flex items-center gap-3 px-6 py-4 sm:px-9"><Users className="h-4 w-4 text-brand-soft" aria-hidden="true" /><span className="font-mono text-lg font-semibold tabular-nums">{summary?.total_players.toLocaleString() ?? 0}</span><span className="text-xs uppercase tracking-[0.12em] text-primary-foreground/55">players tracked</span></div>
+            <div className="flex items-center gap-3 border-t border-primary-foreground/15 px-6 py-4 sm:border-l sm:border-t-0 sm:px-9"><Trophy className="h-4 w-4 text-brand-soft" aria-hidden="true" /><span className="font-mono text-lg font-semibold tabular-nums">{summary?.total_teams ?? 0}</span><span className="text-xs uppercase tracking-[0.12em] text-primary-foreground/55">league teams</span></div>
+            <div className="flex items-center gap-3 border-t border-primary-foreground/15 px-6 py-4 sm:border-l sm:border-t-0 sm:px-9"><Clock3 className="h-4 w-4 text-brand-soft" aria-hidden="true" /><span className="text-xs uppercase tracking-[0.12em] text-primary-foreground/55">daily data refresh</span></div>
           </div>
         </section>
 
-        <div className="grid gap-8 xl:grid-cols-[1.15fr_0.85fr]">
+        <div className="grid gap-10 xl:grid-cols-[1.05fr_0.95fr]">
           <section aria-labelledby="model-title">
             <div className="mb-4 flex items-end justify-between gap-4">
-              <div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Model guide</p><h2 id="model-title" className="mt-1 text-3xl font-medium">What the scores mean</h2></div>
+              <div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand">Model guide</p><h2 id="model-title" className="mt-1 text-3xl font-medium">Read the score correctly</h2></div>
               <Button asChild variant="ghost" size="sm"><Link href="/top-performers">Explore scores<ArrowRight className="h-4 w-4" /></Link></Button>
             </div>
-            <div className="overflow-hidden rounded-xl border border-border bg-card">
-              <div className="border-b border-border p-5 sm:p-6">
-                <p className="max-w-2xl text-sm leading-6 text-muted-foreground">The model converts different underlying statistics into position-relative 0–100 ratings. Use the ratings to understand how a player can score points, then use the raw metrics and fixtures to make the final decision.</p>
+            <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_18px_50px_-44px_rgba(32,34,31,0.7)]">
+              <div className="border-b border-border p-5 sm:p-7">
+                <p className="max-w-2xl text-sm leading-6 text-muted-foreground">Scores are position-relative signals, not predicted FPL points. They explain a player&apos;s route to returns so you can combine underlying quality with the fixture.</p>
+                <div className="mt-6" aria-label="Model score scale from developing to exceptional">
+                  <div className="grid grid-cols-4 gap-1">
+                    <div className="h-2 rounded-l-full bg-secondary" />
+                    <div className="h-2 bg-[#c9c8b8]" />
+                    <div className="h-2 bg-brand-soft" />
+                    <div className="h-2 rounded-r-full bg-brand" />
+                  </div>
+                  <div className="mt-2 flex justify-between font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground"><span>0 · Developing</span><span>50 · Role avg</span><span>100 · Elite</span></div>
+                </div>
               </div>
               <div className="divide-y divide-border">
-                {modelNotes.map((note) => (
+                {modelNotes.map((note, index) => (
                   <div key={note.title} className="flex gap-4 p-5 sm:p-6">
-                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-secondary text-muted-foreground"><note.icon className="h-5 w-5" aria-hidden="true" /></div>
-                    <div><h3 className="font-sans text-sm font-semibold text-foreground">{note.title}</h3><p className="mt-1 text-sm leading-6 text-muted-foreground">{note.description}</p></div>
+                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-soft text-brand"><note.icon className="h-5 w-5" aria-hidden="true" /></div>
+                    <div><p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-brand">0{index + 1}</p><h3 className="mt-0.5 font-sans text-sm font-semibold text-foreground">{note.title}</h3><p className="mt-1 text-sm leading-6 text-muted-foreground">{note.description}</p></div>
                   </div>
                 ))}
               </div>
@@ -121,13 +138,18 @@ export default function HomePage() {
           </section>
 
           <section aria-labelledby="modules-title">
-            <div className="mb-4"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">Analysis modules</p><h2 id="modules-title" className="mt-1 text-3xl font-medium">Explore the data</h2></div>
-            <div className="overflow-hidden rounded-xl border border-border bg-card">
-              {modules.map((module, index) => (
-                <Link key={module.href} href={module.href} className={`group flex items-start gap-4 p-4 transition-colors hover:bg-secondary/35 sm:p-5 ${index ? "border-t border-border" : ""}`}>
-                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-border bg-background text-muted-foreground transition-colors group-hover:text-foreground"><module.icon className="h-5 w-5" aria-hidden="true" /></div>
-                  <div className="min-w-0 flex-1"><h3 className="font-sans text-sm font-semibold text-foreground">{module.title}</h3><p className="mt-1 text-sm leading-5 text-muted-foreground">{module.description}</p></div>
-                  <ArrowRight className="mt-2 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" aria-hidden="true" />
+            <div className="mb-4"><p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand">Analysis modules</p><h2 id="modules-title" className="mt-1 text-3xl font-medium">Choose your next move</h2></div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {modules.map((module) => (
+                <Link key={module.href} href={module.href} className={`group relative flex min-h-44 flex-col justify-between overflow-hidden rounded-2xl border p-5 transition-[transform,background-color,border-color,box-shadow] hover:-translate-y-0.5 focus-visible:-translate-y-0.5 ${module.featured ? "border-brand bg-brand text-brand-foreground sm:col-span-2" : "border-border bg-card text-card-foreground hover:border-brand/40 hover:shadow-[0_18px_40px_-34px_rgba(32,34,31,0.8)]"}`}>
+                  <div className="flex items-start justify-between gap-4">
+                    <span className={`font-mono text-[10px] font-semibold tracking-[0.14em] ${module.featured ? "text-brand-foreground/65" : "text-muted-foreground"}`}>{module.index}</span>
+                    <div className={`grid h-10 w-10 place-items-center rounded-xl ${module.featured ? "bg-brand-foreground/12 text-brand-foreground" : "bg-brand-soft text-brand"}`}><module.icon className="h-5 w-5" aria-hidden="true" /></div>
+                  </div>
+                  <div className="mt-8 flex items-end gap-3">
+                    <div className="min-w-0 flex-1"><h3 className="font-sans text-base font-semibold">{module.title}</h3><p className={`mt-1 text-sm leading-5 ${module.featured ? "text-brand-foreground/70" : "text-muted-foreground"}`}>{module.description}</p></div>
+                    <ArrowRight className={`mb-1 h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1 ${module.featured ? "text-brand-foreground" : "text-muted-foreground group-hover:text-foreground"}`} aria-hidden="true" />
+                  </div>
                 </Link>
               ))}
             </div>

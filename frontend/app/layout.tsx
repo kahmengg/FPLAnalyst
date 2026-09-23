@@ -36,7 +36,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} ${newsreader.variable} antialiased`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${jetbrainsMono.variable} ${newsreader.variable} antialiased`}
+    >
       <body className="font-sans overflow-x-hidden">
         <div className="flex min-h-screen">
           <Sidebar />

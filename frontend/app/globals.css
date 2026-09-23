@@ -26,6 +26,9 @@
   --destructive-foreground: #fff8f7;
   --info: #59636b;
   --info-foreground: #fbfcfc;
+  --brand: #4f6b56;
+  --brand-foreground: #fffdf8;
+  --brand-soft: #dce5d9;
   --border: #d8d2c6;
   --input: #c9c2b5;
   --ring: #555951;
@@ -79,6 +82,9 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-soft: var(--brand-soft);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);

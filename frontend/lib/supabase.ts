@@ -42,6 +42,20 @@ function safeInt(value: any, fallback = 0) {
   return Number.isFinite(parsed) ? parsed : fallback
 }
 
+function resolveCurrentGameweek(fixtures: any[], latestDataGameweek: number) {
+  const gameweeks = [...new Set(fixtures.map((fixture) => safeInt(fixture.gameweek, 0)).filter(Boolean))].sort((a, b) => a - b)
+  if (!gameweeks.length) return latestDataGameweek
+
+  // Player rows arrive after individual matches. Do not move beyond the round
+  // until every official fixture in that round is marked as finished.
+  const latestRound = fixtures.filter((fixture) => safeInt(fixture.gameweek, 0) === latestDataGameweek)
+  if (latestRound.length > 0 && latestRound.some((fixture) => fixture.finished !== true)) {
+    return latestDataGameweek
+  }
+
+  return gameweeks.find((gameweek) => gameweek > latestDataGameweek) ?? gameweeks.at(-1) ?? latestDataGameweek
+}
+
 function firstString(...values: any[]) {
   for (const value of values) {
     if (typeof value === 'string' && value.trim()) {
@@ -1099,21 +1113,35 @@ export async function getDashboardSummary() {
   try {
     requireSupabase()
 
-    const { data, error } = await requireSupabase()
-      .from('dashboard_summary')
-      .select('*')
-      .limit(1)
+    const season = await getSeason()
+    const [summaryResult, fixturesResult] = await Promise.all([
+      requireSupabase()
+        .from('dashboard_summary')
+        .select('*')
+        .limit(1),
+      requireSupabase()
+        .from('fixtures')
+        .select('gameweek, finished')
+        .eq('season_key', season)
+        .order('gameweek'),
+    ])
 
-    if (error) {
-      throw error
+    if (summaryResult.error || fixturesResult.error) {
+      throw summaryResult.error || fixturesResult.error
     }
 
-    const row = data?.[0] || {}
+    const row = summaryResult.data?.[0] || {}
+    const latestDataGameweek = safeInt(row.latest_gameweek, 0)
+    const currentGameweek = resolveCurrentGameweek(fixturesResult.data || [], latestDataGameweek)
 
     return {
       total_players: safeInt(row.total_players, 0),
       total_teams: safeInt(row.total_teams, 0),
-      total_gameweeks: safeInt(row.latest_gameweek, 0),
+      // Keep the legacy field for existing consumers while making its meaning
+      // consistent with the current round shown across the interface.
+      total_gameweeks: currentGameweek,
+      current_gameweek: currentGameweek,
+      latest_data_gameweek: latestDataGameweek,
       last_synced_at: row.last_updated || null,
       generated_at: new Date().toISOString(),
     }

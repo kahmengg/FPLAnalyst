@@ -44,20 +44,6 @@ type TeamSchedule = {
   fixtures: Array<{ gw: number; opponent: string; opponentCode: string; home: boolean; rating: number }>
 }
 
-function defaultFixtureGameweek(fixtures: Fixture[], latestDataGameweek: number) {
-  const gameweeks = [...new Set(fixtures.map((fixture) => fixture.gw))].sort((a, b) => a - b)
-  if (!gameweeks.length) return latestDataGameweek || 1
-
-  // Player data appears as soon as the first match ends. Stay on that round
-  // until every scheduled fixture is marked finished by the official FPL API.
-  const latestRound = fixtures.filter((fixture) => fixture.gw === latestDataGameweek)
-  if (latestRound.length > 0 && latestRound.some((fixture) => !fixture.finished)) {
-    return latestDataGameweek
-  }
-
-  return gameweeks.find((gameweek) => gameweek > latestDataGameweek) ?? gameweeks.at(-1) ?? gameweeks[0]
-}
-
 function difficultyFromOpportunity(rating: number) {
   const clamped = Math.max(20, Math.min(100, rating))
   return Math.max(1, Math.min(5, 5 - ((clamped - 20) / 80) * 4))
@@ -161,7 +147,11 @@ export default function FixtureAnalysisPage() {
     try {
       const [fixtureData, summary] = await Promise.all([getFixtures(), getDashboardSummary()])
       const all = fixtureData as Fixture[]
-      const selected = defaultFixtureGameweek(all, Number(summary.total_gameweeks || 0))
+      const gameweeks = [...new Set(all.map((fixture) => fixture.gw))].sort((a, b) => a - b)
+      const currentGameweek = Number(summary.current_gameweek || summary.total_gameweeks || 0)
+      const selected = gameweeks.includes(currentGameweek)
+        ? currentGameweek
+        : gameweeks.find((value) => value >= currentGameweek) ?? gameweeks.at(-1) ?? currentGameweek
       const upcoming = all.filter((fixture) => fixture.gw >= selected)
       setFixtures(upcoming.length ? upcoming : all)
       setGameweek(selected)
