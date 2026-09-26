@@ -1,11 +1,22 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Home, Users, Trophy, Calendar, Menu, X, Clock, GitCompareArrows, Repeat2 } from "lucide-react"
-import { useEffect, useState } from "react"
-import { getDashboardSummary } from "@/lib/supabase"
-import { DATA_SEASON } from "@/lib/season"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  Home,
+  Users,
+  Trophy,
+  Calendar,
+  Menu,
+  X,
+  Clock,
+  GitCompareArrows,
+  Repeat2,
+} from "lucide-react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getDashboardSummary } from "@/lib/supabase";
+import { DATA_SEASON } from "@/lib/season";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home },
@@ -14,27 +25,17 @@ const navigation = [
   { name: "Fixtures", href: "/fixture-analysis", icon: Calendar },
   { name: "Compare Players", href: "/player-trends", icon: GitCompareArrows },
   { name: "Transfer Planner", href: "/transfer-targets", icon: Repeat2 },
-]
+];
 
 export function Sidebar() {
-  const pathname = usePathname()
-  const [isMobileOpen, setIsMobileOpen] = useState(false)
-  const [gameweek, setGameWeek] = useState(0)
-  const [lastSyncedAt, setLastSyncedAt] = useState<string | null>(null)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const summary = await getDashboardSummary()
-        setGameWeek(summary.total_gameweeks)
-        setLastSyncedAt(summary.last_synced_at)
-      } catch (err: unknown) {
-        setError(err instanceof Error ? err.message : "Unable to load sync status")
-      }
-    }
-    fetchData()
-  }, [])
+  const pathname = usePathname();
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const { data: summary, error } = useQuery({
+    queryKey: ["dashboard-summary"],
+    queryFn: getDashboardSummary,
+  });
+  const gameweek = summary?.current_gameweek ?? summary?.total_gameweeks ?? 0;
+  const lastSyncedAt = summary?.last_synced_at ?? null;
 
   return (
     <>
@@ -54,29 +55,43 @@ export function Sidebar() {
         />
       )}
 
-      <aside className={`fixed inset-y-0 left-0 z-50 w-72 border-r border-sidebar-border bg-sidebar transition-transform duration-200 lg:z-30 lg:translate-x-0 ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 w-72 border-r border-sidebar-border bg-sidebar transition-transform duration-200 lg:z-30 lg:translate-x-0 ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
         <div className="flex h-full flex-col">
           <div className="flex h-20 items-center gap-3 px-5">
             <div className="grid h-10 w-10 place-items-center rounded-lg border border-sidebar-border bg-card text-sidebar-foreground shadow-sm">
               <Trophy className="h-5 w-5" />
             </div>
             <div className="min-w-0 flex-1">
-              <div className="text-base font-semibold text-sidebar-foreground">FPL Analyst</div>
+              <div className="text-base font-semibold text-sidebar-foreground">
+                FPL Analyst
+              </div>
               <div className="mt-0.5 flex items-center gap-2 text-xs text-muted-foreground">
-                <span className={`h-1.5 w-1.5 rounded-full ${error ? "bg-red-500" : DATA_SEASON.isComplete ? "bg-amber-500" : "bg-emerald-500"}`} />
-                <span className="truncate">GW {gameweek || "—"} · {DATA_SEASON.label}</span>
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${error ? "bg-red-500" : DATA_SEASON.isComplete ? "bg-amber-500" : "bg-emerald-500"}`}
+                />
+                <span className="truncate">
+                  GW {gameweek || "—"} · {DATA_SEASON.label}
+                </span>
               </div>
             </div>
-            <button aria-label="Close navigation menu" onClick={() => setIsMobileOpen(false)} className="grid h-9 w-9 place-items-center rounded-lg text-muted-foreground hover:bg-secondary lg:hidden">
+            <button
+              aria-label="Close navigation menu"
+              onClick={() => setIsMobileOpen(false)}
+              className="grid h-9 w-9 place-items-center rounded-lg text-muted-foreground hover:bg-secondary lg:hidden"
+            >
               <X className="h-5 w-5" />
             </button>
           </div>
 
           <nav className="flex-1 overflow-y-auto px-3 py-4">
-            <div className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Analytics</div>
+            <div className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              Analytics
+            </div>
             <div className="space-y-1">
               {navigation.map((item) => {
-                const active = pathname === item.href
+                const active = pathname === item.href;
                 return (
                   <Link
                     key={item.href}
@@ -85,11 +100,16 @@ export function Sidebar() {
                     onClick={() => setIsMobileOpen(false)}
                     className={`relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${active ? "bg-card font-semibold text-sidebar-foreground shadow-sm" : "font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"}`}
                   >
-                    {active ? <span className="absolute inset-y-2 left-0 w-0.5 rounded-full bg-sidebar-primary" aria-hidden="true" /> : null}
+                    {active ? (
+                      <span
+                        className="absolute inset-y-2 left-0 w-0.5 rounded-full bg-sidebar-primary"
+                        aria-hidden="true"
+                      />
+                    ) : null}
                     <item.icon className="h-[18px] w-[18px]" />
                     <span>{item.name}</span>
                   </Link>
-                )
+                );
               })}
             </div>
           </nav>
@@ -101,7 +121,14 @@ export function Sidebar() {
                 Last synced
               </div>
               <div className="mt-1 text-sm font-medium text-sidebar-foreground">
-                {lastSyncedAt ? new Date(lastSyncedAt).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "Unknown"}
+                {lastSyncedAt
+                  ? new Date(lastSyncedAt).toLocaleString("en-GB", {
+                      day: "numeric",
+                      month: "short",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })
+                  : "Unknown"}
               </div>
             </div>
           </div>
@@ -109,5 +136,5 @@ export function Sidebar() {
       </aside>
       <div className="hidden w-72 shrink-0 lg:block" />
     </>
-  )
+  );
 }

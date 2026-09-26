@@ -16,6 +16,10 @@ __pycache__/
 # debug
 debug.log*
 logs/
+/test-results/
+/playwright-report/
+/AGENTS.md
+/CLAUDE.md
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

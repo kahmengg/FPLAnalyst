@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -113,50 +113,88 @@
 }
 
 @layer base {
-  * { border-color: var(--border); }
-  html { scroll-behavior: smooth; background: var(--background); color-scheme: light; }
+  * {
+    border-color: var(--border);
+  }
+  html {
+    scroll-behavior: smooth;
+    background: var(--background);
+    color-scheme: light;
+  }
   body {
     @apply bg-background text-foreground antialiased;
     min-width: 320px;
   }
-  h1, h2, h3, h4, h5, h6 { @apply font-semibold tracking-tight; }
-  h1, h2 { font-family: var(--font-display), Georgia, serif; }
-  h1 { @apply text-3xl lg:text-4xl; }
-  h2 { @apply text-2xl lg:text-3xl; }
-  h3 { @apply text-xl lg:text-2xl; }
-  :focus-visible { @apply outline-2 outline-offset-2 outline-ring; }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold tracking-tight;
+  }
+  h1,
+  h2 {
+    font-family: var(--font-display), Georgia, serif;
+  }
+  h1 {
+    @apply text-3xl lg:text-4xl;
+  }
+  h2 {
+    @apply text-2xl lg:text-3xl;
+  }
+  h3 {
+    @apply text-xl lg:text-2xl;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
 }
 
 /* Keep the first render visually stable. Individual controls can still animate on interaction. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-slot='card'], [data-slot='tabs-list'], [data-slot='tabs-trigger'] {
+  [data-slot="card"],
+  [data-slot="tabs-list"],
+  [data-slot="tabs-trigger"] {
     transition-property: background-color, color, border-color, box-shadow;
     transition-duration: 140ms;
   }
 }
 
 /* tw-animate entrance utilities were causing a visible first-paint flash on page load. */
-.animate-in, .fade-in, [class*='slide-in-from-'] {
+.animate-in,
+.fade-in,
+[class*="slide-in-from-"] {
   animation: none !important;
 }
 
 /* Cleaner page surface: depth comes from spacing and subtle elevation, not strong outlines. */
-[data-slot='card'] {
+[data-slot="card"] {
   border-color: var(--border);
   background-image: none;
 }
 
 /* Keep active tabs neutral and readable even when a route supplies legacy
    gradient utility classes. */
-[data-slot='tabs-trigger'][data-state='active'] {
-  background-color: color-mix(in srgb, var(--primary) 14%, var(--card)) !important;
+[data-slot="tabs-trigger"][data-state="active"] {
+  background-color: color-mix(
+    in srgb,
+    var(--primary) 14%,
+    var(--card)
+  ) !important;
   background-image: none !important;
-  border-color: color-mix(in srgb, var(--primary) 35%, var(--border)) !important;
+  border-color: color-mix(
+    in srgb,
+    var(--primary) 35%,
+    var(--border)
+  ) !important;
   color: var(--primary) !important;
 }
 
 @media (max-width: 640px) {
-  [data-slot='card-header'], [data-slot='card-content'], [data-slot='card-footer'] {
+  [data-slot="card-header"],
+  [data-slot="card-content"],
+  [data-slot="card-footer"] {
     padding-left: 1rem;
     padding-right: 1rem;
   }
