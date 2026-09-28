@@ -6,6 +6,8 @@ import {
   ArrowRight,
   Calendar,
   Clock3,
+  Repeat2,
+  Trophy,
   Users,
 } from "lucide-react";
 
@@ -21,6 +23,37 @@ type DashboardSummary = {
   latest_data_gameweek: number;
   last_synced_at: string | null;
 };
+
+const decisionSteps = [
+  {
+    number: "01",
+    title: "Rank teams",
+    detail: "Find genuine strength",
+    href: "/team-rankings",
+    icon: Trophy,
+  },
+  {
+    number: "02",
+    title: "Check fixtures",
+    detail: "Spot the opportunity",
+    href: "/fixture-analysis",
+    icon: Calendar,
+  },
+  {
+    number: "03",
+    title: "Find players",
+    detail: "Match the scoring route",
+    href: "/top-performers",
+    icon: Users,
+  },
+  {
+    number: "04",
+    title: "Plan the move",
+    detail: "Choose your transfer",
+    href: "/transfer-targets",
+    icon: Repeat2,
+  },
+];
 
 function formatLastSynced(value: string | null) {
   if (!value) return "Unknown";
@@ -131,7 +164,7 @@ export default function HomePage() {
 
         <section
           aria-labelledby="model-title"
-          className="flex flex-col gap-5 rounded-xl border border-border bg-card p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
+          className="mb-8 flex flex-col gap-5 rounded-xl border border-border bg-card p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
         >
           <div className="max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
@@ -152,6 +185,52 @@ export default function HomePage() {
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
+        </section>
+
+        <section aria-labelledby="workflow-title">
+          <div className="mb-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              Weekly workflow
+            </p>
+            <h2 id="workflow-title" className="mt-1 text-2xl font-medium">
+              From signal to transfer.
+            </h2>
+          </div>
+          <div className="overflow-hidden rounded-xl border border-border bg-card">
+            <div className="grid sm:grid-cols-2 xl:grid-cols-4">
+              {decisionSteps.map((step, index) => (
+                <Link
+                  key={step.href}
+                  href={step.href}
+                  className={`group flex min-h-36 flex-col justify-between p-5 transition-colors hover:bg-secondary/35 focus-visible:bg-secondary/35 sm:p-6 ${index ? "border-t border-border sm:border-l sm:border-t-0" : ""} ${index === 2 ? "sm:border-l-0 sm:border-t xl:border-l xl:border-t-0" : ""}`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs font-semibold text-muted-foreground">
+                      {step.number}
+                    </span>
+                    <step.icon
+                      className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-foreground"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="mt-8 flex items-end justify-between gap-3">
+                    <div>
+                      <h3 className="font-sans text-base font-semibold">
+                        {step.title}
+                      </h3>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {step.detail}
+                      </p>
+                    </div>
+                    <ArrowRight
+                      className="mb-1 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-foreground"
+                      aria-hidden="true"
+                    />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </section>
       </div>
     </div>
