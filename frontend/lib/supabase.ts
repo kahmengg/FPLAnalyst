@@ -805,7 +805,7 @@ export async function getAllPlayers(limit = 1000) {
         });
       })
       .filter((row: any) => {
-        const key = `${row.player_name}|${row.team_short}`;
+        const key = String(row.id);
         if (seen.has(key)) {
           return false;
         }
@@ -918,51 +918,30 @@ export async function getPlayerGameweeks(
  * Query player trend data for one or more players.
  */
 export async function getPlayerTrends(
-  playerNames: string[],
+  playerIds: string[],
   limitGws?: number,
 ) {
   try {
-    if (playerNames.length === 0) return {};
+    if (playerIds.length === 0) return {};
     requireSupabase();
-
     const players = await getAllPlayersCached(5000);
-    const normalizedPlayers = playerNames
-      .map((playerName) => {
-        const lower = playerName.trim().toLowerCase();
-        return players.find((player) => {
-          const candidateNames = [
-            player.player_name,
-            player.web_name,
-            player.name,
-          ]
-            .filter(Boolean)
-            .map((value) => String(value).toLowerCase());
-          return (
-            candidateNames.includes(lower) ||
-            candidateNames.some((value) => value.includes(lower))
-          );
-        });
-      })
-      .filter(Boolean);
-
-    if (normalizedPlayers.length === 0) {
-      return {};
-    }
-
+    // Stable IDs prevent equal display names from selecting the wrong player.
+    const normalizedPlayers = playerIds.map(id => players.find(player => player.id === id)).filter(Boolean);
+    if (normalizedPlayers.length === 0) return {};
     const season = await getSeason();
-    const playerIds = normalizedPlayers.map((player: any) => player.id);
+    const resolvedIds = normalizedPlayers.map((player: any) => player.id);
 
     const [seasonStatsRes, gameweeksRes, fixturesRes] = await Promise.all([
       requireSupabase()
         .from("player_season_stats")
         .select("*")
         .eq("season_key", season)
-        .in("player_id", playerIds),
+        .in("player_id", resolvedIds),
       requireSupabase()
         .from("player_gameweeks")
         .select("*")
         .eq("season_key", season)
-        .in("player_id", playerIds)
+        .in("player_id", resolvedIds)
         .order("gameweek"),
       // Select all fixture fields so the frontend remains compatible while the
       // additive score-column migration is being rolled out.
@@ -1085,7 +1064,7 @@ export async function getPlayerTrends(
       const avgPoints = gamesPlayed > 0 ? totalPoints / gamesPlayed : 0;
       const minutesPer90 = totalMinutes > 0 ? totalMinutes / 90 : 0;
 
-      result[player.web_name || player.player_name] = {
+      result[player.id] = {
         player_name: player.player_name,
         team: player.team,
         team_short: player.team_short,

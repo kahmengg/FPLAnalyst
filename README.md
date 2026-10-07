@@ -144,7 +144,17 @@ cd frontend
 npm run dev
 ```
 
-Frontend routes are `/`, `/top-performers`, `/team-rankings`, `/fixture-analysis`, `/player-trends`, `/quick-picks`, and `/transfer-targets`.
+Frontend routes are `/`, `/my-team`, `/top-performers`, `/team-rankings`, `/fixture-analysis`, `/player-trends`, `/quick-picks`, and `/transfer-targets`.
+
+For each page's features and objective, overlap findings, and the implemented guest experience, see [Page audit and My Team proposal](docs/page-audit-and-my-team-proposal.md). `/quick-picks` redirects to Transfer Planner; there are seven navigable pages.
+
+My Team imports the latest public deadline squad by numeric FPL entry ID or official team link, without login. Visitors can also search a fantasy team name inside a public Classic league by entering that league's ID or standings link. `GET /api/fpl-search?league=<id>&name=<query>` searches at most ten standings pages (500 teams), reports partial coverage, preserves duplicate-name entries by ID, and allows confirmation through the usual team preview. It accepts 3–80 characters, caches public standings for five minutes, and bounds upstream work to 18 seconds. Global team-name search is not implemented.
+
+The squad appears on a pitch grouped by position, with a separate ordered bench and selectable player details. Recommendations prioritise availability, minutes and insufficient evidence, preserving hold as an option. A suggested comparison requires an unowned eligible player in the same position at or below the outgoing player's current price, at least 60% recent 60-minute appearances, no worse role score, and an improvement of at least three in the 70/30 research ordering. That threshold is a conservative UI heuristic, not a calibrated points gain; availability of alternatives still needs confirmation.
+
+Visitors preview and confirm the team, optionally remember its ID on this device, and research replacements. The Next.js `GET /api/fpl-team?entry=<id>` adapter validates a complete 15-player response, checks season compatibility, caches public results for five minutes, and does not forward manager personal details. Running the frontend requires a server runtime for these endpoints; a static export alone cannot support imports or league searches.
+
+Fixtures and Transfer Planner share calendar gameweek windows, including blank and double gameweeks. The planner ranks same-position, eligible players using 70% role score and 30% fixture opportunity; this is a research order, not predicted points. Current bank, selling prices, transfer hits and three-per-club legality are not calculated. Public squads may omit transfers made after the latest deadline. Before a public launch, configure host-level request limits for the import endpoint and monitor upstream failures.
 
 The optional Flask API provides:
 
@@ -166,6 +176,8 @@ python -m unittest discover -s backend/tests
 python -m compileall -q backend
 cd frontend
 npm run build
+npm test
+npm run test:e2e
 npm audit
 ```
 

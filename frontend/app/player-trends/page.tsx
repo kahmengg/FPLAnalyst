@@ -19,9 +19,9 @@ import { PageHeader } from "@/components/page-header";
 import { TeamBadge } from "@/components/team-badge";
 import {
   getComparisonPlayers,
-  getPlayerRoleInsights,
   getPlayerTrends,
 } from "@/lib/supabase";
+import { rolesQuery } from "@/lib/research-queries";
 import type { PlayerRoleInsight } from "@/lib/player-role-insights";
 import { scoreForRole, scoreLabel } from "@/lib/decision-model";
 import { currentUrlParams, updateUrlParams } from "@/lib/url-state";
@@ -256,7 +256,7 @@ function summaryMetrics(item: PlayerMetric) {
 }
 
 export default function PlayerTrendsPage() {
-  const [selectedNames, setSelectedNames] = useState<string[]>([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [position, setPosition] = useState<Position | null>(null);
   const [query, setQuery] = useState("");
   const [team, setTeam] = useState("all");
@@ -271,24 +271,25 @@ export default function PlayerTrendsPage() {
     queryKey: ["compare-player-base"],
     queryFn: async () => ({
       players: (await getComparisonPlayers()) as Player[],
-      roles: await getPlayerRoleInsights(),
+
     }),
   });
   const players = baseData?.players ?? [];
-  const roles = baseData?.roles ?? [];
+  const roleResult = useQuery(rolesQuery);
+  const roles = roleResult.data ?? [];
   const {
     data: trendData = {},
     isFetching: loadingTrends,
     error: trendError,
   } = useQuery({
-    queryKey: ["player-trends", selectedNames],
+    queryKey: ["player-trends", selectedIds],
     queryFn: () =>
-      getPlayerTrends(selectedNames, 10) as Promise<
+      getPlayerTrends(selectedIds, 10) as Promise<
         Record<string, PlayerTrendData>
       >,
-    enabled: selectedNames.length > 0,
+    enabled: selectedIds.length > 0,
   });
-  const error = baseError || trendError;
+  const error = baseError || trendError || roleResult.error;
 
   useEffect(() => {
     if (!players.length) return;
@@ -309,11 +310,11 @@ export default function PlayerTrendsPage() {
       .filter(Boolean)
       .map(
         (player) =>
-          (player as Player).web_name || (player as Player).player_name,
+          (player as Player).id,
       )
       .slice(0, MAX_PLAYERS);
     if (restored.length) {
-      setSelectedNames(restored);
+      setSelectedIds(restored);
       setEditingSelection(restored.length < 2);
     }
   }, [players]);
@@ -350,20 +351,20 @@ export default function PlayerTrendsPage() {
 
   const selectedPlayers = useMemo(
     () =>
-      selectedNames
+      selectedIds
         .map((name) =>
           players.find(
-            (player) => (player.web_name || player.player_name) === name,
+            (player) => player.id === name,
           ),
         )
         .filter(Boolean) as Player[],
-    [players, selectedNames],
+    [players, selectedIds],
   );
 
   const selectPosition = (next: Position) => {
     if (position === next) return;
     setPosition(next);
-    setSelectedNames([]);
+    setSelectedIds([]);
     setEditingSelection(true);
     setQuery("");
     setTeam("all");
@@ -371,26 +372,26 @@ export default function PlayerTrendsPage() {
   };
 
   const togglePlayer = (player: Player) => {
-    const name = player.web_name || player.player_name;
-    if (selectedNames.includes(name)) {
-      const next = selectedNames.filter((item) => item !== name);
-      setSelectedNames(next);
+    const name = player.id;
+    if (selectedIds.includes(name)) {
+      const next = selectedIds.filter((item) => item !== name);
+      setSelectedIds(next);
       updateUrlParams({
         players:
           players
-            .filter((item) => next.includes(item.web_name || item.player_name))
+            .filter((item) => next.includes(item.id))
             .map((item) => item.id)
             .join(",") || null,
       });
       setEditingSelection(true);
       return;
     }
-    if (selectedNames.length >= MAX_PLAYERS) return;
-    const next = [...selectedNames, name];
-    setSelectedNames(next);
+    if (selectedIds.length >= MAX_PLAYERS) return;
+    const next = [...selectedIds, name];
+    setSelectedIds(next);
     updateUrlParams({
       players: players
-        .filter((item) => next.includes(item.web_name || item.player_name))
+        .filter((item) => next.includes(item.id))
         .map((item) => item.id)
         .join(","),
     });
@@ -398,7 +399,7 @@ export default function PlayerTrendsPage() {
   };
 
   const metrics = useMemo(() => {
-    return selectedNames
+    return selectedIds
       .map((name) => {
         const data = trendData[name];
         if (!data) return null;
@@ -416,7 +417,7 @@ export default function PlayerTrendsPage() {
           roleInsight: roles.find(
             (role) =>
               role.window === "last_5" &&
-              role.name === name &&
+              role.playerId === name &&
               role.team === data.team,
           ),
         };
@@ -431,7 +432,7 @@ export default function PlayerTrendsPage() {
       recentCS: number;
       roleInsight?: PlayerRoleInsight;
     }>;
-  }, [roles, selectedNames, trendData]);
+  }, [roles, selectedIds, trendData]);
 
   const metricRows = useMemo(() => {
     if (mode === "security") {
@@ -647,9 +648,9 @@ export default function PlayerTrendsPage() {
                     </p>
                   </div>
                   <span className="text-xs text-muted-foreground">
-                    {selectedNames.length}/{MAX_PLAYERS} selected
+                    {selectedIds.length}/{MAX_PLAYERS} selected
                   </span>
-                  {selectedNames.length >= 2 ? (
+                  {selectedIds.length >= 2 ? (
                     <Button
                       variant="outline"
                       size="sm"
@@ -661,7 +662,7 @@ export default function PlayerTrendsPage() {
                 </div>
 
                 <div
-                  className={`${editingSelection || selectedNames.length < 2 ? "grid" : "hidden"} gap-2 md:grid-cols-[minmax(0,1fr)_220px]`}
+                  className={`${editingSelection || selectedIds.length < 2 ? "grid" : "hidden"} gap-2 md:grid-cols-[minmax(0,1fr)_220px]`}
                 >
                   <label className="relative block">
                     <span className="sr-only">Search players</span>
@@ -716,7 +717,7 @@ export default function PlayerTrendsPage() {
                 )}
 
                 <div
-                  className={`${editingSelection || selectedNames.length < 2 ? "block" : "hidden"} overflow-x-auto rounded-xl border border-border/70`}
+                  className={`${editingSelection || selectedIds.length < 2 ? "block" : "hidden"} overflow-x-auto rounded-xl border border-border/70`}
                 >
                   <div className="grid min-w-[560px] grid-cols-[minmax(0,1fr)_80px_80px_72px] gap-2 border-b border-border/60 bg-secondary/25 px-3 py-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
                     <span>Player</span>
@@ -731,10 +732,10 @@ export default function PlayerTrendsPage() {
                       </div>
                     ) : (
                       eligiblePlayers.map((player) => {
-                        const name = player.web_name || player.player_name;
-                        const selected = selectedNames.includes(name);
+                        const name = player.id;
+                        const selected = selectedIds.includes(name);
                         const disabled =
-                          !selected && selectedNames.length >= MAX_PLAYERS;
+                          !selected && selectedIds.length >= MAX_PLAYERS;
                         return (
                           <button
                             key={player.id}
@@ -795,7 +796,7 @@ export default function PlayerTrendsPage() {
               </div>
             </CardContent>
           </Card>
-        ) : selectedNames.length < 2 ? (
+        ) : selectedIds.length < 2 ? (
           <Card className="border-dashed">
             <CardContent className="flex flex-col items-center gap-3 px-6 py-12 text-center">
               <Sparkles className="h-8 w-8 text-muted-foreground" />

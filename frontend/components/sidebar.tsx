@@ -15,11 +15,12 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getDashboardSummary } from "@/lib/supabase";
+import { summaryQuery } from "@/lib/research-queries";
 import { DATA_SEASON } from "@/lib/season";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home },
+  { name: "My Team", href: "/my-team", icon: Users },
   { name: "Top Players", href: "/top-performers", icon: Users },
   { name: "Teams", href: "/team-rankings", icon: Trophy },
   { name: "Fixtures", href: "/fixture-analysis", icon: Calendar },
@@ -30,10 +31,7 @@ const navigation = [
 export function Sidebar() {
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const { data: summary, error } = useQuery({
-    queryKey: ["dashboard-summary"],
-    queryFn: getDashboardSummary,
-  });
+  const { data: summary, error } = useQuery(summaryQuery);
   const gameweek = summary?.current_gameweek ?? summary?.total_gameweeks ?? 0;
   const lastSyncedAt = summary?.last_synced_at ?? null;
 

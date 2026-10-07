@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/research-link";
 import { useQuery } from "@tanstack/react-query";
 import {
   ArrowUpDown,
@@ -432,7 +432,7 @@ export default function TeamRankingsPage() {
         <PageHeader
           eyebrow="League intelligence"
           title="Team rankings"
-          description="Start with the strongest clubs, switch the timeframe or focus, then open fixtures and player picks when a team stands out."
+          description="Understand club quality and changes in form. Compare attack and defence, then check the schedule before researching a player."
         />
 
         <section

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import Link from "@/components/research-link";
 import { ArrowRight, Shield, Sparkles, Target, Users, X } from "lucide-react";
 
 import { TeamBadge } from "@/components/team-badge";

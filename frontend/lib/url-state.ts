@@ -13,6 +13,8 @@ export function updateUrlParams(
     "",
     `${url.pathname}${url.search}${url.hash}`,
   );
+  // Keep contextual navigation in sync when filters change without a route push.
+  window.dispatchEvent(new Event("research-context"));
 }
 
 export function currentUrlParams() {

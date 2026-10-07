@@ -13,8 +13,9 @@ import {
 
 import { ErrorState, PageSkeleton } from "@/components/data-state";
 import { PageHeader } from "@/components/page-header";
+import { WeeklyBriefing } from "@/components/weekly-briefing";
 import { Button } from "@/components/ui/button";
-import { getDashboardSummary } from "@/lib/supabase";
+import { summaryQuery } from "@/lib/research-queries";
 
 type DashboardSummary = {
   total_players: number;
@@ -71,15 +72,7 @@ export default function HomePage() {
     isPending: loading,
     error,
     refetch,
-  } = useQuery({
-    queryKey: ["dashboard-summary"],
-    queryFn: async () => {
-      const dashboardData = await getDashboardSummary();
-      if (!dashboardData.total_players)
-        throw new Error("No FPL data was returned for the configured season.");
-      return dashboardData as DashboardSummary;
-    },
-  });
+  } = useQuery(summaryQuery);
 
   if (loading) return <PageSkeleton label="Loading dashboard" />;
   if (error)
@@ -121,8 +114,8 @@ export default function HomePage() {
       <div className="mx-auto max-w-6xl">
         <PageHeader
           eyebrow="Decision workspace"
-          title="Make the next gameweek count."
-          description="Use the model to find strong players, favourable fixtures and better transfer options."
+          title="Your next gameweek starts here."
+          description="Review your squad, spot the opportunity, and follow the evidence into a transfer decision."
           actions={
             <Button asChild>
               <Link href="/transfer-targets">
@@ -132,6 +125,8 @@ export default function HomePage() {
             </Button>
           }
         />
+
+        <WeeklyBriefing />
 
         <section
           aria-label="Dataset overview"

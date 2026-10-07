@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type KeyboardEvent } from "react";
-import Link from "next/link";
+import Link from "@/components/research-link";
 import { useQuery } from "@tanstack/react-query";
 import {
   ArrowDown,
@@ -36,7 +36,7 @@ import type {
   PlayerRoleInsight,
   RolePosition,
 } from "@/lib/player-role-insights";
-import { getPlayerRoleInsights } from "@/lib/supabase";
+import { rolesQuery } from "@/lib/research-queries";
 import { getTeamBrand } from "@/lib/team-branding";
 import { cn } from "@/lib/utils";
 import { currentUrlParams, updateUrlParams } from "@/lib/url-state";
@@ -420,10 +420,7 @@ export default function TopPerformersPage() {
     isPending: loading,
     error,
     refetch,
-  } = useQuery({
-    queryKey: ["player-role-insights"],
-    queryFn: getPlayerRoleInsights,
-  });
+  } = useQuery(rolesQuery);
   const [position, setPosition] = useState<RolePosition>("Midfielder");
   const [window, setWindow] = useState<InsightWindow>("last_5");
   const [lensValue, setLensValue] = useState("attack");

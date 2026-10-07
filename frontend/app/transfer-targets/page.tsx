@@ -1,498 +1,378 @@
 "use client";
-
+import Link from "@/components/research-link";
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Minus, Plus, Sparkles } from "lucide-react";
-
-import { ErrorState, PageSkeleton } from "@/components/data-state";
 import { PageHeader } from "@/components/page-header";
-import { TeamBadge } from "@/components/team-badge";
-import TeamPicksModal from "@/components/team-picks-modal";
 import { Button } from "@/components/ui/button";
-import { getQuickPicks, getTeamFixtureSummary } from "@/lib/supabase";
-import { boundedInteger, formatRating } from "@/lib/decision-model";
+import { TeamBadge } from "@/components/team-badge";
+import { ErrorState, PageSkeleton } from "@/components/data-state";
+import { useGuestTeam } from "@/components/guest-team-provider";
+import {
+  fixturesQuery,
+  rolesQuery,
+  summaryQuery,
+} from "@/lib/research-queries";
+import { buildSchedules, gameweekWindow } from "@/lib/fixture-model";
+import { boundedInteger, formatRating, oneOf } from "@/lib/decision-model";
+import { rankCandidates } from "@/lib/transfer-research";
 import { currentUrlParams, updateUrlParams } from "@/lib/url-state";
+import { getAllPlayers } from "@/lib/supabase";
+import { DATA_SEASON } from "@/lib/season";
+import type { RolePosition } from "@/lib/player-role-insights";
 
-type UpcomingFixture = {
-  gw: number;
-  opponent: string;
-  opponentShort: string;
-  isHome: boolean;
-  difficulty: number;
-  favorability: number;
-};
-
-type TeamSummary = {
-  team: string;
-  team_short: string;
-  att: number;
-  def: number;
-  overall: number;
-  fixtures: number;
-  nearTermHomeFixtures: number;
-  nearTermRating: number;
-  upcomingFixtures: UpcomingFixture[];
-};
-
-type PickPlayer = {
-  id?: string;
-  web_name: string;
-  position_name: string;
-  now_cost: number;
-  goals_per_game?: number;
-  assists_per_game?: number;
-  points_per_game?: number;
-  selected_by_percent?: number;
-  role_score?: number;
-  score_label?: string;
-  minute_security?: number;
-  points_per_90?: number;
-  defensive_contribution_per_90?: number;
-  clean_sheet_rate?: number;
-};
-
-type PickTeam = { team: string; players?: PickPlayer[] };
-
-type ModalPlayer = {
-  id?: string;
-  name: string;
-  position: string;
-  position_name: string;
-  price: number;
-  goals_pg?: number;
-  assists_pg?: number;
-  points_pg?: number;
-  points_per_game?: number;
-  ownership?: number;
-  selected_by_percent?: number;
-  role_score?: number;
-  score_label?: string;
-  minute_security?: number;
-  points_per_90?: number;
-  defensive_contribution_per_90?: number;
-  cs_rate?: number;
-  clean_sheet_rate?: number;
-};
-
-function score(value: number) {
-  return Number(value || 0)
-    .toFixed(2)
-    .replace(/\.00$/, "")
-    .replace(/(\.\d)0$/, "$1");
-}
-
-function nextFixtureLabel(count: number) {
-  return count === 1 ? "next fixture" : `next ${count} fixtures`;
-}
-
-function FixtureSequence({
-  fixtures,
-  horizon,
-}: {
-  fixtures: UpcomingFixture[];
-  horizon: number;
-}) {
-  if (fixtures.length === 0)
-    return (
-      <p className="text-xs text-muted-foreground">No upcoming fixtures</p>
-    );
-
-  return (
-    <ol
-      className="flex flex-wrap gap-1.5"
-      aria-label={nextFixtureLabel(horizon)}
-    >
-      {fixtures.map((fixture, index) => {
-        const venue = fixture.isHome ? "H" : "A";
-        const opponent = fixture.opponentShort || fixture.opponent || "TBC";
-        return (
-          <li
-            key={`${fixture.gw}-${opponent}-${venue}-${index}`}
-            className="min-w-[4.25rem] rounded-md border border-border bg-background px-2 py-1.5 text-center"
-            title={`Gameweek ${fixture.gw}: ${fixture.opponent || opponent} (${fixture.isHome ? "home" : "away"})`}
-          >
-            <span className="block text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-              GW {fixture.gw}
-            </span>
-            <span className="mt-0.5 block font-mono text-xs font-semibold tabular-nums">
-              {opponent}{" "}
-              <span className="font-normal text-muted-foreground">
-                ({venue})
-              </span>
-            </span>
-          </li>
-        );
-      })}
-    </ol>
-  );
-}
-
-function FixtureHorizonControl({
-  value,
-  maximum,
-  onChange,
-}: {
-  value: number;
-  maximum: number;
-  onChange: (value: number) => void;
-}) {
-  const update = (nextValue: number) =>
-    onChange(Math.min(maximum, Math.max(1, nextValue)));
-
-  return (
-    <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-card p-4 sm:px-5">
-      <div>
-        <p className="text-sm font-semibold">Fixture horizon</p>
-        <p className="mt-0.5 text-xs text-muted-foreground">
-          Choose how many upcoming matches shape the rankings.
-        </p>
-      </div>
-      <div
-        className="flex items-center gap-1 rounded-lg border border-border bg-background p-1"
-        role="group"
-        aria-label="Fixture horizon"
-      >
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          onClick={() => update(value - 1)}
-          disabled={value <= 1}
-          aria-label="Show one fewer fixture"
-        >
-          <Minus aria-hidden="true" />
-        </Button>
-        <label
-          className="flex items-center gap-2 px-1 text-sm font-medium"
-          htmlFor="fixture-horizon"
-        >
-          Next
-          <input
-            id="fixture-horizon"
-            type="number"
-            min={1}
-            max={maximum}
-            value={value}
-            onChange={(event) => update(Number(event.target.value) || 1)}
-            className="h-8 w-14 rounded-md border border-input bg-card px-2 text-center font-mono text-sm tabular-nums outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40"
-            aria-describedby="fixture-horizon-help"
-          />
-        </label>
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          onClick={() => update(value + 1)}
-          disabled={value >= maximum}
-          aria-label="Show one more fixture"
-        >
-          <Plus aria-hidden="true" />
-        </Button>
-      </div>
-      <span id="fixture-horizon-help" className="sr-only">
-        Choose between 1 and {maximum} upcoming fixtures.
-      </span>
-    </div>
-  );
-}
-
+const positions = ["Goalkeeper", "Defender", "Midfielder", "Forward"] as const;
 export default function TransferTargetsPage() {
-  const [selectedTeam, setSelectedTeam] = useState<TeamSummary | null>(null);
-  const [fixtureHorizon, setFixtureHorizon] = useState(3);
-  const [showAllTeams, setShowAllTeams] = useState(false);
-  const {
-    data,
-    isPending: loading,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: ["transfer-planner"],
-    queryFn: async () => {
-      const [teams, attackingPicks, defensivePicks] = await Promise.all([
-        getTeamFixtureSummary(),
-        getQuickPicks("attacking"),
-        getQuickPicks("defensive"),
-      ]);
-      return {
-        teams: teams as TeamSummary[],
-        attackingPicks: attackingPicks as PickTeam[],
-        defensivePicks: defensivePicks as PickTeam[],
-      };
-    },
+  const fixtureResult = useQuery(fixturesQuery);
+  const roleResult = useQuery(rolesQuery);
+  const summary = useQuery(summaryQuery);
+  const guest = useGuestTeam();
+  const identities = useQuery({
+    queryKey: ["player-identities", DATA_SEASON.key],
+    queryFn: () => getAllPlayers(5000),
+    enabled: !!guest.entry,
   });
-  const teams = data?.teams ?? [];
-  const attackingPicks = data?.attackingPicks ?? [];
-  const defensivePicks = data?.defensivePicks ?? [];
-
+  const [position, setPosition] = useState<RolePosition>("Midfielder");
+  const [horizon, setHorizon] = useState(3);
+  const [start, setStart] = useState(1);
+  const [club, setClub] = useState("");
+  const [out, setOut] = useState("");
+  const [query, setQuery] = useState("");
+  const [maxPrice, setMaxPrice] = useState(20);
+  const [showAll, setShowAll] = useState(false);
   useEffect(() => {
-    if (!teams.length) return;
-    const params = currentUrlParams();
-    setFixtureHorizon(
-      boundedInteger(
-        params.get("horizon"),
-        3,
-        1,
-        Math.max(1, ...teams.map((team) => team.upcomingFixtures.length)),
-      ),
-    );
-    const highlighted = params.get("team");
-    if (highlighted)
-      setSelectedTeam(
-        teams.find(
-          (team) =>
-            team.team_short === highlighted || team.team === highlighted,
-        ) ?? null,
+    const restore = () => {
+      const params = currentUrlParams();
+      setPosition(oneOf(params.get("position"), positions, "Midfielder"));
+      setHorizon(boundedInteger(params.get("horizon"), 3, 1, 10));
+      setStart(
+        boundedInteger(
+          params.get("gw"),
+          summary.data?.current_gameweek ?? 1,
+          1,
+          38,
+        ),
       );
-  }, [teams]);
-
-  const maximumFixtureHorizon = useMemo(
-    () => Math.max(1, ...teams.map((team) => team.upcomingFixtures.length)),
-    [teams],
-  );
-
-  const rankedTeams = useMemo(
-    () =>
-      teams
-        .map((team) => {
-          // Every summary metric must use the same user-selected fixture window.
-          const fixtures = team.upcomingFixtures.slice(0, fixtureHorizon);
-          const averageRating =
-            fixtures.length > 0
-              ? fixtures.reduce(
-                  (total, fixture) =>
-                    total +
-                    Math.max(
-                      0,
-                      Math.min(100, 100 - (fixture.difficulty - 1) * 20),
-                    ),
-                  0,
-                ) / fixtures.length
-              : 0;
-
-          return {
-            ...team,
-            upcomingFixtures: fixtures,
-            nearTermRating: averageRating,
-            nearTermHomeFixtures: fixtures.filter((fixture) => fixture.isHome)
-              .length,
-            fixtures: fixtures.filter((fixture) => fixture.difficulty <= 3)
-              .length,
-          };
-        })
-        .sort((a, b) => b.nearTermRating - a.nearTermRating),
-    [fixtureHorizon, teams],
-  );
-  const visibleTeams = showAllTeams ? rankedTeams : rankedTeams.slice(0, 10);
-
-  const modalPlayers = (
-    teamName: string,
-  ): { attackingPlayers: ModalPlayer[]; defensivePlayers: ModalPlayer[] } => {
-    const normalized = teamName.trim().toLowerCase();
-    const attacking = attackingPicks.find(
-      (team) => team.team.trim().toLowerCase() === normalized,
-    );
-    const defensive = defensivePicks.find(
-      (team) => team.team.trim().toLowerCase() === normalized,
-    );
-    const mapBase = (player: PickPlayer) => ({
-      name: player.web_name,
-      position: player.position_name,
-      position_name: player.position_name,
-      price: player.now_cost,
-      points_pg: player.points_per_game,
-      points_per_game: player.points_per_game,
-      ownership: player.selected_by_percent,
-      selected_by_percent: player.selected_by_percent,
-      id: player.id,
-      role_score: player.role_score,
-      score_label: player.score_label,
-      minute_security: player.minute_security,
-      points_per_90: player.points_per_90,
-      defensive_contribution_per_90: player.defensive_contribution_per_90,
-    });
-    return {
-      attackingPlayers: (attacking?.players ?? []).map((player) => ({
-        ...mapBase(player),
-        goals_pg: player.goals_per_game ?? 0,
-        assists_pg: player.assists_per_game ?? 0,
-        clean_sheet_rate: 0,
-      })),
-      defensivePlayers: (defensive?.players ?? []).map((player) => ({
-        ...mapBase(player),
-        cs_rate: player.clean_sheet_rate ?? 0,
-        clean_sheet_rate: player.clean_sheet_rate ?? 0,
-      })),
+      setClub(params.get("team") || params.get("club") || "");
+      setOut(params.get("out") || "");
+      setQuery(params.get("search") || "");
+      const price = Number(params.get("maxPrice") || 20);
+      setMaxPrice(
+        Number.isFinite(price) && price >= 0 && price <= 20 ? price : 20,
+      );
     };
-  };
-
-  if (loading) return <PageSkeleton label="Loading transfer planner" />;
+    restore();
+    window.addEventListener("popstate", restore);
+    return () => window.removeEventListener("popstate", restore);
+  }, [summary.data]);
+  const schedules = useMemo(
+    () =>
+      buildSchedules(
+        fixtureResult.data ?? [],
+        start,
+        horizon,
+        position === "Goalkeeper" || position === "Defender"
+          ? "defense"
+          : "attack",
+      ),
+    [fixtureResult.data, start, horizon, position],
+  );
+  const owned = useMemo(
+    () =>
+      new Set<string>(
+        (identities.data ?? [])
+          .filter((row: { fpl_id?: number }) =>
+            guest.squad.data?.players.some((p) => p.element === row.fpl_id),
+          )
+          .map((row: { id: string }) => row.id),
+      ),
+    [identities.data, guest.squad.data],
+  );
+  const outgoing = roleResult.data?.find(
+    (p) => p.playerId === out && p.window === "last_5",
+  );
+  const candidates = useMemo(
+    () =>
+      rankCandidates(
+        roleResult.data ?? [],
+        schedules,
+        position,
+        owned,
+        maxPrice,
+      ).filter(
+        ({ player }) =>
+          (!club ||
+            player.teamCode.toLowerCase() === club.toLowerCase() ||
+            player.team.toLowerCase() === club.toLowerCase()) &&
+          player.name.toLowerCase().includes(query.toLowerCase()) &&
+          player.playerId !== out,
+      ),
+    [roleResult.data, schedules, position, owned, maxPrice, club, query, out],
+  );
+  const loading =
+    fixtureResult.isPending || roleResult.isPending || summary.isPending;
+  const error = fixtureResult.error || roleResult.error || summary.error;
+  if (loading) return <PageSkeleton label="Loading transfer research" />;
   if (error)
     return (
       <ErrorState
-        title="Transfer planner unavailable"
-        description={
-          error instanceof Error
-            ? error.message
-            : "Unable to load transfer planning data"
-        }
-        onAction={() => void refetch()}
+        title="Transfer research unavailable"
+        description={error.message}
+        onAction={() => {
+          void fixtureResult.refetch();
+          void roleResult.refetch();
+          void summary.refetch();
+        }}
       />
     );
-
+  const weeks = gameweekWindow(start, horizon);
   return (
-    <div className="min-h-screen px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
-      <div className="mx-auto max-w-7xl">
+    <div className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl">
         <PageHeader
           eyebrow="Transfer planner"
-          title="Plan your fixture window."
-          description="Choose a planning window, scan the easiest schedules, then open player picks for a club that interests you."
+          title="Turn a shortlist into a better decision."
+          description="Research same-role candidates using player quality and the upcoming schedule. Compare a possible replacement before committing to a move."
+          actions={
+            <Button asChild variant="outline">
+              <Link
+                href={`/fixture-analysis?view=difficulty&gw=${start}&horizon=${horizon}&mode=${position === "Defender" || position === "Goalkeeper" ? "defense" : "attack"}`}
+              >
+                Explore full schedule
+              </Link>
+            </Button>
+          }
         />
-
-        <div className="mb-5">
-          <FixtureHorizonControl
-            value={fixtureHorizon}
-            maximum={maximumFixtureHorizon}
-            onChange={(value) => {
-              setFixtureHorizon(value);
-              updateUrlParams({ horizon: value });
-            }}
-          />
-        </div>
-
-        <section aria-labelledby="schedule-title">
-          <div className="mb-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-              Club comparison
-            </p>
-            <h2 id="schedule-title" className="mt-1 text-3xl font-medium">
-              Next-{fixtureHorizon} schedule
-            </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Higher ratings mean an easier run. H and A indicate home and
-              away; the ten best schedules are shown first.
-            </p>
-          </div>
-          <div className="hidden max-w-full overflow-x-auto rounded-xl border border-border bg-card md:block">
-            <table className="w-full min-w-[760px] text-sm">
-              <thead className="bg-secondary text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
-                <tr>
-                  <th className="sticky left-0 z-10 bg-secondary px-4 py-4 text-left">Club</th>
-                  <th className="px-4 py-4 text-left">Upcoming fixtures</th>
-                  <th className="px-4 py-4 text-right">Model rating</th>
-                  <th className="sticky right-0 z-10 bg-secondary px-4 py-4 text-right">
-                    <span className="sr-only">Player picks</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {visibleTeams.map((team, index) => (
-                  <tr key={team.team} className="hover:bg-secondary/25">
-                    <th scope="row" className="sticky left-0 bg-card px-4 py-3">
-                      <div className="flex items-center gap-3">
-                        <TeamBadge code={team.team_short || team.team} />
-                        <span className="font-mono text-xs text-muted-foreground">#{index + 1}</span>
-                        <span>{team.team}</span>
-                      </div>
-                    </th>
-                    <td className="px-4 py-3">
-                      <FixtureSequence
-                        fixtures={team.upcomingFixtures ?? []}
-                        horizon={fixtureHorizon}
-                      />
-                    </td>
-                    <td className="px-4 py-3 text-right font-mono tabular-nums">
-                      {formatRating(team.nearTermRating)}
-                    </td>
-                    <td className="sticky right-0 bg-card px-4 py-3 text-right">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => {
-                          setSelectedTeam(team);
-                          updateUrlParams({
-                            team: team.team_short || team.team,
-                          });
-                        }}
-                      >
-                        <Sparkles className="h-4 w-4" />
-                        Picks
-                      </Button>
-                    </td>
-                  </tr>
+        <section
+          className="mb-5 rounded-xl border border-border bg-card p-4"
+          aria-label="Transfer research controls"
+        >
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <label className="text-sm font-medium">
+              Position
+              <select
+                value={position}
+                onChange={(e) => {
+                  setPosition(e.target.value as RolePosition);
+                  setOut("");
+                  updateUrlParams({ position: e.target.value, out: null });
+                }}
+                className="mt-2 h-11 w-full rounded-lg border border-input bg-background px-3"
+              >
+                {positions.map((p) => (
+                  <option key={p}>{p}</option>
                 ))}
-              </tbody>
-            </table>
+              </select>
+            </label>
+            <label className="text-sm font-medium">
+              Start gameweek
+              <input
+                type="number"
+                min={1}
+                max={38}
+                value={start}
+                onChange={(e) => {
+                  const value = boundedInteger(e.target.value, 1, 1, 38);
+                  setStart(value);
+                  updateUrlParams({ gw: value });
+                }}
+                className="mt-2 h-11 w-full rounded-lg border border-input bg-background px-3"
+              />
+            </label>
+            <label htmlFor="fixture-horizon" className="text-sm font-medium">
+              Gameweek horizon
+              <input
+                id="fixture-horizon"
+                type="number"
+                min={1}
+                max={10}
+                value={horizon}
+                onChange={(e) => {
+                  const value = boundedInteger(e.target.value, 3, 1, 10);
+                  setHorizon(value);
+                  updateUrlParams({ horizon: value });
+                }}
+                className="mt-2 h-11 w-full rounded-lg border border-input bg-background px-3"
+              />
+            </label>
+            <label className="text-sm font-medium">
+              Candidate price ceiling (£m)
+              <input
+                type="number"
+                min={0}
+                max={20}
+                step={0.1}
+                value={maxPrice}
+                onChange={(e) => {
+                  const value = Math.max(
+                    0,
+                    Math.min(20, Number(e.target.value) || 0),
+                  );
+                  setMaxPrice(value);
+                  updateUrlParams({ maxPrice: value });
+                }}
+                className="mt-2 h-11 w-full rounded-lg border border-input bg-background px-3"
+              />
+            </label>
           </div>
-          <div className="grid gap-3 md:hidden">
-            {visibleTeams.map((team, index) => (
+          <p className="mt-3 text-xs text-muted-foreground">
+            GW {weeks[0]}–{weeks.at(-1)} · Calendar gameweeks, including blanks
+            and doubles. Fixture ratings use{" "}
+            {position === "Defender" || position === "Goalkeeper"
+              ? "defensive"
+              : "attacking"}{" "}
+            opportunity. A price ceiling is a research filter, not your transfer
+            budget.
+          </p>
+          <div className="mt-4 grid gap-3 border-t border-border pt-4 sm:grid-cols-2">
+            <label className="text-sm">
+              Search candidates
+              <input
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  updateUrlParams({ search: e.target.value });
+                }}
+                className="mt-2 h-11 w-full rounded-lg border border-input bg-background px-3"
+              />
+            </label>
+            <label className="text-sm">
+              Club
+              <select
+                value={club}
+                onChange={(e) => {
+                  setClub(e.target.value);
+                  updateUrlParams({ team: e.target.value, club: null });
+                }}
+                className="mt-2 h-11 w-full rounded-lg border border-input bg-background px-3"
+              >
+                <option value="">All clubs</option>
+                {schedules.map((row) => (
+                  <option key={row.code} value={row.code}>
+                    {row.team}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+        </section>
+        <section className="mb-5 rounded-xl border border-border bg-secondary/30 p-4">
+          <h2 className="font-sans text-base font-semibold">
+            {outgoing
+              ? `Considering a replacement for ${outgoing.name}`
+              : guest.entry
+                ? "Research with your imported squad"
+                : "Explore targets"}
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            {guest.squad.data
+              ? `Players in ${guest.squad.data.name}'s public GW ${guest.squad.data.gameweek} snapshot are excluded once their model identities load.`
+              : "Import a public squad to start from one of your players and exclude already-owned candidates."}{" "}
+            Confirm current squad, selling prices, bank and club limits on FPL
+            before making any transfer. Holding is always an option.
+          </p>
+          {guest.squad.error && (
+            <p role="alert" className="mt-2 text-sm">
+              Squad import unavailable: {guest.squad.error.message}. Showing
+              public research.
+            </p>
+          )}
+          {identities.error && (
+            <p role="alert" className="mt-2 text-sm">
+              Squad mapping unavailable; owned-player exclusions could not be
+              applied.
+            </p>
+          )}
+          <Button asChild variant="outline" size="sm" className="mt-3">
+            <Link href="/my-team">
+              {guest.entry ? "Review my squad" : "Import my team"}
+            </Link>
+          </Button>
+        </section>
+        <div className="mb-4">
+          <h2 className="text-2xl">{position} candidates</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Research order blends role score (70%) and fixture opportunity
+            (30%), within this position only. It is not a forecast of points
+            gained. {candidates.length} matching players.
+          </p>
+        </div>
+        {!candidates.length && (
+          <p role="status" className="rounded-xl border border-border p-5">
+            No candidates in this window. Widen your filters or check later
+            gameweeks; completed fixtures are never reused as upcoming matches.
+          </p>
+        )}
+        <div className="grid gap-3 lg:grid-cols-2">
+          {(showAll ? candidates : candidates.slice(0, 12)).map(
+            ({ player, role, schedule }) => (
               <article
-                key={team.team}
-                className="rounded-xl border border-border bg-card p-4"
+                key={player.playerId}
+                className="rounded-xl border border-border bg-card p-4 sm:p-5"
               >
                 <div className="flex items-start justify-between gap-3">
-                  <div className="flex min-w-0 items-center gap-3">
-                    <TeamBadge code={team.team_short || team.team} />
-                    <div>
-                      <h3 className="font-semibold">{team.team}</h3>
-                      <p className="text-xs text-muted-foreground">
-                        Schedule rank #{index + 1}
+                  <div className="flex min-w-0 gap-3">
+                    <TeamBadge code={player.teamCode} />
+                    <div className="min-w-0">
+                      <h3 className="truncate font-sans text-base font-semibold">
+                        {player.name}
+                      </h3>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {player.team} · £{player.price.toFixed(1)}m ·{" "}
+                        {player.ownership.toFixed(1)}% owned
                       </p>
                     </div>
                   </div>
-                  <span className="font-mono text-sm font-semibold">
-                    {formatRating(team.nearTermRating)}
+                  <span className="font-mono text-sm">
+                    {formatRating(role)}
                   </span>
                 </div>
-                <div className="mt-4">
-                  <FixtureSequence
-                    fixtures={team.upcomingFixtures}
-                    horizon={fixtureHorizon}
-                  />
-                </div>
-                <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-xs text-muted-foreground">
-                  <span>
-                    {team.nearTermHomeFixtures} home · {team.fixtures}{" "}
-                    favourable
-                  </span>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      setSelectedTeam(team);
-                      updateUrlParams({ team: team.team_short || team.team });
-                    }}
-                  >
-                    <Sparkles className="h-4 w-4" />
-                    Picks
+                <p className="mt-3 text-sm">
+                  Role score {Math.round(role)} · Minutes reliability{" "}
+                  {Math.round(player.minuteSecurity * 100)}% · Fixture
+                  opportunity {Math.round(schedule.average)} / 100
+                </p>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {schedule.fixtures
+                    .map(
+                      (f) =>
+                        `GW ${f.gw}: ${f.opponentCode} (${f.home ? "H" : "A"})`,
+                    )
+                    .join(" · ")}
+                  {schedule.blankGameweeks.length
+                    ? ` · No remaining match in GW ${schedule.blankGameweeks.join(", ")}`
+                    : ""}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <Button asChild size="sm">
+                    <Link
+                      href={`/player-trends?position=${encodeURIComponent(position)}&players=${[outgoing?.playerId, player.playerId].filter(Boolean).join(",")}&gw=${start}&horizon=${horizon}`}
+                    >
+                      {outgoing ? "Compare replacement" : "Compare player"}
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" size="sm">
+                    <Link
+                      href={`/top-performers?position=${encodeURIComponent(position)}&club=${player.teamCode}&window=last_5&gw=${start}&horizon=${horizon}`}
+                    >
+                      Explore scoring profile
+                    </Link>
                   </Button>
                 </div>
               </article>
-            ))}
-          </div>
-          {rankedTeams.length > 10 ? (
-            <div className="mt-4 flex justify-center">
-              <Button variant="outline" onClick={() => setShowAllTeams((value) => !value)}>
-                {showAllTeams ? "Show top 10" : `Show all ${rankedTeams.length} clubs`}
-              </Button>
-            </div>
-          ) : null}
-        </section>
-
-        {selectedTeam ? (
-          <TeamPicksModal
-            isOpen={Boolean(selectedTeam)}
-            onClose={() => {
-              setSelectedTeam(null);
-              updateUrlParams({ team: null });
-            }}
-            teamName={selectedTeam.team}
-            teamCode={selectedTeam.team_short || selectedTeam.team}
-            fixtureContext={selectedTeam.upcomingFixtures}
-            fixtureOutlook={selectedTeam.nearTermRating}
-            horizon={fixtureHorizon}
-            {...modalPlayers(selectedTeam.team)}
-          />
-        ) : null}
+            ),
+          )}
+        </div>
+        {candidates.length > 12 && (
+          <Button
+            variant="outline"
+            className="mt-5"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll
+              ? "Show top 12"
+              : `Show all ${candidates.length} candidates`}
+          </Button>
+        )}
       </div>
     </div>
   );

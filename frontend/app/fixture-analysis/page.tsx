@@ -23,7 +23,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getDashboardSummary, getFixtures } from "@/lib/supabase";
+import { fixturesQuery, summaryQuery } from "@/lib/research-queries";
+import { buildSchedules, gameweekWindow } from "@/lib/fixture-model";
 import { cn } from "@/lib/utils";
 import { boundedInteger, formatRating } from "@/lib/decision-model";
 import { currentUrlParams, updateUrlParams } from "@/lib/url-state";
@@ -230,7 +231,9 @@ function DifficultyGrid({
   onQueryChange,
   horizon,
   onHorizonChange,
+  start,
 }: {
+  start: number;
   fixtures: Fixture[];
   mode: FdrMode;
   onModeChange: (mode: FdrMode) => void;
@@ -241,54 +244,11 @@ function DifficultyGrid({
 }) {
   const [sort, setSort] = useState<"difficulty" | "team">("difficulty");
 
-  const gameweeks = useMemo(
-    () =>
-      [...new Set(fixtures.map((fixture) => fixture.gw))]
-        .sort((a, b) => a - b)
-        .slice(0, horizon),
-    [fixtures, horizon],
-  );
-  const schedules = useMemo(() => {
-    const map = new Map<string, TeamSchedule>();
-    for (const fixture of fixtures.filter((item) =>
-      gameweeks.includes(item.gw),
-    )) {
-      for (const side of ["home", "away"] as const) {
-        const team = side === "home" ? fixture.home_team : fixture.away_team;
-        const opponent =
-          side === "home" ? fixture.away_team : fixture.home_team;
-        const existing = map.get(team.name) ?? {
-          team: team.name,
-          code: team.short_name,
-          average: 0,
-          fixtures: [],
-        };
-        existing.fixtures.push({
-          gw: fixture.gw,
-          opponent: opponent.name,
-          opponentCode: opponent.short_name,
-          home: side === "home",
-          rating: team.fdr?.[mode] ?? 50,
-        });
-        map.set(team.name, existing);
-      }
-    }
-    return [...map.values()]
-      .map((team) => ({
-        ...team,
-        fixtures: team.fixtures.sort((a, b) => a.gw - b.gw),
-        average: team.fixtures.length
-          ? team.fixtures.reduce((sum, fixture) => sum + fixture.rating, 0) /
-            team.fixtures.length
-          : 0,
-      }))
-      .filter((team) =>
-        team.team.toLowerCase().includes(query.trim().toLowerCase()),
-      )
-      .sort((a, b) =>
-        sort === "team" ? a.team.localeCompare(b.team) : b.average - a.average,
-      );
-  }, [fixtures, gameweeks, mode, query, sort]);
+  const gameweeks = gameweekWindow(start, horizon);
+  const schedules = useMemo(() => buildSchedules(fixtures, start, horizon, mode)
+    .filter(team => team.team.toLowerCase().includes(query.trim().toLowerCase()) || team.code.toLowerCase() === query.trim().toLowerCase())
+    .sort((a, b) => sort === "team" ? a.team.localeCompare(b.team) : b.average - a.average),
+    [fixtures, start, horizon, mode, query, sort]);
 
   return (
     <div>
@@ -389,30 +349,29 @@ function DifficultyGrid({
                 <td className="px-3 py-3 text-center">
                   <Badge
                     variant="outline"
-                    className={difficultyTone(
-                      difficultyFromOpportunity(team.average),
-                    )}
+                      className={team.fixtures.length ? difficultyTone(
+                        difficultyFromOpportunity(team.average),
+                      ) : "text-muted-foreground"}
                   >
-                    {difficultyFromOpportunity(team.average).toFixed(1)}
+                      {team.fixtures.length ? difficultyFromOpportunity(team.average).toFixed(1) : "—"}
                   </Badge>
                 </td>
                 {gameweeks.map((gw) => {
-                  const fixture = team.fixtures.find((item) => item.gw === gw);
-                  if (!fixture)
+                  const matches = team.fixtures.filter((item) => item.gw === gw);
+                  if (!matches.length)
                     return (
                       <td
                         key={gw}
                         className="px-3 py-3 text-center text-muted-foreground"
                       >
-                        —
+                        Blank
                       </td>
                     );
-                  const difficulty = difficultyFromOpportunity(fixture.rating);
                   return (
                     <td key={gw} className="px-3 py-3 text-center">
-                      <div
+                      {matches.map((fixture, index) => { const difficulty = difficultyFromOpportunity(fixture.rating); return <div key={index}
                         className={cn(
-                          "mx-auto w-20 rounded-lg border px-2 py-2",
+                          "mx-auto mb-1 w-20 rounded-lg border px-2 py-2",
                           difficultyTone(difficulty),
                         )}
                       >
@@ -428,7 +387,7 @@ function DifficultyGrid({
                         <p className="mt-1 font-mono text-xs font-semibold">
                           {difficulty.toFixed(1)}
                         </p>
-                      </div>
+                      </div>; })}
                     </td>
                   );
                 })}
@@ -457,29 +416,13 @@ export default function FixtureAnalysisPage() {
   const [mode, setMode] = useState<FdrMode>("overall");
   const [club, setClub] = useState("");
   const [horizon, setHorizon] = useState(3);
-  const {
-    data,
-    isPending: loading,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: ["fixture-analysis"],
-    queryFn: async () => {
-      const [fixtureData, summary] = await Promise.all([
-        getFixtures(),
-        getDashboardSummary(),
-      ]);
-      return { fixtures: fixtureData as Fixture[], summary };
-    },
-  });
-  const fixtures = useMemo(() => {
-    const all = data?.fixtures ?? [];
-    const current = Number(
-      data?.summary.current_gameweek || data?.summary.total_gameweeks || 0,
-    );
-    const upcoming = all.filter((fixture) => fixture.gw >= current);
-    return upcoming.length ? upcoming : all;
-  }, [data]);
+  const fixtureResult = useQuery(fixturesQuery);
+  const summaryResult = useQuery(summaryQuery);
+  const data = { fixtures: (fixtureResult.data ?? []) as Fixture[], summary: summaryResult.data };
+  const loading = fixtureResult.isPending || summaryResult.isPending;
+  const error = fixtureResult.error || summaryResult.error;
+  const refetch = () => { void fixtureResult.refetch(); void summaryResult.refetch(); };
+  const fixtures = useMemo(() => (fixtureResult.data ?? []) as Fixture[], [fixtureResult.data]);
 
   useEffect(() => {
     if (!fixtures.length) return;
@@ -490,7 +433,7 @@ export default function FixtureAnalysisPage() {
       ].sort((a, b) => a - b);
       const requested = boundedInteger(
         params.get("gw"),
-        Number(data?.summary.current_gameweek || available[0]),
+        Number(data.summary?.current_gameweek || available[0]),
         available[0],
         available.at(-1) ?? available[0],
       );
@@ -507,7 +450,7 @@ export default function FixtureAnalysisPage() {
     restore();
     window.addEventListener("popstate", restore);
     return () => window.removeEventListener("popstate", restore);
-  }, [data, fixtures]);
+  }, [summaryResult.data, fixtures]);
 
   const gameweeks = useMemo(
     () =>
@@ -546,7 +489,8 @@ export default function FixtureAnalysisPage() {
         <PageHeader
           eyebrow="Fixture intelligence"
           title="See the schedule before it moves the market."
-          description="Compare upcoming matchups through attacking opportunity, defensive potential, venue, and role-specific fixture difficulty."
+          description="Research opponents and schedules. Use the difficulty grid for a calendar-gameweek window, then take promising clubs into player research."
+          actions={<Button asChild variant="outline"><Link href={`/transfer-targets?gw=${gameweek ?? 1}&horizon=${horizon}`}>Find transfer candidates</Link></Button>}
         />
         <Tabs
           value={view}
@@ -621,6 +565,7 @@ export default function FixtureAnalysisPage() {
           <TabsContent value="difficulty" className="mt-0">
             <DifficultyGrid
               fixtures={fixtures}
+              start={gameweek ?? data.summary?.current_gameweek ?? 1}
               mode={mode}
               onModeChange={(value) => {
                 setMode(value);

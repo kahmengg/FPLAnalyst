@@ -4,6 +4,8 @@ import "@/app/globals.css";
 import { Sidebar } from "@/components/sidebar";
 import { SeasonStatusBanner } from "@/components/season-status-banner";
 import { QueryProvider } from "@/components/query-provider";
+import { GuestTeamProvider } from "@/components/guest-team-provider";
+import { ResearchGuide } from "@/components/research-guide";
 import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
 
 const inter = Inter({
@@ -44,13 +46,16 @@ export default function RootLayout({
     >
       <body className="font-sans overflow-x-hidden">
         <QueryProvider>
+          <GuestTeamProvider>
           <div className="flex min-h-screen">
             <Sidebar />
             <main className="min-w-0 flex-1">
               <SeasonStatusBanner />
+              <ResearchGuide />
               {children}
             </main>
           </div>
+          </GuestTeamProvider>
         </QueryProvider>
       </body>
     </html>
