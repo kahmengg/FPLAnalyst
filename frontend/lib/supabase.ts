@@ -883,17 +883,32 @@ export async function getPlayerGameweeks(
       return [];
     }
 
+    return getPlayerGameweeksById(playerRow.id, limitGws);
+  } catch (err) {
+    console.error(`Error in getPlayerGameweeks(${playerName}):`, err);
+    throw err;
+  }
+}
+
+export async function getPlayerGameweeksById(
+  playerId: string,
+  limitGws?: number,
+) {
+  try {
+    requireSupabase();
+    if (!playerId.trim()) return [];
+
     const season = await getSeason();
     const { data, error } = await requireSupabase()
       .from("player_gameweeks")
       .select("*")
       .eq("season_key", season)
-      .eq("player_id", playerRow.id)
+      .eq("player_id", playerId)
       .order("gameweek");
 
     if (error) {
       throw new Error(
-        `Failed to load gameweeks for ${playerName}: ${error.message}`,
+        `Failed to load gameweeks for player ${playerId}: ${error.message}`,
       );
     }
 
@@ -913,8 +928,8 @@ export async function getPlayerGameweeks(
       shots: safeNumber(row.shots, 0),
       shots_on_target: safeNumber(row.shots_on_target, 0),
       key_passes: safeNumber(row.chances_created, 0),
-      touches: safeNumber(row.touches, 0),
-      penalty_area_touches: safeNumber(row.touches_opp_box, 0),
+      touches: row.touches == null ? null : safeNumber(row.touches, 0),
+      penalty_area_touches: row.touches_opp_box == null ? null : safeNumber(row.touches_opp_box, 0),
       // The current schema has no carries-final-third metric; do not mislabel non-penalty goals as carries.
       carries_final_third: 0,
       defensive_contribution: safeNumber(row.defensive_contribution, 0),
@@ -928,7 +943,7 @@ export async function getPlayerGameweeks(
 
     return result;
   } catch (err) {
-    console.error(`Error in getPlayerGameweeks(${playerName}):`, err);
+    console.error(`Error in getPlayerGameweeksById(${playerId}):`, err);
     throw err;
   }
 }

@@ -4,6 +4,7 @@ import {
   getDashboardSummary,
   getFixtures,
   getPlayerRoleInsights,
+  getPlayerGameweeksById,
 } from "./supabase";
 
 // Resource keys let pages share the same reads instead of hiding them in bundles.
@@ -19,3 +20,11 @@ export const rolesQuery = queryOptions({
   queryKey: ["player-role-insights", DATA_SEASON.key],
   queryFn: getPlayerRoleInsights,
 });
+
+export function playerGameweeksQuery(playerId: string, limitGws = 5) {
+  return queryOptions({
+    queryKey: ["player-gameweeks", DATA_SEASON.key, playerId, limitGws],
+    queryFn: () => getPlayerGameweeksById(playerId, limitGws),
+    enabled: Boolean(playerId),
+  })
+}
