@@ -17,6 +17,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PageSkeleton } from "@/components/data-state";
 import { PageHeader } from "@/components/page-header";
 import { TeamBadge } from "@/components/team-badge";
+import { PlayerPortrait } from "@/components/player-portrait";
+import { PlayerDetailDrawer } from "@/components/player-detail-drawer";
 import {
   getComparisonPlayers,
   getPlayerTrends,
@@ -262,6 +264,7 @@ export default function PlayerTrendsPage() {
   const [team, setTeam] = useState("all");
   const [mode, setMode] = useState<CompareMode>("output");
   const [editingSelection, setEditingSelection] = useState(true);
+  const [detailPlayerId, setDetailPlayerId] = useState("");
 
   const {
     data: baseData,
@@ -317,7 +320,22 @@ export default function PlayerTrendsPage() {
       setSelectedIds(restored);
       setEditingSelection(restored.length < 2);
     }
+    setDetailPlayerId(params.get("player") || "");
   }, [players]);
+
+  const detailPlayer = roles.find(
+    (role) => role.playerId === detailPlayerId && role.window === "last_5",
+  ) ?? null;
+  const openPlayerDetails = (playerId: string) => {
+    setDetailPlayerId(playerId);
+    const url = new URL(window.location.href);
+    url.searchParams.set("player", playerId);
+    window.history.pushState({}, "", `${url.pathname}${url.search}`);
+  };
+  const closePlayerDetails = () => {
+    setDetailPlayerId("");
+    updateUrlParams({ player: null });
+  };
 
   const teams = useMemo(() => {
     const base = position
@@ -695,23 +713,14 @@ export default function PlayerTrendsPage() {
                 {selectedPlayers.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {selectedPlayers.map((player, index) => (
-                      <button
-                        key={player.id}
-                        type="button"
-                        onClick={() => togglePlayer(player)}
-                        className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/40 px-3 py-1.5 text-sm"
-                      >
-                        <span
-                          className="h-2 w-2 rounded-full"
-                          style={{ backgroundColor: SERIES[index] }}
-                        />
-                        <span className="font-medium">{player.web_name}</span>
-                        <TeamBadge
-                          code={player.team_short || player.team}
-                          className="h-6 min-w-9 px-1.5 text-[10px]"
-                        />
-                        <X className="h-3.5 w-3.5 text-muted-foreground" />
-                      </button>
+                      <div key={player.id} className="inline-flex items-center rounded-full border border-border bg-secondary/40 p-1 pl-2">
+                        <button type="button" onClick={() => openPlayerDetails(player.id)} aria-label={`View details for ${player.web_name}`} className="inline-flex min-h-9 items-center gap-2 rounded-full px-1.5 text-sm hover:bg-card">
+                          <span className="h-2 w-2 rounded-full" style={{ backgroundColor: SERIES[index] }} />
+                          <PlayerPortrait name={player.web_name || player.player_name} photoCode={(player as Player & { photo_code?: number | null }).photo_code} teamCode={player.team_short || player.team} size="sm" className="h-8 w-8 rounded-full" />
+                          <span className="font-medium">{player.web_name}</span>
+                        </button>
+                        <button type="button" onClick={() => togglePlayer(player)} aria-label={`Remove ${player.web_name} from comparison`} className="grid h-9 w-9 place-items-center rounded-full text-muted-foreground hover:bg-card hover:text-foreground"><X className="h-3.5 w-3.5" /></button>
+                      </div>
                     ))}
                   </div>
                 )}
@@ -998,10 +1007,9 @@ export default function PlayerTrendsPage() {
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
-                          <TeamBadge
-                            code={item.data.team_short || item.data.team}
-                            className="h-7 min-w-10 px-1.5 text-[10px]"
-                          />
+                          <button type="button" aria-label={`View details for ${item.data.web_name || item.data.player_name}`} onClick={() => openPlayerDetails(item.name)}>
+                            <PlayerPortrait name={item.data.web_name || item.data.player_name} photoCode={(selectedPlayers.find((player) => player.id === item.name) as (Player & { photo_code?: number | null }) | undefined)?.photo_code} teamCode={item.data.team_short || item.data.team} size="sm" />
+                          </button>
                           <Badge variant="secondary">
                             {POSITION_META[item.data.position].short}
                           </Badge>
@@ -1085,6 +1093,12 @@ export default function PlayerTrendsPage() {
           Check recent minutes alongside the role-specific numbers before
           comparing a regular starter with a substitute.
         </div>
+        <PlayerDetailDrawer
+          player={detailPlayer}
+          cohort={roles.filter((role) => role.positionCode === (position ? POSITION_META[position].short : "") && role.window === "last_5")}
+          open={Boolean(detailPlayer)}
+          onOpenChange={(open) => { if (!open) closePlayerDetails(); }}
+        />
       </div>
     </div>
   );

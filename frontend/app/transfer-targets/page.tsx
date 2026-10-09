@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { PageHeader } from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import { TeamBadge } from "@/components/team-badge";
+import { PlayerPortrait } from "@/components/player-portrait";
+import { PlayerDetailDrawer } from "@/components/player-detail-drawer";
 import { ErrorState, PageSkeleton } from "@/components/data-state";
 import { useGuestTeam } from "@/components/guest-team-provider";
 import {
@@ -39,6 +41,7 @@ export default function TransferTargetsPage() {
   const [query, setQuery] = useState("");
   const [maxPrice, setMaxPrice] = useState(20);
   const [showAll, setShowAll] = useState(false);
+  const [selectedPlayerId, setSelectedPlayerId] = useState("");
   useEffect(() => {
     const restore = () => {
       const params = currentUrlParams();
@@ -55,6 +58,7 @@ export default function TransferTargetsPage() {
       setClub(params.get("team") || params.get("club") || "");
       setOut(params.get("out") || "");
       setQuery(params.get("search") || "");
+      setSelectedPlayerId(params.get("player") || "");
       const price = Number(params.get("maxPrice") || 20);
       setMaxPrice(
         Number.isFinite(price) && price >= 0 && price <= 20 ? price : 20,
@@ -90,6 +94,19 @@ export default function TransferTargetsPage() {
   const outgoing = roleResult.data?.find(
     (p) => p.playerId === out && p.window === "last_5",
   );
+  const selectedPlayer = roleResult.data?.find(
+    (player) => player.playerId === selectedPlayerId && player.window === "last_5",
+  ) ?? null;
+  const openPlayer = (playerId: string) => {
+    setSelectedPlayerId(playerId);
+    const url = new URL(window.location.href);
+    url.searchParams.set("player", playerId);
+    window.history.pushState({}, "", `${url.pathname}${url.search}`);
+  };
+  const closePlayer = () => {
+    setSelectedPlayerId("");
+    updateUrlParams({ player: null });
+  };
   const candidates = useMemo(
     () =>
       rankCandidates(
@@ -311,7 +328,7 @@ export default function TransferTargetsPage() {
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex min-w-0 gap-3">
-                    <TeamBadge code={player.teamCode} />
+                    <PlayerPortrait name={player.name} photoCode={player.photoCode} teamCode={player.teamCode} size="md" />
                     <div className="min-w-0">
                       <h3 className="truncate font-sans text-base font-semibold">
                         {player.name}
@@ -343,6 +360,9 @@ export default function TransferTargetsPage() {
                     : ""}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
+                  <Button type="button" variant="secondary" size="sm" onClick={() => openPlayer(player.playerId)}>
+                    View player details
+                  </Button>
                   <Button asChild size="sm">
                     <Link
                       href={`/player-trends?position=${encodeURIComponent(position)}&players=${[outgoing?.playerId, player.playerId].filter(Boolean).join(",")}&gw=${start}&horizon=${horizon}`}
@@ -373,6 +393,12 @@ export default function TransferTargetsPage() {
               : `Show all ${candidates.length} candidates`}
           </Button>
         )}
+        <PlayerDetailDrawer
+          player={selectedPlayer}
+          cohort={(roleResult.data ?? []).filter((player) => player.position === position && player.window === "last_5")}
+          open={Boolean(selectedPlayer)}
+          onOpenChange={(open) => { if (!open) closePlayer(); }}
+        />
       </div>
     </div>
   );

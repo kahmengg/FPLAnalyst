@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "@/components/research-link";
 import { Button } from "@/components/ui/button";
 import { SquadPitch } from "@/components/squad-pitch";
+import { PlayerPortrait } from "@/components/player-portrait";
 import { reviewPlayer } from "@/lib/squad-review";
 import { buildSchedules, type ModelFixture } from "@/lib/fixture-model";
 import { rankCandidates } from "@/lib/transfer-research";
@@ -85,7 +86,15 @@ export function SquadReviewPanel({
         {positions[row.player.position]} · {row.player.club} ·{" "}
         {row.player.order <= 11 ? "Starting XI" : "Bench"}
       </p>
-      <h3 className="mt-2 text-2xl">{row.player.name}</h3>
+      <div className="mt-3 flex items-center gap-3">
+        <PlayerPortrait
+          name={row.player.name}
+          photoCode={row.insight?.photoCode}
+          teamCode={row.player.club}
+          size="md"
+        />
+        <h3 className="text-2xl">{row.player.name}</h3>
+      </div>
       <p className="mt-3 text-sm font-semibold">
         {loading ? "Checking model evidence…" : row.review.label}
       </p>
