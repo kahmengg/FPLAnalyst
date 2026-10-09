@@ -4,6 +4,7 @@ import {
   mapStoredRoleInsight,
   type PlayerRoleInsight,
 } from "@/lib/player-role-insights";
+import { fetchAllPages } from "@/lib/pagination";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() || "";
 const supabasePublicKey =
@@ -702,14 +703,32 @@ export async function getPlayerRoleInsights(): Promise<PlayerRoleInsight[]> {
       // The ETL output is the canonical frontend source. Older deployments may
       // not have populated it yet, so an empty/error response falls through to
       // the gameweek reconstruction below instead of breaking the page.
-      const stored = await requireSupabase()
-        .from("player_role_insights")
-        .select(
-          "*, players!inner(id, player_name, web_name, position, cost, ownership, is_active, teams!left(name, short_name))",
-        )
-        .eq("season_key", season);
-      if (!stored.error && stored.data?.length)
-        return stored.data
+      let storedRows: any[] = [];
+      let storedError: { message: string } | null = null;
+      try {
+        storedRows = await fetchAllPages(async (from, to) => {
+          const { data, error } = await requireSupabase()
+            .from("player_role_insights")
+            .select(
+              "*, players!inner(id, player_name, web_name, position, cost, ownership, is_active, teams!left(name, short_name))",
+            )
+            .eq("season_key", season)
+            // Stable ordering prevents rows moving between range requests.
+            .order("player_id")
+            .order("window_key")
+            .range(from, to);
+          if (error) throw error;
+          return data ?? [];
+        });
+      } catch (error) {
+        storedError = {
+          message:
+            error instanceof Error ? error.message : "Unknown Supabase error",
+        };
+      }
+
+      if (!storedError && storedRows.length)
+        return storedRows
           .filter((row: any) => {
             const player = Array.isArray(row.players)
               ? row.players[0]
@@ -718,10 +737,10 @@ export async function getPlayerRoleInsights(): Promise<PlayerRoleInsight[]> {
           })
           .map((row: any) => mapStoredRoleInsight(row, defenseByTeam));
 
-      if (stored.error)
+      if (storedError)
         console.warn(
           "Using compatibility role-score reconstruction:",
-          stored.error.message,
+          storedError.message,
         );
 
       const [players, gameweeks] = await Promise.all([
