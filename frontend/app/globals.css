@@ -4,53 +4,67 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #f6f3ec;
-  --foreground: #20221f;
-  --card: #fffdf8;
-  --card-foreground: #20221f;
-  --popover: #fffdf8;
-  --popover-foreground: #20221f;
-  --primary: #2d302c;
-  --primary-foreground: #fffdf8;
-  --secondary: #eee9df;
-  --secondary-foreground: #2d302c;
-  --muted: #ece8df;
-  --muted-foreground: #666960;
-  --accent: #e5e0d6;
-  --accent-foreground: #20221f;
-  --success: #2f7d4a;
-  --success-foreground: #f4fbf6;
-  --warning: #9a6518;
-  --warning-foreground: #fff9ee;
-  --destructive: #b6413b;
-  --destructive-foreground: #fff8f7;
-  --info: #59636b;
-  --info-foreground: #fbfcfc;
-  --brand: #4f6b56;
-  --brand-foreground: #fffdf8;
-  --brand-soft: #dce5d9;
-  --border: #d8d2c6;
-  --input: #c9c2b5;
-  --ring: #555951;
-  --chart-1: #2d302c;
-  --chart-2: #696d65;
-  --chart-3: #9a6518;
-  --chart-4: #2f7d4a;
-  --chart-5: #8b7360;
+  --background: #f5f7fa;
+  --foreground: #10233e;
+  --card: #ffffff;
+  --card-foreground: #10233e;
+  --surface-raised: #f7faff;
+  --surface-tint: #edf4ff;
+  --popover: #ffffff;
+  --popover-foreground: #10233e;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --primary-hover: #1d4ed8;
+  --primary-pressed: #1e40af;
+  --secondary: #e9eff7;
+  --secondary-foreground: #16304f;
+  --muted: #eef2f6;
+  --muted-foreground: #5c6878;
+  --accent: #dbeafe;
+  --accent-foreground: #1d4ed8;
+  --success: #147a55;
+  --success-foreground: #f2fff9;
+  --warning: #a65e08;
+  --warning-foreground: #fff9ed;
+  --destructive: #c43d4d;
+  --destructive-foreground: #fff7f8;
+  --info: #1f6fa8;
+  --info-foreground: #f6fbff;
+  --brand: #2563eb;
+  --brand-foreground: #ffffff;
+  --brand-soft: #dbeafe;
+  --football: #167a5b;
+  --football-foreground: #f2fff9;
+  --football-soft: #dff4eb;
+  --highlight: #e86152;
+  --highlight-foreground: #ffffff;
+  --highlight-soft: #ffebe7;
+  --border: #dbe2ea;
+  --input: #bec9d6;
+  --ring: #1d4ed8;
+  --chart-1: #2563eb;
+  --chart-2: #167a5b;
+  --chart-3: #e86152;
+  --chart-4: #d79a2b;
+  --chart-5: #7656c9;
   --difficulty-1: #dbeadf;
   --difficulty-2: #e5ebd7;
   --difficulty-3: #f0e5c8;
   --difficulty-4: #efd5c4;
   --difficulty-5: #e9c5c2;
   --radius: 0.625rem;
-  --sidebar: #eee9df;
-  --sidebar-foreground: #2d302c;
-  --sidebar-primary: #2d302c;
-  --sidebar-primary-foreground: #fffdf8;
-  --sidebar-accent: #e2ddd3;
-  --sidebar-accent-foreground: #20221f;
-  --sidebar-border: #d4cec2;
-  --sidebar-ring: #555951;
+  --sidebar: #10233e;
+  --sidebar-foreground: #edf4ff;
+  --sidebar-primary: #60a5fa;
+  --sidebar-primary-foreground: #081728;
+  --sidebar-accent: #193553;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #284765;
+  --sidebar-ring: #93c5fd;
+  --shadow-soft: 0 8px 28px rgb(16 35 62 / 0.07);
+  --shadow-raised: 0 18px 48px rgb(16 35 62 / 0.14);
+  --motion-fast: 140ms;
+  --motion-base: 200ms;
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
   --font-display: var(--font-newsreader);
@@ -64,6 +78,8 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-tint: var(--surface-tint);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
@@ -85,6 +101,12 @@
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-soft: var(--brand-soft);
+  --color-football: var(--football);
+  --color-football-foreground: var(--football-foreground);
+  --color-football-soft: var(--football-soft);
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
+  --color-highlight-soft: var(--highlight-soft);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -124,6 +146,10 @@
   body {
     @apply bg-background text-foreground antialiased;
     min-width: 320px;
+    background-image:
+      radial-gradient(circle at 84% -12%, rgb(37 99 235 / 0.09), transparent 28rem),
+      radial-gradient(circle at 12% 18%, rgb(22 122 91 / 0.05), transparent 22rem);
+    background-attachment: fixed;
   }
   h1,
   h2,
@@ -157,7 +183,7 @@
   [data-slot="tabs-list"],
   [data-slot="tabs-trigger"] {
     transition-property: background-color, color, border-color, box-shadow;
-    transition-duration: 140ms;
+    transition-duration: var(--motion-fast);
   }
 }
 
@@ -177,17 +203,9 @@
 /* Keep active tabs neutral and readable even when a route supplies legacy
    gradient utility classes. */
 [data-slot="tabs-trigger"][data-state="active"] {
-  background-color: color-mix(
-    in srgb,
-    var(--primary) 14%,
-    var(--card)
-  ) !important;
+  background-color: var(--card) !important;
   background-image: none !important;
-  border-color: color-mix(
-    in srgb,
-    var(--primary) 35%,
-    var(--border)
-  ) !important;
+  border-color: color-mix(in srgb, var(--primary) 28%, var(--border)) !important;
   color: var(--primary) !important;
 }
 

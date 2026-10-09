@@ -86,3 +86,21 @@ test("league-name lookup shows coverage and previews the selected entry", async 
   await expect(page.getByText("Dream Team · Team 456", { exact: true })).toBeVisible()
   await expect(page.getByRole("button", { name: "Use this team", exact: true })).toBeVisible()
 })
+
+test("modern matchday tokens style the shared shell", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 })
+  await page.goto("/")
+
+  const primaryAction = page.getByRole("link", { name: "Plan transfers" })
+  await expect(primaryAction).toBeVisible({ timeout: 30_000 })
+  await expect(primaryAction).toHaveCSS("background-color", "rgb(37, 99, 235)")
+  await expect(page.locator("body")).toHaveCSS("background-color", "rgb(245, 247, 250)")
+  await expect(page.locator("h1")).toHaveCSS("font-size", "44px")
+
+  await primaryAction.focus()
+  await expect(primaryAction).toHaveCSS("outline-color", "rgb(29, 78, 216)")
+
+  await page.setViewportSize({ width: 390, height: 844 })
+  await expect(page.locator("h1")).toHaveCSS("font-size", "36px")
+  await expect(page.locator("html")).toHaveJSProperty("scrollWidth", 390)
+})
