@@ -7,6 +7,7 @@ export type PlayerRoleInsight = {
   name: string
   team: string
   teamCode: string
+  photoCode: number | null
   position: RolePosition
   positionCode: "GK" | "DEF" | "MID" | "FWD"
   price: number
@@ -64,6 +65,7 @@ type SourcePlayer = {
   position_name?: string
   cost?: number
   ownership?: number
+  photo_code?: number | null
 }
 
 type SourceGameweek = Record<string, unknown> & { player_id: string; gameweek: number }
@@ -153,6 +155,7 @@ export function buildRoleInsightFallback(
         name: text(player.web_name, player.name, player.player_name) ?? "Unknown player",
         team: text(player.team, player.team_name, player.team_short) ?? "Unknown club",
         teamCode,
+        photoCode: player.photo_code && number(player.photo_code) > 0 ? number(player.photo_code) : null,
         position: role.name,
         positionCode: role.code,
         price: number(player.cost),
@@ -240,6 +243,7 @@ export function mapStoredRoleInsight(row: Record<string, unknown>, teamDefense: 
     name: text(player.web_name, player.player_name) ?? "Unknown player",
     team: text(player.teams?.name, player.team_name, player.team_short) ?? "Unknown club",
     teamCode,
+    photoCode: player.photo_code && number(player.photo_code) > 0 ? number(player.photo_code) : null,
     position: role.name,
     positionCode: role.code,
     price: number(player.cost),

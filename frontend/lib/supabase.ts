@@ -710,7 +710,7 @@ export async function getPlayerRoleInsights(): Promise<PlayerRoleInsight[]> {
           const { data, error } = await requireSupabase()
             .from("player_role_insights")
             .select(
-              "*, players!inner(id, player_name, web_name, position, cost, ownership, is_active, teams!left(name, short_name))",
+              "*, players!inner(id, player_name, web_name, position, cost, ownership, photo_code, is_active, teams!left(name, short_name))",
             )
             .eq("season_key", season)
             // Stable ordering prevents rows moving between range requests.
@@ -797,7 +797,7 @@ export async function getAllPlayers(limit = 1000) {
     const { data, error } = await requireSupabase()
       .from("players")
       .select(
-        "id, fpl_id, player_name, web_name, team_id, position, cost, ownership, is_active, teams!left(name, short_name)",
+        "id, fpl_id, player_name, web_name, team_id, position, cost, ownership, photo_code, is_active, teams!left(name, short_name)",
       )
       .eq("is_active", true)
       .order("player_name")

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import { Activity, ShieldCheck } from "lucide-react"
 
-import { TeamBadge } from "@/components/team-badge"
+import { PlayerPortrait } from "@/components/player-portrait"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 
@@ -19,6 +19,7 @@ export type PlayerSummary = {
   ownership?: number
   defensiveContribution?: number
   status?: string
+  photoCode?: number | null
 }
 
 function metric(value: number | undefined, digits = 1) {
@@ -43,7 +44,12 @@ export function PlayerSummaryCard({ player, rank, className, footer }: { player:
     <article className={cn("rounded-xl border border-border bg-card p-4 transition-colors hover:bg-secondary/25", className)}>
       <div className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3">
-          <TeamBadge code={player.teamCode || player.teamName || "FPL"} />
+          <PlayerPortrait
+            name={player.name}
+            photoCode={player.photoCode}
+            teamCode={player.teamCode || player.teamName || "FPL"}
+            size="md"
+          />
           <div className="min-w-0">
             <h3 className="truncate font-sans text-base font-semibold text-foreground">{player.name}</h3>
             <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
