@@ -707,7 +707,7 @@ export async function getPlayerRoleInsights(): Promise<PlayerRoleInsight[]> {
       let storedError: { message: string } | null = null;
       try {
         storedRows = await fetchAllPages(async (from, to) => {
-          const { data, error } = await requireSupabase()
+          let { data, error } = await requireSupabase()
             .from("player_role_insights")
             .select(
               "*, players!inner(id, player_name, web_name, position, cost, ownership, photo_code, is_active, teams!left(name, short_name))",
@@ -717,6 +717,20 @@ export async function getPlayerRoleInsights(): Promise<PlayerRoleInsight[]> {
             .order("player_id")
             .order("window_key")
             .range(from, to);
+          // Keep the frontend deployable before the additive portrait migration.
+          if (error?.message?.includes("photo_code")) {
+            const fallback = await requireSupabase()
+              .from("player_role_insights")
+              .select(
+                "*, players!inner(id, player_name, web_name, position, cost, ownership, is_active, teams!left(name, short_name))",
+              )
+              .eq("season_key", season)
+              .order("player_id")
+              .order("window_key")
+              .range(from, to);
+            data = fallback.data;
+            error = fallback.error;
+          }
           if (error) throw error;
           return data ?? [];
         });
@@ -794,7 +808,7 @@ export async function getAllPlayers(limit = 1000) {
   try {
     requireSupabase();
 
-    const { data, error } = await requireSupabase()
+    let { data, error } = await requireSupabase()
       .from("players")
       .select(
         "id, fpl_id, player_name, web_name, team_id, position, cost, ownership, photo_code, is_active, teams!left(name, short_name)",
@@ -802,6 +816,22 @@ export async function getAllPlayers(limit = 1000) {
       .eq("is_active", true)
       .order("player_name")
       .limit(limit);
+
+    if (error?.message?.includes("photo_code")) {
+      const fallback = await requireSupabase()
+        .from("players")
+        .select(
+          "id, fpl_id, player_name, web_name, team_id, position, cost, ownership, is_active, teams!left(name, short_name)",
+        )
+        .eq("is_active", true)
+        .order("player_name")
+        .limit(limit);
+      data = (fallback.data || []).map((row: any) => ({
+        ...row,
+        photo_code: null,
+      }));
+      error = fallback.error;
+    }
 
     if (error) {
       throw new Error(`Failed to load players: ${error.message}`);

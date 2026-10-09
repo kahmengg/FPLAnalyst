@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type KeyboardEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import Link from "@/components/research-link";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -29,6 +29,10 @@ import {
 
 import { EmptyState, ErrorState, PageSkeleton } from "@/components/data-state";
 import { PageHeader } from "@/components/page-header";
+import { AnalysisToolbar } from "@/components/analysis-toolbar";
+import { MetricPill } from "@/components/metric-pill";
+import { PlayerDetailDrawer } from "@/components/player-detail-drawer";
+import { PlayerPortrait } from "@/components/player-portrait";
 import { TeamBadge } from "@/components/team-badge";
 import { Button } from "@/components/ui/button";
 import type {
@@ -321,7 +325,7 @@ function PlayerDot(props: any) {
   if (!Number.isFinite(cx) || !Number.isFinite(cy)) return null;
   const brand = getTeamBrand(payload.teamCode);
   const radius = payload.radius ?? 6;
-  const select = () => onSelect(payload.id);
+  const select = () => onSelect(payload.playerId);
   const keyDown = (event: KeyboardEvent<SVGGElement>) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
@@ -434,6 +438,7 @@ export default function TopPerformersPage() {
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
   const [showAll, setShowAll] = useState(false);
   const [display, setDisplay] = useState<PlayerDisplay>("map");
+  const lastPlayerTriggerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const restore = () => {
@@ -458,6 +463,7 @@ export default function TopPerformersPage() {
       setTeam(params.get("club") || "all");
       setPrice(params.get("price") || "all");
       setOwnership(params.get("ownership") || "all");
+      setSelectedId(params.get("player"));
     };
     restore();
     globalThis.window.addEventListener("popstate", restore);
@@ -562,7 +568,7 @@ export default function TopPerformersPage() {
     () => getChartConfig(position, activeLens, pointsMedian),
     [activeLens, pointsMedian, position],
   );
-  const selected = filtered.find((player) => player.id === selectedId) ?? null;
+  const selected = filtered.find((player) => player.playerId === selectedId) ?? null;
   const chartData = useMemo(
     () =>
       filtered
@@ -581,7 +587,7 @@ export default function TopPerformersPage() {
           radius: chartConfig.sizeByPoints
             ? 4 + Math.max(0, Math.min(player.pointsPer90, 10)) * 0.6
             : 6,
-          selected: player.id === selectedId,
+          selected: player.playerId === selectedId,
           showLabel: index < 5,
         })),
     [chartConfig, filtered, selectedId],
@@ -595,8 +601,25 @@ export default function TopPerformersPage() {
       setSortDirection("desc");
     }
   };
-  const selectPlayer = (id: string) =>
-    setSelectedId((current) => (current === id ? null : id));
+  const closePlayer = () => {
+    setSelectedId(null);
+    updateUrlParams({ player: null });
+    globalThis.window.requestAnimationFrame(() => lastPlayerTriggerRef.current?.focus());
+  };
+  const selectPlayer = (playerId: string) => {
+    if (selectedId === playerId) {
+      closePlayer();
+      return;
+    }
+    if (document.activeElement instanceof HTMLElement) {
+      lastPlayerTriggerRef.current = document.activeElement;
+    }
+    setSelectedId(playerId);
+    const url = new URL(globalThis.window.location.href);
+    url.searchParams.set("player", playerId);
+    globalThis.window.history.pushState({}, "", `${url.pathname}${url.search}${url.hash}`);
+    globalThis.window.dispatchEvent(new Event("research-context"));
+  };
   const resetFilters = () => {
     setQuery("");
     setTeam("all");
@@ -613,6 +636,10 @@ export default function TopPerformersPage() {
     includeLowSample,
   );
   const visiblePlayers = showAll ? filtered : filtered.slice(0, 25);
+  const rolePool = players.filter(
+    (player) => player.position === position && player.window === window,
+  );
+  const qualifiedCount = rolePool.filter((player) => player.isEligible).length;
 
   if (loading) return <PageSkeleton label="Loading player intelligence" />;
   if (error)
@@ -637,7 +664,19 @@ export default function TopPerformersPage() {
           description="Choose a role, pick the kind of points you want, then explore the map or open the ranked list."
         />
 
-        <div className="mb-5 rounded-xl border border-border bg-card p-4">
+        <div className="mb-4 flex flex-wrap items-center gap-2" aria-live="polite">
+          <MetricPill tone="football">{qualifiedCount} qualified · {rolePool.length} total</MetricPill>
+          <button
+            type="button"
+            aria-pressed={includeLowSample}
+            onClick={() => setIncludeLowSample((value) => !value)}
+            className="min-h-8 rounded-full border border-primary/20 bg-brand-soft px-3 text-xs font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            {includeLowSample ? "Hide provisional players" : "Show provisional players"}
+          </button>
+        </div>
+
+        <AnalysisToolbar className="mb-4" aria-label="Role and timeframe">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
             1 · Choose role and timeframe
           </p>
@@ -691,7 +730,7 @@ export default function TopPerformersPage() {
             </button>
           </div>
           </div>
-        </div>
+        </AnalysisToolbar>
 
         <section
           aria-label="Player filters"
@@ -767,7 +806,7 @@ export default function TopPerformersPage() {
                     onChange={(event) => setIncludeLowSample(event.target.checked)}
                     className="h-4 w-4 accent-foreground"
                   />
-                  Include low-minute samples
+                  Show provisional players
                 </label>
               </div>
             </details>
@@ -970,7 +1009,7 @@ export default function TopPerformersPage() {
                       <SelectedInsight
                         player={selected}
                         forwardMedian={pointsMedian}
-                        onClear={() => setSelectedId(null)}
+                        onClear={closePlayer}
                       />
                     ) : (
                       <div className="flex h-full min-h-44 flex-col justify-center">
@@ -1049,17 +1088,17 @@ export default function TopPerformersPage() {
                     <tr
                       key={player.id}
                       tabIndex={0}
-                      aria-selected={selectedId === player.id}
-                      onClick={() => selectPlayer(player.id)}
+                      aria-selected={selectedId === player.playerId}
+                      onClick={() => selectPlayer(player.playerId)}
                       onKeyDown={(event) => {
                         if (event.key === "Enter" || event.key === " ") {
                           event.preventDefault();
-                          selectPlayer(player.id);
+                          selectPlayer(player.playerId);
                         }
                       }}
                       className={cn(
                         "cursor-pointer transition-colors hover:bg-secondary/30 focus-visible:bg-secondary/40 focus-visible:outline-none",
-                        selectedId === player.id && "bg-secondary/50",
+                        selectedId === player.playerId && "bg-secondary/50",
                       )}
                     >
                       <td className="px-5 py-4 font-mono text-sm text-muted-foreground">
@@ -1067,7 +1106,7 @@ export default function TopPerformersPage() {
                       </td>
                       <th scope="row" className="px-4 py-4">
                         <div className="flex items-center gap-3">
-                          <TeamBadge code={player.teamCode} />
+                          <PlayerPortrait name={player.name} photoCode={player.photoCode} teamCode={player.teamCode} size="sm" />
                           <div className="min-w-0">
                             <p className="truncate font-semibold">
                               {player.name}
@@ -1113,17 +1152,18 @@ export default function TopPerformersPage() {
                 <button
                   key={player.id}
                   type="button"
-                  aria-pressed={selectedId === player.id}
-                  onClick={() => selectPlayer(player.id)}
+                  aria-label={`View player details for ${player.name}`}
+                  aria-pressed={selectedId === player.playerId}
+                  onClick={() => selectPlayer(player.playerId)}
                   className={cn(
                     "rounded-xl border border-border bg-card p-4 text-left transition-colors hover:bg-secondary/25",
-                    selectedId === player.id &&
+                    selectedId === player.playerId &&
                       "border-foreground/30 bg-secondary/40",
                   )}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex min-w-0 items-center gap-3">
-                      <TeamBadge code={player.teamCode} />
+                      <PlayerPortrait name={player.name} photoCode={player.photoCode} teamCode={player.teamCode} size="md" />
                       <div className="min-w-0">
                         <p className="truncate font-semibold">{player.name}</p>
                         <p className="mt-1 truncate text-xs text-muted-foreground">
@@ -1193,6 +1233,15 @@ export default function TopPerformersPage() {
             </p>
           </div>
         </details>
+
+        <PlayerDetailDrawer
+          player={selected}
+          cohort={rolePool}
+          open={Boolean(selected)}
+          onOpenChange={(open) => {
+            if (!open) closePlayer();
+          }}
+        />
       </div>
     </div>
   );

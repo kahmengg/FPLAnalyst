@@ -25,6 +25,26 @@ test("top players reveals complexity progressively", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /leaderboard/i })).toBeVisible()
 })
 
+test("top players exposes the full pool and opens player details", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto("/top-performers?position=Midfielder&lens=attack&window=last_5")
+
+  await expect(page.getByText(/\d+ qualified · \d+ total/)).toBeVisible({ timeout: 30_000 })
+  await expect(page.getByRole("button", { name: /Show provisional players/i })).toBeVisible()
+  await page.getByRole("button", { name: "Ranked list" }).click()
+
+  const firstPlayer = page.getByRole("button", { name: /View player details for/i }).first()
+  await expect(firstPlayer).toBeVisible()
+  await firstPlayer.click()
+  await expect(page).toHaveURL(/player=/)
+  await expect(page.getByRole("dialog")).toBeVisible()
+  await expect(page.getByRole("heading", { name: "Touch profile" })).toBeVisible()
+
+  await page.keyboard.press("Escape")
+  await expect(page.getByRole("dialog")).toBeHidden()
+  await expect(firstPlayer).toBeFocused()
+})
+
 test("transfer research starts with a focused candidate shortlist", async ({ page }) => {
   await page.goto("/transfer-targets")
 

@@ -42,12 +42,12 @@ export function PlayerDetailDrawer({ player, cohort, open, onOpenChange }: Playe
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent aria-describedby="player-detail-description">
+      <SheetContent aria-describedby={undefined}>
         <div className="pr-14">
           <PlayerPortrait name={player.name} photoCode={player.photoCode} teamCode={player.teamCode} size="lg" priority />
           <p className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-primary">{player.position} · {player.team}</p>
           <SheetTitle className="mt-1 font-display text-3xl font-semibold tracking-tight text-foreground">{player.name}</SheetTitle>
-          <SheetDescription id="player-detail-description" className="mt-2 text-sm leading-6 text-muted-foreground">
+          <SheetDescription className="mt-2 text-sm leading-6 text-muted-foreground">
             Role quality, recent output and aggregate touch volume in one view.
           </SheetDescription>
         </div>
