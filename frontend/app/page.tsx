@@ -21,6 +21,7 @@ type DashboardSummary = {
   total_players: number;
   total_teams: number;
   total_gameweeks: number;
+  current_gameweek: number;
   latest_data_gameweek: number;
   last_synced_at: string | null;
 };
@@ -91,21 +92,24 @@ export default function HomePage() {
   const stats = [
     {
       label: "Current gameweek",
-      value: `GW ${summary?.total_gameweeks ?? 0}`,
+      value: `GW ${summary?.current_gameweek ?? summary?.total_gameweeks ?? 0}`,
       detail: `Model through GW ${summary?.latest_data_gameweek ?? 0}`,
       icon: Calendar,
+      tone: "bg-brand-soft text-primary",
     },
     {
       label: "Players tracked",
       value: summary?.total_players.toLocaleString() ?? "0",
       detail: "Across all 20 clubs",
       icon: Users,
+      tone: "bg-football-soft text-football",
     },
     {
       label: "Last synced",
       value: formatLastSynced(summary?.last_synced_at ?? null),
       detail: "Updated daily",
       icon: Clock3,
+      tone: "bg-highlight-soft text-highlight",
     },
   ];
 
@@ -138,7 +142,7 @@ export default function HomePage() {
                 key={stat.label}
                 className={`flex min-h-28 items-center gap-4 p-5 sm:p-6 ${index ? "border-t border-border md:border-l md:border-t-0" : ""}`}
               >
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-secondary text-muted-foreground">
+                <div className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl ${stat.tone}`}>
                   <stat.icon className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <div className="min-w-0">
@@ -159,7 +163,7 @@ export default function HomePage() {
 
         <section
           aria-labelledby="model-title"
-          className="mb-8 flex flex-col gap-5 rounded-xl border border-border bg-card p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
+          className="mb-8 flex flex-col gap-5 rounded-2xl border border-primary/15 bg-brand-soft/55 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
         >
           <div className="max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
@@ -197,7 +201,7 @@ export default function HomePage() {
                 <Link
                   key={step.href}
                   href={step.href}
-                  className={`group flex min-h-36 flex-col justify-between p-5 transition-colors hover:bg-secondary/35 focus-visible:bg-secondary/35 sm:p-6 ${index ? "border-t border-border sm:border-l sm:border-t-0" : ""} ${index === 2 ? "sm:border-l-0 sm:border-t xl:border-l xl:border-t-0" : ""}`}
+              className={`group flex min-h-36 flex-col justify-between p-5 transition-all hover:-translate-y-0.5 hover:bg-brand-soft/45 hover:shadow-[var(--shadow-soft)] focus-visible:bg-brand-soft/45 motion-reduce:transform-none sm:p-6 ${index ? "border-t border-border sm:border-l sm:border-t-0" : ""} ${index === 2 ? "sm:border-l-0 sm:border-t xl:border-l xl:border-t-0" : ""}`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-xs font-semibold text-muted-foreground">

@@ -22,7 +22,7 @@ export function WeeklyBriefing() {
       className="mb-6 overflow-hidden rounded-xl border border-border bg-card"
     >
       <div className="grid md:grid-cols-2">
-        <div className="p-5 sm:p-6">
+        <div className="bg-football-soft/55 p-5 sm:p-6">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
             This week's focus
           </p>
@@ -46,7 +46,7 @@ export function WeeklyBriefing() {
             </Link>
           </Button>
         </div>
-        <div className="border-t border-border bg-secondary/20 p-5 sm:p-6 md:border-l md:border-t-0">
+        <div className="border-t border-border bg-brand-soft/55 p-5 sm:p-6 md:border-l md:border-t-0">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
             Your squad
           </p>

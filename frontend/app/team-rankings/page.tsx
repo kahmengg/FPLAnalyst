@@ -126,9 +126,11 @@ function safePercentage(value: number, maximum: number) {
 
 function StrengthBar({
   value,
+  tone = "overall",
   emphasis = "regular",
 }: {
   value: number;
+  tone?: "attack" | "defense" | "overall";
   emphasis?: "regular" | "strong";
 }) {
   return (
@@ -138,8 +140,13 @@ function StrengthBar({
     >
       <div
         className={cn(
-          "h-full rounded-full bg-foreground/45",
-          emphasis === "strong" && "bg-foreground",
+          "h-full rounded-full",
+          tone === "attack" && "bg-highlight/70",
+          tone === "defense" && "bg-primary/70",
+          tone === "overall" && "bg-football/70",
+          emphasis === "strong" && tone === "attack" && "bg-highlight",
+          emphasis === "strong" && tone === "defense" && "bg-primary",
+          emphasis === "strong" && tone === "overall" && "bg-football",
         )}
         style={{ width: `${Math.max(0, Math.min(value, 100))}%` }}
       />
@@ -722,6 +729,7 @@ export default function TeamRankingsPage() {
                           </span>
                         </div>
                         <StrengthBar
+                          tone="attack"
                           value={period === "last5" ? team.recentAttackStrengthPct : team.attackStrengthPct}
                           emphasis={view === "attack" ? "strong" : "regular"}
                         />
@@ -736,6 +744,7 @@ export default function TeamRankingsPage() {
                           </span>
                         </div>
                         <StrengthBar
+                          tone="defense"
                           value={period === "last5" ? team.recentDefenseStrengthPct : team.defenseStrengthPct}
                           emphasis={view === "defense" ? "strong" : "regular"}
                         />
@@ -815,6 +824,7 @@ export default function TeamRankingsPage() {
                         </span>
                       </div>
                       <StrengthBar
+                        tone="attack"
                         value={period === "last5" ? team.recentAttackStrengthPct : team.attackStrengthPct}
                         emphasis={view === "attack" ? "strong" : "regular"}
                       />
@@ -829,6 +839,7 @@ export default function TeamRankingsPage() {
                         </span>
                       </div>
                       <StrengthBar
+                        tone="defense"
                         value={period === "last5" ? team.recentDefenseStrengthPct : team.defenseStrengthPct}
                         emphasis={view === "defense" ? "strong" : "regular"}
                       />

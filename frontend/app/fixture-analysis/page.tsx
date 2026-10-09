@@ -90,10 +90,12 @@ function RatingBar({
   label,
   value,
   icon: Icon,
+  tone = "attack",
 }: {
   label: string;
   value: number;
   icon: typeof Target;
+  tone?: "attack" | "defense";
 }) {
   return (
     <div>
@@ -108,7 +110,7 @@ function RatingBar({
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-secondary">
         <div
-          className="h-full rounded-full bg-foreground/65"
+          className={cn("h-full rounded-full", tone === "attack" ? "bg-highlight" : "bg-primary")}
           style={{ width: `${Math.max(0, Math.min(value, 100))}%` }}
         />
       </div>
@@ -165,11 +167,13 @@ function FixtureTeamRow({
           label={`Attack #${team.attack_rank ?? "—"}`}
           value={team.attacking_fixture_rating}
           icon={Target}
+          tone="attack"
         />
         <RatingBar
           label={`Defense #${team.defense_rank ?? "—"}`}
           value={team.defensive_fixture_rating}
           icon={Shield}
+          tone="defense"
         />
       </div>
       <div className="mt-3 flex gap-2 border-t border-border pt-3">
