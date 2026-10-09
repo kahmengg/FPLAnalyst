@@ -10,8 +10,8 @@ export function SeasonStatusBanner() {
       aria-label="Dataset season status"
       className={
         archived
-          ? "border-b border-warning/25 bg-warning/10 py-2 pl-16 pr-4 text-foreground sm:px-6"
-          : "border-b border-success/25 bg-success/10 py-2 pl-16 pr-4 text-foreground sm:px-6"
+          ? "hidden border-b border-warning/20 bg-warning/8 px-6 py-1.5 text-foreground lg:block"
+          : "hidden border-b border-success/20 bg-success/8 px-6 py-1.5 text-foreground lg:block"
       }
     >
       <div className="mx-auto flex max-w-7xl items-center gap-2.5">
@@ -24,7 +24,7 @@ export function SeasonStatusBanner() {
         >
           <StatusIcon className="h-4 w-4" aria-hidden="true" />
         </div>
-        <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-1">
+        <div className="flex min-w-0 flex-1 items-center gap-2">
           <p className="text-sm font-semibold">
             {archived ? "Archived season analysis" : "Current season analysis"}
           </p>
@@ -38,7 +38,7 @@ export function SeasonStatusBanner() {
             <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />
             {DATA_SEASON.label} {archived ? "completed" : "active"}
           </span>
-          <p className="hidden text-xs text-muted-foreground md:block">
+          <p className="ml-auto hidden text-xs text-muted-foreground xl:block">
             {archived
               ? `This is historical data from the completed ${DATA_SEASON.label} season.`
               : `Statistics and fixture insights are synced for the ${DATA_SEASON.label} season.`}

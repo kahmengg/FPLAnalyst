@@ -187,6 +187,12 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .mobile-navigation-sheet {
+    transition-duration: 0s !important;
+  }
+}
+
 /* tw-animate entrance utilities were causing a visible first-paint flash on page load. */
 .animate-in,
 .fade-in,

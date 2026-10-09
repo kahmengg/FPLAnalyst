@@ -104,3 +104,44 @@ test("modern matchday tokens style the shared shell", async ({ page }) => {
   await expect(page.locator("h1")).toHaveCSS("font-size", "36px")
   await expect(page.locator("html")).toHaveJSProperty("scrollWidth", 390)
 })
+
+test("mobile navigation opens and restores focus", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto("/")
+
+  const trigger = page.getByRole("button", { name: "Open navigation menu" })
+  await expect(trigger).toHaveAttribute("aria-expanded", "false")
+  await trigger.click()
+  await expect(trigger).toHaveAttribute("aria-expanded", "true")
+  await expect(page.getByRole("dialog", { name: "Primary navigation" })).toBeVisible()
+
+  await page.keyboard.press("Escape")
+  await expect(page.getByRole("dialog", { name: "Primary navigation" })).toBeHidden()
+  await expect(trigger).toBeFocused()
+})
+
+test("workflow remains usable at 390px", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto("/top-performers")
+
+  const workflow = page.getByRole("navigation", { name: "Weekly research workflow" })
+  await expect(workflow).toBeVisible({ timeout: 30_000 })
+  const measurements = await workflow.evaluate((element) => ({
+    height: element.getBoundingClientRect().height,
+    overflowX: getComputedStyle(element).overflowX,
+  }))
+  expect(measurements.height).toBeLessThanOrEqual(52)
+  expect(measurements.overflowX).toBe("auto")
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390)
+})
+
+test("reduced motion shell has no entrance animation", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" })
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto("/")
+  await page.getByRole("button", { name: "Open navigation menu" }).click()
+
+  const drawer = page.getByRole("dialog", { name: "Primary navigation" })
+  await expect(drawer).toBeVisible()
+  await expect(drawer).toHaveCSS("transition-duration", "0s")
+})

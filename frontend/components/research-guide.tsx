@@ -33,24 +33,24 @@ export function ResearchGuide() {
     return researchHref(route, new URLSearchParams(context));
   };
   return (
-    <div className="border-b border-border bg-card/50 px-4 py-3 sm:px-6 lg:px-8">
+    <div className="border-b border-border bg-card/65 px-3 py-1.5 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <nav
           aria-label="Weekly research workflow"
-          className="flex flex-wrap gap-1"
+          className="flex max-h-[52px] flex-nowrap gap-1 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {steps.map(([route, label]) => (
             <Link
               key={route}
               href={href(route)}
               aria-current={pathname === route ? "page" : undefined}
-              className={`rounded-md px-3 py-1.5 text-xs font-medium ${pathname === route ? "bg-secondary text-foreground" : "text-muted-foreground hover:bg-secondary"}`}
+              className={`flex min-h-10 shrink-0 items-center rounded-full px-3 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${pathname === route ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground hover:bg-secondary hover:text-foreground"}`}
             >
               {label}
             </Link>
           ))}
         </nav>
-        <p className="mt-2 text-xs text-muted-foreground">
+        <p className="hidden pt-1.5 text-xs text-muted-foreground sm:block">
           {error
             ? "Model freshness unavailable"
             : data

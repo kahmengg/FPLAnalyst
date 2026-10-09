@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F6F3EC",
+  themeColor: "#10233E",
   colorScheme: "light",
 };
 
@@ -49,7 +49,7 @@ export default function RootLayout({
           <GuestTeamProvider>
           <div className="flex min-h-screen">
             <Sidebar />
-            <main className="min-w-0 flex-1">
+            <main className="min-w-0 flex-1 pt-14 lg:pt-0">
               <SeasonStatusBanner />
               <ResearchGuide />
               {children}
