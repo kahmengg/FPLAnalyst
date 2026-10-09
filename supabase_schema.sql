@@ -27,10 +27,15 @@ create table if not exists players (
   -- latest cost & ownership updated each ETL run
   cost         numeric(5,2) not null,
   ownership    numeric(6,2),
+  photo_code   integer check (photo_code is null or photo_code > 0),
   is_active    boolean  not null default true,
   created_at   timestamptz not null default now(),
   updated_at   timestamptz not null default now()
 );
+
+-- Safe to apply to databases created before portrait metadata was introduced.
+alter table players add column if not exists photo_code integer
+  check (photo_code is null or photo_code > 0);
 
 create index if not exists idx_players_team     on players(team_id);
 create index if not exists idx_players_position on players(position);

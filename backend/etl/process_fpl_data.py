@@ -343,6 +343,8 @@ def upsert_players(df: pd.DataFrame, team_map: dict) -> dict[int, str]:
             "position":    max(1, min(4, pos)),
             "cost":        safe_float(r.get("now_cost")) or 0.0,
             "ownership":   safe_float(r.get("selected_by_percent")),
+            # Optional during rollout so previously downloaded CSVs still work.
+            "photo_code":  safe_int(r.get("photo_code")),
             "is_active":   True,
         })
 

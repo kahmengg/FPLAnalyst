@@ -84,10 +84,12 @@ def fetch_json(url: str):
         return json.loads(response.read().decode("utf-8"))
 
 
-def fetch_fixture_csv() -> str:
+def fetch_fixture_csv(bootstrap: dict | None = None) -> str:
     """Build the schedule and completed match scores from the official FPL API."""
     print("📥 Fetching the official FPL fixture schedule...")
-    bootstrap = fetch_json(FPL_BOOTSTRAP_URL)
+    # The daily sync passes the already-fetched bootstrap payload so player
+    # metadata and fixtures always come from the same official snapshot.
+    bootstrap = bootstrap or fetch_json(FPL_BOOTSTRAP_URL)
     fixtures = fetch_json(FPL_FIXTURES_URL)
 
     team_names = {
@@ -116,6 +118,36 @@ def fetch_fixture_csv() -> str:
     writer = csv.writer(output, lineterminator="\n")
     writer.writerow(FIXTURE_COLUMNS)
     writer.writerows(rows)
+    return output.getvalue()
+
+
+def enrich_stats_with_player_metadata(stats_content: str, bootstrap: dict) -> str:
+    """Append the official portrait code while preserving CSV order and fields."""
+    reader = csv.DictReader(io.StringIO(stats_content))
+    fieldnames = list(reader.fieldnames or [])
+    if "photo_code" not in fieldnames:
+        fieldnames.append("photo_code")
+
+    photo_codes = {}
+    for player in bootstrap.get("elements", []):
+        try:
+            player_id = int(player.get("id"))
+            photo_code = int(player.get("code"))
+        except (TypeError, ValueError):
+            continue
+        if player_id > 0 and photo_code > 0:
+            photo_codes[player_id] = photo_code
+
+    output = io.StringIO(newline="")
+    writer = csv.DictWriter(output, fieldnames=fieldnames, lineterminator="\n")
+    writer.writeheader()
+    for row in reader:
+        try:
+            player_id = int(row.get("id", ""))
+        except (TypeError, ValueError):
+            player_id = 0
+        row["photo_code"] = str(photo_codes.get(player_id, ""))
+        writer.writerow(row)
     return output.getvalue()
 
 
@@ -263,7 +295,8 @@ def main() -> None:
             sys.exit(1)
 
     try:
-        fixture_content = fetch_fixture_csv()
+        bootstrap = fetch_json(FPL_BOOTSTRAP_URL)
+        fixture_content = fetch_fixture_csv(bootstrap)
         fixture_summary = validate_fixture_csv(fixture_content)
 
         if args.fixtures_only:
@@ -271,7 +304,9 @@ def main() -> None:
             print(f"✅ Saved {fixture_summary['rows']} fixtures → {Config.FIXTURE_TEMPLATE_CSV}")
             return
 
-        stats_content = fetch_stats_csv(args.season)
+        stats_content = enrich_stats_with_player_metadata(
+            fetch_stats_csv(args.season), bootstrap
+        )
         stats_summary = validate_stats_csv(stats_content)
 
         # Both downloads are validated before either current input is replaced.

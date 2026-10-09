@@ -93,6 +93,12 @@ From the repository root:
 
 The launcher checks DNS, credentials, and the required Supabase schema before replacing either CSV. On a new database, run `supabase_schema.sql` once in the Supabase SQL Editor first.
 
+Player portraits use the official FPL player code. For an existing deployment,
+apply the `players.photo_code` statement in `supabase_schema.sql` first, run one
+daily sync, verify that active players have sensible non-null coverage, and only
+then deploy the portrait-enabled frontend. The field is nullable so older CSVs
+can still be reprocessed safely.
+
 Individual operations remain available:
 
 ```bash
