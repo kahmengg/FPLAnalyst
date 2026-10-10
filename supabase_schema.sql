@@ -353,7 +353,7 @@ create unique index if not exists idx_fix_season_pair
 -- ============================================================
 
 -- Dashboard summary card data
-create or replace view dashboard_summary as
+create or replace view dashboard_summary with (security_invoker = true) as
 select
   (select count(*)::int  from players  where is_active = true)  as total_players,
   (select count(distinct team_id)::int from team_rankings
@@ -366,7 +366,7 @@ select
    order by updated_at desc limit 1)                             as last_updated;
 
 -- Players page: join everything the table needs in one query
-create or replace view player_overview as
+create or replace view player_overview with (security_invoker = true) as
 select
   p.id,
   p.fpl_id,
@@ -407,7 +407,7 @@ where p.is_active = true;
 
 -- GW history popup: last N gameweeks for a player
 -- Usage: filter by player_id, order by gameweek desc, limit N
-create or replace view player_gw_history as
+create or replace view player_gw_history with (security_invoker = true) as
 select
   pg.player_id,
   pg.gameweek,
@@ -436,7 +436,7 @@ where pg.season_key = (select max(season_key) from player_gameweeks)
 order by pg.gameweek desc;
 
 -- Teams page: rankings with home/away context and form-based metrics
-create or replace view team_overview as
+create or replace view team_overview with (security_invoker = true) as
 select
   t.id,
   t.name,
@@ -470,7 +470,7 @@ left join team_rankings r on r.team_id = t.id
   and r.season_key = (select max(season_key) from team_rankings);
 
 -- Fixture grid: what the Fixture Analysis page needs
-create or replace view fixture_grid as
+create or replace view fixture_grid with (security_invoker = true) as
 select
   f.gameweek,
   ht.name       as home_team,
